@@ -167,6 +167,8 @@ export const services = [
       "Una automatización inestable detiene producción, complica mantenimiento y vuelve costoso cualquier cambio futuro.",
     approach:
       "Relevamiento de señales, lectura de lógica, pruebas controladas y puesta en marcha con criterio de operación y mantenimiento.",
+    whenToConsult:
+      "Cuando una máquina necesita nuevas funciones, presenta fallas repetitivas o se va a modificar lógica, HMI, variadores o señales críticas.",
   },
   {
     title: "Ingeniería eléctrica básica y de detalle",
@@ -189,6 +191,8 @@ export const services = [
       "La falta de ingeniería aumenta retrabajos, errores de conexionado, demoras de montaje y riesgos durante pruebas con producción.",
     approach:
       "Relevamiento técnico, definición de alcance, planos, selección de componentes y preparación de pruebas FAT/SAT.",
+    whenToConsult:
+      "Antes de comprar componentes, montar tableros, migrar una instalación o ejecutar una obra donde un plano incompleto puede generar retrabajo.",
   },
   {
     title: "Diagnóstico de fallas industriales",
@@ -211,6 +215,8 @@ export const services = [
       "Cada hora de incertidumbre puede traducirse en pérdida de producción, cambios innecesarios de módulos y desgaste del equipo de mantenimiento.",
     approach:
       "Lectura de estado, Diagnostic Buffer, hardware online, red, módulos I/O, sensores y actuadores hasta acotar la causa.",
+    whenToConsult:
+      "Cuando hay CPU en STOP, BF/SF activo, fallas intermitentes, pérdida de comunicación o producción necesita una causa técnica antes de cambiar hardware.",
   },
   {
     title: "Migraciones",
@@ -233,6 +239,8 @@ export const services = [
       "La obsolescencia aumenta costos, limita soporte técnico y puede dejar una línea crítica sin recuperación rápida.",
     approach:
       "Relevamiento de hardware y señales, análisis de lógica, conversión por etapas, pruebas y respaldo para arranque.",
+    whenToConsult:
+      "Cuando el sistema legacy empieza a ser un riesgo por repuestos, soporte, software antiguo o falta de documentación para mantenimiento.",
   },
   {
     title: "Redes industriales",
@@ -255,6 +263,8 @@ export const services = [
       "Una red industrial inestable puede parar toda una celda aunque el PLC y los equipos principales estén en buen estado.",
     approach:
       "Revisión de diagnóstico online, topología, nodos, conectores, terminaciones, repetidores y eventos registrados.",
+    whenToConsult:
+      "Cuando aparecen BF, nodos perdidos, desconexiones aleatorias, HMI sin comunicación o drives que dejan de responder sin una causa evidente.",
   },
   {
     title: "Instrumentación y señales de campo",
@@ -277,6 +287,8 @@ export const services = [
       "Una señal de campo mal interpretada puede generar falsas alarmas, paradas, dosificación incorrecta o decisiones de control erróneas.",
     approach:
       "Verificación de lazo, medición eléctrica, escalados, cableado, alimentación y coherencia entre señal y proceso.",
+    whenToConsult:
+      "Cuando una lectura no coincide con el proceso, una señal cae a cero, hay ruido, alarmas falsas o dudas entre sensor, cableado y programa.",
   },
   {
     title: "Electricidad industrial y tableros",
@@ -299,6 +311,8 @@ export const services = [
       "Un tablero difícil de mantener prolonga paradas, aumenta riesgos eléctricos y complica cualquier diagnóstico posterior.",
     approach:
       "Relevamiento, identificación de señales, revisión de protecciones, mando, fuerza y documentación funcional.",
+    whenToConsult:
+      "Cuando el tablero es difícil de diagnosticar, no hay planos confiables, se repiten fallas eléctricas o se necesita mejorar seguridad y trazabilidad.",
   },
   {
     title: "Capacitación técnica industrial",
@@ -321,6 +335,8 @@ export const services = [
       "La falta de criterio común genera dependencia externa, tiempos largos de diagnóstico y decisiones apresuradas en parada.",
     approach:
       "Casos reales, lectura online, análisis de síntomas, práctica con tableros, redes y criterios aplicables al turno.",
+    whenToConsult:
+      "Cuando el equipo de mantenimiento necesita un método común para responder mejor ante paradas, PLC Siemens, redes o señales de campo.",
   },
 ];
 
@@ -388,6 +404,12 @@ export const s7Course = {
     "Diagnóstico con STEP 7 Classic",
     "Procedimiento de búsqueda de fallas paso a paso",
   ],
+  learnItems: [
+    "Interpretar estados RUN/STOP, SF/BF y eventos del Diagnostic Buffer.",
+    "Entrar online con STEP 7 Classic y leer hardware sin perderse en el proyecto.",
+    "Relacionar síntomas de red PROFIBUS, módulos I/O y señales de campo.",
+    "Armar una secuencia de diagnóstico defendible frente a mantenimiento y producción.",
+  ],
   modules: [
     "Fundamentos del diagnóstico industrial",
     "Arquitectura Siemens S7-300/400",
@@ -422,6 +444,17 @@ export const s7Course = {
     "Reiniciar equipos sin registrar síntomas previos.",
     "Perder tiempo revisando zonas del sistema que no están relacionadas con el síntoma.",
   ],
+  difference: [
+    "Está pensado desde la parada de planta, no desde una demostración ideal de software.",
+    "Trabaja con síntomas reales: CPU en STOP, SF/BF, módulos con error, red y señales dudosas.",
+    "Enseña a decidir qué mirar primero, qué descartar y cómo justificar el próximo paso.",
+    "Integra el método BOJ para que el diagnóstico sea repetible y útil para el equipo.",
+  ],
+  appValue: [
+    "La app acompaña al alumno para ordenar síntomas, LEDs, red, señales y observaciones de campo.",
+    "Sirve como guía rápida cuando hay presión y no conviene depender de memoria o prueba y error.",
+    "Ayuda a llevar el método del curso al tablero, con una secuencia de revisión más clara.",
+  ],
 };
 
 export const tiaCourse = {
@@ -449,6 +482,12 @@ export const tiaCourse = {
     "Diagnóstico básico",
     "Introducción a HMI",
   ],
+  learnItems: [
+    "Crear un proyecto desde cero con hardware S7-1200/1500 y estructura básica.",
+    "Ordenar variables, bloques y lógica LAD para que el proyecto sea mantenible.",
+    "Cargar al PLC, monitorear online y entender diagnósticos iniciales.",
+    "Conectar la programación con necesidades reales de mantenimiento y puesta en marcha.",
+  ],
   benefits: [
     "Comprender la estructura de TIA Portal.",
     "Programar desde cero con orden.",
@@ -469,22 +508,27 @@ export const tiaCourse = {
     "Confundir monitoreo online con diagnóstico completo.",
     "Avanzar en un proyecto sin documentar señales ni arquitectura.",
   ],
+  difference: [
+    "Está orientado a entrar a TIA Portal con orden, no a memorizar pantallas.",
+    "Relaciona hardware, variables, bloques y monitoreo con situaciones reales de planta.",
+    "Prepara una base sólida para programar, diagnosticar y comunicarse mejor con mantenimiento.",
+  ],
 };
 
 export const appSections = [
   {
     title: "Problema que resuelve",
-    text: "En una parada suele haber presión, datos incompletos y muchas hipótesis. La app ordena el análisis antes de decidir.",
+    text: "En una parada suele haber presión, datos incompletos y demasiadas hipótesis. La app obliga a ordenar evidencia antes de decidir.",
     icon: "ShieldCheck",
   },
   {
     title: "Valor para el técnico",
-    text: "Menos improvisación, mejor registro de síntomas y una secuencia clara para revisar CPU, red, módulos y señales.",
+    text: "Menos improvisación, mejor registro de síntomas y una secuencia clara para revisar CPU, red, módulos, señales y observaciones.",
     icon: "ClipboardCheck",
   },
   {
     title: "Valor para empresas",
-    text: "Ayuda a estandarizar diagnóstico, capacitar mantenimiento y reducir tiempo perdido por revisiones sin método.",
+    text: "Ayuda a estandarizar criterios de diagnóstico, capacitar mantenimiento y reducir tiempo perdido por revisiones sin método.",
     icon: "Building2",
   },
 ];
@@ -513,11 +557,11 @@ export const appFunctions = [
 export const appDifferentials = [
   {
     title: "Pensada para presión de planta",
-    text: "Ordena información cuando la línea está detenida y el técnico necesita definir el próximo paso sin perder evidencia.",
+    text: "Ordena información cuando la línea está detenida y el técnico necesita definir el próximo paso sin perder datos clave.",
   },
   {
     title: "Conecta síntomas con método",
-    text: "Cruza PLC, CPU, LEDs, red, señales y observaciones para evitar saltos de diagnóstico.",
+    text: "Cruza PLC, CPU, LEDs, red, señales y observaciones para evitar saltos de diagnóstico y conclusiones apresuradas.",
   },
   {
     title: "No reemplaza al técnico",

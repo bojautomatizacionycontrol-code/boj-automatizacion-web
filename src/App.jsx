@@ -109,19 +109,19 @@ const courseVisuals = {
 
 const routeMeta = {
   "/inicio": {
-    title: "BOJ Automatización y Control | PLC Siemens y diagnóstico industrial",
+    title: "BOJ Automatización y Control | PLC Siemens, diagnóstico y mantenimiento industrial",
     description:
-      "Automatización industrial, ingeniería de detalle, PLC Siemens, diagnóstico de fallas, PROFIBUS, TIA Portal, cursos técnicos y app para mantenimiento industrial.",
+      "Automatización industrial en Tucumán y Argentina: PLC Siemens, diagnóstico de fallas, PROFIBUS, PROFINET, TIA Portal, cursos técnicos y app para mantenimiento industrial.",
   },
   "/servicios": {
-    title: "Servicios de automatización industrial | BOJ",
+    title: "Servicios de automatización industrial y diagnóstico | BOJ",
     description:
-      "Servicios técnicos de ingeniería, PLC Siemens, diagnóstico de fallas, redes PROFIBUS/PROFINET, migraciones, instrumentación, tableros y puesta en marcha.",
+      "Servicios técnicos para planta: PLC Siemens, diagnóstico de fallas, redes PROFIBUS/PROFINET, migraciones, instrumentación, tableros y puesta en marcha en Argentina.",
   },
   "/cursos": {
     title: "Cursos técnicos PLC Siemens y TIA Portal | BOJ",
     description:
-      "Cursos técnicos aplicados de diagnóstico en PLC Siemens S7-300/400, STEP 7 Classic y TIA Portal para mantenimiento industrial.",
+      "Cursos técnicos aplicados de diagnóstico en PLC Siemens S7-300/400, STEP 7 Classic y TIA Portal para mantenimiento industrial en Argentina.",
   },
   "/cursos/s7-300-400": {
     title: "Curso diagnóstico PLC Siemens S7-300/400 | BOJ",
@@ -146,7 +146,7 @@ const routeMeta = {
   "/contacto": {
     title: "Contacto técnico | BOJ Automatización y Control",
     description:
-      "Contacto directo para automatización industrial, diagnóstico de fallas, cursos PLC Siemens, TIA Portal, PROFIBUS y mantenimiento industrial.",
+      "Contacto técnico en San Miguel de Tucumán, Argentina, para automatización industrial, diagnóstico de fallas, cursos PLC Siemens, TIA Portal y PROFIBUS.",
   },
 };
 
@@ -298,18 +298,20 @@ function HomePage() {
           <IndustrialPanel />
         </div>
         <div className="section-container hero-content">
-          <p className="eyebrow">PLC Siemens | Ingeniería de detalle | Puesta en marcha</p>
-          <h1>Automatización industrial para resolver fallas y modernizar sistemas de planta</h1>
+          <p className="eyebrow">Diagnóstico de fallas | PLC Siemens | Mantenimiento de planta</p>
+          <h1>Automatización industrial para mantener tu planta operativa</h1>
           <p className="hero-subtitle">
-            BOJ acompaña a plantas industriales, técnicos e ingenierías desde el relevamiento
-            hasta la puesta en marcha: PLC, HMI, SCADA, tableros, redes, señales de campo,
-            diagnóstico de fallas, cursos técnicos y app de soporte en campo.
+            Ayudo a empresas industriales, mantenimiento e ingeniería a resolver fallas,
+            modernizar sistemas PLC/HMI/SCADA y capacitar equipos técnicos con criterio real de planta.
+          </p>
+          <p className="hero-positioning">
+            Diagnóstico con evidencia, automatización con método y puesta en marcha pensando en producción.
           </p>
           <div className="hero-actions">
-            <PrimaryLink href={whatsappUrl("Hola Walter, necesito una consulta técnica por automatización o diagnóstico industrial.")}>
+            <PrimaryLink href={whatsappUrl("Hola Walter, necesito una consulta técnica por una falla de planta, PLC Siemens o automatización industrial.")}>
               <Phone size={18} /> Consultar por WhatsApp
             </PrimaryLink>
-            <SecondaryLink href="#/servicios">Cotizar una solución</SecondaryLink>
+            <SecondaryLink href="#/servicios">Ver servicios</SecondaryLink>
             <GhostLink href="#/cursos">Ver cursos</GhostLink>
           </div>
           <div className="hero-metrics" aria-label="Áreas de trabajo">
@@ -321,9 +323,9 @@ function HomePage() {
             <span>Tableros</span>
           </div>
           <div className="hero-proof-grid" aria-label="Señales de experiencia técnica">
-            <span>Más de 10 años en automatización y puesta en marcha</span>
-            <span>Experiencia en proyectos reales con PLC, HMI y SCADA</span>
-            <span>Capacitación y app para mantenimiento bajo presión</span>
+            <span>Más de 10 años en automatización, diagnóstico y puesta en marcha</span>
+            <span>Trabajo real con PLC Siemens, HMI, SCADA, tableros y redes</span>
+            <span>Cursos y app para técnicos que diagnostican bajo presión</span>
           </div>
         </div>
       </section>
@@ -336,8 +338,8 @@ function HomePage() {
         <div className="section-container">
           <SectionHeader
             eyebrow="Áreas principales"
-            title="Soporte técnico para equipos que necesitan resolver, documentar y sostener la operación"
-            text="BOJ trabaja sobre problemas concretos de planta: líneas detenidas, diagnósticos incompletos, redes inestables, tableros sin trazabilidad y personal que necesita criterio práctico para actuar con seguridad."
+            title="Soporte técnico para resolver fallas, ordenar sistemas y sostener producción"
+            text="BOJ trabaja sobre problemas concretos: líneas detenidas, diagnósticos incompletos, redes inestables, tableros sin trazabilidad y equipos que necesitan criterio práctico para intervenir con seguridad."
           />
           <div className="feature-grid">
             {homeHighlights.map((item) => (
@@ -432,8 +434,8 @@ function ServicesPage() {
   return (
     <PageShell
       eyebrow="Servicios"
-      title="Automatización, diagnóstico y puesta en marcha industrial"
-      subtitle="Intervenciones técnicas para reducir paradas, ordenar sistemas PLC/HMI/SCADA y dejar instalaciones más mantenibles para el equipo de planta."
+      title="Servicios técnicos para reducir paradas y sostener automatización industrial"
+      subtitle="Diagnóstico, ingeniería, programación, redes, tableros y puesta en marcha con foco en continuidad operativa, mantenimiento y decisiones con evidencia."
     >
       <ServicePrinciples />
       <div className="services-list">
@@ -442,8 +444,8 @@ function ServicesPage() {
         ))}
       </div>
       <RouteCTA
-        title="¿Tenés una parada, una migración o una mejora pendiente?"
-        text="Enviá el síntoma, el PLC involucrado, fotos del tablero o una descripción corta del proceso. La primera respuesta ordena alcance, riesgo y próximo paso técnico."
+        title="¿Tenés una falla, una migración o una mejora pendiente?"
+        text="Enviá el síntoma, el PLC involucrado, fotos del tablero o una descripción corta del proceso. La respuesta inicial busca ordenar alcance, riesgo y próximo paso técnico."
         primaryLabel="Consultar por WhatsApp"
         primaryHref={whatsappUrl("Hola Walter, necesito consultar por un servicio técnico industrial.")}
         secondaryLabel="Ir a contacto"
@@ -457,8 +459,8 @@ function CoursesPage() {
   return (
     <PageShell
       eyebrow="Cursos"
-      title="Formación técnica para mantenimiento e ingeniería"
-      subtitle="Cursos aplicados para diagnosticar, programar y tomar decisiones frente a PLC Siemens reales. Menos teoría aislada; más criterio para planta."
+      title="Cursos técnicos para diagnosticar y programar PLC Siemens con criterio de planta"
+      subtitle="Formación aplicada para mantenimiento, instrumentistas, electricistas e ingeniería: menos teoría aislada y más método para actuar frente a fallas reales."
     >
       <div className="training-strip">
         <span>Diagnóstico online</span>
@@ -530,9 +532,12 @@ function CourseLanding({ course, eyebrow, visual, ctas }) {
       </div>
       <div className="course-landing">
         <div className="course-content">
-          <InfoBlock title="Público objetivo" items={course.audience} />
+          <InfoBlock title="Para quién es" items={course.audience} />
+          {course.learnItems ? <InfoBlock title="Qué vas a aprender" items={course.learnItems} /> : null}
           {course.includes ? <InfoBlock title="Qué incluye" items={course.includes} /> : null}
-          <InfoBlock title="Resultado práctico al terminar" items={course.outcomes} />
+          <InfoBlock title="Qué vas a poder hacer después" items={course.outcomes} />
+          {course.difference ? <InfoBlock title="Por qué este curso es diferente" items={course.difference} /> : null}
+          {course.appValue ? <InfoBlock title="Valor de la app incluida" items={course.appValue} /> : null}
           <InfoBlock title={course.includes ? "Programa técnico" : "Contenido de base"} items={course.modules} numbered />
           <InfoBlock title="Impacto en tu trabajo" items={course.benefits} />
           <InfoBlock title="Errores que vas a evitar" items={course.avoidMistakes} />
@@ -560,12 +565,17 @@ function AppPage() {
   return (
     <PageShell
       eyebrow="App"
-      title="App BOJ para diagnóstico en campo"
-      subtitle="Una guía técnica para ordenar síntomas, LEDs, estado de CPU, red y señales cuando el técnico necesita decidir con evidencia."
+      title="App BOJ: diagnóstico industrial guiado para técnicos en campo"
+      subtitle="Una herramienta profesional para ordenar síntomas, LEDs, estado de CPU, red PROFIBUS/PROFINET, señales y posibles causas durante una falla real."
     >
       <div className="app-page-grid">
         <div>
-          <h2>Qué ordena durante una falla</h2>
+          <h2>Menos improvisación cuando la planta está esperando respuesta</h2>
+          <p>
+            La app convierte el método de diagnóstico BOJ en una guía de campo: primero se cargan
+            síntomas y evidencia visible, después se cruzan datos de CPU, red y señales para definir
+            una acción técnica razonable.
+          </p>
           <div className="check-grid compact">
             {appFeatures.map((item) => (
               <CheckItem key={item}>{item}</CheckItem>
@@ -677,8 +687,8 @@ function WorksPage() {
   return (
     <PageShell
       eyebrow="Obras"
-      title="Obras reales y experiencia en planta"
-      subtitle="Casos de ingeniería, programación PLC, HMI, SCADA, tableros, migraciones y puesta en marcha presentados como evidencia técnica."
+      title="Obras y trabajos realizados en entornos industriales"
+      subtitle="Casos de ingeniería, programación PLC, HMI, SCADA, tableros, migraciones y puesta en marcha presentados con problema inicial, intervención y resultado."
     >
       <PortfolioPrep />
       <div className="works-grid">
@@ -702,20 +712,19 @@ function ContactPage() {
   return (
     <PageShell
       eyebrow="Contacto"
-      title="Hablemos de tu sistema"
-      subtitle="Contacto directo para diagnóstico de fallas, automatización, capacitación, migraciones, tableros, redes industriales o app BOJ."
+      title="Contacto técnico directo para tu planta"
+      subtitle="Escribí por fallas de planta, automatización, cursos, capacitaciones, migraciones, tableros, redes industriales o app BOJ."
     >
       <section className="contact-direct">
         <div>
           <p className="eyebrow">Atención directa técnica</p>
-          <h2>Atención directa, técnica y sin vueltas</h2>
+          <h2>Respondemos con foco técnico y próximo paso claro</h2>
           <p>
-            Podés escribir para cotizar una solución, consultar una falla, pedir una capacitación
-            o enviar datos iniciales del equipo. La primera respuesta busca ordenar el próximo
-            paso técnico sin vueltas comerciales innecesarias.
+            Podés enviar el síntoma, el PLC o red involucrada, una foto del tablero o la necesidad
+            de capacitación. La primera respuesta busca ordenar prioridad, alcance y acción posible.
           </p>
         </div>
-        <PrimaryLink href={whatsappUrl("Hola Walter, necesito atención técnica directa por BOJ Automatización y Control.")}>
+        <PrimaryLink href={whatsappUrl("Hola Walter, necesito atención técnica directa por una falla de planta, automatización, cursos o migración.")}>
           <Phone size={18} /> Escribir por WhatsApp
         </PrimaryLink>
       </section>
@@ -725,7 +734,12 @@ function ContactPage() {
           <ContactLine icon="Wrench" label="Responsable" value={contact.responsible} />
           <ContactLine icon="MapPin" label="Ubicación" value={contact.location} />
           <ContactLine icon="Mail" label="Email" value={contact.email} href={`mailto:${contact.email}`} />
-          <ContactLine icon="Phone" label="WhatsApp" value={contact.whatsappDisplay} href={whatsappUrl()} />
+          <ContactLine
+            icon="Phone"
+            label="WhatsApp"
+            value={contact.whatsappDisplay}
+            href={whatsappUrl("Hola Walter, vengo desde la web BOJ. Quiero consultar por una falla de planta, automatización, cursos o migración.")}
+          />
           <div className="social-placeholders">
             {/* Reemplazar # por enlaces reales cuando estén definidos. */}
             <a href={contact.instagram}>Instagram / redes</a>
@@ -933,9 +947,9 @@ function IndustrialScopeSection() {
       <div className="section-container evidence-grid">
         <div className="evidence-copy">
           <p className="eyebrow">Desde la ingeniería hasta producción</p>
-          <h2>Una web nueva con la experiencia real que ya mostraba BOJ en su recorrido</h2>
+          <h2>Experiencia técnica desde la ingeniería hasta la puesta en marcha</h2>
           <p>
-            La propuesta comercial se apoya en trabajo concreto: ingeniería básica y de detalle,
+            La propuesta se apoya en trabajo concreto: ingeniería básica y de detalle,
             planos eléctricos, armado de tableros, programación PLC/HMI/SCADA, migraciones,
             pruebas FAT/SAT y puesta en marcha coordinada con producción.
           </p>
@@ -949,7 +963,7 @@ function IndustrialScopeSection() {
             <GhostLink href="#/servicios">Revisar servicios</GhostLink>
           </div>
         </div>
-        <div className="evidence-visual-grid" aria-label="Imágenes técnicas BOJ recuperadas de la web anterior">
+        <div className="evidence-visual-grid" aria-label="Imágenes técnicas de trabajos y contexto industrial BOJ">
           <figure className="evidence-photo large">
             <img src={panelDiagnosticVisual} alt="Tablero industrial con diagnóstico online" loading="lazy" />
           </figure>
@@ -1079,6 +1093,12 @@ function ServiceDetailCard({ service }) {
         <div className="benefit-box">
           <h3>Resultado esperado</h3>
           <p>{service.benefit}</p>
+          {service.whenToConsult ? (
+            <div className="consult-box">
+              <h3>Cuándo conviene consultar</h3>
+              <p>{service.whenToConsult}</p>
+            </div>
+          ) : null}
           <a
             className="btn secondary"
             href={whatsappUrl(`Hola Walter, quiero consultar por el servicio: ${service.title}.`)}
@@ -1119,12 +1139,12 @@ function CourseCard({ course, expanded = false }) {
             <dd>{course.audience}</dd>
           </div>
           <div>
-            <dt>Qué aprenderá el alumno</dt>
+            <dt>Qué resuelve en planta</dt>
             <dd>{course.learn}</dd>
           </div>
         </dl>
         <PrimaryLink href={`#${course.path}`}>
-          Ver curso <ArrowRight size={18} />
+          Ver temario y consulta <ArrowRight size={18} />
         </PrimaryLink>
         {expanded ? (
           <div className="course-outcomes">
@@ -1410,7 +1430,7 @@ function ClientLogoBand() {
   return (
     <section className="client-band">
       <div className="section-container">
-        <p className="eyebrow">Referencias de obras publicadas en la web anterior</p>
+        <p className="eyebrow">Experiencia en obras y entornos industriales</p>
         <div className="logo-strip">
           {/* Reemplazar por logos reales si se cuenta con autorización de uso de marca. */}
           {clientLogoSlots.map((item) => (
@@ -1476,7 +1496,7 @@ function Footer() {
       </div>
       <div className="footer-bottom">
         <span>BOJ Automatización y Control</span>
-        <span>Web preparada para editar logos, capturas, obras y enlaces reales.</span>
+        <span>Automatización industrial, diagnóstico, cursos técnicos y app BOJ.</span>
       </div>
     </footer>
   );
