@@ -432,8 +432,8 @@ function ServicesPage() {
   return (
     <PageShell
       eyebrow="Servicios"
-      title="Servicios técnicos para automatizar, diagnosticar y poner en marcha sistemas industriales"
-      subtitle="Ingeniería, programación, tableros, redes, migraciones y diagnóstico con foco en continuidad operativa, reducción de paradas y soporte real para mantenimiento."
+      title="Automatización, diagnóstico y puesta en marcha industrial"
+      subtitle="Intervenciones técnicas para reducir paradas, ordenar sistemas PLC/HMI/SCADA y dejar instalaciones más mantenibles para el equipo de planta."
     >
       <ServicePrinciples />
       <div className="services-list">
@@ -442,8 +442,8 @@ function ServicesPage() {
         ))}
       </div>
       <RouteCTA
-        title="¿Tenés una falla detenida o una mejora técnica pendiente?"
-        text="Podés enviar el síntoma, fotos del tablero o una breve descripción del sistema. La consulta inicial ayuda a ordenar el alcance antes de intervenir."
+        title="¿Tenés una parada, una migración o una mejora pendiente?"
+        text="Enviá el síntoma, el PLC involucrado, fotos del tablero o una descripción corta del proceso. La primera respuesta ordena alcance, riesgo y próximo paso técnico."
         primaryLabel="Consultar por WhatsApp"
         primaryHref={whatsappUrl("Hola Walter, necesito consultar por un servicio técnico industrial.")}
         secondaryLabel="Ir a contacto"
@@ -457,8 +457,8 @@ function CoursesPage() {
   return (
     <PageShell
       eyebrow="Cursos"
-      title="Cursos técnicos para trabajar con PLC Siemens con criterio de planta"
-      subtitle="Formación aplicada para técnicos, ingenieros, instrumentistas y mantenimiento que necesitan diagnosticar, programar y tomar decisiones frente a equipos reales, no solo aprender pantallas de software."
+      title="Formación técnica para mantenimiento e ingeniería"
+      subtitle="Cursos aplicados para diagnosticar, programar y tomar decisiones frente a PLC Siemens reales. Menos teoría aislada; más criterio para planta."
     >
       <div className="training-strip">
         <span>Diagnóstico online</span>
@@ -479,8 +479,8 @@ function CoursesPage() {
         </p>
       </div>
       <RouteCTA
-        title="Capacitación para personas que tienen que actuar frente a equipos reales"
-        text="Si necesitás formar a tu equipo, adaptar contenidos a una planta o consultar modalidad in-company, BOJ puede orientar el curso al nivel técnico del grupo."
+        title="Capacitación para equipos que responden ante fallas reales"
+        text="Los contenidos pueden orientarse al nivel del grupo, al tipo de planta y a los problemas que mantenimiento enfrenta durante una parada."
         primaryLabel="Consultar capacitación"
         primaryHref={whatsappUrl("Hola Walter, quiero consultar por cursos o capacitación in-company BOJ.")}
         secondaryLabel="Ver curso S7-300/400"
@@ -532,10 +532,10 @@ function CourseLanding({ course, eyebrow, visual, ctas }) {
         <div className="course-content">
           <InfoBlock title="Público objetivo" items={course.audience} />
           {course.includes ? <InfoBlock title="Qué incluye" items={course.includes} /> : null}
-          <InfoBlock title="Esto es lo que vas a poder hacer después del curso" items={course.outcomes} />
-          <InfoBlock title={course.includes ? "Módulos sugeridos" : "Contenido sugerido"} items={course.modules} numbered />
-          <InfoBlock title="Beneficios" items={course.benefits} />
-          <InfoBlock title="Errores comunes que el curso ayuda a evitar" items={course.avoidMistakes} />
+          <InfoBlock title="Resultado práctico al terminar" items={course.outcomes} />
+          <InfoBlock title={course.includes ? "Programa técnico" : "Contenido de base"} items={course.modules} numbered />
+          <InfoBlock title="Impacto en tu trabajo" items={course.benefits} />
+          <InfoBlock title="Errores que vas a evitar" items={course.avoidMistakes} />
           <div className="button-row">
             {ctas.map((cta, index) =>
               index === 0 ? (
@@ -560,12 +560,12 @@ function AppPage() {
   return (
     <PageShell
       eyebrow="App"
-      title="App de diagnóstico industrial BOJ"
-      subtitle="Una herramienta profesional para ordenar el diagnóstico en campo cuando hay presión de planta, fallas en PLC Siemens, síntomas de red o señales dudosas."
+      title="App BOJ para diagnóstico en campo"
+      subtitle="Una guía técnica para ordenar síntomas, LEDs, estado de CPU, red y señales cuando el técnico necesita decidir con evidencia."
     >
       <div className="app-page-grid">
         <div>
-          <h2>Qué hace</h2>
+          <h2>Qué ordena durante una falla</h2>
           <div className="check-grid compact">
             {appFeatures.map((item) => (
               <CheckItem key={item}>{item}</CheckItem>
@@ -588,8 +588,8 @@ function AppPage() {
       <section className="inner-section">
         <SectionHeader
           eyebrow="Funciones principales"
-          title="Diagnóstico guiado para no saltar pasos críticos"
-          text="La app no reemplaza el criterio técnico: lo ordena. Ayuda a registrar síntomas, cruzar estados y revisar puntos que suelen definir la causa real."
+          title="Diagnóstico guiado para no perder evidencia"
+          text="La app no reemplaza al técnico: organiza la secuencia de revisión para evitar reinicios, cambios de módulo o decisiones tomadas sin datos."
         />
         <div className="function-grid">
           {appFunctions.map((item) => (
@@ -606,7 +606,7 @@ function AppPage() {
         </figure>
         <div>
           <p className="eyebrow">Conexión fuerte con el curso</p>
-          <h2>La app traduce el método de diagnóstico a una guía de campo</h2>
+          <h2>Del método del curso a una guía usable frente al tablero</h2>
           <p>
             El objetivo es que el técnico no llegue al tablero con una lista suelta de ideas,
             sino con una secuencia: estado de CPU, LEDs, red, módulos, señales, observaciones
@@ -624,8 +624,8 @@ function AppPage() {
       <section className="inner-section">
         <SectionHeader
           eyebrow="Diferencial BOJ"
-          title="Por qué esta app es diferente"
-          text="No está pensada como una lista genérica de fallas. Está orientada a ordenar el razonamiento técnico cuando hay presión de planta."
+          title="Por qué no es una lista genérica de fallas"
+          text="Está pensada desde mantenimiento: síntoma, evidencia, causa probable y acción. Sirve para trabajar con más orden cuando producción espera una respuesta."
         />
         <div className="card-grid three">
           {appDifferentials.map((item) => (
@@ -641,7 +641,7 @@ function AppPage() {
       <section className="inner-section">
         <SectionHeader
           eyebrow="Versiones"
-          title="Uso para formación y para diagnóstico avanzado"
+          title="Uso para curso, campo y procedimientos internos"
         />
         <div className="card-grid two">
           {appVersions.map((version) => (
@@ -654,8 +654,8 @@ function AppPage() {
       </section>
 
       <RouteCTA
-        title="La app funciona como extensión práctica del curso de diagnóstico"
-        text="El curso enseña el método; la app ayuda a llevarlo al campo para registrar síntomas, revisar pasos y evitar decisiones apresuradas."
+        title="La app acompaña el criterio que se entrena en el curso"
+        text="El curso enseña cómo diagnosticar; la app ayuda a sostener esa secuencia cuando hay presión, poco tiempo y muchos síntomas mezclados."
         primaryLabel="Consultar acceso a la app"
         primaryHref={whatsappUrl("Hola Walter, quiero consultar acceso a la app de diagnóstico BOJ.")}
         secondaryLabel="Ver curso S7-300/400"
@@ -677,8 +677,8 @@ function WorksPage() {
   return (
     <PageShell
       eyebrow="Obras"
-      title="Obras y trabajos realizados"
-      subtitle="Experiencia aplicada en ingeniería eléctrica, programación PLC, HMI, SCADA, tableros, migraciones, servicios industriales y puesta en marcha en planta."
+      title="Obras reales y experiencia en planta"
+      subtitle="Casos de ingeniería, programación PLC, HMI, SCADA, tableros, migraciones y puesta en marcha presentados como evidencia técnica."
     >
       <PortfolioPrep />
       <div className="works-grid">
@@ -687,8 +687,8 @@ function WorksPage() {
         ))}
       </div>
       <RouteCTA
-        title="Cada obra puede documentarse con fotos, capturas y resultado técnico"
-        text="La estructura queda preparada para agregar evidencia visual real: tablero, PLC, HMI, red, pantalla online, logo del cliente y resultado de la intervención."
+        title="¿Necesitás una intervención similar en tu planta?"
+        text="Podemos partir del problema operativo, revisar el estado técnico actual y definir una solución con alcance claro, pruebas y puesta en marcha."
         primaryLabel="Consultar por una obra similar"
         primaryHref={whatsappUrl("Hola Walter, quiero consultar por una obra o intervención industrial similar.")}
         secondaryLabel="Ver servicios"
@@ -702,13 +702,13 @@ function ContactPage() {
   return (
     <PageShell
       eyebrow="Contacto"
-      title="Contacto"
-      subtitle="Si necesitás asistencia técnica, capacitación, diagnóstico de fallas, automatización o información sobre los cursos, podés comunicarte directamente."
+      title="Hablemos de tu sistema"
+      subtitle="Contacto directo para diagnóstico de fallas, automatización, capacitación, migraciones, tableros, redes industriales o app BOJ."
     >
       <section className="contact-direct">
         <div>
           <p className="eyebrow">Atención directa técnica</p>
-          <h2>Respondemos rápido y hablamos en lenguaje de planta</h2>
+          <h2>Atención directa, técnica y sin vueltas</h2>
           <p>
             Podés escribir para cotizar una solución, consultar una falla, pedir una capacitación
             o enviar datos iniciales del equipo. La primera respuesta busca ordenar el próximo
@@ -1030,7 +1030,7 @@ function ServicePrinciples() {
     <section className="service-principles">
       <div>
         <p className="eyebrow">Criterio de intervención</p>
-        <h2>Servicios pensados para planta, parada, mantenimiento y continuidad</h2>
+        <h2>Primero evidencia. Después decisión técnica.</h2>
       </div>
       <div className="principle-list">
         {servicePrinciples.map((item) => (
@@ -1063,21 +1063,21 @@ function ServiceDetailCard({ service }) {
           </ul>
           <div className="service-proof-grid">
             <div>
-              <h3>Problema que resuelve</h3>
+              <h3>Situación típica</h3>
               <p>{service.problem}</p>
             </div>
             <div>
-              <h3>Impacto en planta</h3>
+              <h3>Impacto si no se corrige</h3>
               <p>{service.impact}</p>
             </div>
             <div>
-              <h3>Enfoque práctico</h3>
+              <h3>Cómo lo aborda BOJ</h3>
               <p>{service.approach}</p>
             </div>
           </div>
         </div>
         <div className="benefit-box">
-          <h3>Beneficio para la empresa</h3>
+          <h3>Resultado esperado</h3>
           <p>{service.benefit}</p>
           <a
             className="btn secondary"
@@ -1206,11 +1206,10 @@ function PortfolioPrep() {
     <section className="portfolio-prep">
       <div>
         <p className="eyebrow">Portfolio técnico con obras reales</p>
-        <h2>Casos publicados por BOJ, ordenados ahora como evidencia comercial</h2>
+        <h2>Experiencia presentada como problema, intervención y resultado</h2>
         <p>
-          La web anterior ya mostraba obras concretas. En esta versión quedan presentadas con
-          problema inicial, intervención y resultado para que un cliente entienda qué se resolvió
-          y por qué BOJ puede intervenir en sistemas industriales exigentes.
+          Cada caso resume una situación real de planta: qué necesitaba el sistema, cómo se
+          intervino y qué valor técnico quedó para operación o mantenimiento.
         </p>
       </div>
       <div className="asset-slots">

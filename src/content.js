@@ -123,10 +123,10 @@ export const methodSteps = [
 ];
 
 export const servicePrinciples = [
-  "Antes de cambiar hardware, se busca evidencia técnica.",
-  "Antes de modificar lógica, se entiende la condición de planta.",
-  "Antes de poner en marcha, se prueban señales, secuencia, seguridad y respuesta operativa.",
-  "Antes de cerrar una intervención, se deja criterio técnico útil para mantenimiento.",
+  "Se releva el síntoma antes de tocar lógica o hardware.",
+  "Se busca evidencia online, eléctrica y de campo.",
+  "Se prueba con producción, mantenimiento y seguridad operativa en mente.",
+  "Se deja una recomendación clara para sostener el sistema después de la intervención.",
 ];
 
 export const contactChecklist = [
@@ -150,7 +150,7 @@ export const services = [
     title: "Automatización industrial",
     icon: "Factory",
     description:
-      "Diseño, modificación, diagnóstico y puesta en marcha de sistemas de automatización industrial basados en PLC, HMI, variadores, sensores, actuadores e instrumentación de campo.",
+      "Diseño, modificación y puesta en marcha de sistemas con PLC, HMI, SCADA, variadores, sensores, actuadores e instrumentación.",
     applications: [
       "PLC Siemens S5, S7-200, S7-300/400, S7-1200/1500",
       "TIA Portal y STEP 7 Classic",
@@ -160,19 +160,19 @@ export const services = [
       "PID y variadores de velocidad",
     ],
     benefit:
-      "Permite mejorar continuidad operativa, ordenar la lógica de control y dejar sistemas más diagnosticables para mantenimiento.",
+      "Un sistema más estable, documentado y diagnosticable, con menos dependencia de improvisación durante una parada.",
     problem:
-      "Sistemas que necesitan modificaciones, ampliaciones o puesta en marcha sin perder trazabilidad técnica.",
+      "Máquinas o procesos que necesitan ampliar funciones, corregir lógica, integrar equipos o arrancar producción con menor riesgo.",
     impact:
-      "Una automatización mal documentada o inestable puede detener producción, dificultar cambios y aumentar tiempos de intervención.",
+      "Una automatización inestable detiene producción, complica mantenimiento y vuelve costoso cualquier cambio futuro.",
     approach:
-      "Relevamiento de señales, lectura de lógica existente, pruebas controladas, documentación clara y puesta en marcha con criterio de planta.",
+      "Relevamiento de señales, lectura de lógica, pruebas controladas y puesta en marcha con criterio de operación y mantenimiento.",
   },
   {
     title: "Ingeniería eléctrica básica y de detalle",
     icon: "ClipboardCheck",
     description:
-      "Desarrollo de ingeniería para instalaciones eléctricas industriales, tableros, migraciones y proyectos de automatización que necesitan documentación clara antes de ejecutar.",
+      "Ingeniería para instalaciones eléctricas, tableros, migraciones y automatización cuando el proyecto necesita claridad antes de ejecutar.",
     applications: [
       "Pliegos y especificaciones técnicas",
       "Planos eléctricos y digitalización",
@@ -182,19 +182,19 @@ export const services = [
       "Selección de sensores, actuadores y componentes de campo",
     ],
     benefit:
-      "Ordena el proyecto antes de intervenir en planta, reduce improvisaciones y facilita compras, montaje, pruebas y mantenimiento posterior.",
+      "Menos retrabajo en montaje, compras mejor definidas y pruebas más ordenadas al llegar a planta.",
     problem:
-      "Proyectos que avanzan sin relevamiento suficiente, con planos incompletos o sin criterio claro para migrar, ampliar o poner en marcha.",
+      "Proyectos con planos incompletos, señales sin relevar o decisiones de montaje tomadas sin ingeniería suficiente.",
     impact:
       "La falta de ingeniería aumenta retrabajos, errores de conexionado, demoras de montaje y riesgos durante pruebas con producción.",
     approach:
-      "Relevamiento técnico, definición de alcance, documentación eléctrica, criterios de selección, revisión de señales y preparación para pruebas FAT/SAT.",
+      "Relevamiento técnico, definición de alcance, planos, selección de componentes y preparación de pruebas FAT/SAT.",
   },
   {
     title: "Diagnóstico de fallas industriales",
     icon: "FileSearch",
     description:
-      "Análisis técnico de fallas en sistemas automatizados, orientado a reducir tiempos de parada y detectar la causa raíz del problema.",
+      "Análisis de fallas en sistemas automatizados para reducir parada, separar causa probable y evitar cambios innecesarios.",
     applications: [
       "CPU en STOP/RUN",
       "LEDs SF/BF/RUN/STOP",
@@ -204,19 +204,19 @@ export const services = [
       "Sensores, actuadores y problemas intermitentes de planta",
     ],
     benefit:
-      "Reduce cambios innecesarios de hardware y acelera decisiones durante paradas críticas de producción.",
+      "Decisiones más rápidas y defendibles durante una parada, con evidencia antes de reemplazar componentes.",
     problem:
-      "Paradas de línea, CPU en STOP, fallas intermitentes, BF/SF activos o síntomas que no tienen una causa evidente.",
+      "CPU en STOP, BF/SF activos, módulos con error, fallas intermitentes o síntomas que producción necesita resolver rápido.",
     impact:
       "Cada hora de incertidumbre puede traducirse en pérdida de producción, cambios innecesarios de módulos y desgaste del equipo de mantenimiento.",
     approach:
-      "Lectura de estados, Diagnostic Buffer, Hardware Config online, revisión de red, módulos I/O, sensores y actuadores hasta separar causa probable.",
+      "Lectura de estado, Diagnostic Buffer, hardware online, red, módulos I/O, sensores y actuadores hasta acotar la causa.",
   },
   {
     title: "Migraciones",
     icon: "RefreshCcw",
     description:
-      "Migración de sistemas antiguos hacia plataformas modernas, manteniendo continuidad operativa y reduciendo riesgos de parada.",
+      "Migración de plataformas legacy a sistemas modernos con relevamiento, pruebas y puesta en marcha planificada.",
     applications: [
       "Migración Siemens S5 a S7/TIA",
       "Migración S7-300/400 a S7-1200/1500",
@@ -226,19 +226,19 @@ export const services = [
       "Pruebas y puesta en marcha",
     ],
     benefit:
-      "Actualiza la plataforma de control con una transición planificada, trazable y con menor exposición productiva.",
+      "Modernización con menor exposición productiva, más soporte técnico y mejor disponibilidad de repuestos.",
     problem:
       "Equipos legacy con repuestos difíciles, software antiguo, baja documentación o riesgo operativo ante una falla mayor.",
     impact:
       "La obsolescencia aumenta costos, limita soporte técnico y puede dejar una línea crítica sin recuperación rápida.",
     approach:
-      "Relevamiento de hardware y señales, análisis de lógica, estrategia de conversión, pruebas por etapas y puesta en marcha con respaldo.",
+      "Relevamiento de hardware y señales, análisis de lógica, conversión por etapas, pruebas y respaldo para arranque.",
   },
   {
     title: "Redes industriales",
     icon: "Network",
     description:
-      "Diagnóstico, configuración y mantenimiento de redes industriales utilizadas en automatización.",
+      "Diagnóstico y configuración de redes industriales que conectan PLC, HMI, drives y periferia distribuida.",
     applications: [
       "PROFIBUS DP",
       "PROFINET",
@@ -248,19 +248,19 @@ export const services = [
       "Fallas BF y comunicación PLC-HMI-Drive",
     ],
     benefit:
-      "Ayuda a detectar fallas físicas, lógicas o de configuración que suelen detener líneas completas.",
+      "Mayor estabilidad de comunicación y menos paradas por nodos perdidos, conectores deficientes o configuración inconsistente.",
     problem:
       "Nodos que desaparecen, fallas BF, comunicación inestable entre PLC, HMI, drives o periferia distribuida.",
     impact:
       "Una red industrial inestable puede parar toda una celda aunque el PLC y los equipos principales estén en buen estado.",
     approach:
-      "Revisión de configuración, estado online, terminaciones, conectores, repetidores, nodos y síntomas registrados por el PLC.",
+      "Revisión de diagnóstico online, topología, nodos, conectores, terminaciones, repetidores y eventos registrados.",
   },
   {
     title: "Instrumentación y señales de campo",
     icon: "Gauge",
     description:
-      "Diagnóstico e integración de instrumentos industriales y señales de proceso.",
+      "Diagnóstico e integración de señales de campo para que el PLC lea el proceso de forma confiable.",
     applications: [
       "4-20 mA y 0-10 V",
       "Sensores y transmisores",
@@ -270,19 +270,19 @@ export const services = [
       "Verificación de lazo",
     ],
     benefit:
-      "Mejora la lectura del proceso y evita que una falla de campo sea confundida con un problema de programa.",
+      "Lecturas más confiables y menor riesgo de confundir una falla de instrumento o cableado con un problema de programa.",
     problem:
       "Lecturas analógicas fuera de escala, señales ausentes, transmisores dudosos o lazos que no coinciden con el proceso real.",
     impact:
       "Una señal de campo mal interpretada puede generar falsas alarmas, paradas, dosificación incorrecta o decisiones de control erróneas.",
     approach:
-      "Verificación de lazo, medición eléctrica, revisión de escalados, cableado, alimentación, estado de entrada y coherencia con el proceso.",
+      "Verificación de lazo, medición eléctrica, escalados, cableado, alimentación y coherencia entre señal y proceso.",
   },
   {
     title: "Electricidad industrial y tableros",
     icon: "CircuitBoard",
     description:
-      "Servicios asociados a tableros eléctricos, conexionado, lógica de mando, protecciones, relevamiento y mejoras.",
+      "Relevamiento, diagnóstico y mejora de tableros de control, fuerza, mando, protecciones y conexionado de campo.",
     applications: [
       "Tableros de control y fuerza",
       "MCC",
@@ -292,19 +292,19 @@ export const services = [
       "Documentación",
     ],
     benefit:
-      "Aporta seguridad, trazabilidad y mejor mantenibilidad en instalaciones eléctricas industriales.",
+      "Tableros más seguros, legibles y mantenibles, con mejor trazabilidad para futuras intervenciones.",
     problem:
       "Tableros con cableado desordenado, señales sin identificar, protecciones dudosas o documentación incompleta.",
     impact:
       "Un tablero difícil de mantener prolonga paradas, aumenta riesgos eléctricos y complica cualquier diagnóstico posterior.",
     approach:
-      "Relevamiento, ordenamiento técnico, identificación de señales, revisión de protecciones, mando, fuerza y documentación funcional.",
+      "Relevamiento, identificación de señales, revisión de protecciones, mando, fuerza y documentación funcional.",
   },
   {
     title: "Capacitación técnica industrial",
     icon: "GraduationCap",
     description:
-      "Capacitaciones para técnicos, instrumentistas, electricistas, ingenieros y personal de mantenimiento.",
+      "Capacitaciones para técnicos, instrumentistas, electricistas, ingenieros y mantenimiento que necesitan actuar frente a equipos reales.",
     applications: [
       "PLC Siemens",
       "Diagnóstico de fallas",
@@ -314,13 +314,13 @@ export const services = [
       "Cursos in-company y grabados",
     ],
     benefit:
-      "Eleva el criterio técnico del equipo y mejora la respuesta ante fallas reales en planta.",
+      "Un equipo con mejor criterio técnico, menos dependencia externa y respuestas más ordenadas ante fallas.",
     problem:
       "Equipos de mantenimiento que usan PLC y redes a diario, pero necesitan método para diagnosticar bajo presión.",
     impact:
       "La falta de criterio común genera dependencia externa, tiempos largos de diagnóstico y decisiones apresuradas en parada.",
     approach:
-      "Capacitación con casos reales, lectura online, análisis de síntomas, práctica con tableros, redes y criterios aplicables al turno.",
+      "Casos reales, lectura online, análisis de síntomas, práctica con tableros, redes y criterios aplicables al turno.",
   },
 ];
 
@@ -335,12 +335,12 @@ export const courses = [
     audience:
       "Técnicos de mantenimiento, instrumentistas, electricistas industriales, ingenieros de planta y programadores PLC.",
     learn:
-      "Interpretar estados de CPU, LEDs SF/BF/RUN/STOP, Diagnostic Buffer, Hardware Config online, fallas PROFIBUS y señales de campo.",
+      "Leer estados de CPU, LEDs, Diagnostic Buffer, hardware online, PROFIBUS y señales de campo para avanzar con método.",
     outcomes: [
-      "Reducir tiempos de diagnóstico ante CPU en STOP, SF/BF o fallas de módulos.",
-      "Trabajar con un método técnico antes de cambiar hardware.",
-      "Interpretar síntomas de PROFIBUS, I/O y señales de campo.",
-      "Registrar datos útiles para explicar la falla y sostener una decisión frente a producción.",
+      "Diagnosticar CPU en STOP, SF/BF o fallas de módulos con una secuencia clara.",
+      "Defender una decisión técnica con evidencia online y de campo.",
+      "Separar fallas de red, I/O, alimentación, instrumento o lógica.",
+      "Registrar datos útiles para explicar la falla frente a mantenimiento y producción.",
     ],
     icon: "Cpu",
   },
@@ -354,9 +354,9 @@ export const courses = [
     audience:
       "Técnicos que quieren iniciar en TIA Portal, estudiantes, programadores que vienen de STEP 7 Classic y personal de mantenimiento.",
     learn:
-      "Crear proyectos, configurar hardware, trabajar con variables, programar LAD básico, cargar al PLC y diagnosticar online.",
+      "Crear proyectos, configurar hardware, ordenar variables, programar LAD básico, cargar al PLC y monitorear online.",
     outcomes: [
-      "Crear y cargar proyectos básicos en TIA Portal con orden.",
+      "Crear y cargar proyectos básicos en TIA Portal con estructura.",
       "Comprender estructura de hardware, variables, bloques y monitoreo online.",
       "Evitar errores iniciales frecuentes al pasar de STEP 7 Classic a TIA.",
       "Preparar una base práctica para proyectos reales con PLC modernos Siemens.",
@@ -369,7 +369,7 @@ export const s7Course = {
   title:
     "Diagnóstico y resolución de fallas en PLC Siemens S7-300/400 con STEP 7 Classic",
   subtitle:
-    "Un curso técnico aplicado para aprender a diagnosticar fallas reales en PLC Siemens, interpretar estados de CPU, analizar el Diagnostic Buffer, revisar hardware online y detectar problemas en redes, módulos y señales de campo bajo presión de planta.",
+    "Curso aplicado para diagnosticar fallas reales en PLC Siemens: CPU, LEDs, Diagnostic Buffer, hardware online, PROFIBUS, módulos y señales de campo.",
   audience: [
     "Técnicos de mantenimiento",
     "Instrumentistas",
@@ -379,14 +379,14 @@ export const s7Course = {
     "Estudiantes técnicos avanzados",
   ],
   includes: [
-    "Videos grabados",
-    "PDFs técnicos",
-    "Casos reales de planta",
+    "Videos grabados con foco técnico",
+    "PDFs de consulta para diagnóstico",
+    "Casos reales de planta y mantenimiento",
     "App de diagnóstico BOJ",
     "Ejemplos con tablero didáctico real",
     "Análisis de LEDs y estados de CPU",
     "Diagnóstico con STEP 7 Classic",
-    "Procedimiento metódico de búsqueda de fallas",
+    "Procedimiento de búsqueda de fallas paso a paso",
   ],
   modules: [
     "Fundamentos del diagnóstico industrial",
@@ -403,13 +403,11 @@ export const s7Course = {
     "Uso de la app de diagnóstico",
   ],
   benefits: [
-    "Reducir tiempo de parada",
-    "Diagnosticar con método",
-    "Evitar cambios innecesarios de hardware",
-    "Interpretar síntomas de CPU y red",
-    "Trabajar con más seguridad técnica",
-    "Mejorar criterio profesional en planta",
-    "Explicar técnicamente qué se revisó, qué evidencia apareció y cuál es el siguiente paso",
+    "Reducir tiempo de diagnóstico durante paradas.",
+    "Trabajar con método antes de cambiar hardware.",
+    "Interpretar síntomas de CPU, módulos, red y señales.",
+    "Evitar reinicios o reemplazos sin evidencia.",
+    "Explicar qué se revisó, qué apareció y cuál es el siguiente paso.",
   ],
   outcomes: [
     "Ingresar online y leer el estado real del PLC sin improvisar.",
@@ -429,7 +427,7 @@ export const s7Course = {
 export const tiaCourse = {
   title: "Introducción a TIA Portal con PLC Siemens S7-1200/1500",
   subtitle:
-    "Curso introductorio para aprender la base de programación, configuración y diagnóstico en TIA Portal aplicado a PLC Siemens modernos.",
+    "Curso introductorio para entrar a TIA Portal con una base ordenada: hardware, variables, LAD, carga, monitoreo y diagnóstico inicial.",
   audience: [
     "Técnicos que quieren iniciar en TIA Portal",
     "Estudiantes",
@@ -452,12 +450,11 @@ export const tiaCourse = {
     "Introducción a HMI",
   ],
   benefits: [
-    "Comprender la estructura de TIA Portal",
-    "Programar desde cero",
-    "Diagnosticar online",
-    "Prepararse para proyectos reales",
-    "Entender buenas prácticas iniciales",
-    "Construir proyectos más mantenibles desde la primera versión",
+    "Comprender la estructura de TIA Portal.",
+    "Programar desde cero con orden.",
+    "Cargar y monitorear online sin improvisar.",
+    "Prepararse para proyectos reales con PLC modernos.",
+    "Construir proyectos más mantenibles desde la primera versión.",
   ],
   outcomes: [
     "Crear un proyecto desde cero y configurar hardware S7-1200/1500.",
@@ -477,30 +474,30 @@ export const tiaCourse = {
 export const appSections = [
   {
     title: "Problema que resuelve",
-    text: "En planta, muchas fallas se diagnostican bajo presión. La app ayuda a ordenar el análisis, cruzar síntomas y seguir un método técnico.",
+    text: "En una parada suele haber presión, datos incompletos y muchas hipótesis. La app ordena el análisis antes de decidir.",
     icon: "ShieldCheck",
   },
   {
     title: "Valor para el técnico",
-    text: "Menos improvisación, más criterio, mejor documentación, diagnóstico más ordenado y apoyo en campo cuando la línea está detenida.",
+    text: "Menos improvisación, mejor registro de síntomas y una secuencia clara para revisar CPU, red, módulos y señales.",
     icon: "ClipboardCheck",
   },
   {
     title: "Valor para empresas",
-    text: "Reducción de tiempos de parada, mejora de procedimientos internos, capacitación práctica y soporte para mantenimiento.",
+    text: "Ayuda a estandarizar diagnóstico, capacitar mantenimiento y reducir tiempo perdido por revisiones sin método.",
     icon: "Building2",
   },
 ];
 
 export const appFeatures = [
-  "Permite ingresar familia de PLC",
-  "Permite seleccionar estado de CPU",
-  "Permite cargar LEDs RUN/STOP/SF/BF",
-  "Permite analizar síntomas de red",
-  "Permite registrar observaciones de campo",
-  "Sugiere posibles causas",
-  "Recomienda pasos de diagnóstico",
-  "Ordena el análisis para evitar decisiones apresuradas",
+  "Familia de PLC y estado de CPU",
+  "LEDs RUN/STOP/SF/BF",
+  "Síntomas de PROFIBUS/PROFINET",
+  "Observaciones de campo",
+  "Posibles causas",
+  "Pasos de diagnóstico sugeridos",
+  "Registro ordenado de evidencia",
+  "Análisis para evitar decisiones apresuradas",
 ];
 
 export const appFunctions = [
@@ -516,19 +513,19 @@ export const appFunctions = [
 export const appDifferentials = [
   {
     title: "Pensada para presión de planta",
-    text: "Ordena la información cuando la línea está detenida y el técnico necesita decidir el próximo paso con evidencia.",
+    text: "Ordena información cuando la línea está detenida y el técnico necesita definir el próximo paso sin perder evidencia.",
   },
   {
     title: "Conecta síntomas con método",
-    text: "Cruza familia de PLC, estado de CPU, LEDs, red, señales y observaciones para evitar saltos de diagnóstico.",
+    text: "Cruza PLC, CPU, LEDs, red, señales y observaciones para evitar saltos de diagnóstico.",
   },
   {
     title: "No reemplaza al técnico",
-    text: "Funciona como guía de razonamiento para sostener criterio, documentar síntomas y evitar decisiones apresuradas.",
+    text: "Funciona como guía de razonamiento para sostener criterio y documentar qué se revisó.",
   },
   {
     title: "Acompaña el curso",
-    text: "Refuerza el método del curso S7-300/400 y lo lleva al campo como guía práctica de consulta.",
+    text: "Lleva el método del curso S7-300/400 al campo como guía rápida de consulta.",
   },
 ];
 
