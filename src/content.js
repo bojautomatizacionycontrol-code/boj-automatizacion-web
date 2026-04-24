@@ -32,8 +32,13 @@ export const homeHighlights = [
     icon: "Cpu",
   },
   {
+    title: "Ingeniería de detalle y puesta en marcha",
+    text: "Relevamiento, especificaciones, planos, tableros, pruebas FAT/SAT y acompañamiento hasta producción.",
+    icon: "ClipboardCheck",
+  },
+  {
     title: "Automatización industrial",
-    text: "Diseño, modificación y puesta en marcha de lógica PLC, HMI, drives e instrumentación.",
+    text: "Programación, modificación y comisionamiento de PLC, HMI, SCADA, drives e instrumentación.",
     icon: "Settings",
   },
   {
@@ -77,8 +82,8 @@ export const trustSignals = [
     label: "S5, S7-200, S7-300/400, S7-1200/1500",
   },
   {
-    value: "Campo real",
-    label: "tableros, redes, sensores, HMI, drives y planta en marcha",
+    value: "Ingeniería a SAT",
+    label: "ingeniería de detalle, tableros, pruebas, comisionamiento y producción",
   },
   {
     value: "Método BOJ",
@@ -87,9 +92,10 @@ export const trustSignals = [
 ];
 
 export const authorityHighlights = [
-  "Automatización industrial aplicada a líneas, máquinas, tableros y procesos reales.",
+  "Soluciones de automatización para máquinas y procesos industriales, adaptadas al contexto de cada cliente.",
   "Diagnóstico de fallas con STEP 7 Classic, TIA Portal, Diagnostic Buffer y revisión online.",
-  "Puesta en marcha, mejoras eléctricas, señales de campo y redes industriales en planta.",
+  "Servicio integral: ingeniería básica y de detalle, tableros, conexión en campo, pruebas FAT/SAT y puesta en marcha.",
+  "Experiencia en PLC, HMI, SCADA, variadores, sensores, actuadores y redes industriales.",
   "Capacitación para mantenimiento con casos concretos, no contenido genérico de software.",
 ];
 
@@ -119,7 +125,8 @@ export const methodSteps = [
 export const servicePrinciples = [
   "Antes de cambiar hardware, se busca evidencia técnica.",
   "Antes de modificar lógica, se entiende la condición de planta.",
-  "Antes de cerrar una intervención, se deja criterio de mantenimiento.",
+  "Antes de poner en marcha, se prueban señales, secuencia, seguridad y respuesta operativa.",
+  "Antes de cerrar una intervención, se deja criterio técnico útil para mantenimiento.",
 ];
 
 export const contactChecklist = [
@@ -131,11 +138,11 @@ export const contactChecklist = [
 ];
 
 export const clientLogoSlots = [
-  "Logo cliente",
-  "Planta industrial",
-  "Área mantenimiento",
-  "Integración",
-  "Capacitación",
+  "Ledesma",
+  "CALSA",
+  "YPF",
+  "TGN",
+  "Gasnor",
 ];
 
 export const services = [
@@ -160,6 +167,28 @@ export const services = [
       "Una automatización mal documentada o inestable puede detener producción, dificultar cambios y aumentar tiempos de intervención.",
     approach:
       "Relevamiento de señales, lectura de lógica existente, pruebas controladas, documentación clara y puesta en marcha con criterio de planta.",
+  },
+  {
+    title: "Ingeniería eléctrica básica y de detalle",
+    icon: "ClipboardCheck",
+    description:
+      "Desarrollo de ingeniería para instalaciones eléctricas industriales, tableros, migraciones y proyectos de automatización que necesitan documentación clara antes de ejecutar.",
+    applications: [
+      "Pliegos y especificaciones técnicas",
+      "Planos eléctricos y digitalización",
+      "Modernización de tableros con lógica a relé",
+      "Migraciones a PLC",
+      "Dimensionamiento de motores, variadores y servos",
+      "Selección de sensores, actuadores y componentes de campo",
+    ],
+    benefit:
+      "Ordena el proyecto antes de intervenir en planta, reduce improvisaciones y facilita compras, montaje, pruebas y mantenimiento posterior.",
+    problem:
+      "Proyectos que avanzan sin relevamiento suficiente, con planos incompletos o sin criterio claro para migrar, ampliar o poner en marcha.",
+    impact:
+      "La falta de ingeniería aumenta retrabajos, errores de conexionado, demoras de montaje y riesgos durante pruebas con producción.",
+    approach:
+      "Relevamiento técnico, definición de alcance, documentación eléctrica, criterios de selección, revisión de señales y preparación para pruebas FAT/SAT.",
   },
   {
     title: "Diagnóstico de fallas industriales",
@@ -311,6 +340,7 @@ export const courses = [
       "Reducir tiempos de diagnóstico ante CPU en STOP, SF/BF o fallas de módulos.",
       "Trabajar con un método técnico antes de cambiar hardware.",
       "Interpretar síntomas de PROFIBUS, I/O y señales de campo.",
+      "Registrar datos útiles para explicar la falla y sostener una decisión frente a producción.",
     ],
     icon: "Cpu",
   },
@@ -329,6 +359,7 @@ export const courses = [
       "Crear y cargar proyectos básicos en TIA Portal con orden.",
       "Comprender estructura de hardware, variables, bloques y monitoreo online.",
       "Evitar errores iniciales frecuentes al pasar de STEP 7 Classic a TIA.",
+      "Preparar una base práctica para proyectos reales con PLC modernos Siemens.",
     ],
     icon: "MonitorCog",
   },
@@ -338,7 +369,7 @@ export const s7Course = {
   title:
     "Diagnóstico y resolución de fallas en PLC Siemens S7-300/400 con STEP 7 Classic",
   subtitle:
-    "Un curso técnico aplicado para aprender a diagnosticar fallas reales en PLC Siemens, interpretar estados de CPU, analizar el Diagnostic Buffer, revisar hardware online y detectar problemas en redes, módulos y señales de campo.",
+    "Un curso técnico aplicado para aprender a diagnosticar fallas reales en PLC Siemens, interpretar estados de CPU, analizar el Diagnostic Buffer, revisar hardware online y detectar problemas en redes, módulos y señales de campo bajo presión de planta.",
   audience: [
     "Técnicos de mantenimiento",
     "Instrumentistas",
@@ -378,6 +409,7 @@ export const s7Course = {
     "Interpretar síntomas de CPU y red",
     "Trabajar con más seguridad técnica",
     "Mejorar criterio profesional en planta",
+    "Explicar técnicamente qué se revisó, qué evidencia apareció y cuál es el siguiente paso",
   ],
   outcomes: [
     "Ingresar online y leer el estado real del PLC sin improvisar.",
@@ -390,6 +422,7 @@ export const s7Course = {
     "Confundir falla de campo con falla de programa.",
     "Ignorar eventos del Diagnostic Buffer.",
     "Reiniciar equipos sin registrar síntomas previos.",
+    "Perder tiempo revisando zonas del sistema que no están relacionadas con el síntoma.",
   ],
 };
 
@@ -424,6 +457,7 @@ export const tiaCourse = {
     "Diagnosticar online",
     "Prepararse para proyectos reales",
     "Entender buenas prácticas iniciales",
+    "Construir proyectos más mantenibles desde la primera versión",
   ],
   outcomes: [
     "Crear un proyecto desde cero y configurar hardware S7-1200/1500.",
@@ -436,6 +470,7 @@ export const tiaCourse = {
     "Programar todo en un bloque sin estructura.",
     "Cargar al PLC sin revisar hardware ni comunicación.",
     "Confundir monitoreo online con diagnóstico completo.",
+    "Avanzar en un proyecto sin documentar señales ni arquitectura.",
   ],
 };
 
@@ -488,6 +523,10 @@ export const appDifferentials = [
     text: "Cruza familia de PLC, estado de CPU, LEDs, red, señales y observaciones para evitar saltos de diagnóstico.",
   },
   {
+    title: "No reemplaza al técnico",
+    text: "Funciona como guía de razonamiento para sostener criterio, documentar síntomas y evitar decisiones apresuradas.",
+  },
+  {
     title: "Acompaña el curso",
     text: "Refuerza el método del curso S7-300/400 y lo lleva al campo como guía práctica de consulta.",
   },
@@ -508,9 +547,158 @@ export const appVersions = [
 
 export const projects = [
   {
-    title: "Modernización de envasadora industrial",
+    title: "Ingeniería, conexionado y puesta en marcha BT40",
+    client: "Ledesma / Usina - Ingenio",
+    year: "2024",
     description:
-      "Reemplazo de sistema de levas mecánicas por control electrónico mediante PLC Siemens S7-1200, encoder incremental, salidas por ventanas de posición, control de temperatura, lógica secuencial y puesta en marcha productiva.",
+      "Trabajo de ingeniería, conexionado y puesta en marcha asociado a BT40, con foco en tableros, potencia, control y validación en campo.",
+    technologies: [
+      "Ingeniería de detalle",
+      "Tableros de potencia",
+      "Conexionado en campo",
+      "Puesta en marcha",
+      "Pruebas SAT",
+      "Documentación técnica",
+    ],
+    problem:
+      "Un sistema de alta criticidad necesitaba integración eléctrica y controlada, con documentación y pruebas antes de operar.",
+    intervention:
+      "Se trabajó sobre ingeniería, conexionado, validación de señales y puesta en marcha coordinada con las condiciones de planta.",
+    result:
+      "El proyecto avanzó con criterio técnico, pruebas ordenadas y una puesta en marcha trazable para operación y mantenimiento.",
+  },
+  {
+    title: "Sistema contra incendios con PLC S7-1500",
+    client: "GETSA",
+    year: "2017",
+    description:
+      "Programación y comisionamiento de sistema contra incendios basado en PLC Siemens S7-1500, con señales críticas y lógica de seguridad operativa.",
+    technologies: [
+      "Siemens S7-1500",
+      "TIA Portal",
+      "HMI",
+      "Señales de campo",
+      "Comisionamiento",
+      "Pruebas funcionales",
+    ],
+    problem:
+      "El sistema requería lógica confiable, pruebas de respuesta y claridad operativa para una aplicación sensible de planta.",
+    intervention:
+      "Se desarrolló la programación, se verificaron entradas y salidas, se probaron secuencias y se acompañó el comisionamiento.",
+    result:
+      "Se dejó un sistema automatizado con respuesta validada y condiciones claras para operación y mantenimiento.",
+  },
+  {
+    title: "Correcciones de programación y HMI en evaporador",
+    client: "CALSA",
+    year: "2024",
+    description:
+      "Corrección y agregado de nuevas bombas y señales en programación y HMI para mejorar operación y diagnóstico del evaporador.",
+    technologies: [
+      "PLC",
+      "HMI",
+      "Bombas",
+      "Señales digitales",
+      "Señales analógicas",
+      "Diagnóstico de proceso",
+    ],
+    problem:
+      "El proceso necesitaba incorporar nuevas señales y bombas sin perder control operativo ni claridad para el operador.",
+    intervention:
+      "Se ajustó lógica, se integraron señales, se revisó la visualización HMI y se verificó el comportamiento en condiciones reales.",
+    result:
+      "La operación quedó más clara, con nuevas señales disponibles y mejor soporte para diagnóstico de mantenimiento.",
+  },
+  {
+    title: "PLC, HMI y SCADA para generadores Siemens TG3 y TG4",
+    client: "Generación Mediterránea",
+    year: "2019",
+    description:
+      "Programación de PLC, HMI y SCADA de servicios para dos nuevas turbinas generadoras, con integración de señales y supervisión.",
+    technologies: [
+      "PLC Siemens",
+      "HMI",
+      "SCADA",
+      "Servicios auxiliares",
+      "Puesta en marcha",
+      "Supervisión industrial",
+    ],
+    problem:
+      "La incorporación de nuevas turbinas exigía control y supervisión confiable de servicios asociados.",
+    intervention:
+      "Se programaron lógicas de control, pantallas HMI/SCADA, señales de campo y pruebas de funcionamiento durante puesta en marcha.",
+    result:
+      "Se integró la supervisión de servicios de generación con mejor visibilidad operativa y soporte técnico para planta.",
+  },
+  {
+    title: "Upgrade de tableros de motocompresores",
+    client: "TGN Tucumán / TGN Jujuy",
+    year: "2018",
+    description:
+      "Actualización de tableros de control de motocompresores, con revisión de mando, señales, protecciones y documentación asociada.",
+    technologies: [
+      "Tableros de control",
+      "Mando industrial",
+      "Protecciones",
+      "Señales de campo",
+      "Documentación",
+      "Puesta en servicio",
+    ],
+    problem:
+      "Los tableros requerían actualización técnica para sostener operación y facilitar mantenimiento.",
+    intervention:
+      "Se revisaron circuitos, mando, señales y criterios de control para implementar mejoras con menor exposición operativa.",
+    result:
+      "Los tableros quedaron más mantenibles, con mejores condiciones de diagnóstico y operación.",
+  },
+  {
+    title: "Upgrade PLC S5 95U a S7-1500 en planta de agua",
+    client: "YPF",
+    year: "2016",
+    description:
+      "Migración de plataforma Siemens S5 95U a S7-1500 en planta de agua, manteniendo continuidad operativa y criterios de control.",
+    technologies: [
+      "Siemens S5 95U",
+      "Siemens S7-1500",
+      "Migración PLC",
+      "Relevamiento de señales",
+      "TIA Portal",
+      "Puesta en marcha",
+    ],
+    problem:
+      "La plataforma legacy presentaba riesgo por obsolescencia, repuestos y dificultad de soporte.",
+    intervention:
+      "Se relevó hardware y señales, se migró lógica, se preparó la nueva arquitectura y se validó la puesta en marcha.",
+    result:
+      "La planta quedó sobre una plataforma moderna, con mayor disponibilidad de soporte y mejores condiciones de mantenimiento.",
+  },
+  {
+    title: "Upgrade S5 155U a S7-1516 en envolvedora de papel",
+    client: "Ledesma",
+    year: "2018",
+    description:
+      "Migración de PLC Siemens S5 155U a S7-1516 en máquina envolvedora de rollos de papel para exportación.",
+    technologies: [
+      "Siemens S5 155U",
+      "Siemens S7-1516",
+      "Migración de lógica",
+      "Máquina envolvedora",
+      "Señales de campo",
+      "Puesta en marcha",
+    ],
+    problem:
+      "La máquina operaba con plataforma antigua y requería actualización sin comprometer la producción.",
+    intervention:
+      "Se migró lógica, se revisaron señales, se validaron secuencias y se acompañó el arranque productivo.",
+    result:
+      "La envolvedora quedó modernizada con arquitectura Siemens actual y mejor capacidad de diagnóstico.",
+  },
+  {
+    title: "Modernización de envasadora industrial",
+    client: "Proyecto de automatización",
+    year: "Actualizable",
+    description:
+      "Reemplazo de sistema de levas mecánicas por control electrónico mediante PLC Siemens S7-1200, encoder incremental, salidas por ventanas de posición, control de temperatura y lógica secuencial.",
     technologies: [
       "Siemens S7-1200",
       "TIA Portal",
@@ -526,79 +714,5 @@ export const projects = [
       "Se relevó la secuencia, se integró encoder incremental, se desarrolló lógica por ventanas de posición y se validaron señales durante puesta en marcha.",
     result:
       "Se logró control electrónico ajustable, mayor trazabilidad de señales y una puesta en marcha con criterio de mantenimiento.",
-  },
-  {
-    title: "Diagnóstico de red PROFIBUS en planta industrial",
-    description:
-      "Análisis de fallas de comunicación en red PROFIBUS DP, revisión de conectores, terminaciones, nodos, configuración y diagnóstico online desde STEP 7 Classic.",
-    technologies: [
-      "Siemens S7-300/400",
-      "PROFIBUS DP",
-      "STEP 7 Classic",
-      "Diagnostic Buffer",
-      "Hardware Config",
-      "BF/SF",
-    ],
-    problem:
-      "La planta presentaba fallas BF intermitentes con pérdida de comunicación en nodos de campo.",
-    intervention:
-      "Se revisaron conectores, terminaciones, configuración de nodos, diagnóstico online y eventos registrados por el sistema.",
-    result:
-      "Se ordenó el diagnóstico de red, se identificaron puntos críticos y se redujo la incertidumbre durante la parada.",
-  },
-  {
-    title: "Capacitación técnica in-company",
-    description:
-      "Dictado de capacitación técnica para personal de mantenimiento sobre diagnóstico y resolución de fallas en PLC Siemens S7-300/400 con STEP 7 Classic, redes industriales y criterios de diagnóstico en planta.",
-    technologies: [
-      "S7-300/400",
-      "STEP 7 Classic",
-      "PROFIBUS",
-      "Diagnóstico online",
-      "Casos reales",
-    ],
-    problem:
-      "El equipo necesitaba un método común para interpretar síntomas y no depender solo de prueba y error.",
-    intervention:
-      "Se trabajó con diagnóstico online, lectura de LEDs, revisión de Diagnostic Buffer, PROFIBUS y casos reales de mantenimiento.",
-    result:
-      "Se fortaleció el criterio del personal y se dejaron procedimientos aplicables a fallas reales.",
-  },
-  {
-    title: "Backup y recuperación de HMI",
-    description:
-      "Respaldo, análisis y documentación de paneles HMI industriales, incluyendo equipos legacy y paneles Siemens Comfort.",
-    technologies: [
-      "Siemens HMI",
-      "ProSave",
-      "WinCC",
-      "Comfort Panel",
-      "OP legacy",
-    ],
-    problem:
-      "Existían paneles sin respaldo actualizado y con riesgo de pérdida de operación ante falla de hardware.",
-    intervention:
-      "Se realizó respaldo, revisión de herramientas compatibles, análisis de paneles legacy y documentación para recuperación.",
-    result:
-      "Se generaron respaldos y documentación útil para mantenimiento, reposición y futuras mejoras.",
-  },
-  {
-    title: "Tableros y mejoras eléctricas industriales",
-    description:
-      "Relevamiento, diagnóstico y mejora de tableros de control, cableado, protecciones, señales, mando y automatización asociada.",
-    technologies: [
-      "Tableros de control",
-      "24 VDC",
-      "Señales digitales",
-      "Señales analógicas",
-      "Protecciones",
-      "Documentación",
-    ],
-    problem:
-      "El tablero presentaba baja trazabilidad de señales y dificultades para localizar fallas durante mantenimiento.",
-    intervention:
-      "Se relevó cableado, mando, protecciones y señales de control para mejorar identificación y diagnóstico.",
-    result:
-      "Se mejoró el orden técnico, la identificación de circuitos y la mantenibilidad de la instalación.",
   },
 ];

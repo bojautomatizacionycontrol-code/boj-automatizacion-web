@@ -50,7 +50,12 @@ import {
   whyBoj,
 } from "./content.js";
 import bojLogo from "./assets/boj-logo-web.png";
-import gearSoft from "./assets/ChatGPT Image 16 sept 2025, 10_54_17 p.m..png";
+import plcCabinetVisual from "./assets/old-site/07-0852e6d5.jpg";
+import panelDiagnosticVisual from "./assets/old-site/panel-diagnostic-optimized.jpg";
+import step7Visual from "./assets/old-site/25-58d80e46.jpg";
+import engineeringVisual from "./assets/old-site/29-255f90e7.jpg";
+import plantVisual from "./assets/old-site/35-47edf350.jpg";
+import aerialPlantVisual from "./assets/old-site/43-00658318.jpg";
 
 const icons = {
   ArrowRight,
@@ -88,16 +93,30 @@ const quickServices = [
   "App de diagnóstico",
 ];
 
+const projectVisuals = [
+  plantVisual,
+  plcCabinetVisual,
+  panelDiagnosticVisual,
+  aerialPlantVisual,
+  engineeringVisual,
+  step7Visual,
+];
+
+const courseVisuals = {
+  s7: step7Visual,
+  tia: plcCabinetVisual,
+};
+
 const routeMeta = {
   "/inicio": {
     title: "BOJ Automatización y Control | PLC Siemens y diagnóstico industrial",
     description:
-      "Automatización industrial, PLC Siemens, diagnóstico de fallas, PROFIBUS, TIA Portal, cursos técnicos y app para mantenimiento industrial.",
+      "Automatización industrial, ingeniería de detalle, PLC Siemens, diagnóstico de fallas, PROFIBUS, TIA Portal, cursos técnicos y app para mantenimiento industrial.",
   },
   "/servicios": {
     title: "Servicios de automatización industrial | BOJ",
     description:
-      "Servicios técnicos para PLC Siemens, diagnóstico de fallas, redes PROFIBUS/PROFINET, migraciones, instrumentación, tableros y mantenimiento industrial.",
+      "Servicios técnicos de ingeniería, PLC Siemens, diagnóstico de fallas, redes PROFIBUS/PROFINET, migraciones, instrumentación, tableros y puesta en marcha.",
   },
   "/cursos": {
     title: "Cursos técnicos PLC Siemens y TIA Portal | BOJ",
@@ -122,7 +141,7 @@ const routeMeta = {
   "/obras": {
     title: "Obras y trabajos realizados | BOJ Automatización",
     description:
-      "Casos técnicos de automatización industrial, diagnóstico PLC Siemens, PROFIBUS, tableros, HMI, instrumentación y puesta en marcha.",
+      "Casos reales de automatización industrial, ingeniería, PLC Siemens, HMI, SCADA, tableros, migraciones, instrumentación y puesta en marcha.",
   },
   "/contacto": {
     title: "Contacto técnico | BOJ Automatización y Control",
@@ -279,17 +298,18 @@ function HomePage() {
           <IndustrialPanel />
         </div>
         <div className="section-container hero-content">
-          <p className="eyebrow">PLC Siemens | Diagnóstico de fallas | Capacitación técnica</p>
-          <h1>Automatización industrial y diagnóstico técnico para mantenimiento de planta</h1>
+          <p className="eyebrow">PLC Siemens | Ingeniería de detalle | Puesta en marcha</p>
+          <h1>Automatización industrial para resolver fallas y modernizar sistemas de planta</h1>
           <p className="hero-subtitle">
-            Ayudo a técnicos, empresas e ingenierías a resolver fallas en PLC, redes,
-            señales y tableros, capacitar equipos de mantenimiento y mejorar sistemas de automatización.
+            BOJ acompaña a plantas industriales, técnicos e ingenierías desde el relevamiento
+            hasta la puesta en marcha: PLC, HMI, SCADA, tableros, redes, señales de campo,
+            diagnóstico de fallas, cursos técnicos y app de soporte en campo.
           </p>
           <div className="hero-actions">
             <PrimaryLink href={whatsappUrl("Hola Walter, necesito una consulta técnica por automatización o diagnóstico industrial.")}>
               <Phone size={18} /> Consultar por WhatsApp
             </PrimaryLink>
-            <SecondaryLink href="#/servicios">Ver servicios</SecondaryLink>
+            <SecondaryLink href="#/servicios">Cotizar una solución</SecondaryLink>
             <GhostLink href="#/cursos">Ver cursos</GhostLink>
           </div>
           <div className="hero-metrics" aria-label="Áreas de trabajo">
@@ -298,17 +318,19 @@ function HomePage() {
             <span>PROFIBUS</span>
             <span>PROFINET</span>
             <span>TIA Portal</span>
+            <span>Tableros</span>
           </div>
           <div className="hero-proof-grid" aria-label="Señales de experiencia técnica">
-            <span>Diagnóstico online y medición en campo</span>
-            <span>Capacitación con fallas reales de planta</span>
-            <span>App técnica para ordenar decisiones</span>
+            <span>Más de 10 años en automatización y puesta en marcha</span>
+            <span>Experiencia en proyectos reales con PLC, HMI y SCADA</span>
+            <span>Capacitación y app para mantenimiento bajo presión</span>
           </div>
         </div>
       </section>
 
       <TrustBar />
       <AuthoritySection />
+      <IndustrialScopeSection />
 
       <section className="section">
         <div className="section-container">
@@ -410,8 +432,8 @@ function ServicesPage() {
   return (
     <PageShell
       eyebrow="Servicios"
-      title="Servicios de automatización, diagnóstico y soporte técnico industrial"
-      subtitle="Intervenciones orientadas a resolver problemas de planta, mejorar la mantenibilidad y acompañar decisiones técnicas con criterio de campo."
+      title="Servicios técnicos para automatizar, diagnosticar y poner en marcha sistemas industriales"
+      subtitle="Ingeniería, programación, tableros, redes, migraciones y diagnóstico con foco en continuidad operativa, reducción de paradas y soporte real para mantenimiento."
     >
       <ServicePrinciples />
       <div className="services-list">
@@ -435,8 +457,8 @@ function CoursesPage() {
   return (
     <PageShell
       eyebrow="Cursos"
-      title="Cursos técnicos de automatización industrial"
-      subtitle="Formación aplicada para técnicos, ingenieros, instrumentistas y personal de mantenimiento que necesitan comprender, diagnosticar y resolver problemas reales en sistemas automatizados."
+      title="Cursos técnicos para trabajar con PLC Siemens con criterio de planta"
+      subtitle="Formación aplicada para técnicos, ingenieros, instrumentistas y mantenimiento que necesitan diagnosticar, programar y tomar decisiones frente a equipos reales, no solo aprender pantallas de software."
     >
       <div className="training-strip">
         <span>Diagnóstico online</span>
@@ -578,6 +600,27 @@ function AppPage() {
 
       <AppWorkflow />
 
+      <section className="inner-section app-evidence-panel">
+        <figure>
+          <img src={step7Visual} alt="Pantalla de diagnóstico online en STEP 7 Classic" loading="lazy" />
+        </figure>
+        <div>
+          <p className="eyebrow">Conexión fuerte con el curso</p>
+          <h2>La app traduce el método de diagnóstico a una guía de campo</h2>
+          <p>
+            El objetivo es que el técnico no llegue al tablero con una lista suelta de ideas,
+            sino con una secuencia: estado de CPU, LEDs, red, módulos, señales, observaciones
+            y próximos pasos. Por eso funciona especialmente bien junto al curso S7-300/400.
+          </p>
+          <div className="button-row">
+            <PrimaryLink href="#/cursos/s7-300-400">Ver curso vinculado</PrimaryLink>
+            <SecondaryLink href={whatsappUrl("Hola Walter, quiero consultar cómo usar la app junto al curso S7-300/400.")}>
+              Consultar app + curso
+            </SecondaryLink>
+          </div>
+        </div>
+      </section>
+
       <section className="inner-section">
         <SectionHeader
           eyebrow="Diferencial BOJ"
@@ -635,7 +678,7 @@ function WorksPage() {
     <PageShell
       eyebrow="Obras"
       title="Obras y trabajos realizados"
-      subtitle="Experiencia aplicada en automatización, diagnóstico, programación PLC, redes industriales, tableros, instrumentación y puesta en marcha."
+      subtitle="Experiencia aplicada en ingeniería eléctrica, programación PLC, HMI, SCADA, tableros, migraciones, servicios industriales y puesta en marcha en planta."
     >
       <PortfolioPrep />
       <div className="works-grid">
@@ -667,8 +710,9 @@ function ContactPage() {
           <p className="eyebrow">Atención directa técnica</p>
           <h2>Respondemos rápido y hablamos en lenguaje de planta</h2>
           <p>
-            Podés escribir con el síntoma, el PLC involucrado, una foto del tablero o la consulta
-            del curso. La primera respuesta busca ordenar el próximo paso técnico.
+            Podés escribir para cotizar una solución, consultar una falla, pedir una capacitación
+            o enviar datos iniciales del equipo. La primera respuesta busca ordenar el próximo
+            paso técnico sin vueltas comerciales innecesarias.
           </p>
         </div>
         <PrimaryLink href={whatsappUrl("Hola Walter, necesito atención técnica directa por BOJ Automatización y Control.")}>
@@ -876,8 +920,46 @@ function AuthoritySection() {
           </div>
         </div>
         <figure className="authority-visual">
-          <img src={gearSoft} alt="Identidad técnica BOJ con engranaje y circuitos" loading="lazy" />
+          <img src={plantVisual} alt="Planta industrial como contexto de automatización BOJ" loading="lazy" />
         </figure>
+      </div>
+    </section>
+  );
+}
+
+function IndustrialScopeSection() {
+  return (
+    <section className="section evidence-section">
+      <div className="section-container evidence-grid">
+        <div className="evidence-copy">
+          <p className="eyebrow">Desde la ingeniería hasta producción</p>
+          <h2>Una web nueva con la experiencia real que ya mostraba BOJ en su recorrido</h2>
+          <p>
+            La propuesta comercial se apoya en trabajo concreto: ingeniería básica y de detalle,
+            planos eléctricos, armado de tableros, programación PLC/HMI/SCADA, migraciones,
+            pruebas FAT/SAT y puesta en marcha coordinada con producción.
+          </p>
+          <div className="evidence-list">
+            <CheckItem>Ingeniería eléctrica, pliegos, especificaciones y digitalización de planos.</CheckItem>
+            <CheckItem>Diseño, testing, montaje y conexionado de tableros de control y potencia.</CheckItem>
+            <CheckItem>Modernizaciones con PLC Siemens, HMI, SCADA, variadores, sensores y actuadores.</CheckItem>
+          </div>
+          <div className="button-row">
+            <SecondaryLink href="#/obras">Ver obras reales</SecondaryLink>
+            <GhostLink href="#/servicios">Revisar servicios</GhostLink>
+          </div>
+        </div>
+        <div className="evidence-visual-grid" aria-label="Imágenes técnicas BOJ recuperadas de la web anterior">
+          <figure className="evidence-photo large">
+            <img src={panelDiagnosticVisual} alt="Tablero industrial con diagnóstico online" loading="lazy" />
+          </figure>
+          <figure className="evidence-photo">
+            <img src={plcCabinetVisual} alt="Sistema PLC industrial" loading="lazy" />
+          </figure>
+          <figure className="evidence-photo">
+            <img src={engineeringVisual} alt="Planos e ingeniería eléctrica" loading="lazy" />
+          </figure>
+        </div>
       </div>
     </section>
   );
@@ -909,7 +991,7 @@ function MethodSection() {
 function HeroAssetVisual() {
   return (
     <div className="hero-asset-visual">
-      <img src={gearSoft} alt="" loading="lazy" />
+      <img src={plcCabinetVisual} alt="" loading="lazy" />
     </div>
   );
 }
@@ -1010,11 +1092,16 @@ function ServiceDetailCard({ service }) {
 }
 
 function CourseCard({ course, expanded = false }) {
+  const visual = courseVisuals[course.id] || plcCabinetVisual;
+
   return (
     <article className="course-card">
       <div className="course-visual-block" aria-hidden="true">
-        <Icon name={course.icon} size={34} />
-        <span>{course.shortTitle}</span>
+        <img src={visual} alt="" loading="lazy" />
+        <div className="course-visual-overlay">
+          <Icon name={course.icon} size={34} />
+          <span>{course.shortTitle}</span>
+        </div>
       </div>
       <div className="course-card-body">
         <h3>{course.title}</h3>
@@ -1067,19 +1154,27 @@ function InfoBlock({ title, items, numbered = false }) {
 }
 
 function ProjectCard({ project, index }) {
+  const visual = projectVisuals[(index - 1) % projectVisuals.length];
+
   return (
     <article className="project-card">
       <div className="project-media">
-        {/* Reemplazar por foto real de obra cuando esté disponible. */}
-        <img className="project-media-mark" src={gearSoft} alt="" loading="lazy" />
+        {/* Reemplazar por foto real específica de la obra cuando esté disponible. */}
+        <img className="project-photo" src={visual} alt={`Referencia visual técnica para ${project.title}`} loading="lazy" />
         <span>OBRA {String(index).padStart(2, "0")}</span>
-        <div className="project-lines" />
+        <div className="project-media-overlay">
+          <strong>{project.year}</strong>
+          <small>{project.client}</small>
+        </div>
       </div>
       <div className="project-body">
         <div className="project-title-row">
           <h2>{project.title}</h2>
           {/* Reemplazar por logo del cliente si corresponde. */}
-          <span className="client-logo-placeholder">Logo cliente</span>
+          <span className="client-logo-placeholder">
+            <small>Referencia</small>
+            {project.client}
+          </span>
         </div>
         <p>{project.description}</p>
         <div className="tag-list">
@@ -1110,17 +1205,18 @@ function PortfolioPrep() {
   return (
     <section className="portfolio-prep">
       <div>
-        <p className="eyebrow">Portfolio técnico editable</p>
-        <h2>Preparado para evidenciar experiencia real sin perder confidencialidad</h2>
+        <p className="eyebrow">Portfolio técnico con obras reales</p>
+        <h2>Casos publicados por BOJ, ordenados ahora como evidencia comercial</h2>
         <p>
-          Cada caso conserva el enfoque técnico: problema, tecnología utilizada, criterio de
-          diagnóstico y resultado. Los espacios visuales están listos para fotos reales o logos.
+          La web anterior ya mostraba obras concretas. En esta versión quedan presentadas con
+          problema inicial, intervención y resultado para que un cliente entienda qué se resolvió
+          y por qué BOJ puede intervenir en sistemas industriales exigentes.
         </p>
       </div>
       <div className="asset-slots">
-        <span>Foto obra</span>
-        <span>Logo cliente</span>
-        <span>Captura PLC/HMI</span>
+        <span>Ingeniería</span>
+        <span>PLC / HMI / SCADA</span>
+        <span>Puesta en marcha</span>
       </div>
     </section>
   );
@@ -1284,12 +1380,17 @@ function AppMockup() {
 }
 
 function CourseVisual({ type }) {
+  const visual = type === "s7" ? step7Visual : plcCabinetVisual;
+
   return (
     <aside className={`course-side-visual ${type}`}>
       <div className="side-visual-header">
         <span>{type === "s7" ? "STEP 7 Classic" : "TIA Portal"}</span>
         <Icon name={type === "s7" ? "Cpu" : "MonitorCog"} />
       </div>
+      <figure className="course-side-photo">
+        <img src={visual} alt={type === "s7" ? "Diagnóstico online en STEP 7 Classic" : "PLC Siemens para curso TIA Portal"} loading="lazy" />
+      </figure>
       <div className="ladder-lines">
         <span />
         <span />
@@ -1310,9 +1411,9 @@ function ClientLogoBand() {
   return (
     <section className="client-band">
       <div className="section-container">
-        <p className="eyebrow">Espacio para clientes y empresas</p>
+        <p className="eyebrow">Referencias de obras publicadas en la web anterior</p>
         <div className="logo-strip">
-          {/* Reemplazar estos bloques por logos reales de clientes o empresas. */}
+          {/* Reemplazar por logos reales si se cuenta con autorización de uso de marca. */}
           {clientLogoSlots.map((item) => (
             <span key={item}>{item}</span>
           ))}
@@ -1356,8 +1457,8 @@ function Footer() {
             </span>
           </div>
           <p>
-            Servicios para PLC Siemens, redes industriales, instrumentación, tableros,
-            migraciones, capacitación técnica y diagnóstico de fallas.
+            Ingeniería de detalle, automatización, PLC Siemens, redes industriales, tableros,
+            migraciones, capacitación técnica, app de diagnóstico y puesta en marcha.
           </p>
         </div>
         <div>
