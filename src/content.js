@@ -515,75 +515,124 @@ export const tiaCourse = {
   ],
 };
 
-export const appSections = [
+export const appHero = {
+  title: "BOJ S7-PLC",
+  subtitle: "Herramienta de diagnóstico industrial para PLC Siemens S7-300/400",
+  text:
+    "Una app técnica diseñada para guiar el diagnóstico de fallas reales en planta, interpretar estados de CPU, analizar fallas PROFIBUS y ordenar hipótesis de causa probable.",
+  note:
+    "No reemplaza el criterio profesional: ayuda a sostener un método cuando hay presión, poco tiempo y síntomas mezclados.",
+};
+
+export const appCapabilities = [
   {
-    title: "Problema que resuelve",
-    text: "En una parada suele haber presión, datos incompletos y demasiadas hipótesis. La app obliga a ordenar evidencia antes de decidir.",
-    icon: "ShieldCheck",
+    title: "Interpreta LEDs de CPU",
+    text: "RUN, STOP, SF, BF, FRCE y DC5V cuando corresponde, con lectura técnica de combinaciones frecuentes.",
+    icon: "Cpu",
   },
   {
-    title: "Valor para el técnico",
-    text: "Menos improvisación, mejor registro de síntomas y una secuencia clara para revisar CPU, red, módulos, señales y observaciones.",
+    title: "Guía diagnóstico por contexto",
+    text: "Mantiene la rama técnica según el síntoma: CPU, conexión online, Diagnostic Buffer, HW Config o PROFIBUS/DP.",
+    icon: "FileSearch",
+  },
+  {
+    title: "Analiza fallas PROFIBUS",
+    text: "BF fijo, BF intermitente, ET200 caída, esclavos DP, conectores, terminaciones, direcciones y 24 VDC.",
+    icon: "Network",
+  },
+  {
+    title: "Prioriza hipótesis",
+    text: "Ordena causas probables según evidencia; no muestra listas indiscriminadas ni pretende adivinar la falla.",
+    icon: "Gauge",
+  },
+  {
+    title: "Incluye casos reales",
+    text: "Biblioteca de fallas típicas de planta con contexto, síntoma, verificación, error común y criterio de seguridad.",
     icon: "ClipboardCheck",
   },
   {
-    title: "Valor para empresas",
-    text: "Ayuda a estandarizar criterios de diagnóstico, capacitar mantenimiento y reducir tiempo perdido por revisiones sin método.",
-    icon: "Building2",
+    title: "Funciona como herramienta de campo",
+    text: "Pensada para técnicos, instrumentistas e ingenieros que diagnostican frente al tablero con STEP 7 Classic.",
+    icon: "Smartphone",
   },
 ];
 
-export const appFeatures = [
-  "Familia de PLC y estado de CPU",
-  "LEDs RUN/STOP/SF/BF",
-  "Síntomas de PROFIBUS/PROFINET",
-  "Observaciones de campo",
-  "Posibles causas",
-  "Pasos de diagnóstico sugeridos",
-  "Registro ordenado de evidencia",
-  "Análisis para evitar decisiones apresuradas",
+export const appPlantBenefits = [
+  "Evita saltos de diagnóstico y revisiones sin relación con el síntoma.",
+  "Ordena verificaciones: LEDs, CPU, conexión online, Diagnostic Buffer, HW Config, red y campo.",
+  "Ayuda a diferenciar fallas de CPU, PROFIBUS, alimentación, módulo, señal, lógica o condición de proceso.",
+  "Reduce errores comunes como cambiar hardware sin evidencia, ignorar FRCE activo o pasar por alto una estación sin 24 VDC.",
+  "Apoya el criterio técnico bajo presión, sin prometer resultados automáticos ni reemplazar al profesional.",
 ];
 
-export const appFunctions = [
-  "Diagnóstico por combinación de LEDs",
-  "Guía para revisar Diagnostic Buffer",
-  "Recomendaciones para revisar PROFIBUS/PROFINET",
-  "Análisis de señales",
-  "Casos típicos de planta",
-  "Árbol de decisión",
-  "Recomendaciones de acción",
+export const appDiagnosticModules = [
+  {
+    title: "Estado CPU / LEDs",
+    text: "Selección visual de RUN, STOP, SF, BF, FRCE y DC5V para interpretar estado probable, significado técnico, advertencias y acciones recomendadas.",
+    items: ["RUN + SF", "RUN + BF", "RUN + SF + BF", "STOP + SF", "BF fijo/intermitente", "FRCE activo"],
+  },
+  {
+    title: "Diagnóstico guiado",
+    text: "Flujo por fases que conserva contexto técnico para no desviar la búsqueda hacia ramas que no corresponden.",
+    items: ["SIMATIC Manager", "Diagnostic Buffer", "HW Config Online", "PROFIBUS/DP", "Señales", "Lógica/secuencia"],
+  },
+  {
+    title: "PROFIBUS / DP",
+    text: "Rama específica para esclavos DP caídos, ET200, variadores, conectores DB9, terminaciones, repetidores y alimentación de estaciones.",
+    items: ["Un esclavo caído", "Varios esclavos", "ET200 offline", "Dirección duplicada", "24 VDC", "Mantenimiento reciente"],
+  },
+  {
+    title: "Hipótesis ponderadas",
+    text: "Ranking de causas probables según respuestas y evidencia. La app orienta verificaciones, no adivina.",
+    items: ["OB82/OB86 faltante", "HW Config mismatch", "FRCE activo", "Conector flojo", "Borne flojo", "Falla por vibración"],
+  },
+  {
+    title: "Casos reales",
+    text: "Casos de planta con contexto, síntoma observado, causa probable, verificación recomendada, error típico y criterio de seguridad.",
+    items: ["10 casos Course Edition", "80+ casos PRO", "Fallas engañosas", "Errores comunes", "Criterio de intervención"],
+  },
+  {
+    title: "Guía técnica",
+    text: "Consulta rápida para OBs, Diagnostic Buffer, HW Config, BF/SF, PROFIBUS y temas avanzados en PRO.",
+    items: ["OB82", "OB86", "OB121", "OB122", "Wire break", "Interlocks"],
+  },
 ];
 
-export const appDifferentials = [
-  {
-    title: "Pensada para presión de planta",
-    text: "Ordena información cuando la línea está detenida y el técnico necesita definir el próximo paso sin perder datos clave.",
-  },
-  {
-    title: "Conecta síntomas con método",
-    text: "Cruza PLC, CPU, LEDs, red, señales y observaciones para evitar saltos de diagnóstico y conclusiones apresuradas.",
-  },
-  {
-    title: "No reemplaza al técnico",
-    text: "Funciona como guía de razonamiento para sostener criterio y documentar qué se revisó.",
-  },
-  {
-    title: "Acompaña el curso",
-    text: "Lleva el método del curso S7-300/400 al campo como guía rápida de consulta.",
-  },
+export const appComparison = [
+  { feature: "LEDs CPU", course: "Sí", pro: "Sí" },
+  { feature: "Diagnóstico CPU", course: "Sí", pro: "Sí" },
+  { feature: "PROFIBUS básico", course: "Sí", pro: "Sí" },
+  { feature: "Casos reales", course: "10 seleccionados", pro: "80+ casos" },
+  { feature: "Señales analógicas 4-20 mA", course: "Limitado", pro: "Sí" },
+  { feature: "DO / actuadores", course: "Bloqueado", pro: "Sí" },
+  { feature: "Lógica, secuencias e interlocks", course: "Bloqueado", pro: "Sí" },
+  { feature: "Diagnóstico engañoso", course: "Básico", pro: "Avanzado" },
+  { feature: "Informe técnico / exportes", course: "Limitado", pro: "Completo" },
+  { feature: "Actualizaciones futuras", course: "Base", pro: "Incluidas" },
 ];
 
-export const appVersions = [
-  {
-    name: "Versión Curso",
-    description:
-      "Incluida con el curso de diagnóstico S7-300/400 para acompañar el aprendizaje y ordenar los casos de práctica.",
-  },
-  {
-    name: "Versión Pro",
-    description:
-      "Orientada a diagnóstico más avanzado, con mayor profundidad para campo y soporte a procedimientos internos de mantenimiento.",
-  },
+export const appRealCases = [
+  "CPU en STOP + SF por OB82 faltante",
+  "STOP + BF por ET200 sin alimentación 24 VDC",
+  "HW Config incorrecta o mismatch con hardware real",
+  "BF intermitente por conector DB9 flojo",
+  "BF fijo por dirección PROFIBUS duplicada",
+  "ET200 aparece y desaparece por borne flojo",
+  "Terminación PROFIBUS incorrecta",
+  "Parecía red, pero era alimentación de estación",
+  "FRCE activo olvidado",
+  "HW Config actualizada en PC pero no descargada al PLC",
+];
+
+export const appAudience = [
+  "Técnicos de mantenimiento",
+  "Instrumentistas",
+  "Automatistas",
+  "Programadores PLC",
+  "Supervisores eléctricos",
+  "Ingenieros de planta",
+  "Estudiantes avanzados de automatización",
+  "Personal de planta que trabaja con Siemens S7",
 ];
 
 export const projects = [

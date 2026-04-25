@@ -28,11 +28,13 @@ import {
   Zap,
 } from "lucide-react";
 import {
-  appDifferentials,
-  appFeatures,
-  appFunctions,
-  appSections,
-  appVersions,
+  appAudience,
+  appCapabilities,
+  appComparison,
+  appDiagnosticModules,
+  appHero,
+  appPlantBenefits,
+  appRealCases,
   authorityHighlights,
   clientLogoSlots,
   contact,
@@ -134,9 +136,9 @@ const routeMeta = {
       "Curso introductorio de TIA Portal para PLC Siemens S7-1200/1500: hardware, variables, LAD, carga, monitoreo online y diagnóstico básico.",
   },
   "/app": {
-    title: "App de diagnóstico industrial BOJ | PLC Siemens",
+    title: "BOJ S7-PLC | App de diagnóstico PLC Siemens S7-300/400",
     description:
-      "App profesional para ordenar diagnóstico de fallas en campo: estados de CPU, LEDs, PROFIBUS/PROFINET, señales y pasos de revisión.",
+      "BOJ S7-PLC es una herramienta de diagnóstico industrial para PLC Siemens S7-300/400 con STEP 7 Classic, LEDs CPU, PROFIBUS, hipótesis y casos reales.",
   },
   "/obras": {
     title: "Obras y trabajos realizados | BOJ Automatización",
@@ -562,85 +564,61 @@ function CourseLanding({ course, eyebrow, visual, ctas }) {
 }
 
 function AppPage() {
+  const scrollToCourseEdition = () => {
+    document.getElementById("course-edition")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <PageShell
       eyebrow="App"
-      title="App BOJ: diagnóstico industrial guiado para técnicos en campo"
-      subtitle="Una herramienta profesional para ordenar síntomas, LEDs, estado de CPU, red PROFIBUS/PROFINET, señales y posibles causas durante una falla real."
+      title={appHero.title}
+      subtitle={appHero.subtitle}
+      heroExtra={
+        <>
+          <p className="page-hero-detail">{appHero.text}</p>
+          <p className="technical-disclaimer">{appHero.note}</p>
+          <div className="button-row page-hero-actions">
+            <button className="btn secondary" type="button" onClick={scrollToCourseEdition}>
+              Ver versión del curso
+            </button>
+            <PrimaryLink href="https://www.bojautomatizacion.com/#/app">
+              Desbloquear PRO <ExternalLink size={17} />
+            </PrimaryLink>
+          </div>
+        </>
+      }
     >
-      <div className="app-page-grid">
+      <div className="app-page-grid app-product-intro">
         <div>
-          <h2>Menos improvisación cuando la planta está esperando respuesta</h2>
+          <p className="eyebrow">Herramienta de campo para STEP 7 Classic</p>
+          <h2>Diagnóstico estructurado para PLC Siemens S7</h2>
           <p>
-            La app convierte el método de diagnóstico BOJ en una guía de campo: primero se cargan
-            síntomas y evidencia visible, después se cruzan datos de CPU, red y señales para definir
-            una acción técnica razonable.
+            BOJ S7-PLC convierte un método de diagnóstico de planta en una herramienta guiada:
+            primero ordena el estado de CPU y LEDs, después conserva el contexto técnico para
+            priorizar verificaciones y causas probables.
           </p>
-          <div className="check-grid compact">
-            {appFeatures.map((item) => (
-              <CheckItem key={item}>{item}</CheckItem>
+          <div className="app-signal-strip" aria-label="Señales y estados que interpreta BOJ S7-PLC">
+            {["RUN", "STOP", "SF", "BF", "FRCE", "DC5V"].map((item) => (
+              <span key={item}>{item}</span>
             ))}
           </div>
         </div>
         <AppMockup />
       </div>
 
-      <div className="card-grid three">
-        {appSections.map((section) => (
-          <article className="info-card" key={section.title}>
-            <Icon name={section.icon} />
-            <h3>{section.title}</h3>
-            <p>{section.text}</p>
-          </article>
-        ))}
-      </div>
-
       <section className="inner-section">
         <SectionHeader
-          eyebrow="Funciones principales"
-          title="Diagnóstico guiado para no perder evidencia"
-          text="La app no reemplaza al técnico: organiza la secuencia de revisión para evitar reinicios, cambios de módulo o decisiones tomadas sin datos."
-        />
-        <div className="function-grid">
-          {appFunctions.map((item) => (
-            <CheckItem key={item}>{item}</CheckItem>
-          ))}
-        </div>
-      </section>
-
-      <AppWorkflow />
-
-      <section className="inner-section app-evidence-panel">
-        <figure>
-          <img src={step7Visual} alt="Pantalla de diagnóstico online en STEP 7 Classic" loading="lazy" />
-        </figure>
-        <div>
-          <p className="eyebrow">Conexión fuerte con el curso</p>
-          <h2>Del método del curso a una guía usable frente al tablero</h2>
-          <p>
-            El objetivo es que el técnico no llegue al tablero con una lista suelta de ideas,
-            sino con una secuencia: estado de CPU, LEDs, red, módulos, señales, observaciones
-            y próximos pasos. Por eso funciona especialmente bien junto al curso S7-300/400.
-          </p>
-          <div className="button-row">
-            <PrimaryLink href="#/cursos/s7-300-400">Ver curso vinculado</PrimaryLink>
-            <SecondaryLink href={whatsappUrl("Hola Walter, quiero consultar cómo usar la app junto al curso S7-300/400.")}>
-              Consultar app + curso
-            </SecondaryLink>
-          </div>
-        </div>
-      </section>
-
-      <section className="inner-section">
-        <SectionHeader
-          eyebrow="Diferencial BOJ"
-          title="Por qué no es una lista genérica de fallas"
-          text="Está pensada desde mantenimiento: síntoma, evidencia, causa probable y acción. Sirve para trabajar con más orden cuando producción espera una respuesta."
+          eyebrow="Qué hace"
+          title="Una guía técnica para no saltear pasos críticos"
+          text="La app trabaja como apoyo al criterio profesional: estructura síntomas, ramas técnicas, hipótesis y casos de referencia sin prometer diagnósticos automáticos."
         />
         <div className="card-grid three">
-          {appDifferentials.map((item) => (
-            <article className="info-card" key={item.title}>
-              <Icon name="ShieldCheck" />
+          {appCapabilities.map((item) => (
+            <article className="info-card app-capability-card" key={item.title}>
+              <Icon name={item.icon} />
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </article>
@@ -648,38 +626,163 @@ function AppPage() {
         </div>
       </section>
 
+      <section className="inner-section app-field-panel">
+        <div>
+          <p className="eyebrow">Cómo ayuda en planta</p>
+          <h2>Ordena el análisis cuando hay presión, alarmas y poco tiempo</h2>
+          <p>
+            En una falla real pueden aparecer señales engañosas: CPU en RUN con proceso detenido,
+            BF intermitente después de mantenimiento, estación remota sin alimentación o FRCE activo
+            olvidado. La app ayuda a separar evidencia de suposiciones.
+          </p>
+        </div>
+        <div className="check-grid compact">
+          {appPlantBenefits.map((item) => (
+            <CheckItem key={item}>{item}</CheckItem>
+          ))}
+        </div>
+      </section>
+
       <section className="inner-section">
         <SectionHeader
-          eyebrow="Versiones"
-          title="Uso para curso, campo y procedimientos internos"
+          eyebrow="Módulos de diagnóstico"
+          title="Ramas técnicas para PLC Siemens S7-300/400"
+          text="El flujo mantiene contexto. Si aparece BF y HW Config muestra un esclavo DP caído, la guía continúa por PROFIBUS/DP en lugar de saltar a DI/DO sin relación."
         />
-        <div className="card-grid two">
-          {appVersions.map((version) => (
-            <article className="version-card" key={version.name}>
-              <h3>{version.name}</h3>
-              <p>{version.description}</p>
+        <div className="app-module-grid">
+          {appDiagnosticModules.map((module) => (
+            <article className="app-module-card" key={module.title}>
+              <h3>{module.title}</h3>
+              <p>{module.text}</p>
+              <div className="tag-list">
+                {module.items.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
             </article>
           ))}
         </div>
       </section>
 
+      <section className="inner-section app-evidence-panel">
+        <figure>
+          <img src={step7Visual} alt="Diagnóstico online con STEP 7 Classic para PLC Siemens S7" loading="lazy" />
+        </figure>
+        <div>
+          <p className="eyebrow">Hipótesis ponderadas</p>
+          <h2>No adivina: prioriza verificaciones según síntomas</h2>
+          <p>
+            A medida que el usuario responde, BOJ S7-PLC actualiza causas probables y deja visibles
+            solo las hipótesis relevantes: OB82/OB86 faltantes, estación DP caída, ET200 sin 24 VDC,
+            HW Config no coincidente, FRCE activo o falla intermitente por vibración.
+          </p>
+          <div className="hypothesis-list">
+            {["Estación DP caída", "ET200 sin 24 VDC", "Conector PROFIBUS flojo", "OB86 faltante"].map((item, index) => (
+              <span key={item}>
+                <b>{index + 1}</b>
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="inner-section" id="course-edition">
+        <SectionHeader
+          eyebrow="Course Edition vs PRO"
+          title="Una versión incluida con el curso y una versión completa para campo"
+          text="La Course Edition permite aplicar el método sobre estados CPU y fallas PROFIBUS frecuentes. PRO desbloquea el motor completo, ramas avanzadas y biblioteca extendida."
+        />
+        <AppComparisonTable />
+      </section>
+
+      <section className="inner-section app-version-grid">
+        <article className="version-card app-version-card">
+          <span className="edition-badge course">Course Edition</span>
+          <h3>BOJ S7-PLC Course Edition</h3>
+          <p>
+            Incluida con el curso. Habilita el módulo completo de LEDs, interpretación de estados
+            CPU, diagnóstico guiado básico, rama PROFIBUS/DP, 10 casos reales seleccionados y guía técnica esencial.
+          </p>
+          <SecondaryLink href="#/cursos/s7-300-400">Ver curso vinculado</SecondaryLink>
+        </article>
+        <article className="version-card app-version-card pro">
+          <span className="edition-badge pro">PRO</span>
+          <h3>BOJ S7-PLC PRO</h3>
+          <p>
+            Desbloquea todas las ramas: señales analógicas, DO/actuadores, lógica, secuencias,
+            interlocks, fallas intermitentes, diagnóstico engañoso avanzado, 80+ casos, guía completa e informes.
+          </p>
+          <PrimaryLink href="https://www.bojautomatizacion.com/#/app">
+            Desbloquear versión PRO
+          </PrimaryLink>
+        </article>
+      </section>
+
+      <section className="inner-section">
+        <SectionHeader
+          eyebrow="Casos reales incluidos"
+          title="Biblioteca de fallas típicas para consultar con criterio"
+          text="Cada caso se presenta con contexto, síntoma observado, causa probable, verificación recomendada, error típico y criterio de seguridad."
+        />
+        <div className="case-grid">
+          {appRealCases.map((caseItem, index) => (
+            <article className="case-card" key={caseItem}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <p>{caseItem}</p>
+            </article>
+          ))}
+        </div>
+        <div className="technical-note app-library-note">
+          <Icon name="ClipboardCheck" />
+          <p>
+            Course Edition incluye 10 casos seleccionados. PRO amplía la biblioteca a 80+ casos reales,
+            incluyendo señales analógicas, actuadores, lógica, interlocks, fallas intermitentes y diagnósticos engañosos.
+          </p>
+        </div>
+      </section>
+
+      <section className="inner-section">
+        <SectionHeader
+          eyebrow="Para quién es"
+          title="Pensada para usuarios técnicos que trabajan con Siemens S7"
+          text="BOJ S7-PLC habla el lenguaje del mantenimiento industrial: CPU, LEDs, BF/SF, Diagnostic Buffer, HW Config, PROFIBUS, señales y criterio de intervención."
+        />
+        <div className="audience-grid">
+          {appAudience.map((item) => (
+            <CheckItem key={item}>{item}</CheckItem>
+          ))}
+        </div>
+      </section>
+
       <RouteCTA
-        title="La app acompaña el criterio que se entrena en el curso"
-        text="El curso enseña cómo diagnosticar; la app ayuda a sostener esa secuencia cuando hay presión, poco tiempo y muchos síntomas mezclados."
-        primaryLabel="Consultar acceso a la app"
-        primaryHref={whatsappUrl("Hola Walter, quiero consultar acceso a la app de diagnóstico BOJ.")}
-        secondaryLabel="Ver curso S7-300/400"
+        title="Llevá el diagnóstico de PLC a un método más ordenado"
+        text="Usá BOJ S7-PLC como apoyo técnico para interpretar síntomas, seguir verificaciones y priorizar causas probables en sistemas Siemens S7-300/400."
+        primaryLabel="Desbloquear versión PRO"
+        primaryHref="https://www.bojautomatizacion.com/#/app"
+        secondaryLabel="Ver curso con Course Edition"
         secondaryHref="#/cursos/s7-300-400"
       />
-
-      <div className="button-row">
-        <PrimaryLink href={whatsappUrl("Hola Walter, quiero ver la app de diagnóstico BOJ.")}>Ver app</PrimaryLink>
-        <SecondaryLink href={whatsappUrl("Hola Walter, quiero consultar por la versión Pro de la app BOJ.")}>
-          Consultar versión Pro
-        </SecondaryLink>
-        <GhostLink href="#/cursos/s7-300-400">Acceder desde el curso</GhostLink>
-      </div>
     </PageShell>
+  );
+}
+
+function AppComparisonTable() {
+  return (
+    <div className="app-comparison-table" role="table" aria-label="Comparación BOJ S7-PLC Course Edition y PRO">
+      <div className="comparison-row header" role="row">
+        <span role="columnheader">Función</span>
+        <span role="columnheader">Course Edition</span>
+        <span role="columnheader">PRO</span>
+      </div>
+      {appComparison.map((item) => (
+        <div className="comparison-row" role="row" key={item.feature}>
+          <span role="cell">{item.feature}</span>
+          <span role="cell">{item.course}</span>
+          <span role="cell">{item.pro}</span>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -866,7 +969,7 @@ function ContactForm() {
   );
 }
 
-function PageShell({ eyebrow, title, subtitle, children }) {
+function PageShell({ eyebrow, title, subtitle, heroExtra, children }) {
   return (
     <>
       <section className="page-hero">
@@ -874,6 +977,7 @@ function PageShell({ eyebrow, title, subtitle, children }) {
           <p className="eyebrow">{eyebrow}</p>
           <h1>{title}</h1>
           {subtitle ? <p>{subtitle}</p> : null}
+          {heroExtra ? <div className="page-hero-extra">{heroExtra}</div> : null}
         </div>
       </section>
       <section className="section">
@@ -1367,30 +1471,36 @@ function AppMockup() {
       {/* Reemplazar este mockup por capturas reales de la app cuando estén listas. */}
       <div className="phone-frame">
         <div className="phone-status">
-          <span>BOJ Diagnóstico</span>
+          <span>BOJ S7-PLC</span>
           <i />
         </div>
         <div className="diagnostic-screen">
-          <strong>PLC Siemens</strong>
-          <p>S7-300/400 | CPU en STOP</p>
-          <div className="led-row">
-            <span className="led green" /> RUN
+          <strong>CPU / LEDs</strong>
+          <p>S7-300/400 | STEP 7 Classic</p>
+          <div className="led-row s7-led-row">
+            <span className="led off" /> RUN
             <span className="led red" /> STOP
             <span className="led amber" /> SF
             <span className="led blue" /> BF
+            <span className="led amber" /> FRCE
+            <span className="led green" /> DC5V
           </div>
           <div className="screen-card">
-            <small>Recomendación</small>
-            <p>Revisar Diagnostic Buffer, módulos online y estado de red PROFIBUS.</p>
+            <small>Rama activa</small>
+            <p>BF activo + esclavo DP caído en HW Config Online.</p>
           </div>
           <div className="screen-card secondary-screen-card">
-            <small>Causa probable</small>
-            <p>Nodo sin comunicación, módulo con falla o pérdida de alimentación de campo.</p>
+            <small>Hipótesis ponderadas</small>
+            <div className="mockup-ranking">
+              <span><b>72%</b> ET200 sin 24 VDC</span>
+              <span><b>58%</b> Conector DB9 flojo</span>
+              <span><b>41%</b> Terminación incorrecta</span>
+            </div>
           </div>
           <div className="screen-steps">
-            <span>1. CPU</span>
-            <span>2. Red</span>
-            <span>3. Señales</span>
+            <span>1. Estado CPU</span>
+            <span>2. PROFIBUS / DP</span>
+            <span>3. Verificación segura</span>
           </div>
         </div>
       </div>
