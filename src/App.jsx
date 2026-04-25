@@ -53,6 +53,9 @@ import {
 } from "./content.js";
 import bojLogo from "./assets/boj-logo-web.png";
 import appScreenshot from "./assets/APP.png";
+import step7ManagerVisual from "./assets/11.png";
+import step7HwConfigVisual from "./assets/12.png";
+import step7LadderVisual from "./assets/13.png";
 import step7ClassicVisual from "./assets/siemens-software-step7-basic.jpg";
 import plcCabinetVisual from "./assets/old-site/07-0852e6d5.jpg";
 import panelDiagnosticVisual from "./assets/old-site/panel-diagnostic-optimized.jpg";
@@ -107,7 +110,7 @@ const projectVisuals = [
 ];
 
 const courseVisuals = {
-  s7: step7Visual,
+  s7: step7HwConfigVisual,
   tia: plcCabinetVisual,
 };
 
@@ -1482,16 +1485,47 @@ function AppMockup() {
 }
 
 function CourseVisual({ type }) {
-  const visual = type === "s7" ? step7Visual : plcCabinetVisual;
+  if (type === "s7") {
+    return (
+      <aside className="course-side-visual s7">
+        <div className="side-visual-header">
+          <span>STEP 7 Classic</span>
+          <Icon name="Cpu" />
+        </div>
+        <div className="step7-collage" aria-label="Capturas reales de SIMATIC STEP 7 Classic">
+          <figure className="step7-shot main">
+            <img src={step7HwConfigVisual} alt="HW Config de SIMATIC STEP 7 Classic con red PROFIBUS" loading="lazy" />
+            <figcaption>HW Config / PROFIBUS</figcaption>
+          </figure>
+          <div className="step7-secondary-grid">
+            <figure className="step7-shot">
+              <img src={step7ManagerVisual} alt="SIMATIC Manager con estructura de proyecto Siemens S7" loading="lazy" />
+              <figcaption>SIMATIC Manager</figcaption>
+            </figure>
+            <figure className="step7-shot">
+              <img src={step7LadderVisual} alt="Editor LAD STL FBD de STEP 7 Classic" loading="lazy" />
+              <figcaption>LAD / STL / FBD</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div className="status-cluster">
+          <b>RUN</b>
+          <b>STOP</b>
+          <b>SF</b>
+          <b>BF</b>
+        </div>
+      </aside>
+    );
+  }
 
   return (
-    <aside className={`course-side-visual ${type}`}>
+    <aside className="course-side-visual tia">
       <div className="side-visual-header">
-        <span>{type === "s7" ? "STEP 7 Classic" : "TIA Portal"}</span>
-        <Icon name={type === "s7" ? "Cpu" : "MonitorCog"} />
+        <span>TIA Portal</span>
+        <Icon name="MonitorCog" />
       </div>
       <figure className="course-side-photo">
-        <img src={visual} alt={type === "s7" ? "Diagnóstico online en STEP 7 Classic" : "PLC Siemens para curso TIA Portal"} loading="lazy" />
+        <img src={plcCabinetVisual} alt="PLC Siemens para curso TIA Portal" loading="lazy" />
       </figure>
       <div className="ladder-lines">
         <span />
