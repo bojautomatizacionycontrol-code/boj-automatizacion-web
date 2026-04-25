@@ -368,7 +368,7 @@ export const courses = [
     level: "Inicial aplicado",
     mode: "Curso introductorio con enfoque práctico",
     audience:
-      "Técnicos que quieren iniciar en TIA Portal, estudiantes, programadores que vienen de STEP 7 Classic y personal de mantenimiento.",
+      "Técnicos que necesitan incorporar TIA Portal, estudiantes avanzados, programadores con experiencia en STEP 7 Classic y personal de mantenimiento.",
     learn:
       "Crear proyectos, configurar hardware, ordenar variables, programar LAD básico, cargar al PLC y monitorear online.",
     outcomes: [
@@ -406,7 +406,7 @@ export const s7Course = {
   ],
   learnItems: [
     "Interpretar estados RUN/STOP, SF/BF y eventos del Diagnostic Buffer.",
-    "Entrar online con STEP 7 Classic y leer hardware sin perderse en el proyecto.",
+    "Conectarse online con STEP 7 Classic y leer hardware con una secuencia clara de diagnóstico.",
     "Relacionar síntomas de red PROFIBUS, módulos I/O y señales de campo.",
     "Armar una secuencia de diagnóstico defendible frente a mantenimiento y producción.",
   ],
@@ -429,7 +429,7 @@ export const s7Course = {
     "Trabajar con método antes de cambiar hardware.",
     "Interpretar síntomas de CPU, módulos, red y señales.",
     "Evitar reinicios o reemplazos sin evidencia.",
-    "Explicar qué se revisó, qué apareció y cuál es el siguiente paso.",
+    "Documentar qué se verificó, qué evidencia apareció y cuál es el siguiente paso técnico.",
   ],
   outcomes: [
     "Ingresar online y leer el estado real del PLC sin improvisar.",
@@ -445,14 +445,14 @@ export const s7Course = {
     "Perder tiempo revisando zonas del sistema que no están relacionadas con el síntoma.",
   ],
   difference: [
-    "Está pensado desde la parada de planta, no desde una demostración ideal de software.",
+    "Está desarrollado desde situaciones de parada de planta, no desde una demostración ideal de software.",
     "Trabaja con síntomas reales: CPU en STOP, SF/BF, módulos con error, red y señales dudosas.",
     "Enseña a decidir qué mirar primero, qué descartar y cómo justificar el próximo paso.",
-    "Integra el método BOJ para que el diagnóstico sea repetible y útil para el equipo.",
+    "Integra el método BOJ para que el diagnóstico sea repetible y útil para el equipo técnico.",
   ],
   appValue: [
-    "La app acompaña al alumno para ordenar síntomas, LEDs, red, señales y observaciones de campo.",
-    "Sirve como guía rápida cuando hay presión y no conviene depender de memoria o prueba y error.",
+    "La app acompaña al participante para ordenar síntomas, LEDs, red, señales y observaciones de campo.",
+    "Funciona como guía rápida cuando hay presión y no resulta conveniente depender de memoria o prueba y error.",
     "Ayuda a llevar el método del curso al tablero, con una secuencia de revisión más clara.",
   ],
 };
@@ -460,9 +460,9 @@ export const s7Course = {
 export const tiaCourse = {
   title: "Introducción a TIA Portal con PLC Siemens S7-1200/1500",
   subtitle:
-    "Curso introductorio para entrar a TIA Portal con una base ordenada: hardware, variables, LAD, carga, monitoreo y diagnóstico inicial.",
+    "Curso introductorio para incorporar TIA Portal con una base ordenada: hardware, variables, LAD, carga, monitoreo y diagnóstico inicial.",
   audience: [
-    "Técnicos que quieren iniciar en TIA Portal",
+    "Técnicos que necesitan iniciar en TIA Portal",
     "Estudiantes",
     "Programadores que vienen de STEP 7 Classic",
     "Personal de mantenimiento",
@@ -509,7 +509,7 @@ export const tiaCourse = {
     "Avanzar en un proyecto sin documentar señales ni arquitectura.",
   ],
   difference: [
-    "Está orientado a entrar a TIA Portal con orden, no a memorizar pantallas.",
+    "Está orientado a incorporar TIA Portal con orden técnico, no a memorizar pantallas.",
     "Relaciona hardware, variables, bloques y monitoreo con situaciones reales de planta.",
     "Prepara una base sólida para programar, diagnosticar y comunicarse mejor con mantenimiento.",
   ],
@@ -519,7 +519,7 @@ export const appHero = {
   title: "BOJ S7-PLC",
   subtitle: "Herramienta de diagnóstico industrial para PLC Siemens S7-300/400",
   text:
-    "Una app técnica diseñada para guiar el diagnóstico de fallas reales en planta, interpretar estados de CPU, analizar fallas PROFIBUS y ordenar hipótesis de causa probable.",
+    "Herramienta digital técnica diseñada para guiar el diagnóstico de fallas reales en planta, interpretar estados de CPU, analizar fallas PROFIBUS y ordenar hipótesis de causa probable.",
   note:
     "No reemplaza el criterio profesional: ayuda a sostener un método cuando hay presión, poco tiempo y síntomas mezclados.",
 };

@@ -158,7 +158,7 @@ function getRoute() {
   return window.location.hash.replace("#", "") || "/inicio";
 }
 
-function whatsappUrl(message = "Hola Walter, quiero consultar por BOJ Automatización y Control.") {
+function whatsappUrl(message = "Hola, escribo desde la web de BOJ Automatización y Control para realizar una consulta técnica.") {
   return `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
@@ -280,7 +280,7 @@ function Header({ route }) {
 
       <a
         className="header-cta"
-        href={whatsappUrl("Hola Walter, quiero consultar por BOJ Automatización y Control.")}
+        href={whatsappUrl("Hola, escribo desde la web de BOJ Automatización y Control para realizar una consulta técnica.")}
         onClick={closeMenu}
       >
         <Phone size={17} /> WhatsApp
@@ -298,17 +298,18 @@ function HomePage() {
           <IndustrialPanel />
         </div>
         <div className="section-container hero-content">
-          <p className="eyebrow">Diagnóstico de fallas | PLC Siemens | Mantenimiento de planta</p>
-          <h1>Automatización industrial para mantener tu planta operativa</h1>
+          <p className="eyebrow">Automatización industrial | PLC Siemens | Diagnóstico de fallas</p>
+          <h1>Soluciones técnicas para diagnosticar, modernizar y sostener sistemas industriales</h1>
           <p className="hero-subtitle">
-            Ayudo a empresas industriales, mantenimiento e ingeniería a resolver fallas,
-            modernizar sistemas PLC/HMI/SCADA y capacitar equipos técnicos con criterio real de planta.
+            BOJ Automatización y Control brinda soporte especializado para plantas industriales,
+            áreas de mantenimiento e ingeniería que necesitan resolver fallas, modernizar
+            sistemas PLC/HMI/SCADA y fortalecer equipos técnicos con criterio real de planta.
           </p>
           <p className="hero-positioning">
-            Diagnóstico con evidencia, automatización con método y puesta en marcha pensando en producción.
+            Diagnóstico con evidencia. Automatización con método. Puesta en marcha con criterio de planta.
           </p>
           <div className="hero-actions">
-            <PrimaryLink href={whatsappUrl("Hola Walter, necesito una consulta técnica por una falla de planta, PLC Siemens o automatización industrial.")}>
+            <PrimaryLink href={whatsappUrl("Hola, escribo desde la web de BOJ por una consulta técnica sobre falla de planta, PLC Siemens o automatización industrial.")}>
               <Phone size={18} /> Consultar por WhatsApp
             </PrimaryLink>
             <SecondaryLink href="#/servicios">Ver servicios</SecondaryLink>
@@ -325,7 +326,7 @@ function HomePage() {
           <div className="hero-proof-grid" aria-label="Señales de experiencia técnica">
             <span>Más de 10 años en automatización, diagnóstico y puesta en marcha</span>
             <span>Trabajo real con PLC Siemens, HMI, SCADA, tableros y redes</span>
-            <span>Cursos y app para técnicos que diagnostican bajo presión</span>
+            <span>Cursos y app para equipos técnicos que diagnostican bajo presión</span>
           </div>
         </div>
       </section>
@@ -407,14 +408,14 @@ function HomePage() {
         <div className="section-container app-intro">
           <div>
             <p className="eyebrow">App de diagnóstico</p>
-            <h2>Un asistente técnico para ordenar la búsqueda de fallas en campo</h2>
+            <h2>Una herramienta técnica para ordenar la búsqueda de fallas en campo</h2>
             <p>
-              La app de diagnóstico BOJ acompaña al técnico en campo para analizar síntomas,
-              estados de CPU, LEDs, red PROFIBUS/PROFINET, señales y posibles causas de falla.
+              BOJ S7-PLC asiste a equipos técnicos en el análisis de síntomas, estados de CPU,
+              LEDs, red PROFIBUS/PROFINET, señales y posibles causas de falla.
             </p>
             <div className="button-row">
               <PrimaryLink href="#/app">Conocer la app</PrimaryLink>
-              <SecondaryLink href={whatsappUrl("Hola Walter, quiero consultar por la app de diagnóstico BOJ.")}>
+              <SecondaryLink href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por BOJ S7-PLC y la versión PRO.")}>
                 Consultar versión Pro
               </SecondaryLink>
             </div>
@@ -444,10 +445,10 @@ function ServicesPage() {
         ))}
       </div>
       <RouteCTA
-        title="¿Tenés una falla, una migración o una mejora pendiente?"
-        text="Enviá el síntoma, el PLC involucrado, fotos del tablero o una descripción corta del proceso. La respuesta inicial busca ordenar alcance, riesgo y próximo paso técnico."
+        title="Cuando una falla, migración o mejora requiere criterio técnico"
+        text="La consulta puede iniciar con el síntoma, el PLC involucrado, fotos del tablero o una descripción breve del proceso. La respuesta inicial ordena alcance, riesgo y próximo paso técnico."
         primaryLabel="Consultar por WhatsApp"
-        primaryHref={whatsappUrl("Hola Walter, necesito consultar por un servicio técnico industrial.")}
+        primaryHref={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por un servicio técnico industrial.")}
         secondaryLabel="Ir a contacto"
         secondaryHref="#/contacto"
       />
@@ -476,15 +477,15 @@ function CoursesPage() {
       <div className="technical-note">
         <Icon name="ClipboardCheck" />
         <p>
-          Los cursos están pensados para que el alumno entienda qué está viendo en el PLC,
-          qué significa cada síntoma y cómo avanzar sin depender únicamente de prueba y error.
+          Los cursos están diseñados para que el participante interprete qué muestra el PLC,
+          qué significa cada síntoma y cómo avanzar sin depender de prueba y error.
         </p>
       </div>
       <RouteCTA
         title="Capacitación para equipos que responden ante fallas reales"
         text="Los contenidos pueden orientarse al nivel del grupo, al tipo de planta y a los problemas que mantenimiento enfrenta durante una parada."
         primaryLabel="Consultar capacitación"
-        primaryHref={whatsappUrl("Hola Walter, quiero consultar por cursos o capacitación in-company BOJ.")}
+        primaryHref={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por cursos o capacitación in-company.")}
         secondaryLabel="Ver curso S7-300/400"
         secondaryHref="#/cursos/s7-300-400"
       />
@@ -499,9 +500,9 @@ function S7CoursePage() {
       eyebrow="Curso aplicado"
       visual="s7"
       ctas={[
-        { label: "Comprar o consultar acceso", href: whatsappUrl("Hola Walter, quiero comprar o consultar acceso al curso de diagnóstico S7-300/400.") },
-        { label: "Consultar disponibilidad", href: mailtoUrl("Consulta curso S7-300/400", "Hola Walter, quiero consultar disponibilidad del curso de diagnóstico S7-300/400.") },
-        { label: "Hablar por WhatsApp", href: whatsappUrl("Hola Walter, quiero hablar por WhatsApp sobre el curso S7-300/400.") },
+        { label: "Comprar o consultar acceso", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar acceso al curso de diagnóstico S7-300/400.") },
+        { label: "Consultar disponibilidad", href: mailtoUrl("Consulta curso S7-300/400", "Hola, escribo desde la web de BOJ para consultar disponibilidad del curso de diagnóstico S7-300/400.") },
+        { label: "Hablar por WhatsApp", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar por el curso S7-300/400.") },
       ]}
     />
   );
@@ -514,8 +515,8 @@ function TiaCoursePage() {
       eyebrow="Curso introductorio"
       visual="tia"
       ctas={[
-        { label: "Comprar o consultar curso", href: whatsappUrl("Hola Walter, quiero comprar o consultar el curso de TIA Portal con PLC S7-1200/1500.") },
-        { label: "Consultar por el curso", href: mailtoUrl("Consulta curso TIA Portal", "Hola Walter, quiero consultar por el curso de Introducción a TIA Portal.") },
+        { label: "Comprar o consultar curso", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar por el curso de TIA Portal con PLC S7-1200/1500.") },
+        { label: "Consultar por el curso", href: mailtoUrl("Consulta curso TIA Portal", "Hola, escribo desde la web de BOJ para consultar por el curso de Introducción a TIA Portal.") },
       ]}
     />
   );
@@ -533,14 +534,14 @@ function CourseLanding({ course, eyebrow, visual, ctas }) {
       <div className="course-landing">
         <div className="course-content">
           <InfoBlock title="Para quién es" items={course.audience} />
-          {course.learnItems ? <InfoBlock title="Qué vas a aprender" items={course.learnItems} /> : null}
+          {course.learnItems ? <InfoBlock title="Contenidos técnicos principales" items={course.learnItems} /> : null}
           {course.includes ? <InfoBlock title="Qué incluye" items={course.includes} /> : null}
-          <InfoBlock title="Qué vas a poder hacer después" items={course.outcomes} />
+          <InfoBlock title="Capacidades al finalizar" items={course.outcomes} />
           {course.difference ? <InfoBlock title="Por qué este curso es diferente" items={course.difference} /> : null}
           {course.appValue ? <InfoBlock title="Valor de la app incluida" items={course.appValue} /> : null}
           <InfoBlock title={course.includes ? "Programa técnico" : "Contenido de base"} items={course.modules} numbered />
-          <InfoBlock title="Impacto en tu trabajo" items={course.benefits} />
-          <InfoBlock title="Errores que vas a evitar" items={course.avoidMistakes} />
+          <InfoBlock title="Impacto profesional y operativo" items={course.benefits} />
+          <InfoBlock title="Errores técnicos que el curso ayuda a evitar" items={course.avoidMistakes} />
           <div className="button-row">
             {ctas.map((cta, index) =>
               index === 0 ? (
@@ -754,8 +755,8 @@ function AppPage() {
       </section>
 
       <RouteCTA
-        title="Llevá el diagnóstico de PLC a un método más ordenado"
-        text="Usá BOJ S7-PLC como apoyo técnico para interpretar síntomas, seguir verificaciones y priorizar causas probables en sistemas Siemens S7-300/400."
+        title="Diagnóstico de PLC con un método más ordenado"
+        text="BOJ S7-PLC se utiliza como apoyo técnico para interpretar síntomas, seguir verificaciones y priorizar causas probables en sistemas Siemens S7-300/400."
         primaryLabel="Desbloquear versión PRO"
         primaryHref="https://www.bojautomatizacion.com/#/app"
         secondaryLabel="Ver curso con Course Edition"
@@ -798,10 +799,10 @@ function WorksPage() {
         ))}
       </div>
       <RouteCTA
-        title="¿Necesitás una intervención similar en tu planta?"
-        text="Podemos partir del problema operativo, revisar el estado técnico actual y definir una solución con alcance claro, pruebas y puesta en marcha."
+        title="Intervenciones técnicas para problemas reales de planta"
+        text="El análisis puede partir del problema operativo, revisar el estado técnico actual y definir una solución con alcance claro, pruebas y puesta en marcha."
         primaryLabel="Consultar por una obra similar"
-        primaryHref={whatsappUrl("Hola Walter, quiero consultar por una obra o intervención industrial similar.")}
+        primaryHref={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por una obra o intervención industrial similar.")}
         secondaryLabel="Ver servicios"
         secondaryHref="#/servicios"
       />
@@ -813,19 +814,20 @@ function ContactPage() {
   return (
     <PageShell
       eyebrow="Contacto"
-      title="Contacto técnico directo para tu planta"
-      subtitle="Escribí por fallas de planta, automatización, cursos, capacitaciones, migraciones, tableros, redes industriales o app BOJ."
+      title="Contacto técnico para industria, mantenimiento e ingeniería"
+      subtitle="Canales de consulta para fallas de planta, automatización, cursos, capacitaciones, migraciones, tableros, redes industriales y BOJ S7-PLC."
     >
       <section className="contact-direct">
         <div>
           <p className="eyebrow">Atención directa técnica</p>
-          <h2>Respondemos con foco técnico y próximo paso claro</h2>
+          <h2>Atención técnica con foco en diagnóstico y próximo paso claro</h2>
           <p>
-            Podés enviar el síntoma, el PLC o red involucrada, una foto del tablero o la necesidad
-            de capacitación. La primera respuesta busca ordenar prioridad, alcance y acción posible.
+            La consulta puede incluir el síntoma, el PLC o red involucrada, una foto del tablero
+            o la necesidad de capacitación. La primera respuesta busca ordenar prioridad,
+            alcance y acción posible.
           </p>
         </div>
-        <PrimaryLink href={whatsappUrl("Hola Walter, necesito atención técnica directa por una falla de planta, automatización, cursos o migración.")}>
+        <PrimaryLink href={whatsappUrl("Hola, escribo desde la web de BOJ para solicitar atención técnica por una falla de planta, automatización, curso o migración.")}>
           <Phone size={18} /> Escribir por WhatsApp
         </PrimaryLink>
       </section>
@@ -839,7 +841,7 @@ function ContactPage() {
             icon="Phone"
             label="WhatsApp"
             value={contact.whatsappDisplay}
-            href={whatsappUrl("Hola Walter, vengo desde la web BOJ. Quiero consultar por una falla de planta, automatización, cursos o migración.")}
+            href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por una falla de planta, automatización, cursos o migración.")}
           />
           <div className="social-placeholders">
             {/* Reemplazar # por enlaces reales cuando estén definidos. */}
@@ -853,7 +855,7 @@ function ContactPage() {
             ))}
           </div>
           <div className="button-row">
-            <PrimaryLink href={whatsappUrl("Hola Walter, quiero realizar una consulta técnica.")}>
+            <PrimaryLink href={whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.")}>
               Contactar por WhatsApp
             </PrimaryLink>
             <SecondaryLink href={`mailto:${contact.email}`}>Enviar email</SecondaryLink>
@@ -864,7 +866,7 @@ function ContactPage() {
       </div>
 
       <section className="inner-section">
-        <h2>También podés consultar por:</h2>
+        <h2>Consultas frecuentes</h2>
         <div className="function-grid">
           {quickServices.map((item) => (
             <CheckItem key={item}>{item}</CheckItem>
@@ -950,7 +952,7 @@ function ContactForm() {
           rows="5"
           value={form.message}
           onChange={updateField}
-          placeholder="Contame qué falla presenta el equipo, qué PLC o red tenés, o qué capacitación necesitás."
+          placeholder="Describa el síntoma, el equipo involucrado, el PLC o red industrial, o la capacitación requerida."
           required
         />
       </label>
@@ -959,7 +961,7 @@ function ContactForm() {
           Enviar consulta
           <ArrowRight size={18} />
         </button>
-        <a className="btn secondary" href={whatsappUrl("Hola Walter, quiero hacer una consulta desde la web.")}>
+        <a className="btn secondary" href={whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.")}>
           Contactar por WhatsApp
         </a>
       </div>
@@ -1203,7 +1205,7 @@ function ServiceDetailCard({ service }) {
           ) : null}
           <a
             className="btn secondary"
-            href={whatsappUrl(`Hola Walter, quiero consultar por el servicio: ${service.title}.`)}
+            href={whatsappUrl(`Hola, escribo desde la web de BOJ para consultar por el servicio: ${service.title}.`)}
           >
             Consultar por este servicio
           </a>
@@ -1250,7 +1252,7 @@ function CourseCard({ course, expanded = false }) {
         </PrimaryLink>
         {expanded ? (
           <div className="course-outcomes">
-            <h4>Después del curso vas a poder:</h4>
+            <h4>Capacidades al finalizar:</h4>
             {course.outcomes.map((item) => (
               <CheckItem key={item}>{item}</CheckItem>
             ))}
@@ -1527,13 +1529,13 @@ function FinalCTA() {
   return (
     <section className="final-cta">
       <div className="section-container">
-        <h2>¿Necesitás resolver una falla, capacitar a tu equipo o mejorar tu sistema de automatización?</h2>
+        <h2>Soporte técnico para resolver fallas, capacitar equipos y mejorar sistemas de automatización</h2>
         <p>
-          Podés consultar por diagnóstico, automatización, cursos, migraciones, redes industriales,
-          tableros o la app de diagnóstico BOJ.
+          Las consultas pueden orientarse a diagnóstico, automatización, cursos, migraciones,
+          redes industriales, tableros o BOJ S7-PLC.
         </p>
         <div className="button-row">
-          <PrimaryLink href={whatsappUrl("Hola Walter, necesito resolver una falla o consultar por servicios BOJ.")}>
+          <PrimaryLink href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por una falla o servicio técnico industrial.")}>
             Contactar por WhatsApp
           </PrimaryLink>
           <SecondaryLink href="#/servicios">Ver servicios</SecondaryLink>
@@ -1582,7 +1584,7 @@ function Footer() {
 function FloatingContact() {
   return (
     <div className="floating-contact" aria-label="Contactos rápidos">
-      <a href={whatsappUrl("Hola Walter, vengo desde la web BOJ y quiero consultar.")} aria-label="Consultar por WhatsApp">
+      <a href={whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.")} aria-label="Consultar por WhatsApp">
         <Phone size={20} />
       </a>
       <a href={`mailto:${contact.email}`} aria-label="Enviar email">
