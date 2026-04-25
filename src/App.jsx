@@ -128,9 +128,9 @@ const routeMeta = {
       "Cursos técnicos aplicados de diagnóstico en PLC Siemens S7-300/400, STEP 7 Classic y TIA Portal para mantenimiento industrial en Argentina.",
   },
   "/cursos/s7-300-400": {
-    title: "Curso diagnóstico PLC Siemens S7-300/400 | BOJ",
+    title: "Curso diagnóstico industrial PLC Siemens S7-300/400 | BOJ",
     description:
-      "Curso aplicado para diagnosticar fallas reales en PLC Siemens S7-300/400 con STEP 7 Classic, Diagnostic Buffer, PROFIBUS y señales de campo.",
+      "Curso aplicado de diagnóstico industrial en PLC Siemens S7-300/400 con STEP 7 Classic, Diagnostic Buffer, HW Config Online, PROFIBUS y fallas reales de planta.",
   },
   "/cursos/tia-portal": {
     title: "Curso TIA Portal S7-1200/1500 | BOJ",
@@ -533,6 +533,7 @@ function CourseLanding({ course, eyebrow, visual, ctas }) {
       </div>
       <div className="course-landing">
         <div className="course-content">
+          {course.positioning ? <InfoBlock title="Propuesta técnica del curso" items={course.positioning} /> : null}
           <InfoBlock title="Para quién es" items={course.audience} />
           {course.learnItems ? <InfoBlock title="Contenidos técnicos principales" items={course.learnItems} /> : null}
           {course.includes ? <InfoBlock title="Qué incluye" items={course.includes} /> : null}
@@ -844,9 +845,8 @@ function ContactPage() {
             href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por una falla de planta, automatización, cursos o migración.")}
           />
           <div className="social-placeholders">
-            {/* Reemplazar # por enlaces reales cuando estén definidos. */}
-            <a href={contact.instagram}>Instagram / redes</a>
-            <a href={contact.linkedin}>LinkedIn</a>
+            <a href={contact.linktree} target="_blank" rel="noreferrer">Linktree BOJ</a>
+            <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
           </div>
           <div className="diagnostic-checklist">
             <h3>Para acelerar una consulta técnica</h3>
@@ -1563,6 +1563,8 @@ function Footer() {
           <h3>Contacto</h3>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
           <a href={whatsappUrl()}>{contact.whatsappDisplay}</a>
+          <a href={contact.linktree} target="_blank" rel="noreferrer">Linktree BOJ</a>
+          <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
           <span>{contact.location}</span>
         </div>
         <div>
