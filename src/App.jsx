@@ -52,6 +52,8 @@ import {
   whyBoj,
 } from "./content.js";
 import bojLogo from "./assets/boj-logo-web.png";
+import appScreenshot from "./assets/APP.png";
+import step7ClassicVisual from "./assets/siemens-software-step7-basic.jpg";
 import plcCabinetVisual from "./assets/old-site/07-0852e6d5.jpg";
 import panelDiagnosticVisual from "./assets/old-site/panel-diagnostic-optimized.jpg";
 import step7Visual from "./assets/old-site/25-58d80e46.jpg";
@@ -232,10 +234,6 @@ function Header({ route }) {
     <header className="site-header">
       <a className="brand" href="#/inicio" onClick={closeMenu} aria-label="Ir a inicio">
         <BrandLogo />
-        <span>
-          <strong>BOJ</strong>
-          <small>Automatización y Control</small>
-        </span>
       </a>
 
       <button
@@ -666,7 +664,7 @@ function AppPage() {
 
       <section className="inner-section app-evidence-panel">
         <figure>
-          <img src={step7Visual} alt="Diagnóstico online con STEP 7 Classic para PLC Siemens S7" loading="lazy" />
+          <img src={step7ClassicVisual} alt="SIMATIC STEP 7 Classic HW Config para diagnóstico PLC Siemens S7" loading="lazy" />
         </figure>
         <div>
           <p className="eyebrow">Hipótesis ponderadas</p>
@@ -1467,42 +1465,15 @@ function IndustrialPanel() {
 
 function AppMockup() {
   return (
-    <div className="app-mockup" aria-label="Mockup de app de diagnóstico BOJ">
-      {/* Reemplazar este mockup por capturas reales de la app cuando estén listas. */}
-      <div className="phone-frame">
-        <div className="phone-status">
+    <div className="app-mockup" aria-label="Captura real de BOJ S7-PLC">
+      <div className="app-screenshot-shell">
+        <div className="app-screenshot-toolbar">
           <span>BOJ S7-PLC</span>
-          <i />
+          <small>Course Edition</small>
         </div>
-        <div className="diagnostic-screen">
-          <strong>CPU / LEDs</strong>
-          <p>S7-300/400 | STEP 7 Classic</p>
-          <div className="led-row s7-led-row">
-            <span className="led off" /> RUN
-            <span className="led red" /> STOP
-            <span className="led amber" /> SF
-            <span className="led blue" /> BF
-            <span className="led amber" /> FRCE
-            <span className="led green" /> DC5V
-          </div>
-          <div className="screen-card">
-            <small>Rama activa</small>
-            <p>BF activo + esclavo DP caído en HW Config Online.</p>
-          </div>
-          <div className="screen-card secondary-screen-card">
-            <small>Hipótesis ponderadas</small>
-            <div className="mockup-ranking">
-              <span><b>72%</b> ET200 sin 24 VDC</span>
-              <span><b>58%</b> Conector DB9 flojo</span>
-              <span><b>41%</b> Terminación incorrecta</span>
-            </div>
-          </div>
-          <div className="screen-steps">
-            <span>1. Estado CPU</span>
-            <span>2. PROFIBUS / DP</span>
-            <span>3. Verificación segura</span>
-          </div>
-        </div>
+        <figure className="app-screenshot-frame">
+          <img src={appScreenshot} alt="Captura de BOJ S7-PLC con diagnóstico por LEDs CPU Siemens S7-300/400" loading="lazy" />
+        </figure>
       </div>
     </div>
   );
@@ -1580,10 +1551,6 @@ function Footer() {
         <div>
           <div className="footer-brand">
             <BrandLogo compact />
-            <span>
-              <strong>BOJ Automatización y Control</strong>
-              <small>Automatización, diagnóstico y formación técnica industrial.</small>
-            </span>
           </div>
           <p>
             Ingeniería de detalle, automatización, PLC Siemens, redes industriales, tableros,
