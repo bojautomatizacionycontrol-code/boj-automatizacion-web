@@ -53,9 +53,9 @@ import {
 } from "./content.js";
 import bojLogo from "./assets/boj-logo-web.png";
 import appScreenshot from "./assets/APP.png";
-import step7ManagerVisual from "./assets/old-site/11-d79af82c.png";
-import step7HwConfigVisual from "./assets/old-site/12-64327f9f.png";
-import step7LadderVisual from "./assets/old-site/13-cd1b90bc.png";
+import step7ManagerVisual from "./assets/11.png";
+import step7HwConfigVisual from "./assets/12.png";
+import step7LadderVisual from "./assets/13.png";
 import step7ClassicVisual from "./assets/siemens-software-step7-basic.jpg";
 import plcCabinetVisual from "./assets/old-site/07-0852e6d5.jpg";
 import panelDiagnosticVisual from "./assets/old-site/panel-diagnostic-optimized.jpg";

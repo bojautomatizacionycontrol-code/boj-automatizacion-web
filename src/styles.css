@@ -115,9 +115,9 @@ main {
   width: 178px;
   height: 50px;
   overflow: hidden;
-  border: 1px solid rgba(98, 210, 255, 0.34);
-  border-radius: 8px;
-  background: #03080d;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .brand-logo.compact {
