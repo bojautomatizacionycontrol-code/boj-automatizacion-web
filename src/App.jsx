@@ -35,11 +35,13 @@ import {
   appHero,
   appPlantBenefits,
   appRealCases,
+  aboutPage,
   authorityHighlights,
   clientLogoSlots,
   contact,
   contactChecklist,
   courses,
+  futureTechnicalArticles,
   homeHighlights,
   methodSteps,
   navItems,
@@ -47,6 +49,7 @@ import {
   s7Course,
   servicePrinciples,
   services,
+  technicalArticle,
   tiaCourse,
   trustSignals,
   whyBoj,
@@ -145,10 +148,20 @@ const routeMeta = {
     description:
       "BOJ S7-PLC es una herramienta de diagnóstico industrial para PLC Siemens S7-300/400 con STEP 7 Classic, LEDs CPU, PROFIBUS, hipótesis y casos reales.",
   },
+  "/recursos-tecnicos": {
+    title: "Recursos técnicos | SIMATIC STEP 7, PLC Siemens y diagnóstico industrial | BOJ",
+    description:
+      "Artículos técnicos sobre SIMATIC STEP 7, PLC Siemens S7-300/400, Diagnostic Buffer, STEP 7 Classic, TIA Portal, PROFIBUS y mantenimiento industrial.",
+  },
   "/obras": {
     title: "Obras y trabajos realizados | BOJ Automatización",
     description:
       "Casos reales de automatización industrial, ingeniería, PLC Siemens, HMI, SCADA, tableros, migraciones, instrumentación y puesta en marcha.",
+  },
+  "/sobre-mi": {
+    title: "Sobre mí | BOJ Automatización y Control",
+    description:
+      "Walter Adrián Boj, responsable técnico de BOJ Automatización y Control: automatización industrial, diagnóstico de fallas, PLC Siemens, redes, cursos y puesta en marcha.",
   },
   "/contacto": {
     title: "Contacto técnico | BOJ Automatización y Control",
@@ -224,7 +237,9 @@ function RouteView({ route }) {
   if (route === "/cursos/s7-300-400") return <S7CoursePage />;
   if (route === "/cursos/tia-portal") return <TiaCoursePage />;
   if (route === "/app") return <AppPage />;
+  if (route === "/recursos-tecnicos") return <TechnicalResourcesPage />;
   if (route === "/obras") return <WorksPage />;
+  if (route === "/sobre-mi") return <AboutPage />;
   if (route === "/contacto") return <ContactPage />;
   return <HomePage />;
 }
@@ -809,6 +824,139 @@ function WorksPage() {
         secondaryLabel="Ver servicios"
         secondaryHref="#/servicios"
       />
+    </PageShell>
+  );
+}
+
+function TechnicalResourcesPage() {
+  return (
+    <PageShell
+      eyebrow="Recursos técnicos"
+      title="Recursos técnicos para automatización industrial y diagnóstico PLC"
+      subtitle="Artículos escritos con enfoque de planta: PLC Siemens, STEP 7 Classic, TIA Portal, Diagnostic Buffer, PROFIBUS, señales y mantenimiento industrial."
+    >
+      <article className="technical-article">
+        <div className="article-kicker">
+          <span>Artículo principal</span>
+          <span>Lectura técnica</span>
+        </div>
+        <h2>{technicalArticle.title}</h2>
+        <p className="article-lead">{technicalArticle.intro}</p>
+        <div className="article-tags">
+          {technicalArticle.meta.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </div>
+
+        {technicalArticle.sections.map((section) => (
+          <section className="article-section" key={section.title}>
+            <h3>{section.title}</h3>
+            <p>{section.text}</p>
+            {section.items ? (
+              <ul className="article-list">
+                {section.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            ) : null}
+          </section>
+        ))}
+
+        <section className="official-links-panel">
+          <div>
+            <p className="eyebrow">Enlaces oficiales Siemens</p>
+            <h3>Fuentes oficiales para documentación, soporte y descargas</h3>
+            <p>
+              Para descargas, documentación y soporte, se recomienda consultar siempre las fuentes
+              oficiales de Siemens. Evitar instaladores no oficiales reduce riesgos técnicos,
+              legales y de seguridad.
+            </p>
+          </div>
+          <div className="official-link-grid">
+            {technicalArticle.officialLinks.map((link) => (
+              <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+                <strong>{link.label}</strong>
+                <span>{link.text}</span>
+                <ExternalLink size={16} />
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <RouteCTA
+          title="Aprendé a diagnosticar fallas reales en PLC Siemens S7-300/400"
+          text="Si trabajás con sistemas Siemens en planta y necesitás aprender a interpretar fallas reales, estados de CPU, Diagnostic Buffer, redes y lógica online, el curso “Diagnóstico y resolución de fallas en PLC Siemens S7-300/400” está orientado justamente a ese objetivo."
+          primaryLabel="Ver cursos"
+          primaryHref="#/cursos"
+          secondaryLabel="Ver curso S7-300/400"
+          secondaryHref="#/cursos/s7-300-400"
+        />
+      </article>
+
+      <section className="inner-section">
+        <SectionHeader
+          eyebrow="Próximamente"
+          title="Nuevos artículos técnicos en preparación"
+          text="La sección quedará preparada para ampliar el posicionamiento técnico de BOJ con contenidos útiles para mantenimiento, instrumentación, automatización e ingeniería."
+        />
+        <div className="upcoming-grid">
+          {futureTechnicalArticles.map((item) => (
+            <article className="upcoming-card" key={item}>
+              <span>Próximamente</span>
+              <h3>{item}</h3>
+              <p>Contenido técnico orientado a diagnóstico, criterio de planta y aplicación real en mantenimiento industrial.</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    </PageShell>
+  );
+}
+
+function AboutPage() {
+  return (
+    <PageShell eyebrow="Sobre mí" title={aboutPage.title} subtitle={aboutPage.subtitle}>
+      <section className="about-grid">
+        <div className="about-copy">
+          <p className="eyebrow">BOJ Automatización y Control</p>
+          <h2>Experiencia técnica aplicada a problemas reales de planta</h2>
+          <p>{aboutPage.intro}</p>
+          <div className="about-focus-grid">
+            {aboutPage.focus.map((item) => (
+              <CheckItem key={item}>{item}</CheckItem>
+            ))}
+          </div>
+        </div>
+        <aside className="about-card">
+          <BrandLogo compact />
+          <h3>{contact.responsible}</h3>
+          <p>Responsable técnico de BOJ Automatización y Control.</p>
+          <div className="tag-list">
+            <span>PLC Siemens</span>
+            <span>STEP 7</span>
+            <span>TIA Portal</span>
+            <span>PROFIBUS</span>
+            <span>Diagnóstico</span>
+          </div>
+          <div className="button-row">
+            <PrimaryLink href="#/contacto">Contacto técnico</PrimaryLink>
+            <SecondaryLink href="#/obras">Ver obras</SecondaryLink>
+          </div>
+        </aside>
+      </section>
+
+      <section className="inner-section about-principles">
+        <SectionHeader
+          eyebrow="Criterio de trabajo"
+          title="Método antes que improvisación"
+          text="La automatización industrial no se sostiene solo con software. Se sostiene con lectura de planta, evidencia, documentación y decisiones técnicas defendibles."
+        />
+        <div className="function-grid">
+          {aboutPage.principles.map((item) => (
+            <CheckItem key={item}>{item}</CheckItem>
+          ))}
+        </div>
+      </section>
     </PageShell>
   );
 }
@@ -1576,6 +1724,8 @@ function Footer() {
           <a href="#/servicios">Diagnóstico de fallas</a>
           <a href="#/servicios">Redes PROFIBUS / PROFINET</a>
           <a href="#/cursos">Cursos técnicos</a>
+          <a href="#/recursos-tecnicos">Recursos técnicos</a>
+          <a href="#/sobre-mi">Sobre mí</a>
         </div>
       </div>
       <div className="footer-bottom">

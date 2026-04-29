@@ -21,7 +21,9 @@ export const navItems = [
     ],
   },
   { label: "App", path: "/app" },
+  { label: "Recursos técnicos", path: "/recursos-tecnicos" },
   { label: "Obras", path: "/obras" },
+  { label: "Sobre mí", path: "/sobre-mi" },
   { label: "Contacto", path: "/contacto" },
 ];
 
@@ -649,6 +651,99 @@ export const appAudience = [
   "Estudiantes avanzados de automatización",
   "Personal de planta que trabaja con Siemens S7",
 ];
+
+export const technicalArticle = {
+  title: "¿Qué es SIMATIC STEP 7 y para qué se utiliza en automatización industrial?",
+  description:
+    "Una mirada técnica y aplicada sobre STEP 7 Classic, su uso en PLC Siemens S7-300/400 y su importancia para mantenimiento industrial.",
+  meta: ["PLC Siemens", "STEP 7 Classic", "S7-300/400", "Diagnóstico industrial"],
+  intro:
+    "SIMATIC STEP 7 sigue siendo una herramienta central en muchas plantas industriales que trabajan con PLC Siemens S7-300 y S7-400. Aunque TIA Portal es la plataforma moderna de Siemens, en campo todavía existe una gran cantidad de sistemas legacy que se mantienen, diagnostican y modifican desde STEP 7 Classic.",
+  sections: [
+    {
+      title: "¿Qué es STEP 7?",
+      text:
+        "STEP 7 Classic es el software histórico de Siemens para configurar, programar, diagnosticar y mantener PLC SIMATIC, especialmente de las familias S7-300 y S7-400. En una planta industrial no se usa solamente para escribir lógica: también permite revisar hardware, entrar online, interpretar eventos, respaldar proyectos y entender el estado real del sistema.",
+    },
+    {
+      title: "¿Para qué se usa en planta?",
+      text:
+        "En mantenimiento industrial, STEP 7 se utiliza como una herramienta de ingeniería y diagnóstico. Permite pasar de un síntoma operativo a evidencia técnica: qué CPU está activa, qué módulos responden, qué eventos aparecen y qué señales condicionan la secuencia.",
+      items: [
+        "Programación PLC en LAD, FBD o STL según el proyecto existente.",
+        "Configuración de hardware, racks, módulos, direcciones y estaciones remotas.",
+        "Diagnóstico online de CPU, módulos, periferia distribuida y comunicaciones.",
+        "Lectura del Diagnostic Buffer para interpretar eventos, errores y OBs involucrados.",
+        "Monitoreo de lógica, señales, marcas, entradas, salidas y bloques de programa.",
+        "Carga, descarga, comparación y respaldo de proyectos.",
+        "Análisis de fallas de planta con foco en causa probable y no solo en el síntoma.",
+      ],
+    },
+    {
+      title: "STEP 7 Classic vs TIA Portal",
+      text:
+        "TIA Portal integra en una plataforma moderna la ingeniería de PLC, HMI, redes y diagnóstico. Sin embargo, STEP 7 Classic sigue presente en muchas instalaciones con S7-300 y S7-400, máquinas importadas, líneas antiguas, sistemas críticos y proyectos que todavía no fueron migrados. Para mantenimiento, conocer ambas herramientas es una ventaja: TIA para sistemas modernos y STEP 7 Classic para intervenir equipamiento instalado.",
+    },
+    {
+      title: "Importancia para mantenimiento industrial",
+      text:
+        "Un técnico de mantenimiento que trabaja con Siemens no necesita usar STEP 7 solo como programador. Necesita usarlo para leer la condición real de la planta y tomar mejores decisiones durante una parada. La diferencia está en interpretar evidencia antes de cambiar hardware, reiniciar equipos o modificar lógica.",
+      items: [
+        "Interpretar fallas de CPU, módulos y estaciones remotas.",
+        "Ver estados online y relacionarlos con señales físicas de campo.",
+        "Diagnosticar CPU en STOP, SF, BF o eventos repetitivos.",
+        "Analizar señales digitales, analógicas, interlocks y condiciones de secuencia.",
+        "Revisar redes PROFIBUS/PROFINET desde el contexto del PLC y la configuración.",
+        "Evitar reemplazos innecesarios de hardware cuando la causa está en campo, red, alimentación o configuración.",
+      ],
+    },
+  ],
+  officialLinks: [
+    {
+      label: "Siemens STEP 7 / TIA Portal",
+      href: "https://www.siemens.com/en-us/products/tia-portal/step7/",
+      text: "Información oficial de Siemens sobre STEP 7 dentro del ecosistema TIA Portal.",
+    },
+    {
+      label: "Siemens Industry Online Support",
+      href: "https://support.industry.siemens.com/",
+      text: "Portal oficial para documentación, soporte, descargas y notas técnicas de productos Siemens.",
+    },
+    {
+      label: "Siemens Industry Mall / STEP 7 Professional",
+      href: "https://mall.industry.siemens.com/mall/en/Catalog/Products/10317037",
+      text: "Información comercial y técnica oficial de STEP 7 Professional en Siemens Industry Mall.",
+    },
+  ],
+};
+
+export const futureTechnicalArticles = [
+  "STEP 7 Classic vs TIA Portal",
+  "Qué es el Diagnostic Buffer",
+  "Qué significa SF/BF en un PLC Siemens",
+  "Introducción a PROFIBUS",
+  "Señales 4-20 mA en PLC",
+];
+
+export const aboutPage = {
+  title: "Sobre mí",
+  subtitle:
+    "Walter Adrián Boj, responsable técnico de BOJ Automatización y Control.",
+  intro:
+    "BOJ Automatización y Control nace desde el trabajo real en planta: diagnóstico de fallas, automatización industrial, tableros, redes, migraciones, puesta en marcha y capacitación técnica aplicada. La propuesta combina experiencia de campo con método, documentación y criterio para que cada intervención tenga sentido operativo.",
+  focus: [
+    "Diagnóstico de fallas en PLC Siemens, redes industriales, módulos, señales y condiciones de proceso.",
+    "Automatización, modificación y puesta en marcha de sistemas PLC/HMI/SCADA.",
+    "Capacitación técnica para mantenimiento, instrumentistas, electricistas, automatistas e ingeniería.",
+    "Desarrollo de BOJ S7-PLC como herramienta de apoyo para diagnóstico estructurado en campo.",
+  ],
+  principles: [
+    "Primero se releva el síntoma; después se analiza la evidencia.",
+    "No se reemplaza hardware sin justificar técnicamente la causa probable.",
+    "La capacitación debe servir para actuar mejor frente a una falla real.",
+    "Una intervención termina mejor cuando deja criterio, respaldo y próximos pasos claros.",
+  ],
+};
 
 export const projects = [
   {
