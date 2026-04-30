@@ -22,8 +22,6 @@ export const navItems = [
   },
   { label: "App", path: "/app" },
   { label: "Recursos técnicos", path: "/recursos-tecnicos" },
-  { label: "Obras", path: "/obras" },
-  { label: "Sobre mí", path: "/sobre-mi" },
   { label: "Contacto", path: "/contacto" },
 ];
 
@@ -652,98 +650,314 @@ export const appAudience = [
   "Personal de planta que trabaja con Siemens S7",
 ];
 
-export const technicalArticle = {
-  title: "¿Qué es SIMATIC STEP 7 y para qué se utiliza en automatización industrial?",
-  description:
-    "Una mirada técnica y aplicada sobre STEP 7 Classic, su uso en PLC Siemens S7-300/400 y su importancia para mantenimiento industrial.",
-  meta: ["PLC Siemens", "STEP 7 Classic", "S7-300/400", "Diagnóstico industrial"],
-  intro:
-    "SIMATIC STEP 7 sigue siendo una herramienta central en muchas plantas industriales que trabajan con PLC Siemens S7-300 y S7-400. Aunque TIA Portal es la plataforma moderna de Siemens, en campo todavía existe una gran cantidad de sistemas legacy que se mantienen, diagnostican y modifican desde STEP 7 Classic.",
-  sections: [
-    {
-      title: "¿Qué es STEP 7?",
-      text:
-        "STEP 7 Classic es el software histórico de Siemens para configurar, programar, diagnosticar y mantener PLC SIMATIC, especialmente de las familias S7-300 y S7-400. En una planta industrial no se usa solamente para escribir lógica: también permite revisar hardware, entrar online, interpretar eventos, respaldar proyectos y entender el estado real del sistema.",
-    },
-    {
-      title: "¿Para qué se usa en planta?",
-      text:
-        "En mantenimiento industrial, STEP 7 se utiliza como una herramienta de ingeniería y diagnóstico. Permite pasar de un síntoma operativo a evidencia técnica: qué CPU está activa, qué módulos responden, qué eventos aparecen y qué señales condicionan la secuencia.",
-      items: [
-        "Programación PLC en LAD, FBD o STL según el proyecto existente.",
-        "Configuración de hardware, racks, módulos, direcciones y estaciones remotas.",
-        "Diagnóstico online de CPU, módulos, periferia distribuida y comunicaciones.",
-        "Lectura del Diagnostic Buffer para interpretar eventos, errores y OBs involucrados.",
-        "Monitoreo de lógica, señales, marcas, entradas, salidas y bloques de programa.",
-        "Carga, descarga, comparación y respaldo de proyectos.",
-        "Análisis de fallas de planta con foco en causa probable y no solo en el síntoma.",
-      ],
-    },
-    {
-      title: "STEP 7 Classic vs TIA Portal",
-      text:
-        "TIA Portal integra en una plataforma moderna la ingeniería de PLC, HMI, redes y diagnóstico. Sin embargo, STEP 7 Classic sigue presente en muchas instalaciones con S7-300 y S7-400, máquinas importadas, líneas antiguas, sistemas críticos y proyectos que todavía no fueron migrados. Para mantenimiento, conocer ambas herramientas es una ventaja: TIA para sistemas modernos y STEP 7 Classic para intervenir equipamiento instalado.",
-    },
-    {
-      title: "Importancia para mantenimiento industrial",
-      text:
-        "Un técnico de mantenimiento que trabaja con Siemens no necesita usar STEP 7 solo como programador. Necesita usarlo para leer la condición real de la planta y tomar mejores decisiones durante una parada. La diferencia está en interpretar evidencia antes de cambiar hardware, reiniciar equipos o modificar lógica.",
-      items: [
-        "Interpretar fallas de CPU, módulos y estaciones remotas.",
-        "Ver estados online y relacionarlos con señales físicas de campo.",
-        "Diagnosticar CPU en STOP, SF, BF o eventos repetitivos.",
-        "Analizar señales digitales, analógicas, interlocks y condiciones de secuencia.",
-        "Revisar redes PROFIBUS/PROFINET desde el contexto del PLC y la configuración.",
-        "Evitar reemplazos innecesarios de hardware cuando la causa está en campo, red, alimentación o configuración.",
-      ],
-    },
-  ],
-  officialLinks: [
-    {
-      label: "Siemens STEP 7 / TIA Portal",
-      href: "https://www.siemens.com/en-us/products/tia-portal/step7/",
-      text: "Información oficial de Siemens sobre STEP 7 dentro del ecosistema TIA Portal.",
-    },
-    {
-      label: "Siemens Industry Online Support",
-      href: "https://support.industry.siemens.com/",
-      text: "Portal oficial para documentación, soporte, descargas y notas técnicas de productos Siemens.",
-    },
-    {
-      label: "Siemens Industry Mall / STEP 7 Professional",
-      href: "https://mall.industry.siemens.com/mall/en/Catalog/Products/10317037",
-      text: "Información comercial y técnica oficial de STEP 7 Professional en Siemens Industry Mall.",
-    },
-  ],
-};
-
-export const futureTechnicalArticles = [
-  "STEP 7 Classic vs TIA Portal",
-  "Qué es el Diagnostic Buffer",
-  "Qué significa SF/BF en un PLC Siemens",
-  "Introducción a PROFIBUS",
-  "Señales 4-20 mA en PLC",
+export const technicalResources = [
+  {
+    id: "simatic-manager",
+    path: "/recursos-tecnicos/simatic-manager",
+    title: "STEP 7 SIMATIC Manager",
+    subtitle:
+      "Software clásico de Siemens para configuración, programación y diagnóstico de PLC S7-300 y S7-400.",
+    description:
+      "Entorno de ingeniería utilizado en muchas plantas con sistemas Siemens legacy: hardware, lógica, diagnóstico online, Diagnostic Buffer, PROFIBUS y respaldo de proyectos.",
+    status: "Disponible",
+    visualKey: "simaticManager",
+    meta: ["S7-300/400", "STEP 7 Classic", "Diagnostic Buffer", "PROFIBUS"],
+    sections: [
+      {
+        title: "Qué es STEP 7 SIMATIC Manager",
+        text:
+          "SIMATIC Manager es el entorno clásico de Siemens para trabajar con proyectos STEP 7 de PLC S7-300 y S7-400. En planta no se utiliza solamente para programar: permite abrir la estructura del proyecto, revisar hardware, conectarse online, leer diagnósticos y entender cómo está armado el sistema que sostiene una máquina o proceso.",
+      },
+      {
+        title: "Para qué se utiliza en automatización industrial",
+        text:
+          "Su valor aparece cuando mantenimiento necesita pasar de un síntoma de producción a evidencia técnica. Desde STEP 7 Classic se puede revisar si la CPU está en RUN o STOP, qué módulos presentan error, qué estaciones PROFIBUS responden, qué eventos registra el sistema y qué lógica condiciona la secuencia.",
+      },
+      {
+        title: "Aplicaciones típicas en planta",
+        text:
+          "En instalaciones con S7-300 y S7-400, SIMATIC Manager suele ser la herramienta principal para intervenir sistemas existentes sin perder trazabilidad del proyecto.",
+        items: [
+          "Configuración de hardware, racks, módulos, direcciones y estaciones remotas.",
+          "Programación PLC en LAD, FBD o STL según el proyecto instalado.",
+          "Monitoreo online de lógica, marcas, entradas, salidas y bloques de programa.",
+          "Lectura del Diagnostic Buffer para interpretar eventos y OBs involucrados.",
+          "Diagnóstico de CPU, módulos I/O y periferia distribuida.",
+          "Diagnóstico de redes PROFIBUS desde HW Config Online.",
+          "Backup, comparación, carga, descarga y restauración de proyectos.",
+        ],
+      },
+      {
+        title: "Importancia para mantenimiento industrial",
+        text:
+          "Un técnico de mantenimiento que domina SIMATIC Manager puede intervenir con mejor criterio durante una parada. La herramienta ayuda a separar una falla de red, campo, hardware, alimentación o lógica antes de reemplazar componentes o modificar programa sin evidencia suficiente.",
+      },
+      {
+        title: "Diferencia general con TIA Portal",
+        text:
+          "TIA Portal es la plataforma moderna de Siemens para ingeniería integrada. STEP 7 Classic sigue siendo imprescindible en muchas líneas con S7-300 y S7-400, máquinas importadas, sistemas críticos y proyectos que no fueron migrados. En mantenimiento conviene conocer ambos entornos: TIA para sistemas nuevos y SIMATIC Manager para equipamiento instalado.",
+      },
+    ],
+    officialLinks: [
+      {
+        label: "Siemens Industry Online Support",
+        href: "https://support.industry.siemens.com/",
+        text: "Portal oficial para documentación, soporte, descargas y notas técnicas de productos Siemens.",
+      },
+      {
+        label: "Siemens STEP 7 / TIA Portal",
+        href: "https://www.siemens.com/en-us/products/tia-portal/step7/",
+        text: "Información oficial de Siemens sobre STEP 7 dentro del ecosistema de ingeniería Siemens.",
+      },
+      {
+        label: "Siemens Industry Mall / STEP 7 Professional",
+        href: "https://mall.industry.siemens.com/mall/en/Catalog/Products/10317037",
+        text: "Ficha comercial y técnica oficial de STEP 7 Professional en Siemens Industry Mall.",
+      },
+    ],
+  },
+  {
+    id: "tia-portal",
+    path: "/recursos-tecnicos/tia-portal",
+    title: "STEP 7 TIA Portal",
+    subtitle:
+      "Entorno moderno de ingeniería Siemens para PLC, HMI, redes, drives y sistemas integrados de automatización.",
+    description:
+      "Plataforma actual para ingeniería Siemens: programación S7-1200/S7-1500, HMI WinCC, PROFINET, diagnóstico online, drives y puesta en marcha integrada.",
+    status: "Disponible",
+    visualKey: "tiaPortal",
+    meta: ["S7-1200/1500", "TIA Portal", "PROFINET", "WinCC"],
+    sections: [
+      {
+        title: "Qué es TIA Portal",
+        text:
+          "TIA Portal es la plataforma de ingeniería integrada de Siemens. Reúne programación PLC, configuración de hardware, redes, HMI, diagnóstico y puesta en marcha en un mismo entorno. Para proyectos nuevos con S7-1200 y S7-1500 es la referencia principal de trabajo.",
+      },
+      {
+        title: "Diferencia con STEP 7 Classic",
+        text:
+          "STEP 7 Classic trabaja principalmente con proyectos S7-300 y S7-400 en SIMATIC Manager. TIA Portal integra PLC, HMI y otros dispositivos bajo una estructura moderna, con mayor trazabilidad de dispositivos, redes y objetos tecnológicos. La diferencia no es solo visual: cambia la forma de organizar el proyecto y diagnosticar sistemas modernos.",
+      },
+      {
+        title: "Para qué se usa",
+        text:
+          "En planta, TIA Portal se utiliza tanto para desarrollar nuevos proyectos como para mantener máquinas modernas con PLC, pantallas y comunicación industrial integrada.",
+        items: [
+          "Programación de PLC Siemens S7-1200 y S7-1500.",
+          "Configuración de hardware, módulos, direcciones y dispositivos PROFINET.",
+          "Integración HMI con WinCC dentro del mismo proyecto.",
+          "Diagnóstico online de CPU, módulos, alarmas y dispositivos conectados.",
+          "Configuración y análisis de redes PROFINET.",
+          "Integración de drives y equipos tecnológicos según la arquitectura.",
+        ],
+      },
+      {
+        title: "Importancia en proyectos modernos",
+        text:
+          "TIA Portal permite trabajar con una visión más integrada de la automatización. En ingeniería ayuda a ordenar dispositivos, pantallas, variables y redes; en mantenimiento permite leer estados online y relacionar eventos de PLC, HMI y comunicación con mayor rapidez.",
+      },
+      {
+        title: "Aplicación en mantenimiento y puesta en marcha",
+        text:
+          "Durante una puesta en marcha, TIA Portal permite probar señales, monitorear bloques, revisar diagnósticos, corregir parametrizaciones y validar comunicación. Para mantenimiento, el valor está en interpretar estados online antes de intervenir físicamente el sistema.",
+      },
+    ],
+    officialLinks: [
+      {
+        label: "Siemens TIA Portal",
+        href: "https://www.siemens.com/global/en/products/automation/industry-software/automation-software/tia-portal.html",
+        text: "Página oficial de Siemens sobre TIA Portal y sus herramientas de ingeniería.",
+      },
+      {
+        label: "Siemens STEP 7 / TIA Portal",
+        href: "https://www.siemens.com/en-us/products/tia-portal/step7/",
+        text: "Información oficial de Siemens sobre STEP 7 dentro de TIA Portal.",
+      },
+      {
+        label: "Siemens Industry Online Support",
+        href: "https://support.industry.siemens.com/",
+        text: "Documentación, soporte y descargas oficiales para productos Siemens.",
+      },
+    ],
+  },
+  {
+    id: "microwin",
+    path: "/recursos-tecnicos/microwin",
+    title: "STEP 7 MicroWIN",
+    subtitle:
+      "Software de programación utilizado para PLC Siemens S7-200.",
+    description:
+      "Herramienta clásica para PLC S7-200, todavía presente en máquinas compactas, automatismos simples y equipos que continúan operando en planta.",
+    status: "Disponible",
+    visualKey: "microWin",
+    meta: ["S7-200", "MicroWIN", "Máquinas compactas", "Mantenimiento"],
+    sections: [
+      {
+        title: "Qué es STEP 7 MicroWIN",
+        text:
+          "STEP 7 MicroWIN es el software utilizado para programar y mantener PLC Siemens S7-200. Aunque pertenece a una generación anterior, sigue apareciendo en máquinas compactas, equipos importados y automatismos que continúan funcionando correctamente y necesitan soporte técnico.",
+      },
+      {
+        title: "Relación con PLC Siemens S7-200",
+        text:
+          "MicroWIN está asociado a la familia S7-200. Su lógica, estructura de proyecto y forma de conexión son diferentes a STEP 7 Classic y TIA Portal. Para mantenimiento, reconocer esa diferencia evita buscar herramientas incorrectas cuando aparece una falla en una máquina legacy.",
+      },
+      {
+        title: "Aplicaciones típicas",
+        text:
+          "El S7-200 fue muy utilizado en aplicaciones donde se requería control compacto, costo contenido y lógica relativamente directa.",
+        items: [
+          "Máquinas compactas y equipos autónomos.",
+          "Automatismos simples con entradas y salidas discretas.",
+          "Lógica secuencial básica.",
+          "Temporizadores, contadores y enclavamientos.",
+          "Comunicación básica según el hardware instalado.",
+          "Adaptaciones de máquinas existentes donde aún conviene conservar el sistema.",
+        ],
+      },
+      {
+        title: "Por qué sigue siendo importante en mantenimiento",
+        text:
+          "En muchas plantas, reemplazar un S7-200 no siempre es la primera opción. Si la máquina está operativa, conocer MicroWIN permite hacer backup, revisar lógica, entender señales y decidir si conviene reparar, documentar o planificar una migración.",
+      },
+      {
+        title: "Diferencias con STEP 7 Classic y TIA Portal",
+        text:
+          "MicroWIN se enfoca en S7-200; STEP 7 Classic se asocia principalmente a S7-300/S7-400; TIA Portal trabaja con S7-1200/S7-1500 y plataformas modernas. En mantenimiento industrial, identificar la familia del PLC define la herramienta correcta antes de conectar una PC a planta.",
+      },
+    ],
+    officialLinks: [
+      {
+        label: "Siemens Industry Online Support",
+        href: "https://support.industry.siemens.com/",
+        text: "Fuente oficial para documentación y soporte de productos Siemens legacy.",
+      },
+      {
+        label: "Soporte Siemens para SIMATIC",
+        href: "https://support.industry.siemens.com/cs/products?lc=en-WW",
+        text: "Buscador oficial de productos, manuales, FAQs y descargas disponibles en Siemens Industry Online Support.",
+      },
+    ],
+  },
+  {
+    id: "logo-soft-comfort",
+    path: "/recursos-tecnicos/logo-soft-comfort",
+    title: "LOGO! Soft Comfort",
+    subtitle:
+      "Software Siemens para programación de relés inteligentes LOGO! orientados a automatismos simples.",
+    description:
+      "Entorno para programar Siemens LOGO!, útil en bombeo, iluminación, control horario, pequeños automatismos y automatización liviana.",
+    status: "Disponible",
+    visualKey: "logoSoftComfort",
+    meta: ["LOGO!", "Automatismos simples", "Control horario", "Bombeo"],
+    sections: [
+      {
+        title: "Qué es LOGO! Soft Comfort",
+        text:
+          "LOGO! Soft Comfort es el software de Siemens para programar relés inteligentes LOGO!. Permite diseñar lógica de control simple mediante bloques funcionales, simular el comportamiento y cargar el programa al equipo según la versión utilizada.",
+      },
+      {
+        title: "Qué es un Siemens LOGO!",
+        text:
+          "Un LOGO! no reemplaza a un PLC industrial completo, pero cubre muy bien automatismos pequeños o medianos donde se requieren pocas señales, lógica clara y mantenimiento sencillo. Es frecuente encontrarlo en servicios auxiliares, tableros compactos y automatización edilicia o industrial liviana.",
+      },
+      {
+        title: "Aplicaciones típicas",
+        text:
+          "La herramienta se utiliza cuando la aplicación necesita una lógica confiable, pero no justifica la complejidad de un PLC mayor.",
+        items: [
+          "Control de bombas y alternancia de equipos.",
+          "Iluminación y automatización edilicia.",
+          "Pequeños automatismos de máquina.",
+          "Control horario y calendario.",
+          "Secuencias simples con enclavamientos.",
+          "Automatización industrial liviana y tableros auxiliares.",
+        ],
+      },
+      {
+        title: "Ventajas y limitaciones frente a un PLC",
+        text:
+          "LOGO! aporta rapidez, bajo costo relativo y facilidad de mantenimiento para aplicaciones simples. Su límite aparece cuando la instalación exige muchas señales, redes complejas, diagnóstico avanzado, escalabilidad o integración profunda con HMI/SCADA.",
+      },
+      {
+        title: "Importancia para técnicos que comienzan en automatización",
+        text:
+          "Para técnicos que se inician, LOGO! Soft Comfort ayuda a comprender lógica, enclavamientos, temporización y secuencias sin entrar de inmediato en la complejidad completa de un PLC Siemens industrial.",
+      },
+    ],
+    officialLinks: [
+      {
+        label: "Siemens LOGO!",
+        href: "https://www.siemens.com/global/en/products/automation/systems/industrial/plc/logo.html",
+        text: "Página oficial de Siemens para relés inteligentes LOGO! y software asociado.",
+      },
+      {
+        label: "Siemens Industry Online Support",
+        href: "https://support.industry.siemens.com/",
+        text: "Documentación, manuales y soporte oficial para productos Siemens.",
+      },
+    ],
+  },
+  {
+    id: "wincc",
+    path: "/recursos-tecnicos/wincc",
+    title: "SIMATIC WinCC",
+    subtitle:
+      "Sistema Siemens para visualización, supervisión y operación de procesos industriales.",
+    description:
+      "Plataforma HMI/SCADA para operación, alarmas, tendencias, variables de proceso y supervisión de sistemas automatizados.",
+    status: "Disponible",
+    visualKey: "wincc",
+    meta: ["HMI", "SCADA", "WinCC", "Operación"],
+    sections: [
+      {
+        title: "Qué es SIMATIC WinCC",
+        text:
+          "SIMATIC WinCC es la familia Siemens orientada a visualización, operación y supervisión de procesos industriales. Permite construir pantallas HMI, sistemas SCADA, alarmas, tendencias, registros y objetos de operación vinculados a PLC y redes industriales.",
+      },
+      {
+        title: "Diferencia entre HMI y SCADA",
+        text:
+          "Una HMI suele estar asociada a una máquina o celda específica: operador, comandos, estados y alarmas locales. Un SCADA supervisa procesos más amplios, puede integrar varias áreas, historizar datos, gestionar alarmas y dar una visión operacional más completa de planta.",
+      },
+      {
+        title: "Aplicaciones típicas",
+        text:
+          "WinCC se utiliza cuando la operación necesita ver, comandar y diagnosticar el proceso con información clara y confiable.",
+        items: [
+          "Pantallas HMI para máquinas y líneas de producción.",
+          "Supervisión de procesos industriales.",
+          "Gestión de alarmas y eventos.",
+          "Tendencias y visualización histórica de variables.",
+          "Operación de equipos, modos, consignas y estados.",
+          "Visualización de variables críticas del PLC.",
+        ],
+      },
+      {
+        title: "Relación con TIA Portal y WinCC Flexible",
+        text:
+          "WinCC aparece integrado en TIA Portal para sistemas modernos, mientras que WinCC Flexible sigue presente en instalaciones más antiguas. En mantenimiento es importante identificar la versión usada para respaldar, modificar o recuperar una pantalla sin comprometer la operación.",
+      },
+      {
+        title: "Importancia en operación y mantenimiento",
+        text:
+          "Una buena visualización reduce errores operativos y mejora el diagnóstico. Alarmas claras, estados bien nombrados y tendencias útiles permiten que operación y mantenimiento hablen sobre datos concretos, no solo sobre síntomas.",
+      },
+    ],
+    officialLinks: [
+      {
+        label: "Siemens WinCC en TIA Portal",
+        href: "https://www.siemens.com/global/en/products/automation/industry-software/automation-software/tia-portal/software/wincc-tia-portal.html",
+        text: "Página oficial de Siemens sobre WinCC dentro del ecosistema TIA Portal.",
+      },
+      {
+        label: "Siemens Industry Online Support",
+        href: "https://support.industry.siemens.com/",
+        text: "Soporte oficial para documentación, manuales, descargas y notas técnicas Siemens.",
+      },
+    ],
+  },
 ];
-
-export const aboutPage = {
-  title: "Sobre mí",
-  subtitle:
-    "Walter Adrián Boj, responsable técnico de BOJ Automatización y Control.",
-  intro:
-    "BOJ Automatización y Control nace desde el trabajo real en planta: diagnóstico de fallas, automatización industrial, tableros, redes, migraciones, puesta en marcha y capacitación técnica aplicada. La propuesta combina experiencia de campo con método, documentación y criterio para que cada intervención tenga sentido operativo.",
-  focus: [
-    "Diagnóstico de fallas en PLC Siemens, redes industriales, módulos, señales y condiciones de proceso.",
-    "Automatización, modificación y puesta en marcha de sistemas PLC/HMI/SCADA.",
-    "Capacitación técnica para mantenimiento, instrumentistas, electricistas, automatistas e ingeniería.",
-    "Desarrollo de BOJ S7-PLC como herramienta de apoyo para diagnóstico estructurado en campo.",
-  ],
-  principles: [
-    "Primero se releva el síntoma; después se analiza la evidencia.",
-    "No se reemplaza hardware sin justificar técnicamente la causa probable.",
-    "La capacitación debe servir para actuar mejor frente a una falla real.",
-    "Una intervención termina mejor cuando deja criterio, respaldo y próximos pasos claros.",
-  ],
-};
 
 export const projects = [
   {

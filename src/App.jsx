@@ -35,13 +35,11 @@ import {
   appHero,
   appPlantBenefits,
   appRealCases,
-  aboutPage,
   authorityHighlights,
   clientLogoSlots,
   contact,
   contactChecklist,
   courses,
-  futureTechnicalArticles,
   homeHighlights,
   methodSteps,
   navItems,
@@ -49,7 +47,7 @@ import {
   s7Course,
   servicePrinciples,
   services,
-  technicalArticle,
+  technicalResources,
   tiaCourse,
   trustSignals,
   whyBoj,
@@ -60,6 +58,10 @@ import step7ManagerVisual from "./assets/11.png";
 import step7HwConfigVisual from "./assets/12.png";
 import step7LadderVisual from "./assets/13.png";
 import step7ClassicVisual from "./assets/siemens-software-step7-basic.jpg";
+import tiaPortalResourceVisual from "./assets/TIA_Portal_1.png";
+import microWinResourceVisual from "./assets/MicroWin-1.png";
+import logoSoftComfortResourceVisual from "./assets/Logo comfort - 1.jpg";
+import winccResourceVisual from "./assets/WinCC-1.jfif";
 import plcCabinetVisual from "./assets/old-site/07-0852e6d5.jpg";
 import panelDiagnosticVisual from "./assets/old-site/panel-diagnostic-optimized.jpg";
 import step7Visual from "./assets/old-site/25-58d80e46.jpg";
@@ -117,6 +119,14 @@ const courseVisuals = {
   tia: plcCabinetVisual,
 };
 
+const resourceVisuals = {
+  simaticManager: [step7HwConfigVisual, step7ManagerVisual, step7LadderVisual],
+  tiaPortal: [tiaPortalResourceVisual],
+  microWin: [microWinResourceVisual],
+  logoSoftComfort: [logoSoftComfortResourceVisual],
+  wincc: [winccResourceVisual],
+};
+
 const routeMeta = {
   "/inicio": {
     title: "BOJ Automatización y Control | PLC Siemens, diagnóstico y mantenimiento industrial",
@@ -149,19 +159,39 @@ const routeMeta = {
       "BOJ S7-PLC es una herramienta de diagnóstico industrial para PLC Siemens S7-300/400 con STEP 7 Classic, LEDs CPU, PROFIBUS, hipótesis y casos reales.",
   },
   "/recursos-tecnicos": {
-    title: "Recursos técnicos | SIMATIC STEP 7, PLC Siemens y diagnóstico industrial | BOJ",
+    title: "Recursos técnicos Siemens | STEP 7, TIA Portal, MicroWIN y WinCC | BOJ",
     description:
-      "Artículos técnicos sobre SIMATIC STEP 7, PLC Siemens S7-300/400, Diagnostic Buffer, STEP 7 Classic, TIA Portal, PROFIBUS y mantenimiento industrial.",
+      "Biblioteca técnica sobre STEP 7 SIMATIC Manager, TIA Portal, MicroWIN, LOGO Soft Comfort, WinCC, PLC Siemens, PROFIBUS, PROFINET y mantenimiento industrial.",
+  },
+  "/recursos-tecnicos/simatic-manager": {
+    title: "STEP 7 SIMATIC Manager | PLC Siemens S7-300/400 | BOJ",
+    description:
+      "Recurso técnico sobre STEP 7 SIMATIC Manager para PLC Siemens S7-300 y S7-400: hardware, Diagnostic Buffer, PROFIBUS, diagnóstico online y mantenimiento industrial.",
+  },
+  "/recursos-tecnicos/tia-portal": {
+    title: "STEP 7 TIA Portal | PLC Siemens S7-1200/1500 | BOJ",
+    description:
+      "Recurso técnico sobre TIA Portal para PLC Siemens S7-1200/1500, HMI WinCC, PROFINET, drives, diagnóstico online, puesta en marcha y mantenimiento industrial.",
+  },
+  "/recursos-tecnicos/microwin": {
+    title: "STEP 7 MicroWIN | PLC Siemens S7-200 | BOJ",
+    description:
+      "Recurso técnico sobre STEP 7 MicroWIN para PLC Siemens S7-200, máquinas compactas, automatismos simples y mantenimiento de equipos legacy.",
+  },
+  "/recursos-tecnicos/logo-soft-comfort": {
+    title: "LOGO! Soft Comfort | Relés inteligentes Siemens LOGO | BOJ",
+    description:
+      "Recurso técnico sobre LOGO! Soft Comfort para relés inteligentes Siemens LOGO, bombeo, iluminación, automatismos simples y control horario.",
+  },
+  "/recursos-tecnicos/wincc": {
+    title: "SIMATIC WinCC | HMI SCADA Siemens | BOJ",
+    description:
+      "Recurso técnico sobre SIMATIC WinCC, HMI, SCADA, alarmas, tendencias, operación de procesos, visualización de variables y mantenimiento industrial.",
   },
   "/obras": {
     title: "Obras y trabajos realizados | BOJ Automatización",
     description:
       "Casos reales de automatización industrial, ingeniería, PLC Siemens, HMI, SCADA, tableros, migraciones, instrumentación y puesta en marcha.",
-  },
-  "/sobre-mi": {
-    title: "Sobre mí | BOJ Automatización y Control",
-    description:
-      "Walter Adrián Boj, responsable técnico de BOJ Automatización y Control: automatización industrial, diagnóstico de fallas, PLC Siemens, redes, cursos y puesta en marcha.",
   },
   "/contacto": {
     title: "Contacto técnico | BOJ Automatización y Control",
@@ -238,8 +268,8 @@ function RouteView({ route }) {
   if (route === "/cursos/tia-portal") return <TiaCoursePage />;
   if (route === "/app") return <AppPage />;
   if (route === "/recursos-tecnicos") return <TechnicalResourcesPage />;
+  if (route.startsWith("/recursos-tecnicos/")) return <TechnicalArticlePage route={route} />;
   if (route === "/obras") return <WorksPage />;
-  if (route === "/sobre-mi") return <AboutPage />;
   if (route === "/contacto") return <ContactPage />;
   return <HomePage />;
 }
@@ -266,7 +296,10 @@ function Header({ route }) {
 
       <nav className={`main-nav ${open ? "is-open" : ""}`} aria-label="Navegación principal">
         {navItems.map((item) => {
-          const active = route === item.path || (item.path === "/cursos" && route.startsWith("/cursos"));
+          const active =
+            route === item.path ||
+            (item.path === "/cursos" && route.startsWith("/cursos")) ||
+            (item.path === "/recursos-tecnicos" && route.startsWith("/recursos-tecnicos"));
           return (
             <div className="nav-item" key={item.path}>
               <a
@@ -832,23 +865,98 @@ function TechnicalResourcesPage() {
   return (
     <PageShell
       eyebrow="Recursos técnicos"
-      title="Recursos técnicos para automatización industrial y diagnóstico PLC"
-      subtitle="Artículos escritos con enfoque de planta: PLC Siemens, STEP 7 Classic, TIA Portal, Diagnostic Buffer, PROFIBUS, señales y mantenimiento industrial."
+      title="Biblioteca técnica Siemens para automatización industrial"
+      subtitle="Guías aplicadas sobre herramientas Siemens utilizadas en planta: STEP 7 SIMATIC Manager, TIA Portal, MicroWIN, LOGO! Soft Comfort y SIMATIC WinCC."
     >
-      <article className="technical-article">
-        <div className="article-kicker">
-          <span>Artículo principal</span>
-          <span>Lectura técnica</span>
+      <section className="resources-intro-panel">
+        <div>
+          <p className="eyebrow">Consulta técnica orientada a planta</p>
+          <h2>Software, diagnóstico y mantenimiento explicados con criterio industrial</h2>
+          <p>
+            Esta sección reúne recursos para técnicos de mantenimiento, instrumentistas,
+            programadores PLC, ingenieros y estudiantes técnicos que necesitan comprender qué
+            herramienta corresponde usar, qué permite diagnosticar y cómo se aplica en sistemas
+            Siemens instalados.
+          </p>
         </div>
-        <h2>{technicalArticle.title}</h2>
-        <p className="article-lead">{technicalArticle.intro}</p>
+        <div className="resource-intro-checks">
+          <CheckItem>Contenido técnico sin instaladores no oficiales ni atajos riesgosos.</CheckItem>
+          <CheckItem>Enfoque aplicado a planta, diagnóstico, respaldo y puesta en marcha.</CheckItem>
+          <CheckItem>Conexión directa con cursos y servicios técnicos de BOJ.</CheckItem>
+        </div>
+      </section>
+
+      <section className="inner-section">
+        <SectionHeader
+          eyebrow="Biblioteca"
+          title="Recursos disponibles"
+          text="Cada recurso abre una página interna con explicación técnica, aplicaciones típicas, importancia para mantenimiento y enlaces oficiales Siemens."
+        />
+        <div className="resources-index-grid">
+          {technicalResources.map((resource) => (
+            <TechnicalResourceCard key={resource.id} resource={resource} />
+          ))}
+        </div>
+      </section>
+
+      <CourseCTA />
+    </PageShell>
+  );
+}
+
+function TechnicalResourceCard({ resource }) {
+  const visual = resourceVisuals[resource.visualKey]?.[0];
+
+  return (
+    <article className="technical-resource-card">
+      <div className="resource-card-visual" aria-hidden={!visual}>
+        {visual ? (
+          <img src={visual} alt="" loading="lazy" />
+        ) : (
+          <div className="resource-card-fallback">
+            <Icon name="MonitorCog" />
+            <span>Visual técnico editable</span>
+          </div>
+        )}
+        <span className="resource-status">{resource.status}</span>
+      </div>
+      <div className="technical-resource-body">
+        <h3>{resource.title}</h3>
+        <p>{resource.description}</p>
+        <div className="article-tags compact">
+          {resource.meta.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </div>
+        <PrimaryLink href={`#${resource.path}`}>
+          Ver recurso <ArrowRight size={17} />
+        </PrimaryLink>
+      </div>
+    </article>
+  );
+}
+
+function TechnicalArticlePage({ route }) {
+  const resource = technicalResources.find((item) => item.path === route);
+  if (!resource) return <TechnicalResourcesPage />;
+
+  return (
+    <PageShell eyebrow="Recurso técnico" title={resource.title} subtitle={resource.subtitle}>
+      <article className="technical-article resource-article">
+        <div className="article-kicker">
+          <span>{resource.status}</span>
+          <span>Aplicado a mantenimiento industrial</span>
+        </div>
+        <p className="article-lead">{resource.description}</p>
         <div className="article-tags">
-          {technicalArticle.meta.map((item) => (
+          {resource.meta.map((item) => (
             <span key={item}>{item}</span>
           ))}
         </div>
 
-        {technicalArticle.sections.map((section) => (
+        <TechnicalResourceVisual resource={resource} />
+
+        {resource.sections.map((section) => (
           <section className="article-section" key={section.title}>
             <h3>{section.title}</h3>
             <p>{section.text}</p>
@@ -862,102 +970,84 @@ function TechnicalResourcesPage() {
           </section>
         ))}
 
-        <section className="official-links-panel">
-          <div>
-            <p className="eyebrow">Enlaces oficiales Siemens</p>
-            <h3>Fuentes oficiales para documentación, soporte y descargas</h3>
-            <p>
-              Para descargas, documentación y soporte, se recomienda consultar siempre las fuentes
-              oficiales de Siemens. Evitar instaladores no oficiales reduce riesgos técnicos,
-              legales y de seguridad.
-            </p>
-          </div>
-          <div className="official-link-grid">
-            {technicalArticle.officialLinks.map((link) => (
-              <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
-                <strong>{link.label}</strong>
-                <span>{link.text}</span>
-                <ExternalLink size={16} />
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <RouteCTA
-          title="Aprendé a diagnosticar fallas reales en PLC Siemens S7-300/400"
-          text="Si trabajás con sistemas Siemens en planta y necesitás aprender a interpretar fallas reales, estados de CPU, Diagnostic Buffer, redes y lógica online, el curso “Diagnóstico y resolución de fallas en PLC Siemens S7-300/400” está orientado justamente a ese objetivo."
-          primaryLabel="Ver cursos"
-          primaryHref="#/cursos"
-          secondaryLabel="Ver curso S7-300/400"
-          secondaryHref="#/cursos/s7-300-400"
-        />
+        <OfficialLinksBlock links={resource.officialLinks} />
+        <CourseCTA />
       </article>
-
-      <section className="inner-section">
-        <SectionHeader
-          eyebrow="Próximamente"
-          title="Nuevos artículos técnicos en preparación"
-          text="La sección quedará preparada para ampliar el posicionamiento técnico de BOJ con contenidos útiles para mantenimiento, instrumentación, automatización e ingeniería."
-        />
-        <div className="upcoming-grid">
-          {futureTechnicalArticles.map((item) => (
-            <article className="upcoming-card" key={item}>
-              <span>Próximamente</span>
-              <h3>{item}</h3>
-              <p>Contenido técnico orientado a diagnóstico, criterio de planta y aplicación real en mantenimiento industrial.</p>
-            </article>
-          ))}
-        </div>
-      </section>
     </PageShell>
   );
 }
 
-function AboutPage() {
-  return (
-    <PageShell eyebrow="Sobre mí" title={aboutPage.title} subtitle={aboutPage.subtitle}>
-      <section className="about-grid">
-        <div className="about-copy">
-          <p className="eyebrow">BOJ Automatización y Control</p>
-          <h2>Experiencia técnica aplicada a problemas reales de planta</h2>
-          <p>{aboutPage.intro}</p>
-          <div className="about-focus-grid">
-            {aboutPage.focus.map((item) => (
-              <CheckItem key={item}>{item}</CheckItem>
-            ))}
-          </div>
-        </div>
-        <aside className="about-card">
-          <BrandLogo compact />
-          <h3>{contact.responsible}</h3>
-          <p>Responsable técnico de BOJ Automatización y Control.</p>
-          <div className="tag-list">
-            <span>PLC Siemens</span>
-            <span>STEP 7</span>
-            <span>TIA Portal</span>
-            <span>PROFIBUS</span>
-            <span>Diagnóstico</span>
-          </div>
-          <div className="button-row">
-            <PrimaryLink href="#/contacto">Contacto técnico</PrimaryLink>
-            <SecondaryLink href="#/obras">Ver obras</SecondaryLink>
-          </div>
-        </aside>
-      </section>
+function TechnicalResourceVisual({ resource }) {
+  const visuals = resourceVisuals[resource.visualKey] || [];
 
-      <section className="inner-section about-principles">
-        <SectionHeader
-          eyebrow="Criterio de trabajo"
-          title="Método antes que improvisación"
-          text="La automatización industrial no se sostiene solo con software. Se sostiene con lectura de planta, evidencia, documentación y decisiones técnicas defendibles."
-        />
-        <div className="function-grid">
-          {aboutPage.principles.map((item) => (
-            <CheckItem key={item}>{item}</CheckItem>
+  if (!visuals.length) {
+    return (
+      <div className="resource-visual-panel fallback">
+        <Icon name="MonitorCog" size={34} />
+        <div>
+          <strong>Espacio visual técnico</strong>
+          <span>Preparado para cargar capturas reales desde la carpeta assets.</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`resource-visual-panel ${visuals.length > 1 ? "has-collage" : ""}`}>
+      <div className="resource-main-image">
+        <img src={visuals[0]} alt={`${resource.title} aplicado a automatización industrial`} loading="lazy" />
+      </div>
+      {visuals.length > 1 ? (
+        <div className="resource-secondary-grid">
+          {visuals.slice(1).map((image, index) => (
+            <img
+              key={image}
+              src={image}
+              alt={`${resource.title} captura técnica ${index + 2}`}
+              loading="lazy"
+            />
           ))}
         </div>
-      </section>
-    </PageShell>
+      ) : null}
+    </div>
+  );
+}
+
+function OfficialLinksBlock({ links }) {
+  return (
+    <section className="official-links-panel">
+      <div>
+        <p className="eyebrow">Fuentes y enlaces oficiales</p>
+        <h3>Documentación, soporte técnico y referencias del fabricante</h3>
+        <p>
+          Para descargas, documentación y soporte técnico, se recomienda consultar siempre fuentes
+          oficiales del fabricante. Evitar instaladores no oficiales reduce riesgos técnicos,
+          legales y de seguridad.
+        </p>
+      </div>
+      <div className="official-link-grid">
+        {links.map((link) => (
+          <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+            <strong>{link.label}</strong>
+            <span>{link.text}</span>
+            <ExternalLink size={16} />
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function CourseCTA() {
+  return (
+    <RouteCTA
+      title="Formación técnica aplicada"
+      text="Si trabajás con sistemas Siemens en planta y querés aprender a diagnosticar, interpretar fallas y trabajar con criterio técnico, podés ver los cursos disponibles de BOJ Automatización y Control."
+      primaryLabel="Ver cursos"
+      primaryHref="#/cursos"
+      secondaryLabel="Consultar capacitación"
+      secondaryHref={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por cursos técnicos de automatización industrial.")}
+    />
   );
 }
 
@@ -1725,7 +1815,7 @@ function Footer() {
           <a href="#/servicios">Redes PROFIBUS / PROFINET</a>
           <a href="#/cursos">Cursos técnicos</a>
           <a href="#/recursos-tecnicos">Recursos técnicos</a>
-          <a href="#/sobre-mi">Sobre mí</a>
+          <a href="#/obras">Obras y trabajos</a>
         </div>
       </div>
       <div className="footer-bottom">
