@@ -49,7 +49,6 @@ import {
   services,
   technicalResources,
   tiaCourse,
-  trustSignals,
   whyBoj,
 } from "./content.js";
 import bojLogo from "./assets/boj-logo-web.png";
@@ -103,6 +102,14 @@ const quickServices = [
   "Migraciones",
   "Redes industriales",
   "App de diagnóstico",
+];
+
+const technicalCredibilityBadges = [
+  "PLC Siemens S5 | S7-300/400 | S7-1200/1500",
+  "STEP 7 Classic / TIA Portal",
+  "PROFIBUS / PROFINET",
+  "HMI, SCADA, variadores e instrumentación",
+  "Diagnóstico aplicado a fallas reales de planta",
 ];
 
 const projectVisuals = [
@@ -343,40 +350,24 @@ function Header({ route }) {
 function HomePage() {
   return (
     <>
-      <section className="hero">
-        <div className="hero-visual" aria-hidden="true">
-          <HeroAssetVisual />
-        </div>
+      <section
+        className="hero hero-industrial-bg"
+        style={{ "--hero-bg": `url(${panelDiagnosticVisual})` }}
+      >
         <div className="section-container hero-content">
-          <p className="eyebrow">Automatización industrial | PLC Siemens | Diagnóstico de fallas</p>
-          <h1>Soluciones técnicas para diagnosticar, modernizar y sostener sistemas industriales</h1>
+          <p className="eyebrow">PLC Siemens | Diagnóstico industrial | Capacitación técnica</p>
+          <h1>Automatización, diagnóstico y capacitación industrial para sistemas PLC Siemens</h1>
           <p className="hero-subtitle">
-            BOJ Automatización y Control brinda soporte especializado para plantas industriales,
-            áreas de mantenimiento e ingeniería que necesitan resolver fallas, modernizar
-            sistemas PLC/HMI/SCADA y fortalecer equipos técnicos con criterio real de planta.
-          </p>
-          <p className="hero-positioning">
-            Diagnóstico con evidencia. Automatización con método. Puesta en marcha con criterio de planta.
+            Servicios técnicos, formación especializada y herramientas digitales para reducir tiempos
+            de parada, diagnosticar fallas con método y mejorar la confiabilidad de sistemas de
+            control industrial.
           </p>
           <div className="hero-actions">
-            <PrimaryLink href={whatsappUrl("Hola, escribo desde la web de BOJ por una consulta técnica sobre falla de planta, PLC Siemens o automatización industrial.")}>
-              <Phone size={18} /> Consultar por WhatsApp
+            <PrimaryLink href={whatsappUrl("Hola, necesito consultar por diagnóstico, automatización o capacitación industrial.")}>
+              <Phone size={18} /> Solicitar diagnóstico
             </PrimaryLink>
-            <SecondaryLink href="#/servicios">Ver servicios</SecondaryLink>
-            <GhostLink href="#/cursos">Ver cursos</GhostLink>
-          </div>
-          <div className="hero-metrics" aria-label="Áreas de trabajo">
-            <span>S7-300/400</span>
-            <span>S7-1200/1500</span>
-            <span>PROFIBUS</span>
-            <span>PROFINET</span>
-            <span>TIA Portal</span>
-            <span>Tableros</span>
-          </div>
-          <div className="hero-proof-grid" aria-label="Señales de experiencia técnica">
-            <span>Más de 10 años en automatización, diagnóstico y puesta en marcha</span>
-            <span>Trabajo real con PLC Siemens, HMI, SCADA, tableros y redes</span>
-            <span>Cursos y app para equipos técnicos que diagnostican bajo presión</span>
+            <SecondaryLink href="#/cursos">Ver cursos</SecondaryLink>
+            <GhostLink href="#/app">Conocer BOJ S7-PLC</GhostLink>
           </div>
         </div>
       </section>
@@ -1247,12 +1238,11 @@ function BrandLogo({ compact = false }) {
 
 function TrustBar() {
   return (
-    <section className="trust-bar" aria-label="Resumen técnico BOJ">
+    <section className="trust-bar" aria-label="Especialización técnica BOJ">
       <div className="section-container trust-grid">
-        {trustSignals.map((signal) => (
-          <div className="trust-item" key={signal.value}>
-            <strong>{signal.value}</strong>
-            <span>{signal.label}</span>
+        {technicalCredibilityBadges.map((badge) => (
+          <div className="trust-item" key={badge}>
+            <span>{badge}</span>
           </div>
         ))}
       </div>
@@ -1343,14 +1333,6 @@ function MethodSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function HeroAssetVisual() {
-  return (
-    <div className="hero-asset-visual">
-      <img src={plcCabinetVisual} alt="" loading="lazy" />
-    </div>
   );
 }
 
@@ -1828,14 +1810,16 @@ function Footer() {
 
 function FloatingContact() {
   return (
-    <div className="floating-contact" aria-label="Contactos rápidos">
-      <a href={whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.")} aria-label="Consultar por WhatsApp">
-        <Phone size={20} />
-      </a>
-      <a href={`mailto:${contact.email}`} aria-label="Enviar email">
-        <Mail size={20} />
-      </a>
-    </div>
+    <a
+      className="floating-contact"
+      href={whatsappUrl("Hola, necesito consultar por diagnóstico, automatización o capacitación industrial.")}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Consultar por WhatsApp sobre diagnóstico, automatización o capacitación industrial"
+    >
+      <Phone size={22} />
+      <span>WhatsApp</span>
+    </a>
   );
 }
 
