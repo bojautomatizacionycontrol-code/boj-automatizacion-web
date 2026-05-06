@@ -122,9 +122,58 @@ const homeServiceOrder = [
   "App de diagnóstico para campo",
 ];
 
+const homeServiceText = {
+  "Diagnóstico de fallas en PLC Siemens":
+    "Lectura técnica de CPU, LEDs, Diagnostic Buffer, módulos, señales y síntomas de planta. Se entrega análisis de causa probable y recomendación de intervención.",
+  "Automatización industrial":
+    "Programación, modificación y puesta en marcha de PLC, HMI, SCADA, drives e instrumentación para máquinas y procesos industriales.",
+  "Ingeniería de detalle y puesta en marcha":
+    "Relevamiento, especificaciones, planos, tableros, pruebas FAT/SAT y acompañamiento hasta producción.",
+  "Redes PROFIBUS / PROFINET":
+    "Revisión de nodos, conectores, terminaciones, BF, comunicación PLC-HMI-Drive y diagnóstico online de redes industriales.",
+  "Migraciones de sistemas":
+    "Relevamiento de plataformas legacy, estrategia de migración, pruebas controladas y puesta en marcha hacia S7/TIA.",
+  "Cursos técnicos aplicados":
+    "Capacitación orientada a mantenimiento industrial con casos reales, procedimientos de diagnóstico y lectura de sistemas existentes.",
+  "App de diagnóstico para campo":
+    "Herramienta digital para ordenar síntomas, estados de CPU, red y observaciones de campo antes de tomar decisiones técnicas.",
+};
+
 const featuredHomeServices = homeServiceOrder
   .map((title) => homeHighlights.find((item) => item.title === title))
+  .map((item) => (item ? { ...item, text: homeServiceText[item.title] || item.text } : item))
   .filter(Boolean);
+
+const homeProblems = [
+  { icon: "Zap", text: "Paradas de máquina sin causa clara." },
+  { icon: "Cpu", text: "Fallas intermitentes en PLC, módulos o redes industriales." },
+  { icon: "Network", text: "Errores PROFIBUS / PROFINET difíciles de diagnosticar." },
+  { icon: "FileSearch", text: "Programas PLC heredados sin documentación suficiente." },
+  { icon: "ClipboardCheck", text: "Tableros o sistemas modificados sin trazabilidad." },
+  { icon: "Wrench", text: "Personal de mantenimiento sin método claro de diagnóstico." },
+  { icon: "Gauge", text: "Señales de campo, sensores o actuadores con comportamiento dudoso." },
+  { icon: "RefreshCcw", text: "Migraciones o mejoras que requieren intervenir sin comprometer la producción." },
+];
+
+const homeAudience = [
+  "Plantas industriales con sistemas PLC Siemens en operación.",
+  "Responsables de mantenimiento que necesitan reducir tiempos de parada.",
+  "Empresas que requieren diagnóstico, mejora o modernización de sistemas existentes.",
+  "Técnicos e ingenieros que buscan formación aplicada a fallas reales.",
+  "Equipos de mantenimiento que necesitan ordenar procedimientos de intervención.",
+  "Industrias con tableros, redes, HMI, variadores o instrumentación en servicio.",
+];
+
+const workModes = [
+  "Diagnóstico remoto asistido.",
+  "Asistencia técnica en planta.",
+  "Capacitación in-company.",
+  "Desarrollo de mejoras y migraciones.",
+  "Soporte técnico por proyecto.",
+  "Revisión de documentación, backups y arquitectura de control.",
+  "Acompañamiento en puesta en marcha.",
+  "Desarrollo de recursos técnicos y herramientas digitales para mantenimiento.",
+];
 
 const featuredCourseBullets = [
   "Orientado a mantenimiento industrial.",
@@ -390,9 +439,8 @@ function HomePage() {
           <p className="eyebrow">PLC Siemens | Diagnóstico industrial | Capacitación técnica</p>
           <h1>Automatización, diagnóstico y capacitación industrial para sistemas PLC Siemens</h1>
           <p className="hero-subtitle">
-            Servicios técnicos, formación especializada y herramientas digitales para reducir tiempos
-            de parada, diagnosticar fallas con método y mejorar la confiabilidad de sistemas de
-            control industrial.
+            Diagnóstico, automatización y capacitación técnica para plantas que necesitan resolver
+            fallas, reducir paradas y mantener sistemas Siemens operativos con criterio profesional.
           </p>
           <div className="hero-actions">
             <PrimaryLink href={whatsappUrl("Hola, necesito consultar por diagnóstico, automatización o capacitación industrial.")}>
@@ -405,11 +453,13 @@ function HomePage() {
       </section>
 
       <TrustBar />
+      <HomeProblemsSection />
       <HomeServicesSection />
       <HomeDifferentialSection />
       <MethodSection />
       <FeaturedCourseSection />
       <FeaturedAppSection />
+      <WorkModesSection />
       <FinalCTA />
     </>
   );
@@ -1256,14 +1306,36 @@ function IndustrialScopeSection() {
   );
 }
 
+function HomeProblemsSection() {
+  return (
+    <section className="section home-problems-section">
+      <div className="section-container">
+        <SectionHeader
+          eyebrow="Problemas que resolvemos"
+          title="Fallas y condiciones reales que afectan producción"
+          text="BOJ interviene sobre fallas y condiciones reales de planta donde el tiempo de parada, la falta de información o el diagnóstico incompleto afectan directamente la producción."
+        />
+        <div className="problem-grid">
+          {homeProblems.map((item) => (
+            <article className="problem-card" key={item.text}>
+              <Icon name={item.icon} size={20} />
+              <span>{item.text}</span>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HomeServicesSection() {
   return (
     <section className="section home-services-section">
       <div className="section-container">
         <SectionHeader
           eyebrow="Servicios principales"
-          title="Áreas técnicas para resolver fallas, modernizar sistemas y capacitar equipos"
-          text="La Home ordena las capacidades principales de BOJ para que mantenimiento, ingeniería o producción identifiquen rápido si el problema requiere diagnóstico, automatización, red industrial, migración, capacitación o una herramienta de asistencia en campo."
+          title="Servicios para diagnóstico, automatización y mejora de sistemas de control industrial"
+          text="Intervenciones orientadas a resolver fallas, modernizar sistemas, ordenar documentación técnica y acompañar al personal de mantenimiento en planta."
         />
         <div className="feature-grid home-services-grid">
           {featuredHomeServices.map((item) => (
@@ -1300,9 +1372,49 @@ function HomeDifferentialSection() {
             <span>Diagnóstico online</span>
             <span>Puesta en marcha</span>
           </div>
+          <div className="check-grid home-differential-checks">
+            {whyBoj.map((item) => (
+              <CheckItem key={item}>{item}</CheckItem>
+            ))}
+          </div>
         </div>
-        <div className="check-grid home-differential-checks">
-          {whyBoj.map((item) => (
+        <aside className="home-audience-panel">
+          <p className="eyebrow">Para quién trabajamos</p>
+          <h3>Entornos industriales con sistemas de control en servicio</h3>
+          <p>
+            BOJ está orientado a entornos industriales donde los sistemas de control deben
+            mantenerse operativos, documentados y diagnosticables.
+          </p>
+          <div className="home-audience-list">
+            {homeAudience.map((item) => (
+              <CheckItem key={item}>{item}</CheckItem>
+            ))}
+          </div>
+        </aside>
+      </div>
+    </section>
+  );
+}
+
+function WorkModesSection() {
+  return (
+    <section className="section work-modes-section">
+      <div className="section-container work-modes-layout">
+        <div>
+          <p className="eyebrow">Modalidades de trabajo</p>
+          <h2>Soporte adaptable a la criticidad de planta y al equipo técnico interno</h2>
+          <p>
+            El soporte puede adaptarse al tipo de problema, criticidad de la planta y
+            disponibilidad del equipo técnico interno.
+          </p>
+          <p className="work-modes-scope">
+            Servicios presenciales y soporte técnico para industrias en Argentina. Capacitación
+            digital, recursos técnicos y app de diagnóstico disponibles para técnicos
+            hispanohablantes.
+          </p>
+        </div>
+        <div className="work-modes-grid">
+          {workModes.map((item) => (
             <CheckItem key={item}>{item}</CheckItem>
           ))}
         </div>
@@ -1324,6 +1436,11 @@ function FeaturedCourseSection() {
             PROFIBUS/PROFINET y utilizar herramientas de STEP 7 Classic para diagnosticar con
             método.
           </p>
+          <p className="course-positioning-note">
+            No es un curso básico de programación desde cero. Está diseñado para interpretar
+            sistemas existentes, diagnosticar fallas y tomar decisiones técnicas en contexto de
+            planta.
+          </p>
           <div className="highlight-list">
             {featuredCourseBullets.map((item) => (
               <CheckItem key={item}>{item}</CheckItem>
@@ -1334,7 +1451,7 @@ function FeaturedCourseSection() {
               Ver curso <ArrowRight size={18} />
             </PrimaryLink>
             <SecondaryLink href={whatsappUrl("Hola, necesito consultar por capacitación en diagnóstico de fallas PLC Siemens S7-300/400 con STEP 7 Classic.")}>
-              Consultar capacitación
+              Consultar capacitación in-company
             </SecondaryLink>
           </div>
         </div>
@@ -1359,6 +1476,10 @@ function FeaturedAppSection() {
             de campo para obtener hipótesis probables, criterios de verificación y una secuencia
             de análisis más ordenada.
           </p>
+          <p>
+            Pensada para técnicos que necesitan ordenar el diagnóstico en campo, evitar
+            conclusiones apresuradas y documentar mejor el análisis de una falla.
+          </p>
           <div className="highlight-list app-highlight-list">
             {featuredAppBullets.map((item) => (
               <CheckItem key={item}>{item}</CheckItem>
@@ -1376,7 +1497,9 @@ function FeaturedAppSection() {
           </p>
           <div className="button-row">
             <PrimaryLink href="#/app">Conocer la app</PrimaryLink>
-            <SecondaryLink href="#/app">Probar BOJ S7-PLC</SecondaryLink>
+            <SecondaryLink href={whatsappUrl("Hola, quiero solicitar acceso Trial a BOJ S7-PLC.")}>
+              Solicitar acceso Trial
+            </SecondaryLink>
           </div>
         </div>
         <AppMockup />
