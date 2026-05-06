@@ -112,6 +112,38 @@ const technicalCredibilityBadges = [
   "Diagnóstico aplicado a fallas reales de planta",
 ];
 
+const homeServiceOrder = [
+  "Diagnóstico de fallas en PLC Siemens",
+  "Automatización industrial",
+  "Ingeniería de detalle y puesta en marcha",
+  "Redes PROFIBUS / PROFINET",
+  "Migraciones de sistemas",
+  "Cursos técnicos aplicados",
+  "App de diagnóstico para campo",
+];
+
+const featuredHomeServices = homeServiceOrder
+  .map((title) => homeHighlights.find((item) => item.title === title))
+  .filter(Boolean);
+
+const featuredCourseBullets = [
+  "Orientado a mantenimiento industrial.",
+  "Diagnóstico de CPU, módulos, señales y red.",
+  "Uso de SIMATIC Manager / STEP 7 Classic.",
+  "Interpretación de RUN, STOP, SF y BF.",
+  "Casos reales de planta.",
+  "Enfoque aplicado, no programación básica genérica.",
+];
+
+const featuredAppBullets = [
+  "Diagnóstico guiado por síntomas, estados de CPU, LEDs y red.",
+  "Estados RUN, STOP, SF, BF y combinaciones frecuentes.",
+  "Hipótesis probables con criterios de verificación.",
+  "Casos típicos de planta y fallas engañosas.",
+  "BOJ S7-PLC Course Edition y versión PRO con biblioteca extendida.",
+  "80+ casos reales disponibles en la versión PRO.",
+];
+
 const projectVisuals = [
   plantVisual,
   plcCabinetVisual,
@@ -373,100 +405,11 @@ function HomePage() {
       </section>
 
       <TrustBar />
-      <AuthoritySection />
-      <IndustrialScopeSection />
-
-      <section className="section">
-        <div className="section-container">
-          <SectionHeader
-            eyebrow="Áreas principales"
-            title="Soporte técnico para resolver fallas, ordenar sistemas y sostener producción"
-            text="BOJ trabaja sobre problemas concretos: líneas detenidas, diagnósticos incompletos, redes inestables, tableros sin trazabilidad y equipos que necesitan criterio práctico para intervenir con seguridad."
-          />
-          <div className="feature-grid">
-            {homeHighlights.map((item) => (
-              <FeatureCard key={item.title} item={item} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section band">
-        <div className="section-container split-section">
-          <div>
-            <p className="eyebrow">Por qué BOJ</p>
-            <h2>Un enfoque pensado para mantenimiento industrial real</h2>
-            <p>
-              La diferencia no está solo en programar un PLC. Está en interpretar síntomas,
-              separar una falla de campo de una falla de lógica, leer el estado del hardware y
-              decidir el siguiente paso con método.
-            </p>
-          </div>
-          <div className="check-grid">
-            {whyBoj.map((item) => (
-              <CheckItem key={item}>{item}</CheckItem>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <HomeServicesSection />
+      <HomeDifferentialSection />
       <MethodSection />
-
-      <section className="section">
-        <div className="section-container">
-          <SectionHeader
-            eyebrow="Servicios destacados"
-            title="Intervenciones técnicas con foco en continuidad operativa"
-            text="Diagnóstico, automatización y mejoras pensadas para reducir incertidumbre técnica y dejar sistemas más claros para el equipo de planta."
-          />
-          <div className="card-grid three">
-            {services.slice(0, 3).map((service) => (
-              <ServiceSummaryCard key={service.title} service={service} />
-            ))}
-          </div>
-          <div className="center-action">
-            <SecondaryLink href="#/servicios">Ver todos los servicios</SecondaryLink>
-          </div>
-        </div>
-      </section>
-
-      <section className="section band">
-        <div className="section-container">
-          <SectionHeader
-            eyebrow="Cursos técnicos"
-            title="Capacitación aplicada para diagnosticar y programar con criterio"
-            text="Formación orientada a técnicos, instrumentistas, electricistas e ingenieros que necesitan pasar de la teoría al análisis real de planta."
-          />
-          <div className="course-grid">
-            {courses.map((course) => (
-              <CourseCard key={course.id} course={course} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="section-container app-intro">
-          <div>
-            <p className="eyebrow">App de diagnóstico</p>
-            <h2>Una herramienta técnica para ordenar la búsqueda de fallas en campo</h2>
-            <p>
-              BOJ S7-PLC asiste a equipos técnicos en el análisis de síntomas, estados de CPU,
-              LEDs, red PROFIBUS/PROFINET, señales y posibles causas de falla.
-            </p>
-            <div className="button-row">
-              <PrimaryLink href="#/app">Conocer la app</PrimaryLink>
-              <SecondaryLink href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por BOJ S7-PLC y la versión PRO.")}>
-                Consultar versión Pro
-              </SecondaryLink>
-            </div>
-          </div>
-          <AppMockup />
-        </div>
-      </section>
-
-      <ClientLogoBand />
-
+      <FeaturedCourseSection />
+      <FeaturedAppSection />
       <FinalCTA />
     </>
   );
@@ -1313,6 +1256,135 @@ function IndustrialScopeSection() {
   );
 }
 
+function HomeServicesSection() {
+  return (
+    <section className="section home-services-section">
+      <div className="section-container">
+        <SectionHeader
+          eyebrow="Servicios principales"
+          title="Áreas técnicas para resolver fallas, modernizar sistemas y capacitar equipos"
+          text="La Home ordena las capacidades principales de BOJ para que mantenimiento, ingeniería o producción identifiquen rápido si el problema requiere diagnóstico, automatización, red industrial, migración, capacitación o una herramienta de asistencia en campo."
+        />
+        <div className="feature-grid home-services-grid">
+          {featuredHomeServices.map((item) => (
+            <FeatureCard key={item.title} item={item} />
+          ))}
+        </div>
+        <div className="home-section-actions">
+          <PrimaryLink href={whatsappUrl("Hola, necesito consultar por servicios de diagnóstico, automatización o capacitación industrial.")}>
+            Consultar servicios <ArrowRight size={18} />
+          </PrimaryLink>
+          <SecondaryLink href={whatsappUrl("Hola, necesito solicitar diagnóstico por una falla o problema en un sistema industrial con PLC Siemens.")}>
+            <Phone size={18} /> Solicitar diagnóstico
+          </SecondaryLink>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HomeDifferentialSection() {
+  return (
+    <section className="section band home-differential">
+      <div className="section-container split-section">
+        <div className="home-differential-copy">
+          <p className="eyebrow">Por qué BOJ</p>
+          <h2>Un enfoque pensado para mantenimiento industrial real</h2>
+          <p>
+            La diferencia no está solo en programar un PLC. Está en interpretar síntomas,
+            separar una falla de campo de una falla de lógica, leer el estado del hardware y
+            decidir el siguiente paso con método, evidencia y criterio de planta.
+          </p>
+          <div className="home-differential-proof">
+            <span>PLC Siemens</span>
+            <span>Diagnóstico online</span>
+            <span>Puesta en marcha</span>
+          </div>
+        </div>
+        <div className="check-grid home-differential-checks">
+          {whyBoj.map((item) => (
+            <CheckItem key={item}>{item}</CheckItem>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturedCourseSection() {
+  return (
+    <section className="section featured-course">
+      <div className="section-container featured-course-layout">
+        <div className="featured-course-copy">
+          <p className="eyebrow">Curso destacado</p>
+          <h2>{s7Course.title}</h2>
+          <p>
+            Formación técnica orientada a personal de mantenimiento industrial que necesita
+            interpretar fallas reales, leer estados de CPU, analizar módulos, redes
+            PROFIBUS/PROFINET y utilizar herramientas de STEP 7 Classic para diagnosticar con
+            método.
+          </p>
+          <div className="highlight-list">
+            {featuredCourseBullets.map((item) => (
+              <CheckItem key={item}>{item}</CheckItem>
+            ))}
+          </div>
+          <div className="button-row">
+            <PrimaryLink href="#/cursos/s7-300-400">
+              Ver curso <ArrowRight size={18} />
+            </PrimaryLink>
+            <SecondaryLink href={whatsappUrl("Hola, necesito consultar por capacitación en diagnóstico de fallas PLC Siemens S7-300/400 con STEP 7 Classic.")}>
+              Consultar capacitación
+            </SecondaryLink>
+          </div>
+        </div>
+        <div className="featured-course-visual">
+          <CourseVisual type="s7" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturedAppSection() {
+  return (
+    <section className="section band featured-app">
+      <div className="section-container app-feature-layout">
+        <div className="app-feature-copy">
+          <p className="eyebrow">Producto técnico digital</p>
+          <h2>{appHero.title}</h2>
+          <p className="section-lead">{appHero.subtitle}.</p>
+          <p>
+            La app permite ingresar síntomas, estados de CPU, condiciones de red y observaciones
+            de campo para obtener hipótesis probables, criterios de verificación y una secuencia
+            de análisis más ordenada.
+          </p>
+          <div className="highlight-list app-highlight-list">
+            {featuredAppBullets.map((item) => (
+              <CheckItem key={item}>{item}</CheckItem>
+            ))}
+          </div>
+          <div className="app-module-strip" aria-label="Módulos técnicos destacados de BOJ S7-PLC">
+            {appDiagnosticModules.slice(0, 4).map((module) => (
+              <span key={module.title}>{module.title}</span>
+            ))}
+          </div>
+          <p className="technical-disclaimer app-home-note">
+            La app asiste el diagnóstico técnico. No reemplaza la verificación en campo, la
+            documentación oficial del fabricante ni el criterio profesional del personal
+            autorizado.
+          </p>
+          <div className="button-row">
+            <PrimaryLink href="#/app">Conocer la app</PrimaryLink>
+            <SecondaryLink href="#/app">Probar BOJ S7-PLC</SecondaryLink>
+          </div>
+        </div>
+        <AppMockup />
+      </div>
+    </section>
+  );
+}
+
 function MethodSection() {
   return (
     <section className="section method-section">
@@ -1752,10 +1824,10 @@ function FinalCTA() {
   return (
     <section className="final-cta">
       <div className="section-container">
-        <h2>Soporte técnico para resolver fallas, capacitar equipos y mejorar sistemas de automatización</h2>
+        <h2>¿Necesita resolver una falla, mejorar un sistema o capacitar a su equipo?</h2>
         <p>
-          Las consultas pueden orientarse a diagnóstico, automatización, cursos, migraciones,
-          redes industriales, tableros o BOJ S7-PLC.
+          BOJ Automatización y Control brinda soporte técnico, capacitación y herramientas
+          aplicadas para sistemas industriales basados en PLC Siemens.
         </p>
         <div className="button-row">
           <PrimaryLink href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por una falla o servicio técnico industrial.")}>
