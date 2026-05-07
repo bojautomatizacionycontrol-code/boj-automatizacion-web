@@ -16,6 +16,9 @@
   --cyan: #62d2ff;
   --orange: #ff8a2a;
   --green: #47d18c;
+  --primary-color: var(--blue);
+  --secondary-color: var(--cyan);
+  --accent-color: var(--orange);
   --red: #ff4f5e;
   --steel: #1e303c;
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
@@ -85,7 +88,7 @@ main {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px max(20px, calc((100vw - var(--container)) / 2));
+  padding: 11px max(20px, calc((100vw - var(--container)) / 2));
   border-bottom: 1px solid var(--line);
   background: rgba(3, 8, 13, 0.86);
   backdrop-filter: blur(18px);
@@ -112,8 +115,8 @@ main {
 .brand-logo {
   display: grid;
   place-items: center;
-  width: 178px;
-  height: 50px;
+  width: 190px;
+  height: 54px;
   overflow: hidden;
   border: 0;
   border-radius: 0;
@@ -606,7 +609,7 @@ p {
 
 .method-card {
   position: relative;
-  min-height: 250px;
+  min-height: 214px;
   padding: 24px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -927,11 +930,11 @@ p {
 }
 
 .problem-card {
-  min-height: 112px;
+  min-height: 98px;
   display: flex;
   gap: 12px;
   align-items: flex-start;
-  padding: 16px;
+  padding: 14px;
   border: 1px solid rgba(98, 210, 255, 0.16);
   border-radius: var(--radius);
   background:
@@ -960,6 +963,253 @@ p {
 
 .home-services-grid .feature-card {
   min-height: 100%;
+}
+
+.home-hero-compact {
+  min-height: clamp(500px, calc(86svh - 76px), 680px);
+}
+
+.home-compact-section {
+  position: relative;
+}
+
+.home-compact-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.home-compact-grid.four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.home-compact-card,
+.home-product-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+    rgba(16, 26, 34, 0.86);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.2);
+}
+
+.home-compact-card::after,
+.home-product-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-top: 2px solid rgba(98, 210, 255, 0.18);
+  pointer-events: none;
+}
+
+.home-compact-card h3,
+.home-product-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.02rem;
+}
+
+.home-compact-card p,
+.home-product-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.compact-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 18px;
+  color: var(--cyan);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.compact-card-link:hover {
+  color: #dff7ff;
+}
+
+.video-presentation-section {
+  background:
+    linear-gradient(180deg, rgba(3, 8, 13, 0.86), rgba(16, 26, 34, 0.78)),
+    rgba(5, 12, 18, 0.86);
+}
+
+.video-presentation-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1fr);
+  gap: 34px;
+  align-items: center;
+}
+
+.video-copy p:not(.eyebrow) {
+  max-width: 640px;
+}
+
+.video-placeholder-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 330px;
+  border: 1px solid rgba(98, 210, 255, 0.22);
+  border-radius: var(--radius);
+  background: #071017;
+  box-shadow: var(--shadow);
+}
+
+.home-video {
+  width: 100%;
+  min-height: 330px;
+  display: block;
+  object-fit: cover;
+  opacity: 0.72;
+}
+
+.video-placeholder-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(3, 8, 13, 0.18), rgba(3, 8, 13, 0.78)),
+    repeating-linear-gradient(90deg, rgba(98, 210, 255, 0.08) 0 1px, transparent 1px 68px);
+  pointer-events: none;
+}
+
+.video-play-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border: 1px solid rgba(98, 210, 255, 0.38);
+  border-radius: 999px;
+  color: #031016;
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  font: inherit;
+  font-weight: 950;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.play-glyph {
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 12px solid #031016;
+}
+
+.service-modes-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(16, 26, 34, 0.82);
+}
+
+.service-modes-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+.service-modes-table th,
+.service-modes-table td {
+  padding: 18px;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.service-modes-table th:last-child,
+.service-modes-table td:last-child {
+  border-right: 0;
+}
+
+.service-modes-table tr:last-child th,
+.service-modes-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.service-modes-table thead th {
+  color: var(--cyan);
+  background: rgba(98, 210, 255, 0.07);
+  font-size: 0.84rem;
+  text-transform: uppercase;
+}
+
+.service-modes-table tbody th {
+  color: #f3f7fb;
+  font-weight: 900;
+}
+
+.service-modes-table td {
+  color: var(--muted);
+}
+
+.home-product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.home-product-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.78fr) minmax(0, 1fr);
+  gap: 22px;
+  padding: 0;
+}
+
+.home-product-media {
+  min-height: 260px;
+  margin: 0;
+  overflow: hidden;
+  border-right: 1px solid var(--line);
+  background: #071017;
+}
+
+.home-product-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  opacity: 0.86;
+}
+
+.home-product-body {
+  padding: 24px 24px 24px 0;
+}
+
+.home-product-body ul {
+  margin: 16px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.home-product-body li + li {
+  margin-top: 8px;
+}
+
+.home-trust-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.7fr);
+  gap: 34px;
+  align-items: center;
+}
+
+.home-trust-list {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+  border: 1px solid rgba(98, 210, 255, 0.18);
+  border-radius: var(--radius);
+  background: rgba(3, 8, 13, 0.45);
 }
 
 .home-section-actions {
@@ -1006,6 +1256,16 @@ p {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(3, 8, 13, 0.28);
+}
+
+.home-authority-statement {
+  margin-top: 18px;
+  padding: 15px 16px;
+  border-left: 3px solid var(--cyan);
+  color: #e8f4fa;
+  background: rgba(98, 210, 255, 0.07);
+  font-weight: 850;
+  line-height: 1.5;
 }
 
 .home-audience-panel {
@@ -1113,6 +1373,14 @@ p {
 
 .app-home-note {
   margin-top: 20px;
+}
+
+.featured-app .app-mockup {
+  justify-items: end;
+}
+
+.featured-app .app-screenshot-shell {
+  width: min(100%, 330px);
 }
 
 .work-modes-section {
@@ -1273,7 +1541,7 @@ p {
 }
 
 .final-cta {
-  padding: 90px 0;
+  padding: 90px 0 116px;
   background:
     linear-gradient(120deg, rgba(20, 149, 255, 0.24), rgba(255, 138, 42, 0.14)),
     #08131a;
@@ -2750,17 +3018,17 @@ textarea {
 
 .floating-contact {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
-  right: calc(20px + env(safe-area-inset-right, 0px));
-  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  right: 14px;
+  bottom: 14px;
+  right: calc(14px + env(safe-area-inset-right, 0px));
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
   z-index: 40;
-  min-height: 50px;
+  min-height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  padding: 12px 14px;
+  padding: 11px 13px;
   border: 1px solid rgba(71, 209, 140, 0.42);
   border-radius: 8px;
   color: #031016;
@@ -2770,13 +3038,17 @@ textarea {
   box-shadow:
     0 14px 34px rgba(0, 0, 0, 0.32),
     0 0 0 1px rgba(255, 255, 255, 0.08);
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   font-weight: 950;
   animation: whatsappPulse 4.8s ease-in-out infinite;
 }
 
 .floating-contact svg {
   flex: 0 0 auto;
+}
+
+.mobile-whatsapp-contact {
+  display: none;
 }
 
 @keyframes whatsappPulse {
@@ -2927,6 +3199,10 @@ textarea {
     min-height: 420px;
   }
 
+  .featured-app .app-mockup {
+    justify-items: center;
+  }
+
   .project-card {
     grid-template-columns: 1fr;
   }
@@ -2998,6 +3274,14 @@ textarea {
   .section,
   .final-cta {
     padding: 64px 0;
+  }
+
+  .home-problems-section {
+    padding-top: 76px;
+  }
+
+  .final-cta {
+    padding-bottom: 104px;
   }
 
   .page-hero {
@@ -3113,23 +3397,49 @@ textarea {
   }
 
   .floating-contact {
-    inset: auto 14px 14px auto;
-    right: 14px;
-    bottom: 14px;
-    right: calc(14px + env(safe-area-inset-right, 0px));
-    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
-    z-index: 60;
-    width: 50px;
-    height: 50px;
-    min-height: 50px;
-    display: inline-flex !important;
-    opacity: 1;
-    visibility: visible;
-    padding: 0;
+    display: none !important;
   }
 
-  .floating-contact span {
-    display: none;
+  .mobile-whatsapp-contact {
+    position: fixed;
+    left: auto;
+    right: calc(14px + env(safe-area-inset-right, 0px));
+    top: auto;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    z-index: 60;
+    width: 52px;
+    min-height: 52px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    border: 1px solid rgba(71, 209, 140, 0.42);
+    border-radius: 999px;
+    color: #031016;
+    background:
+      linear-gradient(135deg, rgba(71, 209, 140, 0.97), rgba(98, 210, 255, 0.97)),
+      #47d18c;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+    font-size: 0.82rem;
+    font-weight: 950;
+  }
+
+  .mobile-whatsapp-contact span {
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .mobile-whatsapp-contact svg {
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -3138,14 +3448,13 @@ textarea {
     padding-inline: 14px;
   }
 
-  .floating-contact {
-    position: fixed !important;
-    inset: auto 14px 14px auto !important;
+  .mobile-whatsapp-contact {
+    left: auto;
+    right: calc(12px + env(safe-area-inset-right, 0px));
+    top: auto;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     width: 50px;
-    height: 50px;
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
+    min-height: 50px;
   }
 
   .nav-toggle {
@@ -3168,6 +3477,10 @@ textarea {
 
   .hero {
     padding: 58px 0 56px;
+  }
+
+  .home-problems-section {
+    padding-top: 172px;
   }
 
   .hero-content > * {
@@ -3299,5 +3612,110 @@ textarea {
 
   .diagnostic-screen {
     min-height: 500px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .home-compact-grid.four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .video-presentation-layout,
+  .home-trust-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .home-product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-product-card {
+    grid-template-columns: minmax(180px, 0.44fr) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 820px) {
+  .home-hero-compact {
+    min-height: auto;
+  }
+
+  .home-problems-section {
+    padding-top: 104px;
+  }
+
+  .home-compact-grid.four {
+    grid-template-columns: 1fr;
+  }
+
+  .home-compact-card,
+  .home-product-card {
+    padding: 20px;
+  }
+
+  .video-presentation-layout {
+    gap: 24px;
+  }
+
+  .video-placeholder-card,
+  .home-video {
+    min-height: 240px;
+  }
+
+  .video-play-button {
+    width: calc(100% - 36px);
+    justify-content: center;
+    white-space: normal;
+  }
+
+  .service-modes-table {
+    min-width: 680px;
+  }
+
+  .service-modes-table th,
+  .service-modes-table td {
+    padding: 14px;
+  }
+
+  .home-product-card {
+    grid-template-columns: 1fr;
+  }
+
+  .home-product-media {
+    min-height: 220px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .home-product-body {
+    padding: 0;
+  }
+
+  .home-trust-list {
+    padding: 20px;
+  }
+
+  .footer-grid {
+    gap: 28px;
+  }
+}
+
+@media (max-width: 560px) {
+  .home-problems-section {
+    padding-top: 68px;
+  }
+
+  .home-compact-card,
+  .home-product-card,
+  .home-trust-list {
+    padding: 18px;
+  }
+
+  .video-placeholder-card,
+  .home-video {
+    min-height: 210px;
+  }
+
+  .home-product-media {
+    min-height: 190px;
   }
 }
