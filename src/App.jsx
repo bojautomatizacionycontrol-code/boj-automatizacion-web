@@ -323,6 +323,128 @@ const homeTrustProofs = [
   "Obras documentadas en automatización, migraciones, HMI y SCADA.",
 ];
 
+const S7_PLAN_PRICES = {
+  professional: 197,
+  enterprise: 397,
+};
+
+const S7_HOTMART_URLS = {
+  professional: "",
+  enterprise: "",
+};
+
+const s7SalesWhatsapp = whatsappUrl(
+  "Hola, escribo desde la web de BOJ para consultar por el paquete Diagnóstico S7-300/400 con manuales digitales y App PRO."
+);
+
+const s7CourseIncludes = [
+  {
+    icon: "FileSearch",
+    title: "Manual 1",
+    name: "Diagnóstico y resolución de fallas en PLC Siemens S7-300/400",
+    text: "Manual práctico con método de diagnóstico basado en situaciones reales de planta: CPU, LEDs, módulos, red, señales y causa probable.",
+    tag: "Diagnóstico industrial",
+  },
+  {
+    icon: "ClipboardCheck",
+    title: "Manual 2",
+    name: "Fundamentos de sistemas de control industrial y diagnóstico en PLC Siemens",
+    text: "Base conceptual para comprender sistemas de control, interpretar fallas y ordenar el análisis técnico antes de intervenir.",
+    tag: "Base técnica",
+  },
+  {
+    icon: "Smartphone",
+    title: "App S7-PLC",
+    name: "Licencia PRO con actualizaciones durante 12 meses",
+    text: "La app guía paso a paso el diagnóstico, organiza observaciones de campo y ayuda a priorizar verificaciones técnicas.",
+    tag: "App PRO 12 meses",
+    image: appScreenshot,
+  },
+];
+
+const s7Plans = [
+  {
+    id: "professional",
+    title: "Plan Profesional",
+    price: S7_PLAN_PRICES.professional,
+    description: "Para técnicos, automatistas y profesionales que necesitan una herramienta completa de diagnóstico individual.",
+    features: [
+      "2 libros en español y portugués.",
+      "Licencia PRO de la app por 12 meses.",
+      "Actualizaciones durante el año.",
+      "1 licencia simultánea de la app.",
+    ],
+  },
+  {
+    id: "enterprise",
+    title: "Plan Empresas",
+    price: S7_PLAN_PRICES.enterprise,
+    description: "Para equipos de mantenimiento, ingeniería o capacitación interna que necesitan múltiples accesos y soporte.",
+    featured: true,
+    features: [
+      "2 libros en seis idiomas: inglés, español, portugués, alemán, francés e italiano.",
+      "Licencia PRO de la app por 12 meses.",
+      "Hasta 3 licencias simultáneas.",
+      "Soporte técnico por correo electrónico.",
+      "Actualizaciones durante el año.",
+    ],
+  },
+];
+
+const s7PlanComparison = [
+  { item: "Idiomas de los libros", professional: "Español y portugués", enterprise: "Seis idiomas", highlight: true },
+  { item: "Manuales digitales", professional: "2 libros incluidos", enterprise: "2 libros incluidos" },
+  { item: "App BOJ S7-PLC PRO", professional: "12 meses", enterprise: "12 meses" },
+  { item: "Licencias simultáneas", professional: "1 licencia", enterprise: "Hasta 3 licencias", highlight: true },
+  { item: "Soporte por correo", professional: "No incluido", enterprise: "Incluido", highlight: true },
+  { item: "Actualizaciones", professional: "Durante el año", enterprise: "Durante el año" },
+];
+
+const s7ExpectedResults = [
+  {
+    icon: "FileSearch",
+    title: "Diagnóstico más ordenado",
+    text: "El material ayuda a pasar del síntoma a la evidencia antes de modificar lógica o reemplazar hardware.",
+  },
+  {
+    icon: "ShieldCheck",
+    title: "Menos prueba y error",
+    text: "La secuencia técnica reduce decisiones apresuradas durante una parada o una falla intermitente.",
+  },
+  {
+    icon: "ClipboardCheck",
+    title: "Mejor criterio documentado",
+    text: "Los manuales y la app facilitan registrar observaciones, hipótesis y verificaciones de campo.",
+  },
+];
+
+const s7FaqItems = [
+  {
+    question: "¿Cómo se accede a los libros digitales?",
+    answer: "Los manuales se entregan en formato digital dentro del flujo comercial del producto. La página no publica descargas directas.",
+  },
+  {
+    question: "¿Cómo se activa la licencia de la app BOJ S7-PLC?",
+    answer: "La licencia PRO se gestiona luego de la compra y queda asociada al acceso indicado para el comprador o la empresa.",
+  },
+  {
+    question: "¿Qué idiomas incluye cada plan?",
+    answer: "El Plan Profesional incluye los libros en español y portugués. El Plan Empresas incluye inglés, español, portugués, alemán, francés e italiano.",
+  },
+  {
+    question: "¿Qué requisitos previos conviene tener?",
+    answer: "Es recomendable conocer conceptos básicos de PLC, mantenimiento industrial, señales de campo y lectura general de sistemas Siemens.",
+  },
+  {
+    question: "¿Las actualizaciones están incluidas?",
+    answer: "Sí. Ambos planes incluyen actualizaciones durante el año de licencia de la app y del material asociado al producto.",
+  },
+  {
+    question: "¿Cuándo estarán disponibles los botones de Hotmart?",
+    answer: "Los botones de compra quedarán activos cuando se carguen las URLs reales de Hotmart para cada plan.",
+  },
+];
+
 const projectVisuals = [
   plantVisual,
   plcCabinetVisual,
@@ -416,6 +538,12 @@ const routeMeta = {
     description:
       "Contacto técnico en San Miguel de Tucumán, Argentina, para automatización industrial, diagnóstico de fallas, cursos PLC Siemens, TIA Portal y PROFIBUS.",
   },
+};
+
+routeMeta["/cursos/s7-300-400"] = {
+  title: "Diagnóstico PLC Siemens S7-300/400 + App PRO | BOJ",
+  description:
+    "Paquete digital BOJ para diagnóstico industrial en PLC Siemens S7-300/400: dos manuales prácticos, App BOJ S7-PLC PRO por 12 meses y actualizaciones.",
 };
 
 function getRoute() {
@@ -655,6 +783,8 @@ function CoursesPage() {
 }
 
 function S7CoursePage() {
+  return <S7CourseSalesPage />;
+
   return (
     <CourseLanding
       course={s7Course}
@@ -666,6 +796,230 @@ function S7CoursePage() {
         { label: "Hablar por WhatsApp", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar por el curso S7-300/400.") },
       ]}
     />
+  );
+}
+
+function S7CourseSalesPage() {
+  return (
+    <PageShell
+      eyebrow="Curso aplicado + App PRO"
+      title="Diagnóstico y resolución de fallas en PLC Siemens S7-300/400"
+      subtitle="Manual de diagnóstico industrial + App PRO para reducir tiempos de parada"
+      heroExtra={
+        <div className="s7-sales-hero">
+          <p>
+            Producto digital compuesto por dos libros prácticos y una licencia BOJ S7-PLC PRO
+            por 12 meses, con actualizaciones incluidas durante el año.
+          </p>
+          <p>
+            Diseñado para mantenimiento, instrumentistas, automatistas e ingeniería que necesitan
+            ordenar fallas reales de planta con método técnico.
+          </p>
+          <div className="button-row s7-hero-actions">
+            <S7PurchaseButton planId="professional" />
+            <SecondaryLink href={s7SalesWhatsapp}>Consultar por WhatsApp</SecondaryLink>
+          </div>
+        </div>
+      }
+    >
+      <section className="inner-section s7-sales-intro">
+        <div className="s7-sales-copy">
+          <p className="eyebrow">Producto digital BOJ</p>
+          <h2>Dos manuales técnicos y una app de asistencia para diagnóstico en campo</h2>
+          <p>
+            El objetivo no es enseñar programación desde cero. Es entregar una secuencia práctica
+            para interpretar síntomas, confirmar evidencia y tomar decisiones técnicas sobre
+            sistemas Siemens S7-300/400 en operación.
+          </p>
+        </div>
+        <CourseVisual type="s7" />
+      </section>
+
+      <section className="inner-section">
+        <SectionHeader
+          eyebrow="Qué incluye este curso"
+          title="Material de diagnóstico + licencia PRO por 12 meses"
+          text="Se reciben los dos manuales en formato digital y una licencia PRO de BOJ S7-PLC para ordenar observaciones, hipótesis y criterios de verificación."
+        />
+        <div className="s7-include-grid">
+          {s7CourseIncludes.map((item) => (
+            <CourseIncludedCard key={item.name} item={item} />
+          ))}
+        </div>
+      </section>
+
+      <section className="inner-section s7-plan-section">
+        <SectionHeader
+          eyebrow="Planes disponibles"
+          title="Elegir plan según uso individual o equipo de mantenimiento"
+          text="Ambos planes incluyen app PRO por 12 meses y actualizaciones durante el año. El plan Empresas agrega más idiomas, licencias simultáneas y soporte por correo."
+        />
+        <div className="s7-plan-grid">
+          {s7Plans.map((plan) => (
+            <S7PlanCard key={plan.id} plan={plan} />
+          ))}
+        </div>
+      </section>
+
+      <S7PlanComparisonTable />
+
+      <section className="inner-section">
+        <SectionHeader
+          eyebrow="Resultados esperados"
+          title="Menos improvisación y más evidencia técnica durante una falla"
+          text="Sin promesas automáticas ni porcentajes no verificados: el valor está en ordenar el diagnóstico y evitar decisiones apresuradas."
+        />
+        <div className="s7-results-grid">
+          {s7ExpectedResults.map((item) => (
+            <article className="s7-result-card" key={item.title}>
+              <Icon name={item.icon} />
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <S7Faq />
+
+      <section className="route-cta s7-final-cta">
+        <div>
+          <h2>¿Quiere preparar la compra o consultar qué plan conviene?</h2>
+          <p>
+            Los botones de Hotmart quedarán activos cuando estén creadas las URLs de cada plan.
+            Mientras tanto, la consulta por WhatsApp permite resolver dudas de preventa.
+          </p>
+        </div>
+        <div className="button-row">
+          <S7PurchaseButton planId="enterprise" />
+          <SecondaryLink href={s7SalesWhatsapp}>Consultar por WhatsApp</SecondaryLink>
+        </div>
+      </section>
+    </PageShell>
+  );
+}
+
+function CourseIncludedCard({ item }) {
+  return (
+    <article className={`s7-include-card ${item.image ? "with-app" : ""}`}>
+      <div className="s7-include-visual" aria-hidden="true">
+        {item.image ? (
+          <img src={item.image} alt="" loading="lazy" />
+        ) : (
+          <div className="manual-mockup">
+            <span>{item.title}</span>
+            <Icon name={item.icon} size={34} />
+          </div>
+        )}
+      </div>
+      <div>
+        <span className="s7-card-tag">{item.tag}</span>
+        <h3>{item.name}</h3>
+        <p>{item.text}</p>
+      </div>
+    </article>
+  );
+}
+
+function S7PlanCard({ plan }) {
+  return (
+    <article className={`s7-plan-card ${plan.featured ? "featured" : ""}`}>
+      {plan.featured ? <span className="s7-plan-badge">Para equipos</span> : null}
+      <div className="s7-plan-heading">
+        <h3>{plan.title}</h3>
+        <p>{plan.description}</p>
+      </div>
+      <div className="s7-plan-price">
+        <strong>{plan.price} USD</strong>
+        <span>Pago por plan</span>
+      </div>
+      <ul className="clean-list s7-plan-features">
+        {plan.features.map((feature) => (
+          <li key={feature}>
+            <CheckCircle2 size={17} />
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+      <S7PurchaseButton planId={plan.id} />
+    </article>
+  );
+}
+
+function S7PurchaseButton({ planId }) {
+  const url = S7_HOTMART_URLS[planId];
+  const planLabel = planId === "enterprise" ? "Plan Empresas" : "Plan Profesional";
+
+  if (!url) {
+    return (
+      <button className="btn primary s7-purchase-button disabled" type="button" disabled aria-disabled="true">
+        Compra en Hotmart próximamente
+      </button>
+    );
+  }
+
+  return (
+    <a
+      className="btn primary s7-purchase-button"
+      href={url}
+      target="_blank"
+      rel="noopener"
+      aria-label={`Comprar ${planLabel} en Hotmart`}
+    >
+      Comprar {planLabel} <ExternalLink size={17} />
+    </a>
+  );
+}
+
+function S7PlanComparisonTable() {
+  return (
+    <section className="inner-section">
+      <SectionHeader
+        eyebrow="Comparativa"
+        title="Diferencias principales entre Profesional y Empresas"
+        text="La tabla resume el alcance de cada plan para decidir según idioma, cantidad de licencias y necesidad de soporte."
+      />
+      <div className="s7-plan-table-wrap">
+        <table className="s7-plan-table" aria-label="Comparativa de planes del curso S7-300/400">
+          <thead>
+            <tr>
+              <th scope="col">Elemento</th>
+              <th scope="col">Plan Profesional</th>
+              <th scope="col">Plan Empresas</th>
+            </tr>
+          </thead>
+          <tbody>
+            {s7PlanComparison.map((row) => (
+              <tr key={row.item} className={row.highlight ? "enterprise-highlight" : ""}>
+                <th scope="row">{row.item}</th>
+                <td>{row.professional}</td>
+                <td>{row.enterprise}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
+function S7Faq() {
+  return (
+    <section className="inner-section s7-faq-section">
+      <SectionHeader
+        eyebrow="Preguntas frecuentes"
+        title="Acceso, licencia e idiomas"
+        text="Información breve para entender qué se entrega y cómo queda preparada la compra cuando Hotmart esté configurado."
+      />
+      <div className="s7-faq-grid">
+        {s7FaqItems.map((item) => (
+          <details className="s7-faq-item" key={item.question}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
   );
 }
 
