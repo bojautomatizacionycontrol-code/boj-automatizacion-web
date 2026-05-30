@@ -56,7 +56,7 @@ import {
 import bojLogo from "./assets/boj-logo-real-cropped.png";
 import appScreenshot from "./assets/APP.png";
 import appRealCapture from "./assets/boj-s7-plc-real-capture.png";
-import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v2.jpg";
+import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v3.jpg";
 import step7ManagerVisual from "./assets/11.png";
 import step7HwConfigVisual from "./assets/12.png";
 import step7LadderVisual from "./assets/13.png";
