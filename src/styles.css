@@ -5429,6 +5429,16 @@ textarea {
   min-height: 378px;
 }
 
+.mock-hero-bg {
+  object-position: center center;
+}
+
+.mock-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(2, 11, 20, 0.94) 0%, rgba(2, 11, 20, 0.78) 31%, rgba(2, 11, 20, 0.28) 58%, rgba(2, 11, 20, 0.14) 100%),
+    linear-gradient(180deg, rgba(2, 11, 20, 0.2), rgba(2, 11, 20, 0.7));
+}
+
 .mock-hero-grid {
   grid-template-columns: minmax(560px, 0.9fr) minmax(480px, 1fr);
   gap: clamp(28px, 3vw, 46px);

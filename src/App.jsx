@@ -56,6 +56,7 @@ import {
 import bojLogo from "./assets/boj-logo-real-cropped.png";
 import appScreenshot from "./assets/APP.png";
 import appRealCapture from "./assets/boj-s7-plc-real-capture.png";
+import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v2.jpg";
 import step7ManagerVisual from "./assets/11.png";
 import step7HwConfigVisual from "./assets/12.png";
 import step7LadderVisual from "./assets/13.png";
@@ -513,7 +514,7 @@ function HomeLandingRedesign() {
   return (
     <div className="mock-home">
       <section className="mock-hero" data-home-section="hero">
-        <img className="mock-hero-bg" src={panelDiagnosticVisual} alt="" aria-hidden="true" />
+        <img className="mock-hero-bg" src={heroIndustrialCover} alt="" aria-hidden="true" />
         <div className="mock-hero-shade" aria-hidden="true" />
         <div className="mock-home-container mock-hero-grid">
           <div className="mock-hero-copy">
@@ -534,7 +535,6 @@ function HomeLandingRedesign() {
             </div>
           </div>
           <div className="mock-hero-visual" aria-label="Especialización técnica BOJ">
-            <img src={plcCabinetVisual} alt="PLC Siemens y tablero industrial" />
             <div className="mock-check-card">
               {homeHeroChecks.map((item) => (
                 <span key={item}>
