@@ -57,6 +57,8 @@ import bojLogo from "./assets/boj-logo-real-cropped.png";
 import appScreenshot from "./assets/APP.png";
 import appRealCapture from "./assets/boj-s7-plc-real-capture.png";
 import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v4.jpg";
+import courseS7400Visual from "./assets/course-s7-400.jpg";
+import courseTiaPortalVisual from "./assets/course-tia-portal.jpg";
 import step7ManagerVisual from "./assets/11.png";
 import step7HwConfigVisual from "./assets/12.png";
 import step7LadderVisual from "./assets/13.png";
@@ -434,6 +436,82 @@ const secondaryServiceCards = [
     title: "Capacitación técnica industrial",
     text: "Formación práctica para técnicos, instrumentistas, electricistas, ingenieros y mantenimiento que necesitan actuar frente a equipos reales.",
     applications: ["PLC Siemens", "Diagnóstico de fallas", "Redes industriales", "TIA Portal y STEP 7 Classic", "Señales analógicas y variadores", "Cursos in-company y grabados"],
+  },
+];
+
+const coursesTrainingBenefits = [
+  {
+    icon: "Factory",
+    title: "Casos reales de planta",
+    text: "Enfoque aplicado a fallas, síntomas y diagnóstico.",
+  },
+  {
+    icon: "FileSearch",
+    title: "Menos teoría aislada",
+    text: "Más criterio técnico para actuar en campo.",
+  },
+  {
+    icon: "ClipboardCheck",
+    title: "Contenido usable",
+    text: "Videos, PDFs técnicos y secuencia clara de análisis.",
+  },
+];
+
+const coursesAvailableCards = [
+  {
+    icon: "ClipboardCheck",
+    image: courseS7400Visual,
+    title: "Diagnóstico y resolución de fallas en PLC Siemens S7-300/400",
+    label: "Diagnóstico S7-300/400",
+    path: "#/cursos/s7-300-400",
+    quickFacts: [
+      { icon: "Gauge", title: "Nivel", text: "Intermedio técnico" },
+      { icon: "MonitorCog", title: "Formato", text: "Videos grabados, PDFs técnicos y casos reales" },
+      { icon: "FileSearch", title: "Enfoque", text: "Fallas CPU, BF/SF, señales, red, hardware y criterio de diagnóstico" },
+    ],
+    bullets: [
+      "Diagnosticar estados CPU (STOP, SF/BF) y señales críticas.",
+      "Diferenciar fallas de campo, de programa, de red y de hardware.",
+      "Reducir prueba y error con una secuencia clara de diagnóstico.",
+      "Respaldar decisiones técnicas con evidencia online y de campo.",
+    ],
+  },
+  {
+    icon: "MonitorCog",
+    image: courseTiaPortalVisual,
+    title: "Introducción a TIA Portal con PLC S7-1200/1500",
+    label: "TIA Portal S7-1200/1500",
+    path: "#/cursos/tia-portal",
+    quickFacts: [
+      { icon: "Gauge", title: "Nivel", text: "Inicial aplicado" },
+      { icon: "MonitorCog", title: "Formato", text: "Videos grabados y material práctico" },
+      { icon: "FileSearch", title: "Enfoque", text: "Proyectos, hardware, variables, programación básica y monitoreo online" },
+    ],
+    bullets: [
+      "Comprender la estructura de hardware, variables y monitoreo online.",
+      "Crear y organizar proyectos, cargar al PLC y monitorear señales.",
+      "Evitar errores frecuentes al migrar de STEP 7 Classic a TIA Portal.",
+      "Preparar una base sólida para proyectos reales con PLC Siemens.",
+    ],
+  },
+];
+
+const coursesLearningBlocks = [
+  {
+    icon: "FileSearch",
+    text: "Interpretar fallas con más criterio técnico.",
+  },
+  {
+    icon: "ClipboardCheck",
+    text: "Ordenar un diagnóstico sin depender de prueba y error.",
+  },
+  {
+    icon: "Cpu",
+    text: "Comprender mejor PLC, señales, red y hardware.",
+  },
+  {
+    icon: "Factory",
+    text: "Trabajar con un enfoque más aplicable a planta.",
   },
 ];
 
@@ -1311,39 +1389,147 @@ function ServiceSecondaryCard({ service }) {
 }
 
 function CoursesPage() {
+  const scrollToCourses = (event) => {
+    event.preventDefault();
+    document.getElementById("cursos-disponibles")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
-    <PageShell
-      eyebrow="Cursos"
-      title="Cursos técnicos para diagnosticar y programar PLC Siemens con criterio de planta"
-      subtitle="Formación aplicada para mantenimiento, instrumentistas, electricistas e ingeniería: menos teoría aislada y más método para actuar frente a fallas reales."
-    >
-      <div className="training-strip">
-        <span>Diagnóstico online</span>
-        <span>Casos reales de planta</span>
-        <span>Tableros y señales</span>
-        <span>Criterio de mantenimiento</span>
+    <div className="courses-redesign-page">
+      <section className="courses-hero">
+        <img className="courses-hero-bg" src={courseTiaPortalVisual} alt="" aria-hidden="true" />
+        <div className="courses-hero-overlay" aria-hidden="true" />
+        <div className="mock-home-container courses-hero-content">
+          <p className="courses-eyebrow">Cursos</p>
+          <h1>Cursos técnicos Siemens orientados a diagnóstico real de planta</h1>
+          <p>
+            Formación aplicada para técnicos, instrumentistas, electricistas e ingenieros que necesitan
+            diagnosticar, programar y actuar con criterio frente a fallas reales.
+          </p>
+          <div className="courses-actions">
+            <a className="mock-btn mock-btn-primary" href="#/cursos" onClick={scrollToCourses}>
+              Ver cursos disponibles <ArrowRight size={18} />
+            </a>
+            <a
+              className="mock-btn mock-btn-outline"
+              href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por capacitación técnica industrial.")}
+            >
+              Consultar capacitación <ArrowRight size={18} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="courses-light-section">
+        <div className="mock-home-container">
+          <div className="courses-section-heading courses-section-heading-dark">
+            <h2>Formación pensada para mantenimiento industrial</h2>
+          </div>
+          <div className="courses-benefit-grid">
+            {coursesTrainingBenefits.map((item) => (
+              <article className="courses-benefit-card" key={item.title}>
+                <Icon name={item.icon} size={28} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="courses-available-section" id="cursos-disponibles">
+        <div className="mock-home-container">
+          <div className="courses-section-heading">
+            <h2>Cursos disponibles</h2>
+          </div>
+          <div className="courses-available-list">
+            {coursesAvailableCards.map((course) => (
+              <CourseAvailableCard key={course.label} course={course} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="courses-light-section courses-learning-section">
+        <div className="mock-home-container">
+          <div className="courses-section-heading courses-section-heading-dark">
+            <h2>Qué aprende el alumno</h2>
+          </div>
+          <div className="courses-learning-grid">
+            {coursesLearningBlocks.map((item) => (
+              <article className="courses-learning-card" key={item.text}>
+                <Icon name={item.icon} size={26} />
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="courses-final-cta">
+        <div className="mock-home-container courses-final-cta-content">
+          <h2>¿Buscás capacitación técnica para vos o para tu equipo?</h2>
+          <p>
+            Podemos orientarte según el nivel del grupo, el tipo de planta y el problema que necesitan resolver.
+          </p>
+          <div className="courses-actions">
+            <a
+              className="mock-btn mock-btn-primary"
+              href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por capacitación técnica industrial.")}
+            >
+              Consultar capacitación <ArrowRight size={18} />
+            </a>
+            <a className="mock-btn mock-btn-outline" href="#/cursos/s7-300-400">
+              Ver curso S7-300/400 <ArrowRight size={18} />
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function CourseAvailableCard({ course }) {
+  return (
+    <article className="course-available-card">
+      <div className="course-available-content">
+        <div className="course-available-title-row">
+          <span>
+            <Icon name={course.icon} size={30} />
+          </span>
+          <h3>{course.title}</h3>
+        </div>
+        <div className="course-quick-facts">
+          {course.quickFacts.map((fact) => (
+            <div key={`${course.label}-${fact.title}`}>
+              <Icon name={fact.icon} size={18} />
+              <p>
+                <strong>{fact.title}:</strong> {fact.text}
+              </p>
+            </div>
+          ))}
+        </div>
+        <ul className="course-available-bullets">
+          {course.bullets.map((item) => (
+            <li key={item}>
+              <CheckCircle2 size={16} />
+              {item}
+            </li>
+          ))}
+        </ul>
       </div>
-      <div className="course-grid">
-        {courses.map((course) => (
-          <CourseCard key={course.id} course={course} expanded />
-        ))}
+      <div className="course-available-visual">
+        <img src={course.image} alt="" aria-hidden="true" loading="lazy" />
+        <div aria-hidden="true" />
+        <strong>{course.label}</strong>
+        <a className="mock-btn mock-btn-primary" href={course.path}>
+          Ver curso <ArrowRight size={18} />
+        </a>
       </div>
-      <div className="technical-note">
-        <Icon name="ClipboardCheck" />
-        <p>
-          Los cursos están diseñados para que el participante interprete qué muestra el PLC,
-          qué significa cada síntoma y cómo avanzar sin depender de prueba y error.
-        </p>
-      </div>
-      <RouteCTA
-        title="Capacitación para equipos que responden ante fallas reales"
-        text="Los contenidos pueden orientarse al nivel del grupo, al tipo de planta y a los problemas que mantenimiento enfrenta durante una parada."
-        primaryLabel="Consultar capacitación"
-        primaryHref={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por cursos o capacitación in-company.")}
-        secondaryLabel="Ver curso S7-300/400"
-        secondaryHref="#/cursos/s7-300-400"
-      />
-    </PageShell>
+    </article>
   );
 }
 
