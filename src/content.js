@@ -2,7 +2,7 @@ export const contact = {
   brand: "BOJ Automatización y Control",
   responsible: "Walter Adrián Boj",
   location: "San Miguel de Tucumán, Argentina",
-  email: "adrianboj4@gmail.com",
+  email: "contacto@bojautomatizacion.com",
   whatsappDisplay: "+54 9 381 5327469",
   whatsappNumber: "5493815327469",
   linktree: "https://linktr.ee/bojautomatizacionycontrol",
@@ -21,7 +21,7 @@ export const navItems = [
     ],
   },
   { label: "App", path: "/app" },
-  { label: "Recursos técnicos", path: "/recursos-tecnicos" },
+  { label: "Recursos", path: "/recursos-tecnicos" },
   { label: "Contacto", path: "/contacto" },
 ];
 

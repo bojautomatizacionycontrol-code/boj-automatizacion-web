@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   ChevronDown,
   CircuitBoard,
+  Clock,
   ClipboardCheck,
   Cpu,
   ExternalLink,
@@ -49,10 +50,12 @@ import {
   services,
   technicalResources,
   tiaCourse,
+  trustSignals,
   whyBoj,
 } from "./content.js";
-import bojLogo from "./assets/boj-logo-web.png";
+import bojLogo from "./assets/boj-logo-real-cropped.png";
 import appScreenshot from "./assets/APP.png";
+import appRealCapture from "./assets/boj-s7-plc-real-capture.png";
 import step7ManagerVisual from "./assets/11.png";
 import step7HwConfigVisual from "./assets/12.png";
 import step7LadderVisual from "./assets/13.png";
@@ -74,6 +77,7 @@ const icons = {
   Cable,
   CheckCircle2,
   CircuitBoard,
+  Clock,
   ClipboardCheck,
   Cpu,
   ExternalLink,
@@ -104,347 +108,6 @@ const quickServices = [
   "App de diagnóstico",
 ];
 
-const technicalCredibilityBadges = [
-  "PLC Siemens S5 | S7-300/400 | S7-1200/1500",
-  "STEP 7 Classic / TIA Portal",
-  "PROFIBUS / PROFINET",
-  "HMI, SCADA, variadores e instrumentación",
-  "Diagnóstico aplicado a fallas reales de planta",
-];
-
-const homeServiceOrder = [
-  "Diagnóstico de fallas en PLC Siemens",
-  "Automatización industrial",
-  "Ingeniería de detalle y puesta en marcha",
-  "Redes PROFIBUS / PROFINET",
-  "Migraciones de sistemas",
-  "Cursos técnicos aplicados",
-  "App de diagnóstico para campo",
-];
-
-const homeServiceText = {
-  "Diagnóstico de fallas en PLC Siemens":
-    "Lectura técnica de CPU, LEDs, Diagnostic Buffer, módulos, señales, red y síntomas de planta. Se entrega análisis de causa probable y recomendación de intervención.",
-  "Automatización industrial":
-    "Programación, modificación y puesta en marcha de PLC, HMI, SCADA, drives e instrumentación para máquinas y procesos industriales.",
-  "Ingeniería de detalle y puesta en marcha":
-    "Relevamiento, especificaciones, planos, tableros, pruebas FAT/SAT y acompañamiento hasta producción.",
-  "Redes PROFIBUS / PROFINET":
-    "Revisión de nodos, conectores, terminaciones, BF, comunicación PLC-HMI-Drive y diagnóstico online de redes industriales.",
-  "Migraciones de sistemas":
-    "Relevamiento de plataformas legacy, estrategia de migración, pruebas controladas y puesta en marcha hacia S7/TIA.",
-  "Cursos técnicos aplicados":
-    "Capacitación orientada a mantenimiento industrial con casos reales, procedimientos de diagnóstico y lectura de sistemas existentes.",
-  "App de diagnóstico para campo":
-    "Herramienta digital para ordenar síntomas, estados de CPU, red y observaciones de campo antes de tomar decisiones técnicas.",
-};
-
-const featuredHomeServices = homeServiceOrder
-  .map((title) => homeHighlights.find((item) => item.title === title))
-  .map((item) => (item ? { ...item, text: homeServiceText[item.title] || item.text } : item))
-  .filter(Boolean);
-
-const homeProblems = [
-  { icon: "Zap", text: "Paradas de máquina sin causa clara." },
-  { icon: "Cpu", text: "Fallas intermitentes en PLC, módulos o redes industriales." },
-  { icon: "Network", text: "Errores PROFIBUS / PROFINET difíciles de diagnosticar." },
-  { icon: "FileSearch", text: "Programas PLC heredados sin documentación suficiente." },
-  { icon: "ClipboardCheck", text: "Tableros o sistemas modificados sin trazabilidad." },
-  { icon: "Wrench", text: "Personal de mantenimiento sin método claro de diagnóstico." },
-  { icon: "Gauge", text: "Señales de campo, sensores o actuadores con comportamiento dudoso." },
-  { icon: "RefreshCcw", text: "Migraciones o mejoras que requieren intervenir sin comprometer la producción." },
-];
-
-const homeAudience = [
-  "Plantas industriales con sistemas PLC Siemens en operación.",
-  "Responsables de mantenimiento que necesitan reducir tiempos de parada.",
-  "Empresas que requieren diagnóstico, mejora o modernización de sistemas existentes.",
-  "Técnicos e ingenieros que buscan formación aplicada a fallas reales.",
-  "Equipos de mantenimiento que necesitan ordenar procedimientos de intervención.",
-  "Industrias con tableros, redes, HMI, variadores o instrumentación en servicio.",
-];
-
-const workModes = [
-  "Diagnóstico remoto asistido.",
-  "Asistencia técnica en planta.",
-  "Capacitación in-company.",
-  "Desarrollo de mejoras y migraciones.",
-  "Soporte técnico por proyecto.",
-  "Revisión de documentación, backups y arquitectura de control.",
-  "Acompañamiento en puesta en marcha.",
-  "Desarrollo de recursos técnicos y herramientas digitales para mantenimiento.",
-];
-
-const featuredCourseBullets = [
-  "Orientado a mantenimiento industrial.",
-  "Diagnóstico de CPU, módulos, señales y red.",
-  "Uso de SIMATIC Manager / STEP 7 Classic.",
-  "Interpretación de RUN, STOP, SF y BF.",
-  "Lectura de Diagnostic Buffer.",
-  "HW Config online.",
-  "PROFIBUS / PROFINET.",
-  "Casos reales de planta.",
-];
-
-const featuredAppBullets = [
-  "Reduce diagnósticos apresurados.",
-  "Ayuda a separar falla de campo, red, hardware o lógica.",
-  "Ordena la evidencia antes de tomar decisiones.",
-  "Guía el análisis con criterios técnicos de mantenimiento.",
-  "Disponible en edición Course y versión PRO.",
-];
-
-const homeMethodSteps = [
-  {
-    icon: "FileSearch",
-    title: "Relevar el síntoma",
-    text: "Registrar el estado real del sistema: CPU, LEDs, condición de máquina, alarmas, módulos afectados, red involucrada y señales críticas del proceso.",
-  },
-  {
-    icon: "ClipboardCheck",
-    title: "Confirmar evidencia",
-    text: "Validar la información con herramientas online, Diagnostic Buffer, HW Config, monitoreo de variables, estado de nodos y mediciones de campo.",
-  },
-  {
-    icon: "Network",
-    title: "Aislar la causa probable",
-    text: "Distinguir si la falla proviene de lógica, hardware, red industrial, instrumento, cableado, alimentación, actuador o condición de proceso.",
-  },
-  {
-    icon: "ShieldCheck",
-    title: "Intervenir con criterio",
-    text: "Ejecutar la acción técnica necesaria, evitando pruebas innecesarias, documentando lo realizado y dejando una recomendación útil para mantenimiento.",
-  },
-];
-
-const compactHomeProblems = [
-  {
-    icon: "Zap",
-    title: "Paradas inesperadas",
-    text: "Máquinas detenidas sin causa clara y con impacto directo en producción.",
-  },
-  {
-    icon: "Network",
-    title: "Fallas intermitentes en red",
-    text: "Errores PROFIBUS / PROFINET, BF activos y comunicación inestable.",
-  },
-  {
-    icon: "FileSearch",
-    title: "Sistemas heredados",
-    text: "Programas PLC antiguos, documentación incompleta y tableros modificados.",
-  },
-  {
-    icon: "RefreshCcw",
-    title: "Migraciones y mejoras",
-    text: "Intervenciones sobre sistemas en servicio sin comprometer la producción.",
-  },
-];
-
-const compactHomeServices = [
-  {
-    icon: "Cpu",
-    title: "Diagnóstico de fallas",
-    text: "Lectura de CPU, módulos, señales y redes para aislar la causa probable.",
-    href: "#/servicios",
-  },
-  {
-    icon: "Settings",
-    title: "Automatización industrial",
-    text: "Programación, modificación y puesta en marcha de PLC, HMI y variadores.",
-    href: "#/servicios",
-  },
-  {
-    icon: "Network",
-    title: "Redes PROFIBUS / PROFINET",
-    text: "Revisión de nodos, conectores, BF y comunicación PLC-HMI-Drive.",
-    href: "#/servicios",
-  },
-  {
-    icon: "GraduationCap",
-    title: "Formación y herramientas",
-    text: "Cursos técnicos aplicados y app BOJ S7-PLC para ordenar diagnósticos.",
-    href: "#/cursos",
-  },
-];
-
-const serviceModeRows = [
-  {
-    label: "Tiempo de respuesta",
-    remote: "Primer análisis con datos, fotos o conexión remota.",
-    company: "Coordinación según criticidad, seguridad y disponibilidad de planta.",
-    online: "Acceso planificado a contenidos, clases o recursos digitales.",
-  },
-  {
-    label: "Ventajas",
-    remote: "Reduce incertidumbre inicial y ordena evidencia antes de intervenir.",
-    company: "Permite revisar tablero, señales, red y proceso en contexto real.",
-    online: "Estandariza criterios de diagnóstico para técnicos y mantenimiento.",
-  },
-  {
-    label: "Recomendado para",
-    remote: "Consultas urgentes, prediagnóstico y revisión de síntomas.",
-    company: "Paradas críticas, puesta en marcha, migraciones y capacitación interna.",
-    online: "Equipos que necesitan formación aplicada sin detener operación.",
-  },
-];
-
-const productCards = [
-  {
-    eyebrow: "Curso destacado",
-    title: "Diagnóstico de fallas PLC Siemens S7-300/400",
-    image: step7HwConfigVisual,
-    alt: "Captura técnica de STEP 7 Classic y HW Config",
-    bullets: [
-      "STEP 7 Classic, CPU, módulos y Diagnostic Buffer.",
-      "Casos reales orientados a mantenimiento industrial.",
-      "Criterio técnico para intervenir sistemas existentes.",
-    ],
-    href: "#/cursos/s7-300-400",
-    label: "Ver temario",
-  },
-  {
-    eyebrow: "App BOJ S7-PLC",
-    title: "Herramienta de diagnóstico para campo",
-    image: appScreenshot,
-    alt: "Captura de la aplicación BOJ S7-PLC",
-    bullets: [
-      "Ordena síntomas, LEDs, red y observaciones de planta.",
-      "Propone hipótesis probables y criterios de verificación.",
-      "Disponible en edición Course y versión PRO.",
-    ],
-    href: "#/app",
-    label: "Conocer la app",
-  },
-];
-
-const homeTrustProofs = [
-  "Diagnóstico aplicado sobre PLC Siemens y redes industriales.",
-  "Cursos técnicos orientados a mantenimiento y fallas reales.",
-  "Obras documentadas en automatización, migraciones, HMI y SCADA.",
-];
-
-const S7_PLAN_PRICES = {
-  professional: 197,
-  enterprise: 397,
-};
-
-const S7_HOTMART_URLS = {
-  professional: "",
-  enterprise: "",
-};
-
-const s7SalesWhatsapp = whatsappUrl(
-  "Hola, escribo desde la web de BOJ para consultar por el paquete Diagnóstico S7-300/400 con manuales digitales y App PRO."
-);
-
-const s7CourseIncludes = [
-  {
-    icon: "FileSearch",
-    title: "Manual 1",
-    name: "Diagnóstico y resolución de fallas en PLC Siemens S7-300/400",
-    text: "Manual práctico con método de diagnóstico basado en situaciones reales de planta: CPU, LEDs, módulos, red, señales y causa probable.",
-    tag: "Diagnóstico industrial",
-  },
-  {
-    icon: "ClipboardCheck",
-    title: "Manual 2",
-    name: "Fundamentos de sistemas de control industrial y diagnóstico en PLC Siemens",
-    text: "Base conceptual para comprender sistemas de control, interpretar fallas y ordenar el análisis técnico antes de intervenir.",
-    tag: "Base técnica",
-  },
-  {
-    icon: "Smartphone",
-    title: "App S7-PLC",
-    name: "Licencia PRO con actualizaciones durante 12 meses",
-    text: "La app guía paso a paso el diagnóstico, organiza observaciones de campo y ayuda a priorizar verificaciones técnicas.",
-    tag: "App PRO 12 meses",
-    image: appScreenshot,
-  },
-];
-
-const s7Plans = [
-  {
-    id: "professional",
-    title: "Plan Profesional",
-    price: S7_PLAN_PRICES.professional,
-    description: "Para técnicos, automatistas y profesionales que necesitan una herramienta completa de diagnóstico individual.",
-    features: [
-      "2 libros en español y portugués.",
-      "Licencia PRO de la app por 12 meses.",
-      "Actualizaciones durante el año.",
-      "1 licencia simultánea de la app.",
-    ],
-  },
-  {
-    id: "enterprise",
-    title: "Plan Empresas",
-    price: S7_PLAN_PRICES.enterprise,
-    description: "Para equipos de mantenimiento, ingeniería o capacitación interna que necesitan múltiples accesos y soporte.",
-    featured: true,
-    features: [
-      "2 libros en seis idiomas: inglés, español, portugués, alemán, francés e italiano.",
-      "Licencia PRO de la app por 12 meses.",
-      "Hasta 3 licencias simultáneas.",
-      "Soporte técnico por correo electrónico.",
-      "Actualizaciones durante el año.",
-    ],
-  },
-];
-
-const s7PlanComparison = [
-  { item: "Idiomas de los libros", professional: "Español y portugués", enterprise: "Seis idiomas", highlight: true },
-  { item: "Manuales digitales", professional: "2 libros incluidos", enterprise: "2 libros incluidos" },
-  { item: "App BOJ S7-PLC PRO", professional: "12 meses", enterprise: "12 meses" },
-  { item: "Licencias simultáneas", professional: "1 licencia", enterprise: "Hasta 3 licencias", highlight: true },
-  { item: "Soporte por correo", professional: "No incluido", enterprise: "Incluido", highlight: true },
-  { item: "Actualizaciones", professional: "Durante el año", enterprise: "Durante el año" },
-];
-
-const s7ExpectedResults = [
-  {
-    icon: "FileSearch",
-    title: "Diagnóstico más ordenado",
-    text: "El material ayuda a pasar del síntoma a la evidencia antes de modificar lógica o reemplazar hardware.",
-  },
-  {
-    icon: "ShieldCheck",
-    title: "Menos prueba y error",
-    text: "La secuencia técnica reduce decisiones apresuradas durante una parada o una falla intermitente.",
-  },
-  {
-    icon: "ClipboardCheck",
-    title: "Mejor criterio documentado",
-    text: "Los manuales y la app facilitan registrar observaciones, hipótesis y verificaciones de campo.",
-  },
-];
-
-const s7FaqItems = [
-  {
-    question: "¿Cómo se accede a los libros digitales?",
-    answer: "Los manuales se entregan en formato digital dentro del flujo comercial del producto. La página no publica descargas directas.",
-  },
-  {
-    question: "¿Cómo se activa la licencia de la app BOJ S7-PLC?",
-    answer: "La licencia PRO se gestiona luego de la compra y queda asociada al acceso indicado para el comprador o la empresa.",
-  },
-  {
-    question: "¿Qué idiomas incluye cada plan?",
-    answer: "El Plan Profesional incluye los libros en español y portugués. El Plan Empresas incluye inglés, español, portugués, alemán, francés e italiano.",
-  },
-  {
-    question: "¿Qué requisitos previos conviene tener?",
-    answer: "Es recomendable conocer conceptos básicos de PLC, mantenimiento industrial, señales de campo y lectura general de sistemas Siemens.",
-  },
-  {
-    question: "¿Las actualizaciones están incluidas?",
-    answer: "Sí. Ambos planes incluyen actualizaciones durante el año de licencia de la app y del material asociado al producto.",
-  },
-  {
-    question: "¿Cuándo estarán disponibles los botones de Hotmart?",
-    answer: "Los botones de compra quedarán activos cuando se carguen las URLs reales de Hotmart para cada plan.",
-  },
-];
-
 const projectVisuals = [
   plantVisual,
   plcCabinetVisual,
@@ -466,6 +129,157 @@ const resourceVisuals = {
   logoSoftComfort: [logoSoftComfortResourceVisual],
   wincc: [winccResourceVisual],
 };
+
+const homeTrustIndicators = [
+  {
+    icon: "ShieldCheck",
+    value: "10+",
+    label: "años de experiencia",
+  },
+  {
+    icon: "Cpu",
+    value: "PLC",
+    label: "Siemens",
+  },
+  {
+    icon: "Network",
+    value: "PROFIBUS /",
+    label: "PROFINET",
+  },
+  {
+    icon: "Phone",
+    value: "Soporte técnico",
+    label: "especializado",
+  },
+];
+
+const specializationBadges = [
+  { icon: "Zap", label: "Energía" },
+  { icon: "Factory", label: "Oil & Gas" },
+  { icon: "CircuitBoard", label: "Alimentos" },
+  { icon: "Gauge", label: "Papel" },
+  { icon: "Building2", label: "Procesos" },
+];
+
+const landingServices = [
+  {
+    icon: "FileSearch",
+    title: "Diagnóstico de fallas",
+    text: "Análisis y detección precisa de fallas en sistemas de control, potencia, redes e instrumentación.",
+  },
+  {
+    icon: "RefreshCcw",
+    title: "Migración de sistemas",
+    text: "Actualización de plataformas PLC, HMI y redes industriales con criterios de continuidad operativa.",
+  },
+  {
+    icon: "MonitorCog",
+    title: "Programación PLC y HMI",
+    text: "Desarrollo de software industrial en Siemens S7, TIA Portal, Step 7 Classic y soluciones HMI.",
+  },
+  {
+    icon: "Network",
+    title: "Redes industriales",
+    text: "Configuración, diagnóstico y mantenimiento de redes PROFIBUS, PROFINET y Ethernet industrial.",
+  },
+  {
+    icon: "Gauge",
+    title: "Instrumentación y señales",
+    text: "Integración y diagnóstico de señales digitales, analógicas, 4-20 mA, sensores y actuadores.",
+  },
+  {
+    icon: "ClipboardCheck",
+    title: "Ingeniería y puesta en marcha",
+    text: "Ingeniería aplicada, FAT, SAT, asistencia en planta y soporte técnico especializado.",
+  },
+];
+
+const landingCourses = [
+  {
+    title: "Diagnóstico de PLC Siemens S7-300/400",
+    text: "Curso práctico orientado a mantenimiento industrial, diagnóstico de fallas reales y resolución de problemas en planta.",
+    image: step7HwConfigVisual,
+    path: "/cursos/s7-300-400",
+  },
+  {
+    title: "TIA Portal y PLC S7-1200/1500",
+    text: "Programación aplicada, estructuras de bloques, HMI, señales y comunicación industrial.",
+    image: tiaPortalResourceVisual,
+    path: "/cursos/tia-portal",
+  },
+  {
+    title: "Redes industriales y variadores",
+    text: "Diagnóstico de PROFIBUS, PROFINET, variadores de frecuencia y fallas de comunicación.",
+    image: plcCabinetVisual,
+    path: "/cursos",
+  },
+];
+
+const landingProjects = [
+  {
+    title: "Modernización de planta de tratamiento de líquidos",
+    text: "Migración de sistemas, integración HMI y red industrial.",
+    image: plantVisual,
+  },
+  {
+    title: "Sistema de control para compresores de gas",
+    text: "PLC Siemens, variadores, comunicación industrial y soporte en planta.",
+    image: aerialPlantVisual,
+  },
+  {
+    title: "Automatización de línea de producción",
+    text: "Control de procesos, instrumentación, señales y supervisión operativa.",
+    image: engineeringVisual,
+  },
+  {
+    title: "Puesta en marcha en planta de alimentos",
+    text: "Ingeniería, programación, FAT/SAT y asistencia técnica en sitio.",
+    image: panelDiagnosticVisual,
+  },
+];
+
+const homeHeroChecks = [
+  "PLC Siemens",
+  "STEP 7 / TIA Portal",
+  "PROFIBUS / PROFINET",
+  "Soporte técnico y capacitación",
+];
+
+const homeWorkLines = [
+  {
+    icon: "Factory",
+    title: "Servicios industriales",
+    text: "Diagnóstico, automatización, migraciones y soporte técnico especializado en planta.",
+  },
+  {
+    icon: "GraduationCap",
+    title: "Capacitación técnica",
+    text: "Cursos prácticos para mantenimiento y diagnóstico real en sistemas industriales Siemens.",
+  },
+  {
+    icon: "MonitorCog",
+    title: "Herramientas digitales",
+    text: "BOJ S7-PLC como apoyo al diagnóstico técnico en sistemas S7-300/400.",
+  },
+];
+
+const homeProblems = [
+  { icon: "ShieldCheck", text: "Máquinas detenidas\nsin causa clara" },
+  { icon: "Wrench", text: "Fallas SF / BF /\nSTOP en PLC Siemens" },
+  { icon: "Network", text: "Errores en redes\nPROFIBUS / PROFINET" },
+  { icon: "RefreshCcw", text: "Migración de\nsistemas obsoletos" },
+  { icon: "Gauge", text: "Señales analógicas\ne instrumentación" },
+  { icon: "GraduationCap", text: "Capacitación para\npersonal de mantenimiento" },
+];
+
+const homeTechSpecialties = [
+  { icon: "Cpu", label: "S7-300 / S7-400 /\nS7-1200" },
+  { icon: "MonitorCog", label: "STEP 7 Classic /\nTIA Portal" },
+  { icon: "Smartphone", label: "WinCC /\nHMI" },
+  { icon: "Network", label: "PROFIBUS /\nPROFINET" },
+  { icon: "Gauge", label: "Variadores e\ninstrumentación" },
+  { icon: "ClipboardCheck", label: "Diagnóstico\nen planta" },
+];
 
 const routeMeta = {
   "/inicio": {
@@ -538,12 +352,6 @@ const routeMeta = {
     description:
       "Contacto técnico en San Miguel de Tucumán, Argentina, para automatización industrial, diagnóstico de fallas, cursos PLC Siemens, TIA Portal y PROFIBUS.",
   },
-};
-
-routeMeta["/cursos/s7-300-400"] = {
-  title: "Diagnóstico PLC Siemens S7-300/400 + App PRO | BOJ",
-  description:
-    "Paquete digital BOJ para diagnóstico industrial en PLC Siemens S7-300/400: dos manuales prácticos, App BOJ S7-PLC PRO por 12 meses y actualizaciones.",
 };
 
 function getRoute() {
@@ -630,16 +438,6 @@ function Header({ route }) {
         <BrandLogo />
       </a>
 
-      <button
-        className="nav-toggle"
-        type="button"
-        onClick={() => setOpen((value) => !value)}
-        aria-label={open ? "Cerrar menú" : "Abrir menú"}
-        aria-expanded={open}
-      >
-        {open ? <X size={22} /> : <Menu size={22} />}
-      </button>
-
       <nav className={`main-nav ${open ? "is-open" : ""}`} aria-label="Navegación principal">
         {navItems.map((item) => {
           const active =
@@ -673,50 +471,492 @@ function Header({ route }) {
             </div>
           );
         })}
+        <div className="mobile-nav-actions">
+          <a
+            className="header-action solid"
+            href={whatsappUrl("Hola, escribo desde la web de BOJ Automatización y Control para solicitar un diagnóstico industrial.")}
+            onClick={closeMenu}
+          >
+            Solicitar diagnóstico
+          </a>
+        </div>
       </nav>
 
-      <a
-        className="header-cta"
-        href={whatsappUrl("Hola, escribo desde la web de BOJ Automatización y Control para realizar una consulta técnica.")}
-        onClick={closeMenu}
+      <div className="header-actions">
+        <a
+          className="header-action solid"
+          href={whatsappUrl("Hola, escribo desde la web de BOJ Automatización y Control para solicitar un diagnóstico industrial.")}
+          onClick={closeMenu}
+        >
+          Solicitar diagnóstico
+        </a>
+      </div>
+
+      <button
+        className="nav-toggle"
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-label="Abrir menú"
+        aria-expanded={open}
       >
-        <Phone size={17} /> WhatsApp
-      </a>
+        {open ? <X size={22} /> : <Menu size={22} />}
+      </button>
     </header>
   );
 }
 
 function HomePage() {
+  return <HomeLandingRedesign />;
+}
+
+function HomeLandingRedesign() {
   return (
-    <>
-      <section
-        className="hero hero-industrial-bg home-hero-compact"
-        style={{ "--hero-bg": `url(${panelDiagnosticVisual})` }}
-      >
-        <div className="section-container hero-content">
-          <p className="eyebrow">PLC Siemens | Diagnóstico industrial | Formación técnica</p>
-          <h1>Soluciones de diagnóstico y mejora para PLC Siemens</h1>
-          <p className="hero-subtitle">
-            Soporte técnico, automatización y capacitación para reducir paradas, resolver fallas
-            complejas y fortalecer el criterio del equipo de mantenimiento.
-          </p>
-          <div className="hero-actions">
-            <PrimaryLink href={whatsappUrl("Hola, necesito solicitar diagnóstico para un sistema PLC Siemens.")}>
-              <Phone size={18} /> Solicitar diagnóstico
-            </PrimaryLink>
-            <SecondaryLink href="#/cursos">Cursos y formación</SecondaryLink>
+    <div className="mock-home">
+      <section className="mock-hero" data-home-section="hero">
+        <img className="mock-hero-bg" src={panelDiagnosticVisual} alt="" aria-hidden="true" />
+        <div className="mock-hero-shade" aria-hidden="true" />
+        <div className="mock-home-container mock-hero-grid">
+          <div className="mock-hero-copy">
+            <h1>Automatización, diagnóstico y capacitación industrial.</h1>
+            <p>
+              Soluciones técnicas para sistemas PLC Siemens, diagnóstico de fallas reales de planta y formación orientada a mantenimiento industrial.
+            </p>
+            <div className="mock-hero-actions">
+              <a
+                className="mock-btn mock-btn-primary"
+                href={whatsappUrl("Hola, escribo desde la web de BOJ para solicitar un diagnóstico industrial.")}
+              >
+                Solicitar diagnóstico industrial <ArrowRight size={18} />
+              </a>
+              <a className="mock-btn mock-btn-outline" href="#/cursos">
+                Ver cursos y herramientas <ArrowRight size={18} />
+              </a>
+            </div>
+          </div>
+          <div className="mock-hero-visual" aria-label="Especialización técnica BOJ">
+            <img src={plcCabinetVisual} alt="PLC Siemens y tablero industrial" />
+            <div className="mock-check-card">
+              {homeHeroChecks.map((item) => (
+                <span key={item}>
+                  <CheckCircle2 size={18} />
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <HomeProblemsSection />
-      <HomeServicesSection />
-      <VideoPresentationSection />
-      <ServiceModesTable />
-      <HomeProductCards />
-      <HomeTrustSection />
-      <FinalCTA />
-    </>
+      <section className="mock-section mock-work" data-home-section="worklines">
+        <div className="mock-home-container">
+          <h2>Tres líneas de trabajo claras.</h2>
+          <div className="mock-work-grid">
+            {homeWorkLines.map((item) => (
+              <article className="mock-work-card" key={item.title}>
+                <span className="mock-icon-circle">
+                  <Icon name={item.icon} size={32} />
+                </span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mock-section mock-problems" data-home-section="problems">
+        <div className="mock-home-container">
+          <h2>Problemas que resolvemos.</h2>
+          <div className="mock-problems-grid">
+            {homeProblems.map((problem) => (
+              <article className="mock-problem-item" key={problem.text}>
+                <Icon name={problem.icon} size={36} />
+                <span>{problem.text}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mock-tech-strip" data-home-section="tech">
+        <div className="mock-home-container">
+          <h2>Especialización técnica.</h2>
+          <div className="mock-tech-grid">
+            {homeTechSpecialties.map((item) => (
+              <span className="mock-tech-chip" key={item.label}>
+                <Icon name={item.icon} size={31} />
+                <strong>{item.label}</strong>
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mock-section mock-app" data-home-section="app">
+        <div className="mock-home-container mock-app-grid">
+          <div className="mock-app-copy">
+            <h2>BOJ S7-PLC</h2>
+            <p>
+              Asistente técnico para diagnóstico orientativo de fallas en sistemas Siemens S7-300/400.
+            </p>
+            <ul>
+              <li>Ingreso de síntomas</li>
+              <li>Hipótesis técnicas</li>
+              <li>Guía de verificación</li>
+            </ul>
+            <a className="mock-btn mock-btn-primary" href="#/app">
+              Conocer la app <ArrowRight size={18} />
+            </a>
+          </div>
+          <AppDiagnosticMockup />
+        </div>
+      </section>
+
+      <section className="mock-final-cta" data-home-section="cta">
+        <img src={plantVisual} alt="" aria-hidden="true" />
+        <div className="mock-final-overlay" aria-hidden="true" />
+        <div className="mock-home-container mock-final-content">
+          <h2>¿Tenés una falla, una máquina parada o necesitás capacitar a tu equipo?</h2>
+          <p>Podemos ayudarte con diagnóstico, automatización y formación técnica aplicada.</p>
+          <div className="mock-final-actions">
+            <a
+              className="mock-btn mock-btn-whatsapp"
+              href={whatsappUrl("Hola, necesito consultar por una falla, máquina parada o capacitación técnica.")}
+            >
+              <Phone size={18} /> Contactar por WhatsApp
+            </a>
+            <a
+              className="mock-btn mock-btn-outline"
+              href={mailtoUrl("Consulta técnica BOJ", "Hola, quiero realizar una consulta técnica.")}
+            >
+              <Mail size={18} /> Enviar consulta técnica
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function AppDiagnosticMockup() {
+  return (
+    <figure className="mock-app-visual real-app-capture" aria-label="Captura real de BOJ S7-PLC">
+      <div className="real-app-screen">
+        <img
+          src={appRealCapture}
+          alt="Captura real de BOJ S7-PLC con diagnóstico por estado de CPU"
+          loading="lazy"
+        />
+      </div>
+    </figure>
+  );
+}
+
+function AppDiagnosticMockupOld() {
+  return (
+    <div className="mock-app-visual" aria-label="Mockup de BOJ S7-PLC">
+      <div className="mock-laptop">
+        <div className="mock-laptop-top">
+          <span>BOJ S7-PLC</span>
+          <small>Panel de diagnóstico</small>
+        </div>
+        <div className="mock-laptop-body">
+          <aside>
+            <span className="active">Diagnóstico</span>
+            <span>Síntomas</span>
+            <span>Hipótesis</span>
+            <span>Verificación</span>
+          </aside>
+          <div className="mock-dashboard-grid">
+            <div className="mock-panel">
+              <b>Ingreso de síntomas</b>
+              <span>CPU en STOP</span>
+              <span>BF intermitente</span>
+              <span>Señal AI incorrecta</span>
+            </div>
+            <div className="mock-panel">
+              <b>Hipótesis técnicas</b>
+              <span>Falla de red</span>
+              <span>Módulo sin respuesta</span>
+              <span>Alimentación 24VDC</span>
+            </div>
+            <div className="mock-panel mock-panel-wide">
+              <b>Verificación sugerida</b>
+              <span>Revisar diagnóstico online, conectores y estado de módulos antes de intervenir.</span>
+              <button type="button">Generar informe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="mock-phone">
+        <div className="mock-phone-notch" />
+        <b>Resultado orientativo</b>
+        <span>Prioridad alta</span>
+        <span>Red PROFIBUS</span>
+        <span>Verificar estación</span>
+      </div>
+    </div>
+  );
+}
+
+function OldHomePageReference() {
+  return (
+    <div className="boj-home">
+      <section className="home-hero">
+        <div className="home-hero-media" aria-hidden="true">
+          <img src={panelDiagnosticVisual} alt="" />
+        </div>
+        <div className="home-hero-overlay" aria-hidden="true" />
+        <div className="home-container home-hero-content">
+          <div className="home-hero-copy">
+            <p className="hero-kicker">PLC Siemens | Diagnóstico industrial | Ingeniería aplicada</p>
+            <h1>Automatización y Control Industrial de Nivel Profesional</h1>
+            <p className="home-hero-subtitle">
+              Diagnóstico, programación, migraciones, redes industriales e ingeniería aplicada para procesos reales.
+            </p>
+            <div className="home-hero-actions">
+              <a
+                className="home-btn primary"
+                href={whatsappUrl("Hola, escribo desde la web de BOJ para solicitar un servicio de automatización o diagnóstico industrial.")}
+              >
+                Solicitar servicio <ArrowRight size={19} />
+              </a>
+              <a className="home-btn secondary" href="#/cursos">
+                Conocer la academia <ArrowRight size={19} />
+              </a>
+            </div>
+            <div className="home-trust-grid" aria-label="Indicadores de confianza">
+              {homeTrustIndicators.map((item) => (
+                <div className="home-trust-item" key={`${item.value}-${item.label}`}>
+                  <Icon name={item.icon} size={30} />
+                  <span>
+                    <strong>{item.value}</strong>
+                    <small>{item.label}</small>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <SpecializationStrip />
+
+      <section className="landing-section services-home">
+        <div className="home-container">
+          <LandingSectionHeader title="Servicios" />
+          <div className="service-showcase-grid">
+            {landingServices.map((service) => (
+              <ServiceHomeCard key={service.title} service={service} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="landing-section courses-home">
+        <div className="home-container">
+          <LandingSectionHeader title="Cursos y formación técnica" />
+          <div className="courses-home-layout">
+            <div className="courses-card-grid">
+              {landingCourses.map((course) => (
+                <CourseHomeCard key={course.title} course={course} />
+              ))}
+            </div>
+            <AcademyCard />
+          </div>
+        </div>
+      </section>
+
+      <AppHomeSection />
+
+      <section className="landing-section projects-home">
+        <div className="home-container">
+          <LandingSectionHeader title="Proyectos y experiencia" />
+          <div className="projects-home-grid">
+            {landingProjects.map((project) => (
+              <ProjectHomeCard key={project.title} project={project} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <HomeContactSection />
+    </div>
+  );
+}
+
+function LandingSectionHeader({ title, text }) {
+  return (
+    <div className="landing-section-header">
+      <h2>{title}</h2>
+      {text ? <p>{text}</p> : null}
+    </div>
+  );
+}
+
+function SpecializationStrip() {
+  return (
+    <section className="specialization-strip">
+      <div className="home-container">
+        <h2>Especialistas en diagnóstico, automatización y mantenimiento industrial</h2>
+        <div className="specialization-badges" aria-label="Sectores industriales">
+          {specializationBadges.map((badge) => (
+            <span key={badge.label}>
+              <Icon name={badge.icon} size={20} />
+              {badge.label}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServiceHomeCard({ service }) {
+  return (
+    <article className="service-home-card">
+      <Icon name={service.icon} size={54} />
+      <h3>{service.title}</h3>
+      <p>{service.text}</p>
+      <a href="#/servicios" aria-label={`Ver detalle de ${service.title}`}>
+        <ArrowRight size={20} />
+      </a>
+    </article>
+  );
+}
+
+function CourseHomeCard({ course }) {
+  return (
+    <article className="course-home-card">
+      <figure>
+        <img src={course.image} alt="" loading="lazy" />
+      </figure>
+      <div>
+        <span className="course-mode">
+          <MonitorCog size={15} /> Curso online
+        </span>
+        <h3>{course.title}</h3>
+        <p>{course.text}</p>
+        <a href={`#${course.path}`}>
+          Ver programa <ArrowRight size={17} />
+        </a>
+      </div>
+    </article>
+  );
+}
+
+function AcademyCard() {
+  return (
+    <article className="academy-home-card">
+      <GraduationCap size={48} />
+      <h3>Academia técnica BOJ</h3>
+      <p>Formación aplicada a mantenimiento, diagnóstico y automatización real de planta.</p>
+      <ul>
+        <li>Cursos online y presenciales</li>
+        <li>Materiales y recursos exclusivos</li>
+        <li>Certificados de participación</li>
+      </ul>
+      <a className="home-btn primary" href="#/cursos">
+        Ver programas <ArrowRight size={18} />
+      </a>
+    </article>
+  );
+}
+
+function AppHomeSection() {
+  return (
+    <section className="landing-section app-home">
+      <div className="home-container app-home-grid">
+        <div className="app-home-copy">
+          <span className="section-badge">APP</span>
+          <h2>App BOJ S7-PLC</h2>
+          <h3>Asistencia técnica para diagnóstico orientativo</h3>
+          <p>
+            Herramienta digital para apoyar tareas de mantenimiento en sistemas Siemens S7-300/400 mediante criterios técnicos, síntomas ingresados y lógica de diagnóstico guiado.
+          </p>
+          <a className="home-btn secondary" href="#/app">
+            Conocer la app <ArrowRight size={18} />
+          </a>
+        </div>
+        <AppProScreenshot />
+      </div>
+    </section>
+  );
+}
+
+function AppProScreenshot() {
+  return <AppDiagnosticMockup />;
+}
+
+function ProjectHomeCard({ project }) {
+  return (
+    <article className="project-home-card">
+      <figure>
+        <img src={project.image} alt="" loading="lazy" />
+      </figure>
+      <div>
+        <h3>{project.title}</h3>
+        <p>{project.text}</p>
+        <a href="#/obras">
+          Ver detalle <ArrowRight size={17} />
+        </a>
+      </div>
+    </article>
+  );
+}
+
+function HomeContactSection() {
+  return (
+    <section className="landing-section contact-home">
+      <div className="home-container contact-home-grid">
+        <div className="contact-info-card">
+          <h2>Contacto</h2>
+          <ContactLine icon="MapPin" label="Ubicación" value={contact.location} />
+          <ContactLine icon="Mail" label="Email" value={contact.email} href={`mailto:${contact.email}`} />
+          <ContactLine
+            icon="Phone"
+            label="WhatsApp"
+            value={contact.whatsappDisplay}
+            href={whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.")}
+          />
+          <ContactLine icon="Clock" label="Atención" value="Lunes a viernes de 8:00 a 18:00 hs" />
+        </div>
+        <LandingContactForm />
+      </div>
+    </section>
+  );
+}
+
+function LandingContactForm() {
+  function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const body = [
+      `Nombre completo: ${data.get("name") || ""}`,
+      `Correo electrónico: ${data.get("email") || ""}`,
+      `Asunto: ${data.get("subject") || ""}`,
+      "",
+      "Mensaje:",
+      data.get("message") || "",
+    ].join("\n");
+
+    window.location.href = mailtoUrl("Consulta desde la web BOJ", body);
+  }
+
+  return (
+    <form className="landing-contact-form" onSubmit={handleSubmit}>
+      <div className="form-row">
+        <input name="name" placeholder="Nombre completo" required />
+        <input name="email" type="email" placeholder="Correo electrónico" required />
+      </div>
+      <input name="subject" placeholder="Asunto" required />
+      <textarea name="message" rows="5" placeholder="Mensaje" required />
+      <button className="home-btn primary" type="submit">
+        Enviar mensaje <ArrowRight size={18} />
+      </button>
+    </form>
   );
 }
 
@@ -783,8 +1023,6 @@ function CoursesPage() {
 }
 
 function S7CoursePage() {
-  return <S7CourseSalesPage />;
-
   return (
     <CourseLanding
       course={s7Course}
@@ -796,230 +1034,6 @@ function S7CoursePage() {
         { label: "Hablar por WhatsApp", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar por el curso S7-300/400.") },
       ]}
     />
-  );
-}
-
-function S7CourseSalesPage() {
-  return (
-    <PageShell
-      eyebrow="Curso aplicado + App PRO"
-      title="Diagnóstico y resolución de fallas en PLC Siemens S7-300/400"
-      subtitle="Manual de diagnóstico industrial + App PRO para reducir tiempos de parada"
-      heroExtra={
-        <div className="s7-sales-hero">
-          <p>
-            Producto digital compuesto por dos libros prácticos y una licencia BOJ S7-PLC PRO
-            por 12 meses, con actualizaciones incluidas durante el año.
-          </p>
-          <p>
-            Diseñado para mantenimiento, instrumentistas, automatistas e ingeniería que necesitan
-            ordenar fallas reales de planta con método técnico.
-          </p>
-          <div className="button-row s7-hero-actions">
-            <S7PurchaseButton planId="professional" />
-            <SecondaryLink href={s7SalesWhatsapp}>Consultar por WhatsApp</SecondaryLink>
-          </div>
-        </div>
-      }
-    >
-      <section className="inner-section s7-sales-intro">
-        <div className="s7-sales-copy">
-          <p className="eyebrow">Producto digital BOJ</p>
-          <h2>Dos manuales técnicos y una app de asistencia para diagnóstico en campo</h2>
-          <p>
-            El objetivo no es enseñar programación desde cero. Es entregar una secuencia práctica
-            para interpretar síntomas, confirmar evidencia y tomar decisiones técnicas sobre
-            sistemas Siemens S7-300/400 en operación.
-          </p>
-        </div>
-        <CourseVisual type="s7" />
-      </section>
-
-      <section className="inner-section">
-        <SectionHeader
-          eyebrow="Qué incluye este curso"
-          title="Material de diagnóstico + licencia PRO por 12 meses"
-          text="Se reciben los dos manuales en formato digital y una licencia PRO de BOJ S7-PLC para ordenar observaciones, hipótesis y criterios de verificación."
-        />
-        <div className="s7-include-grid">
-          {s7CourseIncludes.map((item) => (
-            <CourseIncludedCard key={item.name} item={item} />
-          ))}
-        </div>
-      </section>
-
-      <section className="inner-section s7-plan-section">
-        <SectionHeader
-          eyebrow="Planes disponibles"
-          title="Elegir plan según uso individual o equipo de mantenimiento"
-          text="Ambos planes incluyen app PRO por 12 meses y actualizaciones durante el año. El plan Empresas agrega más idiomas, licencias simultáneas y soporte por correo."
-        />
-        <div className="s7-plan-grid">
-          {s7Plans.map((plan) => (
-            <S7PlanCard key={plan.id} plan={plan} />
-          ))}
-        </div>
-      </section>
-
-      <S7PlanComparisonTable />
-
-      <section className="inner-section">
-        <SectionHeader
-          eyebrow="Resultados esperados"
-          title="Menos improvisación y más evidencia técnica durante una falla"
-          text="Sin promesas automáticas ni porcentajes no verificados: el valor está en ordenar el diagnóstico y evitar decisiones apresuradas."
-        />
-        <div className="s7-results-grid">
-          {s7ExpectedResults.map((item) => (
-            <article className="s7-result-card" key={item.title}>
-              <Icon name={item.icon} />
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <S7Faq />
-
-      <section className="route-cta s7-final-cta">
-        <div>
-          <h2>¿Quiere preparar la compra o consultar qué plan conviene?</h2>
-          <p>
-            Los botones de Hotmart quedarán activos cuando estén creadas las URLs de cada plan.
-            Mientras tanto, la consulta por WhatsApp permite resolver dudas de preventa.
-          </p>
-        </div>
-        <div className="button-row">
-          <S7PurchaseButton planId="enterprise" />
-          <SecondaryLink href={s7SalesWhatsapp}>Consultar por WhatsApp</SecondaryLink>
-        </div>
-      </section>
-    </PageShell>
-  );
-}
-
-function CourseIncludedCard({ item }) {
-  return (
-    <article className={`s7-include-card ${item.image ? "with-app" : ""}`}>
-      <div className="s7-include-visual" aria-hidden="true">
-        {item.image ? (
-          <img src={item.image} alt="" loading="lazy" />
-        ) : (
-          <div className="manual-mockup">
-            <span>{item.title}</span>
-            <Icon name={item.icon} size={34} />
-          </div>
-        )}
-      </div>
-      <div>
-        <span className="s7-card-tag">{item.tag}</span>
-        <h3>{item.name}</h3>
-        <p>{item.text}</p>
-      </div>
-    </article>
-  );
-}
-
-function S7PlanCard({ plan }) {
-  return (
-    <article className={`s7-plan-card ${plan.featured ? "featured" : ""}`}>
-      {plan.featured ? <span className="s7-plan-badge">Para equipos</span> : null}
-      <div className="s7-plan-heading">
-        <h3>{plan.title}</h3>
-        <p>{plan.description}</p>
-      </div>
-      <div className="s7-plan-price">
-        <strong>{plan.price} USD</strong>
-        <span>Pago por plan</span>
-      </div>
-      <ul className="clean-list s7-plan-features">
-        {plan.features.map((feature) => (
-          <li key={feature}>
-            <CheckCircle2 size={17} />
-            <span>{feature}</span>
-          </li>
-        ))}
-      </ul>
-      <S7PurchaseButton planId={plan.id} />
-    </article>
-  );
-}
-
-function S7PurchaseButton({ planId }) {
-  const url = S7_HOTMART_URLS[planId];
-  const planLabel = planId === "enterprise" ? "Plan Empresas" : "Plan Profesional";
-
-  if (!url) {
-    return (
-      <button className="btn primary s7-purchase-button disabled" type="button" disabled aria-disabled="true">
-        Compra en Hotmart próximamente
-      </button>
-    );
-  }
-
-  return (
-    <a
-      className="btn primary s7-purchase-button"
-      href={url}
-      target="_blank"
-      rel="noopener"
-      aria-label={`Comprar ${planLabel} en Hotmart`}
-    >
-      Comprar {planLabel} <ExternalLink size={17} />
-    </a>
-  );
-}
-
-function S7PlanComparisonTable() {
-  return (
-    <section className="inner-section">
-      <SectionHeader
-        eyebrow="Comparativa"
-        title="Diferencias principales entre Profesional y Empresas"
-        text="La tabla resume el alcance de cada plan para decidir según idioma, cantidad de licencias y necesidad de soporte."
-      />
-      <div className="s7-plan-table-wrap">
-        <table className="s7-plan-table" aria-label="Comparativa de planes del curso S7-300/400">
-          <thead>
-            <tr>
-              <th scope="col">Elemento</th>
-              <th scope="col">Plan Profesional</th>
-              <th scope="col">Plan Empresas</th>
-            </tr>
-          </thead>
-          <tbody>
-            {s7PlanComparison.map((row) => (
-              <tr key={row.item} className={row.highlight ? "enterprise-highlight" : ""}>
-                <th scope="row">{row.item}</th>
-                <td>{row.professional}</td>
-                <td>{row.enterprise}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </section>
-  );
-}
-
-function S7Faq() {
-  return (
-    <section className="inner-section s7-faq-section">
-      <SectionHeader
-        eyebrow="Preguntas frecuentes"
-        title="Acceso, licencia e idiomas"
-        text="Información breve para entender qué se entrega y cómo queda preparada la compra cuando Hotmart esté configurado."
-      />
-      <div className="s7-faq-grid">
-        {s7FaqItems.map((item) => (
-          <details className="s7-faq-item" key={item.question}>
-            <summary>{item.question}</summary>
-            <p>{item.answer}</p>
-          </details>
-        ))}
-      </div>
-    </section>
   );
 }
 
@@ -1705,18 +1719,19 @@ function SectionHeader({ eyebrow, title, text }) {
 function BrandLogo({ compact = false }) {
   return (
     <span className={`brand-logo ${compact ? "compact" : ""}`}>
-      <img src={bojLogo} alt="Logo BOJ Automatización y Control" />
+      <img src={bojLogo} alt="BOJ Automatización y Control" />
     </span>
   );
 }
 
 function TrustBar() {
   return (
-    <section className="trust-bar" aria-label="Especialización técnica BOJ">
+    <section className="trust-bar" aria-label="Resumen técnico BOJ">
       <div className="section-container trust-grid">
-        {technicalCredibilityBadges.map((badge) => (
-          <div className="trust-item" key={badge}>
-            <span>{badge}</span>
+        {trustSignals.map((signal) => (
+          <div className="trust-item" key={signal.value}>
+            <strong>{signal.value}</strong>
+            <span>{signal.label}</span>
           </div>
         ))}
       </div>
@@ -1787,372 +1802,17 @@ function IndustrialScopeSection() {
   );
 }
 
-function HomeProblemsSection() {
-  return (
-    <section className="section home-problems-section home-compact-section" id="problemas">
-      <div className="section-container">
-        <SectionHeader
-          eyebrow="Problemas que resolvemos"
-          title="Problemas que requieren diagnóstico técnico"
-          text="Una falla no siempre empieza como pedido de automatización. Suele aparecer como parada, alarma, red inestable o sistema heredado."
-        />
-        <div className="home-compact-grid four">
-          {compactHomeProblems.map((item) => (
-            <HomeCompactCard key={item.title} item={item} />
-          ))}
-        </div>
-        <div className="home-section-actions">
-          <SecondaryLink href="#/obras">Ver casos de éxito</SecondaryLink>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function HomeServicesSection() {
-  return (
-    <section className="section home-services-section home-compact-section">
-      <div className="section-container">
-        <SectionHeader
-          eyebrow="Servicios principales"
-          title="Áreas de trabajo resumidas"
-          text="Cuatro caminos claros para pasar desde el problema actual hacia diagnóstico, mejora, formación o herramientas digitales."
-        />
-        <div className="home-compact-grid four">
-          {compactHomeServices.map((item) => (
-            <HomeCompactCard key={item.title} item={item} linkLabel="Ver más" />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function HomeCompactCard({ item, linkLabel }) {
-  return (
-    <article className="home-compact-card card">
-      <span className="icon-chip" aria-hidden="true">
-        <Icon name={item.icon} />
-      </span>
-      <h3>{item.title}</h3>
-      <p>{item.text}</p>
-      {item.href && linkLabel ? (
-        <a className="compact-card-link" href={item.href} aria-label={`${linkLabel}: ${item.title}`}>
-          {linkLabel} <ArrowRight size={16} />
-        </a>
-      ) : null}
-    </article>
-  );
-}
-
-function VideoPresentationSection() {
-  const [videoRequested, setVideoRequested] = useState(false);
-
-  return (
-    <section className="section video-presentation-section" id="video-presentacion">
-      <div className="section-container video-presentation-layout">
-        <div className="video-copy">
-          <p className="eyebrow">Cómo trabajamos</p>
-          <h2>Diagnóstico, formación y herramientas en contexto industrial</h2>
-          <p>
-            El video de presentación mostrará fragmentos de diagnóstico en planta, cursos técnicos
-            y uso de BOJ S7-PLC. Mientras se produce el material, la Home deja la estructura lista
-            sin inventar contenido audiovisual.
-          </p>
-          <div className="button-row">
-            <SecondaryLink href="#/servicios">Detalle del método</SecondaryLink>
-            <GhostLink href="#/obras">Ver obras reales</GhostLink>
-          </div>
-        </div>
-        <div className="video-placeholder-card">
-          <video
-            className="home-video"
-            poster={panelDiagnosticVisual}
-            preload="none"
-            aria-label="Video de presentación de BOJ en preparación"
-          />
-          <button
-            className="video-play-button"
-            type="button"
-            aria-label="Reproducir video de presentación"
-            aria-pressed={videoRequested}
-            onClick={() => setVideoRequested(true)}
-          >
-            <span className="play-glyph" aria-hidden="true" />
-            <span>{videoRequested ? "Video en preparación" : "Reproducir presentación"}</span>
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ServiceModesTable() {
-  return (
-    <section className="section service-modes-section" id="modalidades">
-      <div className="section-container">
-        <SectionHeader
-          eyebrow="Modalidades"
-          title="Elegir el tipo de soporte según urgencia y contexto"
-          text="La modalidad depende de la criticidad, la evidencia disponible y la necesidad de acompañar al equipo técnico interno."
-        />
-        <div className="service-modes-table-wrap">
-          <table className="service-modes-table">
-            <thead>
-              <tr>
-                <th scope="col">Criterio</th>
-                <th scope="col">Soporte remoto</th>
-                <th scope="col">In-company</th>
-                <th scope="col">Capacitación online</th>
-              </tr>
-            </thead>
-            <tbody>
-              {serviceModeRows.map((row) => (
-                <tr key={row.label}>
-                  <th scope="row">{row.label}</th>
-                  <td>{row.remote}</td>
-                  <td>{row.company}</td>
-                  <td>{row.online}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="home-section-actions">
-          <PrimaryLink href={whatsappUrl("Hola, necesito orientación para elegir modalidad de soporte técnico o capacitación.")}>
-            ¿Qué modalidad necesito?
-          </PrimaryLink>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function HomeProductCards() {
-  return (
-    <section className="section home-products-section">
-      <div className="section-container">
-        <SectionHeader
-          eyebrow="Formación y herramienta digital"
-          title="Dos recursos para sostener el diagnóstico más allá de la intervención"
-          text="El curso y la app concentran el método de trabajo en formatos aplicables por técnicos e industrias."
-        />
-        <div className="home-product-grid">
-          {productCards.map((item) => (
-            <article className="home-product-card card" key={item.title}>
-              <figure className="home-product-media">
-                <img src={item.image} alt={item.alt} loading="lazy" />
-              </figure>
-              <div className="home-product-body">
-                <p className="eyebrow">{item.eyebrow}</p>
-                <h3>{item.title}</h3>
-                <ul>
-                  {item.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-                <a className="compact-card-link" href={item.href} aria-label={`${item.label}: ${item.title}`}>
-                  {item.label} <ArrowRight size={16} />
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function HomeTrustSection() {
-  return (
-    <section className="section band home-trust-section">
-      <div className="section-container home-trust-panel">
-        <div>
-          <p className="eyebrow">Confianza técnica verificable</p>
-          <h2>Experiencia aplicada, sin testimonios ni logos inventados</h2>
-          <p>
-            La confianza se apoya en trabajos documentados, criterios de diagnóstico y experiencia
-            con sistemas industriales reales.
-          </p>
-        </div>
-        <div className="home-trust-list">
-          {homeTrustProofs.map((item) => (
-            <CheckItem key={item}>{item}</CheckItem>
-          ))}
-          <SecondaryLink href="#/obras">Ver obras reales</SecondaryLink>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function HomeDifferentialSection() {
-  return (
-    <section className="section band home-differential">
-      <div className="section-container split-section">
-        <div className="home-differential-copy">
-          <p className="eyebrow">Experiencia aplicada en planta</p>
-          <h2>Diagnóstico y soporte técnico sobre sistemas reales de producción</h2>
-          <p>
-            BOJ Automatización y Control trabaja sobre sistemas reales de producción, con foco
-            en diagnóstico de PLC Siemens, redes industriales, HMI, variadores, instrumentación,
-            migraciones y soporte técnico para mantenimiento.
-          </p>
-          <p className="home-authority-statement">
-            El enfoque no se limita a programar. Se orienta a interpretar síntomas, confirmar
-            evidencia y tomar decisiones técnicas bajo presión operativa.
-          </p>
-          <div className="home-differential-proof">
-            <span>PLC Siemens</span>
-            <span>Redes industriales</span>
-            <span>Mantenimiento industrial</span>
-            <span>Diagnóstico con evidencia</span>
-          </div>
-        </div>
-        <aside className="home-audience-panel">
-          <p className="eyebrow">Para quién trabajamos</p>
-          <h3>Entornos industriales con sistemas de control en servicio</h3>
-          <p>
-            BOJ está orientado a entornos industriales donde los sistemas de control deben
-            mantenerse operativos, documentados y diagnosticables.
-          </p>
-          <div className="home-audience-list">
-            {homeAudience.map((item) => (
-              <CheckItem key={item}>{item}</CheckItem>
-            ))}
-          </div>
-        </aside>
-      </div>
-    </section>
-  );
-}
-
-function WorkModesSection() {
-  return (
-    <section className="section work-modes-section">
-      <div className="section-container work-modes-layout">
-        <div>
-          <p className="eyebrow">Modalidades de trabajo</p>
-          <h2>Soporte adaptable a la criticidad de planta y al equipo técnico interno</h2>
-          <p>
-            El soporte puede adaptarse al tipo de problema, criticidad de la planta y
-            disponibilidad del equipo técnico interno.
-          </p>
-          <p className="work-modes-scope">
-            Servicios presenciales y soporte técnico para industrias en Argentina. Capacitación
-            digital, recursos técnicos y app de diagnóstico disponibles para técnicos
-            hispanohablantes.
-          </p>
-        </div>
-        <div className="work-modes-grid">
-          {workModes.map((item) => (
-            <CheckItem key={item}>{item}</CheckItem>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FeaturedCourseSection() {
-  return (
-    <section className="section featured-course">
-      <div className="section-container featured-course-layout">
-        <div className="featured-course-copy">
-          <p className="eyebrow">Curso destacado</p>
-          <h2>{s7Course.title}</h2>
-          <p>
-            Formación técnica orientada a personal de mantenimiento industrial que necesita
-            interpretar fallas reales, leer estados de CPU, analizar módulos, redes
-            PROFIBUS/PROFINET y utilizar herramientas de STEP 7 Classic para diagnosticar con
-            método.
-          </p>
-          <p className="course-positioning-note">
-            No es un curso inicial de programación. Es una formación técnica orientada a
-            interpretar sistemas existentes, diagnosticar fallas y tomar decisiones en contexto
-            real de planta.
-          </p>
-          <div className="highlight-list">
-            {featuredCourseBullets.map((item) => (
-              <CheckItem key={item}>{item}</CheckItem>
-            ))}
-          </div>
-          <div className="button-row">
-            <PrimaryLink href="#/cursos/s7-300-400">
-              Ver curso <ArrowRight size={18} />
-            </PrimaryLink>
-            <SecondaryLink href={whatsappUrl("Hola, necesito consultar disponibilidad del curso de diagnóstico de fallas PLC Siemens S7-300/400 con STEP 7 Classic.")}>
-              Consultar disponibilidad
-            </SecondaryLink>
-            <GhostLink href={whatsappUrl("Hola, necesito solicitar capacitación in-company en diagnóstico de fallas PLC Siemens S7-300/400 con STEP 7 Classic.")}>
-              Consultar capacitación in-company
-            </GhostLink>
-          </div>
-        </div>
-        <div className="featured-course-visual">
-          <CourseVisual type="s7" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FeaturedAppSection() {
-  return (
-    <section className="section band featured-app">
-      <div className="section-container app-feature-layout">
-        <div className="app-feature-copy">
-          <p className="eyebrow">Producto técnico digital</p>
-          <h2>{appHero.title}</h2>
-          <p className="section-lead">{appHero.subtitle}.</p>
-          <p>
-            La app permite ingresar síntomas, estados de CPU, condiciones de red y observaciones
-            de campo para obtener hipótesis probables, criterios de verificación y una secuencia
-            de análisis más ordenada.
-          </p>
-          <p>
-            Diseñada para técnicos que necesitan ordenar síntomas, estados de CPU, fallas de red
-            y observaciones de campo antes de intervenir el sistema.
-          </p>
-          <div className="highlight-list app-highlight-list">
-            {featuredAppBullets.map((item) => (
-              <CheckItem key={item}>{item}</CheckItem>
-            ))}
-          </div>
-          <div className="app-module-strip" aria-label="Módulos técnicos destacados de BOJ S7-PLC">
-            {appDiagnosticModules.slice(0, 4).map((module) => (
-              <span key={module.title}>{module.title}</span>
-            ))}
-          </div>
-          <p className="technical-disclaimer app-home-note">
-            La app asiste el diagnóstico técnico. No reemplaza la verificación en campo, la
-            documentación oficial del fabricante ni el criterio profesional del personal
-            autorizado.
-          </p>
-          <div className="button-row">
-            <PrimaryLink href="#/app">Conocer la app</PrimaryLink>
-            <SecondaryLink href={whatsappUrl("Hola, quiero solicitar acceso Trial a BOJ S7-PLC.")}>
-              Solicitar acceso Trial
-            </SecondaryLink>
-          </div>
-        </div>
-        <AppMockup />
-      </div>
-    </section>
-  );
-}
-
 function MethodSection() {
   return (
     <section className="section method-section">
       <div className="section-container">
         <SectionHeader
-          eyebrow="MÉTODO DE DIAGNÓSTICO"
-          title="Método de diagnóstico aplicado a fallas reales de planta"
-          text="Cada intervención se aborda con una secuencia técnica: observar el síntoma, confirmar evidencia, aislar la causa probable y definir una acción segura antes de modificar el sistema."
+          eyebrow="Método de trabajo"
+          title="Diagnóstico con secuencia técnica, no con prueba y error"
+          text="La intervención parte de síntomas observables y evidencia online. El objetivo es encontrar causa raíz, evitar cambios innecesarios y dejar una decisión clara para mantenimiento."
         />
         <div className="method-grid">
-          {homeMethodSteps.map((step) => (
+          {methodSteps.map((step) => (
             <article className="method-card" key={step.title}>
               <Icon name={step.icon} />
               <h3>{step.title}</h3>
@@ -2162,6 +1822,14 @@ function MethodSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function HeroAssetVisual() {
+  return (
+    <div className="hero-asset-visual">
+      <img src={plcCabinetVisual} alt="" loading="lazy" />
+    </div>
   );
 }
 
@@ -2581,10 +2249,10 @@ function FinalCTA() {
   return (
     <section className="final-cta">
       <div className="section-container">
-        <h2>¿Necesita resolver una falla, mejorar un sistema o capacitar a su equipo?</h2>
+        <h2>Soporte técnico para resolver fallas, capacitar equipos y mejorar sistemas de automatización</h2>
         <p>
-          BOJ Automatización y Control brinda soporte técnico, capacitación y herramientas
-          aplicadas para sistemas industriales basados en PLC Siemens.
+          Las consultas pueden orientarse a diagnóstico, automatización, cursos, migraciones,
+          redes industriales, tableros o BOJ S7-PLC.
         </p>
         <div className="button-row">
           <PrimaryLink href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por una falla o servicio técnico industrial.")}>
@@ -2599,70 +2267,103 @@ function FinalCTA() {
 }
 
 function Footer() {
+  return <MainFooter />;
+}
+
+function MainFooter() {
+  const footerLinks = [
+    { label: "Inicio", path: "/inicio" },
+    { label: "Servicios", path: "/servicios" },
+    { label: "Cursos", path: "/cursos" },
+    { label: "App", path: "/app" },
+    { label: "Recursos", path: "/recursos-tecnicos" },
+    { label: "Contacto", path: "/contacto" },
+  ];
+
+  return (
+    <footer className="site-footer mock-footer">
+      <div className="mock-home-container mock-footer-inner">
+        <div className="mock-footer-brand">
+          <BrandLogo compact />
+        </div>
+        <div className="mock-footer-contact" aria-label="Datos de contacto">
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          <a href="https://www.bojautomatizacion.com" target="_blank" rel="noreferrer">
+            www.bojautomatizacion.com
+          </a>
+          <span>{contact.location}</span>
+        </div>
+        <nav className="mock-footer-nav" aria-label="Navegación del footer">
+          {footerLinks.map((item) => (
+            <a key={item.path} href={`#${item.path}`}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+      <div className="mock-footer-bottom">
+        <span>© 2025 BOJ Automatización y Control. Todos los derechos reservados.</span>
+      </div>
+    </footer>
+  );
+}
+
+function OldFooterReference() {
   return (
     <footer className="site-footer">
-      <div className="section-container footer-grid">
-        <div>
+      <div className="home-container footer-grid">
+        <div className="footer-about">
           <div className="footer-brand">
             <BrandLogo compact />
           </div>
           <p>
-            Diagnóstico, automatización, capacitación y herramientas digitales para sistemas PLC
-            Siemens en entornos industriales.
+            Soluciones industriales de automatización, control y mantenimiento para procesos críticos e inteligentes.
           </p>
+          <div className="footer-socials">
+            <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href={whatsappUrl()} target="_blank" rel="noreferrer">WhatsApp</a>
+          </div>
+        </div>
+        <div>
+          <h3>Navegación</h3>
+          <a href="#/inicio">Inicio</a>
+          <a href="#/servicios">Servicios</a>
+          <a href="#/cursos">Cursos</a>
+          <a href="#/app">App</a>
+          <a href="#/obras">Proyectos</a>
+          <a href="#/contacto">Contacto</a>
+        </div>
+        <div>
+          <h3>Servicios</h3>
+          <a href="#/servicios">Diagnóstico de fallas</a>
+          <a href="#/servicios">Migración de PLC y HMI</a>
+          <a href="#/servicios">Redes industriales</a>
+          <a href="#/servicios">Puesta en marcha</a>
         </div>
         <div>
           <h3>Contacto</h3>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
           <a href={whatsappUrl()}>{contact.whatsappDisplay}</a>
-          <a href={contact.linktree} target="_blank" rel="noreferrer">Linktree BOJ</a>
-          <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
           <span>{contact.location}</span>
-        </div>
-        <div>
-          <h3>Navegación</h3>
-          <a href="#/servicios">Servicios</a>
-          <a href="#/cursos">Cursos</a>
-          <a href="#/app">App BOJ S7-PLC</a>
-          <a href="#/obras">Obras reales</a>
-          <a href="#/recursos-tecnicos">Recursos técnicos</a>
-          <a href="#/contacto">Contacto</a>
         </div>
       </div>
       <div className="footer-bottom">
-        <span>BOJ Automatización y Control</span>
-        <span>PLC Siemens, diagnóstico industrial, formación técnica y app BOJ.</span>
+        <span>© 2026 BOJ Automatización y Control. Todos los derechos reservados.</span>
       </div>
     </footer>
   );
 }
 
 function FloatingContact() {
-  const href = whatsappUrl("Hola, necesito consultar por diagnóstico, automatización o capacitación industrial.");
-
   return (
-    <>
-      <a
-        className="floating-contact"
-        href={href}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Consultar por WhatsApp sobre diagnóstico, automatización o capacitación industrial"
-      >
-        <Phone size={22} />
-        <span>WhatsApp</span>
+    <div className="floating-contact" aria-label="Contactos rápidos">
+      <a href={whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.")} aria-label="Consultar por WhatsApp">
+        <Phone size={20} />
       </a>
-      <a
-        className="mobile-whatsapp-contact"
-        href={href}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Consultar por WhatsApp sobre diagnóstico, automatización o capacitación industrial"
-      >
-        <Phone size={19} />
-        <span>WhatsApp</span>
+      <a href={`mailto:${contact.email}`} aria-label="Enviar email">
+        <Mail size={20} />
       </a>
-    </>
+    </div>
   );
 }
 
