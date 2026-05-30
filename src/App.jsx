@@ -56,7 +56,7 @@ import {
 import bojLogo from "./assets/boj-logo-real-cropped.png";
 import appScreenshot from "./assets/APP.png";
 import appRealCapture from "./assets/boj-s7-plc-real-capture.png";
-import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v3.jpg";
+import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v4.jpg";
 import step7ManagerVisual from "./assets/11.png";
 import step7HwConfigVisual from "./assets/12.png";
 import step7LadderVisual from "./assets/13.png";
@@ -274,12 +274,167 @@ const homeProblems = [
 ];
 
 const homeTechSpecialties = [
-  { icon: "Cpu", label: "S7-300 / S7-400 /\nS7-1200" },
-  { icon: "MonitorCog", label: "STEP 7 Classic /\nTIA Portal" },
-  { icon: "Smartphone", label: "WinCC /\nHMI" },
-  { icon: "Network", label: "PROFIBUS /\nPROFINET" },
-  { icon: "Gauge", label: "Variadores e\ninstrumentación" },
-  { icon: "ClipboardCheck", label: "Diagnóstico\nen planta" },
+  {
+    icon: "CircuitBoard",
+    title: "PLC Siemens",
+    text: "S7-300 / S7-400 / S7-1200 / S7-1500",
+  },
+  {
+    icon: "MonitorCog",
+    title: "Software de ingeniería",
+    text: "STEP 7 Classic / TIA Portal / WinCC",
+  },
+  {
+    icon: "Network",
+    title: "Redes industriales",
+    text: "PROFIBUS / PROFINET",
+  },
+  {
+    icon: "Gauge",
+    title: "Accionamientos e instrumentación",
+    text: "Variadores / señales analógicas / instrumentación",
+  },
+  {
+    icon: "ClipboardCheck",
+    title: "Diagnóstico en planta",
+    text: "Soporte técnico / análisis de fallas / verificación",
+  },
+];
+
+const servicesInterventionCriteria = [
+  "Se releva el síntoma antes de tocar lógica o hardware.",
+  "Se busca evidencia online, eléctrica y de campo.",
+  "Se prueba con producción, mantenimiento y seguridad operativa en mente.",
+  "Se deja una recomendación clara para sostener el sistema después de la intervención.",
+];
+
+const servicesAreaCards = [
+  {
+    icon: "FileSearch",
+    title: "Diagnóstico de fallas",
+    text: "Análisis técnico y búsqueda de causa raíz",
+  },
+  {
+    icon: "Settings",
+    title: "Automatización industrial",
+    text: "PLC, HMI, SCADA y puesta en marcha",
+  },
+  {
+    icon: "RefreshCcw",
+    title: "Migraciones",
+    text: "Actualización de sistemas y plataformas",
+  },
+  {
+    icon: "Network",
+    title: "Redes industriales",
+    text: "PROFIBUS, PROFINET y comunicación",
+  },
+  {
+    icon: "Gauge",
+    title: "Instrumentación y señales",
+    text: "Sensores, 4-20 mA y señales de campo",
+  },
+  {
+    icon: "Zap",
+    title: "Electricidad y tableros",
+    text: "Tableros, protecciones y fuerza",
+  },
+];
+
+const serviceWorkflowCards = [
+  {
+    icon: "FileSearch",
+    title: "Diagnóstico con evidencia",
+    text: "Relevamos síntomas, estado del sistema y condiciones de campo antes de intervenir.",
+  },
+  {
+    icon: "ClipboardCheck",
+    title: "Decisión técnica clara",
+    text: "Priorizamos causa probable, riesgo operativo y próximo paso técnico.",
+  },
+  {
+    icon: "ShieldCheck",
+    title: "Intervención orientada a continuidad",
+    text: "Buscamos reducir paradas, evitar cambios innecesarios y sostener la operación.",
+  },
+];
+
+const mainServiceCards = [
+  {
+    icon: "FileSearch",
+    title: "Diagnóstico de fallas industriales",
+    description:
+      "Detección y análisis de fallas para reducir paradas, separar causa probable y evitar cambios innecesarios.",
+    applications: [
+      "PLC Siemens S5, S7-200, S7-300, S7-400, S7-1200 y S7-1500",
+      "TIA Portal y STEP 7 Classic",
+      "Señales digitales y analógicas",
+      "Lógica secuencial, PID y variadores",
+    ],
+    result: "Diagnóstico claro, causa raíz identificada y plan de acción con evidencia.",
+    when: "Ante paradas repetitivas, fallas intermitentes o falta de criterio técnico.",
+  },
+  {
+    icon: "Settings",
+    title: "Automatización industrial",
+    description: "Diseño, modificación y puesta en marcha de sistemas de control.",
+    applications: [
+      "PLC Siemens y otras marcas",
+      "HMI / SCADA",
+      "Variadores / servomotores",
+      "Lógica, secuencias y seguridad",
+    ],
+    result: "Sistema estable, funcional y listo para producir con menor dependencia externa.",
+    when: "Cuando hay nuevas funciones, mejoras o falta de flexibilidad en el sistema actual.",
+  },
+  {
+    icon: "RefreshCcw",
+    title: "Migraciones",
+    description: "Actualización y migración de sistemas antiguos hacia plataformas modernas.",
+    applications: [
+      "Migración Siemens S5 a S7/TIA",
+      "Migración S7-300/400 a S7-1200/1500",
+      "Migraciones PLC y HMI",
+      "Backups y documentación técnica",
+    ],
+    result: "Sistema actualizado, documentado y preparado para el largo plazo.",
+    when: "Cuando hay equipos obsoletos, falta de repuestos, software antiguo o riesgo operativo.",
+  },
+  {
+    icon: "Network",
+    title: "Redes industriales",
+    description:
+      "Diseño, instalación y diagnóstico de redes industriales que conectan PLC, HMI, drives y periferia distribuida.",
+    applications: [
+      "PROFIBUS DP",
+      "PROFINET",
+      "Ethernet industrial",
+      "Diagnóstico de nodos, conectores y comunicación PLC-HMI-Drive",
+    ],
+    result: "Redes estables, seguras y con comunicación confiable.",
+    when: "Ante fallas de comunicación, BF, nodos perdidos, latencias o necesidad de expandir la red.",
+  },
+];
+
+const secondaryServiceCards = [
+  {
+    icon: "Gauge",
+    title: "Instrumentación y señales de campo",
+    text: "Diagnóstico e integración de señales de campo para que el PLC lea el proceso de forma confiable.",
+    applications: ["4-20 mA / 0-10 V", "Sensores y transmisores", "Presión, temperatura, nivel y caudal", "Escalado de señales", "Fallas de cableado y lazo"],
+  },
+  {
+    icon: "Cable",
+    title: "Electricidad industrial y tableros",
+    text: "Relevamiento, diagnóstico y mejora de tableros de control, fuerza, mando, protecciones y conexionado de campo.",
+    applications: ["Tableros de control y fuerza", "MCC", "Arranques de motores", "Protecciones", "Ordenamiento y documentación"],
+  },
+  {
+    icon: "GraduationCap",
+    title: "Capacitación técnica industrial",
+    text: "Formación práctica para técnicos, instrumentistas, electricistas, ingenieros y mantenimiento que necesitan actuar frente a equipos reales.",
+    applications: ["PLC Siemens", "Diagnóstico de fallas", "Redes industriales", "TIA Portal y STEP 7 Classic", "Señales analógicas y variadores", "Cursos in-company y grabados"],
+  },
 ];
 
 const routeMeta = {
@@ -583,12 +738,14 @@ function HomeLandingRedesign() {
       <section className="mock-tech-strip" data-home-section="tech">
         <div className="mock-home-container">
           <h2>Especialización técnica.</h2>
+          <p className="mock-tech-subtitle">Tecnologías y áreas en las que trabajamos.</p>
           <div className="mock-tech-grid">
             {homeTechSpecialties.map((item) => (
-              <span className="mock-tech-chip" key={item.label}>
-                <Icon name={item.icon} size={31} />
-                <strong>{item.label}</strong>
-              </span>
+              <article className="mock-tech-card" key={item.title}>
+                <Icon name={item.icon} size={48} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
             ))}
           </div>
         </div>
@@ -961,27 +1118,195 @@ function LandingContactForm() {
 }
 
 function ServicesPage() {
+  const scrollToServiceDetails = (event) => {
+    event.preventDefault();
+    document.getElementById("servicios-principales")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
-    <PageShell
-      eyebrow="Servicios"
-      title="Servicios técnicos para reducir paradas y sostener automatización industrial"
-      subtitle="Diagnóstico, ingeniería, programación, redes, tableros y puesta en marcha con foco en continuidad operativa, mantenimiento y decisiones con evidencia."
-    >
-      <ServicePrinciples />
-      <div className="services-list">
-        {services.map((service) => (
-          <ServiceDetailCard key={service.title} service={service} />
-        ))}
+    <div className="services-redesign-page">
+      <section className="services-redesign-hero">
+        <img className="services-redesign-hero-bg" src={heroIndustrialCover} alt="" aria-hidden="true" />
+        <div className="services-redesign-hero-overlay" aria-hidden="true" />
+        <div className="mock-home-container services-redesign-hero-grid">
+          <div className="services-redesign-hero-copy">
+            <p className="services-redesign-eyebrow">Servicios</p>
+            <h1>Servicios técnicos para reducir paradas y sostener automatización industrial</h1>
+            <p>
+              Diagnóstico, ingeniería, programación, redes, tableros y puesta en marcha con foco en
+              continuidad operativa, mantenimiento y decisiones con evidencia.
+            </p>
+            <div className="services-redesign-actions">
+              <a
+                className="mock-btn mock-btn-primary"
+                href={whatsappUrl("Hola, escribo desde la web de BOJ para solicitar un diagnóstico industrial.")}
+              >
+                Solicitar diagnóstico <ArrowRight size={18} />
+              </a>
+              <a className="mock-btn mock-btn-outline" href="#/servicios" onClick={scrollToServiceDetails}>
+                Ver áreas de servicio <ArrowRight size={18} />
+              </a>
+            </div>
+          </div>
+
+          <article className="services-intervention-card">
+            <span className="services-card-kicker">Criterio de intervención</span>
+            <h2>Criterio de intervención</h2>
+            <div>
+              {servicesInterventionCriteria.map((item) => (
+                <span key={item}>
+                  <CheckCircle2 size={18} />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className="services-workflow-section">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-workflow-heading">
+            <h2>Cómo trabajamos</h2>
+            <p>Un enfoque técnico orientado a diagnóstico claro, decisión correcta y continuidad operativa.</p>
+          </div>
+          <div className="services-workflow-grid">
+            {serviceWorkflowCards.map((card) => (
+              <article className="services-workflow-card" key={card.title}>
+                <Icon name={card.icon} size={26} />
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="services-redesign-section services-areas-section" id="areas-de-servicio">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-area-heading">
+            <h2>Áreas de servicio.</h2>
+            <p>Servicios técnicos para automatización, diagnóstico y soporte industrial.</p>
+          </div>
+          <div className="services-area-grid">
+            {servicesAreaCards.map((card) => (
+              <article className="services-area-card" key={card.title}>
+                <Icon name={card.icon} size={30} />
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="services-redesign-section services-main-section" id="servicios-principales">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-main-heading">
+            <h2>Servicios principales</h2>
+          </div>
+          <div className="services-main-grid">
+            {mainServiceCards.map((service) => (
+              <ServicePrimaryCard key={service.title} service={service} />
+            ))}
+          </div>
+          <div className="services-secondary-grid">
+            {secondaryServiceCards.map((service) => (
+              <ServiceSecondaryCard key={service.title} service={service} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="services-redesign-cta">
+        <img src={plantVisual} alt="" aria-hidden="true" />
+        <div className="services-redesign-cta-overlay" aria-hidden="true" />
+        <div className="mock-home-container services-redesign-cta-content">
+          <h2>Cuando una falla, migración o mejora requiere criterio técnico</h2>
+          <p>
+            La consulta puede iniciar con el síntoma, el PLC involucrado, fotos del tablero o una
+            descripción breve del proceso. La respuesta inicial ordena alcance, riesgo y próximo paso técnico.
+          </p>
+          <div className="services-redesign-actions">
+            <a
+              className="mock-btn mock-btn-whatsapp"
+              href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por un servicio técnico industrial.")}
+            >
+              <Phone size={18} /> Consultar por WhatsApp
+            </a>
+            <a className="mock-btn mock-btn-outline" href="#/contacto">
+              Ir a contacto <ArrowRight size={18} />
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function ServicePrimaryCard({ service }) {
+  return (
+    <article className="services-primary-card">
+      <div className="services-primary-head">
+        <span>
+          <Icon name={service.icon} size={34} />
+        </span>
+        <div>
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+        </div>
       </div>
-      <RouteCTA
-        title="Cuando una falla, migración o mejora requiere criterio técnico"
-        text="La consulta puede iniciar con el síntoma, el PLC involucrado, fotos del tablero o una descripción breve del proceso. La respuesta inicial ordena alcance, riesgo y próximo paso técnico."
-        primaryLabel="Consultar por WhatsApp"
-        primaryHref={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por un servicio técnico industrial.")}
-        secondaryLabel="Ir a contacto"
-        secondaryHref="#/contacto"
-      />
-    </PageShell>
+      <div className="services-primary-body">
+        <ServiceInfoBlock title="Aplicaciones">
+          <ul>
+            {service.applications.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </ServiceInfoBlock>
+        <ServiceInfoBlock title="Resultado esperado">
+          <p>{service.result}</p>
+        </ServiceInfoBlock>
+        <ServiceInfoBlock title="Cuándo conviene consultar">
+          <p>{service.when}</p>
+        </ServiceInfoBlock>
+      </div>
+      <a
+        className="services-consult-link"
+        href={whatsappUrl(`Hola, escribo desde la web de BOJ para consultar por ${service.title}.`)}
+      >
+        Consultar este servicio <ArrowRight size={16} />
+      </a>
+    </article>
+  );
+}
+
+function ServiceInfoBlock({ title, children }) {
+  return (
+    <div className="services-info-block">
+      <h4>{title}</h4>
+      {children}
+    </div>
+  );
+}
+
+function ServiceSecondaryCard({ service }) {
+  return (
+    <article className="services-secondary-card">
+      <div>
+        <Icon name={service.icon} size={28} />
+        <h3>{service.title}</h3>
+      </div>
+      <p>{service.text}</p>
+      <ul>
+        {service.applications.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </article>
   );
 }
 
