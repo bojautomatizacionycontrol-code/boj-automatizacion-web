@@ -1458,7 +1458,6 @@ function CoursesPage() {
         <img className="courses-hero-bg" src={courseTiaPortalVisual} alt="" aria-hidden="true" />
         <div className="courses-hero-overlay" aria-hidden="true" />
         <div className="mock-home-container courses-hero-content">
-          <p className="courses-eyebrow">Cursos</p>
           <h1>Cursos técnicos Siemens orientados a diagnóstico real de planta</h1>
           <p>
             Formación aplicada para técnicos, instrumentistas, electricistas e ingenieros que necesitan

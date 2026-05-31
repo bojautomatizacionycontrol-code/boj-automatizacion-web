@@ -6362,29 +6362,22 @@ textarea {
 .courses-hero-content {
   position: relative;
   z-index: 1;
-  max-width: 760px;
-  padding: 48px 0;
-}
-
-.courses-eyebrow {
-  margin: 0;
-  color: #18bff2;
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  width: min(calc(100vw - 64px), 1360px);
+  max-width: none;
+  margin: 0 auto;
+  padding: 54px 0 52px;
 }
 
 .courses-hero-content h1 {
   max-width: 760px;
-  margin: 10px 0 14px;
+  margin: 0 0 14px;
   color: #ffffff;
   font-size: clamp(2.1rem, 3.2vw, 3.65rem);
   line-height: 1;
   letter-spacing: 0;
 }
 
-.courses-hero-content > p:not(.courses-eyebrow) {
+.courses-hero-content > p {
   max-width: 690px;
   margin: 0;
   color: rgba(247, 251, 255, 0.82);
@@ -6759,6 +6752,7 @@ textarea {
   }
 
   .courses-hero-content {
+    width: min(calc(100vw - 28px), 620px);
     padding: 34px 0;
   }
 
