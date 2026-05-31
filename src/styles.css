@@ -4219,6 +4219,17 @@ textarea {
   min-width: 238px;
 }
 
+@media (min-width: 1101px) {
+  .site-header .submenu {
+    min-width: 210px;
+  }
+
+  .site-header .submenu a {
+    white-space: normal;
+    line-height: 1.25;
+  }
+}
+
 .home-hero {
   position: relative;
   min-height: min(650px, calc(100svh - 86px));
@@ -7021,7 +7032,20 @@ textarea {
 }
 
 .app-pro-plans-section {
-  padding-top: 56px;
+  padding: 44px 0 48px;
+}
+
+.app-pro-plans-section .app-pro-section-heading {
+  margin-bottom: 20px;
+}
+
+.app-pro-plans-section .app-pro-section-heading h2 {
+  font-size: clamp(1.8rem, 2.6vw, 2.45rem);
+}
+
+.app-pro-plans-section .app-pro-section-heading p {
+  margin-top: 8px;
+  font-size: 0.94rem;
 }
 
 .app-pro-dark-section::before,
@@ -7081,15 +7105,15 @@ textarea {
 .app-pro-plan-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  gap: 16px;
 }
 
 .app-pro-plan-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 260px;
-  padding: 24px 22px;
+  min-height: 236px;
+  padding: 22px 20px;
   border: 1px solid rgba(0, 166, 214, 0.26);
   border-radius: 20px;
   background:
@@ -7100,9 +7124,9 @@ textarea {
 
 .app-pro-plan-badge {
   position: absolute;
-  top: 18px;
-  right: 18px;
-  padding: 7px 10px;
+  top: 16px;
+  right: 16px;
+  padding: 6px 9px;
   border: 1px solid rgba(0, 210, 255, 0.4);
   border-radius: 999px;
   background: rgba(0, 143, 199, 0.15);
@@ -7113,36 +7137,50 @@ textarea {
 
 .app-pro-plan-card h3 {
   color: #ffffff;
-  font-size: 1.35rem;
+  font-size: 1.18rem;
 }
 
 .app-pro-plan-card strong {
   display: block;
-  margin-top: 14px;
+  margin-top: 10px;
   color: #ffffff;
-  font-size: clamp(2.6rem, 4vw, 4rem);
+  font-size: clamp(2.1rem, 3vw, 3rem);
   line-height: 0.95;
 }
 
+.app-pro-plan-meta {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 10px;
+  padding: 6px 10px;
+  border: 1px solid rgba(0, 210, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(0, 143, 199, 0.12);
+  color: #9ee9ff;
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
 .app-pro-plan-card p {
-  margin: 14px 0 20px;
+  margin: 12px 0 16px;
   color: rgba(235, 245, 252, 0.74);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.42;
 }
 
 .app-pro-plan-card .mock-btn {
   margin-top: auto;
   justify-content: center;
   min-height: 44px;
+  padding-inline: 20px;
 }
 
 .app-pro-institutional {
-  max-width: 900px;
-  margin: 24px auto 0;
-  padding: 22px 28px;
+  max-width: 780px;
+  margin: 18px auto 0;
+  padding: 16px 22px;
   border: 1px solid rgba(0, 166, 214, 0.32);
-  border-radius: 18px;
+  border-radius: 14px;
   background: rgba(0, 143, 199, 0.1);
   text-align: center;
 }
@@ -7150,12 +7188,13 @@ textarea {
 .app-pro-institutional h3 {
   margin-top: 0;
   color: #ffffff;
-  font-size: 1.16rem;
+  font-size: 1.06rem;
 }
 
 .app-pro-institutional p {
-  margin: 8px 0 0;
+  margin: 6px 0 0;
   color: rgba(235, 245, 252, 0.72);
+  font-size: 0.92rem;
 }
 
 .app-pro-trial-section {

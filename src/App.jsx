@@ -549,19 +549,22 @@ const appProPlans = [
   {
     title: "Mensual",
     price: "60 USD",
-    text: "Licencia PRO por 1 mes. Ideal para pruebas extendidas, trabajos puntuales o diagnóstico temporal.",
+    meta: "1 dispositivo · 1 mes",
+    text: "Acceso completo a BOJ S7-PLC PRO para uso puntual, pruebas extendidas o diagnóstico temporal.",
     button: "Activar mensual",
   },
   {
     title: "6 meses",
     price: "197 USD",
-    text: "Licencia PRO por 6 meses. Para técnicos, mantenimiento o uso recurrente durante proyectos.",
+    meta: "1 dispositivo · 6 meses",
+    text: "Acceso completo a BOJ S7-PLC PRO para técnicos, mantenimiento o uso recurrente durante proyectos.",
     button: "Activar 6 meses",
   },
   {
     title: "12 meses — 5 licencias",
     price: "497 USD",
-    text: "Licencia PRO por 12 meses con 5 licencias. Mejor opción para uso profesional continuo o equipos de trabajo.",
+    meta: "5 dispositivos · 12 meses",
+    text: "Mejor opción para uso profesional continuo, equipos de mantenimiento o empresas.",
     button: "Activar anual",
     badge: "Más conveniente",
   },
@@ -1734,6 +1737,7 @@ function AppPage() {
                 {plan.badge ? <span className="app-pro-plan-badge">{plan.badge}</span> : null}
                 <h3>{plan.title}</h3>
                 <strong>{plan.price}</strong>
+                <span className="app-pro-plan-meta">{plan.meta}</span>
                 <p>{plan.text}</p>
                 <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
                   {plan.button} <ExternalLink size={17} />
