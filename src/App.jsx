@@ -56,6 +56,7 @@ import {
 import bojLogo from "./assets/boj-logo-real-cropped.png";
 import appScreenshot from "./assets/APP.png";
 import appRealCapture from "./assets/boj-s7-plc-real-capture.png";
+import appProHeroLaptopVisual from "./assets/app-pro-hero-background-v2.png";
 import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v4.jpg";
 import courseS7400Visual from "./assets/course-s7-400.jpg";
 import courseTiaPortalVisual from "./assets/course-tia-portal.jpg";
@@ -515,6 +516,57 @@ const coursesLearningBlocks = [
   },
 ];
 
+const appProductUrl = "http://app.bojautomatizacion.com/";
+
+const appDiagnosticFlow = [
+  {
+    icon: "FileSearch",
+    title: "Ingreso de síntomas",
+    text: "Estados de CPU, LEDs, red, módulos, señales y comportamiento observado en campo.",
+  },
+  {
+    icon: "ClipboardCheck",
+    title: "Hipótesis técnicas",
+    text: "La app ordena posibles causas según la evidencia ingresada y las prioridades de diagnóstico.",
+  },
+  {
+    icon: "ShieldCheck",
+    title: "Guía de verificación",
+    text: "Obtené pasos sugeridos para verificar PLC, red, hardware y condiciones de campo.",
+  },
+];
+
+const appProIncludes = [
+  { icon: "FileSearch", title: "Diagnóstico por LEDs y síntomas" },
+  { icon: "ClipboardCheck", title: "Hipótesis técnicas priorizadas" },
+  { icon: "ShieldCheck", title: "Guía de verificación" },
+  { icon: "Cpu", title: "Orientado a S7-300/400" },
+  { icon: "MonitorCog", title: "Interfaz web accesible" },
+  { icon: "Settings", title: "Apoyo para técnicos y empresas" },
+];
+
+const appProPlans = [
+  {
+    title: "Mensual",
+    price: "60 USD",
+    text: "Licencia PRO por 1 mes. Ideal para pruebas extendidas, trabajos puntuales o diagnóstico temporal.",
+    button: "Activar mensual",
+  },
+  {
+    title: "6 meses",
+    price: "197 USD",
+    text: "Licencia PRO por 6 meses. Para técnicos, mantenimiento o uso recurrente durante proyectos.",
+    button: "Activar 6 meses",
+  },
+  {
+    title: "12 meses — 5 licencias",
+    price: "497 USD",
+    text: "Licencia PRO por 12 meses con 5 licencias. Mejor opción para uso profesional continuo o equipos de trabajo.",
+    button: "Activar anual",
+    badge: "Más conveniente",
+  },
+];
+
 const routeMeta = {
   "/inicio": {
     title: "BOJ Automatización y Control | PLC Siemens, diagnóstico y mantenimiento industrial",
@@ -542,9 +594,9 @@ const routeMeta = {
       "Curso introductorio de TIA Portal para PLC Siemens S7-1200/1500: hardware, variables, LAD, carga, monitoreo online y diagnóstico básico.",
   },
   "/app": {
-    title: "BOJ S7-PLC | App de diagnóstico PLC Siemens S7-300/400",
+    title: "BOJ S7-PLC PRO | App de diagnóstico PLC Siemens S7-300/400",
     description:
-      "BOJ S7-PLC es una herramienta de diagnóstico industrial para PLC Siemens S7-300/400 con STEP 7 Classic, LEDs CPU, PROFIBUS, hipótesis y casos reales.",
+      "BOJ S7-PLC PRO es una herramienta web de asistencia técnica para diagnóstico orientativo en PLC Siemens S7-300/400, con prueba inicial de 48 hs y licencias PRO.",
   },
   "/recursos-tecnicos": {
     title: "Recursos técnicos Siemens | STEP 7, TIA Portal, MicroWIN y WinCC | BOJ",
@@ -1604,206 +1656,136 @@ function CourseLanding({ course, eyebrow, visual, ctas }) {
 }
 
 function AppPage() {
-  const scrollToCourseEdition = () => {
-    document.getElementById("course-edition")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
   return (
-    <PageShell
-      eyebrow="App"
-      title={appHero.title}
-      subtitle={appHero.subtitle}
-      heroExtra={
-        <>
-          <p className="page-hero-detail">{appHero.text}</p>
-          <p className="technical-disclaimer">{appHero.note}</p>
-          <div className="button-row page-hero-actions">
-            <button className="btn secondary" type="button" onClick={scrollToCourseEdition}>
-              Ver versión del curso
-            </button>
-            <PrimaryLink href="https://www.bojautomatizacion.com/#/app">
-              Desbloquear PRO <ExternalLink size={17} />
-            </PrimaryLink>
+    <div className="app-pro-page">
+      <section className="app-pro-hero">
+        <img className="app-pro-hero-bg" src={appProHeroLaptopVisual} alt="" aria-hidden="true" />
+        <div className="app-pro-hero-shade" aria-hidden="true" />
+        <div className="mock-home-container app-pro-hero-grid">
+          <div className="app-pro-hero-copy">
+            <p className="app-pro-eyebrow">APP</p>
+            <h1>BOJ S7-PLC PRO</h1>
+            <p className="app-pro-subtitle">
+              Asistente técnico para diagnóstico orientativo de fallas en PLC Siemens S7-300/400.
+            </p>
+            <p>
+              Cargá síntomas, estados de CPU, LEDs, fallas de red y condiciones de campo para obtener
+              hipótesis técnicas ordenadas y una guía de verificación.
+            </p>
+            <div className="app-pro-actions">
+              <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
+                Probar gratis 48 hs <ExternalLink size={18} />
+              </a>
+              <a className="mock-btn mock-btn-outline" href={appProductUrl} target="_blank" rel="noreferrer">
+                Ingresar a la app <ExternalLink size={18} />
+              </a>
+            </div>
+            <a className="app-pro-url" href={appProductUrl} target="_blank" rel="noreferrer">
+              app.bojautomatizacion.com
+            </a>
           </div>
-        </>
-      }
-    >
-      <div className="app-page-grid app-product-intro">
-        <div>
-          <p className="eyebrow">Herramienta de campo para STEP 7 Classic</p>
-          <h2>Diagnóstico estructurado para PLC Siemens S7</h2>
-          <p>
-            BOJ S7-PLC convierte un método de diagnóstico de planta en una herramienta guiada:
-            primero ordena el estado de CPU y LEDs, después conserva el contexto técnico para
-            priorizar verificaciones y causas probables.
-          </p>
-          <div className="app-signal-strip" aria-label="Señales y estados que interpreta BOJ S7-PLC">
-            {["RUN", "STOP", "SF", "BF", "FRCE", "DC5V"].map((item) => (
-              <span key={item}>{item}</span>
-            ))}
+
+          <div className="app-pro-hero-visual" aria-hidden="true" />
+        </div>
+      </section>
+
+      <section className="app-pro-light-section">
+        <div className="mock-home-container">
+          <div className="app-pro-section-heading app-pro-section-heading-dark">
+            <h2>Diagnóstico guiado para mantenimiento industrial</h2>
           </div>
-        </div>
-        <AppMockup />
-      </div>
-
-      <section className="inner-section">
-        <SectionHeader
-          eyebrow="Qué hace"
-          title="Una guía técnica para no saltear pasos críticos"
-          text="La app trabaja como apoyo al criterio profesional: estructura síntomas, ramas técnicas, hipótesis y casos de referencia sin prometer diagnósticos automáticos."
-        />
-        <div className="card-grid three">
-          {appCapabilities.map((item) => (
-            <article className="info-card app-capability-card" key={item.title}>
-              <Icon name={item.icon} />
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="inner-section app-field-panel">
-        <div>
-          <p className="eyebrow">Cómo ayuda en planta</p>
-          <h2>Ordena el análisis cuando hay presión, alarmas y poco tiempo</h2>
-          <p>
-            En una falla real pueden aparecer señales engañosas: CPU en RUN con proceso detenido,
-            BF intermitente después de mantenimiento, estación remota sin alimentación o FRCE activo
-            olvidado. La app ayuda a separar evidencia de suposiciones.
-          </p>
-        </div>
-        <div className="check-grid compact">
-          {appPlantBenefits.map((item) => (
-            <CheckItem key={item}>{item}</CheckItem>
-          ))}
-        </div>
-      </section>
-
-      <section className="inner-section">
-        <SectionHeader
-          eyebrow="Módulos de diagnóstico"
-          title="Ramas técnicas para PLC Siemens S7-300/400"
-          text="El flujo mantiene contexto. Si aparece BF y HW Config muestra un esclavo DP caído, la guía continúa por PROFIBUS/DP en lugar de saltar a DI/DO sin relación."
-        />
-        <div className="app-module-grid">
-          {appDiagnosticModules.map((module) => (
-            <article className="app-module-card" key={module.title}>
-              <h3>{module.title}</h3>
-              <p>{module.text}</p>
-              <div className="tag-list">
-                {module.items.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="inner-section app-evidence-panel">
-        <figure>
-          <img src={step7ClassicVisual} alt="SIMATIC STEP 7 Classic HW Config para diagnóstico PLC Siemens S7" loading="lazy" />
-        </figure>
-        <div>
-          <p className="eyebrow">Hipótesis ponderadas</p>
-          <h2>No adivina: prioriza verificaciones según síntomas</h2>
-          <p>
-            A medida que el usuario responde, BOJ S7-PLC actualiza causas probables y deja visibles
-            solo las hipótesis relevantes: OB82/OB86 faltantes, estación DP caída, ET200 sin 24 VDC,
-            HW Config no coincidente, FRCE activo o falla intermitente por vibración.
-          </p>
-          <div className="hypothesis-list">
-            {["Estación DP caída", "ET200 sin 24 VDC", "Conector PROFIBUS flojo", "OB86 faltante"].map((item, index) => (
-              <span key={item}>
-                <b>{index + 1}</b>
-                {item}
-              </span>
+          <div className="app-pro-flow-grid">
+            {appDiagnosticFlow.map((item) => (
+              <article className="app-pro-flow-card" key={item.title}>
+                <Icon name={item.icon} size={28} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="inner-section" id="course-edition">
-        <SectionHeader
-          eyebrow="Course Edition vs PRO"
-          title="Una versión incluida con el curso y una versión completa para campo"
-          text="La Course Edition permite aplicar el método sobre estados CPU y fallas PROFIBUS frecuentes. PRO desbloquea el motor completo, ramas avanzadas y biblioteca extendida."
-        />
-        <AppComparisonTable />
-      </section>
-
-      <section className="inner-section app-version-grid">
-        <article className="version-card app-version-card">
-          <span className="edition-badge course">Course Edition</span>
-          <h3>BOJ S7-PLC Course Edition</h3>
-          <p>
-            Incluida con el curso. Habilita el módulo completo de LEDs, interpretación de estados
-            CPU, diagnóstico guiado básico, rama PROFIBUS/DP, 10 casos reales seleccionados y guía técnica esencial.
-          </p>
-          <SecondaryLink href="#/cursos/s7-300-400">Ver curso vinculado</SecondaryLink>
-        </article>
-        <article className="version-card app-version-card pro">
-          <span className="edition-badge pro">PRO</span>
-          <h3>BOJ S7-PLC PRO</h3>
-          <p>
-            Desbloquea todas las ramas: señales analógicas, DO/actuadores, lógica, secuencias,
-            interlocks, fallas intermitentes, diagnóstico engañoso avanzado, 80+ casos, guía completa e informes.
-          </p>
-          <PrimaryLink href="https://www.bojautomatizacion.com/#/app">
-            Desbloquear versión PRO
-          </PrimaryLink>
-        </article>
-      </section>
-
-      <section className="inner-section">
-        <SectionHeader
-          eyebrow="Casos reales incluidos"
-          title="Biblioteca de fallas típicas para consultar con criterio"
-          text="Cada caso se presenta con contexto, síntoma observado, causa probable, verificación recomendada, error típico y criterio de seguridad."
-        />
-        <div className="case-grid">
-          {appRealCases.map((caseItem, index) => (
-            <article className="case-card" key={caseItem}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <p>{caseItem}</p>
-            </article>
-          ))}
-        </div>
-        <div className="technical-note app-library-note">
-          <Icon name="ClipboardCheck" />
-          <p>
-            Course Edition incluye 10 casos seleccionados. PRO amplía la biblioteca a 80+ casos reales,
-            incluyendo señales analógicas, actuadores, lógica, interlocks, fallas intermitentes y diagnósticos engañosos.
-          </p>
+      <section className="app-pro-dark-section">
+        <div className="mock-home-container">
+          <div className="app-pro-section-heading">
+            <h2>Qué incluye BOJ S7-PLC PRO</h2>
+          </div>
+          <div className="app-pro-include-grid">
+            {appProIncludes.map((item) => (
+              <article className="app-pro-include-card" key={item.title}>
+                <Icon name={item.icon} size={30} />
+                <h3>{item.title}</h3>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="inner-section">
-        <SectionHeader
-          eyebrow="Para quién es"
-          title="Pensada para usuarios técnicos que trabajan con Siemens S7"
-          text="BOJ S7-PLC habla el lenguaje del mantenimiento industrial: CPU, LEDs, BF/SF, Diagnostic Buffer, HW Config, PROFIBUS, señales y criterio de intervención."
-        />
-        <div className="audience-grid">
-          {appAudience.map((item) => (
-            <CheckItem key={item}>{item}</CheckItem>
-          ))}
+      <section className="app-pro-plans-section" id="planes-pro">
+        <div className="mock-home-container">
+          <div className="app-pro-section-heading">
+            <h2>Elegí tu licencia PRO</h2>
+            <p>Licencias por tiempo de uso. Acceso completo a la app.</p>
+          </div>
+          <div className="app-pro-plan-grid">
+            {appProPlans.map((plan) => (
+              <article className="app-pro-plan-card" key={plan.title}>
+                {plan.badge ? <span className="app-pro-plan-badge">{plan.badge}</span> : null}
+                <h3>{plan.title}</h3>
+                <strong>{plan.price}</strong>
+                <p>{plan.text}</p>
+                <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
+                  {plan.button} <ExternalLink size={17} />
+                </a>
+              </article>
+            ))}
+          </div>
+          <article className="app-pro-institutional">
+            <h3>Institucional / Centros de formación: A cotizar.</h3>
+            <p>Consultá por licencias para instituciones, academias o centros de formación técnica.</p>
+          </article>
         </div>
       </section>
 
-      <RouteCTA
-        title="Diagnóstico de PLC con un método más ordenado"
-        text="BOJ S7-PLC se utiliza como apoyo técnico para interpretar síntomas, seguir verificaciones y priorizar causas probables en sistemas Siemens S7-300/400."
-        primaryLabel="Desbloquear versión PRO"
-        primaryHref="https://www.bojautomatizacion.com/#/app"
-        secondaryLabel="Ver curso con Course Edition"
-        secondaryHref="#/cursos/s7-300-400"
-      />
-    </PageShell>
+      <section className="app-pro-trial-section" id="trial-48">
+        <div className="mock-home-container app-pro-trial-grid">
+          <div>
+            <p className="app-pro-eyebrow">PRUEBA INICIAL</p>
+            <h2>Probá BOJ S7-PLC PRO durante 48 hs</h2>
+            <p>
+              Accedé a una prueba inicial para conocer el flujo de diagnóstico, cargar síntomas y evaluar
+              si la herramienta se adapta a tu forma de trabajo.
+            </p>
+          </div>
+          <div className="app-pro-trial-card">
+            <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
+              Iniciar prueba gratis <ExternalLink size={18} />
+            </a>
+            <p>
+              Ingresá en:{" "}
+              <a href={appProductUrl} target="_blank" rel="noreferrer">
+                app.bojautomatizacion.com
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="app-pro-legal-section">
+        <div className="mock-home-container">
+          <div className="app-pro-legal-card">
+            <Icon name="ShieldCheck" size={28} />
+            <p>
+              BOJ S7-PLC PRO es una herramienta de asistencia técnica para diagnóstico orientativo.
+              No reemplaza el criterio profesional, los procedimientos de seguridad de planta ni las
+              verificaciones eléctricas, de hardware o de proceso que correspondan.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
   );
 }
 
