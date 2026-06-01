@@ -6833,8 +6833,8 @@ textarea {
 
 .app-pro-hero-shade {
   background:
-    linear-gradient(90deg, rgba(2, 11, 20, 0.96) 0%, rgba(2, 11, 20, 0.88) 34%, rgba(2, 11, 20, 0.48) 62%, rgba(2, 11, 20, 0.16) 100%),
-    linear-gradient(180deg, rgba(2, 11, 20, 0.1), rgba(2, 11, 20, 0.58));
+    linear-gradient(90deg, rgba(2, 11, 20, 0.96) 0%, rgba(2, 11, 20, 0.9) 28%, rgba(2, 11, 20, 0.58) 50%, rgba(2, 11, 20, 0.3) 72%, rgba(2, 11, 20, 0.12) 100%),
+    linear-gradient(180deg, rgba(2, 11, 20, 0.06), rgba(2, 11, 20, 0.42));
 }
 
 .app-pro-hero-grid {
@@ -6912,15 +6912,15 @@ textarea {
 
 .app-pro-section-heading {
   max-width: 780px;
-  margin: 0 auto 24px;
+  margin: 0 auto 22px;
   text-align: center;
 }
 
 .app-pro-section-heading h2 {
   margin: 0;
   color: #ffffff;
-  font-size: clamp(2rem, 3vw, 2.8rem);
-  line-height: 1.08;
+  font-size: clamp(1.95rem, 2.7vw, 2.7rem);
+  line-height: 1.06;
 }
 
 .app-pro-section-heading p {
@@ -6935,7 +6935,7 @@ textarea {
 }
 
 .app-pro-light-section {
-  padding: 56px 0;
+  padding: 50px 0 54px;
   background: #f5f8fb;
   color: #071521;
 }
@@ -6948,7 +6948,7 @@ textarea {
 
 .app-pro-flow-card {
   min-height: auto;
-  padding: 22px;
+  padding: 22px 24px;
   border: 1px solid rgba(7, 21, 33, 0.1);
   border-radius: 16px;
   background: #ffffff;
@@ -6984,14 +6984,14 @@ textarea {
 .app-pro-legal-section {
   position: relative;
   overflow: hidden;
-  padding: 56px 0;
+  padding: 56px 0 60px;
   background:
     radial-gradient(circle at 50% 0%, rgba(0, 166, 214, 0.14), transparent 42%),
     linear-gradient(180deg, #061927 0%, #020b14 100%);
 }
 
 .app-pro-plans-section {
-  padding: 44px 0 48px;
+  padding: 48px 0 52px;
 }
 
 .app-pro-plans-section .app-pro-section-heading {
@@ -7036,8 +7036,8 @@ textarea {
 .app-pro-include-card {
   display: grid;
   place-items: center;
-  min-height: 176px;
-  padding: 22px 16px;
+  min-height: 166px;
+  padding: 20px 16px;
   border: 1px solid rgba(157, 190, 214, 0.22);
   border-radius: 16px;
   background:
@@ -7070,7 +7070,7 @@ textarea {
 }
 
 .app-pro-problems-section {
-  padding-top: 52px;
+  padding-top: 48px;
   border-bottom: 1px solid rgba(7, 21, 33, 0.08);
 }
 
@@ -7116,8 +7116,8 @@ textarea {
 
 .app-pro-split-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
-  gap: 22px;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr);
+  gap: 32px;
 }
 
 .app-pro-how-card,
@@ -7145,10 +7145,20 @@ textarea {
 }
 
 .app-pro-step {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 12px;
   align-items: start;
+}
+
+.app-pro-step:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 5px;
+  right: -13px;
+  color: rgba(0, 143, 199, 0.72);
+  font-weight: 900;
 }
 
 .app-pro-step > span {
@@ -7186,6 +7196,7 @@ textarea {
 .app-pro-language-list span {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   min-height: 36px;
   padding: 8px 13px;
   border: 1px solid rgba(0, 143, 199, 0.24);
@@ -7193,6 +7204,7 @@ textarea {
   background: rgba(0, 143, 199, 0.08);
   color: #056f9d;
   font-weight: 850;
+  min-width: 94px;
 }
 
 .app-pro-real-view-section {
@@ -7246,7 +7258,7 @@ textarea {
   display: flex;
   flex-direction: column;
   min-height: 236px;
-  padding: 22px 20px;
+  padding: 26px 28px;
   border: 1px solid rgba(0, 166, 214, 0.26);
   border-radius: 20px;
   background:
@@ -7340,7 +7352,7 @@ textarea {
 }
 
 .app-pro-trial-section {
-  padding: 56px 0;
+  padding: 46px 0;
   background: #ffffff;
   color: #071521;
 }
@@ -7457,6 +7469,10 @@ textarea {
 
   .app-pro-step-list {
     grid-template-columns: 1fr;
+  }
+
+  .app-pro-step:not(:last-child)::after {
+    display: none;
   }
 
   .app-pro-plan-grid {

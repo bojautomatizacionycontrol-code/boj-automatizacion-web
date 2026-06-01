@@ -594,7 +594,7 @@ const appHowItWorks = [
   },
 ];
 
-const appLanguages = ["Español", "English", "Português"];
+const appLanguages = ["Español", "English", "Português", "Deutsch", "Français", "Italiano"];
 
 const appRealViews = [
   {
