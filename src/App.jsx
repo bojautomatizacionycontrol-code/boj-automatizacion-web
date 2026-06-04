@@ -517,7 +517,7 @@ const coursesLearningBlocks = [
   },
 ];
 
-const appProductUrl = "http://app.bojautomatizacion.com/";
+const appProductUrl = "https://app.bojautomatizacion.com/";
 
 const appDiagnosticFlow = [
   {
@@ -533,7 +533,7 @@ const appDiagnosticFlow = [
   {
     icon: "ShieldCheck",
     title: "Guía de verificación",
-    text: "Obtené pasos sugeridos para verificar PLC, red, hardware y condiciones de campo.",
+    text: "Obtén pasos sugeridos para verificar PLC, red, hardware y condiciones de campo.",
   },
 ];
 
@@ -581,16 +581,16 @@ const appProblemItems = [
 
 const appHowItWorks = [
   {
-    title: "Ingresás el síntoma",
-    text: "Cargá lo que observás en el PLC y en campo.",
+    title: "Ingresas el síntoma",
+    text: "Carga lo que observas en el PLC y en campo.",
   },
   {
     title: "La app ordena hipótesis",
-    text: "Recibís causas probables juntas con prioridad.",
+    text: "Recibes causas probables organizadas por prioridad.",
   },
   {
-    title: "Verificás en campo",
-    text: "Seguís la guía paso a paso y validás la causa raíz.",
+    title: "Verificas en campo",
+    text: "Sigues una guía paso a paso para validar la causa probable.",
   },
 ];
 
@@ -617,25 +617,75 @@ const appRealViews = [
 const appProPlans = [
   {
     title: "Mensual",
-    price: "60 USD",
-    meta: "1 dispositivo · 1 mes",
-    text: "Uso puntual, pruebas extendidas o diagnóstico temporal.",
+    price: "27 USD",
+    meta: "1 mes · 1 licencia",
+    text: "Acceso completo a BOJ S7-PLC PRO para uso puntual, pruebas extendidas o diagnóstico temporal.",
+    bullets: ["Acceso completo PRO", "1 licencia", "Vigencia por 1 mes", "Ideal para uso puntual"],
     button: "Elegir plan",
   },
   {
-    title: "6 meses",
-    price: "197 USD",
-    meta: "1 dispositivo · 6 meses",
-    text: "Técnicos y mantenimiento con uso recurrente.",
-    button: "Elegir plan",
-  },
-  {
-    title: "12 meses — 5 licencias",
-    price: "497 USD",
-    meta: "5 dispositivos · 12 meses",
-    text: "Para equipos de mantenimiento y varias estaciones de trabajo.",
+    title: "Técnico",
+    price: "97 USD",
+    meta: "6 meses · 1 licencia · Curso en PDFs incluido",
+    text: "Plan recomendado para técnicos de mantenimiento, instrumentistas, electricistas industriales y automatistas que necesitan usar la herramienta de forma recurrente.",
+    bullets: [
+      "Acceso completo PRO",
+      "1 licencia",
+      "Vigencia por 6 meses",
+      "Curso técnico en PDFs incluido",
+      "Mejor opción para uso profesional individual",
+    ],
     button: "Elegir plan",
     badge: "Más conveniente",
+  },
+  {
+    title: "Empresas",
+    price: "497 USD",
+    meta: "12 meses · 6 licencias · Curso en PDFs incluido",
+    text: "Plan pensado para empresas, equipos de mantenimiento, áreas de automatización o varias estaciones de trabajo.",
+    bullets: [
+      "Acceso completo PRO",
+      "6 licencias incluidas",
+      "Vigencia por 12 meses",
+      "Curso técnico en PDFs incluido",
+      "Pensado para equipos técnicos y empresas",
+    ],
+    button: "Elegir plan",
+  },
+];
+
+const appAudienceProfiles = [
+  { icon: "Wrench", text: "Técnicos de mantenimiento industrial" },
+  { icon: "Gauge", text: "Instrumentistas y electricistas de planta" },
+  { icon: "Cpu", text: "Automatistas y programadores PLC" },
+  { icon: "Factory", text: "Empresas con sistemas Siemens S7-300/400" },
+  { icon: "GraduationCap", text: "Centros de formación técnica" },
+];
+
+const appFaqItems = [
+  {
+    question: "¿Qué pasa cuando termina el trial de 48 hs?",
+    answer: "Al finalizar la prueba, el acceso gratuito se desactiva. Puedes continuar usando la herramienta activando una licencia PRO.",
+  },
+  {
+    question: "¿Necesito conectar la app directamente al PLC?",
+    answer: "No. La app trabaja con la información que cargas manualmente: estado de CPU, LEDs, síntomas, fallas de red, módulos y condiciones observadas en campo.",
+  },
+  {
+    question: "¿Sirve para Siemens S7-300 y S7-400?",
+    answer: "Sí. Está orientada al diagnóstico de sistemas Siemens S7-300/400, especialmente estados de CPU, LEDs, PROFIBUS, módulos y señales asociadas.",
+  },
+  {
+    question: "¿La app reemplaza al técnico?",
+    answer: "No. BOJ S7-PLC PRO es una herramienta de asistencia técnica. Ayuda a ordenar hipótesis y verificaciones, pero las conclusiones deben ser evaluadas por personal calificado.",
+  },
+  {
+    question: "¿Puedo usarla desde cualquier dispositivo?",
+    answer: "Sí. Es una aplicación web accesible desde navegador. La licencia se organiza por dispositivo según el plan contratado.",
+  },
+  {
+    question: "¿Hay planes para empresas o centros de formación?",
+    answer: "Sí. Las instituciones, empresas y centros de formación pueden solicitar una propuesta a medida.",
   },
 ];
 
@@ -1734,14 +1784,13 @@ function AppPage() {
         <div className="app-pro-hero-shade" aria-hidden="true" />
         <div className="mock-home-container app-pro-hero-grid">
           <div className="app-pro-hero-copy">
-            <h1>BOJ S7-PLC PRO</h1>
-            <p className="app-pro-subtitle">
-              Asistente técnico para diagnóstico orientativo de fallas en PLC Siemens S7-300/400.
-            </p>
+            <h1>Diagnostica fallas en PLC Siemens S7-300/400 con método, no a prueba y error</h1>
+            <p className="app-pro-product-name">BOJ S7-PLC PRO</p>
             <p>
-              Cargá síntomas, estados de CPU, LEDs y condiciones de campo para obtener hipótesis técnicas
-              ordenadas y una guía de verificación.
+              Carga síntomas, estados de CPU, LEDs, fallas de red y condiciones de campo para obtener
+              hipótesis técnicas priorizadas y una guía de verificación paso a paso.
             </p>
+            <p className="app-pro-microcopy">Prueba la herramienta durante 48 hs sin tarjeta de crédito.</p>
             <div className="app-pro-actions">
               <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
                 Probar gratis 48 hs <ExternalLink size={18} />
@@ -1753,40 +1802,6 @@ function AppPage() {
             <a className="app-pro-url" href={appProductUrl} target="_blank" rel="noreferrer">
               app.bojautomatizacion.com
             </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="app-pro-light-section">
-        <div className="mock-home-container">
-          <div className="app-pro-section-heading app-pro-section-heading-dark">
-            <h2>Diagnóstico guiado para mantenimiento industrial</h2>
-          </div>
-          <div className="app-pro-flow-grid">
-            {appDiagnosticFlow.map((item) => (
-              <article className="app-pro-flow-card" key={item.title}>
-                <Icon name={item.icon} size={28} />
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="app-pro-dark-section">
-        <div className="mock-home-container">
-          <div className="app-pro-section-heading">
-            <h2>Qué incluye BOJ S7-PLC PRO</h2>
-          </div>
-          <div className="app-pro-include-grid">
-            {appProIncludes.map((item) => (
-              <article className="app-pro-include-card" key={item.title}>
-                <Icon name={item.icon} size={30} />
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
           </div>
         </div>
       </section>
@@ -1808,8 +1823,8 @@ function AppPage() {
         </div>
       </section>
 
-      <section className="app-pro-light-section app-pro-split-section">
-        <div className="mock-home-container app-pro-split-grid">
+      <section className="app-pro-light-section app-pro-how-section">
+        <div className="mock-home-container">
           <div className="app-pro-how-card">
             <h2>Cómo funciona</h2>
             <div className="app-pro-step-list">
@@ -1824,15 +1839,23 @@ function AppPage() {
               ))}
             </div>
           </div>
-          <aside className="app-pro-language-card">
-            <h2>Disponible en varios idiomas</h2>
-            <div className="app-pro-language-list">
-              {appLanguages.map((language) => (
-                <span key={language}>{language}</span>
-              ))}
-            </div>
-            <p>Interfaz preparada para uso técnico internacional.</p>
-          </aside>
+        </div>
+      </section>
+
+      <section className="app-pro-dark-section">
+        <div className="mock-home-container">
+          <div className="app-pro-section-heading">
+            <h2>Qué incluye BOJ S7-PLC PRO</h2>
+          </div>
+          <div className="app-pro-include-grid">
+            {appProIncludes.map((item) => (
+              <article className="app-pro-include-card" key={item.title}>
+                <Icon name={item.icon} size={30} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1851,15 +1874,91 @@ function AppPage() {
               </article>
             ))}
           </div>
+          <div className="app-pro-centered-cta">
+            <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
+              Probar gratis 48 hs <ExternalLink size={18} />
+            </a>
+            <p>Sin tarjeta de crédito · Acceso inmediato</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="app-pro-light-section app-pro-language-section">
+        <div className="mock-home-container">
+          <div className="app-pro-language-card">
+            <h2>Disponible en varios idiomas</h2>
+            <div className="app-pro-language-list">
+              {appLanguages.map((language) => (
+                <span key={language}>{language}</span>
+              ))}
+            </div>
+            <p>Interfaz preparada para uso técnico internacional.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="app-pro-light-section app-pro-audience-section">
+        <div className="mock-home-container app-pro-audience-grid">
+          <div>
+            <div className="app-pro-section-heading app-pro-section-heading-dark app-pro-section-heading-left">
+              <h2>Para quién es BOJ S7-PLC PRO</h2>
+              <p>
+                Una herramienta pensada para personas y equipos que necesitan ordenar un diagnóstico técnico
+                antes de intervenir en planta.
+              </p>
+            </div>
+            <div className="app-pro-audience-list">
+              {appAudienceProfiles.map((item) => (
+                <article className="app-pro-audience-item" key={item.text}>
+                  <Icon name={item.icon} size={22} />
+                  <span>{item.text}</span>
+                </article>
+              ))}
+            </div>
+          </div>
+          <aside className="app-pro-not-for-card">
+            <h3>No está pensada para</h3>
+            <p>
+              Reemplazar al técnico ni ejecutar acciones sobre el PLC. Es una herramienta de asistencia para
+              ordenar hipótesis y verificaciones.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section className="app-pro-trust-section">
+        <div className="mock-home-container app-pro-trust-grid">
+          <div className="app-pro-trust-icon">
+            <Icon name="ShieldCheck" size={34} />
+          </div>
+          <div>
+            <h2>Desarrollada con criterio de planta</h2>
+            <p>
+              BOJ S7-PLC PRO fue desarrollada por Walter Adrián Boj, especialista en automatización industrial
+              y diagnóstico de sistemas PLC Siemens, con experiencia en mantenimiento, programación, redes
+              industriales e intervención sobre fallas reales de planta.
+            </p>
+            <p>
+              La herramienta no busca reemplazar al profesional, sino ayudarlo a ordenar síntomas, relacionar
+              evidencia y avanzar con una secuencia lógica de verificación.
+            </p>
+            <a className="mock-btn mock-btn-outline" href={contact.linkedin} target="_blank" rel="noreferrer">
+              Ver perfil profesional <ExternalLink size={17} />
+            </a>
+          </div>
         </div>
       </section>
 
       <section className="app-pro-plans-section" id="planes-pro">
         <div className="mock-home-container">
           <div className="app-pro-section-heading">
-            <h2>Elegí tu licencia PRO</h2>
+            <h2>Elige tu licencia PRO</h2>
             <p>Licencias por tiempo de uso. Acceso completo a la app.</p>
           </div>
+          <p className="app-pro-value-note">
+            Una parada de máquina puede costar mucho más que una licencia. BOJ S7-PLC PRO ayuda a ordenar
+            el diagnóstico antes de cambiar hardware, reiniciar equipos o intervenir sin evidencia.
+          </p>
           <div className="app-pro-plan-grid">
             {appProPlans.map((plan) => (
               <article className="app-pro-plan-card" key={plan.title}>
@@ -1868,6 +1967,13 @@ function AppPage() {
                 <strong>{plan.price}</strong>
                 <span className="app-pro-plan-meta">{plan.meta}</span>
                 <p>{plan.text}</p>
+                <ul>
+                  {plan.bullets.map((item) => (
+                    <li key={item}>
+                      <CheckCircle2 size={15} /> {item}
+                    </li>
+                  ))}
+                </ul>
                 <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
                   {plan.button} <ExternalLink size={17} />
                 </a>
@@ -1893,9 +1999,9 @@ function AppPage() {
       <section className="app-pro-trial-section" id="trial-48">
         <div className="mock-home-container app-pro-trial-grid">
           <div>
-            <h2>Probá BOJ S7-PLC PRO durante 48 hs</h2>
+            <h2>Prueba BOJ S7-PLC PRO durante 48 hs</h2>
             <p>
-              Accedé a todas las funciones PRO sin compromiso. Registrate y obtené acceso inmediato
+              Accede a todas las funciones PRO sin compromiso. Regístrate y obtén acceso inmediato
               a la herramienta.
             </p>
           </div>
@@ -1908,13 +2014,29 @@ function AppPage() {
         </div>
       </section>
 
+      <section className="app-pro-faq-section">
+        <div className="mock-home-container">
+          <div className="app-pro-section-heading app-pro-section-heading-dark">
+            <h2>Preguntas frecuentes</h2>
+          </div>
+          <div className="app-pro-faq-grid">
+            {appFaqItems.map((item) => (
+              <article className="app-pro-faq-item" key={item.question}>
+                <h3>{item.question}</h3>
+                <p>{item.answer}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="app-pro-legal-section">
         <div className="mock-home-container">
           <div className="app-pro-legal-card">
             <Icon name="ShieldCheck" size={28} />
             <p>
-              BOJ S7-PLC PRO es una herramienta de asistencia técnica. Las conclusiones deben ser verificadas
-              por personal calificado. No reemplaza el juicio profesional ni los procedimientos de seguridad de planta.
+              BOJ S7-PLC PRO acompaña el criterio técnico del profesional. Las conclusiones deben ser verificadas
+              por personal calificado y no reemplazan los procedimientos de seguridad de planta.
             </p>
           </div>
         </div>
