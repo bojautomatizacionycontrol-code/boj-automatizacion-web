@@ -579,8 +579,8 @@ const appProIncludes = [
   },
   {
     icon: "MonitorCog",
-    title: "Interfaz web accesible",
-    text: "Desde cualquier dispositivo con navegador.",
+    title: "Interfaz web instalable",
+    text: "Acceso desde navegador y posibilidad de instalación en dispositivos compatibles.",
   },
   {
     icon: "Settings",
@@ -621,16 +621,19 @@ const appLanguages = ["Español", "English", "Português", "Deutsch", "Français
 const appRealViews = [
   {
     title: "Diagnóstico por estado de CPU",
+    text: "Carga RUN, STOP, SF, BF y otros estados para orientar el diagnóstico.",
     image: appRealCapture,
     position: "center top",
   },
   {
-    title: "Hipótesis técnicas",
+    title: "Hipótesis técnicas priorizadas",
+    text: "La app ordena posibles causas según la evidencia ingresada.",
     image: appProRealCapture,
     position: "center top",
   },
   {
     title: "Guía de verificación",
+    text: "Pasos concretos para validar la causa probable en campo.",
     image: appScreenshot,
     position: "center top",
   },
@@ -701,16 +704,58 @@ const appAudienceProfiles = [
 ];
 
 const appOfflineItems = [
-  { icon: "Globe", title: "El plan Trial", text: "funciona solo online" },
-  { icon: "WifiOff", title: "Mensual y Profesional", text: "offline hasta 2 días" },
-  { icon: "CalendarCheck", title: "Empresarial", text: "offline hasta 7 días" },
+  { icon: "Globe", title: "Trial", text: "Solo online" },
+  { icon: "WifiOff", title: "Mensual y Profesional", text: "Offline hasta 2 días" },
+  { icon: "CalendarCheck", title: "Empresarial", text: "Offline hasta 7 días" },
+];
+
+const appAccessItems = [
+  {
+    icon: "Globe",
+    title: "Acceso desde navegador",
+    text: "Ingresa desde cualquier equipo compatible usando app.bojautomatizacion.com.",
+  },
+  {
+    icon: "Smartphone",
+    title: "App instalable",
+    text: "Instálala en el dispositivo compatible para tener acceso directo como herramienta de trabajo.",
+  },
+  {
+    icon: "WifiOff",
+    title: "Uso offline según plan",
+    text: "Trial solo online. Mensual y Profesional offline hasta 2 días. Empresarial offline hasta 7 días.",
+  },
 ];
 
 const appHeroBadges = [
   { icon: "Globe", label: "Uso online y offline" },
+  { icon: "Smartphone", label: "App instalable" },
   { icon: "Brain", label: "Hipótesis priorizadas" },
   { icon: "ClipboardCheck", label: "Guía de verificación" },
   { icon: "Settings", label: "6 idiomas" },
+];
+
+const appOperationalBenefits = [
+  {
+    icon: "RefreshCcw",
+    title: "Reduce prueba y error",
+    text: "Ayuda a ordenar la intervención antes de cambiar módulos, reiniciar equipos o modificar lógica.",
+  },
+  {
+    icon: "Clock",
+    title: "Acelera el diagnóstico",
+    text: "Relaciona síntomas, LEDs, red, módulos y condiciones de campo en una misma secuencia.",
+  },
+  {
+    icon: "ShieldCheck",
+    title: "Mejora el criterio técnico",
+    text: "Propone hipótesis y verificaciones para respaldar decisiones en planta.",
+  },
+  {
+    icon: "ClipboardCheck",
+    title: "Estandariza el método",
+    text: "Permite que técnicos y equipos trabajen con una lógica común de diagnóstico.",
+  },
 ];
 
 const appTrustMetrics = [
@@ -734,12 +779,20 @@ const appFaqItems = [
     answer: "No. La app trabaja con la información que cargas manualmente: estado de CPU, LEDs, síntomas, fallas de red, módulos y condiciones observadas en campo.",
   },
   {
+    question: "¿La app se puede instalar?",
+    answer: "Sí. BOJ S7-PLC PRO puede instalarse en dispositivos compatibles para acceder más rápido como herramienta de trabajo. La disponibilidad offline depende del plan contratado.",
+  },
+  {
+    question: "¿Necesito instalar algo para usarla?",
+    answer: "No es obligatorio. Puedes usarla desde el navegador. Si el dispositivo es compatible, también puedes instalarla para tener acceso directo.",
+  },
+  {
     question: "¿La app reemplaza al técnico?",
     answer: "No. BOJ S7-PLC PRO es una herramienta de asistencia técnica. Ayuda a ordenar hipótesis y verificaciones, pero las conclusiones deben ser evaluadas por personal calificado.",
   },
   {
     question: "¿La app funciona offline?",
-    answer: "Sí, según el plan contratado. El plan Mensual y Profesional permiten uso offline hasta 2 días. El plan Empresarial permite uso offline hasta 7 días. El Trial funciona solo online.",
+    answer: "Sí, según el plan contratado. El Trial funciona solo online. El plan Mensual y el plan Profesional permiten uso offline hasta 2 días. El plan Empresarial permite uso offline hasta 7 días.",
   },
   {
     question: "¿Qué planes incluyen curso?",
@@ -1944,6 +1997,23 @@ function AppPage() {
         </div>
       </section>
 
+      <section className="app-pro-benefits-section">
+        <div className="mock-home-container">
+          <div className="app-pro-section-heading">
+            <h2>Por qué usar BOJ S7-PLC PRO en una falla real</h2>
+          </div>
+          <div className="app-pro-benefit-grid">
+            {appOperationalBenefits.map((item) => (
+              <article className="app-pro-benefit-card" key={item.title}>
+                <Icon name={item.icon} size={26} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="app-pro-real-language-section">
         <div className="mock-home-container app-pro-real-language-grid">
           <div>
@@ -1956,26 +2026,37 @@ function AppPage() {
                   </figure>
                   <div>
                     <h3>{item.title}</h3>
-                    <p>
-                      {item.title === "Diagnóstico por estado de CPU"
-                        ? "Interpretación clara de estados y síntomas."
-                        : item.title === "Hipótesis técnicas"
-                          ? "Causas probables ordenadas por prioridad."
-                          : "Pasos detallados para validar la causa."}
-                    </p>
+                    <p>{item.text}</p>
                   </div>
                 </article>
               ))}
             </div>
           </div>
           <div className="app-pro-language-card">
-            <h2>Disponible en varios idiomas</h2>
+            <h2>Disponible en 6 idiomas</h2>
             <div className="app-pro-language-list">
               {appLanguages.map((language) => (
                 <span key={language}>{language}</span>
               ))}
             </div>
-            <p>Interfaz preparada para uso técnico internacional.</p>
+            <p>Interfaz preparada para técnicos, empresas y equipos de mantenimiento en distintos países.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="app-pro-access-section">
+        <div className="mock-home-container">
+          <div className="app-pro-section-heading app-pro-section-heading-dark">
+            <h2>Acceso web, instalación y uso offline</h2>
+          </div>
+          <div className="app-pro-access-grid">
+            {appAccessItems.map((item) => (
+              <article className="app-pro-access-card" key={item.title}>
+                <Icon name={item.icon} size={26} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -1983,7 +2064,7 @@ function AppPage() {
       <section className="app-pro-value-row-section">
         <div className="mock-home-container app-pro-value-row-grid">
           <article className="app-pro-offline-card">
-            <h2>Online y offline según el plan</h2>
+            <h2>Online, instalable y offline según el plan</h2>
             <div className="app-pro-offline-items">
               {appOfflineItems.map((item) => (
                 <div key={item.title}>
@@ -1993,14 +2074,18 @@ function AppPage() {
                 </div>
               ))}
             </div>
+            <p className="app-pro-offline-note">
+              La instalación facilita el acceso, pero la disponibilidad offline depende del plan contratado.
+            </p>
           </article>
           <article className="app-pro-cost-card">
             <div>
-              <h2>El costo de una parada es mayor que el de una licencia</h2>
+              <h2>Una parada de planta puede costar más que una licencia</h2>
               <p>
-                Una parada de máquina puede costar mucho más que una licencia. BOJ S7-PLC PRO ayuda a ordenar
-                el diagnóstico antes de cambiar hardware, reiniciar equipos o intervenir sin evidencia.
+                Cuando una máquina está detenida, cada minuto cuenta. BOJ S7-PLC PRO ayuda a ordenar síntomas,
+                hipótesis y verificaciones antes de cambiar hardware, reiniciar equipos o intervenir sin evidencia.
               </p>
+              <strong className="app-pro-cost-emphasis">Menos prueba y error. Más criterio técnico.</strong>
             </div>
             <div className="app-pro-cost-visual" aria-hidden="true">
               <span />
@@ -2014,6 +2099,10 @@ function AppPage() {
           </article>
           <article className="app-pro-audience-card">
             <h2>Para quién es BOJ S7-PLC PRO</h2>
+            <p className="app-pro-audience-intro">
+              Pensada para técnicos y equipos que necesitan ordenar un diagnóstico antes de intervenir en sistemas
+              Siemens S7-300/400.
+            </p>
             <div className="app-pro-audience-list">
               {appAudienceProfiles.map((item) => (
                 <div className="app-pro-audience-item" key={item.text}>
@@ -2023,8 +2112,8 @@ function AppPage() {
               ))}
             </div>
             <p className="app-pro-audience-note">
-              No está pensada para reemplazar al técnico: es una herramienta de asistencia para ordenar hipótesis
-              y verificaciones.
+              No reemplaza al técnico: lo ayuda a ordenar hipótesis, verificar evidencia y tomar mejores decisiones
+              en campo.
             </p>
           </article>
         </div>
@@ -2107,7 +2196,7 @@ function AppPage() {
           </div>
           <div>
             <h2>Prueba BOJ S7-PLC PRO durante 48 hs</h2>
-            <p>Sin tarjeta de crédito · Acceso inmediato · Funciona online</p>
+            <p>Acceso inmediato · Sin tarjeta de crédito · Funciona online · Ideal para conocer el flujo de diagnóstico</p>
           </div>
           <a className="mock-btn mock-btn-light" href={appProductUrl} target="_blank" rel="noreferrer">
             Probar gratis 48 hs <ExternalLink size={18} />

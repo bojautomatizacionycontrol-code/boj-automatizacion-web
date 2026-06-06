@@ -9124,3 +9124,165 @@ textarea {
     font-size: clamp(1.85rem, 8.3vw, 2.7rem);
   }
 }
+
+/* APP conversion polish: installable access, benefits and clearer proof blocks */
+.app-pro-benefits-section {
+  position: relative;
+  overflow: hidden;
+  padding: 24px 0 28px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0, 174, 234, 0.14), transparent 42%),
+    linear-gradient(180deg, #06192a 0%, #020d1e 100%);
+  color: var(--boj-white);
+}
+
+.app-pro-benefits-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.app-pro-benefits-section > .mock-home-container {
+  position: relative;
+  z-index: 1;
+}
+
+.app-pro-benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.app-pro-benefit-card {
+  min-height: 126px;
+  padding: 16px 14px;
+  border: 1px solid rgba(0, 174, 234, 0.24);
+  border-radius: 8px;
+  background: rgba(7, 25, 39, 0.9);
+  box-shadow: inset 0 -3px 0 rgba(0, 174, 234, 0.52);
+}
+
+.app-pro-benefit-card svg {
+  color: var(--boj-cyan);
+}
+
+.app-pro-benefit-card h3 {
+  margin: 10px 0 6px;
+  color: var(--boj-white);
+  font-size: 0.84rem;
+  line-height: 1.22;
+  font-weight: 900;
+}
+
+.app-pro-benefit-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.72rem;
+  line-height: 1.42;
+}
+
+.app-pro-real-view-card img {
+  object-fit: contain;
+  background: var(--boj-bg);
+}
+
+.app-pro-real-view-card p {
+  min-height: 34px;
+}
+
+.app-pro-access-section {
+  padding: 18px 0 20px;
+  border-top: 1px solid var(--boj-line-light);
+  border-bottom: 1px solid var(--boj-line-light);
+  background: #f7fbff;
+  color: var(--boj-text);
+}
+
+.app-pro-access-section .app-pro-section-heading {
+  margin-bottom: 14px;
+}
+
+.app-pro-access-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.app-pro-access-card {
+  min-height: 118px;
+  padding: 16px;
+  border: 1px solid var(--boj-line-light);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(7, 21, 33, 0.06);
+}
+
+.app-pro-access-card svg {
+  color: var(--boj-cyan);
+}
+
+.app-pro-access-card h3 {
+  margin: 9px 0 6px;
+  color: var(--boj-text);
+  font-size: 0.88rem;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.app-pro-access-card p {
+  margin: 0;
+  color: var(--boj-muted);
+  font-size: 0.74rem;
+  line-height: 1.42;
+  overflow-wrap: anywhere;
+}
+
+.app-pro-value-row-section {
+  padding-top: 18px;
+}
+
+.app-pro-offline-note,
+.app-pro-audience-intro {
+  margin: 12px 0 0;
+  color: var(--boj-muted);
+  font-size: 0.72rem;
+  line-height: 1.42;
+}
+
+.app-pro-cost-emphasis {
+  display: block;
+  margin-top: 10px;
+  color: var(--boj-cyan-2);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  font-weight: 900;
+}
+
+.app-pro-audience-intro {
+  margin: -4px 0 12px;
+}
+
+@media (max-width: 1180px) {
+  .app-pro-benefit-grid,
+  .app-pro-access-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .app-pro-benefit-grid,
+  .app-pro-access-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-pro-benefit-card,
+  .app-pro-access-card {
+    min-height: 0;
+  }
+}
