@@ -9787,3 +9787,394 @@ textarea {
     justify-self: center;
   }
 }
+
+/* APP strict layout pass */
+.app-pro-page,
+.app-pro-page * {
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.app-pro-page h1,
+.app-pro-page h2,
+.app-pro-page h3,
+.app-pro-page p,
+.app-pro-page li,
+.app-pro-page span,
+.app-pro-page summary,
+.app-pro-page a,
+.app-pro-page button {
+  letter-spacing: 0;
+}
+
+.app-pro-hero,
+.app-pro-problems-how-section,
+.app-pro-includes-section,
+.app-pro-benefits-section,
+.app-pro-real-language-section,
+.app-pro-access-section,
+.app-pro-value-row-section,
+.app-pro-trust-section,
+.app-pro-plans-section,
+.app-pro-trial-section,
+.app-pro-faq-section {
+  scroll-margin-top: 110px;
+}
+
+.app-pro-hero {
+  height: 360px;
+  min-height: 360px;
+}
+
+.app-pro-hero-content {
+  align-items: center;
+}
+
+.app-pro-hero-copy h1 {
+  max-width: 640px;
+  font-size: clamp(1.9rem, 2.65vw, 2.85rem);
+  line-height: 1.08;
+}
+
+.app-pro-hero-copy > p:not(.app-pro-product-name) {
+  max-width: 560px;
+}
+
+.app-pro-hero-badges {
+  max-width: 690px;
+}
+
+.app-pro-access-card,
+.app-pro-benefit-card,
+.app-pro-include-card,
+.app-pro-problem-item,
+.app-pro-real-view-card,
+.app-pro-plan-card,
+.app-pro-faq-item,
+.app-pro-institutional {
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.app-pro-real-view-grid {
+  width: min(100%, 1040px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.app-pro-real-view-card figure {
+  aspect-ratio: 16 / 9;
+}
+
+.app-pro-real-view-trigger img {
+  object-fit: contain;
+  object-position: center top;
+}
+
+.app-pro-access-card {
+  min-height: 128px;
+  height: 100%;
+}
+
+.app-pro-access-card p {
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.app-pro-trust-section {
+  padding: 28px 0;
+}
+
+.app-pro-trust-grid {
+  width: min(100%, 1200px);
+  max-width: 1200px;
+  grid-template-columns: 112px minmax(0, 1fr) minmax(480px, 1.25fr);
+  gap: 24px;
+  align-items: center;
+}
+
+.app-pro-trust-avatar {
+  width: 104px;
+  height: 104px;
+  border: 2px solid rgba(0, 174, 234, 0.88);
+  border-radius: 9999px;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0 0 24px rgba(0, 174, 234, 0.26);
+}
+
+.app-pro-trust-copy p {
+  max-width: 620px;
+}
+
+.app-pro-trust-metrics {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.app-pro-trust-metrics article {
+  min-height: 72px;
+  height: 100%;
+}
+
+.app-pro-plans-section {
+  padding: 88px 0 80px;
+  scroll-margin-top: 110px;
+}
+
+.app-pro-plans-section .app-pro-section-heading {
+  margin-bottom: 26px;
+}
+
+.app-pro-plans-section .app-pro-section-heading h2 {
+  margin: 0;
+}
+
+.app-pro-plans-section .app-pro-section-heading p {
+  max-width: 640px;
+  margin: 10px auto 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.app-pro-plan-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.app-pro-plan-card {
+  display: flex;
+  min-height: 306px;
+  height: 100%;
+  flex-direction: column;
+  padding: 24px 18px 18px;
+}
+
+.app-pro-plan-card.featured {
+  padding-top: 38px;
+}
+
+.app-pro-plan-card h3 {
+  line-height: 1.2;
+}
+
+.app-pro-plan-card strong {
+  line-height: 1;
+}
+
+.app-pro-plan-meta {
+  max-width: 100%;
+  white-space: normal;
+  line-height: 1.2;
+}
+
+.app-pro-plan-card ul {
+  margin: 15px 0 18px;
+}
+
+.app-pro-plan-card .mock-btn {
+  width: 100%;
+  margin-top: auto;
+  white-space: normal;
+}
+
+.app-pro-plan-badge {
+  top: 12px;
+  right: 14px;
+  white-space: nowrap;
+}
+
+.app-pro-institutional {
+  min-height: 78px;
+}
+
+.app-pro-trial-section {
+  min-height: 96px;
+  padding: 14px 0;
+}
+
+.app-pro-trial-grid {
+  min-height: 76px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+}
+
+.app-pro-trial-grid h2 {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.1vw, 1.85rem);
+  line-height: 1.12;
+}
+
+.app-pro-trial-grid p {
+  max-width: 760px;
+  margin: 5px 0 0;
+  line-height: 1.35;
+}
+
+.app-pro-trial-grid .mock-btn {
+  white-space: normal;
+}
+
+.app-pro-faq-section {
+  padding: 38px 0 48px;
+  background: #f7fbff;
+}
+
+.app-pro-faq-section .mock-home-container {
+  max-width: 1200px;
+}
+
+.app-pro-faq-section .app-pro-section-heading {
+  margin-bottom: 18px;
+}
+
+.app-pro-faq-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+
+.app-pro-faq-item {
+  overflow: hidden;
+  border: 1px solid #dce6ee;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgba(7, 21, 33, 0.06);
+}
+
+.app-pro-faq-item summary {
+  min-height: 52px;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  color: #07131f;
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+
+.app-pro-faq-item p {
+  padding: 0 14px 14px;
+  color: #536274;
+  font-size: 0.78rem;
+  line-height: 1.48;
+}
+
+@media (max-width: 1180px) {
+  .app-pro-trust-grid {
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .app-pro-trust-avatar {
+    width: 88px;
+    height: 88px;
+  }
+
+  .app-pro-trust-metrics {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-pro-plan-grid,
+  .app-pro-faq-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .app-pro-hero,
+  .app-pro-hero-content {
+    height: auto;
+  }
+
+  .app-pro-hero {
+    min-height: 560px;
+  }
+
+  .app-pro-hero-content {
+    padding: 138px 0 28px;
+  }
+
+  .app-pro-hero-copy h1 {
+    font-size: clamp(1.72rem, 7.1vw, 2.32rem);
+    line-height: 1.08;
+  }
+
+  .app-pro-hero-badges {
+    margin-top: 14px;
+  }
+
+  .app-pro-trust-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .app-pro-trust-avatar {
+    width: 76px;
+    height: 76px;
+    justify-self: center;
+  }
+
+  .app-pro-trust-copy p {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .app-pro-trust-copy .mock-btn {
+    justify-content: center;
+  }
+
+  .app-pro-trust-metrics,
+  .app-pro-plan-grid,
+  .app-pro-real-view-grid,
+  .app-pro-faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-pro-plans-section {
+    padding: 58px 0 56px;
+    scroll-margin-top: 90px;
+  }
+
+  .app-pro-plan-card,
+  .app-pro-plan-card.featured {
+    min-height: 0;
+    padding: 22px 18px 18px;
+  }
+
+  .app-pro-plan-badge {
+    position: static;
+    align-self: center;
+    margin-bottom: 10px;
+  }
+
+  .app-pro-institutional {
+    min-height: 0;
+  }
+
+  .app-pro-trial-section {
+    min-height: 0;
+    padding: 20px 0;
+  }
+
+  .app-pro-trial-grid {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+    text-align: center;
+  }
+
+  .app-pro-trial-rocket {
+    justify-self: center;
+  }
+
+  .app-pro-trial-grid .mock-btn {
+    justify-content: center;
+    width: 100%;
+  }
+}

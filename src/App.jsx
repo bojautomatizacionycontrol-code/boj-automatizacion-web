@@ -780,32 +780,32 @@ const appFaqItems = [
     answer: "El Trial permite probar BOJ S7-PLC PRO durante 48 horas. Funciona solo online y algunas funciones pueden estar limitadas.",
   },
   {
+    question: "¿La app se puede instalar?",
+    answer: "Sí. En dispositivos compatibles puede instalarse como aplicación web para acceder más rápido desde el escritorio o la pantalla de inicio.",
+  },
+  {
+    question: "¿Necesito instalar algo para usarla?",
+    answer: "No. También puede usarse desde el navegador ingresando a app.bojautomatizacion.com.",
+  },
+  {
+    question: "¿La app funciona offline?",
+    answer: "Depende del plan. El Trial funciona solo online. Mensual y Profesional permiten uso offline hasta 2 días. Empresarial permite uso offline hasta 7 días.",
+  },
+  {
     question: "¿Cuántos dispositivos puedo usar?",
     answer: "Depende del plan. Mensual incluye 1 dispositivo, Profesional incluye 2 dispositivos y Empresarial incluye 10 dispositivos.",
   },
   {
+    question: "¿Qué planes incluyen curso?",
+    answer: "El plan Profesional y el plan Empresarial incluyen app PRO + Curso. El plan Mensual incluye solo la app PRO.",
+  },
+  {
     question: "¿Necesito conectar la app directamente al PLC?",
-    answer: "No. La app trabaja con la información que cargas manualmente: estado de CPU, LEDs, síntomas, fallas de red, módulos y condiciones observadas en campo.",
-  },
-  {
-    question: "¿La app se puede instalar?",
-    answer: "Sí. BOJ S7-PLC PRO puede instalarse en dispositivos compatibles para acceder más rápido como herramienta de trabajo. La disponibilidad offline depende del plan contratado.",
-  },
-  {
-    question: "¿Necesito instalar algo para usarla?",
-    answer: "No es obligatorio. Puedes usarla desde el navegador. Si el dispositivo es compatible, también puedes instalarla para tener acceso directo.",
+    answer: "No. La app trabaja con la información que carga el usuario: estado de CPU, LEDs, síntomas, fallas de red, módulos y condiciones observadas en campo.",
   },
   {
     question: "¿La app reemplaza al técnico?",
     answer: "No. BOJ S7-PLC PRO es una herramienta de asistencia técnica. Ayuda a ordenar hipótesis y verificaciones, pero las conclusiones deben ser evaluadas por personal calificado.",
-  },
-  {
-    question: "¿La app funciona offline?",
-    answer: "Sí, según el plan contratado. El Trial funciona solo online. El plan Mensual y el plan Profesional permiten uso offline hasta 2 días. El plan Empresarial permite uso offline hasta 7 días.",
-  },
-  {
-    question: "¿Qué planes incluyen curso?",
-    answer: "El plan Profesional y el plan Empresarial incluyen app PRO + Curso. El plan Mensual incluye solo la app PRO.",
   },
   {
     question: "¿Sirve para Siemens S7-300 y S7-400?",
@@ -813,11 +813,11 @@ const appFaqItems = [
   },
   {
     question: "¿Puedo usarla desde cualquier dispositivo?",
-    answer: "Sí. Es una aplicación web accesible desde navegador. La licencia se organiza por dispositivo según el plan contratado.",
+    answer: "Puede usarse desde dispositivos compatibles con navegador moderno. La cantidad de dispositivos habilitados depende del plan contratado.",
   },
   {
     question: "¿Hay planes para empresas o centros de formación?",
-    answer: "Sí. Las instituciones, empresas y centros de formación pueden solicitar una propuesta a medida.",
+    answer: "Sí. Instituciones, empresas y centros de formación pueden solicitar condiciones especiales según cantidad de usuarios, licencias o programa de capacitación.",
   },
 ];
 
@@ -2207,6 +2207,7 @@ function AppPage() {
         <div className="mock-home-container">
           <div className="app-pro-section-heading">
             <h2>Elige tu licencia PRO</h2>
+            <p>Trial inicial y planes pagos según tiempo de uso, dispositivos y modalidad offline.</p>
           </div>
           <div className="app-pro-plan-grid">
             {pricingCards.map((plan) => (
