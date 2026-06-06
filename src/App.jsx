@@ -65,8 +65,11 @@ import {
 import bojLogo from "./assets/boj-logo-real-cropped.png";
 import appScreenshot from "./assets/APP.png";
 import appRealCapture from "./assets/boj-s7-plc-real-capture.png";
-import appProRealCapture from "./assets/app-pro-real-capture.png";
 import appProHeroLaptopVisual from "./assets/app-pro-hero-background-v2.png";
+import appPanelPrincipalDiagnostico from "./assets/app-panel-principal-diagnostico.jpg";
+import appResultadoDiagnostico from "./assets/app-resultado-diagnostico.jpg";
+import appDiagnosticoGuiado from "./assets/app-diagnostico-guiado.jpg";
+import appHipotesisPriorizadas from "./assets/app-hipotesis-priorizadas.jpg";
 import walterBojAvatar from "./assets/walter-boj-avatar.png";
 import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v4.jpg";
 import courseS7400Visual from "./assets/course-s7-400.jpg";
@@ -620,21 +623,27 @@ const appLanguages = ["Español", "English", "Português", "Deutsch", "Français
 
 const appRealViews = [
   {
-    title: "Diagnóstico por estado de CPU",
-    text: "Carga RUN, STOP, SF, BF y otros estados para orientar el diagnóstico.",
-    image: appRealCapture,
+    title: "Panel principal de diagnóstico",
+    text: "Vista general del entorno de diagnóstico, síntomas, LEDs y resultados activos.",
+    image: appPanelPrincipalDiagnostico,
+    position: "center top",
+  },
+  {
+    title: "Resultado orientativo y acciones sugeridas",
+    text: "Hipótesis principal, evidencias consideradas, pruebas recomendadas y validación posterior.",
+    image: appResultadoDiagnostico,
+    position: "center top",
+  },
+  {
+    title: "Subflujos guiados y diagnóstico por etapas",
+    text: "Asistencia paso a paso para aislar fallas en módulos, IM, base y comunicación.",
+    image: appDiagnosticoGuiado,
     position: "center top",
   },
   {
     title: "Hipótesis técnicas priorizadas",
-    text: "La app ordena posibles causas según la evidencia ingresada.",
-    image: appProRealCapture,
-    position: "center top",
-  },
-  {
-    title: "Guía de verificación",
-    text: "Pasos concretos para validar la causa probable en campo.",
-    image: appScreenshot,
+    text: "Ordenamiento de causas probables según LEDs, red, módulos y evidencia ingresada.",
+    image: appHipotesisPriorizadas,
     position: "center top",
   },
 ];
@@ -1901,6 +1910,26 @@ function CourseLanding({ course, eyebrow, visual, ctas }) {
 
 function AppPage() {
   const pricingCards = [appTrialPlan, ...appProPlans];
+  const [activeScreenshot, setActiveScreenshot] = useState(null);
+
+  useEffect(() => {
+    if (!activeScreenshot) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setActiveScreenshot(null);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeScreenshot]);
 
   return (
     <div className="app-pro-page">
@@ -2022,7 +2051,14 @@ function AppPage() {
               {appRealViews.map((item) => (
                 <article className="app-pro-real-view-card" key={item.title}>
                   <figure>
-                    <img src={item.image} alt={item.title} loading="lazy" style={{ objectPosition: item.position }} />
+                    <button
+                      className="app-pro-real-view-trigger"
+                      type="button"
+                      onClick={() => setActiveScreenshot(item)}
+                      aria-label={`Ampliar captura: ${item.title}`}
+                    >
+                      <img src={item.image} alt={item.title} loading="lazy" style={{ objectPosition: item.position }} />
+                    </button>
                   </figure>
                   <div>
                     <h3>{item.title}</h3>
@@ -2043,6 +2079,21 @@ function AppPage() {
           </div>
         </div>
       </section>
+
+      {activeScreenshot ? (
+        <div className="app-pro-lightbox" role="dialog" aria-modal="true" aria-labelledby="app-pro-lightbox-title" onClick={() => setActiveScreenshot(null)}>
+          <div className="app-pro-lightbox-panel" onClick={(event) => event.stopPropagation()}>
+            <button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Cerrar captura ampliada">
+              <X size={20} />
+            </button>
+            <img src={activeScreenshot.image} alt={activeScreenshot.title} />
+            <div className="app-pro-lightbox-copy">
+              <h2 id="app-pro-lightbox-title">{activeScreenshot.title}</h2>
+              <p>{activeScreenshot.text}</p>
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       <section className="app-pro-access-section">
         <div className="mock-home-container">
