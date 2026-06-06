@@ -727,7 +727,7 @@ const appAccessItems = [
   {
     icon: "Smartphone",
     title: "App instalable",
-    text: "Instálala en el dispositivo compatible para tener acceso directo como herramienta de trabajo.",
+    text: "Instálala en dispositivos compatibles para acceder más rápido como herramienta de trabajo.",
   },
   {
     icon: "WifiOff",
@@ -1954,7 +1954,14 @@ function AppPage() {
               <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
                 Probar gratis 48 hs <ExternalLink size={18} />
               </a>
-              <a className="mock-btn mock-btn-outline" href={appProductUrl} target="_blank" rel="noreferrer">
+              <a
+                className="mock-btn mock-btn-outline"
+                href="#planes-pro"
+                onClick={(event) => {
+                  event.preventDefault();
+                  document.getElementById("planes-pro")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
+              >
                 Ver planes PRO
               </a>
             </div>
@@ -2261,8 +2268,8 @@ function AppPage() {
             <h2>Preguntas frecuentes</h2>
           </div>
           <div className="app-pro-faq-grid">
-            {appFaqItems.map((item) => (
-              <details className="app-pro-faq-item" key={item.question}>
+            {appFaqItems.map((item, index) => (
+              <details className="app-pro-faq-item" key={item.question} open={index === 0}>
                 <summary>
                   {item.question}
                   <ChevronDown size={16} />
