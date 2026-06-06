@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
+  Brain,
   Building2,
   Cable,
+  CalendarCheck,
   CheckCircle2,
   ChevronDown,
   CircuitBoard,
@@ -14,6 +16,8 @@ import {
   FileSearch,
   Gauge,
   GraduationCap,
+  Globe,
+  Landmark,
   Mail,
   MapPin,
   Menu,
@@ -21,9 +25,14 @@ import {
   Network,
   Phone,
   RefreshCcw,
+  Rocket,
+  ScanSearch,
   Settings,
   ShieldCheck,
   Smartphone,
+  TriangleAlert,
+  Users,
+  WifiOff,
   Wrench,
   X,
   Zap,
@@ -58,6 +67,7 @@ import appScreenshot from "./assets/APP.png";
 import appRealCapture from "./assets/boj-s7-plc-real-capture.png";
 import appProRealCapture from "./assets/app-pro-real-capture.png";
 import appProHeroLaptopVisual from "./assets/app-pro-hero-background-v2.png";
+import walterBojAvatar from "./assets/walter-boj-avatar.png";
 import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v4.jpg";
 import courseS7400Visual from "./assets/course-s7-400.jpg";
 import courseTiaPortalVisual from "./assets/course-tia-portal.jpg";
@@ -78,8 +88,10 @@ import aerialPlantVisual from "./assets/old-site/43-00658318.jpg";
 
 const icons = {
   ArrowRight,
+  Brain,
   Building2,
   Cable,
+  CalendarCheck,
   CheckCircle2,
   CircuitBoard,
   Clock,
@@ -90,15 +102,22 @@ const icons = {
   FileSearch,
   Gauge,
   GraduationCap,
+  Globe,
+  Landmark,
   Mail,
   MapPin,
   MonitorCog,
   Network,
   Phone,
   RefreshCcw,
+  Rocket,
+  ScanSearch,
   Settings,
   ShieldCheck,
   Smartphone,
+  TriangleAlert,
+  Users,
+  WifiOff,
   Wrench,
   Zap,
 };
@@ -581,14 +600,17 @@ const appProblemItems = [
 
 const appHowItWorks = [
   {
+    icon: "ClipboardCheck",
     title: "Ingresas el síntoma",
     text: "Carga lo que observas en el PLC y en campo.",
   },
   {
+    icon: "Brain",
     title: "La app ordena hipótesis",
     text: "Recibes causas probables organizadas por prioridad.",
   },
   {
+    icon: "CheckCircle2",
     title: "Verificas en campo",
     text: "Sigues una guía paso a paso para validar la causa probable.",
   },
@@ -615,15 +637,14 @@ const appRealViews = [
 ];
 
 const appTrialPlan = {
-  title: "Trial",
+  title: "TRIAL",
   price: "Gratis",
   meta: "48 horas · Online · Funciones limitadas",
   text: "Prueba inicial para conocer el flujo de diagnóstico de BOJ S7-PLC PRO antes de activar una licencia paga.",
   bullets: [
-    "Acceso gratuito por 48 horas",
+    "Acceso gratuito por 48 hs",
     "Funciona solo online",
     "Algunas funciones limitadas",
-    "No requiere tarjeta de crédito",
     "Ideal para conocer la herramienta",
   ],
   button: "Probar gratis 48 hs",
@@ -636,9 +657,7 @@ const appProPlans = [
     meta: "1 mes · 1 dispositivo",
     text: "Acceso completo a la app BOJ S7-PLC PRO para uso puntual, pruebas extendidas o diagnóstico temporal.",
     bullets: [
-      "Incluye solo la app PRO",
-      "Vigencia por 1 mes",
-      "1 dispositivo habilitado",
+      "Incluye solo app PRO",
       "Funciona offline hasta 2 días",
       "Acceso completo a diagnósticos PRO",
     ],
@@ -652,10 +671,8 @@ const appProPlans = [
     bullets: [
       "Incluye app PRO",
       "Incluye Curso",
-      "Vigencia por 6 meses",
-      "2 dispositivos habilitados",
       "Funciona offline hasta 2 días",
-      "Ideal para uso profesional individual o dupla técnica",
+      "Ideal para uso profesional recurrente",
     ],
     button: "Elegir profesional",
     badge: "Más conveniente",
@@ -668,8 +685,6 @@ const appProPlans = [
     bullets: [
       "Incluye app PRO",
       "Incluye Curso",
-      "Vigencia por 6 meses",
-      "10 dispositivos habilitados",
       "Funciona offline hasta 7 días",
       "Pensado para equipos técnicos y empresas",
     ],
@@ -685,34 +700,54 @@ const appAudienceProfiles = [
   { icon: "GraduationCap", text: "Centros de formación técnica" },
 ];
 
+const appOfflineItems = [
+  { icon: "Globe", title: "El plan Trial", text: "funciona solo online" },
+  { icon: "WifiOff", title: "Mensual y Profesional", text: "offline hasta 2 días" },
+  { icon: "CalendarCheck", title: "Empresarial", text: "offline hasta 7 días" },
+];
+
+const appHeroBadges = [
+  { icon: "Globe", label: "Uso online y offline" },
+  { icon: "Brain", label: "Hipótesis priorizadas" },
+  { icon: "ClipboardCheck", label: "Guía de verificación" },
+  { icon: "Settings", label: "6 idiomas" },
+];
+
+const appTrustMetrics = [
+  { icon: "Clock", title: "+15 años", text: "de experiencia" },
+  { icon: "Cpu", title: "PLC Siemens", text: "foco S7-300/400" },
+  { icon: "ShieldCheck", title: "Miles de fallas", text: "resueltas en planta" },
+  { icon: "ClipboardCheck", title: "Metodología", text: "probada en campo" },
+];
+
 const appFaqItems = [
   {
     question: "¿Qué incluye el Trial gratuito?",
     answer: "El Trial permite probar BOJ S7-PLC PRO durante 48 horas. Funciona solo online y algunas funciones pueden estar limitadas.",
   },
   {
-    question: "¿La app funciona offline?",
-    answer: "Sí, según el plan contratado. El plan Mensual y Profesional permiten uso offline hasta 2 días. El plan Empresarial permite uso offline hasta 7 días. El Trial funciona solo online.",
-  },
-  {
     question: "¿Cuántos dispositivos puedo usar?",
     answer: "Depende del plan. Mensual incluye 1 dispositivo, Profesional incluye 2 dispositivos y Empresarial incluye 10 dispositivos.",
-  },
-  {
-    question: "¿Qué planes incluyen curso?",
-    answer: "El plan Profesional y el plan Empresarial incluyen app PRO + Curso. El plan Mensual incluye solo la app PRO.",
   },
   {
     question: "¿Necesito conectar la app directamente al PLC?",
     answer: "No. La app trabaja con la información que cargas manualmente: estado de CPU, LEDs, síntomas, fallas de red, módulos y condiciones observadas en campo.",
   },
   {
-    question: "¿Sirve para Siemens S7-300 y S7-400?",
-    answer: "Sí. Está orientada al diagnóstico de sistemas Siemens S7-300/400, especialmente estados de CPU, LEDs, PROFIBUS, módulos y señales asociadas.",
-  },
-  {
     question: "¿La app reemplaza al técnico?",
     answer: "No. BOJ S7-PLC PRO es una herramienta de asistencia técnica. Ayuda a ordenar hipótesis y verificaciones, pero las conclusiones deben ser evaluadas por personal calificado.",
+  },
+  {
+    question: "¿La app funciona offline?",
+    answer: "Sí, según el plan contratado. El plan Mensual y Profesional permiten uso offline hasta 2 días. El plan Empresarial permite uso offline hasta 7 días. El Trial funciona solo online.",
+  },
+  {
+    question: "¿Qué planes incluyen curso?",
+    answer: "El plan Profesional y el plan Empresarial incluyen app PRO + Curso. El plan Mensual incluye solo la app PRO.",
+  },
+  {
+    question: "¿Sirve para Siemens S7-300 y S7-400?",
+    answer: "Sí. Está orientada al diagnóstico de sistemas Siemens S7-300/400, especialmente estados de CPU, LEDs, PROFIBUS, módulos y señales asociadas.",
   },
   {
     question: "¿Puedo usarla desde cualquier dispositivo?",
@@ -1812,72 +1847,87 @@ function CourseLanding({ course, eyebrow, visual, ctas }) {
 }
 
 function AppPage() {
+  const pricingCards = [appTrialPlan, ...appProPlans];
+
   return (
     <div className="app-pro-page">
       <section className="app-pro-hero">
         <img className="app-pro-hero-bg" src={appProHeroLaptopVisual} alt="" aria-hidden="true" />
         <div className="app-pro-hero-shade" aria-hidden="true" />
-        <div className="mock-home-container app-pro-hero-grid">
+        <div className="mock-home-container app-pro-hero-content">
           <div className="app-pro-hero-copy">
-            <h1>Diagnostica fallas en PLC Siemens S7-300/400 con método, no a prueba y error</h1>
+            <h1>
+              Diagnostica fallas en
+              <br />
+              PLC Siemens S7-300/400
+              <br />
+              con método, no a prueba y error
+            </h1>
             <p className="app-pro-product-name">BOJ S7-PLC PRO</p>
             <p>
               Carga síntomas, estados de CPU, LEDs, fallas de red y condiciones de campo para obtener
               hipótesis técnicas priorizadas y una guía de verificación paso a paso.
             </p>
-            <p className="app-pro-microcopy">Prueba la herramienta durante 48 hs sin tarjeta de crédito.</p>
             <div className="app-pro-actions">
               <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
                 Probar gratis 48 hs <ExternalLink size={18} />
               </a>
               <a className="mock-btn mock-btn-outline" href={appProductUrl} target="_blank" rel="noreferrer">
-                Ingresar a la app <ExternalLink size={18} />
+                Ver planes PRO
               </a>
             </div>
-            <a className="app-pro-url" href={appProductUrl} target="_blank" rel="noreferrer">
-              app.bojautomatizacion.com
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="app-pro-light-section app-pro-problems-section">
-        <div className="mock-home-container">
-          <div className="app-pro-section-heading app-pro-section-heading-dark">
-            <h2>Problemas que ayuda a resolver</h2>
-          </div>
-          <div className="app-pro-problem-grid">
-            {appProblemItems.map((item) => (
-              <article className="app-pro-problem-item" key={item.title}>
-                <Icon name={item.icon} size={28} />
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="app-pro-light-section app-pro-how-section">
-        <div className="mock-home-container">
-          <div className="app-pro-how-card">
-            <h2>Cómo funciona</h2>
-            <div className="app-pro-step-list">
-              {appHowItWorks.map((item, index) => (
-                <article className="app-pro-step" key={item.title}>
-                  <span>{index + 1}</span>
-                  <div>
-                    <h3>{item.title}</h3>
-                    <p>{item.text}</p>
-                  </div>
-                </article>
+            <div className="app-pro-hero-badges" aria-label="Resumen de BOJ S7-PLC PRO">
+              {appHeroBadges.map((badge) => (
+                <span className="app-pro-hero-badge" key={badge.label}>
+                  <Icon name={badge.icon} size={18} />
+                  {badge.label}
+                </span>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="app-pro-dark-section">
+      <section className="app-pro-problems-how-section">
+        <div className="mock-home-container app-pro-problems-how-grid">
+          <div className="app-pro-problems-panel">
+            <h2>Problemas que ayuda a resolver</h2>
+            <div className="app-pro-problem-grid">
+              {appProblemItems.map((item) => (
+                <article className="app-pro-problem-item" key={item.title}>
+                  <Icon name={item.icon} size={26} />
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+          <div className="app-pro-how-panel">
+            <h2>Cómo funciona</h2>
+            <div className="app-pro-how-steps">
+              {appHowItWorks.map((item, index) => (
+                <div className="app-pro-how-step-wrap" key={item.title}>
+                  <article className="app-pro-how-step">
+                    <span className="app-pro-step-number">{index + 1}</span>
+                    <div className="app-pro-step-icon-circle">
+                      <Icon name={item.icon} size={28} />
+                    </div>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                  {index < appHowItWorks.length - 1 ? (
+                    <span className="app-pro-step-arrow" aria-hidden="true">
+                      <ArrowRight size={24} />
+                    </span>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="app-pro-dark-section app-pro-includes-section">
         <div className="mock-home-container">
           <div className="app-pro-section-heading">
             <h2>Qué incluye BOJ S7-PLC PRO</h2>
@@ -1894,32 +1944,30 @@ function AppPage() {
         </div>
       </section>
 
-      <section className="app-pro-light-section app-pro-real-view-section">
-        <div className="mock-home-container">
-          <div className="app-pro-section-heading app-pro-section-heading-dark">
+      <section className="app-pro-real-language-section">
+        <div className="mock-home-container app-pro-real-language-grid">
+          <div>
             <h2>Vista real de la herramienta</h2>
+            <div className="app-pro-real-view-grid">
+              {appRealViews.map((item) => (
+                <article className="app-pro-real-view-card" key={item.title}>
+                  <figure>
+                    <img src={item.image} alt={item.title} loading="lazy" style={{ objectPosition: item.position }} />
+                  </figure>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>
+                      {item.title === "Diagnóstico por estado de CPU"
+                        ? "Interpretación clara de estados y síntomas."
+                        : item.title === "Hipótesis técnicas"
+                          ? "Causas probables ordenadas por prioridad."
+                          : "Pasos detallados para validar la causa."}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
-          <div className="app-pro-real-view-grid">
-            {appRealViews.map((item) => (
-              <article className="app-pro-real-view-card" key={item.title}>
-                <figure>
-                  <img src={item.image} alt={item.title} loading="lazy" style={{ objectPosition: item.position }} />
-                </figure>
-                <h3>{item.title}</h3>
-              </article>
-            ))}
-          </div>
-          <div className="app-pro-centered-cta">
-            <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
-              Probar gratis 48 hs <ExternalLink size={18} />
-            </a>
-            <p>Sin tarjeta de crédito · Acceso inmediato</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="app-pro-light-section app-pro-language-section">
-        <div className="mock-home-container">
           <div className="app-pro-language-card">
             <h2>Disponible en varios idiomas</h2>
             <div className="app-pro-language-list">
@@ -1932,54 +1980,78 @@ function AppPage() {
         </div>
       </section>
 
-      <section className="app-pro-light-section app-pro-audience-section">
-        <div className="mock-home-container app-pro-audience-grid">
-          <div>
-            <div className="app-pro-section-heading app-pro-section-heading-dark app-pro-section-heading-left">
-              <h2>Para quién es BOJ S7-PLC PRO</h2>
-              <p>
-                Una herramienta pensada para personas y equipos que necesitan ordenar un diagnóstico técnico
-                antes de intervenir en planta.
-              </p>
-            </div>
-            <div className="app-pro-audience-list">
-              {appAudienceProfiles.map((item) => (
-                <article className="app-pro-audience-item" key={item.text}>
-                  <Icon name={item.icon} size={22} />
-                  <span>{item.text}</span>
-                </article>
+      <section className="app-pro-value-row-section">
+        <div className="mock-home-container app-pro-value-row-grid">
+          <article className="app-pro-offline-card">
+            <h2>Uso online y offline según el plan</h2>
+            <div className="app-pro-offline-items">
+              {appOfflineItems.map((item) => (
+                <div key={item.title}>
+                  <Icon name={item.icon} size={34} />
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
               ))}
             </div>
-          </div>
-          <aside className="app-pro-not-for-card">
-            <h3>No está pensada para</h3>
-            <p>
-              Reemplazar al técnico ni ejecutar acciones sobre el PLC. Es una herramienta de asistencia para
-              ordenar hipótesis y verificaciones.
+          </article>
+          <article className="app-pro-cost-card">
+            <div>
+              <h2>El costo de una parada es mayor que el de una licencia</h2>
+              <p>
+                Una parada de máquina puede costar mucho más que una licencia. BOJ S7-PLC PRO ayuda a ordenar
+                el diagnóstico antes de cambiar hardware, reiniciar equipos o intervenir sin evidencia.
+              </p>
+            </div>
+            <div className="app-pro-cost-visual" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+              <span />
+              <b>
+                <TriangleAlert size={24} />
+              </b>
+            </div>
+          </article>
+          <article className="app-pro-audience-card">
+            <h2>Para quién es BOJ S7-PLC PRO</h2>
+            <div className="app-pro-audience-list">
+              {appAudienceProfiles.map((item) => (
+                <div className="app-pro-audience-item" key={item.text}>
+                  <Icon name={item.icon} size={18} />
+                  <span>{item.text}</span>
+                </div>
+              ))}
+            </div>
+            <p className="app-pro-audience-note">
+              No está pensada para reemplazar al técnico: es una herramienta de asistencia para ordenar hipótesis
+              y verificaciones.
             </p>
-          </aside>
+          </article>
         </div>
       </section>
 
       <section className="app-pro-trust-section">
         <div className="mock-home-container app-pro-trust-grid">
-          <div className="app-pro-trust-icon">
-            <Icon name="ShieldCheck" size={34} />
-          </div>
-          <div>
+          <img className="app-pro-trust-avatar" src={walterBojAvatar} alt="Walter Adrián Boj" loading="lazy" />
+          <div className="app-pro-trust-copy">
             <h2>Desarrollada con criterio de planta</h2>
             <p>
               BOJ S7-PLC PRO fue desarrollada por Walter Adrián Boj, especialista en automatización industrial
-              y diagnóstico de sistemas PLC Siemens, con experiencia en mantenimiento, programación, redes
-              industriales e intervención sobre fallas reales de planta.
-            </p>
-            <p>
-              La herramienta no busca reemplazar al profesional, sino ayudarlo a ordenar síntomas, relacionar
-              evidencia y avanzar con una secuencia lógica de verificación.
+              y diagnóstico de sistemas PLC Siemens, con experiencia en mantenimiento, programación y fallas
+              reales de planta.
             </p>
             <a className="mock-btn mock-btn-outline" href={contact.linkedin} target="_blank" rel="noreferrer">
               Ver perfil profesional <ExternalLink size={17} />
             </a>
+          </div>
+          <div className="app-pro-trust-metrics">
+            {appTrustMetrics.map((item) => (
+              <article key={item.title}>
+                <Icon name={item.icon} size={22} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -1988,41 +2060,17 @@ function AppPage() {
         <div className="mock-home-container">
           <div className="app-pro-section-heading">
             <h2>Elige tu licencia PRO</h2>
-            <p>Trial inicial y planes pagos según tiempo de uso, dispositivos y modalidad offline.</p>
           </div>
-          <article className="app-pro-trial-plan">
-            <div className="app-pro-trial-plan-main">
-              <span className="app-pro-trial-kicker">Prueba gratis durante 48 hs</span>
-              <div className="app-pro-trial-title-row">
-                <h3>{appTrialPlan.title}</h3>
-                <strong>{appTrialPlan.price}</strong>
-              </div>
-              <span className="app-pro-plan-meta">{appTrialPlan.meta}</span>
-              <p>{appTrialPlan.text}</p>
-            </div>
-            <ul>
-              {appTrialPlan.bullets.map((item) => (
-                <li key={item}>
-                  <CheckCircle2 size={15} /> {item}
-                </li>
-              ))}
-            </ul>
-            <a className="mock-btn mock-btn-outline" href={appProductUrl} target="_blank" rel="noreferrer">
-              {appTrialPlan.button} <ExternalLink size={17} />
-            </a>
-          </article>
-          <p className="app-pro-value-note">
-            Una parada de máquina puede costar mucho más que una licencia. BOJ S7-PLC PRO ayuda a ordenar
-            el diagnóstico antes de cambiar hardware, reiniciar equipos o intervenir sin evidencia.
-          </p>
           <div className="app-pro-plan-grid">
-            {appProPlans.map((plan) => (
-              <article className="app-pro-plan-card" key={plan.title}>
+            {pricingCards.map((plan) => (
+              <article
+                className={`app-pro-plan-card${plan.badge ? " featured" : ""}${plan.title === "TRIAL" ? " trial" : ""}`}
+                key={plan.title}
+              >
                 {plan.badge ? <span className="app-pro-plan-badge">{plan.badge}</span> : null}
                 <h3>{plan.title}</h3>
                 <strong>{plan.price}</strong>
                 <span className="app-pro-plan-meta">{plan.meta}</span>
-                <p>{plan.text}</p>
                 <ul>
                   {plan.bullets.map((item) => (
                     <li key={item}>
@@ -2037,11 +2085,14 @@ function AppPage() {
             ))}
           </div>
           <article className="app-pro-institutional">
-            <h3>Institucional / Centros de formación: A cotizar.</h3>
-            <p>
-              Condiciones especiales para instituciones educativas, centros de formación técnica, empresas
-              con múltiples usuarios o programas corporativos.
-            </p>
+            <Icon name="Landmark" size={34} />
+            <div>
+              <h3>Institucional / Centros de formación: A cotizar.</h3>
+              <p>
+                Condiciones especiales para instituciones educativas, centros de formación técnica, empresas
+                con múltiples usuarios o programas corporativos.
+              </p>
+            </div>
             <a className="mock-btn mock-btn-outline" href={appProductUrl} target="_blank" rel="noreferrer">
               Consultar condiciones <ExternalLink size={17} />
             </a>
@@ -2051,19 +2102,16 @@ function AppPage() {
 
       <section className="app-pro-trial-section" id="trial-48">
         <div className="mock-home-container app-pro-trial-grid">
+          <div className="app-pro-trial-rocket">
+            <Icon name="Rocket" size={42} />
+          </div>
           <div>
             <h2>Prueba BOJ S7-PLC PRO durante 48 hs</h2>
-            <p>
-              Accede a una prueba inicial online con funciones limitadas para conocer el flujo de diagnóstico
-              antes de activar una licencia PRO.
-            </p>
-          </div>
-          <div className="app-pro-trial-card">
-            <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
-              Probar gratis 48 hs <ExternalLink size={18} />
-            </a>
             <p>Sin tarjeta de crédito · Acceso inmediato · Funciona online</p>
           </div>
+          <a className="mock-btn mock-btn-light" href={appProductUrl} target="_blank" rel="noreferrer">
+            Probar gratis 48 hs <ExternalLink size={18} />
+          </a>
         </div>
       </section>
 
@@ -2074,23 +2122,14 @@ function AppPage() {
           </div>
           <div className="app-pro-faq-grid">
             {appFaqItems.map((item) => (
-              <article className="app-pro-faq-item" key={item.question}>
-                <h3>{item.question}</h3>
+              <details className="app-pro-faq-item" key={item.question}>
+                <summary>
+                  {item.question}
+                  <ChevronDown size={16} />
+                </summary>
                 <p>{item.answer}</p>
-              </article>
+              </details>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="app-pro-legal-section">
-        <div className="mock-home-container">
-          <div className="app-pro-legal-card">
-            <Icon name="ShieldCheck" size={28} />
-            <p>
-              BOJ S7-PLC PRO acompaña el criterio técnico del profesional. Las conclusiones deben ser verificadas
-              por personal calificado y no reemplazan los procedimientos de seguridad de planta.
-            </p>
           </div>
         </div>
       </section>
@@ -3078,8 +3117,8 @@ function MainFooter() {
     { label: "Inicio", path: "/inicio" },
     { label: "Servicios", path: "/servicios" },
     { label: "Cursos", path: "/cursos" },
-    { label: "App", path: "/app" },
     { label: "Recursos", path: "/recursos-tecnicos" },
+    { label: "App", path: "/app" },
     { label: "Contacto", path: "/contacto" },
   ];
 
@@ -3088,8 +3127,10 @@ function MainFooter() {
       <div className="mock-home-container mock-footer-inner">
         <div className="mock-footer-brand">
           <BrandLogo compact />
+          <p>Soluciones para diagnóstico y eficiencia en automatización.</p>
         </div>
         <div className="mock-footer-contact" aria-label="Datos de contacto">
+          <h3>Contacto</h3>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
           <a href="https://www.bojautomatizacion.com" target="_blank" rel="noreferrer">
             www.bojautomatizacion.com
@@ -3097,12 +3138,26 @@ function MainFooter() {
           <span>{contact.location}</span>
         </div>
         <nav className="mock-footer-nav" aria-label="Navegación del footer">
+          <h3>Navegación</h3>
           {footerLinks.map((item) => (
             <a key={item.path} href={`#${item.path}`}>
               {item.label}
             </a>
           ))}
         </nav>
+        <div className="mock-footer-legal">
+          <h3>Legal</h3>
+          <a href="#/app">Términos y condiciones</a>
+          <a href="#/app">Política de privacidad</a>
+        </div>
+        <div className="mock-footer-social">
+          <h3>Seguinos</h3>
+          <div>
+            <a href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">in</a>
+            <a href={contact.linktree} target="_blank" rel="noreferrer" aria-label="YouTube">yt</a>
+            <a href={contact.linktree} target="_blank" rel="noreferrer" aria-label="Instagram">ig</a>
+          </div>
+        </div>
       </div>
       <div className="mock-footer-bottom">
         <span>© 2025 BOJ Automatización y Control. Todos los derechos reservados.</span>
