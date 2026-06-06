@@ -614,43 +614,66 @@ const appRealViews = [
   },
 ];
 
+const appTrialPlan = {
+  title: "Trial",
+  price: "Gratis",
+  meta: "48 horas · Online · Funciones limitadas",
+  text: "Prueba inicial para conocer el flujo de diagnóstico de BOJ S7-PLC PRO antes de activar una licencia paga.",
+  bullets: [
+    "Acceso gratuito por 48 horas",
+    "Funciona solo online",
+    "Algunas funciones limitadas",
+    "No requiere tarjeta de crédito",
+    "Ideal para conocer la herramienta",
+  ],
+  button: "Probar gratis 48 hs",
+};
+
 const appProPlans = [
   {
     title: "Mensual",
-    price: "27 USD",
-    meta: "1 mes · 1 licencia",
-    text: "Acceso completo a BOJ S7-PLC PRO para uso puntual, pruebas extendidas o diagnóstico temporal.",
-    bullets: ["Acceso completo PRO", "1 licencia", "Vigencia por 1 mes", "Ideal para uso puntual"],
-    button: "Elegir plan",
+    price: "70 USD",
+    meta: "1 mes · 1 dispositivo",
+    text: "Acceso completo a la app BOJ S7-PLC PRO para uso puntual, pruebas extendidas o diagnóstico temporal.",
+    bullets: [
+      "Incluye solo la app PRO",
+      "Vigencia por 1 mes",
+      "1 dispositivo habilitado",
+      "Funciona offline hasta 2 días",
+      "Acceso completo a diagnósticos PRO",
+    ],
+    button: "Elegir mensual",
   },
   {
-    title: "Técnico",
-    price: "97 USD",
-    meta: "6 meses · 1 licencia · Curso en PDFs incluido",
-    text: "Plan recomendado para técnicos de mantenimiento, instrumentistas, electricistas industriales y automatistas que necesitan usar la herramienta de forma recurrente.",
+    title: "Profesional",
+    price: "350 USD",
+    meta: "6 meses · 2 dispositivos · App PRO + Curso",
+    text: "Plan recomendado para técnicos, automatistas, instrumentistas y personal de mantenimiento que necesitan usar la herramienta de forma recurrente y reforzar criterio técnico con material de apoyo.",
     bullets: [
-      "Acceso completo PRO",
-      "1 licencia",
+      "Incluye app PRO",
+      "Incluye Curso",
       "Vigencia por 6 meses",
-      "Curso técnico en PDFs incluido",
-      "Mejor opción para uso profesional individual",
+      "2 dispositivos habilitados",
+      "Funciona offline hasta 2 días",
+      "Ideal para uso profesional individual o dupla técnica",
     ],
-    button: "Elegir plan",
+    button: "Elegir profesional",
     badge: "Más conveniente",
   },
   {
-    title: "Empresas",
-    price: "497 USD",
-    meta: "12 meses · 6 licencias · Curso en PDFs incluido",
-    text: "Plan pensado para empresas, equipos de mantenimiento, áreas de automatización o varias estaciones de trabajo.",
+    title: "Empresarial",
+    price: "800 USD",
+    meta: "6 meses · 10 dispositivos · App PRO + Curso",
+    text: "Plan pensado para empresas, equipos de mantenimiento, áreas de automatización, soporte técnico interno o varias estaciones de trabajo.",
     bullets: [
-      "Acceso completo PRO",
-      "6 licencias incluidas",
-      "Vigencia por 12 meses",
-      "Curso técnico en PDFs incluido",
+      "Incluye app PRO",
+      "Incluye Curso",
+      "Vigencia por 6 meses",
+      "10 dispositivos habilitados",
+      "Funciona offline hasta 7 días",
       "Pensado para equipos técnicos y empresas",
     ],
-    button: "Elegir plan",
+    button: "Elegir empresarial",
   },
 ];
 
@@ -664,8 +687,20 @@ const appAudienceProfiles = [
 
 const appFaqItems = [
   {
-    question: "¿Qué pasa cuando termina el trial de 48 hs?",
-    answer: "Al finalizar la prueba, el acceso gratuito se desactiva. Puedes continuar usando la herramienta activando una licencia PRO.",
+    question: "¿Qué incluye el Trial gratuito?",
+    answer: "El Trial permite probar BOJ S7-PLC PRO durante 48 horas. Funciona solo online y algunas funciones pueden estar limitadas.",
+  },
+  {
+    question: "¿La app funciona offline?",
+    answer: "Sí, según el plan contratado. El plan Mensual y Profesional permiten uso offline hasta 2 días. El plan Empresarial permite uso offline hasta 7 días. El Trial funciona solo online.",
+  },
+  {
+    question: "¿Cuántos dispositivos puedo usar?",
+    answer: "Depende del plan. Mensual incluye 1 dispositivo, Profesional incluye 2 dispositivos y Empresarial incluye 10 dispositivos.",
+  },
+  {
+    question: "¿Qué planes incluyen curso?",
+    answer: "El plan Profesional y el plan Empresarial incluyen app PRO + Curso. El plan Mensual incluye solo la app PRO.",
   },
   {
     question: "¿Necesito conectar la app directamente al PLC?",
@@ -1953,8 +1988,29 @@ function AppPage() {
         <div className="mock-home-container">
           <div className="app-pro-section-heading">
             <h2>Elige tu licencia PRO</h2>
-            <p>Licencias por tiempo de uso. Acceso completo a la app.</p>
+            <p>Trial inicial y planes pagos según tiempo de uso, dispositivos y modalidad offline.</p>
           </div>
+          <article className="app-pro-trial-plan">
+            <div className="app-pro-trial-plan-main">
+              <span className="app-pro-trial-kicker">Prueba gratis durante 48 hs</span>
+              <div className="app-pro-trial-title-row">
+                <h3>{appTrialPlan.title}</h3>
+                <strong>{appTrialPlan.price}</strong>
+              </div>
+              <span className="app-pro-plan-meta">{appTrialPlan.meta}</span>
+              <p>{appTrialPlan.text}</p>
+            </div>
+            <ul>
+              {appTrialPlan.bullets.map((item) => (
+                <li key={item}>
+                  <CheckCircle2 size={15} /> {item}
+                </li>
+              ))}
+            </ul>
+            <a className="mock-btn mock-btn-outline" href={appProductUrl} target="_blank" rel="noreferrer">
+              {appTrialPlan.button} <ExternalLink size={17} />
+            </a>
+          </article>
           <p className="app-pro-value-note">
             Una parada de máquina puede costar mucho más que una licencia. BOJ S7-PLC PRO ayuda a ordenar
             el diagnóstico antes de cambiar hardware, reiniciar equipos o intervenir sin evidencia.
@@ -1983,14 +2039,11 @@ function AppPage() {
           <article className="app-pro-institutional">
             <h3>Institucional / Centros de formación: A cotizar.</h3>
             <p>
-              Condiciones especiales para instituciones educativas, empresas y programas corporativos.
-              Contactanos para recibir una propuesta a medida.
+              Condiciones especiales para instituciones educativas, centros de formación técnica, empresas
+              con múltiples usuarios o programas corporativos.
             </p>
-            <a
-              className="mock-btn mock-btn-outline"
-              href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar condiciones institucionales de BOJ S7-PLC PRO.")}
-            >
-              Consultar condiciones <ArrowRight size={17} />
+            <a className="mock-btn mock-btn-outline" href={appProductUrl} target="_blank" rel="noreferrer">
+              Consultar condiciones <ExternalLink size={17} />
             </a>
           </article>
         </div>
@@ -2001,15 +2054,15 @@ function AppPage() {
           <div>
             <h2>Prueba BOJ S7-PLC PRO durante 48 hs</h2>
             <p>
-              Accede a todas las funciones PRO sin compromiso. Regístrate y obtén acceso inmediato
-              a la herramienta.
+              Accede a una prueba inicial online con funciones limitadas para conocer el flujo de diagnóstico
+              antes de activar una licencia PRO.
             </p>
           </div>
           <div className="app-pro-trial-card">
             <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
               Probar gratis 48 hs <ExternalLink size={18} />
             </a>
-            <p>Sin tarjeta de crédito · Acceso inmediato</p>
+            <p>Sin tarjeta de crédito · Acceso inmediato · Funciona online</p>
           </div>
         </div>
       </section>

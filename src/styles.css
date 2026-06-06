@@ -7403,6 +7403,87 @@ textarea {
   line-height: 1.5;
 }
 
+.app-pro-trial-plan {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(240px, 0.86fr) auto;
+  gap: 18px;
+  align-items: center;
+  margin: 0 auto 18px;
+  padding: 20px 22px;
+  border: 1px solid rgba(0, 210, 255, 0.24);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(0, 143, 199, 0.12), rgba(7, 21, 33, 0.58)),
+    rgba(6, 25, 39, 0.72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.app-pro-trial-plan-main p {
+  margin: 10px 0 0;
+  color: rgba(235, 245, 252, 0.72);
+  font-size: 0.9rem;
+  line-height: 1.42;
+}
+
+.app-pro-trial-kicker {
+  display: block;
+  margin-bottom: 8px;
+  color: #25c7f5;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.app-pro-trial-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: baseline;
+}
+
+.app-pro-trial-title-row h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.15rem;
+}
+
+.app-pro-trial-title-row strong {
+  color: #ffffff;
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  line-height: 1;
+}
+
+.app-pro-trial-plan ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app-pro-trial-plan li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(235, 245, 252, 0.78);
+  font-size: 0.85rem;
+  line-height: 1.32;
+}
+
+.app-pro-trial-plan li svg {
+  flex: 0 0 auto;
+  color: #25c7f5;
+}
+
+.app-pro-trial-plan .mock-btn {
+  justify-content: center;
+  min-height: 42px;
+  padding-inline: 18px;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
 .app-pro-plan-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -7705,6 +7786,7 @@ textarea {
   .app-pro-split-grid,
   .app-pro-audience-grid,
   .app-pro-trust-grid,
+  .app-pro-trial-plan,
   .app-pro-trial-grid {
     grid-template-columns: 1fr;
   }
@@ -7770,6 +7852,7 @@ textarea {
 
   .app-pro-flow-card,
   .app-pro-plan-card,
+  .app-pro-trial-plan,
   .app-pro-trial-card,
   .app-pro-institutional,
   .app-pro-how-card,
