@@ -11105,3 +11105,91 @@ textarea {
     padding: 9px 12px;
   }
 }
+
+/* APP fine alignment: gallery thumbnails, field avatar and pricing rows */
+.app-pro-real-view-card figure {
+  background: #020d1e;
+}
+
+.app-pro-real-view-trigger img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.app-pro-lightbox-panel img {
+  object-fit: contain;
+  object-position: center;
+}
+
+.app-pro-trust-avatar {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.app-pro-plan-card,
+.app-pro-plan-card.featured {
+  display: grid;
+  grid-template-rows: 34px 58px 42px 1fr auto;
+  row-gap: 10px;
+  min-height: 342px;
+  padding-top: 38px;
+}
+
+.app-pro-plan-card h3 {
+  min-height: 34px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  margin: 0;
+}
+
+.app-pro-plan-card strong {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.app-pro-plan-meta {
+  min-height: 42px;
+  display: inline-flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.app-pro-plan-card ul {
+  align-self: start;
+  margin: 4px 0 16px;
+}
+
+.app-pro-plan-card .mock-btn {
+  align-self: end;
+  margin-top: 0;
+}
+
+@media (max-width: 760px) {
+  .app-pro-plan-card,
+  .app-pro-plan-card.featured {
+    grid-template-rows: auto auto auto 1fr auto;
+    row-gap: 8px;
+    min-height: 0;
+    padding-top: 16px;
+  }
+
+  .app-pro-plan-card h3,
+  .app-pro-plan-card strong,
+  .app-pro-plan-meta {
+    min-height: 0;
+  }
+
+  .app-pro-plan-card h3 {
+    align-items: center;
+  }
+
+  .app-pro-plan-card ul {
+    margin: 4px 0 12px;
+  }
+}

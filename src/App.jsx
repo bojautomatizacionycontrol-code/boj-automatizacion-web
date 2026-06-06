@@ -70,7 +70,7 @@ import appPanelPrincipalDiagnostico from "./assets/app-panel-principal-diagnosti
 import appResultadoDiagnostico from "./assets/app-resultado-diagnostico.jpg";
 import appDiagnosticoGuiado from "./assets/app-diagnostico-guiado.jpg";
 import appHipotesisPriorizadas from "./assets/app-hipotesis-priorizadas.jpg";
-import walterBojAvatar from "./assets/walter-boj-avatar.png";
+import walterBojAvatar from "./assets/walter-boj-avatar-field.jpeg";
 import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v4.jpg";
 import courseS7400Visual from "./assets/course-s7-400.jpg";
 import courseTiaPortalVisual from "./assets/course-tia-portal.jpg";
