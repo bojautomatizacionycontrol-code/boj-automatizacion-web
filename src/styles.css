@@ -9014,3 +9014,113 @@ textarea {
     gap: 22px;
   }
 }
+
+/* APP fine tuning: hero scale, clean wrapping and pricing hierarchy */
+.app-pro-page,
+.app-pro-page * {
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: manual;
+}
+
+.app-pro-hero {
+  min-height: 360px;
+  height: 360px;
+  overflow: hidden;
+}
+
+.app-pro-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(2, 13, 30, 0.97) 0%, rgba(2, 13, 30, 0.86) 34%, rgba(2, 13, 30, 0.42) 62%, rgba(2, 13, 30, 0.1) 100%),
+    linear-gradient(180deg, rgba(2, 13, 30, 0.04), rgba(2, 13, 30, 0.24));
+}
+
+.app-pro-hero-copy {
+  max-width: 610px;
+}
+
+.app-pro-hero-copy h1 {
+  max-width: 610px;
+  margin-bottom: 10px;
+  font-size: clamp(1.95rem, 2.8vw, 2.95rem);
+  line-height: 1.07;
+  overflow-wrap: normal;
+  text-wrap: balance;
+}
+
+.app-pro-product-name {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.app-pro-hero-copy > p:not(.app-pro-product-name) {
+  max-width: 565px;
+  font-size: 0.9rem;
+  line-height: 1.48;
+}
+
+.app-pro-actions {
+  margin-top: 18px;
+}
+
+.app-pro-hero-badges {
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.app-pro-hero-badge {
+  min-height: 32px;
+  padding: 6px 11px;
+  font-size: 0.72rem;
+}
+
+.app-pro-language-card {
+  min-width: 0;
+}
+
+.app-pro-language-card p,
+.app-pro-real-view-card p,
+.app-pro-audience-item,
+.app-pro-plan-meta,
+.app-pro-plan-card li {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.app-pro-language-list span {
+  white-space: nowrap;
+}
+
+.app-pro-plan-card.trial {
+  border-color: rgba(0, 174, 234, 0.18);
+  background: linear-gradient(180deg, rgba(7, 25, 39, 0.72), rgba(5, 18, 30, 0.78));
+  box-shadow: none;
+}
+
+.app-pro-plan-card.trial strong {
+  font-size: clamp(1.72rem, 2vw, 2.08rem);
+}
+
+.app-pro-plan-card.trial .app-pro-plan-meta {
+  background: rgba(0, 174, 234, 0.08);
+}
+
+.app-pro-plan-card.trial .mock-btn {
+  border: 1px solid rgba(0, 174, 234, 0.46);
+  background: rgba(0, 174, 234, 0.14);
+}
+
+@media (max-width: 760px) {
+  .app-pro-hero {
+    height: auto;
+    min-height: 500px;
+  }
+
+  .app-pro-hero-content {
+    padding: 172px 0 32px;
+  }
+
+  .app-pro-hero-copy h1 {
+    font-size: clamp(1.85rem, 8.3vw, 2.7rem);
+  }
+}

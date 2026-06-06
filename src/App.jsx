@@ -1983,7 +1983,7 @@ function AppPage() {
       <section className="app-pro-value-row-section">
         <div className="mock-home-container app-pro-value-row-grid">
           <article className="app-pro-offline-card">
-            <h2>Uso online y offline según el plan</h2>
+            <h2>Online y offline según el plan</h2>
             <div className="app-pro-offline-items">
               {appOfflineItems.map((item) => (
                 <div key={item.title}>
@@ -2037,8 +2037,8 @@ function AppPage() {
             <h2>Desarrollada con criterio de planta</h2>
             <p>
               BOJ S7-PLC PRO fue desarrollada por Walter Adrián Boj, especialista en automatización industrial
-              y diagnóstico de sistemas PLC Siemens, con experiencia en mantenimiento, programación y fallas
-              reales de planta.
+              y diagnóstico de sistemas PLC Siemens, con experiencia en mantenimiento, programación, redes
+              industriales y fallas reales de planta.
             </p>
             <a className="mock-btn mock-btn-outline" href={contact.linkedin} target="_blank" rel="noreferrer">
               Ver perfil profesional <ExternalLink size={17} />
