@@ -2269,8 +2269,8 @@ function AppPage() {
             <h2>Preguntas frecuentes</h2>
           </div>
           <div className="app-pro-faq-grid">
-            {appFaqItems.map((item, index) => (
-              <details className="app-pro-faq-item" key={item.question} open={index === 0}>
+            {appFaqItems.map((item) => (
+              <details className="app-pro-faq-item" key={item.question}>
                 <summary>
                   {item.question}
                   <ChevronDown size={16} />
