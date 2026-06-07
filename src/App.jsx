@@ -712,28 +712,10 @@ const appAudienceProfiles = [
   { icon: "GraduationCap", text: "Centros de formación técnica" },
 ];
 
-const appOfflineItems = [
-  { icon: "Globe", title: "Trial", text: "Solo online" },
-  { icon: "WifiOff", title: "Mensual y Profesional", text: "Offline hasta 2 días" },
-  { icon: "CalendarCheck", title: "Empresarial", text: "Offline hasta 7 días" },
-];
-
-const appAccessItems = [
-  {
-    icon: "Globe",
-    title: "Acceso desde navegador",
-    text: "Ingresa desde cualquier equipo compatible usando app.bojautomatizacion.com.",
-  },
-  {
-    icon: "Smartphone",
-    title: "App instalable",
-    text: "Instálala en dispositivos compatibles para acceder más rápido como herramienta de trabajo.",
-  },
-  {
-    icon: "WifiOff",
-    title: "Uso offline según plan",
-    text: "Trial solo online. Mensual y Profesional offline hasta 2 días. Empresarial offline hasta 7 días.",
-  },
+const appAvailabilityItems = [
+  { icon: "Globe", title: "Web", text: "Desde navegador" },
+  { icon: "Smartphone", title: "Instalable", text: "Acceso directo en dispositivo compatible" },
+  { icon: "WifiOff", title: "Offline según plan", text: "Disponibilidad variable" },
 ];
 
 const appHeroBadges = [
@@ -2102,29 +2084,12 @@ function AppPage() {
         </div>
       ) : null}
 
-      <section className="app-pro-access-section">
-        <div className="mock-home-container">
-          <div className="app-pro-section-heading app-pro-section-heading-dark">
-            <h2>Acceso web, instalación y uso offline</h2>
-          </div>
-          <div className="app-pro-access-grid">
-            {appAccessItems.map((item) => (
-              <article className="app-pro-access-card" key={item.title}>
-                <Icon name={item.icon} size={26} />
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="app-pro-value-row-section">
         <div className="mock-home-container app-pro-value-row-grid">
           <article className="app-pro-offline-card">
-            <h2>Online, instalable y offline según el plan</h2>
+            <h2>Acceso, instalación y disponibilidad</h2>
             <div className="app-pro-offline-items">
-              {appOfflineItems.map((item) => (
+              {appAvailabilityItems.map((item) => (
                 <div key={item.title}>
                   <Icon name={item.icon} size={34} />
                   <h3>{item.title}</h3>
@@ -2133,7 +2098,7 @@ function AppPage() {
               ))}
             </div>
             <p className="app-pro-offline-note">
-              La instalación facilita el acceso, pero la disponibilidad offline depende del plan contratado.
+              La app puede usarse desde navegador, instalarse como acceso directo y ofrecer uso offline según el plan contratado.
             </p>
           </article>
           <article className="app-pro-cost-card">

@@ -11193,3 +11193,367 @@ textarea {
     margin: 4px 0 12px;
   }
 }
+
+/* APP commercial value cards: balanced access, cost and audience row */
+.app-pro-value-row-section {
+  padding: 36px 0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0, 174, 234, 0.06), transparent 36%),
+    linear-gradient(180deg, #fbfdff 0%, #f2f6fa 100%);
+}
+
+.app-pro-value-row-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 18px;
+}
+
+.app-pro-offline-card,
+.app-pro-cost-card,
+.app-pro-audience-card {
+  min-height: 360px;
+  padding: 30px;
+  border: 1px solid rgba(7, 37, 62, 0.14);
+  border-radius: 16px;
+  box-shadow: 0 16px 36px rgba(2, 11, 20, 0.08);
+}
+
+.app-pro-offline-card,
+.app-pro-audience-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.app-pro-cost-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 88% 82%, rgba(226, 74, 74, 0.22), transparent 25%),
+    radial-gradient(circle at 16% 8%, rgba(0, 174, 234, 0.16), transparent 32%),
+    linear-gradient(140deg, #061a31 0%, #020b14 100%);
+  color: #ffffff;
+}
+
+.app-pro-cost-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 34%);
+}
+
+.app-pro-offline-card h2,
+.app-pro-cost-card h2,
+.app-pro-audience-card h2 {
+  position: relative;
+  margin: 0 0 20px;
+  color: var(--boj-text);
+  font-size: clamp(1.25rem, 1.45vw, 1.48rem);
+  font-weight: 900;
+  line-height: 1.16;
+  letter-spacing: 0;
+}
+
+.app-pro-offline-card h2,
+.app-pro-audience-card h2 {
+  text-align: center;
+}
+
+.app-pro-cost-card h2 {
+  max-width: 330px;
+  color: #ffffff;
+  text-align: left;
+}
+
+.app-pro-offline-card h2::after,
+.app-pro-cost-card h2::after,
+.app-pro-audience-card h2::after {
+  content: "";
+  display: block;
+  width: 54px;
+  height: 3px;
+  margin: 14px auto 0;
+  border-radius: 999px;
+  background: var(--boj-cyan);
+}
+
+.app-pro-cost-card h2::after {
+  margin-left: 0;
+}
+
+.app-pro-offline-items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 18px 0 24px;
+  text-align: center;
+}
+
+.app-pro-offline-items > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 14px;
+}
+
+.app-pro-offline-items > div + div {
+  border-left: 1px solid rgba(7, 37, 62, 0.14);
+}
+
+.app-pro-offline-items svg {
+  width: 42px;
+  height: 42px;
+  color: #007aa8;
+  stroke-width: 1.9;
+}
+
+.app-pro-offline-items h3 {
+  margin: 12px 0 7px;
+  color: var(--boj-text);
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.18;
+}
+
+.app-pro-offline-items p {
+  max-width: 128px;
+  margin: 0 auto;
+  color: var(--boj-muted);
+  font-size: 0.78rem;
+  line-height: 1.38;
+}
+
+.app-pro-offline-note {
+  margin: auto 0 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(7, 37, 62, 0.12);
+  color: #546274;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.app-pro-cost-card > div:first-child {
+  position: relative;
+  z-index: 1;
+}
+
+.app-pro-cost-card p {
+  max-width: 360px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.95rem;
+  line-height: 1.58;
+}
+
+.app-pro-cost-emphasis {
+  display: block;
+  margin-top: 26px;
+  color: var(--boj-cyan);
+  font-size: 1.08rem;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.app-pro-cost-visual {
+  position: relative;
+  z-index: 1;
+  align-self: flex-end;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 7px;
+  width: 128px;
+  min-height: 112px;
+  margin-top: auto;
+}
+
+.app-pro-cost-visual span {
+  width: 14px;
+  border-radius: 5px 5px 0 0;
+  background: linear-gradient(180deg, rgba(0, 174, 234, 0.94), rgba(0, 118, 177, 0.46));
+}
+
+.app-pro-cost-visual span:nth-child(1) { height: 40px; }
+.app-pro-cost-visual span:nth-child(2) { height: 58px; }
+.app-pro-cost-visual span:nth-child(3) { height: 78px; }
+.app-pro-cost-visual span:nth-child(4) { height: 102px; }
+
+.app-pro-cost-visual b {
+  right: 0;
+  bottom: 8px;
+  width: 48px;
+  height: 48px;
+}
+
+.app-pro-audience-intro {
+  margin: 0 0 18px;
+  color: #546274;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.app-pro-audience-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.app-pro-audience-item {
+  min-height: 52px;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(7, 37, 62, 0.13);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #ffffff, #f8fbfd);
+  color: var(--boj-text);
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1.25;
+  box-shadow: 0 8px 18px rgba(2, 11, 20, 0.045);
+}
+
+.app-pro-audience-item:last-child {
+  grid-column: 1 / -1;
+}
+
+.app-pro-audience-item svg {
+  width: 22px;
+  height: 22px;
+  color: var(--boj-cyan);
+}
+
+.app-pro-audience-note {
+  margin: auto 0 0;
+  padding: 13px 14px;
+  border: 1px solid rgba(0, 174, 234, 0.22);
+  border-radius: 12px;
+  background: rgba(0, 174, 234, 0.08);
+  color: #006995;
+  font-size: 0.84rem;
+  font-weight: 850;
+  line-height: 1.45;
+}
+
+@media (max-width: 1120px) {
+  .app-pro-value-row-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-pro-audience-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .app-pro-value-row-section {
+    padding: 24px 0;
+  }
+
+  .app-pro-value-row-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .app-pro-cost-card {
+    order: 1;
+  }
+
+  .app-pro-offline-card {
+    order: 2;
+  }
+
+  .app-pro-audience-card {
+    order: 3;
+    grid-column: auto;
+  }
+
+  .app-pro-offline-card,
+  .app-pro-cost-card,
+  .app-pro-audience-card {
+    min-height: 0;
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .app-pro-offline-card h2,
+  .app-pro-cost-card h2,
+  .app-pro-audience-card h2 {
+    margin-bottom: 15px;
+    font-size: 1.12rem;
+  }
+
+  .app-pro-cost-card p,
+  .app-pro-audience-intro,
+  .app-pro-offline-note {
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .app-pro-offline-items {
+    margin: 12px 0 16px;
+  }
+
+  .app-pro-offline-items > div {
+    padding: 0 8px;
+  }
+
+  .app-pro-offline-items svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .app-pro-offline-items h3 {
+    margin: 8px 0 4px;
+    font-size: 0.7rem;
+  }
+
+  .app-pro-offline-items p {
+    font-size: 0.66rem;
+    line-height: 1.28;
+  }
+
+  .app-pro-cost-emphasis {
+    margin-top: 16px;
+    font-size: 0.92rem;
+  }
+
+  .app-pro-cost-visual {
+    width: 108px;
+    min-height: 78px;
+  }
+
+  .app-pro-cost-visual span {
+    width: 10px;
+  }
+
+  .app-pro-cost-visual span:nth-child(1) { height: 26px; }
+  .app-pro-cost-visual span:nth-child(2) { height: 38px; }
+  .app-pro-cost-visual span:nth-child(3) { height: 52px; }
+  .app-pro-cost-visual span:nth-child(4) { height: 68px; }
+
+  .app-pro-cost-visual b {
+    width: 38px;
+    height: 38px;
+  }
+
+  .app-pro-audience-list {
+    gap: 8px;
+  }
+
+  .app-pro-audience-item {
+    min-height: 46px;
+    padding: 9px 10px;
+    font-size: 0.7rem;
+  }
+
+  .app-pro-audience-note {
+    margin-top: 14px;
+    padding: 11px 12px;
+    font-size: 0.76rem;
+  }
+}
