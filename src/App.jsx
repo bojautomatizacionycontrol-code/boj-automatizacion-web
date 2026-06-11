@@ -265,28 +265,21 @@ const landingProjects = [
   },
 ];
 
-const homeHeroChecks = [
-  "PLC Siemens",
-  "STEP 7 / TIA Portal",
-  "PROFIBUS / PROFINET",
-  "Soporte técnico y capacitación",
-];
-
 const homeWorkLines = [
   {
     icon: "Factory",
     title: "Servicios industriales",
-    text: "Diagnóstico, automatización, migraciones y soporte técnico especializado en planta.",
+    text: "Diagnóstico, automatización, migraciones y soporte técnico en planta.",
   },
   {
     icon: "GraduationCap",
     title: "Capacitación técnica",
-    text: "Cursos prácticos para mantenimiento y diagnóstico real en sistemas industriales Siemens.",
+    text: "Cursos prácticos para mantenimiento y diagnóstico en sistemas Siemens.",
   },
   {
     icon: "MonitorCog",
     title: "Herramientas digitales",
-    text: "BOJ S7-PLC como apoyo al diagnóstico técnico en sistemas S7-300/400.",
+    text: "BOJ S7-PLC como apoyo para ordenar fallas en S7-300/400.",
   },
 ];
 
@@ -1015,30 +1008,23 @@ function HomeLandingRedesign() {
         <div className="mock-hero-shade" aria-hidden="true" />
         <div className="mock-home-container mock-hero-grid">
           <div className="mock-hero-copy">
-            <h1>Automatización, diagnóstico y capacitación industrial.</h1>
+            <h1>Diagnóstico y automatización industrial para PLC Siemens</h1>
             <p>
-              Soluciones técnicas para sistemas PLC Siemens, diagnóstico de fallas reales de planta y formación orientada a mantenimiento industrial.
+              Resolución de fallas reales de planta, puesta en marcha, mejoras PLC/HMI/SCADA, cursos técnicos y BOJ S7-PLC para mantenimiento industrial.
             </p>
             <div className="mock-hero-actions">
               <a
                 className="mock-btn mock-btn-primary"
                 href={whatsappUrl("Hola, escribo desde la web de BOJ para solicitar un diagnóstico industrial.")}
               >
-                Solicitar diagnóstico industrial <ArrowRight size={18} />
+                Solicitar diagnóstico <ArrowRight size={18} />
               </a>
               <a className="mock-btn mock-btn-outline" href="#/cursos">
-                Ver cursos y herramientas <ArrowRight size={18} />
+                Ver cursos <ArrowRight size={18} />
               </a>
-            </div>
-          </div>
-          <div className="mock-hero-visual" aria-label="Especialización técnica BOJ">
-            <div className="mock-check-card">
-              {homeHeroChecks.map((item) => (
-                <span key={item}>
-                  <CheckCircle2 size={18} />
-                  {item}
-                </span>
-              ))}
+              <a className="mock-btn mock-btn-outline" href="#/app">
+                Conocer BOJ S7-PLC <ArrowRight size={18} />
+              </a>
             </div>
           </div>
         </div>
@@ -1046,7 +1032,7 @@ function HomeLandingRedesign() {
 
       <section className="mock-section mock-work" data-home-section="worklines">
         <div className="mock-home-container">
-          <h2>Tres líneas de trabajo claras.</h2>
+          <h2>Servicios, formación y herramientas para mantenimiento industrial</h2>
           <div className="mock-work-grid">
             {homeWorkLines.map((item) => (
               <article className="mock-work-card" key={item.title}>
@@ -1066,6 +1052,9 @@ function HomeLandingRedesign() {
       <section className="mock-section mock-problems" data-home-section="problems">
         <div className="mock-home-container">
           <h2>Problemas que resolvemos.</h2>
+          <p className="mock-problems-subtitle">
+            Partimos del síntoma real: CPU detenida, SF/BF, red inestable, señales dudosas o equipos que dejaron de responder.
+          </p>
           <div className="mock-problems-grid">
             {homeProblems.map((problem) => (
               <article className="mock-problem-item" key={problem.text}>
@@ -1098,7 +1087,7 @@ function HomeLandingRedesign() {
           <div className="mock-app-copy">
             <h2>BOJ S7-PLC</h2>
             <p>
-              Asistente técnico para diagnóstico orientativo de fallas en sistemas Siemens S7-300/400.
+              App web para ordenar el diagnóstico de fallas en Siemens S7-300/400: síntomas, LEDs, hipótesis técnicas y guía de verificación.
             </p>
             <ul>
               <li>Ingreso de síntomas</li>
@@ -3218,17 +3207,11 @@ function MainFooter() {
             </a>
           ))}
         </nav>
-        <div className="mock-footer-legal">
-          <h3>Legal</h3>
-          <a href="#/app">Términos y condiciones</a>
-          <a href="#/app">Política de privacidad</a>
-        </div>
         <div className="mock-footer-social">
           <h3>Seguinos</h3>
           <div>
             <a href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">in</a>
-            <a href={contact.linktree} target="_blank" rel="noreferrer" aria-label="YouTube">yt</a>
-            <a href={contact.linktree} target="_blank" rel="noreferrer" aria-label="Instagram">ig</a>
+            <a href={contact.linktree} target="_blank" rel="noreferrer" aria-label="Linktree">lt</a>
           </div>
         </div>
       </div>
