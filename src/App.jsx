@@ -1130,13 +1130,31 @@ function HomeLandingRedesign() {
 
 function AppDiagnosticMockup() {
   return (
-    <figure className="mock-app-visual real-app-capture" aria-label="Captura real de BOJ S7-PLC">
-      <div className="real-app-screen">
-        <img
-          src={appRealCapture}
-          alt="Captura real de BOJ S7-PLC con diagnóstico por estado de CPU"
-          loading="lazy"
-        />
+    <figure className="mock-app-visual real-app-capture app-product-composition" aria-label="Capturas reales de BOJ S7-PLC en escritorio y celular">
+      <div className="app-product-stage">
+        <div className="app-desktop-frame">
+          <div className="app-desktop-toolbar" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="real-app-screen app-desktop-screen">
+            <img
+              src={appRealCapture}
+              alt="Captura real de BOJ S7-PLC con diagnóstico por estado de CPU"
+              loading="lazy"
+            />
+          </div>
+          <div className="app-laptop-base" aria-hidden="true" />
+        </div>
+        <div className="app-mobile-frame" aria-label="Vista mobile de BOJ S7-PLC">
+          <div className="app-mobile-speaker" aria-hidden="true" />
+          <img
+            src={appScreenshot}
+            alt="Vista mobile de BOJ S7-PLC con diagnóstico por LEDs de CPU"
+            loading="lazy"
+          />
+        </div>
       </div>
     </figure>
   );

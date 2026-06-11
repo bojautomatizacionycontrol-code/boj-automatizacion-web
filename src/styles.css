@@ -15032,35 +15032,176 @@ textarea {
 }
 
 .mock-app {
-  padding: 58px 0;
-  background: #f3f7fb;
+  padding: 64px 0 70px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 24%, rgba(0, 174, 234, 0.12), transparent 32%),
+    linear-gradient(180deg, #ffffff 0%, #eef4f8 100%);
 }
 
 .mock-app-grid {
-  grid-template-columns: minmax(300px, 0.62fr) minmax(0, 1fr);
-  gap: 34px;
+  grid-template-columns: minmax(300px, 0.48fr) minmax(0, 1.08fr);
+  gap: clamp(32px, 4vw, 58px);
 }
 
 .mock-app-copy {
   padding-left: 0;
+  max-width: 430px;
 }
 
 .mock-app-copy h2 {
-  font-size: clamp(1.8rem, 2.4vw, 2.45rem);
+  margin-bottom: 10px;
+  font-size: clamp(2rem, 2.65vw, 2.65rem);
+  line-height: 1.02;
 }
 
 .mock-app-copy p {
-  font-size: 1rem;
-  line-height: 1.52;
+  max-width: 420px;
+  margin-bottom: 16px;
+  color: #172a3b;
+  font-size: 1.03rem;
+  line-height: 1.5;
+}
+
+.mock-app-copy ul {
+  gap: 9px;
+  margin-bottom: 22px;
+}
+
+.mock-app-copy li {
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+.app-product-composition {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.app-product-stage {
+  position: relative;
+  width: min(100%, 860px);
+  margin-left: auto;
+  padding: 8px clamp(34px, 4.2vw, 54px) 56px 0;
+}
+
+.app-desktop-frame {
+  position: relative;
+  padding: 8px;
+  border: 7px solid #08111c;
+  border-bottom-width: 13px;
+  border-radius: 18px 18px 10px 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 32%),
+    #07111d;
+  box-shadow:
+    0 30px 62px rgba(4, 17, 29, 0.22),
+    0 0 0 1px rgba(0, 174, 234, 0.12);
+}
+
+.app-desktop-toolbar {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 6px 7px;
+}
+
+.app-desktop-toolbar span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.app-desktop-toolbar span:nth-child(1) {
+  background: #20d66b;
+}
+
+.app-desktop-toolbar span:nth-child(2) {
+  background: #23c7f4;
+}
+
+.app-desktop-toolbar span:nth-child(3) {
+  background: rgba(255, 255, 255, 0.24);
 }
 
 .real-app-screen,
-.real-app-screen img {
+.real-app-screen img,
+.app-desktop-screen,
+.app-desktop-screen img {
   max-width: 100%;
 }
 
-.real-app-screen img {
+.app-desktop-screen {
+  border-radius: 9px;
+}
+
+.app-desktop-screen img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1917 / 916;
   object-fit: contain;
+  object-position: center top;
+  background: #020b14;
+}
+
+.app-laptop-base {
+  width: 74%;
+  height: 12px;
+  margin: 12px auto -18px;
+  border-radius: 0 0 18px 18px;
+  background: linear-gradient(180deg, #101a25, #060c14);
+  box-shadow: 0 16px 28px rgba(4, 17, 29, 0.2);
+}
+
+.app-mobile-frame {
+  position: absolute;
+  right: 0;
+  bottom: 6px;
+  width: clamp(148px, 16vw, 186px);
+  aspect-ratio: 9 / 18.5;
+  padding: 16px 8px 10px;
+  border: 7px solid #060d16;
+  border-radius: 30px;
+  background: #050b12;
+  box-shadow:
+    0 26px 50px rgba(3, 13, 22, 0.34),
+    0 0 0 1px rgba(35, 199, 244, 0.16);
+  overflow: hidden;
+  z-index: 3;
+}
+
+.app-mobile-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 22px;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.12), transparent 32%);
+}
+
+.app-mobile-speaker {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 42px;
+  height: 5px;
+  border-radius: 999px;
+  background: #02060b;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.app-mobile-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+  object-position: center top;
+  background: #07111d;
 }
 
 .mock-final-cta {
@@ -15071,6 +15212,92 @@ textarea {
   grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr) auto;
   gap: 22px;
   padding: 24px 0;
+}
+
+@media (max-width: 1180px) {
+  .mock-app-grid {
+    gap: 30px;
+  }
+
+  .mock-app-copy {
+    max-width: 620px;
+  }
+
+  .app-product-stage {
+    width: min(100%, 820px);
+    margin-inline: auto;
+    padding-right: clamp(34px, 7vw, 62px);
+  }
+}
+
+@media (max-width: 760px) {
+  .mock-app-grid {
+    gap: 24px;
+  }
+
+  .mock-app-copy {
+    max-width: none;
+  }
+
+  .mock-app-copy h2 {
+    font-size: clamp(1.75rem, 8vw, 2.15rem);
+  }
+
+  .app-product-stage {
+    padding: 0 30px 48px 0;
+  }
+
+  .app-desktop-frame {
+    padding: 6px;
+    border-width: 5px;
+    border-bottom-width: 10px;
+    border-radius: 14px 14px 8px 8px;
+  }
+
+  .app-desktop-toolbar {
+    height: 18px;
+    gap: 5px;
+    padding-bottom: 5px;
+  }
+
+  .app-desktop-toolbar span {
+    width: 6px;
+    height: 6px;
+  }
+
+  .app-laptop-base {
+    height: 9px;
+    margin-top: 9px;
+  }
+
+  .app-mobile-frame {
+    width: clamp(104px, 30vw, 132px);
+    bottom: 4px;
+    border-width: 5px;
+    border-radius: 22px;
+    padding: 12px 5px 7px;
+  }
+
+  .app-mobile-speaker {
+    top: 6px;
+    width: 30px;
+    height: 4px;
+  }
+
+  .app-mobile-frame img {
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 430px) {
+  .app-product-stage {
+    padding-right: 18px;
+    padding-bottom: 42px;
+  }
+
+  .app-mobile-frame {
+    width: 96px;
+  }
 }
 
 .services-redesign-hero,
@@ -16046,6 +16273,45 @@ textarea {
   color: #ffffff;
 }
 
+.mock-home .mock-final-content {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "title actions"
+    "text actions";
+  align-items: center;
+  column-gap: 30px;
+  row-gap: 8px;
+}
+
+.mock-home .mock-final-content h2 {
+  grid-area: title;
+  max-width: 760px;
+}
+
+.mock-home .mock-final-content p {
+  grid-area: text;
+  max-width: 620px;
+}
+
+.mock-home .mock-final-actions {
+  grid-area: actions;
+}
+
+@media (max-width: 980px) {
+  .mock-home .mock-final-content {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "text"
+      "actions";
+    row-gap: 10px;
+  }
+
+  .mock-home .mock-final-actions {
+    justify-content: flex-start;
+  }
+}
+
 .resources-intro-panel .check-item {
   border-color: rgba(0, 174, 234, 0.16);
   background: transparent;
@@ -16065,6 +16331,19 @@ textarea {
   .services-redesign-hero-copy h1,
   .courses-hero-content h1 {
     line-height: 1.08;
+  }
+
+  .mock-home .mock-final-content {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "text"
+      "actions";
+    row-gap: 10px;
+  }
+
+  .mock-home .mock-final-actions {
+    justify-content: stretch;
   }
 
   .services-redesign-hero-grid {
