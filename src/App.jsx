@@ -720,33 +720,9 @@ const appAvailabilityItems = [
 
 const appHeroBadges = [
   { icon: "Globe", label: "Uso online y offline" },
-  { icon: "Smartphone", label: "App instalable" },
   { icon: "Brain", label: "Hipótesis priorizadas" },
   { icon: "ClipboardCheck", label: "Guía de verificación" },
   { icon: "Settings", label: "6 idiomas" },
-];
-
-const appOperationalBenefits = [
-  {
-    icon: "RefreshCcw",
-    title: "Reduce prueba y error",
-    text: "Ayuda a ordenar la intervención antes de cambiar módulos, reiniciar equipos o modificar lógica.",
-  },
-  {
-    icon: "Clock",
-    title: "Acelera el diagnóstico",
-    text: "Relaciona síntomas, LEDs, red, módulos y condiciones de campo en una misma secuencia.",
-  },
-  {
-    icon: "ShieldCheck",
-    title: "Mejora el criterio técnico",
-    text: "Propone hipótesis y verificaciones para respaldar decisiones en planta.",
-  },
-  {
-    icon: "ClipboardCheck",
-    title: "Estandariza el método",
-    text: "Permite que técnicos y equipos trabajen con una lógica común de diagnóstico.",
-  },
 ];
 
 const appTrustMetrics = [
@@ -1929,8 +1905,9 @@ function AppPage() {
             </h1>
             <p className="app-pro-product-name">BOJ S7-PLC PRO</p>
             <p>
-              Carga síntomas, estados de CPU, LEDs, fallas de red y condiciones de campo para obtener
-              hipótesis técnicas priorizadas y una guía de verificación paso a paso.
+              Kit profesional de diagnóstico para cargar síntomas, estados de CPU, LEDs, fallas de red y condiciones
+              de campo. Recibe hipótesis técnicas priorizadas y una guía de verificación paso a paso para intervenir
+              con método.
             </p>
             <div className="app-pro-actions">
               <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
@@ -2015,27 +1992,10 @@ function AppPage() {
         </div>
       </section>
 
-      <section className="app-pro-benefits-section">
-        <div className="mock-home-container">
-          <div className="app-pro-section-heading">
-            <h2>Por qué usar BOJ S7-PLC PRO en una falla real</h2>
-          </div>
-          <div className="app-pro-benefit-grid">
-            {appOperationalBenefits.map((item) => (
-              <article className="app-pro-benefit-card" key={item.title}>
-                <Icon name={item.icon} size={26} />
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="app-pro-real-language-section">
         <div className="mock-home-container app-pro-real-language-grid">
           <div>
-            <h2>Vista real de la herramienta</h2>
+            <h2>Capturas reales del kit profesional</h2>
             <div className="app-pro-real-view-grid">
               {appRealViews.map((item) => (
                 <article className="app-pro-real-view-card" key={item.title}>
@@ -2098,7 +2058,7 @@ function AppPage() {
               ))}
             </div>
             <p className="app-pro-offline-note">
-              La app puede usarse desde navegador, instalarse como acceso directo y ofrecer uso offline según el plan contratado.
+              El kit puede usarse desde navegador, instalarse como acceso directo y ofrecer uso offline según el plan contratado.
             </p>
           </article>
           <article className="app-pro-cost-card">
@@ -2490,12 +2450,12 @@ function ContactPage() {
     <PageShell
       eyebrow="Contacto"
       title="Contacto técnico para industria, mantenimiento e ingeniería"
-      subtitle="Canales de consulta para fallas de planta, automatización, cursos, capacitaciones, migraciones, tableros, redes industriales y BOJ S7-PLC."
+      subtitle="Consultá por diagnóstico, servicios, cursos o licencias BOJ S7-PLC PRO. También atendemos consultas por automatización, migraciones, tableros y redes industriales."
     >
       <section className="contact-direct">
         <div>
           <p className="eyebrow">Atención directa técnica</p>
-          <h2>Atención técnica con foco en diagnóstico y próximo paso claro</h2>
+          <h2>Consultá por diagnóstico, servicios, cursos o licencias BOJ S7-PLC PRO</h2>
           <p>
             La consulta puede incluir el síntoma, el PLC o red involucrada, una foto del tablero
             o la necesidad de capacitación. La primera respuesta busca ordenar prioridad,
