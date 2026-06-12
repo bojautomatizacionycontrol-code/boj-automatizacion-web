@@ -89,6 +89,22 @@ import engineeringVisual from "./assets/old-site/29-255f90e7.jpg";
 import plantVisual from "./assets/old-site/35-47edf350.jpg";
 import aerialPlantVisual from "./assets/old-site/43-00658318.jpg";
 
+const serviceWorkImageModules = import.meta.glob("./assets/services-works/*.{png,jpg,jpeg,webp}", {
+  eager: true,
+  import: "default",
+});
+
+const getServiceWorkImage = (fileNames) => {
+  const candidates = Array.isArray(fileNames) ? fileNames : [fileNames];
+
+  for (const fileName of candidates) {
+    const image = serviceWorkImageModules[`./assets/services-works/${fileName}`];
+    if (image) return image;
+  }
+
+  return "";
+};
+
 const icons = {
   ArrowRight,
   Brain,
@@ -320,13 +336,6 @@ const homeTechSpecialties = [
   },
 ];
 
-const servicesInterventionCriteria = [
-  "Se releva el síntoma antes de tocar lógica o hardware.",
-  "Se busca evidencia online, eléctrica y de campo.",
-  "Se prueba con producción, mantenimiento y seguridad operativa en mente.",
-  "Se deja una recomendación clara para sostener el sistema después de la intervención.",
-];
-
 const servicesAreaCards = [
   {
     icon: "FileSearch",
@@ -375,6 +384,111 @@ const serviceWorkflowCards = [
     icon: "ShieldCheck",
     title: "Intervención orientada a continuidad",
     text: "Buscamos reducir paradas, evitar cambios innecesarios y sostener la operación.",
+  },
+];
+
+const servicesExperienceCards = [
+  {
+    icon: "Zap",
+    title: "Oil & Gas / Energía",
+    text: "Sistemas críticos, generación, compresión, tableros y continuidad operativa.",
+  },
+  {
+    icon: "Factory",
+    title: "Alimentos y procesos",
+    text: "Puesta en marcha, control de proceso, señales y soporte a producción.",
+  },
+  {
+    icon: "Settings",
+    title: "Papel / Manufactura",
+    text: "Automatización, variadores, diagnóstico y mejoras en líneas industriales.",
+  },
+  {
+    icon: "Gauge",
+    title: "Tratamiento de agua / Servicios industriales",
+    text: "Control, instrumentación, bombas, tableros y sistemas auxiliares.",
+  },
+  {
+    icon: "ClipboardCheck",
+    title: "Ingeniería y puesta en marcha",
+    text: "Validación en campo, pruebas SAT, documentación y asistencia técnica.",
+  },
+];
+
+const servicesFeaturedWorks = [
+  {
+    title: "Generador WEG BT40",
+    meta: "Ledesma · 2024",
+    description: "Ingeniería, conexionado y puesta en marcha de generador BT40 de 42 MW. Usina Ingenio.",
+    imageFiles: [
+      "Generador industrial — para Generador WEG BT40.png",
+      "generador_industrial_sobre_fondo_minimalista.png",
+    ],
+  },
+  {
+    title: "Evaporador",
+    meta: "CALSA · 2024",
+    description: "Corrección y agregado de nuevas bombas y señales en programación y HMI.",
+    imageFiles: [
+      "Evaporador  equipo de proceso — para Evaporador CALSA.png",
+      "sistema_industrial_en_ambiente_minimalista.png",
+    ],
+  },
+  {
+    title: "Generadores Siemens TG3/TG4",
+    meta: "Generación Mediterránea · 2019",
+    description: "Programación de PLC, HMI y SCADA de servicios para nuevas turbinas generadoras.",
+    imageFiles: [
+      "Turbina o generador industrial — para Generadores Siemens TG3TG4.png",
+      "turbina_industrial_en_estudio_brillante.png",
+    ],
+  },
+  {
+    title: "Compresores",
+    meta: "TGN Tucumán / TGN Jujuy · 2018",
+    description: "Upgrade de tableros de control de motocompresores.",
+    imageFiles: [
+      "Motocompresor industrial — para Compresores TGN.png",
+      "componente_industrial_en_estudio_minimalista.png",
+    ],
+  },
+  {
+    title: "Sistema contra incendios",
+    meta: "GETSA · 2017",
+    description: "Programación y comisionamiento de sistema contra incendios con PLC S7-1500.",
+    imageFiles: [
+      "Sistema contra incendios industrial — bombas, cañerías, válvulas.png",
+      "sistema_industrial_con_bomba_y_tubería.png",
+      "sistema_industrial_con_bomba_y_tuberia.png",
+    ],
+  },
+  {
+    title: "Gasómetro",
+    meta: "Gasnor · 2017",
+    description: "Programación de gasómetro en PLC S7-1200 y HMI para calibración de medidores.",
+    imageFiles: [
+      "Medición de gas  gasómetro — tuberías, instrumentación, skid de medición.png",
+      "montaje_industrial_de_proceso_modular.png",
+    ],
+  },
+  {
+    title: "Planta de agua",
+    meta: "YPF · 2016",
+    description: "Upgrade de PLC S5-95U a S7-1500 en planta de agua.",
+    imageFiles: [
+      "Planta de agua  bombeo industrial — bombas, cañerías, tratamiento.png",
+      "sistema_industrial_de_tratamiento_de_agua.png",
+    ],
+  },
+  {
+    title: "Central de lubricación",
+    meta: "Ledesma · 2016",
+    description: "Programación de PLC S7-1500 y HMI TP1200 para central de lubricación.",
+    imageFiles: [
+      "Central de lubricación industrial — bombas, manifold, líneas de lubricación.png",
+      "sistema_hidráulico_de_control_en_pared.png",
+      "sistema_hidraulico_de_control_en_pared.png",
+    ],
   },
 ];
 
@@ -1485,8 +1599,8 @@ function ServicesPage() {
             <p className="services-redesign-eyebrow">Servicios</p>
             <h1>Servicios técnicos para reducir paradas y sostener automatización industrial</h1>
             <p>
-              Diagnóstico, ingeniería, programación, redes, tableros y puesta en marcha con foco en
-              continuidad operativa, mantenimiento y decisiones con evidencia.
+              Diagnóstico, ingeniería, programación, redes, tableros y puesta en marcha con experiencia real
+              en plantas industriales y foco en continuidad operativa.
             </p>
             <div className="services-redesign-actions">
               <a
@@ -1500,19 +1614,6 @@ function ServicesPage() {
               </a>
             </div>
           </div>
-
-          <article className="services-intervention-card">
-            <span className="services-card-kicker">Criterio de intervención</span>
-            <h2>Criterio de intervención</h2>
-            <div>
-              {servicesInterventionCriteria.map((item) => (
-                <span key={item}>
-                  <CheckCircle2 size={18} />
-                  {item}
-                </span>
-              ))}
-            </div>
-          </article>
         </div>
       </section>
 
@@ -1534,10 +1635,64 @@ function ServicesPage() {
         </div>
       </section>
 
+      <section className="services-field-section">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-field-heading">
+            <h2>Experiencia en campo industrial</h2>
+            <p>
+              Intervenciones realizadas en plantas y procesos donde la continuidad operativa, el diagnóstico
+              rápido y la puesta en marcha segura son críticos.
+            </p>
+          </div>
+          <div className="services-field-grid">
+            {servicesExperienceCards.map((card) => (
+              <article className="services-field-card" key={card.title}>
+                <Icon name={card.icon} size={30} />
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="services-redesign-section services-works-section">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-works-heading">
+            <h2>Obras e intervenciones destacadas</h2>
+            <p>
+              Selección de trabajos técnicos realizados en automatización, migraciones, tableros, PLC, HMI
+              y puesta en marcha.
+            </p>
+          </div>
+          <div className="services-works-grid">
+            {servicesFeaturedWorks.map((work) => {
+              const imageSrc = getServiceWorkImage(work.imageFiles);
+
+              return (
+                <article
+                  className={`services-work-card${imageSrc ? "" : " services-work-card--missing-media"}`}
+                  key={`${work.title}-${work.meta}`}
+                >
+                  <div className="services-work-media" aria-hidden="true">
+                    {imageSrc ? <img src={imageSrc} alt="" loading="lazy" /> : null}
+                  </div>
+                  <div className="services-work-content">
+                    <h3>{work.title}</h3>
+                    <p>{work.meta}</p>
+                    <span>{work.description}</span>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       <section className="services-redesign-section services-areas-section" id="areas-de-servicio">
         <div className="mock-home-container">
           <div className="services-section-heading services-area-heading">
-            <h2>Áreas de servicio.</h2>
+            <h2>Áreas de servicio</h2>
             <p>Servicios técnicos para automatización, diagnóstico y soporte industrial.</p>
           </div>
           <div className="services-area-grid">
@@ -1561,6 +1716,15 @@ function ServicesPage() {
             {mainServiceCards.map((service) => (
               <ServicePrimaryCard key={service.title} service={service} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="services-redesign-section services-secondary-section">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-secondary-heading">
+            <h2>Servicios complementarios</h2>
+            <p>Soporte técnico para señales, tableros y formación aplicada al mantenimiento industrial.</p>
           </div>
           <div className="services-secondary-grid">
             {secondaryServiceCards.map((service) => (
