@@ -826,13 +826,6 @@ const appAvailabilityItems = [
   { icon: "WifiOff", title: "Offline según plan", text: "Disponibilidad variable" },
 ];
 
-const appHeroBadges = [
-  { icon: "Globe", label: "Uso online y offline" },
-  { icon: "Brain", label: "Hipótesis priorizadas" },
-  { icon: "ClipboardCheck", label: "Guía de verificación" },
-  { icon: "Settings", label: "6 idiomas" },
-];
-
 const appTrustMetrics = [
   { icon: "Clock", title: "+15 años", text: "de experiencia" },
   { icon: "Cpu", title: "PLC Siemens", text: "foco S7-300/400" },
@@ -2068,18 +2061,11 @@ function AppPage() {
         <div className="app-pro-hero-shade" aria-hidden="true" />
         <div className="mock-home-container app-pro-hero-content">
           <div className="app-pro-hero-copy">
-            <h1>
-              Diagnostica fallas en
-              <br />
-              PLC Siemens S7-300/400
-              <br />
-              con método, no a prueba y error
-            </h1>
             <p className="app-pro-product-name">BOJ S7-PLC PRO</p>
+            <h1>Diagnóstico guiado para PLC Siemens S7-300/400</h1>
             <p>
-              Kit profesional de diagnóstico para cargar síntomas, estados de CPU, LEDs, fallas de red y condiciones
-              de campo. Recibe hipótesis técnicas priorizadas y una guía de verificación paso a paso para intervenir
-              con método.
+              Cargá síntomas, LEDs y condiciones de campo. BOJ S7-PLC ordena hipótesis técnicas y guía la
+              verificación paso a paso.
             </p>
             <div className="app-pro-actions">
               <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
@@ -2095,14 +2081,6 @@ function AppPage() {
               >
                 Ver planes PRO
               </a>
-            </div>
-            <div className="app-pro-hero-badges" aria-label="Resumen de BOJ S7-PLC PRO">
-              {appHeroBadges.map((badge) => (
-                <span className="app-pro-hero-badge" key={badge.label}>
-                  <Icon name={badge.icon} size={18} />
-                  {badge.label}
-                </span>
-              ))}
             </div>
           </div>
         </div>
