@@ -73,6 +73,7 @@ import appHipotesisPriorizadas from "./assets/app-hipotesis-priorizadas.jpg";
 import walterBojAvatar from "./assets/walter-boj-avatar-field.jpeg";
 import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v4.jpg";
 import courseS7400Visual from "./assets/course-s7-400.jpg";
+import s7CourseCoverHero from "./assets/services-works/paisaje_industrial_nocturno_con_tecnología_avanzad.png.png";
 import courseTiaPortalVisual from "./assets/course-tia-portal.jpg";
 import step7ManagerVisual from "./assets/11.png";
 import step7HwConfigVisual from "./assets/12.png";
@@ -1969,7 +1970,7 @@ function CourseAvailableCard({ course }) {
 
 function S7CoursePage() {
   return (
-    <CourseLanding
+    <S7CourseLanding
       course={s7Course}
       eyebrow="Curso aplicado"
       visual="s7"
@@ -2382,6 +2383,210 @@ function AppPage() {
   );
 }
 
+function S7CourseLanding({ course, eyebrow, ctas }) {
+  const accessCta = ctas.find((cta) => cta.label.includes("Comprar")) ?? ctas[0];
+  const availabilityCta = ctas.find((cta) => cta.label.includes("disponibilidad")) ?? ctas[1];
+  const whatsappCta = ctas.find((cta) => cta.label.includes("WhatsApp")) ?? ctas[2];
+  const heroActions = (
+    <div className="s7-course-hero-actions">
+      <PrimaryLink href={availabilityCta.href}>Consultar disponibilidad</PrimaryLink>
+      <SecondaryLink href={whatsappCta.href}>Hablar por WhatsApp</SecondaryLink>
+    </div>
+  );
+
+  const differentiators = [
+    course.positioning[0],
+    course.positioning[1],
+    course.positioning[3],
+    course.difference[2],
+    course.difference[3],
+    course.difference[4],
+    course.benefits[0],
+    course.benefits[3],
+  ];
+  const learningItems = [...course.learnItems, ...course.outcomes.slice(0, 4)];
+  const includeIcons = ["MonitorCog", "FileSearch", "ClipboardCheck", "Factory", "Cpu", "ShieldCheck", "Gauge", "ClipboardCheck"];
+
+  const heroStyle = { "--s7-course-cover-image": `url(${s7CourseCoverHero})` };
+
+  return (
+    <PageShell
+      eyebrow={eyebrow}
+      title={course.title}
+      subtitle={course.subtitle}
+      heroExtra={heroActions}
+      heroClassName="s7-course-cover-hero"
+      heroStyle={heroStyle}
+    >
+      <div className="training-strip page-strip s7-course-strip">
+        <span>Aplicado a mantenimiento</span>
+        <span>Diagnóstico online</span>
+        <span>Casos de planta</span>
+        <span>Procedimiento técnico</span>
+      </div>
+
+      <div className="s7-course-landing">
+        <div className="s7-course-intro-grid">
+          <div className="s7-course-intro-main">
+          <section className="s7-course-block s7-course-difference">
+            <div className="s7-course-heading">
+              <p className="eyebrow">Criterio BOJ</p>
+              <h2>Qué hace diferente este curso</h2>
+              <p>
+                Está pensado para diagnosticar bajo presión operativa, ordenar evidencia y decidir el próximo
+                paso técnico sin caer en prueba y error.
+              </p>
+            </div>
+            <div className="s7-course-bullet-grid">
+              {differentiators.map((item) => (
+                <article key={item}>
+                  <Icon name="CheckCircle2" size={18} />
+                  <span>{item}</span>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <div className="s7-course-mobile-panel">
+            <S7CourseSidePanel availabilityCta={availabilityCta} />
+          </div>
+
+          <section className="s7-course-block s7-course-audience">
+            <div className="s7-course-heading compact">
+              <p className="eyebrow">Perfil técnico</p>
+              <h2>Para quién es</h2>
+            </div>
+            <div className="s7-course-chip-grid">
+              {course.audience.map((item) => (
+                <span key={item}>
+                  <CheckCircle2 size={16} />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </section>
+
+          <section className="s7-course-block s7-course-learning">
+            <div className="s7-course-heading">
+              <p className="eyebrow">Habilidades concretas</p>
+              <h2>Qué vas a aprender</h2>
+              <p>Diagnóstico con STEP 7 Classic, lectura online, criterio de campo y cierre técnico defendible.</p>
+            </div>
+            <div className="s7-course-card-grid">
+              {learningItems.map((item, index) => (
+                <article key={item}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <p>{item}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="s7-course-block s7-course-includes">
+            <div className="s7-course-heading">
+              <p className="eyebrow">Material y método</p>
+              <h2>Qué incluye</h2>
+            </div>
+            <div className="s7-course-mini-grid">
+              {course.includes.map((item, index) => (
+                <article key={item}>
+                  <Icon name={includeIcons[index] || "ClipboardCheck"} size={22} />
+                  <span>{item}</span>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          </div>
+
+          <div className="s7-course-sidebar">
+            <S7CourseSidePanel availabilityCta={availabilityCta} />
+          </div>
+        </div>
+
+        <main className="s7-course-main s7-course-main-wide">
+          <section className="s7-course-mid-cta">
+            <div>
+              <h2>Curso aplicado para diagnosticar con más criterio técnico</h2>
+              <p>Consultá acceso, modalidad y disponibilidad para sumarlo al trabajo de mantenimiento.</p>
+            </div>
+            <div className="button-row">
+              <PrimaryLink href={accessCta.href}>Comprar o consultar acceso</PrimaryLink>
+              <SecondaryLink href={whatsappCta.href}>Hablar por WhatsApp</SecondaryLink>
+            </div>
+          </section>
+
+          <section className="s7-course-block s7-course-program">
+            <div className="s7-course-heading">
+              <p className="eyebrow">Contenido técnico</p>
+              <h2>Programa técnico</h2>
+            </div>
+            <ol>
+              {course.modules.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ol>
+          </section>
+
+          <section className="s7-course-block s7-course-mistakes">
+            <div className="s7-course-heading">
+              <p className="eyebrow">Valor operativo</p>
+              <h2>Errores que este curso ayuda a evitar</h2>
+            </div>
+            <div>
+              {course.avoidMistakes.map((item) => (
+                <span key={item}>
+                  <Icon name="ShieldCheck" size={17} />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </section>
+
+          <section className="s7-course-final-cta">
+            <div>
+              <p className="eyebrow">Acceso al curso</p>
+              <h2>Formación técnica para intervenir con criterio</h2>
+              <p>Videos, PDFs, casos reales y BOJ S7-PLC Course Edition para ordenar el diagnóstico en planta.</p>
+            </div>
+            <div className="button-row">
+              <PrimaryLink href={accessCta.href}>Comprar o consultar acceso</PrimaryLink>
+              <SecondaryLink href={whatsappCta.href}>Hablar por WhatsApp</SecondaryLink>
+              <SecondaryLink href={availabilityCta.href}>Consultar disponibilidad</SecondaryLink>
+            </div>
+          </section>
+        </main>
+      </div>
+    </PageShell>
+  );
+}
+
+function S7CourseSidePanel({ availabilityCta }) {
+  const facts = [
+    ["Modalidad", "Videos grabados + PDFs técnicos"],
+    ["Enfoque aplicado", "Diagnóstico real S7-300/400"],
+    ["Casos reales", "Síntomas de planta y fallas típicas"],
+    ["Incluye app", "BOJ S7-PLC Course Edition"],
+  ];
+
+  return (
+    <aside className="s7-course-side-panel">
+      <CourseVisual type="s7" />
+      <div className="s7-course-fast-facts">
+        {facts.map(([label, value]) => (
+          <div key={label}>
+            <span>{label}</span>
+            <strong>{value}</strong>
+          </div>
+        ))}
+      </div>
+      <a className="btn primary" href={availabilityCta.href}>
+        Consultar disponibilidad
+      </a>
+    </aside>
+  );
+}
+
 function AppComparisonTable() {
   return (
     <div className="app-comparison-table" role="table" aria-label="Comparación BOJ S7-PLC Course Edition y PRO">
@@ -2774,10 +2979,10 @@ function ContactForm() {
   );
 }
 
-function PageShell({ eyebrow, title, subtitle, heroExtra, children }) {
+function PageShell({ eyebrow, title, subtitle, heroExtra, heroClassName, heroStyle, children }) {
   return (
     <>
-      <section className="page-hero">
+      <section className={["page-hero", heroClassName].filter(Boolean).join(" ")} style={heroStyle}>
         <div className="section-container">
           <p className="eyebrow">{eyebrow}</p>
           <h1>{title}</h1>
@@ -3279,12 +3484,6 @@ function CourseVisual({ type }) {
               <figcaption>LAD / STL / FBD</figcaption>
             </figure>
           </div>
-        </div>
-        <div className="status-cluster">
-          <b>RUN</b>
-          <b>STOP</b>
-          <b>SF</b>
-          <b>BF</b>
         </div>
       </aside>
     );
