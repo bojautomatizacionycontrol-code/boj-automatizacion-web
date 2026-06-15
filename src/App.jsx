@@ -823,16 +823,16 @@ const appAudienceProfiles = [
 ];
 
 const appAvailabilityItems = [
-  { icon: "Globe", title: "Web", text: "Desde navegador" },
-  { icon: "Smartphone", title: "Instalable", text: "Acceso directo en dispositivo compatible" },
-  { icon: "WifiOff", title: "Offline según plan", text: "Disponibilidad variable" },
+  { icon: "Globe", title: "Web", text: "Acceso inmediato desde navegador, sin instalación obligatoria." },
+  { icon: "Smartphone", title: "Instalable", text: "Acceso directo desde dispositivo compatible para uso más cómodo." },
+  { icon: "WifiOff", title: "Offline según plan", text: "Disponibilidad offline variable según la licencia contratada." },
 ];
 
 const appTrustMetrics = [
-  { icon: "Clock", title: "+15 años", text: "de experiencia" },
-  { icon: "Cpu", title: "PLC Siemens", text: "foco S7-300/400" },
-  { icon: "ShieldCheck", title: "Miles de fallas", text: "resueltas en planta" },
-  { icon: "ClipboardCheck", title: "Metodología", text: "probada en campo" },
+  { icon: "Clock", title: "+15 años", text: "Experiencia en automatización, mantenimiento y diagnóstico industrial." },
+  { icon: "Cpu", title: "PLC Siemens", text: "Foco técnico en S7-300/400 y fallas reales de planta." },
+  { icon: "ShieldCheck", title: "Miles de fallas", text: "Resueltas y analizadas en entornos industriales." },
+  { icon: "ClipboardCheck", title: "Metodología probada", text: "Criterio aplicado en campo para reducir prueba y error." },
 ];
 
 const appFaqItems = [
@@ -2083,7 +2083,7 @@ function S7SalesLanding({ course, eyebrow }) {
     {
       icon: "ScanSearch",
       title: "Diagnóstico antes de intervención",
-      text: "Pensá primero, actuá después. Menos riesgos, mejores resultados.",
+      text: "Primero pensá, después actuá. Menos riesgo, mejores decisiones.",
     },
     {
       icon: "ShieldCheck",
@@ -2097,8 +2097,8 @@ function S7SalesLanding({ course, eyebrow }) {
     },
     {
       icon: "ClipboardCheck",
-      title: "Uso de la app PRO para ordenar hipótesis y verificaciones",
-      text: "Tu acompañamiento técnico durante el diagnóstico.",
+      title: "Uso de la app PRO como apoyo",
+      text: "Ayuda a ordenar hipótesis y verificaciones durante el diagnóstico.",
     },
   ];
 
@@ -2134,37 +2134,58 @@ function S7SalesLanding({ course, eyebrow }) {
 
   const courseFaqItems = [
     {
-      question: "¿Necesito saber programar PLC para hacer el curso?",
-      answer: "No es necesario partir como programador experto. El foco está en diagnóstico, lectura online, interpretación de estados y criterio técnico para intervenir con evidencia.",
-    },
-    {
-      question: "¿Necesito tener STEP 7 instalado?",
-      answer: "Es recomendable para practicar mejor los procedimientos. Aun así, el curso muestra el flujo de trabajo para que puedas entender qué observar en SIMATIC Manager, HW Config y Diagnostic Buffer.",
+      question: "¿Qué recibo exactamente al comprar?",
+      answer: "Recibís un kit profesional de diagnóstico: material técnico estructurado, PDFs de consulta, método de análisis, casos de fallas reales y 1 mes de acceso a BOJ S7-PLC PRO.",
     },
     {
       question: "¿El curso incluye la APP PRO?",
-      answer: "Sí. La oferta incluye el curso aplicado S7-300/400 y 1 mes de acceso a BOJ S7-PLC PRO como apoyo para ordenar síntomas, hipótesis y verificaciones.",
+      answer: "Sí. La compra incluye el curso Diagnóstico S7-300/400 y 1 mes de acceso a BOJ S7-PLC PRO.",
     },
     {
       question: "¿Por cuánto tiempo tengo la APP PRO?",
-      answer: "El acceso incluido es por 1 mes para 1 dispositivo. Luego puedes continuar con un plan PRO si quieres mantener la herramienta activa.",
+      answer: "Incluye 1 mes de APP PRO para 1 dispositivo. Cuando vence el mes, podés renovarla si querés seguir usándola.",
     },
     {
       question: "¿Sirve para S7-300 y S7-400?",
-      answer: "Sí. El contenido está enfocado en diagnóstico de PLC Siemens S7-300/400 con STEP 7 Classic, incluyendo CPU, módulos, LEDs, PROFIBUS, HW Config y Diagnostic Buffer.",
+      answer: "Sí. Está orientado a diagnóstico de sistemas Siemens S7-300/400, especialmente CPU, LEDs, Diagnostic Buffer, PROFIBUS, módulos, señales y fallas de campo.",
+    },
+    {
+      question: "¿Me ayuda a conectarme al PLC con más seguridad?",
+      answer: "Sí. El curso te ayuda a entender qué mirar antes y durante una conexión online: estado de CPU, hardware, Diagnostic Buffer, red, módulos y señales. No reemplaza los procedimientos de seguridad de planta, pero te ayuda a intervenir con más criterio.",
+    },
+    {
+      question: "¿Necesito tener STEP 7 instalado?",
+      answer: "Es recomendable para practicar mejor los procedimientos. De todos modos, el material muestra qué observar en SIMATIC Manager, HW Config y Diagnostic Buffer para entender el flujo de diagnóstico.",
+    },
+    {
+      question: "¿Necesito saber programar PLC para hacer el curso?",
+      answer: "No es necesario ser programador avanzado. El curso está pensado para técnicos, electricistas, automatistas y personal de mantenimiento que necesitan diagnosticar fallas reales con más criterio.",
     },
     {
       question: "¿El curso es teórico o aplicado?",
-      answer: "Es aplicado. Incluye método de diagnóstico, material técnico aplicado, guías técnicas y casos orientados a fallas reales de planta.",
+      answer: "Es aplicado. Tiene base técnica, pero el foco está en diagnóstico real: ordenar síntomas, interpretar evidencias y decidir el próximo paso antes de intervenir.",
+    },
+    {
+      question: "¿Está orientado a fallas reales de planta?",
+      answer: "Sí. El enfoque no es programación genérica, sino diagnóstico aplicado: CPU en STOP, SF/BF, PROFIBUS, módulos caídos, señales incorrectas, fallas intermitentes y errores comunes de intervención.",
     },
     {
       question: "¿Puedo usarlo si trabajo en mantenimiento?",
-      answer: "Sí. Está pensado para técnicos, electricistas, instrumentistas y equipos de mantenimiento que necesitan diagnosticar bajo presión operativa.",
+      answer: "Sí. Está pensado especialmente para mantenimiento industrial, donde muchas veces hay poco tiempo, presión operativa y síntomas incompletos.",
     },
     {
       question: "¿Qué pasa cuando vence el mes de APP PRO?",
-      answer: "El acceso incluido finaliza al cumplir el mes. Puedes usar el curso y sus materiales, y contratar un plan de BOJ S7-PLC PRO si necesitas seguir usando la app.",
+      answer: "El acceso mensual a la APP PRO finaliza. El material del curso queda según las condiciones de entrega definidas, y la app puede renovarse si necesitás continuar con acceso PRO.",
     },
+    {
+      question: "¿La APP PRO reemplaza al curso?",
+      answer: "No. El curso te da el criterio técnico y la metodología. La APP PRO funciona como apoyo durante el diagnóstico para ordenar síntomas, hipótesis y verificaciones.",
+    },
+  ];
+
+  const courseFaqColumns = [
+    courseFaqItems.filter((_, index) => index % 2 === 0),
+    courseFaqItems.filter((_, index) => index % 2 === 1),
   ];
 
   return (
@@ -2399,14 +2420,18 @@ function S7SalesLanding({ course, eyebrow }) {
             <h2>Antes de comprar el curso</h2>
           </div>
           <div className="s7-sales-faq-grid">
-            {courseFaqItems.map((item) => (
-              <details className="s7-sales-faq-item" key={item.question}>
-                <summary>
-                  <span>{item.question}</span>
-                  <ChevronDown size={18} aria-hidden="true" />
-                </summary>
-                <p>{item.answer}</p>
-              </details>
+            {courseFaqColumns.map((column, columnIndex) => (
+              <div className="s7-sales-faq-column" key={`faq-column-${columnIndex + 1}`}>
+                {column.map((item) => (
+                  <details className="s7-sales-faq-item" key={item.question}>
+                    <summary>
+                      <span>{item.question}</span>
+                      <ChevronDown size={18} aria-hidden="true" />
+                    </summary>
+                    <p>{item.answer}</p>
+                  </details>
+                ))}
+              </div>
             ))}
           </div>
         </div>
@@ -2415,7 +2440,7 @@ function S7SalesLanding({ course, eyebrow }) {
       <section className="s7-sales-final-cta">
         <div className="s7-sales-container">
           <div className="s7-sales-final-cta-panel">
-            <p>Si trabajás con PLC Siemens S7-300/400 y necesitás diagnosticar con más criterio, este curso te da método, práctica y apoyo técnico.</p>
+            <p>Si trabajás con PLC Siemens S7-300/400 y necesitás diagnosticar con más criterio, este curso te da método, estructura y apoyo técnico para intervenir mejor.</p>
             <div className="s7-sales-final-actions">
               <a className="s7-sales-btn s7-sales-btn-primary" href={purchaseHref} target="_blank" rel="noreferrer">
                 Comprar curso + APP PRO
@@ -2653,6 +2678,9 @@ function AppPage() {
         <div className="mock-home-container app-pro-value-row-grid">
           <article className="app-pro-offline-card">
             <h2>Acceso, instalación y disponibilidad</h2>
+            <p className="app-pro-offline-intro">
+              El acceso fue pensado para adaptarse a distintas formas de trabajo: consulta rápida, uso desde escritorio y apoyo en campo.
+            </p>
             <div className="app-pro-offline-items">
               {appAvailabilityItems.map((item) => (
                 <div key={item.title}>
@@ -2663,7 +2691,7 @@ function AppPage() {
               ))}
             </div>
             <p className="app-pro-offline-note">
-              El kit puede usarse desde navegador, instalarse como acceso directo y ofrecer uso offline según el plan contratado.
+              Pensado para consulta rápida, acceso flexible y continuidad de trabajo en campo.
             </p>
           </article>
           <article className="app-pro-cost-card">
@@ -2673,7 +2701,15 @@ function AppPage() {
                 Cuando una máquina está detenida, cada minuto cuenta. BOJ S7-PLC PRO ayuda a ordenar síntomas,
                 hipótesis y verificaciones antes de cambiar hardware, reiniciar equipos o intervenir sin evidencia.
               </p>
+              <ul className="app-pro-cost-bullets">
+                <li>Ordena síntomas e hipótesis antes de intervenir.</li>
+                <li>Reduce prueba y error en momentos de presión.</li>
+                <li>Ayuda a verificar evidencia antes de cambiar hardware o reiniciar equipos.</li>
+              </ul>
               <strong className="app-pro-cost-emphasis">Menos prueba y error. Más criterio técnico.</strong>
+              <p className="app-pro-cost-support">
+                El objetivo no es reemplazar al técnico: es ayudarlo a decidir mejor en campo.
+              </p>
             </div>
             <div className="app-pro-cost-visual" aria-hidden="true">
               <span />
