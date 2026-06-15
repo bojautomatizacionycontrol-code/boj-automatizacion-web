@@ -2044,20 +2044,20 @@ function S7SalesLanding({ course, eyebrow }) {
 
   const courseIncludes = [
     {
-      title: "Videos aplicados con tablero didáctico",
-      text: "Contenido práctico para ver diagnóstico y criterio técnico aplicado sobre situaciones reales y simuladas.",
+      title: "Método BOJ de diagnóstico industrial",
+      text: "Secuencia práctica para ordenar síntomas, LEDs, eventos, red, módulos y señales antes de intervenir el PLC.",
     },
     {
-      title: "PDFs técnicos completos",
-      text: "Material con la teoría y la práctica desarrollada en el curso para estudiar, consultar y repasar.",
+      title: "Material técnico aplicado",
+      text: "Guías estructuradas con criterio de campo para estudiar, consultar y usar como apoyo durante diagnósticos reales.",
     },
     {
-      title: "Casos de diagnóstico",
-      text: "Ejemplos de STOP, SF/BF, módulos, señales y red para ordenar la evidencia.",
+      title: "Casos de falla y razonamiento técnico",
+      text: "Situaciones típicas de STOP, SF/BF, PROFIBUS, módulos, señales y fallas intermitentes explicadas desde la lógica de mantenimiento.",
     },
     {
       title: "STEP 7 Classic / SIMATIC Manager",
-      text: "Uso aplicado de HW Config Online, Diagnostic Buffer, LEDs, PROFIBUS, módulos y señales.",
+      text: "Criterio para conectarse, leer HW Config Online, revisar Diagnostic Buffer y analizar el sistema sin intervenir a ciegas.",
     },
   ];
 
@@ -2113,10 +2113,10 @@ function S7SalesLanding({ course, eyebrow }) {
 
   const offerIncludes = [
     "Curso aplicado de diagnóstico S7-300/400",
-    "Videos aplicados con tablero didáctico",
-    "PDFs técnicos: teoría y práctica",
-    "Casos reales de planta y errores típicos",
-    "STEP 7 Classic / HW Config / Diagnostic Buffer",
+    "Método BOJ de diagnóstico industrial",
+    "Material técnico aplicado y guías técnicas",
+    "Casos de falla y razonamiento técnico",
+    "STEP 7 Classic / SIMATIC Manager / HW Config / Diagnostic Buffer",
     "1 mes de BOJ S7-PLC PRO",
     "1 dispositivo",
     "Uso offline hasta 2 días",
@@ -2155,7 +2155,7 @@ function S7SalesLanding({ course, eyebrow }) {
     },
     {
       question: "¿El curso es teórico o aplicado?",
-      answer: "Es aplicado. Incluye explicación técnica, videos con tablero didáctico, PDFs y casos orientados a fallas reales de planta.",
+      answer: "Es aplicado. Incluye método de diagnóstico, material técnico aplicado, guías técnicas y casos orientados a fallas reales de planta.",
     },
     {
       question: "¿Puedo usarlo si trabajo en mantenimiento?",
@@ -2262,6 +2262,7 @@ function S7SalesLanding({ course, eyebrow }) {
                   </div>
                 ))}
               </div>
+              <p className="s7-sales-include-note">Basado en más de 15 años de experiencia en diagnóstico, mantenimiento y automatización industrial.</p>
             </article>
 
             <article className="s7-sales-include-card s7-sales-include-app">
