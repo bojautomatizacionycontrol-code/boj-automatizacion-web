@@ -73,6 +73,8 @@ import appHipotesisPriorizadas from "./assets/app-hipotesis-priorizadas.jpg";
 import walterBojAvatar from "./assets/walter-boj-avatar-field.jpeg";
 import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v4.jpg";
 import courseS7400Visual from "./assets/course-s7-400.jpg";
+import s7IncludePlc400Visual from "./assets/services-works/PLC400.png";
+import s7IncludeAppPanelVisual from "./assets/services-works/panel app 2.png";
 import s7CourseCoverHero from "./assets/services-works/paisaje_industrial_nocturno_con_tecnología_avanzad.png.png";
 import courseTiaPortalVisual from "./assets/course-tia-portal.jpg";
 import step7ManagerVisual from "./assets/11.png";
@@ -1962,17 +1964,469 @@ function CourseAvailableCard({ course }) {
 }
 
 function S7CoursePage() {
+  return <S7SalesLanding course={s7Course} eyebrow="Curso aplicado" />;
+}
+
+function S7SalesLanding({ course, eyebrow }) {
+  const purchaseHref = whatsappUrl("Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 147 USD.");
+  const heroStyle = { "--s7-sales-hero-image": `url(${s7CourseCoverHero})` };
+
+  const scrollToCourseSection = (event, sectionId) => {
+    event.preventDefault();
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const problemCards = [
+    {
+      icon: "Zap",
+      title: "Fallas reales",
+      text: "Situaciones típicas que enfrentás todos los días en planta.",
+    },
+    {
+      icon: "MonitorCog",
+      title: "Decisiones con criterio",
+      text: "Evidencia, síntomas y pasos correctos para diagnosticar.",
+    },
+    {
+      icon: "Clock",
+      title: "Menos prueba y error",
+      text: "Ordená la búsqueda y reducí tiempos de máquina parada.",
+    },
+    {
+      icon: "ShieldCheck",
+      title: "Enfocado en campo",
+      text: "Herramientas y métodos que funcionan donde realmente se necesitan.",
+    },
+  ];
+
+  const learningCards = [
+    {
+      icon: "Cable",
+      title: "Perder el miedo a conectarte al PLC",
+      text: "Buenas prácticas para entrar online con STEP 7 / SIMATIC Manager, leer hardware y diagnosticar sin intervenir a ciegas.",
+    },
+    {
+      icon: "MonitorCog",
+      title: "Leer hardware online con STEP 7 / SIMATIC Manager",
+      text: "Comprendé tu sistema como un profesional.",
+    },
+    {
+      icon: "Cpu",
+      title: "Interpretar estados RUN/STOP/SF/BF",
+      text: "Qué significan realmente y qué acción tomar.",
+    },
+    {
+      icon: "ClipboardCheck",
+      title: "Usar Diagnostic Buffer con criterio técnico",
+      text: "Extraé, filtrá y entendé eventos que importan.",
+    },
+    {
+      icon: "Network",
+      title: "Diagnosticar PROFIBUS DP",
+      text: "Fallas típicas en red, esclavos y comunicación.",
+    },
+    {
+      icon: "CircuitBoard",
+      title: "Diferenciar falla de campo, red, módulo o lógica",
+      text: "Localizá el origen del problema sin perder tiempo.",
+    },
+    {
+      icon: "Brain",
+      title: "Construir una hipótesis defendible",
+      text: "Antes de intervenir, definí qué vas a verificar.",
+    },
+    {
+      icon: "RefreshCcw",
+      title: "Reducir prueba y error cuando la máquina está parada",
+      text: "Método sistemático para diagnosticar rápido y bien.",
+    },
+  ];
+
+  const courseIncludes = [
+    {
+      title: "Videos aplicados con tablero didáctico",
+      text: "Contenido práctico para ver diagnóstico y criterio técnico aplicado sobre situaciones reales y simuladas.",
+    },
+    {
+      title: "PDFs técnicos completos",
+      text: "Material con la teoría y la práctica desarrollada en el curso para estudiar, consultar y repasar.",
+    },
+    {
+      title: "Casos de diagnóstico",
+      text: "Ejemplos de STOP, SF/BF, módulos, señales y red para ordenar la evidencia.",
+    },
+    {
+      title: "STEP 7 Classic / SIMATIC Manager",
+      text: "Uso aplicado de HW Config Online, Diagnostic Buffer, LEDs, PROFIBUS, módulos y señales.",
+    },
+  ];
+
+  const appIncludes = [
+    "Diagnóstico por síntomas, LEDs, red, módulos y señales",
+    "Hipótesis técnicas priorizadas",
+    "Guía paso a paso",
+    "Uso offline hasta 2 días",
+    "Acceso desde navegador e instalación como app",
+  ];
+
+  const appHighlights = [
+    { icon: "CalendarCheck", label: "1 mes de acceso" },
+    { icon: "Smartphone", label: "1 dispositivo" },
+  ];
+
+  const differentiators = [
+    {
+      icon: "Factory",
+      title: "Fallas reales de planta",
+      text: "No teoría aislada: casos aplicados que aparecen en mantenimiento y producción.",
+    },
+    {
+      icon: "ScanSearch",
+      title: "Diagnóstico antes de intervención",
+      text: "Pensá primero, actuá después. Menos riesgos, mejores resultados.",
+    },
+    {
+      icon: "ShieldCheck",
+      title: "Criterio de campo aplicado a PLC Siemens",
+      text: "Método probado en S7-300/400 y entornos industriales.",
+    },
+    {
+      icon: "Network",
+      title: "Relación entre síntomas, LEDs, red, módulos y señales",
+      text: "Conectá las piezas y entendé el sistema completo.",
+    },
+    {
+      icon: "ClipboardCheck",
+      title: "Uso de la app PRO para ordenar hipótesis y verificaciones",
+      text: "Tu acompañamiento técnico durante el diagnóstico.",
+    },
+  ];
+
+  const audienceItems = [
+    { icon: "Wrench", title: "Técnicos de mantenimiento industrial" },
+    { icon: "Settings", title: "Automatistas y programadores PLC" },
+    { icon: "Zap", title: "Electricistas de planta" },
+    { icon: "Gauge", title: "Instrumentistas" },
+    { icon: "Building2", title: "Empresas con PLC Siemens S7-300/400" },
+    { icon: "GraduationCap", title: "Centros de formación técnica" },
+  ];
+
+  const offerIncludes = [
+    "Curso aplicado de diagnóstico S7-300/400",
+    "Videos aplicados con tablero didáctico",
+    "PDFs técnicos: teoría y práctica",
+    "Casos reales de planta y errores típicos",
+    "STEP 7 Classic / HW Config / Diagnostic Buffer",
+    "1 mes de BOJ S7-PLC PRO",
+    "1 dispositivo",
+    "Uso offline hasta 2 días",
+    "Acceso por navegador e instalación como app",
+  ];
+
+  const mistakes = [
+    "Perder tiempo con prueba y error.",
+    "Cambiar módulos sin hipótesis clara.",
+    "Interpretar mal LEDs y estados.",
+    "No detectar fallas de red PROFIBUS.",
+    "No registrar síntomas y evidencia.",
+    "Agravar el problema por intervenir sin criterio.",
+  ];
+
+  const courseFaqItems = [
+    {
+      question: "¿Necesito saber programar PLC para hacer el curso?",
+      answer: "No es necesario partir como programador experto. El foco está en diagnóstico, lectura online, interpretación de estados y criterio técnico para intervenir con evidencia.",
+    },
+    {
+      question: "¿Necesito tener STEP 7 instalado?",
+      answer: "Es recomendable para practicar mejor los procedimientos. Aun así, el curso muestra el flujo de trabajo para que puedas entender qué observar en SIMATIC Manager, HW Config y Diagnostic Buffer.",
+    },
+    {
+      question: "¿El curso incluye la APP PRO?",
+      answer: "Sí. La oferta incluye el curso aplicado S7-300/400 y 1 mes de acceso a BOJ S7-PLC PRO como apoyo para ordenar síntomas, hipótesis y verificaciones.",
+    },
+    {
+      question: "¿Por cuánto tiempo tengo la APP PRO?",
+      answer: "El acceso incluido es por 1 mes para 1 dispositivo. Luego puedes continuar con un plan PRO si quieres mantener la herramienta activa.",
+    },
+    {
+      question: "¿Sirve para S7-300 y S7-400?",
+      answer: "Sí. El contenido está enfocado en diagnóstico de PLC Siemens S7-300/400 con STEP 7 Classic, incluyendo CPU, módulos, LEDs, PROFIBUS, HW Config y Diagnostic Buffer.",
+    },
+    {
+      question: "¿El curso es teórico o aplicado?",
+      answer: "Es aplicado. Incluye explicación técnica, videos con tablero didáctico, PDFs y casos orientados a fallas reales de planta.",
+    },
+    {
+      question: "¿Puedo usarlo si trabajo en mantenimiento?",
+      answer: "Sí. Está pensado para técnicos, electricistas, instrumentistas y equipos de mantenimiento que necesitan diagnosticar bajo presión operativa.",
+    },
+    {
+      question: "¿Qué pasa cuando vence el mes de APP PRO?",
+      answer: "El acceso incluido finaliza al cumplir el mes. Puedes usar el curso y sus materiales, y contratar un plan de BOJ S7-PLC PRO si necesitas seguir usando la app.",
+    },
+  ];
+
   return (
-    <S7CourseLanding
-      course={s7Course}
-      eyebrow="Curso aplicado"
-      visual="s7"
-      ctas={[
-        { label: "Comprar o consultar acceso", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar acceso al curso de diagnóstico S7-300/400.") },
-        { label: "Consultar disponibilidad", href: mailtoUrl("Consulta curso S7-300/400", "Hola, escribo desde la web de BOJ para consultar disponibilidad del curso de diagnóstico S7-300/400.") },
-        { label: "Hablar por WhatsApp", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar por el curso S7-300/400.") },
-      ]}
-    />
+    <div className="s7-sales-page">
+      <section className="s7-sales-hero" style={heroStyle}>
+        <div className="s7-sales-container s7-sales-hero-grid">
+          <div className="s7-sales-hero-copy">
+            <p className="s7-sales-eyebrow">{eyebrow}</p>
+            <h1>
+              Diagnóstico de fallas en PLC Siemens S7-300/400
+              <span>con STEP 7 Classic</span>
+            </h1>
+            <p>Resolución aplicada de fallas reales: CPU, LEDs, Diagnostic Buffer, HW Config Online, PROFIBUS, módulos, señales y criterio de intervención.</p>
+            <div className="s7-sales-actions">
+              <a className="s7-sales-btn s7-sales-btn-primary" href={purchaseHref} target="_blank" rel="noreferrer">
+                Comprar curso + APP PRO
+              </a>
+              <a className="s7-sales-btn s7-sales-btn-secondary" href="#/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
+                Ver qué incluye
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="s7-sales-confidence">
+        <div className="s7-sales-container">
+          <Icon name="ShieldCheck" size={26} />
+          <p>Perdé el miedo a conectarte al PLC y diagnosticá con <strong>criterio profesional.</strong></p>
+        </div>
+      </div>
+
+      <section className="s7-sales-section s7-sales-problem">
+        <div className="s7-sales-container s7-sales-problem-grid">
+          <div className="s7-sales-section-copy">
+            <p className="s7-sales-kicker">Qué problema resuelve</p>
+            <h2>No es un curso de programación. Es para diagnosticar fallas reales en condiciones de planta.</h2>
+            <p>Aprendé a pensar como un técnico experto cuando la máquina está parada y la presión operativa es alta.</p>
+          </div>
+          <div className="s7-sales-problem-cards">
+            {problemCards.map((item) => (
+              <article className="s7-sales-light-card" key={item.title}>
+                <Icon name={item.icon} size={46} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="s7-sales-section s7-sales-dark s7-sales-learning">
+        <div className="s7-sales-container">
+          <div className="s7-sales-centered-heading">
+            <p className="s7-sales-kicker">Qué vas a aprender</p>
+          </div>
+          <div className="s7-sales-learning-grid">
+            {learningCards.map((item) => (
+              <article className="s7-sales-dark-card" key={item.title}>
+                <Icon name={item.icon} size={34} />
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="s7-sales-section s7-sales-includes" id="curso-s7-incluye">
+        <div className="s7-sales-container">
+          <div className="s7-sales-section-heading">
+            <p className="s7-sales-kicker">Qué incluye</p>
+            <h2>Una formación aplicada + una herramienta profesional para diagnosticar con más criterio en PLC Siemens S7-300/400.</h2>
+          </div>
+
+          <div className="s7-sales-include-grid">
+            <span className="s7-sales-plus" aria-hidden="true">+</span>
+
+            <article className="s7-sales-include-card s7-sales-include-course">
+              <span className="s7-sales-include-number">1</span>
+              <h3>Curso aplicado S7-300/400</h3>
+              <figure>
+                <img src={s7IncludePlc400Visual} alt="PLC Siemens S7-400 en tablero industrial usado como apoyo del curso S7-300/400" loading="lazy" />
+              </figure>
+              <div className="s7-sales-include-list">
+                {courseIncludes.map((item) => (
+                  <div className="s7-sales-include-item" key={item.title}>
+                    <CheckCircle2 size={20} aria-hidden="true" />
+                    <div>
+                      <h4>{item.title}</h4>
+                      <p>{item.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            <article className="s7-sales-include-card s7-sales-include-app">
+              <span className="s7-sales-include-number">2</span>
+              <h3>APP PRO - 1 mes de BOJ S7-PLC PRO</h3>
+              <div className="s7-sales-app-layout">
+                <figure>
+                  <img src={s7IncludeAppPanelVisual} alt="Captura real de BOJ S7-PLC PRO para diagnóstico" loading="lazy" />
+                </figure>
+                <div className="s7-sales-app-copy">
+                  <p>La app te ayuda a ordenar síntomas, LEDs, hipótesis y verificaciones durante el diagnóstico.</p>
+                  <div className="s7-sales-app-highlights">
+                    {appHighlights.map((item) => (
+                      <span key={item.label}>
+                        <Icon name={item.icon} size={20} />
+                        {item.label}
+                      </span>
+                    ))}
+                  </div>
+                  <ul>
+                    {appIncludes.map((item) => (
+                      <li key={item}>
+                        <CheckCircle2 size={18} aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="s7-sales-section s7-sales-dark s7-sales-difference">
+        <div className="s7-sales-container">
+          <div className="s7-sales-centered-heading">
+            <p className="s7-sales-kicker">Qué hace diferente este curso</p>
+          </div>
+          <div className="s7-sales-difference-grid">
+            {differentiators.map((item) => (
+              <article className="s7-sales-difference-card" key={item.title}>
+                <Icon name={item.icon} size={38} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="s7-sales-section s7-sales-audience">
+        <div className="s7-sales-container">
+          <div className="s7-sales-section-heading s7-sales-section-heading-compact">
+            <p className="s7-sales-kicker">Para quién es</p>
+            <h2>Pensado para quienes tienen que resolver fallas reales con presión de producción, poco tiempo y síntomas incompletos.</h2>
+          </div>
+          <div className="s7-sales-audience-grid">
+            {audienceItems.map((item) => (
+              <article className="s7-sales-audience-card" key={item.title}>
+                <Icon name={item.icon} size={42} />
+                <h3>{item.title}</h3>
+              </article>
+            ))}
+          </div>
+          <p className="s7-sales-audience-note">No reemplaza la experiencia en campo: la ordena y la refuerza.</p>
+        </div>
+      </section>
+
+      <section className="s7-sales-section s7-sales-offer" id="curso-s7-compra">
+        <div className="s7-sales-container">
+          <div className="s7-sales-offer-heading">
+            <p className="s7-sales-kicker">Accedé al curso + BOJ S7-PLC PRO</p>
+            <h2>Una oferta técnica para ordenar el diagnóstico antes de intervenir.</h2>
+            <p>Una parada de máquina puede costar más que esta formación. El objetivo es que sepas ordenar el diagnóstico antes de cambiar hardware, reiniciar equipos o intervenir sin evidencia.</p>
+          </div>
+
+          <div className="s7-sales-offer-panel">
+            <div className="s7-sales-offer-product">
+              <p className="s7-sales-kicker">Oferta única</p>
+              <h2>Curso Diagnóstico S7-300/400 + APP PRO</h2>
+              <span>Incluye 1 mes de BOJ S7-PLC PRO</span>
+            </div>
+
+            <div className="s7-sales-offer-price">
+              <strong>147 USD</strong>
+              <p>Acceso digital al curso + herramienta PRO por 1 mes.</p>
+            </div>
+
+            <div className="s7-sales-offer-content">
+              <ul className="s7-sales-offer-list">
+                {offerIncludes.map((item) => (
+                  <li key={item}>
+                    <CheckCircle2 size={18} aria-hidden="true" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="s7-sales-offer-actions">
+                <a className="s7-sales-btn s7-sales-btn-primary" href={purchaseHref} target="_blank" rel="noreferrer">
+                  Comprar curso + APP PRO
+                </a>
+                <a className="s7-sales-btn s7-sales-btn-secondary" href={appProductUrl} target="_blank" rel="noreferrer">
+                  Probar APP 48 hs
+                </a>
+              </div>
+              <p className="s7-sales-offer-note">Acceso digital. Verificá siempre las conclusiones en campo antes de intervenir.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="s7-sales-section s7-sales-dark s7-sales-mistakes">
+        <div className="s7-sales-container">
+          <div className="s7-sales-centered-heading">
+            <p className="s7-sales-kicker">Errores que este curso ayuda a evitar</p>
+            <h2>Diagnosticar con método evita decisiones costosas.</h2>
+          </div>
+          <div className="s7-sales-mistake-grid">
+            {mistakes.map((item) => (
+              <article className="s7-sales-mistake-card" key={item}>
+                <TriangleAlert size={24} aria-hidden="true" />
+                <p>{item}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="s7-sales-section s7-sales-faq">
+        <div className="s7-sales-container">
+          <div className="s7-sales-section-heading">
+            <p className="s7-sales-kicker">Preguntas frecuentes</p>
+            <h2>Antes de comprar el curso</h2>
+          </div>
+          <div className="s7-sales-faq-grid">
+            {courseFaqItems.map((item) => (
+              <details className="s7-sales-faq-item" key={item.question}>
+                <summary>
+                  <span>{item.question}</span>
+                  <ChevronDown size={18} aria-hidden="true" />
+                </summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="s7-sales-final-cta">
+        <div className="s7-sales-container">
+          <div className="s7-sales-final-cta-panel">
+            <p>Si trabajás con PLC Siemens S7-300/400 y necesitás diagnosticar con más criterio, este curso te da método, práctica y apoyo técnico.</p>
+            <div className="s7-sales-final-actions">
+              <a className="s7-sales-btn s7-sales-btn-primary" href={purchaseHref} target="_blank" rel="noreferrer">
+                Comprar curso + APP PRO
+              </a>
+              <a className="s7-sales-btn s7-sales-btn-secondary" href="#/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
+                Ver qué incluye
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 
@@ -2361,31 +2815,108 @@ function AppPage() {
   );
 }
 
-function S7CourseLanding({ course, eyebrow, ctas }) {
-  const accessCta = ctas.find((cta) => cta.label.includes("Comprar")) ?? ctas[0];
-  const availabilityCta = ctas.find((cta) => cta.label.includes("disponibilidad")) ?? ctas[1];
-  const whatsappCta = ctas.find((cta) => cta.label.includes("WhatsApp")) ?? ctas[2];
+function S7CourseLanding({ course, eyebrow }) {
+  const purchaseHref = whatsappUrl("Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 147 USD.");
+  const heroStyle = { "--s7-course-cover-image": `url(${s7CourseCoverHero})` };
+
+  const scrollToCourseSection = (event, sectionId) => {
+    event.preventDefault();
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const heroActions = (
     <div className="s7-course-hero-actions">
-      <PrimaryLink href={availabilityCta.href}>Consultar disponibilidad</PrimaryLink>
-      <SecondaryLink href={whatsappCta.href}>Hablar por WhatsApp</SecondaryLink>
+      <a className="btn primary" href="#/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-compra")}>
+        Comprar curso + APP PRO
+      </a>
+      <a className="btn secondary" href="#/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
+        Ver qué incluye
+      </a>
     </div>
   );
 
-  const differentiators = [
-    course.positioning[0],
-    course.positioning[1],
-    course.positioning[3],
-    course.difference[2],
-    course.difference[3],
-    course.difference[4],
-    course.benefits[0],
-    course.benefits[3],
+  const proposalItems = [
+    "No es un curso genérico de programación PLC. Está orientado a diagnóstico real de fallas.",
+    "Aprendé a ordenar síntomas, LEDs, eventos y evidencias antes de cambiar módulos o reiniciar equipos.",
+    "Una parada de planta puede costar más que una formación bien aplicada.",
+    "El objetivo no es adivinar la falla: es reducir prueba y error con criterio técnico.",
   ];
-  const learningItems = [...course.learnItems, ...course.outcomes.slice(0, 4)];
-  const includeIcons = ["MonitorCog", "FileSearch", "ClipboardCheck", "Factory", "Cpu", "ShieldCheck", "Gauge", "ClipboardCheck"];
 
-  const heroStyle = { "--s7-course-cover-image": `url(${s7CourseCoverHero})` };
+  const earlyOfferItems = ["Curso aplicado S7-300/400", "1 mes APP PRO", "1 dispositivo"];
+  const learningItems = [...course.learnItems, ...course.outcomes.slice(0, 3)];
+  const includeDeliverables = [
+    {
+      variant: "course",
+      icon: "Cpu",
+      label: "Entregable principal",
+      title: "Curso aplicado S7-300/400",
+      image: courseS7400Visual,
+      imageAlt: "Tablero didáctico Siemens S7-300/400 usado como referencia del curso",
+      imageLabel: "Videos + material técnico",
+      points: [
+        {
+          title: "Videos aplicados con tablero didáctico",
+          text: "Contenido práctico para ver diagnóstico y criterio técnico aplicado sobre situaciones reales y simuladas.",
+        },
+        {
+          title: "PDFs técnicos completos",
+          text: "Material con la teoría y la práctica desarrollada en el curso para estudiar, consultar y repasar.",
+        },
+      ],
+    },
+    {
+      variant: "app",
+      icon: "Gauge",
+      label: "Herramienta incluida",
+      title: "BOJ S7-PLC PRO por 1 mes",
+      image: appPanelPrincipalDiagnostico,
+      imageAlt: "Captura real de BOJ S7-PLC PRO con panel principal de diagnóstico",
+      imageLabel: "APP PRO incluida",
+      points: [
+        {
+          title: "1 mes de acceso a BOJ S7-PLC PRO",
+          text: "Acceso a la herramienta profesional para acompañar el método del curso durante el diagnóstico.",
+        },
+        {
+          title: "Apoyo al diagnóstico en campo",
+          text: "Ayuda a ordenar síntomas, hipótesis y verificaciones antes de intervenir el sistema.",
+        },
+        {
+          title: "Navegador e instalación compatible",
+          text: "Acceso desde navegador y posibilidad de instalación como app en dispositivos compatibles.",
+        },
+      ],
+    },
+  ];
+
+  const differentiators = [
+    "Fallas reales, no teoría aislada.",
+    "Diagnóstico antes de intervención.",
+    "Criterio de campo aplicado.",
+    "Relación entre LEDs, red, módulos, señales y eventos.",
+    "App PRO como apoyo para ordenar hipótesis.",
+  ];
+
+  const audienceItems = [
+    "Técnicos de mantenimiento industrial",
+    "Automatistas y programadores PLC",
+    "Electricistas de planta",
+    "Instrumentistas",
+    "Empresas con PLC Siemens S7-300/400",
+    "Centros de formación técnica",
+  ];
+
+  const saleIncludes = [
+    "Curso aplicado de diagnóstico S7-300/400.",
+    "Material técnico en PDF.",
+    "Casos orientados a fallas reales de planta.",
+    "Diagnóstico por LEDs, STOP, SF, BF, PROFIBUS, módulos y señales.",
+    "Uso de STEP 7 Classic, HW Config y Diagnostic Buffer como parte del criterio técnico.",
+    "App incluida: 1 mes de BOJ S7-PLC PRO.",
+    "1 dispositivo.",
+    "Offline hasta 2 días según política PRO mensual.",
+    "Acceso desde navegador e instalación como app en dispositivos compatibles.",
+  ];
 
   return (
     <PageShell
@@ -2396,104 +2927,134 @@ function S7CourseLanding({ course, eyebrow, ctas }) {
       heroClassName="s7-course-cover-hero"
       heroStyle={heroStyle}
     >
-      <div className="training-strip page-strip s7-course-strip">
-        <span>Aplicado a mantenimiento</span>
-        <span>Diagnóstico online</span>
-        <span>Casos de planta</span>
-        <span>Procedimiento técnico</span>
-      </div>
-
       <div className="s7-course-landing">
         <div className="s7-course-intro-grid">
           <div className="s7-course-intro-main">
-          <section className="s7-course-block s7-course-difference">
-            <div className="s7-course-heading">
-              <p className="eyebrow">Criterio BOJ</p>
-              <h2>Qué hace diferente este curso</h2>
-              <p>
-                Está pensado para diagnosticar bajo presión operativa, ordenar evidencia y decidir el próximo
-                paso técnico sin caer en prueba y error.
-              </p>
-            </div>
-            <div className="s7-course-bullet-grid">
-              {differentiators.map((item) => (
-                <article key={item}>
-                  <Icon name="CheckCircle2" size={18} />
-                  <span>{item}</span>
-                </article>
-              ))}
-            </div>
-          </section>
+            <section className="s7-course-block s7-course-proposal">
+              <div className="s7-course-heading">
+                <p className="eyebrow">Propuesta técnica</p>
+                <h2>Diagnóstico real para fallas de planta</h2>
+                <p>
+                  Formación aplicada para técnicos, automatistas, electricistas de planta y mantenimiento industrial
+                  que necesitan decidir con evidencia antes de intervenir.
+                </p>
+              </div>
+              <div className="s7-course-bullet-grid">
+                {proposalItems.map((item) => (
+                  <article key={item}>
+                    <Icon name="CheckCircle2" size={18} />
+                    <span>{item}</span>
+                  </article>
+                ))}
+              </div>
+            </section>
 
-          <div className="s7-course-mobile-panel">
-            <S7CourseSidePanel availabilityCta={availabilityCta} />
-          </div>
+            <article className="s7-course-early-offer" aria-label="Oferta Curso Diagnóstico S7-300/400 + APP PRO">
+              <div className="s7-course-early-copy">
+                <p className="eyebrow">Oferta del curso</p>
+                <h3>Curso + 1 mes APP PRO</h3>
+                <p>Kit profesional para estudiar, consultar y aplicar criterio de diagnóstico en planta.</p>
+                <div>
+                  {earlyOfferItems.map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
+              </div>
+              <strong>147 USD</strong>
+              <a className="btn primary" href={purchaseHref} target="_blank" rel="noreferrer">
+                Comprar curso + APP PRO
+              </a>
+            </article>
 
-          <section className="s7-course-block s7-course-audience">
-            <div className="s7-course-heading compact">
-              <p className="eyebrow">Perfil técnico</p>
-              <h2>Para quién es</h2>
+            <div className="s7-course-mobile-panel">
+              <S7CourseSidePanel purchaseHref={purchaseHref} />
             </div>
-            <div className="s7-course-chip-grid">
-              {course.audience.map((item) => (
-                <span key={item}>
-                  <CheckCircle2 size={16} />
-                  {item}
-                </span>
-              ))}
-            </div>
-          </section>
 
-          <section className="s7-course-block s7-course-learning">
-            <div className="s7-course-heading">
-              <p className="eyebrow">Habilidades concretas</p>
-              <h2>Qué vas a aprender</h2>
-              <p>Diagnóstico con STEP 7 Classic, lectura online, criterio de campo y cierre técnico defendible.</p>
-            </div>
-            <div className="s7-course-card-grid">
-              {learningItems.map((item, index) => (
-                <article key={item}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <p>{item}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="s7-course-block s7-course-includes">
-            <div className="s7-course-heading">
-              <p className="eyebrow">Material y método</p>
-              <h2>Qué incluye</h2>
-            </div>
-            <div className="s7-course-mini-grid">
-              {course.includes.map((item, index) => (
-                <article key={item}>
-                  <Icon name={includeIcons[index] || "ClipboardCheck"} size={22} />
-                  <span>{item}</span>
-                </article>
-              ))}
-            </div>
-          </section>
-
+            <section className="s7-course-block s7-course-learning">
+              <div className="s7-course-heading">
+                <p className="eyebrow">Habilidades concretas</p>
+                <h2>Qué vas a aprender</h2>
+                <p>Diagnóstico con STEP 7 Classic, lectura online, criterio de campo y cierre técnico defendible.</p>
+              </div>
+              <div className="s7-course-card-grid">
+                {learningItems.map((item, index) => (
+                  <article key={item}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <p>{item}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
           </div>
 
           <div className="s7-course-sidebar">
-            <S7CourseSidePanel availabilityCta={availabilityCta} />
+            <S7CourseSidePanel purchaseHref={purchaseHref} />
           </div>
         </div>
 
-        <main className="s7-course-main s7-course-main-wide">
-          <section className="s7-course-mid-cta">
-            <div>
-              <h2>Curso aplicado para diagnosticar con más criterio técnico</h2>
-              <p>Consultá acceso, modalidad y disponibilidad para sumarlo al trabajo de mantenimiento.</p>
-            </div>
-            <div className="button-row">
-              <PrimaryLink href={accessCta.href}>Comprar o consultar acceso</PrimaryLink>
-              <SecondaryLink href={whatsappCta.href}>Hablar por WhatsApp</SecondaryLink>
-            </div>
-          </section>
+        <section className="s7-course-block s7-course-includes" id="curso-s7-incluye">
+          <div className="s7-course-heading s7-course-include-heading">
+            <p className="eyebrow">Material y método</p>
+            <h2>Qué incluye</h2>
+            <p>
+              Una formación aplicada + una herramienta profesional para diagnosticar con más criterio en PLC
+              Siemens S7-300/400.
+            </p>
+          </div>
+          <div className="s7-course-include-feature-grid">
+            {includeDeliverables.map((item) => (
+              <article className={`s7-course-include-feature ${item.variant}`} key={item.title}>
+                <figure className="s7-course-include-media">
+                  <img src={item.image} alt={item.imageAlt} loading="lazy" />
+                  <figcaption>{item.imageLabel}</figcaption>
+                </figure>
+                <div className="s7-course-include-body">
+                  <div className="s7-course-include-title-row">
+                    <span>
+                      <Icon name={item.icon} size={22} />
+                    </span>
+                    <div>
+                      <small>{item.label}</small>
+                      <h3>{item.title}</h3>
+                    </div>
+                  </div>
+                  <ul>
+                    {item.points.map((point) => (
+                      <li key={point.title}>
+                        <CheckCircle2 size={17} />
+                        <div>
+                          <strong>{point.title}</strong>
+                          <p>{point.text}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
 
+        <section className="s7-course-block s7-course-difference">
+          <div className="s7-course-heading">
+            <p className="eyebrow">Criterio BOJ</p>
+            <h2>Qué hace diferente este curso</h2>
+            <p>
+              Está pensado para diagnosticar bajo presión operativa, ordenar evidencia y decidir el próximo
+              paso técnico sin caer en prueba y error.
+            </p>
+          </div>
+          <div className="s7-course-bullet-grid">
+            {differentiators.map((item) => (
+              <article key={item}>
+                <Icon name="CheckCircle2" size={18} />
+                <span>{item}</span>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <main className="s7-course-main s7-course-main-wide">
           <section className="s7-course-block s7-course-program">
             <div className="s7-course-heading">
               <p className="eyebrow">Contenido técnico</p>
@@ -2504,6 +3065,57 @@ function S7CourseLanding({ course, eyebrow, ctas }) {
                 <li key={item}>{item}</li>
               ))}
             </ol>
+          </section>
+
+          <section className="s7-course-block s7-course-audience">
+            <div className="s7-course-heading">
+              <p className="eyebrow">Perfil técnico</p>
+              <h2>Para quién es</h2>
+              <p>Pensado para equipos que conviven con fallas reales y necesitan un método común de diagnóstico.</p>
+            </div>
+            <div className="s7-course-chip-grid">
+              {audienceItems.map((item) => (
+                <span key={item}>
+                  <CheckCircle2 size={16} />
+                  {item}
+                </span>
+              ))}
+            </div>
+            <p className="s7-course-audience-note">No reemplaza la experiencia en campo: la ordena y la refuerza.</p>
+          </section>
+
+          <section className="s7-course-sale-section" id="curso-s7-compra">
+            <div className="s7-course-sale-copy">
+              <p className="eyebrow">Oferta única</p>
+              <h2>Accedé al curso + BOJ S7-PLC PRO</h2>
+              <p>
+                Formación aplicada para diagnosticar fallas reales en PLC Siemens S7-300/400, con apoyo de la app
+                PRO durante 1 mes.
+              </p>
+            </div>
+            <article className="s7-course-offer-card">
+              <div className="s7-course-offer-summary">
+                <span>Curso Diagnóstico S7-300/400 + APP PRO</span>
+                <strong>147 USD</strong>
+                <small>Acceso digital. Verificá siempre las conclusiones en campo antes de intervenir.</small>
+                <div className="button-row">
+                  <a className="btn primary" href={purchaseHref} target="_blank" rel="noreferrer">
+                    Comprar curso + APP PRO
+                  </a>
+                  <a className="btn secondary" href={appProductUrl} target="_blank" rel="noreferrer">
+                    Probar APP 48 hs <ExternalLink size={17} />
+                  </a>
+                </div>
+              </div>
+              <ul className="s7-course-sale-list">
+                {saleIncludes.map((item) => (
+                  <li key={item}>
+                    <CheckCircle2 size={16} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
           </section>
 
           <section className="s7-course-block s7-course-mistakes">
@@ -2523,15 +3135,16 @@ function S7CourseLanding({ course, eyebrow, ctas }) {
 
           <section className="s7-course-final-cta">
             <div>
-              <p className="eyebrow">Acceso al curso</p>
-              <h2>Formación técnica para intervenir con criterio</h2>
-              <p>Videos, PDFs, casos reales y BOJ S7-PLC Course Edition para ordenar el diagnóstico en planta.</p>
+              <p className="eyebrow">Cierre técnico</p>
+              <h2>Empezá a diagnosticar fallas con método</h2>
+              <p>
+                Accedé al curso y usá BOJ S7-PLC PRO durante 1 mes para ordenar síntomas, hipótesis y
+                verificaciones.
+              </p>
             </div>
-            <div className="button-row">
-              <PrimaryLink href={accessCta.href}>Comprar o consultar acceso</PrimaryLink>
-              <SecondaryLink href={whatsappCta.href}>Hablar por WhatsApp</SecondaryLink>
-              <SecondaryLink href={availabilityCta.href}>Consultar disponibilidad</SecondaryLink>
-            </div>
+            <a className="btn primary" href={purchaseHref} target="_blank" rel="noreferrer">
+              Comprar curso + APP PRO
+            </a>
           </section>
         </main>
       </div>
@@ -2539,28 +3152,27 @@ function S7CourseLanding({ course, eyebrow, ctas }) {
   );
 }
 
-function S7CourseSidePanel({ availabilityCta }) {
-  const facts = [
-    ["Modalidad", "Videos grabados + PDFs técnicos"],
-    ["Enfoque aplicado", "Diagnóstico real S7-300/400"],
-    ["Casos reales", "Síntomas de planta y fallas típicas"],
-    ["Incluye app", "BOJ S7-PLC Course Edition"],
-  ];
-
+function S7CourseSidePanel({ purchaseHref }) {
   return (
     <aside className="s7-course-side-panel">
+      <article className="s7-course-fast-facts s7-course-side-offer">
+        <p className="eyebrow">Oferta del curso</p>
+        <h3>Curso Diagnóstico S7-300/400 + APP PRO</h3>
+        <strong className="s7-course-side-price">147 USD</strong>
+        <div>
+          <span>Incluye</span>
+          <strong>Curso + 1 mes APP PRO</strong>
+        </div>
+        <div>
+          <span>Uso</span>
+          <strong>1 dispositivo · offline hasta 2 días</strong>
+        </div>
+        <a className="btn primary" href={purchaseHref} target="_blank" rel="noreferrer">
+          Comprar curso + APP PRO
+        </a>
+        <small>Acceso digital. Verificá siempre las conclusiones en campo.</small>
+      </article>
       <CourseVisual type="s7" />
-      <div className="s7-course-fast-facts">
-        {facts.map(([label, value]) => (
-          <div key={label}>
-            <span>{label}</span>
-            <strong>{value}</strong>
-          </div>
-        ))}
-      </div>
-      <a className="btn primary" href={availabilityCta.href}>
-        Consultar disponibilidad
-      </a>
     </aside>
   );
 }
