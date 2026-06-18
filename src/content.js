@@ -21,6 +21,7 @@ export const navItems = [
     ],
   },
   { label: "App", path: "/app" },
+  { label: "Obras", path: "/obras" },
   { label: "Recursos", path: "/recursos-tecnicos" },
   { label: "Contacto", path: "/contacto" },
 ];
@@ -347,7 +348,7 @@ export const courses = [
     title: "Diagnóstico y resolución de fallas en PLC Siemens S7-300/400",
     shortTitle: "Diagnóstico S7-300/400",
     level: "Intermedio técnico",
-    mode: "Videos grabados, PDFs técnicos y casos reales",
+    mode: "Material técnico en PDF, guías y casos reales",
     audience:
       "Mantenimiento industrial, instrumentistas, automatistas, ingeniería de planta, operación técnica y programadores PLC.",
     learn:
@@ -403,7 +404,7 @@ export const s7Course = {
     "Estudiantes técnicos avanzados con base en PLC",
   ],
   includes: [
-    "Videos grabados con foco técnico aplicado",
+    "Material técnico en PDF con foco aplicado",
     "PDFs profesionales de consulta para diagnóstico",
     "Base conceptual sobre sistemas de control industrial",
     "Casos reales de planta y mantenimiento",
