@@ -20706,3 +20706,22 @@ textarea {
     min-height: 210px;
   }
 }
+
+/* --- Obras: pulido de legibilidad (PortfolioPrep + RouteCTA) --- */
+/* Titulo de la card superior: estaba oscuro sobre fondo oscuro.
+   !important para ganar a reglas legacy de mayor especificidad. */
+.portfolio-prep h2 {
+  color: #f4f8fc !important;
+}
+
+/* Boton secundario del CTA final: se veia apagado/deshabilitado. */
+.route-cta .btn.secondary {
+  color: #eaf6ff !important;
+  border-color: rgba(98, 210, 255, 0.6) !important;
+  background: rgba(98, 210, 255, 0.18) !important;
+}
+
+.route-cta .btn.secondary:hover {
+  border-color: rgba(98, 210, 255, 0.95) !important;
+  background: rgba(98, 210, 255, 0.28) !important;
+}
