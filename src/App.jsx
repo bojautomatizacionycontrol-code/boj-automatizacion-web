@@ -65,7 +65,7 @@ import {
 import bojLogo from "./assets/boj-logo-real-cropped.png";
 import appScreenshot from "./assets/APP.png";
 import appRealCapture from "./assets/boj-s7-plc-real-capture.png";
-import appProHeroLaptopVisual from "./assets/app-pro-hero-background-v2.png";
+import appProHeroLaptopVisual from "./assets/app-pro-hero-background-v2.jpg";
 import appPanelPrincipalDiagnostico from "./assets/app-panel-principal-diagnostico.jpg";
 import appResultadoDiagnostico from "./assets/app-resultado-diagnostico.jpg";
 import appDiagnosticoGuiado from "./assets/app-diagnostico-guiado.jpg";
@@ -73,9 +73,9 @@ import appHipotesisPriorizadas from "./assets/app-hipotesis-priorizadas.jpg";
 import walterBojAvatar from "./assets/walter-boj-avatar-field.jpeg";
 import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v4.jpg";
 import courseS7400Visual from "./assets/course-s7-400.jpg";
-import s7IncludePlc400Visual from "./assets/services-works/PLC400.png";
+import s7IncludePlc400Visual from "./assets/services-works/PLC400.jpg";
 import s7IncludeAppPanelVisual from "./assets/services-works/panel app 2.png";
-import s7CourseCoverHero from "./assets/services-works/paisaje_industrial_nocturno_con_tecnología_avanzad.png.png";
+import s7CourseCoverHero from "./assets/services-works/paisaje_industrial_nocturno_con_tecnología_avanzad.png.jpg";
 import courseTiaPortalVisual from "./assets/course-tia-portal.jpg";
 import step7ManagerVisual from "./assets/11.png";
 import step7HwConfigVisual from "./assets/12.png";
@@ -161,6 +161,18 @@ const projectVisuals = [
   aerialPlantVisual,
   engineeringVisual,
   step7Visual,
+];
+
+// Imagen real (de services-works) por obra, en el mismo orden que `projects`.
+const projectWorkImageFiles = [
+  "Generador industrial — para Generador WEG BT40.jpg",
+  "Sistema contra incendios industrial — bombas, cañerías, válvulas.jpg",
+  "Evaporador  equipo de proceso — para Evaporador CALSA.jpg",
+  "Turbina o generador industrial — para Generadores Siemens TG3TG4.jpg",
+  "Motocompresor industrial — para Compresores TGN.jpg",
+  "Planta de agua  bombeo industrial — bombas, cañerías, tratamiento.jpg",
+  "PLC400.jpg",
+  "paisaje_industrial_nocturno_con_tecnología_avanzad.png.jpg",
 ];
 
 const courseVisuals = {
@@ -433,7 +445,7 @@ const servicesFeaturedWorks = [
     meta: "Ledesma · 2024",
     description: "Ingeniería, conexionado y puesta en marcha de generador BT40 de 42 MW. Usina Ingenio.",
     imageFiles: [
-      "Generador industrial — para Generador WEG BT40.png",
+      "Generador industrial — para Generador WEG BT40.jpg",
       "generador_industrial_sobre_fondo_minimalista.png",
     ],
   },
@@ -442,7 +454,7 @@ const servicesFeaturedWorks = [
     meta: "CALSA · 2024",
     description: "Corrección y agregado de nuevas bombas y señales en programación y HMI.",
     imageFiles: [
-      "Evaporador  equipo de proceso — para Evaporador CALSA.png",
+      "Evaporador  equipo de proceso — para Evaporador CALSA.jpg",
       "sistema_industrial_en_ambiente_minimalista.png",
     ],
   },
@@ -451,7 +463,7 @@ const servicesFeaturedWorks = [
     meta: "Generación Mediterránea · 2019",
     description: "Programación de PLC, HMI y SCADA de servicios para nuevas turbinas generadoras.",
     imageFiles: [
-      "Turbina o generador industrial — para Generadores Siemens TG3TG4.png",
+      "Turbina o generador industrial — para Generadores Siemens TG3TG4.jpg",
       "turbina_industrial_en_estudio_brillante.png",
     ],
   },
@@ -460,7 +472,7 @@ const servicesFeaturedWorks = [
     meta: "TGN Tucumán / TGN Jujuy · 2018",
     description: "Upgrade de tableros de control de motocompresores.",
     imageFiles: [
-      "Motocompresor industrial — para Compresores TGN.png",
+      "Motocompresor industrial — para Compresores TGN.jpg",
       "componente_industrial_en_estudio_minimalista.png",
     ],
   },
@@ -469,7 +481,7 @@ const servicesFeaturedWorks = [
     meta: "GETSA · 2017",
     description: "Programación y comisionamiento de sistema contra incendios con PLC S7-1500.",
     imageFiles: [
-      "Sistema contra incendios industrial — bombas, cañerías, válvulas.png",
+      "Sistema contra incendios industrial — bombas, cañerías, válvulas.jpg",
       "sistema_industrial_con_bomba_y_tubería.png",
       "sistema_industrial_con_bomba_y_tuberia.png",
     ],
@@ -479,7 +491,7 @@ const servicesFeaturedWorks = [
     meta: "Gasnor · 2017",
     description: "Programación de gasómetro en PLC S7-1200 y HMI para calibración de medidores.",
     imageFiles: [
-      "Medición de gas  gasómetro — tuberías, instrumentación, skid de medición.png",
+      "Medición de gas  gasómetro — tuberías, instrumentación, skid de medición.jpg",
       "montaje_industrial_de_proceso_modular.png",
     ],
   },
@@ -488,7 +500,7 @@ const servicesFeaturedWorks = [
     meta: "YPF · 2016",
     description: "Upgrade de PLC S5-95U a S7-1500 en planta de agua.",
     imageFiles: [
-      "Planta de agua  bombeo industrial — bombas, cañerías, tratamiento.png",
+      "Planta de agua  bombeo industrial — bombas, cañerías, tratamiento.jpg",
       "sistema_industrial_de_tratamiento_de_agua.png",
     ],
   },
@@ -497,7 +509,7 @@ const servicesFeaturedWorks = [
     meta: "Ledesma · 2016",
     description: "Programación de PLC S7-1500 y HMI TP1200 para central de lubricación.",
     imageFiles: [
-      "Central de lubricación industrial — bombas, manifold, líneas de lubricación.png",
+      "Central de lubricación industrial — bombas, manifold, líneas de lubricación.jpg",
       "sistema_hidráulico_de_control_en_pared.png",
       "sistema_hidraulico_de_control_en_pared.png",
     ],
@@ -1282,7 +1294,7 @@ function HomeObrasTeaser() {
           {featured.map((project, index) => (
             <article className="mock-obras-card" key={project.title}>
               <div className="mock-obras-media">
-                <img src={projectVisuals[index]} alt={project.title} loading="lazy" />
+                <img src={getServiceWorkImage(projectWorkImageFiles[index]) || projectVisuals[index]} alt={project.title} loading="lazy" />
                 <span className="mock-obras-client">{project.client}</span>
               </div>
               <div className="mock-obras-body">
@@ -4066,13 +4078,12 @@ function InfoBlock({ title, items, numbered = false }) {
 }
 
 function ProjectCard({ project, index }) {
-  const visual = projectVisuals[(index - 1) % projectVisuals.length];
+  const visual = getServiceWorkImage(projectWorkImageFiles[index - 1]) || projectVisuals[(index - 1) % projectVisuals.length];
 
   return (
     <article className="project-card">
       <div className="project-media">
-        {/* Reemplazar por foto real específica de la obra cuando esté disponible. */}
-        <img className="project-photo" src={visual} alt={`Referencia visual técnica para ${project.title}`} loading="lazy" />
+        <img className="project-photo" src={visual} alt={`Obra: ${project.title} — ${project.client}`} loading="lazy" />
         <span>OBRA {String(index).padStart(2, "0")}</span>
         <div className="project-media-overlay">
           <strong>{project.year}</strong>
@@ -4082,11 +4093,6 @@ function ProjectCard({ project, index }) {
       <div className="project-body">
         <div className="project-title-row">
           <h2>{project.title}</h2>
-          {/* Reemplazar por logo del cliente si corresponde. */}
-          <span className="client-logo-placeholder">
-            <small>Referencia</small>
-            {project.client}
-          </span>
         </div>
         <p>{project.description}</p>
         <div className="tag-list">
