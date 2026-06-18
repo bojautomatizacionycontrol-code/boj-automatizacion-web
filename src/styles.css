@@ -20572,3 +20572,137 @@ textarea {
     gap: 24px;
   }
 }
+
+/* =====================================================================
+   BOJ AUDIT — Lote visual: heroes mas claros + alturas similares,
+   recursos simetricos, pagina Obras on-brand con fotos reales.
+   ===================================================================== */
+
+/* --- Heroes: alturas similares (440-500px) en home, app y curso --- */
+.mock-hero,
+.s7-sales-hero {
+  min-height: clamp(440px, 34vw, 500px);
+}
+
+.app-pro-hero {
+  height: auto;
+  min-height: clamp(440px, 34vw, 500px);
+  max-height: none;
+}
+
+/* --- Heroes: imagenes mas claras (menos overlay oscuro) --- */
+.mock-hero-bg {
+  opacity: 1;
+  filter: brightness(1.07) contrast(1.02) saturate(1.02);
+}
+
+.app-pro-hero-bg {
+  filter: brightness(1.08) contrast(1) saturate(1.02);
+}
+
+.mock-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(2, 11, 20, 0.8) 0%, rgba(2, 11, 20, 0.56) 38%, rgba(2, 11, 20, 0.24) 70%, rgba(2, 11, 20, 0.48) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(2, 11, 20, 0.46));
+}
+
+.app-pro-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(2, 11, 20, 0.84) 0%, rgba(2, 11, 20, 0.62) 40%, rgba(2, 11, 20, 0.3) 70%, rgba(2, 11, 20, 0.1) 100%),
+    linear-gradient(180deg, rgba(2, 11, 20, 0.04) 0%, rgba(2, 11, 20, 0.3) 100%);
+}
+
+.s7-sales-hero {
+  background-image:
+    linear-gradient(90deg, rgba(0, 12, 24, 0.8) 0%, rgba(0, 12, 24, 0.56) 46%, rgba(0, 12, 24, 0.2) 100%),
+    var(--s7-sales-hero-image);
+}
+
+/* --- Recursos: imagenes del mismo tamano (simetria de los 5 bloques) --- */
+.resource-card-visual {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  min-height: 0;
+  height: auto;
+}
+
+.resource-card-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Obras: cards claras on-brand con la foto real visible --- */
+.project-card {
+  border: 1px solid #ccd8e4;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 14px 34px rgba(7, 17, 28, 0.08);
+  color: #1d2b3a;
+}
+
+.project-media {
+  background: #06101a;
+}
+
+.project-media::after {
+  background: linear-gradient(
+    180deg,
+    rgba(3, 8, 13, 0.34) 0%,
+    rgba(3, 8, 13, 0) 26%,
+    rgba(3, 8, 13, 0) 52%,
+    rgba(3, 8, 13, 0.62) 100%
+  );
+}
+
+.project-photo {
+  opacity: 1;
+  filter: saturate(1) contrast(1.02);
+}
+
+.project-media span {
+  color: #ffffff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.project-body {
+  background: #ffffff;
+}
+
+.project-title-row {
+  grid-template-columns: 1fr;
+}
+
+.project-body h2 {
+  color: #0f1b27;
+}
+
+.project-body > p,
+.project-result-grid p {
+  color: #3a4a59;
+}
+
+.project-result-grid h3 {
+  color: #0a82b4;
+}
+
+.project-result-grid > div {
+  border: 1px solid #e0e8f0;
+  background: #f7f9fc;
+}
+
+.tag-list span {
+  border: 1px solid #d3deea;
+  background: #eef4f8;
+  color: #1d2b3a;
+}
+
+@media (max-width: 760px) {
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .project-media {
+    min-height: 210px;
+  }
+}

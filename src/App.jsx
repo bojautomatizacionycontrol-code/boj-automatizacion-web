@@ -163,6 +163,18 @@ const projectVisuals = [
   step7Visual,
 ];
 
+// Imagen real (de services-works) por obra, en el mismo orden que `projects`.
+const projectWorkImageFiles = [
+  "Generador industrial — para Generador WEG BT40.png",
+  "Sistema contra incendios industrial — bombas, cañerías, válvulas.png",
+  "Evaporador  equipo de proceso — para Evaporador CALSA.png",
+  "Turbina o generador industrial — para Generadores Siemens TG3TG4.png",
+  "Motocompresor industrial — para Compresores TGN.png",
+  "Planta de agua  bombeo industrial — bombas, cañerías, tratamiento.png",
+  "PLC400.png",
+  "paisaje_industrial_nocturno_con_tecnología_avanzad.png.png",
+];
+
 const courseVisuals = {
   s7: step7HwConfigVisual,
   tia: plcCabinetVisual,
@@ -1282,7 +1294,7 @@ function HomeObrasTeaser() {
           {featured.map((project, index) => (
             <article className="mock-obras-card" key={project.title}>
               <div className="mock-obras-media">
-                <img src={projectVisuals[index]} alt={project.title} loading="lazy" />
+                <img src={getServiceWorkImage(projectWorkImageFiles[index]) || projectVisuals[index]} alt={project.title} loading="lazy" />
                 <span className="mock-obras-client">{project.client}</span>
               </div>
               <div className="mock-obras-body">
@@ -4066,13 +4078,12 @@ function InfoBlock({ title, items, numbered = false }) {
 }
 
 function ProjectCard({ project, index }) {
-  const visual = projectVisuals[(index - 1) % projectVisuals.length];
+  const visual = getServiceWorkImage(projectWorkImageFiles[index - 1]) || projectVisuals[(index - 1) % projectVisuals.length];
 
   return (
     <article className="project-card">
       <div className="project-media">
-        {/* Reemplazar por foto real específica de la obra cuando esté disponible. */}
-        <img className="project-photo" src={visual} alt={`Referencia visual técnica para ${project.title}`} loading="lazy" />
+        <img className="project-photo" src={visual} alt={`Obra: ${project.title} — ${project.client}`} loading="lazy" />
         <span>OBRA {String(index).padStart(2, "0")}</span>
         <div className="project-media-overlay">
           <strong>{project.year}</strong>
@@ -4082,11 +4093,6 @@ function ProjectCard({ project, index }) {
       <div className="project-body">
         <div className="project-title-row">
           <h2>{project.title}</h2>
-          {/* Reemplazar por logo del cliente si corresponde. */}
-          <span className="client-logo-placeholder">
-            <small>Referencia</small>
-            {project.client}
-          </span>
         </div>
         <p>{project.description}</p>
         <div className="tag-list">
