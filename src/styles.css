@@ -20725,3 +20725,40 @@ textarea {
   border-color: rgba(98, 210, 255, 0.95) !important;
   background: rgba(98, 210, 255, 0.28) !important;
 }
+
+/* --- Obras: mas informacion por obra (sector/rol + alcance) --- */
+.project-meta-line {
+  margin: 2px 0 14px;
+  color: #0a82b4;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+}
+
+.project-highlights {
+  list-style: none;
+  margin: 14px 0 4px;
+  padding: 14px 16px;
+  display: grid;
+  gap: 9px;
+  border: 1px solid #e0e8f0;
+  border-radius: 10px;
+  background: #f7f9fc;
+}
+
+.project-highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #2b3a49;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  font-weight: 540;
+}
+
+.project-highlights li svg {
+  flex: none;
+  margin-top: 2px;
+  color: #0a82b4;
+}
