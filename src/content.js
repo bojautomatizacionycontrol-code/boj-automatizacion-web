@@ -1166,8 +1166,8 @@ export const projects = [
       "Encoder incremental y salidas por ventanas de posición.",
       "Control de temperatura y lógica secuencial.",
     ],
-    client: "Proyecto de automatización",
-    year: "Actualizable",
+    client: "Rivoli",
+    year: "2025",
     description:
       "Reemplazo de sistema de levas mecánicas por control electrónico mediante PLC Siemens S7-1200, encoder incremental, salidas por ventanas de posición, control de temperatura y lógica secuencial.",
     technologies: [
