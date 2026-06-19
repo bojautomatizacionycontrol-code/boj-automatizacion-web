@@ -72,6 +72,15 @@ import appDiagnosticoGuiado from "./assets/app-diagnostico-guiado.jpg";
 import appHipotesisPriorizadas from "./assets/app-hipotesis-priorizadas.jpg";
 import walterBojAvatar from "./assets/walter-boj-avatar-field.jpeg";
 import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v4.jpg";
+import heroInicio from "./assets/hero-inicio.jpg";
+import heroServicios from "./assets/hero-servicios.jpg";
+import heroCursos from "./assets/hero-cursos.jpg";
+import heroCursoS7 from "./assets/hero-curso-s7.jpg";
+import heroCursoTia from "./assets/hero-curso-tia.jpg";
+import heroApp from "./assets/hero-app.jpg";
+import heroObras from "./assets/hero-obras.jpg";
+import heroRecursos from "./assets/hero-recursos.jpg";
+import heroContacto from "./assets/hero-contacto.jpg";
 import courseS7400Visual from "./assets/course-s7-400.jpg";
 import s7IncludePlc400Visual from "./assets/services-works/PLC400.jpg";
 import s7IncludeAppPanelVisual from "./assets/services-works/panel app 2.png";
@@ -1127,6 +1136,37 @@ function Header({ route }) {
   );
 }
 
+function HeroAction({ action, variant }) {
+  if (!action) return null;
+  const extra = action.external ? { target: "_blank", rel: "noreferrer" } : {};
+  return (
+    <a className={`mock-btn ${variant}`} href={action.href} onClick={action.onClick} {...extra}>
+      {action.label} <ArrowRight size={18} />
+    </a>
+  );
+}
+
+// Hero unificado para toda la web: misma altura, estructura y tipografia.
+function Hero({ image, eyebrow, title, subtitle, primary, secondary }) {
+  return (
+    <section className="boj-hero">
+      {image ? <img className="boj-hero-bg" src={image} alt="" aria-hidden="true" /> : null}
+      <div className="boj-hero-shade" aria-hidden="true" />
+      <div className="mock-home-container boj-hero-inner">
+        {eyebrow ? <p className="boj-hero-eyebrow">{eyebrow}</p> : null}
+        <h1 className="boj-hero-title">{title}</h1>
+        {subtitle ? <p className="boj-hero-subtitle">{subtitle}</p> : null}
+        {primary || secondary ? (
+          <div className="boj-hero-actions">
+            <HeroAction action={primary} variant="mock-btn-primary" />
+            <HeroAction action={secondary} variant="mock-btn-outline" />
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
 function HomePage() {
   return <HomeLandingRedesign />;
 }
@@ -1134,32 +1174,14 @@ function HomePage() {
 function HomeLandingRedesign() {
   return (
     <div className="mock-home">
-      <section className="mock-hero" data-home-section="hero">
-        <img className="mock-hero-bg" src={heroIndustrialCover} alt="" aria-hidden="true" />
-        <div className="mock-hero-shade" aria-hidden="true" />
-        <div className="mock-home-container mock-hero-grid">
-          <div className="mock-hero-copy">
-            <h1>Diagnóstico de fallas y automatización industrial en PLC Siemens</h1>
-            <p>
-              Más de 15 años resolviendo fallas, paradas y puestas en marcha en planta. Servicios de automatización, un curso aplicado de diagnóstico y la app BOJ S7-PLC para mantenimiento industrial.
-            </p>
-            <div className="mock-hero-actions">
-              <a
-                className="mock-btn mock-btn-primary"
-                href={whatsappUrl("Hola, escribo desde la web de BOJ para solicitar un diagnóstico industrial.")}
-              >
-                Solicitar diagnóstico <ArrowRight size={18} />
-              </a>
-              <a className="mock-btn mock-btn-outline" href="#/cursos">
-                Ver cursos <ArrowRight size={18} />
-              </a>
-            </div>
-            <p className="mock-hero-proof">
-              +15 años en planta · PLC Siemens S5 · S7-200/300/400 · S7-1200/1500 · PROFIBUS / PROFINET
-            </p>
-          </div>
-        </div>
-      </section>
+      <Hero
+        image={heroInicio}
+        eyebrow="Automatización y diagnóstico industrial"
+        title="Diagnóstico de fallas y automatización industrial en PLC Siemens"
+        subtitle="Más de 15 años resolviendo fallas, paradas y puestas en marcha en planta. Servicios de automatización, un curso aplicado de diagnóstico y la app BOJ S7-PLC para mantenimiento industrial."
+        primary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para solicitar un diagnóstico industrial.") }}
+        secondary={{ label: "Ver cursos", href: "#/cursos" }}
+      />
 
       <HomeClientStrip />
 
@@ -1664,31 +1686,14 @@ function ServicesPage() {
 
   return (
     <div className="services-redesign-page">
-      <section className="services-redesign-hero">
-        <img className="services-redesign-hero-bg" src={heroIndustrialCover} alt="" aria-hidden="true" />
-        <div className="services-redesign-hero-overlay" aria-hidden="true" />
-        <div className="mock-home-container services-redesign-hero-grid">
-          <div className="services-redesign-hero-copy">
-            <p className="services-redesign-eyebrow">Servicios</p>
-            <h1>Servicios técnicos para reducir paradas y sostener automatización industrial</h1>
-            <p>
-              Diagnóstico, ingeniería, programación, redes, tableros y puesta en marcha con experiencia real
-              en plantas industriales y foco en continuidad operativa.
-            </p>
-            <div className="services-redesign-actions">
-              <a
-                className="mock-btn mock-btn-primary"
-                href={whatsappUrl("Hola, escribo desde la web de BOJ para solicitar un diagnóstico industrial.")}
-              >
-                Solicitar diagnóstico <ArrowRight size={18} />
-              </a>
-              <a className="mock-btn mock-btn-outline" href="#/servicios" onClick={scrollToServiceDetails}>
-                Ver áreas de servicio <ArrowRight size={18} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero
+        image={heroServicios}
+        eyebrow="Servicios"
+        title="Servicios técnicos para reducir paradas y sostener automatización industrial"
+        subtitle="Diagnóstico, ingeniería, programación, redes, tableros y puesta en marcha con experiencia real en plantas industriales y foco en continuidad operativa."
+        primary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para solicitar un diagnóstico industrial.") }}
+        secondary={{ label: "Ver áreas de servicio", href: "#/servicios", onClick: scrollToServiceDetails }}
+      />
 
       <section className="services-workflow-section">
         <div className="mock-home-container">
@@ -1907,28 +1912,14 @@ function CoursesPage() {
 
   return (
     <div className="courses-redesign-page">
-      <section className="courses-hero">
-        <img className="courses-hero-bg" src={courseTiaPortalVisual} alt="" aria-hidden="true" />
-        <div className="courses-hero-overlay" aria-hidden="true" />
-        <div className="mock-home-container courses-hero-content">
-          <h1>Cursos técnicos Siemens orientados a diagnóstico real de planta</h1>
-          <p>
-            Formación aplicada para técnicos, instrumentistas, electricistas e ingenieros que necesitan
-            diagnosticar, programar y actuar con criterio frente a fallas reales.
-          </p>
-          <div className="courses-actions">
-            <a className="mock-btn mock-btn-primary" href="#/cursos" onClick={scrollToCourses}>
-              Ver cursos disponibles <ArrowRight size={18} />
-            </a>
-            <a
-              className="mock-btn mock-btn-outline"
-              href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por capacitación técnica industrial.")}
-            >
-              Consultar capacitación <ArrowRight size={18} />
-            </a>
-          </div>
-        </div>
-      </section>
+      <Hero
+        image={heroCursos}
+        eyebrow="Cursos"
+        title="Cursos técnicos Siemens orientados a diagnóstico real de planta"
+        subtitle="Formación aplicada para técnicos, instrumentistas, electricistas e ingenieros que necesitan diagnosticar, programar y actuar con criterio frente a fallas reales."
+        primary={{ label: "Ver cursos disponibles", href: "#/cursos", onClick: scrollToCourses }}
+        secondary={{ label: "Consultar capacitación", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar por capacitación técnica industrial.") }}
+      />
 
       <section className="courses-light-section">
         <div className="mock-home-container">
@@ -2267,26 +2258,14 @@ function S7SalesLanding({ course, eyebrow }) {
 
   return (
     <div className="s7-sales-page">
-      <section className="s7-sales-hero" style={heroStyle}>
-        <div className="s7-sales-container s7-sales-hero-grid">
-          <div className="s7-sales-hero-copy">
-            <p className="s7-sales-eyebrow">{eyebrow}</p>
-            <h1>
-              Diagnóstico de fallas en PLC Siemens S7-300/400
-              <span>con STEP 7 Classic</span>
-            </h1>
-            <p>Resolución aplicada de fallas reales: CPU, LEDs, Diagnostic Buffer, HW Config Online, PROFIBUS, módulos, señales y criterio de intervención.</p>
-            <div className="s7-sales-actions">
-              <a className="s7-sales-btn s7-sales-btn-primary" href={purchaseHref} target="_blank" rel="noreferrer">
-                Comprar curso + APP PRO — 147 USD
-              </a>
-              <a className="s7-sales-btn s7-sales-btn-secondary" href="#/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
-                Ver qué incluye
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero
+        image={heroCursoS7}
+        eyebrow={eyebrow}
+        title="Diagnóstico de fallas en PLC Siemens S7-300/400 con STEP 7 Classic"
+        subtitle="Resolución aplicada de fallas reales: CPU, LEDs, Diagnostic Buffer, HW Config Online, PROFIBUS, módulos, señales y criterio de intervención."
+        primary={{ label: "Comprar curso + APP PRO — 147 USD", href: purchaseHref, external: true }}
+        secondary={{ label: "Ver qué incluye", href: "#/cursos/s7-300-400", onClick: (event) => scrollToCourseSection(event, "curso-s7-incluye") }}
+      />
 
       <div className="s7-sales-confidence">
         <div className="s7-sales-container">
@@ -2597,7 +2576,14 @@ function TiaCoursePage() {
 
 function CourseLanding({ course, eyebrow, visual, ctas }) {
   return (
-    <PageShell eyebrow={eyebrow} title={course.title} subtitle={course.subtitle}>
+    <PageShell
+      eyebrow={eyebrow}
+      title={course.title}
+      subtitle={course.subtitle}
+      heroImage={heroCursoTia}
+      heroPrimary={ctas[0]}
+      heroSecondary={ctas[1]}
+    >
       <div className="training-strip page-strip">
         <span>Aplicado a mantenimiento</span>
         <span>Diagnóstico online</span>
@@ -2661,35 +2647,21 @@ function AppPage() {
 
   return (
     <div className="app-pro-page">
-      <section className="app-pro-hero">
-        <img className="app-pro-hero-bg" src={appProHeroLaptopVisual} alt="" aria-hidden="true" />
-        <div className="app-pro-hero-shade" aria-hidden="true" />
-        <div className="mock-home-container app-pro-hero-content">
-          <div className="app-pro-hero-copy">
-            <p className="app-pro-product-name">BOJ S7-PLC PRO</p>
-            <h1>Diagnóstico guiado para PLC Siemens S7-300/400</h1>
-            <p>
-              Cargá síntomas, LEDs y condiciones de campo. BOJ S7-PLC ordena hipótesis técnicas y guía la
-              verificación paso a paso.
-            </p>
-            <div className="app-pro-actions">
-              <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
-                Probar gratis 48 hs <ExternalLink size={18} />
-              </a>
-              <a
-                className="mock-btn mock-btn-outline"
-                href="#planes-pro"
-                onClick={(event) => {
-                  event.preventDefault();
-                  document.getElementById("planes-pro")?.scrollIntoView({ behavior: "smooth", block: "start" });
-                }}
-              >
-                Ver planes PRO
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero
+        image={heroApp}
+        eyebrow="BOJ S7-PLC PRO"
+        title="Diagnóstico guiado para PLC Siemens S7-300/400"
+        subtitle="Cargá síntomas, LEDs y condiciones de campo. BOJ S7-PLC ordena hipótesis técnicas y guía la verificación paso a paso."
+        primary={{ label: "Probar gratis 48 hs", href: appProductUrl, external: true }}
+        secondary={{
+          label: "Ver planes PRO",
+          href: "#planes-pro",
+          onClick: (event) => {
+            event.preventDefault();
+            document.getElementById("planes-pro")?.scrollIntoView({ behavior: "smooth", block: "start" });
+          },
+        }}
+      />
 
       <section className="app-pro-problems-how-section">
         <div className="mock-home-container app-pro-problems-how-grid">
@@ -3402,6 +3374,9 @@ function WorksPage() {
       eyebrow="Obras"
       title="Obras y trabajos realizados en entornos industriales"
       subtitle="Casos de ingeniería, programación PLC, HMI, SCADA, tableros, migraciones y puesta en marcha presentados con problema inicial, intervención y resultado."
+      heroImage={heroObras}
+      heroPrimary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar por una obra o intervención industrial similar.") }}
+      heroSecondary={{ label: "Ver servicios", href: "#/servicios" }}
     >
       <PortfolioPrep />
       <div className="works-grid">
@@ -3427,6 +3402,9 @@ function TechnicalResourcesPage() {
       eyebrow="Recursos técnicos"
       title="Biblioteca técnica Siemens para automatización industrial"
       subtitle="Guías aplicadas sobre herramientas Siemens utilizadas en planta: STEP 7 SIMATIC Manager, TIA Portal, MicroWIN, LOGO! Soft Comfort y SIMATIC WinCC."
+      heroImage={heroRecursos}
+      heroPrimary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.") }}
+      heroSecondary={{ label: "Ver cursos", href: "#/cursos" }}
     >
       <section className="resources-intro-panel">
         <div>
@@ -3617,6 +3595,9 @@ function ContactPage() {
       eyebrow="Contacto"
       title="Contacto técnico para industria, mantenimiento e ingeniería"
       subtitle="Consultá por diagnóstico, servicios, cursos o licencias BOJ S7-PLC PRO. También atendemos consultas por automatización, migraciones, tableros y redes industriales."
+      heroImage={heroContacto}
+      heroPrimary={{ label: "Escribir por WhatsApp", href: whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica."), external: true }}
+      heroSecondary={{ label: "Enviar email", href: `mailto:${contact.email}` }}
     >
       <section className="contact-direct">
         <div>
@@ -3769,17 +3750,17 @@ function ContactForm() {
   );
 }
 
-function PageShell({ eyebrow, title, subtitle, heroExtra, heroClassName, heroStyle, children }) {
+function PageShell({ eyebrow, title, subtitle, heroImage, heroPrimary, heroSecondary, children }) {
   return (
     <>
-      <section className={["page-hero", heroClassName].filter(Boolean).join(" ")} style={heroStyle}>
-        <div className="section-container">
-          <p className="eyebrow">{eyebrow}</p>
-          <h1>{title}</h1>
-          {subtitle ? <p>{subtitle}</p> : null}
-          {heroExtra ? <div className="page-hero-extra">{heroExtra}</div> : null}
-        </div>
-      </section>
+      <Hero
+        image={heroImage || heroRecursos}
+        eyebrow={eyebrow}
+        title={title}
+        subtitle={subtitle}
+        primary={heroPrimary}
+        secondary={heroSecondary}
+      />
       <section className="section">
         <div className="section-container">{children}</div>
       </section>
