@@ -171,8 +171,8 @@ const projectWorkImageFiles = [
   "Turbina o generador industrial — para Generadores Siemens TG3TG4.jpg",
   "Motocompresor industrial — para Compresores TGN.jpg",
   "Planta de agua  bombeo industrial — bombas, cañerías, tratamiento.jpg",
-  "PLC400.jpg",
-  "paisaje_industrial_nocturno_con_tecnología_avanzad.png.jpg",
+  "envolvedora-papel.jpg",
+  "envasadora.jpg",
 ];
 
 const courseVisuals = {
