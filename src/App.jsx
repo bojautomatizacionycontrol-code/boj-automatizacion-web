@@ -4094,7 +4094,19 @@ function ProjectCard({ project, index }) {
         <div className="project-title-row">
           <h2>{project.title}</h2>
         </div>
+        {project.sector || project.role ? (
+          <p className="project-meta-line">{[project.sector, project.role].filter(Boolean).join(" · ")}</p>
+        ) : null}
         <p>{project.description}</p>
+        {project.highlights?.length ? (
+          <ul className="project-highlights">
+            {project.highlights.map((item) => (
+              <li key={item}>
+                <CheckCircle2 size={15} aria-hidden="true" /> {item}
+              </li>
+            ))}
+          </ul>
+        ) : null}
         <div className="tag-list">
           {project.technologies.map((tech) => (
             <span key={tech}>{tech}</span>

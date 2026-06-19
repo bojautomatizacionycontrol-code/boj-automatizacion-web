@@ -963,6 +963,13 @@ export const technicalResources = [
 export const projects = [
   {
     title: "Ingeniería, conexionado y puesta en marcha BT40",
+    sector: "Energía / Generación",
+    role: "Ingeniería, conexionado y puesta en marcha",
+    highlights: [
+      "Generador de 42 MW en la usina del ingenio.",
+      "Ingeniería de detalle, tableros de potencia y control.",
+      "Conexionado en campo, validación de señales y pruebas SAT.",
+    ],
     client: "Ledesma / Usina - Ingenio",
     year: "2024",
     description:
@@ -984,6 +991,13 @@ export const projects = [
   },
   {
     title: "Sistema contra incendios con PLC S7-1500",
+    sector: "Industria / Seguridad",
+    role: "Programación y comisionamiento",
+    highlights: [
+      "PLC Siemens S7-1500 con lógica de seguridad operativa.",
+      "Verificación de entradas, salidas y señales críticas.",
+      "Pruebas de respuesta y comisionamiento en sitio.",
+    ],
     client: "GETSA",
     year: "2017",
     description:
@@ -1005,6 +1019,13 @@ export const projects = [
   },
   {
     title: "Correcciones de programación y HMI en evaporador",
+    sector: "Alimentos / Procesos",
+    role: "Programación y mejoras de HMI",
+    highlights: [
+      "Incorporación de nuevas bombas y señales al proceso.",
+      "Ajustes de lógica y visualización HMI para el operador.",
+      "Verificación del comportamiento en condiciones reales.",
+    ],
     client: "CALSA",
     year: "2024",
     description:
@@ -1026,6 +1047,13 @@ export const projects = [
   },
   {
     title: "PLC, HMI y SCADA para generadores Siemens TG3 y TG4",
+    sector: "Energía / Generación",
+    role: "Programación PLC, HMI y SCADA",
+    highlights: [
+      "Servicios auxiliares de dos turbinas generadoras.",
+      "Pantallas HMI/SCADA e integración de señales de campo.",
+      "Pruebas de funcionamiento durante la puesta en marcha.",
+    ],
     client: "Generación Mediterránea",
     year: "2019",
     description:
@@ -1047,6 +1075,13 @@ export const projects = [
   },
   {
     title: "Upgrade de tableros de motocompresores",
+    sector: "Oil & Gas / Transporte",
+    role: "Upgrade de tableros de control",
+    highlights: [
+      "Actualización de mando, señales y protecciones.",
+      "Mejores condiciones de diagnóstico y operación.",
+      "Documentación técnica de los tableros intervenidos.",
+    ],
     client: "TGN Tucumán / TGN Jujuy",
     year: "2018",
     description:
@@ -1068,6 +1103,13 @@ export const projects = [
   },
   {
     title: "Upgrade PLC S5 95U a S7-1500 en planta de agua",
+    sector: "Oil & Gas / Servicios",
+    role: "Migración PLC y puesta en marcha",
+    highlights: [
+      "Migración de Siemens S5-95U a S7-1500.",
+      "Relevamiento de hardware/señales y conversión de lógica.",
+      "Puesta en marcha manteniendo la continuidad operativa.",
+    ],
     client: "YPF",
     year: "2016",
     description:
@@ -1089,6 +1131,13 @@ export const projects = [
   },
   {
     title: "Upgrade S5 155U a S7-1516 en envolvedora de papel",
+    sector: "Papel / Manufactura",
+    role: "Migración de lógica y puesta en marcha",
+    highlights: [
+      "Migración de Siemens S5-155U a S7-1516.",
+      "Envolvedora de rollos de papel para exportación.",
+      "Revisión de señales y validación de secuencias.",
+    ],
     client: "Ledesma",
     year: "2018",
     description:
@@ -1110,6 +1159,13 @@ export const projects = [
   },
   {
     title: "Modernización de envasadora industrial",
+    sector: "Manufactura / Packaging",
+    role: "Automatización y control",
+    highlights: [
+      "Reemplazo de levas mecánicas por control electrónico (S7-1200).",
+      "Encoder incremental y salidas por ventanas de posición.",
+      "Control de temperatura y lógica secuencial.",
+    ],
     client: "Proyecto de automatización",
     year: "Actualizable",
     description:
