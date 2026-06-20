@@ -20848,3 +20848,106 @@ textarea {
     justify-content: center;
   }
 }
+
+/* =====================================================================
+   BOJ AUDIT — Paginas internas (PageShell) a tema CLARO, consistente
+   con el resto del sitio. El cuerpo hereda texto oscuro; se convierten
+   los paneles/inputs oscuros. Las bandas de CTA (.route-cta) quedan
+   oscuras a proposito, como el CTA final del home.
+   ===================================================================== */
+.boj-shell-body {
+  background: #f6f8fb;
+  color: #2b3a49;
+}
+
+.boj-shell-body .eyebrow {
+  color: #0a82b4;
+}
+
+/* Paneles de intro: oscuro -> claro */
+.boj-shell-body .resources-intro-panel,
+.boj-shell-body .contact-direct,
+.boj-shell-body .portfolio-prep {
+  border-color: #d9e2ea;
+  background: #ffffff;
+  color: #2b3a49;
+  box-shadow: 0 14px 34px rgba(7, 17, 28, 0.06);
+}
+
+.boj-shell-body .resources-intro-panel h2,
+.boj-shell-body .contact-direct h2,
+.boj-shell-body .portfolio-prep h2 {
+  color: #0f1b27 !important;
+}
+
+.boj-shell-body .resources-intro-panel p,
+.boj-shell-body .contact-direct p,
+.boj-shell-body .portfolio-prep p {
+  color: #3a4a59;
+}
+
+/* Slots del portfolio (Obras) */
+.boj-shell-body .asset-slots span {
+  border-color: #cfe0ea;
+  color: #3a4a59;
+  background: #f3f8fb;
+}
+
+/* Paneles de contacto */
+.boj-shell-body .contact-panel,
+.boj-shell-body .contact-form {
+  border-color: #d9e2ea;
+  background: #ffffff;
+  box-shadow: 0 14px 34px rgba(7, 17, 28, 0.06);
+}
+
+.boj-shell-body label {
+  color: #1d2b3a;
+}
+
+.boj-shell-body input,
+.boj-shell-body select,
+.boj-shell-body textarea {
+  color: #1d2b3a;
+  border-color: #d3deea;
+  background: #ffffff;
+}
+
+.boj-shell-body .diagnostic-checklist {
+  border-color: #cfe6f2;
+  background: #f2f9fd;
+}
+
+/* Visual lateral del curso TIA */
+.boj-shell-body .course-side-visual {
+  border-color: #d9e2ea;
+  background: #eef4f8;
+}
+
+/* Boton secundario en paginas claras (no en la banda oscura route-cta,
+   que mantiene su override propio con !important) */
+.boj-shell-body .btn.secondary {
+  color: #0b80b3;
+  border-color: rgba(11, 128, 179, 0.5);
+  background: #ffffff;
+}
+
+.boj-shell-body .btn.secondary:hover {
+  background: #eef7fb;
+}
+
+/* CheckItems y links sociales: texto oscuro en pagina clara */
+.boj-shell-body .check-item,
+.boj-shell-body .resources-intro-panel .check-item {
+  color: #2b3a49;
+}
+
+.boj-shell-body .social-placeholders a {
+  color: #1d2b3a;
+  border-color: #d3deea;
+  background: #ffffff;
+}
+
+.boj-shell-body .contact-line small {
+  color: #5f7181;
+}
