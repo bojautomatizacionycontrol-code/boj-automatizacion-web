@@ -20951,3 +20951,15 @@ textarea {
 .boj-shell-body .contact-line small {
   color: #5f7181;
 }
+
+/* Alinear el cuerpo de las paginas internas con el hero (mismo ancho que
+   Inicio: el hero usa .mock-home-container = 1560px). Antes el cuerpo
+   quedaba a 1180px y se veia desalineado. */
+.boj-shell-body .section-container {
+  width: min(calc(100% - 112px), 1560px);
+}
+
+/* El texto del check va en un span: forzar el color oscuro heredado */
+.boj-shell-body .check-item span {
+  color: inherit;
+}
