@@ -3761,7 +3761,7 @@ function PageShell({ eyebrow, title, subtitle, heroImage, heroPrimary, heroSecon
         primary={heroPrimary}
         secondary={heroSecondary}
       />
-      <section className="section">
+      <section className="section boj-shell-body">
         <div className="section-container">{children}</div>
       </section>
     </>
