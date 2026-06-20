@@ -14682,6 +14682,7 @@ textarea {
 .mock-home .mock-home-container,
 .services-redesign-page .mock-home-container,
 .courses-redesign-page .mock-home-container,
+.boj-hero .mock-home-container,
 .section-container {
   width: min(calc(100% - 72px), 1240px);
 }
@@ -16006,6 +16007,7 @@ textarea {
   .mock-home .mock-home-container,
   .services-redesign-page .mock-home-container,
   .courses-redesign-page .mock-home-container,
+  .boj-hero .mock-home-container,
   .section-container,
   .services-redesign-hero-grid,
   .courses-hero-content {
@@ -16032,6 +16034,7 @@ textarea {
   .mock-home .mock-home-container,
   .services-redesign-page .mock-home-container,
   .courses-redesign-page .mock-home-container,
+  .boj-hero .mock-home-container,
   .section-container,
   .services-redesign-hero-grid,
   .courses-hero-content {
@@ -20950,13 +20953,6 @@ textarea {
 
 .boj-shell-body .contact-line small {
   color: #5f7181;
-}
-
-/* Alinear el cuerpo de las paginas internas con el hero (mismo ancho que
-   Inicio: el hero usa .mock-home-container = 1560px). Antes el cuerpo
-   quedaba a 1180px y se veia desalineado. */
-.boj-shell-body .section-container {
-  width: min(calc(100% - 112px), 1560px);
 }
 
 /* El texto del check va en un span: forzar el color oscuro heredado */
