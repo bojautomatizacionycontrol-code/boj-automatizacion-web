@@ -20959,3 +20959,546 @@ textarea {
 .boj-shell-body .check-item span {
   color: inherit;
 }
+
+/* =====================================================================
+   BOJ AUDIT — Conversión de ventas (jun 2026)
+   Hero note · proof strip · Método BOJ · flipbook del manual ·
+   value-stack + launch · testimonios · garantía final.
+   Bloque al final del archivo para ganar la cascada. Colores explícitos
+   (proof y testimonios se reusan fuera de .s7-sales-page).
+   ===================================================================== */
+
+/* ── Microcopy de confianza bajo los CTA del hero (global) ───────────── */
+.boj-hero-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(2, 13, 30, 0.42);
+  color: #eaf5fb;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(4px);
+}
+.boj-hero-note svg {
+  color: #46d0ff;
+  flex: none;
+}
+
+/* ── Franja de prueba social (clientes, solo texto) ──────────────────── */
+.s7-proof {
+  background: #061827;
+  border-top: 1px solid rgba(0, 183, 232, 0.18);
+  border-bottom: 1px solid rgba(0, 183, 232, 0.18);
+}
+.s7-proof-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 26px;
+  padding: 18px 0;
+}
+.s7-proof-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: #9fb6c6;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.s7-proof-label svg {
+  color: #00c8ff;
+  flex: none;
+}
+.s7-proof-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.s7-proof-list li {
+  color: #f1f7fb;
+  font-weight: 800;
+  font-size: 0.96rem;
+  letter-spacing: 0.01em;
+}
+.s7-proof-list li:not(:last-child)::after {
+  content: "·";
+  margin-left: 22px;
+  color: rgba(0, 200, 255, 0.55);
+}
+.s7-proof-link {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #00c8ff;
+  font-weight: 800;
+  font-size: 0.86rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.s7-proof-link:hover {
+  text-decoration: underline;
+}
+
+/* ── Método BOJ (4 pasos) ────────────────────────────────────────────── */
+.s7-method {
+  background: #f3f7fb;
+}
+.s7-method-lead {
+  margin: 12px 0 0;
+  max-width: 760px;
+  color: #4a5b6b;
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+.s7-method-grid {
+  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: stretch;
+}
+.s7-method-step-wrap {
+  flex: 1 1 210px;
+  display: flex;
+  align-items: stretch;
+}
+.s7-method-step {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 20px 22px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid #e3ecf3;
+  box-shadow: 0 14px 30px rgba(7, 27, 45, 0.06);
+}
+.s7-method-num {
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: #00b7e8;
+}
+.s7-method-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  color: #04263a;
+  background: linear-gradient(135deg, #00c8ff, #1594ff);
+}
+.s7-method-step h3 {
+  margin: 4px 0 0;
+  font-size: 1.08rem;
+  color: #061524;
+  line-height: 1.2;
+}
+.s7-method-step p {
+  margin: 0;
+  color: #4a5b6b;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+.s7-method-arrow {
+  flex: none;
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  color: #00b7e8;
+}
+
+/* ── Flipbook: primeras páginas del manual ───────────────────────────── */
+.s7-manual-lead {
+  margin: 12px auto 0;
+  max-width: 680px;
+  color: #b9cdda;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+.s7-flip {
+  margin-top: 30px;
+}
+.s7-flip-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.s7-flip-page {
+  position: relative;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: zoom-in;
+  border-radius: 12px;
+  overflow: hidden;
+  line-height: 0;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+}
+.s7-flip-page img {
+  display: block;
+  width: min(420px, 64vw);
+  height: auto;
+}
+.s7-flip-zoom {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: rgba(2, 13, 30, 0.78);
+  color: #eaf5fb;
+  font-size: 0.78rem;
+  font-weight: 800;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.s7-flip-page:hover .s7-flip-zoom,
+.s7-flip-page:focus-visible .s7-flip-zoom {
+  opacity: 1;
+}
+.s7-flip-nav {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 200, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: #eaf5fb;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.s7-flip-nav:hover {
+  background: rgba(0, 200, 255, 0.18);
+  transform: scale(1.06);
+}
+.s7-flip-prev svg {
+  transform: rotate(180deg);
+}
+.s7-flip-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+.s7-flip-caption {
+  color: #cfe2ee;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-align: center;
+}
+.s7-flip-counter {
+  flex: none;
+  color: #00c8ff;
+  font-weight: 900;
+  font-size: 0.82rem;
+  padding: 3px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 200, 255, 0.3);
+}
+.s7-flip-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+.s7-flip-thumb {
+  border: 2px solid transparent;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 7px;
+  overflow: hidden;
+  line-height: 0;
+  opacity: 0.5;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+.s7-flip-thumb img {
+  display: block;
+  width: 52px;
+  height: auto;
+}
+.s7-flip-thumb:hover {
+  opacity: 0.85;
+}
+.s7-flip-thumb.active {
+  opacity: 1;
+  border-color: #00c8ff;
+}
+.s7-flip-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: rgba(2, 9, 18, 0.92);
+  display: grid;
+  place-items: center;
+  padding: 22px;
+}
+.s7-flip-lightbox-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.s7-flip-lightbox-inner img {
+  max-height: 88vh;
+  max-width: min(640px, 84vw);
+  height: auto;
+  width: auto;
+  border-radius: 10px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+.s7-flip-lightbox-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+  background: #00c8ff;
+  color: #04263a;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+.s7-flip-lightbox-caption {
+  position: absolute;
+  left: 50%;
+  bottom: -34px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  color: #cfe2ee;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* ── Ribbon de lanzamiento + value-stack en la oferta ────────────────── */
+.s7-sales-offer-product .s7-sales-launch {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 0;
+  margin: 0 0 14px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffcf6b, #ff9d3d);
+  border: 0;
+  color: #3a2300;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 24px rgba(255, 157, 61, 0.32);
+}
+.s7-sales-offer-product .s7-sales-launch svg {
+  flex: none;
+}
+.s7-sales-valuestack {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(207, 227, 239, 0.18);
+}
+.s7-sales-valuestack-row,
+.s7-sales-valuestack-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+.s7-sales-valuestack-row {
+  padding: 7px 0;
+  color: #cfe1ee;
+  font-size: 0.92rem;
+  border-bottom: 1px dashed rgba(207, 227, 239, 0.16);
+}
+.s7-sales-valuestack-value {
+  flex: none;
+  color: #9fd9ef;
+  font-weight: 700;
+}
+.s7-sales-valuestack-total {
+  padding-top: 12px;
+  color: #ffffff;
+  font-weight: 800;
+}
+.s7-sales-valuestack-total strong {
+  color: #00e0ff;
+  font-size: 1.18rem;
+}
+.s7-sales-valuestack-anchor {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255, 157, 61, 0.1);
+  border: 1px solid rgba(255, 157, 61, 0.28);
+  color: #ffe6c4;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+/* ── Testimonios (curso + app) ───────────────────────────────────────── */
+.s7-testimonials-light {
+  background: #eef4f8;
+}
+.s7-testimonials-light .s7-sales-kicker {
+  color: #0a82b4;
+}
+.s7-testimonials-light .s7-sales-centered-heading h2 {
+  color: #0d2336;
+}
+.s7-testimonials-dark {
+  color: #eaf5fb;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(0, 200, 255, 0.12), transparent 30%),
+    linear-gradient(180deg, #061827 0%, #020d1e 100%);
+}
+.s7-testimonials-dark .s7-sales-centered-heading h2 {
+  color: #ffffff;
+}
+.s7-testimonials-grid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.s7-testimonial-card {
+  position: relative;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px 26px 24px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid #e1ebf2;
+  box-shadow: 0 16px 36px rgba(7, 27, 45, 0.07);
+}
+.s7-testimonials-dark .s7-testimonial-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(0, 200, 255, 0.22);
+  box-shadow: none;
+}
+.s7-testimonial-mark {
+  position: absolute;
+  top: 6px;
+  right: 20px;
+  font-size: 3.4rem;
+  line-height: 1;
+  font-family: Georgia, "Times New Roman", serif;
+  color: rgba(0, 183, 232, 0.22);
+}
+.s7-testimonial-card blockquote {
+  margin: 0;
+  color: #2c3e4e;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+.s7-testimonials-dark .s7-testimonial-card blockquote {
+  color: #d6e6f0;
+}
+.s7-testimonial-card figcaption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+.s7-testimonial-avatar {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 0.92rem;
+  color: #04263a;
+  background: linear-gradient(135deg, #00c8ff, #1594ff);
+}
+.s7-testimonial-id {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.s7-testimonial-id strong {
+  color: #0d2336;
+  font-size: 0.96rem;
+}
+.s7-testimonials-dark .s7-testimonial-id strong {
+  color: #ffffff;
+}
+.s7-testimonial-id em {
+  color: #5d7387;
+  font-style: normal;
+  font-size: 0.84rem;
+}
+.s7-testimonials-dark .s7-testimonial-id em {
+  color: #8fa8b8;
+}
+
+/* ── Garantía bajo el CTA final ──────────────────────────────────────── */
+.s7-sales-final-guarantee {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 0;
+  color: #cfe1ee;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.s7-sales-final-guarantee svg {
+  color: #00c8ff;
+  flex: none;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .s7-method-arrow {
+    display: none;
+  }
+  .s7-method-step-wrap {
+    flex-basis: 240px;
+  }
+  .s7-testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  .s7-proof-link {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .s7-flip-page img {
+    width: min(320px, 78vw);
+  }
+  .s7-flip-nav {
+    width: 40px;
+    height: 40px;
+  }
+  .s7-method-step-wrap {
+    flex-basis: 100%;
+  }
+}

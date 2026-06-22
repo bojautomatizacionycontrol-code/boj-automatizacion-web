@@ -55,6 +55,10 @@ import {
   navItems,
   projects,
   s7Course,
+  s7ProofClients,
+  s7ManualPages,
+  s7Testimonials,
+  metodoBojSteps,
   servicePrinciples,
   services,
   technicalResources,
@@ -105,6 +109,77 @@ const serviceWorkImageModules = import.meta.glob("./assets/services-works/*.{png
   eager: true,
   import: "default",
 });
+
+const manualPreviewModules = import.meta.glob("./assets/manual-preview/*.jpg", {
+  eager: true,
+  import: "default",
+});
+const manualPreviewImages = Object.keys(manualPreviewModules)
+  .sort()
+  .map((key) => manualPreviewModules[key]);
+
+// ───────────────────────────────────────────────────────────────────────────
+// Analítica / tracking de conversión.
+// Para ACTIVAR: completá los IDs abajo. Mientras estén vacíos, todo es no-op
+// seguro (no carga scripts, no rompe nada). track() sirve aunque no haya IDs.
+// GA4 → mide tráfico y embudo. Meta Pixel → remarketing al 95% que no compra.
+const ANALYTICS = {
+  ga4Id: "", // p.ej. "G-XXXXXXXXXX"
+  metaPixelId: "", // p.ej. "1234567890123456"
+};
+
+function track(event, params = {}) {
+  if (typeof window === "undefined") return;
+  try {
+    if (typeof window.gtag === "function") window.gtag("event", event, params);
+    if (Array.isArray(window.dataLayer)) window.dataLayer.push({ event, ...params });
+    if (typeof window.fbq === "function") window.fbq("trackCustom", event, params);
+  } catch (_) {
+    /* el tracking nunca debe romper la UI */
+  }
+}
+
+let analyticsBootstrapped = false;
+function initAnalytics() {
+  if (analyticsBootstrapped || typeof document === "undefined") return;
+  analyticsBootstrapped = true;
+
+  if (ANALYTICS.ga4Id) {
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${ANALYTICS.ga4Id}`;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() {
+      window.dataLayer.push(arguments);
+    };
+    window.gtag("js", new Date());
+    window.gtag("config", ANALYTICS.ga4Id);
+  }
+
+  if (ANALYTICS.metaPixelId) {
+    /* eslint-disable */
+    !(function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = "2.0";
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+    window.fbq("init", ANALYTICS.metaPixelId);
+    window.fbq("track", "PageView");
+    /* eslint-enable */
+  }
+}
 
 const getServiceWorkImage = (fileNames) => {
   const candidates = Array.isArray(fileNames) ? fileNames : [fileNames];
@@ -1017,7 +1092,12 @@ function App() {
   }, []);
 
   useEffect(() => {
+    initAnalytics();
+  }, []);
+
+  useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    track("page_view", { page_path: route });
   }, [route]);
 
   useEffect(() => {
@@ -1147,7 +1227,7 @@ function HeroAction({ action, variant }) {
 }
 
 // Hero unificado para toda la web: misma altura, estructura y tipografia.
-function Hero({ image, eyebrow, title, subtitle, primary, secondary }) {
+function Hero({ image, eyebrow, title, subtitle, primary, secondary, note }) {
   return (
     <section className="boj-hero">
       {image ? <img className="boj-hero-bg" src={image} alt="" aria-hidden="true" /> : null}
@@ -1161,6 +1241,12 @@ function Hero({ image, eyebrow, title, subtitle, primary, secondary }) {
             <HeroAction action={primary} variant="mock-btn-primary" />
             <HeroAction action={secondary} variant="mock-btn-outline" />
           </div>
+        ) : null}
+        {note ? (
+          <p className="boj-hero-note">
+            <ShieldCheck size={16} aria-hidden="true" />
+            <span>{note}</span>
+          </p>
         ) : null}
       </div>
     </section>
@@ -2035,6 +2121,185 @@ function S7CoursePage() {
   return <S7SalesLanding course={s7Course} eyebrow="Curso aplicado" />;
 }
 
+function S7ProofStrip() {
+  return (
+    <section className="s7-proof">
+      <div className="s7-sales-container s7-proof-inner">
+        <p className="s7-proof-label">
+          <Factory size={17} aria-hidden="true" />
+          Un método nacido en planta, no en un aula. Trabajos reales para:
+        </p>
+        <ul className="s7-proof-list">
+          {s7ProofClients.map((name) => (
+            <li key={name}>{name}</li>
+          ))}
+        </ul>
+        <a className="s7-proof-link" href="#/obras">
+          Ver obras reales <ArrowRight size={15} />
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function S7MethodStrip() {
+  return (
+    <section className="s7-sales-section s7-method">
+      <div className="s7-sales-container">
+        <div className="s7-sales-section-heading">
+          <p className="s7-sales-kicker">El Método BOJ</p>
+          <h2>Del síntoma a la causa probable, con evidencia. No con prueba y error.</h2>
+          <p className="s7-method-lead">
+            La misma secuencia que aplico en planta hace más de 15 años, ordenada para que la uses cuando la
+            máquina está parada y la presión es alta.
+          </p>
+        </div>
+        <div className="s7-method-grid">
+          {metodoBojSteps.map((step, index) => (
+            <div className="s7-method-step-wrap" key={step.num}>
+              <article className="s7-method-step">
+                <span className="s7-method-num">{step.num}</span>
+                <span className="s7-method-icon">
+                  <Icon name={step.icon} size={26} />
+                </span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </article>
+              {index < metodoBojSteps.length - 1 ? (
+                <span className="s7-method-arrow" aria-hidden="true">
+                  <ArrowRight size={22} />
+                </span>
+              ) : null}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ManualFlipbook({ images, pages }) {
+  const total = images.length;
+  const [index, setIndex] = useState(0);
+  const [zoom, setZoom] = useState(false);
+  const go = (target) => setIndex((current) => (target + total) % total || 0);
+
+  useEffect(() => {
+    const onKey = (event) => {
+      if (event.key === "ArrowLeft") setIndex((c) => (c - 1 + total) % total);
+      else if (event.key === "ArrowRight") setIndex((c) => (c + 1) % total);
+      else if (event.key === "Escape") setZoom(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [total]);
+
+  useEffect(() => {
+    if (!zoom) return undefined;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [zoom]);
+
+  if (!total) return null;
+  const caption = pages[index]?.label || `Página ${index + 1}`;
+
+  return (
+    <div className="s7-flip">
+      <div className="s7-flip-stage">
+        <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label="Página anterior">
+          <ArrowRight size={24} />
+        </button>
+        <button type="button" className="s7-flip-page" onClick={() => setZoom(true)} aria-label={`Ampliar: ${caption}`}>
+          <img src={images[index]} alt={`Vista previa del manual — ${caption}`} loading="lazy" />
+          <span className="s7-flip-zoom" aria-hidden="true">
+            <ScanSearch size={18} /> Ampliar
+          </span>
+        </button>
+        <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label="Página siguiente">
+          <ArrowRight size={24} />
+        </button>
+      </div>
+      <div className="s7-flip-bar">
+        <span className="s7-flip-caption">{caption}</span>
+        <span className="s7-flip-counter">{index + 1} / {total}</span>
+      </div>
+      <div className="s7-flip-thumbs" role="tablist" aria-label="Páginas del manual">
+        {images.map((image, i) => (
+          <button
+            key={image}
+            type="button"
+            className={`s7-flip-thumb${i === index ? " active" : ""}`}
+            onClick={() => setIndex(i)}
+            aria-label={`Ir a la página ${i + 1}`}
+            aria-selected={i === index}
+            role="tab"
+          >
+            <img src={image} alt="" loading="lazy" />
+          </button>
+        ))}
+      </div>
+
+      {zoom ? (
+        <div className="s7-flip-lightbox" role="dialog" aria-modal="true" onClick={() => setZoom(false)}>
+          <div className="s7-flip-lightbox-inner" onClick={(event) => event.stopPropagation()}>
+            <button type="button" className="s7-flip-lightbox-close" onClick={() => setZoom(false)} aria-label="Cerrar vista ampliada">
+              <X size={20} />
+            </button>
+            <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label="Página anterior">
+              <ArrowRight size={26} />
+            </button>
+            <img src={images[index]} alt={`Vista previa del manual — ${caption}`} />
+            <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label="Página siguiente">
+              <ArrowRight size={26} />
+            </button>
+            <span className="s7-flip-lightbox-caption">{caption} · {index + 1} / {total}</span>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function S7Testimonials({ background = "light" }) {
+  const initials = (name) =>
+    name
+      .split(" ")
+      .filter((part) => part && !part.endsWith("."))
+      .slice(-2)
+      .map((part) => part[0])
+      .join("")
+      .toUpperCase();
+
+  return (
+    <section className={`s7-sales-section s7-testimonials s7-testimonials-${background}`}>
+      <div className="s7-sales-container">
+        <div className="s7-sales-centered-heading">
+          <p className="s7-sales-kicker">Lo que dicen los técnicos</p>
+          <h2>Resultados reales en planta, no promesas.</h2>
+        </div>
+        <div className="s7-testimonials-grid">
+          {s7Testimonials.map((item) => (
+            <figure className="s7-testimonial-card" key={item.name}>
+              <span className="s7-testimonial-mark" aria-hidden="true">“</span>
+              <blockquote>{item.quote}</blockquote>
+              <figcaption>
+                <span className="s7-testimonial-avatar" aria-hidden="true">{initials(item.name)}</span>
+                <span className="s7-testimonial-id">
+                  <strong>{item.name}</strong>
+                  <em>{item.role}</em>
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function S7SalesLanding({ course, eyebrow }) {
   const purchaseHref = whatsappUrl("Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 147 USD.");
   const heroStyle = { "--s7-sales-hero-image": `url(${s7CourseCoverHero})` };
@@ -2260,12 +2525,20 @@ function S7SalesLanding({ course, eyebrow }) {
     <div className="s7-sales-page">
       <Hero
         image={heroCursoS7}
-        eyebrow={eyebrow}
-        title="Diagnóstico de fallas en PLC Siemens S7-300/400 con STEP 7 Classic"
-        subtitle="Resolución aplicada de fallas reales: CPU, LEDs, Diagnostic Buffer, HW Config Online, PROFIBUS, módulos, señales y criterio de intervención."
-        primary={{ label: "Comprar curso + APP PRO — 147 USD", href: purchaseHref, external: true }}
+        eyebrow="Diagnóstico industrial · Método BOJ"
+        title="Cuando la línea está parada y todos te miran, dejá de adivinar."
+        subtitle="Aprendé a diagnosticar fallas reales en PLC Siemens S7-300/400 —CPU, PROFIBUS, módulos y señales— con una secuencia probada: del síntoma a la causa con evidencia, no con prueba y error. Para mantenimiento que trabaja bajo presión."
+        primary={{
+          label: "Empezar ahora — Curso + App PRO · 147 USD",
+          href: purchaseHref,
+          external: true,
+          onClick: () => track("begin_checkout", { item: "curso_s7_app_pro", value: 147, currency: "USD", source: "hero" }),
+        }}
         secondary={{ label: "Ver qué incluye", href: "#/cursos/s7-300-400", onClick: (event) => scrollToCourseSection(event, "curso-s7-incluye") }}
+        note="Pago seguro · Acceso inmediato · Garantía de 7 días"
       />
+
+      <S7ProofStrip />
 
       <div className="s7-sales-confidence">
         <div className="s7-sales-container">
@@ -2273,6 +2546,8 @@ function S7SalesLanding({ course, eyebrow }) {
           <p>Perdé el miedo a conectarte al PLC y diagnosticá con <strong>criterio profesional.</strong></p>
         </div>
       </div>
+
+      <S7MethodStrip />
 
       <section className="s7-sales-section s7-sales-problem">
         <div className="s7-sales-container s7-sales-problem-grid">
@@ -2374,6 +2649,20 @@ function S7SalesLanding({ course, eyebrow }) {
         </div>
       </section>
 
+      <section className="s7-sales-section s7-sales-dark s7-manual-preview">
+        <div className="s7-sales-container">
+          <div className="s7-sales-centered-heading">
+            <p className="s7-sales-kicker">Mirá por dentro</p>
+            <h2>Las primeras páginas del manual.</h2>
+            <p className="s7-manual-lead">
+              Material técnico profesional, con diseño pensado para usarse en planta. Pasá las hojas y mirá la
+              calidad antes de comprar.
+            </p>
+          </div>
+          <ManualFlipbook images={manualPreviewImages} pages={s7ManualPages} />
+        </div>
+      </section>
+
       <section className="s7-sales-section s7-sales-program" id="curso-s7-programa">
         <div className="s7-sales-container">
           <div className="s7-sales-section-heading">
@@ -2459,14 +2748,35 @@ function S7SalesLanding({ course, eyebrow }) {
 
           <div className="s7-sales-offer-panel">
             <div className="s7-sales-offer-product">
+              <span className="s7-sales-launch">
+                <Clock size={15} aria-hidden="true" /> Precio de lanzamiento · por tiempo limitado
+              </span>
               <p className="s7-sales-kicker">Oferta única</p>
               <h2>Curso Diagnóstico S7-300/400 + APP PRO</h2>
-              <span>Incluye 1 mes de BOJ S7-PLC PRO</span>
+              <span className="s7-sales-offer-tagline">Incluye 1 mes de BOJ S7-PLC PRO</span>
             </div>
 
             <div className="s7-sales-offer-price">
               <strong>147 USD</strong>
               <p>Acceso digital al curso + herramienta PRO por 1 mes.</p>
+              <div className="s7-sales-valuestack">
+                <div className="s7-sales-valuestack-row">
+                  <span>App BOJ S7-PLC PRO — 1 mes</span>
+                  <span className="s7-sales-valuestack-value">vale 70 USD</span>
+                </div>
+                <div className="s7-sales-valuestack-row">
+                  <span>Curso completo + Método BOJ</span>
+                  <span className="s7-sales-valuestack-value">incluido</span>
+                </div>
+                <div className="s7-sales-valuestack-total">
+                  <span>Todo junto, hoy</span>
+                  <strong>147 USD</strong>
+                </div>
+                <p className="s7-sales-valuestack-anchor">
+                  ¿Cuánto cuesta una hora de línea parada en tu planta? Casi siempre, mucho más que esto. Un
+                  solo módulo cambiado a ciegas ya vale más que el curso completo.
+                </p>
+              </div>
             </div>
 
             <div className="s7-sales-offer-content">
@@ -2479,10 +2789,22 @@ function S7SalesLanding({ course, eyebrow }) {
                 ))}
               </ul>
               <div className="s7-sales-offer-actions">
-                <a className="s7-sales-btn s7-sales-btn-primary" href={purchaseHref} target="_blank" rel="noreferrer">
+                <a
+                  className="s7-sales-btn s7-sales-btn-primary"
+                  href={purchaseHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => track("begin_checkout", { item: "curso_s7_app_pro", value: 147, currency: "USD", source: "offer" })}
+                >
                   Comprar curso + APP PRO
                 </a>
-                <a className="s7-sales-btn s7-sales-btn-secondary" href={appProductUrl} target="_blank" rel="noreferrer">
+                <a
+                  className="s7-sales-btn s7-sales-btn-secondary"
+                  href={appProductUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => track("app_trial_click", { source: "offer" })}
+                >
                   Probar APP 48 hs
                 </a>
               </div>
@@ -2517,6 +2839,8 @@ function S7SalesLanding({ course, eyebrow }) {
         </div>
       </section>
 
+      <S7Testimonials background="light" />
+
       <section className="s7-sales-section s7-sales-faq">
         <div className="s7-sales-container">
           <div className="s7-sales-section-heading">
@@ -2546,13 +2870,23 @@ function S7SalesLanding({ course, eyebrow }) {
           <div className="s7-sales-final-cta-panel">
             <p>Si trabajás con PLC Siemens S7-300/400 y necesitás diagnosticar con más criterio, este curso te da método, estructura y apoyo técnico para intervenir mejor.</p>
             <div className="s7-sales-final-actions">
-              <a className="s7-sales-btn s7-sales-btn-primary" href={purchaseHref} target="_blank" rel="noreferrer">
+              <a
+                className="s7-sales-btn s7-sales-btn-primary"
+                href={purchaseHref}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => track("begin_checkout", { item: "curso_s7_app_pro", value: 147, currency: "USD", source: "final_cta" })}
+              >
                 Comprar curso + APP PRO — 147 USD
               </a>
               <a className="s7-sales-btn s7-sales-btn-secondary" href="#/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
                 Ver qué incluye
               </a>
             </div>
+            <p className="s7-sales-final-guarantee">
+              <ShieldCheck size={17} aria-hidden="true" />
+              Garantía de 7 días · Pago seguro · Acceso inmediato
+            </p>
           </div>
         </div>
       </section>
@@ -2650,9 +2984,14 @@ function AppPage() {
       <Hero
         image={heroApp}
         eyebrow="BOJ S7-PLC PRO"
-        title="Diagnóstico guiado para PLC Siemens S7-300/400"
-        subtitle="Cargá síntomas, LEDs y condiciones de campo. BOJ S7-PLC ordena hipótesis técnicas y guía la verificación paso a paso."
-        primary={{ label: "Probar gratis 48 hs", href: appProductUrl, external: true }}
+        title="Ordená el diagnóstico antes de cambiar un solo módulo."
+        subtitle="Cargá síntomas, LEDs y condiciones de campo: BOJ S7-PLC mantiene el contexto, ordena las hipótesis por evidencia y te dice qué verificar primero. Para Siemens S7-300/400, en planta y bajo presión."
+        primary={{
+          label: "Probar gratis 48 hs",
+          href: appProductUrl,
+          external: true,
+          onClick: () => track("app_trial_click", { source: "app_hero" }),
+        }}
         secondary={{
           label: "Ver planes PRO",
           href: "#planes-pro",
@@ -2661,7 +3000,10 @@ function AppPage() {
             document.getElementById("planes-pro")?.scrollIntoView({ behavior: "smooth", block: "start" });
           },
         }}
+        note="Sin tarjeta de crédito · Acceso inmediato · Funciona en el navegador"
       />
+
+      <S7ProofStrip />
 
       <section className="app-pro-problems-how-section">
         <div className="mock-home-container app-pro-problems-how-grid">
@@ -2900,6 +3242,8 @@ function AppPage() {
         </div>
       </section>
 
+      <S7Testimonials background="dark" />
+
       <section className="app-pro-plans-section" id="planes-pro">
         <div className="mock-home-container">
           <div className="app-pro-section-heading">
@@ -2927,7 +3271,13 @@ function AppPage() {
                     </li>
                   ))}
                 </ul>
-                <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
+                <a
+                  className="mock-btn mock-btn-primary"
+                  href={appProductUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => track("plan_click", { plan: plan.title })}
+                >
                   {plan.button} <ExternalLink size={17} />
                 </a>
               </article>
@@ -2958,7 +3308,13 @@ function AppPage() {
             <h2>Prueba BOJ S7-PLC PRO durante 48 hs</h2>
             <p>Acceso inmediato · Sin tarjeta de crédito · Funciona online · Ideal para conocer el flujo de diagnóstico</p>
           </div>
-          <a className="mock-btn mock-btn-light" href={appProductUrl} target="_blank" rel="noreferrer">
+          <a
+            className="mock-btn mock-btn-light"
+            href={appProductUrl}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => track("app_trial_click", { source: "trial_section" })}
+          >
             Probar gratis 48 hs <ExternalLink size={18} />
           </a>
         </div>
@@ -3807,7 +4163,7 @@ function AuthoritySection() {
       <div className="section-container authority-grid">
         <div>
           <p className="eyebrow">Autoridad técnica</p>
-          <h2>Más de 10 años de experiencia en automatización industrial, diagnóstico de fallas y puesta en marcha en planta</h2>
+          <h2>Más de 15 años de experiencia en automatización industrial, diagnóstico de fallas y puesta en marcha en planta</h2>
           <p>
             BOJ combina trabajo de campo, lectura online de PLC, análisis eléctrico y criterio
             de mantenimiento para resolver problemas reales sin caer en cambios innecesarios.

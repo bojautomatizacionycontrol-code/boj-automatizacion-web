@@ -75,7 +75,7 @@ export const whyBoj = [
 
 export const trustSignals = [
   {
-    value: "Más de 10 años",
+    value: "Más de 15 años",
     label: "automatización industrial, diagnóstico de fallas y puesta en marcha en planta",
   },
   {
@@ -1185,5 +1185,83 @@ export const projects = [
       "Se relevó la secuencia, se integró encoder incremental, se desarrolló lógica por ventanas de posición y se validaron señales durante puesta en marcha.",
     result:
       "Se logró control electrónico ajustable, mayor trazabilidad de señales y una puesta en marcha con criterio de mantenimiento.",
+  },
+];
+
+// Prueba social: clientes reales de planta (solo texto, sin logos).
+export const s7ProofClients = [
+  "YPF",
+  "Ledesma",
+  "Generación Mediterránea",
+  "TGN",
+  "CALSA",
+  "GETSA",
+];
+
+// Método BOJ — 4 pasos para el visual de la landing del curso.
+export const metodoBojSteps = [
+  {
+    num: "01",
+    icon: "FileSearch",
+    title: "Relevar el síntoma",
+    text: "Estado de CPU, LEDs, condición de línea, módulos afectados y red involucrada. Antes de tocar nada.",
+  },
+  {
+    num: "02",
+    icon: "ClipboardCheck",
+    title: "Confirmar evidencia",
+    text: "Diagnostic Buffer, HW Config online, monitoreo de variables, estado de nodos y medición en campo.",
+  },
+  {
+    num: "03",
+    icon: "CircuitBoard",
+    title: "Separar la causa",
+    text: "Distinguir falla de lógica, módulo, red, instrumento, cableado, alimentación o condición de proceso.",
+  },
+  {
+    num: "04",
+    icon: "ShieldCheck",
+    title: "Actuar con criterio",
+    text: "Intervenir con una hipótesis defendible, resolver y dejar la falla documentada para la próxima.",
+  },
+];
+
+// Vista previa del manual: primeras 8 páginas (extraídas del PDF real).
+export const s7ManualPages = [
+  { label: "Portada — Manual técnico profesional" },
+  { label: "Introducción — Diagnosticar no es adivinar" },
+  { label: "Perfil del participante y objetivos" },
+  { label: "Resultado esperado y sobre el autor" },
+  { label: "Módulos del curso" },
+  { label: "Índice de módulos (cont.)" },
+  { label: "Módulo I — Realidad del diagnóstico en planta" },
+  { label: "Escenario real de diagnóstico" },
+];
+
+// Testimonios reales de técnicos e ingenieros.
+export const s7Testimonials = [
+  {
+    quote:
+      "Antes me costaba ordenar el diagnóstico cuando una CPU quedaba en STOP o aparecía BF. Con el curso entendí cómo analizar la falla por etapas y la app me sirve como guía rápida en planta. Hoy tengo más seguridad para intervenir sin empezar cambiando componentes al azar.",
+    name: "Andrés Segura",
+    role: "Técnico de mantenimiento industrial",
+  },
+  {
+    quote:
+      "En una parada de máquina teníamos una falla BF en una red PROFIBUS. Antes hubiera empezado revisando módulos sin un orden claro. Con el método del curso y la app pude seguir una secuencia de diagnóstico: CPU, red, nodo afectado, alimentación y cableado. Terminamos encontrando una ficha floja en un esclavo remoto. Lo más útil fue tener una lógica de intervención y no depender solo de prueba y error.",
+    name: "Ing. Pablo Andrada",
+    role: "Mantenimiento eléctrico",
+  },
+  {
+    quote:
+      "La app BOJ S7-PLC me sirve como apoyo cuando estoy frente al tablero. No reemplaza el conocimiento técnico, pero ayuda a ordenar las verificaciones y a no saltearse pasos importantes. Para fallas con LEDs, STOP, SF o BF, es una guía muy práctica.",
+    name: "Daniel Scott",
+    role: "Técnico en mantenimiento industrial",
+  },
+  {
+    quote:
+      "El curso no se queda solo en teoría. Me ayudó a entender cómo pensar una falla de PLC en campo: qué mirar primero, qué descartar y cómo relacionar síntomas con posibles causas. Es útil especialmente para quienes trabajan con Siemens S7 y necesitan mejorar el diagnóstico.",
+    name: "Ezequiel Contreras",
+    role: "Técnico en controles automáticos",
   },
 ];
