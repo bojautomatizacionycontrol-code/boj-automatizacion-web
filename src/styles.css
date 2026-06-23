@@ -21743,3 +21743,55 @@ textarea {
     flex-basis: 100%;
   }
 }
+
+/* =====================================================================
+   BOJ AUDIT — Identidad premium #1: tipografia display + acento refinado.
+   Space Grotesk (display tecnico-premium) en titulos; Inter en cuerpo.
+   ===================================================================== */
+:root {
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --boj-accent: #0e7c99;
+  --boj-accent-bright: #19a8cb;
+}
+
+h1,
+h2,
+h3,
+.boj-hero-title,
+.mock-hero-copy h1,
+.app-pro-product-name,
+.s7-sales-eyebrow {
+  font-family: var(--font-display);
+  font-synthesis: none;
+}
+
+/* Titulos: peso refinado (Space Grotesk llega a 700) + tracking ajustado */
+h1,
+h2,
+h3,
+.boj-hero-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.boj-hero-title,
+.mock-section h2,
+.mock-problems h2,
+.mock-tech-strip h2,
+.s7-sales-section-heading h2,
+.s7-sales-centered-heading h2,
+.s7-sales-offer-heading h2,
+.app-pro-section-heading h2,
+.courses-section-heading h2 {
+  letter-spacing: -0.028em;
+}
+
+/* Eyebrows: tracking amplio + display, sensacion editorial premium */
+.boj-hero-eyebrow,
+.mock-section .eyebrow,
+.s7-sales-kicker,
+.app-pro-product-name {
+  font-family: var(--font-display);
+  letter-spacing: 0.14em;
+  font-weight: 600;
+}
