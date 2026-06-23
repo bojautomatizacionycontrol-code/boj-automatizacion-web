@@ -2597,36 +2597,44 @@ function S7SalesLanding({ course, eyebrow }) {
           </div>
 
           <div className="s7-sales-include-grid">
-            <span className="s7-sales-plus" aria-hidden="true">+</span>
-
             <article className="s7-sales-include-card s7-sales-include-course">
               <span className="s7-sales-include-number">1</span>
               <h3>Curso aplicado S7-300/400</h3>
-              <p className="s7-sales-include-preview-label">
-                <ScanSearch size={16} aria-hidden="true" /> Mirá las primeras 8 páginas del manual
-              </p>
-              <ManualFlipbook images={manualPreviewImages} pages={s7ManualPages} variant="card" />
-              <div className="s7-sales-include-list">
-                {courseIncludes.map((item) => (
-                  <div className="s7-sales-include-item" key={item.title}>
-                    <CheckCircle2 size={20} aria-hidden="true" />
-                    <div>
-                      <h4>{item.title}</h4>
-                      <p>{item.text}</p>
-                    </div>
+              <div className="s7-sales-include-body">
+                <div className="s7-sales-include-media">
+                  <p className="s7-sales-include-preview-label">
+                    <ScanSearch size={16} aria-hidden="true" /> Mirá las primeras 8 páginas del manual
+                  </p>
+                  <ManualFlipbook images={manualPreviewImages} pages={s7ManualPages} variant="card" />
+                </div>
+                <div className="s7-sales-include-main">
+                  <div className="s7-sales-include-list">
+                    {courseIncludes.map((item) => (
+                      <div className="s7-sales-include-item" key={item.title}>
+                        <CheckCircle2 size={20} aria-hidden="true" />
+                        <div>
+                          <h4>{item.title}</h4>
+                          <p>{item.text}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                  <p className="s7-sales-include-note">Basado en más de 15 años de experiencia en diagnóstico, mantenimiento y automatización industrial.</p>
+                </div>
               </div>
-              <p className="s7-sales-include-note">Basado en más de 15 años de experiencia en diagnóstico, mantenimiento y automatización industrial.</p>
             </article>
+
+            <span className="s7-sales-plus" aria-hidden="true">+</span>
 
             <article className="s7-sales-include-card s7-sales-include-app">
               <span className="s7-sales-include-number">2</span>
               <h3>APP PRO - 1 mes de BOJ S7-PLC PRO</h3>
-              <div className="s7-sales-app-layout">
-                <figure>
-                  <img src={s7IncludeAppPanelVisual} alt="Captura real de BOJ S7-PLC PRO para diagnóstico" loading="lazy" />
-                </figure>
+              <div className="s7-sales-include-body">
+                <div className="s7-sales-include-media s7-sales-app-media">
+                  <figure>
+                    <img src={s7IncludeAppPanelVisual} alt="Captura real de BOJ S7-PLC PRO — diagnóstico de CPU y estado del sistema" loading="lazy" />
+                  </figure>
+                </div>
                 <div className="s7-sales-app-copy">
                   <p>La app te ayuda a ordenar síntomas, LEDs, hipótesis y verificaciones durante el diagnóstico.</p>
                   <div className="s7-sales-app-highlights">

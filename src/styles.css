@@ -21414,6 +21414,122 @@ textarea {
   }
 }
 
+/* ── "Qué incluye": dos bloques full-width, layout horizontal apilado ───── */
+.s7-sales-include-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+}
+.s7-sales-plus {
+  position: relative;
+  left: auto;
+  top: auto;
+  align-self: center;
+  margin: -23px auto;
+  transform: none;
+  z-index: 3;
+}
+.s7-sales-include-card {
+  min-height: 0;
+  padding: 26px 30px 28px;
+}
+.s7-sales-include-card h3 {
+  margin: 0 0 20px;
+}
+.s7-sales-include-body {
+  display: grid;
+  gap: 30px;
+  align-items: start;
+}
+.s7-sales-include-course .s7-sales-include-body {
+  grid-template-columns: minmax(0, 290px) minmax(0, 1fr);
+  align-items: center;
+}
+.s7-sales-include-app .s7-sales-include-body {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: stretch;
+}
+.s7-sales-include-media {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.s7-sales-include-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.s7-sales-include-main .s7-sales-include-note {
+  margin: 4px 0 0;
+}
+
+/* Flipbook del cuadro 1: vertical, ajustado a la columna media */
+.s7-flip-card .s7-flip-stage {
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+  height: auto;
+  aspect-ratio: 1100 / 1556;
+}
+.s7-flip-card .s7-flip-page img {
+  object-fit: cover;
+}
+.s7-flip-card .s7-flip-bar {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 12px;
+}
+.s7-flip-card .s7-flip-caption {
+  font-size: 0.82rem;
+}
+
+/* App: captura de alto natural en la columna media */
+.s7-sales-app-media {
+  gap: 14px;
+  justify-content: center;
+}
+.s7-sales-include-app figure {
+  margin: 0;
+  height: auto;
+  aspect-ratio: auto;
+  border: 1px solid rgba(0, 183, 232, 0.2);
+  border-radius: 10px;
+  background: #061827;
+  overflow: hidden;
+}
+.s7-sales-include-app figure img {
+  position: static;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+.s7-sales-app-copy {
+  justify-content: space-between;
+  gap: 18px;
+}
+.s7-sales-app-copy ul {
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 760px) {
+  .s7-sales-include-course .s7-sales-include-body,
+  .s7-sales-include-app .s7-sales-include-body {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+  .s7-sales-include-course .s7-sales-include-media {
+    max-width: 360px;
+    margin-inline: auto;
+  }
+  .s7-sales-app-highlights {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── Ribbon de lanzamiento + value-stack en la oferta ────────────────── */
 .s7-sales-offer-product .s7-sales-launch {
   width: fit-content;
