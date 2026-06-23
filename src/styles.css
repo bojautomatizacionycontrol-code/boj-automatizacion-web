@@ -20999,16 +20999,16 @@ textarea {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px 26px;
-  padding: 18px 0;
+  gap: 8px 16px;
+  padding: 16px 0;
 }
 .s7-proof-label {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
   margin: 0;
   color: #9fb6c6;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
 }
 .s7-proof-label svg {
@@ -21018,7 +21018,8 @@ textarea {
 .s7-proof-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 22px;
+  align-items: center;
+  gap: 6px 14px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -21026,22 +21027,21 @@ textarea {
 .s7-proof-list li {
   color: #f1f7fb;
   font-weight: 800;
-  font-size: 0.96rem;
+  font-size: 0.92rem;
   letter-spacing: 0.01em;
 }
 .s7-proof-list li:not(:last-child)::after {
   content: "·";
-  margin-left: 22px;
+  margin-left: 14px;
   color: rgba(0, 200, 255, 0.55);
 }
 .s7-proof-link {
-  margin-left: auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   color: #00c8ff;
   font-weight: 800;
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -21292,6 +21292,126 @@ textarea {
   color: #cfe2ee;
   font-weight: 700;
   font-size: 0.85rem;
+}
+
+/* ── Flipbook variante "card" (dentro del cuadro 1 de Qué incluye) ───────── */
+.s7-sales-include-preview-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  color: #0a82b4;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+.s7-sales-include-preview-label svg {
+  flex: none;
+}
+.s7-flip-card {
+  margin: 0 0 20px;
+}
+.s7-flip-card .s7-flip-stage {
+  position: relative;
+  display: block;
+  height: clamp(300px, 25vw, 350px);
+  border: 1px solid rgba(0, 183, 232, 0.2);
+  border-radius: 10px;
+  background: #061827;
+  overflow: hidden;
+}
+.s7-flip-card .s7-flip-page {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: none;
+  cursor: zoom-in;
+}
+.s7-flip-card .s7-flip-page img {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+.s7-flip-card .s7-flip-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  z-index: 2;
+  background: rgba(2, 13, 30, 0.6);
+}
+.s7-flip-card .s7-flip-nav:hover {
+  transform: translateY(-50%) scale(1.06);
+}
+.s7-flip-card .s7-flip-prev {
+  left: 8px;
+}
+.s7-flip-card .s7-flip-next {
+  right: 8px;
+}
+.s7-flip-card .s7-flip-bar {
+  margin-top: 12px;
+  justify-content: space-between;
+}
+.s7-flip-card .s7-flip-caption {
+  text-align: left;
+  color: #45596b;
+  font-size: 0.86rem;
+}
+
+/* ── Lista de la oferta: dos columnas parejas (flujo por columna) ───────── */
+@media (min-width: 901px) {
+  .s7-sales-offer-list {
+    grid-template-rows: repeat(5, auto);
+    grid-auto-flow: column;
+    align-items: start;
+  }
+}
+.s7-sales-offer-list li svg {
+  margin-top: 1px;
+}
+
+/* ── Ancla de costo: fila full-width al pie del panel de oferta ─────────── */
+.s7-sales-offer-panel {
+  grid-template-areas:
+    "product content"
+    "price content"
+    "anchor anchor";
+}
+.s7-sales-offer-anchor {
+  grid-area: anchor;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 6px 0 0;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: rgba(255, 157, 61, 0.1);
+  border: 1px solid rgba(255, 157, 61, 0.3);
+  color: #ffe6c4;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+.s7-sales-offer-anchor svg {
+  color: #ffb24d;
+  flex: none;
+  margin-top: 2px;
+}
+@media (max-width: 900px) {
+  .s7-sales-offer-panel {
+    grid-template-areas:
+      "product"
+      "price"
+      "content"
+      "anchor";
+  }
 }
 
 /* ── Ribbon de lanzamiento + value-stack en la oferta ────────────────── */

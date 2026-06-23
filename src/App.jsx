@@ -2178,7 +2178,7 @@ function S7MethodStrip() {
   );
 }
 
-function ManualFlipbook({ images, pages }) {
+function ManualFlipbook({ images, pages, variant = "full" }) {
   const total = images.length;
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState(false);
@@ -2207,40 +2207,42 @@ function ManualFlipbook({ images, pages }) {
   const caption = pages[index]?.label || `Página ${index + 1}`;
 
   return (
-    <div className="s7-flip">
+    <div className={`s7-flip s7-flip-${variant}`}>
       <div className="s7-flip-stage">
         <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label="Página anterior">
-          <ArrowRight size={24} />
+          <ArrowRight size={variant === "card" ? 20 : 24} />
         </button>
         <button type="button" className="s7-flip-page" onClick={() => setZoom(true)} aria-label={`Ampliar: ${caption}`}>
           <img src={images[index]} alt={`Vista previa del manual — ${caption}`} loading="lazy" />
           <span className="s7-flip-zoom" aria-hidden="true">
-            <ScanSearch size={18} /> Ampliar
+            <ScanSearch size={16} /> Ampliar
           </span>
         </button>
         <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label="Página siguiente">
-          <ArrowRight size={24} />
+          <ArrowRight size={variant === "card" ? 20 : 24} />
         </button>
       </div>
       <div className="s7-flip-bar">
         <span className="s7-flip-caption">{caption}</span>
         <span className="s7-flip-counter">{index + 1} / {total}</span>
       </div>
-      <div className="s7-flip-thumbs" role="tablist" aria-label="Páginas del manual">
-        {images.map((image, i) => (
-          <button
-            key={image}
-            type="button"
-            className={`s7-flip-thumb${i === index ? " active" : ""}`}
-            onClick={() => setIndex(i)}
-            aria-label={`Ir a la página ${i + 1}`}
-            aria-selected={i === index}
-            role="tab"
-          >
-            <img src={image} alt="" loading="lazy" />
-          </button>
-        ))}
-      </div>
+      {variant === "full" ? (
+        <div className="s7-flip-thumbs" role="tablist" aria-label="Páginas del manual">
+          {images.map((image, i) => (
+            <button
+              key={image}
+              type="button"
+              className={`s7-flip-thumb${i === index ? " active" : ""}`}
+              onClick={() => setIndex(i)}
+              aria-label={`Ir a la página ${i + 1}`}
+              aria-selected={i === index}
+              role="tab"
+            >
+              <img src={image} alt="" loading="lazy" />
+            </button>
+          ))}
+        </div>
+      ) : null}
 
       {zoom ? (
         <div className="s7-flip-lightbox" role="dialog" aria-modal="true" onClick={() => setZoom(false)}>
@@ -2600,9 +2602,10 @@ function S7SalesLanding({ course, eyebrow }) {
             <article className="s7-sales-include-card s7-sales-include-course">
               <span className="s7-sales-include-number">1</span>
               <h3>Curso aplicado S7-300/400</h3>
-              <figure>
-                <img src={s7IncludePlc400Visual} alt="PLC Siemens S7-400 en tablero industrial usado como apoyo del curso S7-300/400" loading="lazy" />
-              </figure>
+              <p className="s7-sales-include-preview-label">
+                <ScanSearch size={16} aria-hidden="true" /> Mirá las primeras 8 páginas del manual
+              </p>
+              <ManualFlipbook images={manualPreviewImages} pages={s7ManualPages} variant="card" />
               <div className="s7-sales-include-list">
                 {courseIncludes.map((item) => (
                   <div className="s7-sales-include-item" key={item.title}>
@@ -2646,20 +2649,6 @@ function S7SalesLanding({ course, eyebrow }) {
               </div>
             </article>
           </div>
-        </div>
-      </section>
-
-      <section className="s7-sales-section s7-sales-dark s7-manual-preview">
-        <div className="s7-sales-container">
-          <div className="s7-sales-centered-heading">
-            <p className="s7-sales-kicker">Mirá por dentro</p>
-            <h2>Las primeras páginas del manual.</h2>
-            <p className="s7-manual-lead">
-              Material técnico profesional, con diseño pensado para usarse en planta. Pasá las hojas y mirá la
-              calidad antes de comprar.
-            </p>
-          </div>
-          <ManualFlipbook images={manualPreviewImages} pages={s7ManualPages} />
         </div>
       </section>
 
@@ -2772,10 +2761,6 @@ function S7SalesLanding({ course, eyebrow }) {
                   <span>Todo junto, hoy</span>
                   <strong>147 USD</strong>
                 </div>
-                <p className="s7-sales-valuestack-anchor">
-                  ¿Cuánto cuesta una hora de línea parada en tu planta? Casi siempre, mucho más que esto. Un
-                  solo módulo cambiado a ciegas ya vale más que el curso completo.
-                </p>
               </div>
             </div>
 
@@ -2818,6 +2803,14 @@ function S7SalesLanding({ course, eyebrow }) {
               </p>
               <p className="s7-sales-offer-note">Acceso digital. Verificá siempre las conclusiones en campo antes de intervenir.</p>
             </div>
+
+            <p className="s7-sales-offer-anchor">
+              <TriangleAlert size={18} aria-hidden="true" />
+              <span>
+                ¿Cuánto cuesta una hora de línea parada en tu planta? Casi siempre, mucho más que esto. Un solo
+                módulo cambiado a ciegas ya vale más que el curso completo.
+              </span>
+            </p>
           </div>
         </div>
       </section>
