@@ -21372,6 +21372,11 @@ textarea {
     grid-template-rows: repeat(5, auto);
     grid-auto-flow: column;
     align-items: start;
+    row-gap: 14px;
+  }
+  /* sin este reset, el 1er ítem de la 2da columna baja 10px y desalinea la fila */
+  .s7-sales-offer-list li + li {
+    margin-top: 0;
   }
 }
 .s7-sales-offer-list li svg {

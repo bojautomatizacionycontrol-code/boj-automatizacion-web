@@ -2542,13 +2542,6 @@ function S7SalesLanding({ course, eyebrow }) {
 
       <S7ProofStrip />
 
-      <div className="s7-sales-confidence">
-        <div className="s7-sales-container">
-          <Icon name="ShieldCheck" size={26} />
-          <p>Perdé el miedo a conectarte al PLC y diagnosticá con <strong>criterio profesional.</strong></p>
-        </div>
-      </div>
-
       <S7MethodStrip />
 
       <section className="s7-sales-section s7-sales-problem">
@@ -2659,6 +2652,13 @@ function S7SalesLanding({ course, eyebrow }) {
           </div>
         </div>
       </section>
+
+      <div className="s7-sales-confidence">
+        <div className="s7-sales-container">
+          <Icon name="ShieldCheck" size={26} />
+          <p>Perdé el miedo a conectarte al PLC y diagnosticá con <strong>criterio profesional.</strong></p>
+        </div>
+      </div>
 
       <section className="s7-sales-section s7-sales-program" id="curso-s7-programa">
         <div className="s7-sales-container">
