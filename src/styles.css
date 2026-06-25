@@ -21491,10 +21491,23 @@ textarea {
   font-size: 0.82rem;
 }
 
-/* App: captura de alto natural en la columna media */
+/* Variante landscape: carrusel de capturas de la app (cuadro 2) */
+.s7-flip-landscape.s7-flip-card .s7-flip-stage {
+  max-width: 100%;
+  aspect-ratio: 3 / 2;
+}
+.s7-flip-landscape.s7-flip-card .s7-flip-page img {
+  object-fit: contain;
+}
+.s7-flip-landscape .s7-flip-lightbox-inner img {
+  max-width: min(1040px, 92vw);
+  max-height: 86vh;
+}
+
+/* App: carrusel en la columna media */
 .s7-sales-app-media {
-  gap: 14px;
-  justify-content: center;
+  gap: 12px;
+  justify-content: flex-start;
 }
 .s7-sales-include-app figure {
   margin: 0;

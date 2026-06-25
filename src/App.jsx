@@ -118,6 +118,14 @@ const manualPreviewImages = Object.keys(manualPreviewModules)
   .sort()
   .map((key) => manualPreviewModules[key]);
 
+const appCarouselModules = import.meta.glob("./assets/app-carousel/*.jpg", {
+  eager: true,
+  import: "default",
+});
+const appCarouselImages = Object.keys(appCarouselModules)
+  .sort()
+  .map((key) => appCarouselModules[key]);
+
 // ───────────────────────────────────────────────────────────────────────────
 // Analítica / tracking de conversión.
 // Para ACTIVAR: completá los IDs abajo. Mientras estén vacíos, todo es no-op
@@ -861,6 +869,16 @@ const appRealViews = [
     image: appHipotesisPriorizadas,
     position: "center top",
   },
+];
+
+// Carrusel de capturas de la app para el cuadro 2 de "Qué incluye".
+// appCarouselImages ordenado por nombre: [0]=01-panel-principal, [1]=02-resultado,
+// [2]=03-hipotesis, [3]=04-estado-cpu. Mostramos primero las que mejor encuadran.
+const s7AppCarousel = [
+  { label: "Diagnóstico por estado de CPU y LEDs", image: appCarouselImages[3] },
+  { label: "Resultado orientativo y acciones sugeridas", image: appCarouselImages[1] },
+  { label: "Hipótesis técnicas priorizadas", image: appCarouselImages[2] },
+  { label: "Panel principal de diagnóstico", image: appCarouselImages[0] },
 ];
 
 const appTrialPlan = {
@@ -2178,7 +2196,7 @@ function S7MethodStrip() {
   );
 }
 
-function ManualFlipbook({ images, pages, variant = "full" }) {
+function ManualFlipbook({ images, pages, variant = "full", orientation = "portrait", altPrefix = "Vista previa del manual" }) {
   const total = images.length;
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState(false);
@@ -2207,18 +2225,18 @@ function ManualFlipbook({ images, pages, variant = "full" }) {
   const caption = pages[index]?.label || `Página ${index + 1}`;
 
   return (
-    <div className={`s7-flip s7-flip-${variant}`}>
+    <div className={`s7-flip s7-flip-${variant} s7-flip-${orientation}`}>
       <div className="s7-flip-stage">
-        <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label="Página anterior">
+        <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label="Anterior">
           <ArrowRight size={variant === "card" ? 20 : 24} />
         </button>
         <button type="button" className="s7-flip-page" onClick={() => setZoom(true)} aria-label={`Ampliar: ${caption}`}>
-          <img src={images[index]} alt={`Vista previa del manual — ${caption}`} loading="lazy" />
+          <img src={images[index]} alt={`${altPrefix} — ${caption}`} loading="lazy" />
           <span className="s7-flip-zoom" aria-hidden="true">
             <ScanSearch size={16} /> Ampliar
           </span>
         </button>
-        <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label="Página siguiente">
+        <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label="Siguiente">
           <ArrowRight size={variant === "card" ? 20 : 24} />
         </button>
       </div>
@@ -2250,11 +2268,11 @@ function ManualFlipbook({ images, pages, variant = "full" }) {
             <button type="button" className="s7-flip-lightbox-close" onClick={() => setZoom(false)} aria-label="Cerrar vista ampliada">
               <X size={20} />
             </button>
-            <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label="Página anterior">
+            <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label="Anterior">
               <ArrowRight size={26} />
             </button>
-            <img src={images[index]} alt={`Vista previa del manual — ${caption}`} />
-            <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label="Página siguiente">
+            <img src={images[index]} alt={`${altPrefix} — ${caption}`} />
+            <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label="Siguiente">
               <ArrowRight size={26} />
             </button>
             <span className="s7-flip-lightbox-caption">{caption} · {index + 1} / {total}</span>
@@ -2624,9 +2642,16 @@ function S7SalesLanding({ course, eyebrow }) {
               <h3>APP PRO - 1 mes de BOJ S7-PLC PRO</h3>
               <div className="s7-sales-include-body">
                 <div className="s7-sales-include-media s7-sales-app-media">
-                  <figure>
-                    <img src={s7IncludeAppPanelVisual} alt="Captura real de BOJ S7-PLC PRO — diagnóstico de CPU y estado del sistema" loading="lazy" />
-                  </figure>
+                  <p className="s7-sales-include-preview-label">
+                    <ScanSearch size={16} aria-hidden="true" /> Recorré capturas reales de la app
+                  </p>
+                  <ManualFlipbook
+                    images={s7AppCarousel.map((s) => s.image)}
+                    pages={s7AppCarousel}
+                    variant="card"
+                    orientation="landscape"
+                    altPrefix="Captura real de BOJ S7-PLC PRO"
+                  />
                 </div>
                 <div className="s7-sales-app-copy">
                   <p>La app te ayuda a ordenar síntomas, LEDs, hipótesis y verificaciones durante el diagnóstico.</p>
