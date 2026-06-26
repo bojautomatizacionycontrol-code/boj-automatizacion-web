@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   ArrowRight,
   Brain,
@@ -2262,23 +2263,26 @@ function ManualFlipbook({ images, pages, variant = "full", orientation = "portra
         </div>
       ) : null}
 
-      {zoom ? (
-        <div className="s7-flip-lightbox" role="dialog" aria-modal="true" onClick={() => setZoom(false)}>
-          <div className="s7-flip-lightbox-inner" onClick={(event) => event.stopPropagation()}>
-            <button type="button" className="s7-flip-lightbox-close" onClick={() => setZoom(false)} aria-label="Cerrar vista ampliada">
-              <X size={20} />
-            </button>
-            <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label="Anterior">
-              <ArrowRight size={26} />
-            </button>
-            <img src={images[index]} alt={`${altPrefix} — ${caption}`} />
-            <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label="Siguiente">
-              <ArrowRight size={26} />
-            </button>
-            <span className="s7-flip-lightbox-caption">{caption} · {index + 1} / {total}</span>
-          </div>
-        </div>
-      ) : null}
+      {zoom
+        ? createPortal(
+            <div className={`s7-flip-lightbox s7-flip-${orientation}`} role="dialog" aria-modal="true" onClick={() => setZoom(false)}>
+              <div className="s7-flip-lightbox-inner" onClick={(event) => event.stopPropagation()}>
+                <button type="button" className="s7-flip-lightbox-close" onClick={() => setZoom(false)} aria-label="Cerrar vista ampliada">
+                  <X size={20} />
+                </button>
+                <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label="Anterior">
+                  <ArrowRight size={26} />
+                </button>
+                <img src={images[index]} alt={`${altPrefix} — ${caption}`} />
+                <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label="Siguiente">
+                  <ArrowRight size={26} />
+                </button>
+                <span className="s7-flip-lightbox-caption">{caption} · {index + 1} / {total}</span>
+              </div>
+            </div>,
+            document.body
+          )
+        : null}
     </div>
   );
 }
@@ -2654,23 +2658,28 @@ function S7SalesLanding({ course, eyebrow }) {
                   />
                 </div>
                 <div className="s7-sales-app-copy">
-                  <p>La app te ayuda a ordenar síntomas, LEDs, hipótesis y verificaciones durante el diagnóstico.</p>
-                  <div className="s7-sales-app-highlights">
+                  <p className="s7-sales-app-lead">
+                    Tu <strong>copiloto de diagnóstico</strong> frente al tablero: ordena síntomas, LEDs, hipótesis y verificaciones, paso a paso.
+                  </p>
+                  <div className="s7-sales-app-specs">
                     {appHighlights.map((item) => (
-                      <span key={item.label}>
-                        <Icon name={item.icon} size={20} />
+                      <span className="s7-sales-app-spec" key={item.label}>
+                        <Icon name={item.icon} size={18} />
                         {item.label}
                       </span>
                     ))}
                   </div>
-                  <ul>
-                    {appIncludes.map((item) => (
-                      <li key={item}>
-                        <CheckCircle2 size={18} aria-hidden="true" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="s7-sales-app-features">
+                    <p className="s7-sales-app-features-title">Con la app PRO podés:</p>
+                    <ul>
+                      {appIncludes.map((item) => (
+                        <li key={item}>
+                          <CheckCircle2 size={17} aria-hidden="true" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </article>
