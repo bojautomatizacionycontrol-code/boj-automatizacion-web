@@ -1029,7 +1029,9 @@ const routeMeta = {
 };
 
 function getRoute() {
-  return window.location.hash.replace("#", "") || "/inicio";
+  let path = window.location.pathname || "/";
+  if (path.length > 1 && path.endsWith("/")) path = path.replace(/\/+$/, ""); // sin slash final salvo raíz
+  return path;
 }
 
 function whatsappUrl(message = "Hola, escribo desde la web de BOJ Automatización y Control para realizar una consulta técnica.") {
@@ -1049,14 +1051,47 @@ function App() {
   const [route, setRoute] = useState(getRoute);
 
   useEffect(() => {
-    const onHashChange = () => setRoute(getRoute());
-    window.addEventListener("hashchange", onHashChange);
+    const onPopState = () => setRoute(getRoute());
+    window.addEventListener("popstate", onPopState);
 
-    if (!window.location.hash) {
-      window.history.replaceState(null, "", "#/inicio");
-    }
+    const navigate = (to) => {
+      const current = window.location.pathname + window.location.search + window.location.hash;
+      if (to !== current) window.history.pushState(null, "", to);
+      setRoute(getRoute());
+    };
 
-    return () => window.removeEventListener("hashchange", onHashChange);
+    // Interceptor de clics: convierte enlaces internos same-origin en navegación
+    // SPA (History API). Deja pasar sin interceptar: clics ya prevenidos, botón no
+    // izquierdo o con Ctrl/Meta/Shift/Alt, target distinto de _self, descargas,
+    // href de ancla intra-página (#...), protocolos no http(s) (mailto/tel/…) y
+    // enlaces de otro origin (app.bojautomatizacion.com, WhatsApp, Siemens, etc.).
+    const onClick = (event) => {
+      if (event.defaultPrevented) return;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const target = event.target;
+      const anchor = target && target.closest ? target.closest("a") : null;
+      if (!anchor) return;
+      if (anchor.target && anchor.target !== "_self") return;
+      if (anchor.hasAttribute("download")) return;
+      const href = anchor.getAttribute("href");
+      if (!href || href.startsWith("#")) return; // anclas intra-página, sin cambio
+      let url;
+      try {
+        url = new URL(anchor.href);
+      } catch {
+        return;
+      }
+      if (url.origin !== window.location.origin) return; // externos
+      if (url.protocol !== "http:" && url.protocol !== "https:") return; // mailto/tel/javascript
+      event.preventDefault();
+      navigate(url.pathname + url.search + url.hash);
+    };
+    document.addEventListener("click", onClick);
+
+    return () => {
+      window.removeEventListener("popstate", onPopState);
+      document.removeEventListener("click", onClick);
+    };
   }, []);
 
   useEffect(() => {
