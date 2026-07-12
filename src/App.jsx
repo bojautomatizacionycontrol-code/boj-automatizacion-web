@@ -1116,6 +1116,12 @@ function App() {
     setMeta('meta[property="og:title"]', "content", meta.title);
     setMeta('meta[property="og:description"]', "content", meta.description);
     setMeta('meta[name="robots"]', "content", isKnownRoute(route) ? "index, follow" : "noindex, follow");
+
+    // canonical y og:url por ruta, con dominio de PRODUCCIÓN fijo (nunca
+    // location.origin, para no emitir canonical hacia URLs de Preview). Home = "/".
+    const canonicalUrl = "https://www.bojautomatizacion.com" + (route === "/inicio" ? "/" : route);
+    setMeta('link[rel="canonical"]', "href", canonicalUrl);
+    setMeta('meta[property="og:url"]', "content", canonicalUrl);
   }, [route]);
 
   return (
