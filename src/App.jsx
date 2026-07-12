@@ -2304,6 +2304,16 @@ function S7SalesLanding({ course, eyebrow }) {
       title: "Enfocado en campo",
       text: "Herramientas y métodos que funcionan donde realmente se necesitan.",
     },
+    {
+      icon: "Network",
+      title: "Relación entre síntomas, LEDs, red, módulos y señales",
+      text: "Conectá las piezas y entendé el sistema completo.",
+    },
+    {
+      icon: "ClipboardCheck",
+      title: "Uso de la app PRO como apoyo",
+      text: "Ayuda a ordenar hipótesis y verificaciones durante el diagnóstico.",
+    },
   ];
 
   const learningCards = [
@@ -2381,34 +2391,6 @@ function S7SalesLanding({ course, eyebrow }) {
     { icon: "Smartphone", label: "1 dispositivo" },
   ];
 
-  const differentiators = [
-    {
-      icon: "Factory",
-      title: "Fallas reales de planta",
-      text: "No teoría aislada: casos aplicados que aparecen en mantenimiento y producción.",
-    },
-    {
-      icon: "ScanSearch",
-      title: "Diagnóstico antes de intervención",
-      text: "Primero pensá, después actuá. Menos riesgo, mejores decisiones.",
-    },
-    {
-      icon: "ShieldCheck",
-      title: "Criterio de campo aplicado a PLC Siemens",
-      text: "Método probado en S7-300/400 y entornos industriales.",
-    },
-    {
-      icon: "Network",
-      title: "Relación entre síntomas, LEDs, red, módulos y señales",
-      text: "Conectá las piezas y entendé el sistema completo.",
-    },
-    {
-      icon: "ClipboardCheck",
-      title: "Uso de la app PRO como apoyo",
-      text: "Ayuda a ordenar hipótesis y verificaciones durante el diagnóstico.",
-    },
-  ];
-
   const audienceItems = [
     { icon: "Wrench", title: "Técnicos de mantenimiento industrial" },
     { icon: "Settings", title: "Automatistas y programadores PLC" },
@@ -2425,9 +2407,7 @@ function S7SalesLanding({ course, eyebrow }) {
     "Casos de falla y razonamiento técnico",
     "STEP 7 Classic / SIMATIC Manager / HW Config / Diagnostic Buffer",
     "1 mes de BOJ S7-PLC PRO",
-    "1 dispositivo",
     "Uso offline hasta 2 días",
-    "Acceso por navegador e instalación como app",
   ];
 
   const mistakes = [
@@ -2656,23 +2636,6 @@ function S7SalesLanding({ course, eyebrow }) {
         </div>
       </section>
 
-      <section className="s7-sales-section s7-sales-dark s7-sales-difference">
-        <div className="s7-sales-container">
-          <div className="s7-sales-centered-heading">
-            <p className="s7-sales-kicker">Qué hace diferente este curso</p>
-          </div>
-          <div className="s7-sales-difference-grid">
-            {differentiators.map((item) => (
-              <article className="s7-sales-difference-card" key={item.title}>
-                <Icon name={item.icon} size={38} />
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="s7-sales-section s7-sales-audience">
         <div className="s7-sales-container">
           <div className="s7-sales-section-heading s7-sales-section-heading-compact">
@@ -2802,14 +2765,14 @@ function S7SalesLanding({ course, eyebrow }) {
             <p className="s7-sales-kicker">Errores que este curso ayuda a evitar</p>
             <h2>Diagnosticar con método evita decisiones costosas.</h2>
           </div>
-          <div className="s7-sales-mistake-grid">
+          <ul className="s7-sales-mistakes-strip">
             {mistakes.map((item) => (
-              <article className="s7-sales-mistake-card" key={item}>
-                <TriangleAlert size={24} aria-hidden="true" />
-                <p>{item}</p>
-              </article>
+              <li key={item}>
+                <TriangleAlert size={18} aria-hidden="true" />
+                <span>{item}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -2849,6 +2812,15 @@ function S7SalesLanding({ course, eyebrow }) {
               </PurchaseCTA>
               <a className="s7-sales-btn s7-sales-btn-secondary" href="/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
                 Ver qué incluye
+              </a>
+              <a
+                className="s7-sales-btn s7-sales-btn-secondary"
+                href={appProductUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => track("app_trial_click", { source: "final" })}
+              >
+                Probar APP 48 hs
               </a>
             </div>
             <p className="s7-sales-final-guarantee">

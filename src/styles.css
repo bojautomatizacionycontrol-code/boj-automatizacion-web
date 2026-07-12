@@ -21889,3 +21889,54 @@ h3,
   letter-spacing: 0.14em;
   font-weight: 600;
 }
+
+/* ── Bloque 3A: franja compacta de errores (reemplaza cards) ─────────────── */
+.s7-sales-mistakes-strip {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 28px;
+  max-width: 880px;
+  margin-inline: auto;
+}
+
+.s7-sales-mistakes-strip li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: rgba(226, 238, 248, 0.92);
+}
+
+.s7-sales-mistakes-strip li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #f5b84b;
+}
+
+@media (max-width: 640px) {
+  .s7-sales-mistakes-strip {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* ── Bloque 3A: en móvil la APP PRO se muestra antes que el curso.
+   Los badges numerados 1/2 se ocultan en móvil para que el orden invertido
+   no quede incoherente. Desktop conserva el orden original. ─────────────── */
+@media (max-width: 900px) {
+  .s7-sales-include-app {
+    order: -2;
+  }
+
+  .s7-sales-plus {
+    order: -1;
+  }
+
+  .s7-sales-include-number {
+    display: none;
+  }
+}
