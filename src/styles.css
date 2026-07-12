@@ -21940,3 +21940,68 @@ h3,
     display: none;
   }
 }
+
+/* ── Bloque 3A: slots preparados (inactivos hasta 3B) ────────────────────── */
+/* Video demo: visible solo cuando offer.course.demoVideoUrl tiene URL. */
+.s7-sales-demo-video {
+  margin-top: 26px;
+}
+
+.s7-sales-demo-video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(8, 18, 28, 0.85);
+}
+
+.s7-sales-demo-video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Pasos de compra (checkout live): lista corta previa a los botones. */
+.s7-sales-howto {
+  list-style: none;
+  counter-reset: howto;
+  margin: 0 0 18px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.s7-sales-howto li {
+  counter-increment: howto;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.s7-sales-howto li::before {
+  content: counter(howto);
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: rgba(56, 189, 248, 0.16);
+  color: #7dd3fc;
+}
+
+/* Botón deshabilitado del estado "preview" del checkout. */
+.s7-sales-btn.is-disabled,
+.mock-btn.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}

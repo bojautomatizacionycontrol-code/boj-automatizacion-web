@@ -2609,6 +2609,24 @@ function S7SalesLanding({ course, eyebrow }) {
               </div>
             </article>
           </div>
+
+          {/* Slot del video demo (bloque 3A): se activa cargando
+              offer.course.demoVideoUrl; con "" no se renderiza nada. */}
+          {offer.course.demoVideoUrl ? (
+            <div className="s7-sales-demo-video">
+              <p className="s7-sales-include-preview-label">
+                <ScanSearch size={16} aria-hidden="true" /> Mirá el sistema en acción
+              </p>
+              <div className="s7-sales-demo-video-frame">
+                <iframe
+                  src={offer.course.demoVideoUrl}
+                  title="Video demo del sistema de diagnóstico BOJ"
+                  loading="lazy"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
 
@@ -2723,6 +2741,22 @@ function S7SalesLanding({ course, eyebrow }) {
                   </li>
                 ))}
               </ul>
+              {/* "Cómo funciona la compra" (bloque 3A): copy del flujo DEFINITIVO
+                  (Hotmart). Solo se renderiza con checkout.status === "live", es
+                  decir, después de validar E2E el corte del bloque 3B. */}
+              {purchaseTarget.isLive ? (
+                <ol className="s7-sales-howto">
+                  <li>
+                    <strong>Pago seguro con Hotmart.</strong> Checkout cifrado, con tarjeta y los medios de pago de tu país.
+                  </li>
+                  <li>
+                    <strong>Entrega digital.</strong> Al acreditarse el pago recibís en tu email el acceso al material.
+                  </li>
+                  <li>
+                    <strong>Activación de tu mes de App PRO.</strong> Con el mismo email de la compra. Garantía de 7 días.
+                  </li>
+                </ol>
+              ) : null}
               <div className="s7-sales-offer-actions">
                 <PurchaseCTA source="offer" className="s7-sales-btn s7-sales-btn-primary">
                   Comprar curso + APP PRO
