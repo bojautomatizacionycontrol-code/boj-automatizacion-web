@@ -1115,6 +1115,7 @@ function App() {
     setMeta('meta[name="description"]', "content", meta.description);
     setMeta('meta[property="og:title"]', "content", meta.title);
     setMeta('meta[property="og:description"]', "content", meta.description);
+    setMeta('meta[name="robots"]', "content", isKnownRoute(route) ? "index, follow" : "noindex, follow");
   }, [route]);
 
   return (
@@ -1129,7 +1130,30 @@ function App() {
   );
 }
 
+const KNOWN_ROUTES = new Set([
+  "/",
+  "/inicio",
+  "/servicios",
+  "/cursos",
+  "/cursos/s7-300-400",
+  "/cursos/tia-portal",
+  "/app",
+  "/recursos-tecnicos",
+  "/obras",
+  "/contacto",
+]);
+
+// Fuente única de rutas conocidas (incluye la validación de los 5 slugs de recursos
+// contra technicalResources). La usan RouteView (despacho) y el efecto de metadatos
+// (toggle de robots index/noindex).
+function isKnownRoute(route) {
+  if (KNOWN_ROUTES.has(route)) return true;
+  if (route.startsWith("/recursos-tecnicos/")) return technicalResources.some((item) => item.path === route);
+  return false;
+}
+
 function RouteView({ route }) {
+  if (route === "/" || route === "/inicio") return <HomePage />;
   if (route === "/servicios") return <ServicesPage />;
   if (route === "/cursos") return <CoursesPage />;
   if (route === "/cursos/s7-300-400") return <S7CoursePage />;
@@ -1139,7 +1163,24 @@ function RouteView({ route }) {
   if (route.startsWith("/recursos-tecnicos/")) return <TechnicalArticlePage route={route} />;
   if (route === "/obras") return <WorksPage />;
   if (route === "/contacto") return <ContactPage />;
-  return <HomePage />;
+  return <NotFound />;
+}
+
+// NotFound client-side (no es un HTTP 404 real: Vercel responde index.html). El
+// efecto de metadatos le aplica robots "noindex, follow".
+function NotFound() {
+  return (
+    <PageShell
+      eyebrow="Error 404"
+      title="Página no encontrada"
+      subtitle="La página que buscás no existe o cambió de dirección. Volvé al inicio para seguir navegando."
+      heroPrimary={{ label: "Volver al inicio", href: "/" }}
+    >
+      <p className="notfound-help">
+        ¿Buscabas algo puntual? Ir a <a href="/servicios">Servicios</a>, <a href="/cursos">Cursos</a>, <a href="/app">la App</a> o <a href="/contacto">Contacto</a>.
+      </p>
+    </PageShell>
+  );
 }
 
 function Header({ route }) {
@@ -3381,7 +3422,7 @@ function TechnicalResourceCard({ resource }) {
 
 function TechnicalArticlePage({ route }) {
   const resource = technicalResources.find((item) => item.path === route);
-  if (!resource) return <TechnicalResourcesPage />;
+  if (!resource) return <NotFound />;
 
   return (
     <PageShell eyebrow="Recurso técnico" title={resource.title} subtitle={resource.subtitle}>
