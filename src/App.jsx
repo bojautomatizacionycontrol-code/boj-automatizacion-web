@@ -90,7 +90,6 @@ import heroContacto from "./assets/hero-contacto.jpg";
 import courseS7400Visual from "./assets/course-s7-400.jpg";
 import s7IncludePlc400Visual from "./assets/services-works/PLC400.jpg";
 import s7IncludeAppPanelVisual from "./assets/services-works/panel app 2.png";
-import s7CourseCoverHero from "./assets/services-works/paisaje_industrial_nocturno_con_tecnología_avanzad.png.jpg";
 import courseTiaPortalVisual from "./assets/course-tia-portal.jpg";
 import step7ManagerVisual from "./assets/11.png";
 import step7HwConfigVisual from "./assets/12.png";
@@ -2224,7 +2223,6 @@ function S7Testimonials({ background = "light" }) {
 
 function S7SalesLanding({ course, eyebrow }) {
   const purchaseHref = whatsappUrl(offer.course.purchaseMessage);
-  const heroStyle = { "--s7-sales-hero-image": `url(${s7CourseCoverHero})` };
 
   const scrollToCourseSection = (event, sectionId) => {
     event.preventDefault();
@@ -3273,31 +3271,6 @@ function AppPage() {
       </section>
 
     </div>
-  );
-}
-
-function S7CourseSidePanel({ purchaseHref }) {
-  return (
-    <aside className="s7-course-side-panel">
-      <article className="s7-course-fast-facts s7-course-side-offer">
-        <p className="eyebrow">Oferta del curso</p>
-        <h3>Curso Diagnóstico S7-300/400 + APP PRO</h3>
-        <strong className="s7-course-side-price">147 USD</strong>
-        <div>
-          <span>Incluye</span>
-          <strong>Curso + 1 mes APP PRO</strong>
-        </div>
-        <div>
-          <span>Uso</span>
-          <strong>1 dispositivo · offline hasta 2 días</strong>
-        </div>
-        <a className="btn primary" href={purchaseHref} target="_blank" rel="noreferrer">
-          Comprar curso + APP PRO
-        </a>
-        <small>Acceso digital. Verificá siempre las conclusiones en campo.</small>
-      </article>
-      <CourseVisual type="s7" />
-    </aside>
   );
 }
 
