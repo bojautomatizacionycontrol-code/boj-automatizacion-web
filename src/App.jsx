@@ -2504,7 +2504,7 @@ function S7SalesLanding({ course, eyebrow }) {
         subtitle="Aprendé a diagnosticar fallas reales en PLC Siemens S7-300/400 —CPU, PROFIBUS, módulos y señales— con una secuencia probada: del síntoma a la causa con evidencia, no con prueba y error. Para mantenimiento que trabaja bajo presión."
         primary={heroPurchaseAction}
         secondary={{ label: "Ver qué incluye", href: "/cursos/s7-300-400", onClick: (event) => scrollToCourseSection(event, "curso-s7-incluye") }}
-        note="Pago seguro · Acceso inmediato · Garantía de 7 días"
+        note="Garantía de 7 días · Acceso digital"
       />
 
       <S7ProofStrip />
@@ -2853,7 +2853,7 @@ function S7SalesLanding({ course, eyebrow }) {
             </div>
             <p className="s7-sales-final-guarantee">
               <ShieldCheck size={17} aria-hidden="true" />
-              Garantía de 7 días · Pago seguro · Acceso inmediato
+              Garantía de 7 días · Acceso digital
             </p>
           </div>
         </div>
