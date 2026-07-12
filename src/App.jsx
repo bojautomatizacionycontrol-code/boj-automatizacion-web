@@ -2797,7 +2797,7 @@ function S7SalesLanding({ course, eyebrow }) {
               </div>
               <p className="s7-sales-offer-guarantee">
                 <ShieldCheck size={18} aria-hidden="true" />
-                Garantía de 7 días: si el material no es lo que esperabas, te devolvemos el pago.
+                {guaranteeNote}
               </p>
               <p className="s7-sales-offer-crosslink">
                 ¿Vas a usar la app de forma recurrente o en equipo? Mirá los{" "}
