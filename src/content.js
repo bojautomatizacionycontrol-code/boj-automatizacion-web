@@ -1278,6 +1278,25 @@ export const offer = {
     priceValue: 147,
     priceCurrency: "USD",
     purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 147 USD.",
+    // Slot del video demo de la landing: con "" la sección no se renderiza.
+    demoVideoUrl: "",
+    // Estado del checkout definitivo (Hotmart). El corte del bloque 3B consiste
+    // en editar SOLO este objeto: status "live" + checkoutUrl real. Mientras
+    // status sea "pending", la web mantiene el flujo de compra vigente sin
+    // cambios. "preview" muestra un botón deshabilitado, solo para revisar el
+    // estado futuro en un Preview de Vercel (nunca en producción).
+    checkout: {
+      provider: "hotmart",
+      status: "pending", // "pending" | "preview" | "live"
+      checkoutUrl: "",
+      productId: "",
+      offerId: "",
+      thankYouPath: "/gracias",
+      ctaLabel: "Comprar curso + APP PRO",
+      guaranteeDays: 7,
+      appMonths: 1,
+      devices: 1,
+    },
   },
   // App BOJ S7-PLC PRO
   app: {
