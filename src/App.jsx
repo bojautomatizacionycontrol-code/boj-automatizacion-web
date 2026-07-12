@@ -712,7 +712,7 @@ const coursesAvailableCards = [
     image: courseS7400Visual,
     title: "Diagnóstico y resolución de fallas en PLC Siemens S7-300/400",
     label: "Diagnóstico S7-300/400",
-    path: "#/cursos/s7-300-400",
+    path: "/cursos/s7-300-400",
     quickFacts: [
       { icon: "Gauge", title: "Nivel", text: "Intermedio técnico" },
       { icon: "MonitorCog", title: "Formato", text: "Material técnico en PDF, guías y casos reales" },
@@ -730,7 +730,7 @@ const coursesAvailableCards = [
     image: courseTiaPortalVisual,
     title: "Introducción a TIA Portal con PLC S7-1200/1500",
     label: "TIA Portal S7-1200/1500",
-    path: "#/cursos/tia-portal",
+    path: "/cursos/tia-portal",
     quickFacts: [
       { icon: "Gauge", title: "Nivel", text: "Inicial aplicado" },
       { icon: "MonitorCog", title: "Formato", text: "Material técnico en PDF y práctico" },
@@ -1148,7 +1148,7 @@ function Header({ route }) {
 
   return (
     <header className="site-header">
-      <a className="brand" href="#/inicio" onClick={closeMenu} aria-label="Ir a inicio">
+      <a className="brand" href="/" onClick={closeMenu} aria-label="Ir a inicio">
         <BrandLogo />
       </a>
 
@@ -1162,7 +1162,7 @@ function Header({ route }) {
             <div className="nav-item" key={item.path}>
               <a
                 className={active ? "active" : ""}
-                href={`#${item.path}`}
+                href={item.path}
                 onClick={closeMenu}
               >
                 {item.label}
@@ -1174,7 +1174,7 @@ function Header({ route }) {
                     <a
                       key={child.path}
                       className={route === child.path ? "active" : ""}
-                      href={`#${child.path}`}
+                      href={child.path}
                       onClick={closeMenu}
                     >
                       {child.label}
@@ -1269,7 +1269,7 @@ function HomeLandingRedesign() {
         title="Diagnóstico de fallas y automatización industrial en PLC Siemens"
         subtitle="Más de 15 años resolviendo fallas, paradas y puestas en marcha en planta. Servicios de automatización, un curso aplicado de diagnóstico y la app BOJ S7-PLC para mantenimiento industrial."
         primary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para solicitar un diagnóstico industrial.") }}
-        secondary={{ label: "Ver cursos", href: "#/cursos" }}
+        secondary={{ label: "Ver cursos", href: "/cursos" }}
       />
 
       <HomeClientStrip />
@@ -1338,7 +1338,7 @@ function HomeLandingRedesign() {
               <li>Hipótesis técnicas</li>
               <li>Guía de verificación</li>
             </ul>
-            <a className="mock-btn mock-btn-primary" href="#/app">
+            <a className="mock-btn mock-btn-primary" href="/app">
               Conocer la app <ArrowRight size={18} />
             </a>
           </div>
@@ -1384,7 +1384,7 @@ function HomeClientStrip() {
             <li key={name}>{name}</li>
           ))}
         </ul>
-        <a className="mock-clients-link" href="#/obras">
+        <a className="mock-clients-link" href="/obras">
           Ver proyectos realizados <ArrowRight size={15} />
         </a>
       </div>
@@ -1417,7 +1417,7 @@ function HomeObrasTeaser() {
           ))}
         </div>
         <div className="mock-obras-cta">
-          <a className="mock-btn mock-btn-primary" href="#/obras">
+          <a className="mock-btn mock-btn-primary" href="/obras">
             Ver todos los proyectos <ArrowRight size={18} />
           </a>
         </div>
@@ -1491,7 +1491,7 @@ function ServiceHomeCard({ service }) {
       <Icon name={service.icon} size={54} />
       <h3>{service.title}</h3>
       <p>{service.text}</p>
-      <a href="#/servicios" aria-label={`Ver detalle de ${service.title}`}>
+      <a href="/servicios" aria-label={`Ver detalle de ${service.title}`}>
         <ArrowRight size={20} />
       </a>
     </article>
@@ -1529,7 +1529,7 @@ function AcademyCard() {
         <li>Materiales y recursos exclusivos</li>
         <li>Certificados de participación</li>
       </ul>
-      <a className="home-btn primary" href="#/cursos">
+      <a className="home-btn primary" href="/cursos">
         Ver programas <ArrowRight size={18} />
       </a>
     </article>
@@ -1547,7 +1547,7 @@ function AppHomeSection() {
           <p>
             Herramienta digital para apoyar tareas de mantenimiento en sistemas Siemens S7-300/400 mediante criterios técnicos, síntomas ingresados y lógica de diagnóstico guiado.
           </p>
-          <a className="home-btn secondary" href="#/app">
+          <a className="home-btn secondary" href="/app">
             Conocer la app <ArrowRight size={18} />
           </a>
         </div>
@@ -1570,7 +1570,7 @@ function ProjectHomeCard({ project }) {
       <div>
         <h3>{project.title}</h3>
         <p>{project.text}</p>
-        <a href="#/obras">
+        <a href="/obras">
           Ver detalle <ArrowRight size={17} />
         </a>
       </div>
@@ -1648,7 +1648,7 @@ function ServicesPage() {
         title="Servicios técnicos para reducir paradas y sostener automatización industrial"
         subtitle="Diagnóstico, ingeniería, programación, redes, tableros y puesta en marcha con experiencia real en plantas industriales y foco en continuidad operativa."
         primary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para solicitar un diagnóstico industrial.") }}
-        secondary={{ label: "Ver áreas de servicio", href: "#/servicios", onClick: scrollToServiceDetails }}
+        secondary={{ label: "Ver áreas de servicio", href: "/servicios", onClick: scrollToServiceDetails }}
       />
 
       <section className="services-workflow-section">
@@ -1784,7 +1784,7 @@ function ServicesPage() {
             >
               <Phone size={18} /> Consultar por WhatsApp
             </a>
-            <a className="mock-btn mock-btn-outline" href="#/contacto">
+            <a className="mock-btn mock-btn-outline" href="/contacto">
               Ir a contacto <ArrowRight size={18} />
             </a>
           </div>
@@ -1873,7 +1873,7 @@ function CoursesPage() {
         eyebrow="Cursos"
         title="Cursos técnicos Siemens orientados a diagnóstico real de planta"
         subtitle="Formación aplicada para técnicos, instrumentistas, electricistas e ingenieros que necesitan diagnosticar, programar y actuar con criterio frente a fallas reales."
-        primary={{ label: "Ver cursos disponibles", href: "#/cursos", onClick: scrollToCourses }}
+        primary={{ label: "Ver cursos disponibles", href: "/cursos", onClick: scrollToCourses }}
         secondary={{ label: "Consultar capacitación", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar por capacitación técnica industrial.") }}
       />
 
@@ -1936,7 +1936,7 @@ function CoursesPage() {
             >
               Consultar capacitación <ArrowRight size={18} />
             </a>
-            <a className="mock-btn mock-btn-outline" href="#/cursos/s7-300-400">
+            <a className="mock-btn mock-btn-outline" href="/cursos/s7-300-400">
               Ver curso S7-300/400 <ArrowRight size={18} />
             </a>
           </div>
@@ -2004,7 +2004,7 @@ function S7ProofStrip() {
             <li key={name}>{name}</li>
           ))}
         </ul>
-        <a className="s7-proof-link" href="#/obras">
+        <a className="s7-proof-link" href="/obras">
           Ver obras reales <ArrowRight size={15} />
         </a>
       </div>
@@ -2409,7 +2409,7 @@ function S7SalesLanding({ course, eyebrow }) {
           external: true,
           onClick: () => track("begin_checkout", { item: "curso_s7_app_pro", value: offer.course.priceValue, currency: offer.course.priceCurrency, source: "hero" }),
         }}
-        secondary={{ label: "Ver qué incluye", href: "#/cursos/s7-300-400", onClick: (event) => scrollToCourseSection(event, "curso-s7-incluye") }}
+        secondary={{ label: "Ver qué incluye", href: "/cursos/s7-300-400", onClick: (event) => scrollToCourseSection(event, "curso-s7-incluye") }}
         note="Pago seguro · Acceso inmediato · Garantía de 7 días"
       />
 
@@ -2692,7 +2692,7 @@ function S7SalesLanding({ course, eyebrow }) {
               </p>
               <p className="s7-sales-offer-crosslink">
                 ¿Vas a usar la app de forma recurrente o en equipo? Mirá los{" "}
-                <a href="#/app">planes PRO (6 meses / varios dispositivos)</a>.
+                <a href="/app">planes PRO (6 meses / varios dispositivos)</a>.
               </p>
               <p className="s7-sales-offer-note">Acceso digital. Verificá siempre las conclusiones en campo antes de intervenir.</p>
             </div>
@@ -2765,7 +2765,7 @@ function S7SalesLanding({ course, eyebrow }) {
               >
                 Comprar curso + APP PRO — {offer.course.price}
               </a>
-              <a className="s7-sales-btn s7-sales-btn-secondary" href="#/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
+              <a className="s7-sales-btn s7-sales-btn-secondary" href="/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
                 Ver qué incluye
               </a>
             </div>
@@ -3137,7 +3137,7 @@ function AppPage() {
             <p>Trial inicial y planes pagos según tiempo de uso, dispositivos y modalidad offline.</p>
             <p className="app-pro-plans-crosslink">
               Los planes <strong>Profesional</strong> y <strong>Empresarial</strong> incluyen el{" "}
-              <a href="#/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.
+              <a href="/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.
             </p>
           </div>
           <div className="app-pro-plan-grid">
@@ -3281,7 +3281,7 @@ function WorksPage() {
       subtitle="Casos de ingeniería, programación PLC, HMI, SCADA, tableros, migraciones y puesta en marcha presentados con problema inicial, intervención y resultado."
       heroImage={heroObras}
       heroPrimary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar por una obra o intervención industrial similar.") }}
-      heroSecondary={{ label: "Ver servicios", href: "#/servicios" }}
+      heroSecondary={{ label: "Ver servicios", href: "/servicios" }}
     >
       <PortfolioPrep />
       <div className="works-grid">
@@ -3295,7 +3295,7 @@ function WorksPage() {
         primaryLabel="Consultar por una obra similar"
         primaryHref={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por una obra o intervención industrial similar.")}
         secondaryLabel="Ver servicios"
-        secondaryHref="#/servicios"
+        secondaryHref="/servicios"
       />
     </PageShell>
   );
@@ -3309,7 +3309,7 @@ function TechnicalResourcesPage() {
       subtitle="Guías aplicadas sobre herramientas Siemens utilizadas en planta: STEP 7 SIMATIC Manager, TIA Portal, MicroWIN, LOGO! Soft Comfort y SIMATIC WinCC."
       heroImage={heroRecursos}
       heroPrimary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.") }}
-      heroSecondary={{ label: "Ver cursos", href: "#/cursos" }}
+      heroSecondary={{ label: "Ver cursos", href: "/cursos" }}
     >
       <section className="resources-intro-panel">
         <div>
@@ -3371,7 +3371,7 @@ function TechnicalResourceCard({ resource }) {
             <span key={item}>{item}</span>
           ))}
         </div>
-        <PrimaryLink href={`#${resource.path}`}>
+        <PrimaryLink href={resource.path}>
           Ver recurso <ArrowRight size={17} />
         </PrimaryLink>
       </div>
@@ -3487,7 +3487,7 @@ function CourseCTA() {
       title="Formación técnica aplicada"
       text="Si trabajás con sistemas Siemens en planta y querés aprender a diagnosticar, interpretar fallas y trabajar con criterio técnico, podés ver los cursos disponibles de BOJ Automatización y Control."
       primaryLabel="Ver cursos"
-      primaryHref="#/cursos"
+      primaryHref="/cursos"
       secondaryLabel="Consultar capacitación"
       secondaryHref={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por cursos técnicos de automatización industrial.")}
     />
@@ -3749,8 +3749,8 @@ function IndustrialScopeSection() {
             <CheckItem>Modernizaciones con PLC Siemens, HMI, SCADA, variadores, sensores y actuadores.</CheckItem>
           </div>
           <div className="button-row">
-            <SecondaryLink href="#/obras">Ver obras reales</SecondaryLink>
-            <GhostLink href="#/servicios">Revisar servicios</GhostLink>
+            <SecondaryLink href="/obras">Ver obras reales</SecondaryLink>
+            <GhostLink href="/servicios">Revisar servicios</GhostLink>
           </div>
         </div>
         <div className="evidence-visual-grid" aria-label="Imágenes técnicas de trabajos y contexto industrial BOJ">
@@ -3822,7 +3822,7 @@ function ServiceSummaryCard({ service }) {
         <strong>Resuelve:</strong>
         <span>{service.problem}</span>
       </div>
-      <a href="#/servicios">
+      <a href="/servicios">
         Ver detalle <ArrowRight size={16} />
       </a>
     </article>
@@ -4225,8 +4225,8 @@ function FinalCTA() {
           <PrimaryLink href={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por una falla o servicio técnico industrial.")}>
             Contactar por WhatsApp
           </PrimaryLink>
-          <SecondaryLink href="#/servicios">Ver servicios</SecondaryLink>
-          <GhostLink href="#/cursos">Ver cursos</GhostLink>
+          <SecondaryLink href="/servicios">Ver servicios</SecondaryLink>
+          <GhostLink href="/cursos">Ver cursos</GhostLink>
         </div>
       </div>
     </section>
@@ -4239,7 +4239,7 @@ function Footer() {
 
 function MainFooter() {
   const footerLinks = [
-    { label: "Inicio", path: "/inicio" },
+    { label: "Inicio", path: "/" },
     { label: "Servicios", path: "/servicios" },
     { label: "Cursos", path: "/cursos" },
     { label: "Recursos", path: "/recursos-tecnicos" },
@@ -4266,7 +4266,7 @@ function MainFooter() {
         <nav className="mock-footer-nav" aria-label="Navegación del footer">
           <h3>Navegación</h3>
           {footerLinks.map((item) => (
-            <a key={item.path} href={`#${item.path}`}>
+            <a key={item.path} href={item.path}>
               {item.label}
             </a>
           ))}

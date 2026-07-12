@@ -10,7 +10,7 @@ export const contact = {
 };
 
 export const navItems = [
-  { label: "Inicio", path: "/inicio" },
+  { label: "Inicio", path: "/" },
   { label: "Servicios", path: "/servicios" },
   {
     label: "Cursos",
