@@ -54,6 +54,7 @@ import {
   homeHighlights,
   methodSteps,
   navItems,
+  offer,
   projects,
   s7Course,
   s7ProofClients,
@@ -763,7 +764,7 @@ const coursesLearningBlocks = [
   },
 ];
 
-const appProductUrl = "https://app.bojautomatizacion.com/";
+const appProductUrl = offer.app.productUrl;
 
 const appDiagnosticFlow = [
   {
@@ -882,61 +883,9 @@ const s7AppCarousel = [
   { label: "Panel principal de diagnóstico", image: appCarouselImages[0] },
 ];
 
-const appTrialPlan = {
-  title: "TRIAL",
-  price: "Gratis",
-  meta: "48 horas · Online · Funciones limitadas",
-  text: "Prueba inicial para conocer el flujo de diagnóstico de BOJ S7-PLC PRO antes de activar una licencia paga.",
-  bullets: [
-    "Acceso gratuito por 48 hs",
-    "Funciona solo online",
-    "Algunas funciones limitadas",
-    "Ideal para conocer la herramienta",
-  ],
-  button: "Probar gratis 48 hs",
-};
+const appTrialPlan = offer.app.trialPlan;
 
-const appProPlans = [
-  {
-    title: "Mensual",
-    price: "70 USD",
-    meta: "1 mes · 1 dispositivo",
-    text: "Acceso completo a la app BOJ S7-PLC PRO para uso puntual, pruebas extendidas o diagnóstico temporal.",
-    bullets: [
-      "Incluye solo app PRO",
-      "Funciona offline hasta 2 días",
-      "Acceso completo a diagnósticos PRO",
-    ],
-    button: "Elegir mensual",
-  },
-  {
-    title: "Profesional",
-    price: "350 USD",
-    meta: "6 meses · 2 dispositivos · App PRO + Curso",
-    text: "Plan recomendado para técnicos, automatistas, instrumentistas y personal de mantenimiento que necesitan usar la herramienta de forma recurrente y reforzar criterio técnico con material de apoyo.",
-    bullets: [
-      "Incluye app PRO",
-      "Incluye Curso",
-      "Funciona offline hasta 2 días",
-      "Ideal para uso profesional recurrente",
-    ],
-    button: "Elegir profesional",
-    badge: "Más conveniente",
-  },
-  {
-    title: "Empresarial",
-    price: "800 USD",
-    meta: "6 meses · 10 dispositivos · App PRO + Curso",
-    text: "Plan pensado para empresas, equipos de mantenimiento, áreas de automatización, soporte técnico interno o varias estaciones de trabajo.",
-    bullets: [
-      "Incluye app PRO",
-      "Incluye Curso",
-      "Funciona offline hasta 7 días",
-      "Pensado para equipos técnicos y empresas",
-    ],
-    button: "Elegir empresarial",
-  },
-];
+const appProPlans = offer.app.proPlans;
 
 const appAudienceProfiles = [
   { icon: "Wrench", text: "Técnicos de mantenimiento industrial" },
@@ -2192,7 +2141,7 @@ function S7Testimonials({ background = "light" }) {
 }
 
 function S7SalesLanding({ course, eyebrow }) {
-  const purchaseHref = whatsappUrl("Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 147 USD.");
+  const purchaseHref = whatsappUrl(offer.course.purchaseMessage);
   const heroStyle = { "--s7-sales-hero-image": `url(${s7CourseCoverHero})` };
 
   const scrollToCourseSection = (event, sectionId) => {
@@ -2420,10 +2369,10 @@ function S7SalesLanding({ course, eyebrow }) {
         title="Cuando la línea está parada y todos te miran, dejá de adivinar."
         subtitle="Aprendé a diagnosticar fallas reales en PLC Siemens S7-300/400 —CPU, PROFIBUS, módulos y señales— con una secuencia probada: del síntoma a la causa con evidencia, no con prueba y error. Para mantenimiento que trabaja bajo presión."
         primary={{
-          label: "Empezar ahora — Curso + App PRO · 147 USD",
+          label: `Empezar ahora — Curso + App PRO · ${offer.course.price}`,
           href: purchaseHref,
           external: true,
-          onClick: () => track("begin_checkout", { item: "curso_s7_app_pro", value: 147, currency: "USD", source: "hero" }),
+          onClick: () => track("begin_checkout", { item: "curso_s7_app_pro", value: offer.course.priceValue, currency: offer.course.priceCurrency, source: "hero" }),
         }}
         secondary={{ label: "Ver qué incluye", href: "#/cursos/s7-300-400", onClick: (event) => scrollToCourseSection(event, "curso-s7-incluye") }}
         note="Pago seguro · Acceso inmediato · Garantía de 7 días"
@@ -2655,7 +2604,7 @@ function S7SalesLanding({ course, eyebrow }) {
             </div>
 
             <div className="s7-sales-offer-price">
-              <strong>147 USD</strong>
+              <strong>{offer.course.price}</strong>
               <p>Acceso digital al curso + herramienta PRO por 1 mes.</p>
               <div className="s7-sales-valuestack">
                 <div className="s7-sales-valuestack-row">
@@ -2668,7 +2617,7 @@ function S7SalesLanding({ course, eyebrow }) {
                 </div>
                 <div className="s7-sales-valuestack-total">
                   <span>Todo junto, hoy</span>
-                  <strong>147 USD</strong>
+                  <strong>{offer.course.price}</strong>
                 </div>
               </div>
             </div>
@@ -2688,7 +2637,7 @@ function S7SalesLanding({ course, eyebrow }) {
                   href={purchaseHref}
                   target="_blank"
                   rel="noreferrer"
-                  onClick={() => track("begin_checkout", { item: "curso_s7_app_pro", value: 147, currency: "USD", source: "offer" })}
+                  onClick={() => track("begin_checkout", { item: "curso_s7_app_pro", value: offer.course.priceValue, currency: offer.course.priceCurrency, source: "offer" })}
                 >
                   Comprar curso + APP PRO
                 </a>
@@ -2777,9 +2726,9 @@ function S7SalesLanding({ course, eyebrow }) {
                 href={purchaseHref}
                 target="_blank"
                 rel="noreferrer"
-                onClick={() => track("begin_checkout", { item: "curso_s7_app_pro", value: 147, currency: "USD", source: "final_cta" })}
+                onClick={() => track("begin_checkout", { item: "curso_s7_app_pro", value: offer.course.priceValue, currency: offer.course.priceCurrency, source: "final_cta" })}
               >
-                Comprar curso + APP PRO — 147 USD
+                Comprar curso + APP PRO — {offer.course.price}
               </a>
               <a className="s7-sales-btn s7-sales-btn-secondary" href="#/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
                 Ver qué incluye

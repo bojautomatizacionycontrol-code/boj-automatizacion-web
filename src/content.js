@@ -1265,3 +1265,76 @@ export const s7Testimonials = [
     role: "Técnico en controles automáticos",
   },
 ];
+
+// ───────────────────────────────────────────────────────────────────────────
+// Oferta comercial centralizada: fuente única de precios, planes y enlaces
+// de compra. Los valores aquí son los vigentes (no modificar sin decisión
+// comercial). SINCRONIZAR el precio del curso con el JSON-LD de index.html
+// (schema.org Course → "price": "147") ante cualquier cambio de precio.
+export const offer = {
+  // Curso Diagnóstico S7-300/400 + App PRO (bundle de lanzamiento)
+  course: {
+    price: "147 USD",
+    priceValue: 147,
+    priceCurrency: "USD",
+    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 147 USD.",
+  },
+  // App BOJ S7-PLC PRO
+  app: {
+    productUrl: "https://app.bojautomatizacion.com/",
+    trialPlan: {
+      title: "TRIAL",
+      price: "Gratis",
+      meta: "48 horas · Online · Funciones limitadas",
+      text: "Prueba inicial para conocer el flujo de diagnóstico de BOJ S7-PLC PRO antes de activar una licencia paga.",
+      bullets: [
+        "Acceso gratuito por 48 hs",
+        "Funciona solo online",
+        "Algunas funciones limitadas",
+        "Ideal para conocer la herramienta",
+      ],
+      button: "Probar gratis 48 hs",
+    },
+    proPlans: [
+      {
+        title: "Mensual",
+        price: "70 USD",
+        meta: "1 mes · 1 dispositivo",
+        text: "Acceso completo a la app BOJ S7-PLC PRO para uso puntual, pruebas extendidas o diagnóstico temporal.",
+        bullets: [
+          "Incluye solo app PRO",
+          "Funciona offline hasta 2 días",
+          "Acceso completo a diagnósticos PRO",
+        ],
+        button: "Elegir mensual",
+      },
+      {
+        title: "Profesional",
+        price: "350 USD",
+        meta: "6 meses · 2 dispositivos · App PRO + Curso",
+        text: "Plan recomendado para técnicos, automatistas, instrumentistas y personal de mantenimiento que necesitan usar la herramienta de forma recurrente y reforzar criterio técnico con material de apoyo.",
+        bullets: [
+          "Incluye app PRO",
+          "Incluye Curso",
+          "Funciona offline hasta 2 días",
+          "Ideal para uso profesional recurrente",
+        ],
+        button: "Elegir profesional",
+        badge: "Más conveniente",
+      },
+      {
+        title: "Empresarial",
+        price: "800 USD",
+        meta: "6 meses · 10 dispositivos · App PRO + Curso",
+        text: "Plan pensado para empresas, equipos de mantenimiento, áreas de automatización, soporte técnico interno o varias estaciones de trabajo.",
+        bullets: [
+          "Incluye app PRO",
+          "Incluye Curso",
+          "Funciona offline hasta 7 días",
+          "Pensado para equipos técnicos y empresas",
+        ],
+        button: "Elegir empresarial",
+      },
+    ],
+  },
+};
