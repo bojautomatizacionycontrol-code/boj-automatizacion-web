@@ -2295,6 +2295,8 @@ function S7SalesLanding({ course, eyebrow }) {
   const guaranteeNote = purchaseTarget.isFlowValidated
     ? "Pago seguro · Acceso inmediato · Garantía de 7 días"
     : "Garantía de 7 días · Acceso digital";
+  // Vigencia de la promoción, formateada DD/MM/YYYY para el badge de lanzamiento.
+  const promoEnds = offer.course.promotionEndsAt.split("-").reverse().join("/");
 
   const scrollToCourseSection = (event, sectionId) => {
     event.preventDefault();
@@ -2724,7 +2726,7 @@ function S7SalesLanding({ course, eyebrow }) {
           <div className="s7-sales-offer-panel">
             <div className="s7-sales-offer-product">
               <span className="s7-sales-launch">
-                <Clock size={15} aria-hidden="true" /> Precio de lanzamiento · por tiempo limitado
+                <Clock size={15} aria-hidden="true" /> Precio de lanzamiento · hasta el {promoEnds}
               </span>
               <p className="s7-sales-kicker">Oferta única</p>
               <h2>Curso Diagnóstico S7-300/400 + APP PRO</h2>
@@ -2732,7 +2734,11 @@ function S7SalesLanding({ course, eyebrow }) {
             </div>
 
             <div className="s7-sales-offer-price">
+              <span className="s7-sales-offer-regular">
+                Antes <del>{offer.course.regularPrice} USD</del>
+              </span>
               <strong>{offer.course.price}</strong>
+              <span className="s7-sales-offer-savings">Ahorrás {offer.course.promotionalSavings} USD</span>
               <p>Acceso digital al curso + herramienta PRO por 1 mes.</p>
               <div className="s7-sales-valuestack">
                 <div className="s7-sales-valuestack-row">

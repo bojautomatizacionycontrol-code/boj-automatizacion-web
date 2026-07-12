@@ -1274,10 +1274,18 @@ export const s7Testimonials = [
 export const offer = {
   // Curso Diagnóstico S7-300/400 + App PRO (bundle de lanzamiento)
   course: {
-    price: "147 USD",
-    priceValue: 147,
+    // Precio ACTUAL vigente (hoy = promoción). Alimenta hero, total, CTA final y
+    // tracking. Al terminar la promoción, volver a "147 USD" / 147 y retirar la
+    // presentación de precio anterior/ahorro.
+    price: "117 USD",
+    priceValue: 117,
     priceCurrency: "USD",
-    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 147 USD.",
+    // Promoción temporal de lanzamiento: precio anterior (tachado) y ahorro.
+    regularPrice: 147,
+    promotionalPrice: 117,
+    promotionalSavings: 30,
+    promotionEndsAt: "2026-07-31",
+    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 117 USD.",
     // Slot del video demo de la landing: con "" la sección no se renderiza.
     demoVideoUrl: "",
     // Estado del checkout definitivo (Hotmart). El corte del bloque 3B consiste
