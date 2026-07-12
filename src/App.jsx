@@ -1025,6 +1025,10 @@ const routeMeta = {
     description:
       "Contacto técnico en San Miguel de Tucumán, Argentina, para automatización industrial, diagnóstico de fallas, cursos PLC Siemens, TIA Portal y PROFIBUS.",
   },
+  "/gracias": {
+    title: "Gracias por tu compra | BOJ Automatización y Control",
+    description: "Confirmación de compra: acceso al material y activación de BOJ S7-PLC PRO.",
+  },
 };
 
 function getRoute() {
@@ -1168,6 +1172,9 @@ function RouteView({ route }) {
   if (route.startsWith("/recursos-tecnicos/")) return <TechnicalArticlePage route={route} />;
   if (route === "/obras") return <WorksPage />;
   if (route === "/contacto") return <ContactPage />;
+  // /gracias despacha pero NO integra KNOWN_ROUTES: así hereda robots
+  // "noindex, follow" (post-compra, fuera de sitemap y sin enlaces internos).
+  if (route === "/gracias") return <GraciasPage />;
   return <NotFound />;
 }
 
@@ -3554,6 +3561,54 @@ function CourseCTA() {
       secondaryLabel="Consultar capacitación"
       secondaryHref={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por cursos técnicos de automatización industrial.")}
     />
+  );
+}
+
+// Página post-compra (/gracias), construida en el bloque 3A pero NO enlazada,
+// noindex y fuera del sitemap. Se activa como retorno del checkout en el bloque
+// 3B. Copy neutro: no asume qué parámetros anexa Hotmart al volver (se verifica
+// en 3B); cubre el caso de pago pendiente sin leer la URL.
+function GraciasPage() {
+  useEffect(() => {
+    track("purchase_page_view", { item: "curso_s7_app_pro" });
+  }, []);
+
+  return (
+    <PageShell
+      eyebrow="Compra"
+      title="¡Gracias por tu compra!"
+      subtitle="Estamos procesando tu pedido. Si tu pago quedó pendiente de acreditación, vas a recibir un aviso por email apenas se complete."
+    >
+      <div className="gracias-steps">
+        <article className="gracias-step">
+          <h3>1 · Revisá tu email</h3>
+          <p>
+            El acceso al material llega al email que usaste en la compra. Si no lo ves, revisá la carpeta de spam o
+            promociones.
+          </p>
+        </article>
+        <article className="gracias-step">
+          <h3>2 · Activá tu mes de BOJ S7-PLC PRO</h3>
+          <p>Ingresá a la app con el mismo email de la compra para activar tu acceso PRO.</p>
+        </article>
+        <article className="gracias-step">
+          <h3>3 · ¿Problemas con el acceso?</h3>
+          <p>
+            Escribinos y lo resolvemos: <a href={`mailto:${contact.email}`}>{contact.email}</a> o WhatsApp{" "}
+            <a href={whatsappUrl("Hola, acabo de comprar el curso S7-300/400 y tengo un problema con el acceso.")}>
+              {contact.whatsappDisplay}
+            </a>
+            .
+          </p>
+        </article>
+      </div>
+      <div className="gracias-actions">
+        <a className="btn primary" href={appProductUrl} target="_blank" rel="noreferrer">
+          Abrir la app
+        </a>
+        <SecondaryLink href="/">Volver al inicio</SecondaryLink>
+      </div>
+    </PageShell>
   );
 }
 

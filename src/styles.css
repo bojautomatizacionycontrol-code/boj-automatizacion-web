@@ -22005,3 +22005,34 @@ h3,
   cursor: not-allowed;
   pointer-events: none;
 }
+
+/* ── Bloque 3A: página /gracias (post-compra, oculta hasta el corte 3B) ──── */
+.gracias-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-bottom: 30px;
+}
+
+.gracias-step h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.gracias-step p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.gracias-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+@media (max-width: 900px) {
+  .gracias-steps {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
