@@ -1288,6 +1288,11 @@ export const offer = {
     checkout: {
       provider: "hotmart",
       status: "pending", // "pending" | "preview" | "live"
+      // true SOLO tras validar E2E el flujo Hotmart→entrega→licencia (3B).
+      // Con live sin validar, el checkout funciona pero los claims finales
+      // ("Pago seguro · Acceso inmediato", bloque "Cómo funciona la compra")
+      // siguen ocultos.
+      flowValidated: false,
       checkoutUrl: "",
       productId: "",
       offerId: "",

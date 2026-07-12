@@ -1026,8 +1026,8 @@ const routeMeta = {
       "Contacto técnico en San Miguel de Tucumán, Argentina, para automatización industrial, diagnóstico de fallas, cursos PLC Siemens, TIA Portal y PROFIBUS.",
   },
   "/gracias": {
-    title: "Gracias por tu compra | BOJ Automatización y Control",
-    description: "Confirmación de compra: acceso al material y activación de BOJ S7-PLC PRO.",
+    title: "Procesando tu operación | BOJ Automatización y Control",
+    description: "Estado de tu operación: acceso al material y activación de BOJ S7-PLC PRO.",
   },
 };
 
@@ -2235,17 +2235,23 @@ function S7Testimonials({ background = "light" }) {
 // botón deshabilitado para revisar el estado futuro en un Preview.
 function purchaseCtaTarget() {
   const checkout = offer.course.checkout;
-  const isLive = checkout.status === "live" && Boolean(checkout.checkoutUrl);
+  const hasCheckoutUrl = typeof checkout.checkoutUrl === "string" && checkout.checkoutUrl.trim() !== "";
+  // live sin checkoutUrl NO es live: cae al CTA vigente (nunca un href vacío).
+  const isCheckoutLive = checkout.status === "live" && hasCheckoutUrl;
+  // Los claims finales exigen además la validación E2E del flujo (3B); abrir el
+  // checkout en una prueba controlada NO exige flowValidated.
+  const isCheckoutFlowValidated = isCheckoutLive && checkout.flowValidated === true;
   return {
-    isLive,
+    isLive: isCheckoutLive,
     isPreview: checkout.status === "preview",
-    href: isLive ? checkout.checkoutUrl : whatsappUrl(offer.course.purchaseMessage),
+    isFlowValidated: isCheckoutFlowValidated,
+    href: isCheckoutLive ? checkout.checkoutUrl : whatsappUrl(offer.course.purchaseMessage),
     trackPayload: (source) => ({
       item: "curso_s7_app_pro",
       value: offer.course.priceValue,
       currency: offer.course.priceCurrency,
       source,
-      ...(isLive ? { payment: "hotmart" } : {}),
+      ...(isCheckoutLive ? { payment: "hotmart" } : {}),
     }),
   };
 }
@@ -2284,6 +2290,11 @@ function S7SalesLanding({ course, eyebrow }) {
         external: true,
         onClick: () => track("begin_checkout", purchaseTarget.trackPayload("hero")),
       };
+  // "Pago seguro · Acceso inmediato" solo con el flujo Hotmart validado E2E
+  // (flowValidated). En pending, preview o live sin validar: copy neutral.
+  const guaranteeNote = purchaseTarget.isFlowValidated
+    ? "Pago seguro · Acceso inmediato · Garantía de 7 días"
+    : "Garantía de 7 días · Acceso digital";
 
   const scrollToCourseSection = (event, sectionId) => {
     event.preventDefault();
@@ -2491,7 +2502,7 @@ function S7SalesLanding({ course, eyebrow }) {
         subtitle="Aprendé a diagnosticar fallas reales en PLC Siemens S7-300/400 —CPU, PROFIBUS, módulos y señales— con una secuencia probada: del síntoma a la causa con evidencia, no con prueba y error. Para mantenimiento que trabaja bajo presión."
         primary={heroPurchaseAction}
         secondary={{ label: "Ver qué incluye", href: "/cursos/s7-300-400", onClick: (event) => scrollToCourseSection(event, "curso-s7-incluye") }}
-        note="Garantía de 7 días · Acceso digital"
+        note={guaranteeNote}
       />
 
       <S7ProofStrip />
@@ -2749,9 +2760,9 @@ function S7SalesLanding({ course, eyebrow }) {
                 ))}
               </ul>
               {/* "Cómo funciona la compra" (bloque 3A): copy del flujo DEFINITIVO
-                  (Hotmart). Solo se renderiza con checkout.status === "live", es
-                  decir, después de validar E2E el corte del bloque 3B. */}
-              {purchaseTarget.isLive ? (
+                  (Hotmart). Solo se renderiza con el flujo validado E2E
+                  (checkout live + flowValidated, corte del bloque 3B). */}
+              {purchaseTarget.isFlowValidated ? (
                 <ol className="s7-sales-howto">
                   <li>
                     <strong>Pago seguro con Hotmart.</strong> Checkout cifrado, con tarjeta y los medios de pago de tu país.
@@ -2866,7 +2877,7 @@ function S7SalesLanding({ course, eyebrow }) {
             </div>
             <p className="s7-sales-final-guarantee">
               <ShieldCheck size={17} aria-hidden="true" />
-              Garantía de 7 días · Acceso digital
+              {guaranteeNote}
             </p>
           </div>
         </div>
@@ -3570,21 +3581,24 @@ function CourseCTA() {
 // en 3B); cubre el caso de pago pendiente sin leer la URL.
 function GraciasPage() {
   useEffect(() => {
-    track("purchase_page_view", { item: "curso_s7_app_pro" });
+    // Métrica de la página de retorno. La conversión "purchase" real se define
+    // en el bloque 3B (con fuente única y dedupe); acá no se registra purchase
+    // ni begin_checkout.
+    track("thank_you_page_view", { item: "curso_s7_app_pro" });
   }, []);
 
   return (
     <PageShell
       eyebrow="Compra"
-      title="¡Gracias por tu compra!"
-      subtitle="Estamos procesando tu pedido. Si tu pago quedó pendiente de acreditación, vas a recibir un aviso por email apenas se complete."
+      title="Estamos procesando tu operación"
+      subtitle="Revisá el correo utilizado durante la compra. Si el pago todavía está pendiente, vas a recibir las instrucciones cuando se confirme."
     >
       <div className="gracias-steps">
         <article className="gracias-step">
           <h3>1 · Revisá tu email</h3>
           <p>
-            El acceso al material llega al email que usaste en la compra. Si no lo ves, revisá la carpeta de spam o
-            promociones.
+            Las instrucciones de acceso al material se envían al email que usaste en la compra. Si no las ves, revisá
+            la carpeta de spam o promociones.
           </p>
         </article>
         <article className="gracias-step">
