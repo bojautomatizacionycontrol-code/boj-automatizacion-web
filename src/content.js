@@ -1277,15 +1277,15 @@ export const offer = {
     // Precio ACTUAL vigente (hoy = promoción). Alimenta hero, total, CTA final y
     // tracking. Al terminar la promoción, volver a "147 USD" / 147 y retirar la
     // presentación de precio anterior/ahorro.
-    price: "117 USD",
-    priceValue: 117,
+    price: "97 USD",
+    priceValue: 97,
     priceCurrency: "USD",
     // Promoción temporal de lanzamiento: precio anterior (tachado) y ahorro.
     regularPrice: 147,
-    promotionalPrice: 117,
-    promotionalSavings: 30,
+    promotionalPrice: 97,
+    promotionalSavings: 50,
     promotionEndsAt: "2026-07-31",
-    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 117 USD.",
+    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 97 USD.",
     // Slot del video demo de la landing: con "" la sección no se renderiza.
     demoVideoUrl: "",
     // Estado del checkout definitivo (Hotmart). El corte del bloque 3B consiste
