@@ -3603,7 +3603,10 @@ function GraciasPage() {
         </article>
         <article className="gracias-step">
           <h3>2 · Activá tu mes de BOJ S7-PLC PRO</h3>
-          <p>Ingresá a la app con el mismo email de la compra para activar tu acceso PRO.</p>
+          <p>
+            Conservá el mismo email utilizado en la compra. Cuando tu acceso esté disponible, vas a recibir las
+            instrucciones para activar tu mes de BOJ S7-PLC PRO.
+          </p>
         </article>
         <article className="gracias-step">
           <h3>3 · ¿Problemas con el acceso?</h3>
