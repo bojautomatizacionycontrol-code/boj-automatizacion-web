@@ -1274,10 +1274,42 @@ export const s7Testimonials = [
 export const offer = {
   // Curso Diagnóstico S7-300/400 + App PRO (bundle de lanzamiento)
   course: {
-    price: "147 USD",
-    priceValue: 147,
+    // Precio ACTUAL vigente (hoy = promoción). Alimenta hero, total, CTA final y
+    // tracking. Al terminar la promoción, volver a "147 USD" / 147 y retirar la
+    // presentación de precio anterior/ahorro.
+    price: "97 USD",
+    priceValue: 97,
     priceCurrency: "USD",
-    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 147 USD.",
+    // Promoción temporal de lanzamiento: precio anterior (tachado) y ahorro.
+    regularPrice: 147,
+    promotionalPrice: 97,
+    promotionalSavings: 50,
+    promotionEndsAt: "2026-07-31",
+    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 97 USD.",
+    // Slot del video demo de la landing: con "" la sección no se renderiza.
+    demoVideoUrl: "",
+    // Estado del checkout definitivo (Hotmart). El corte del bloque 3B consiste
+    // en editar SOLO este objeto: status "live" + checkoutUrl real. Mientras
+    // status sea "pending", la web mantiene el flujo de compra vigente sin
+    // cambios. "preview" muestra un botón deshabilitado, solo para revisar el
+    // estado futuro en un Preview de Vercel (nunca en producción).
+    checkout: {
+      provider: "hotmart",
+      status: "pending", // "pending" | "preview" | "live"
+      // true SOLO tras validar E2E el flujo Hotmart→entrega→licencia (3B).
+      // Con live sin validar, el checkout funciona pero los claims finales
+      // ("Pago seguro · Acceso inmediato", bloque "Cómo funciona la compra")
+      // siguen ocultos.
+      flowValidated: false,
+      checkoutUrl: "",
+      productId: "",
+      offerId: "",
+      thankYouPath: "/gracias",
+      ctaLabel: "Comprar curso + APP PRO",
+      guaranteeDays: 7,
+      appMonths: 1,
+      devices: 1,
+    },
   },
   // App BOJ S7-PLC PRO
   app: {

@@ -90,7 +90,6 @@ import heroContacto from "./assets/hero-contacto.jpg";
 import courseS7400Visual from "./assets/course-s7-400.jpg";
 import s7IncludePlc400Visual from "./assets/services-works/PLC400.jpg";
 import s7IncludeAppPanelVisual from "./assets/services-works/panel app 2.png";
-import s7CourseCoverHero from "./assets/services-works/paisaje_industrial_nocturno_con_tecnología_avanzad.png.jpg";
 import courseTiaPortalVisual from "./assets/course-tia-portal.jpg";
 import step7ManagerVisual from "./assets/11.png";
 import step7HwConfigVisual from "./assets/12.png";
@@ -1026,6 +1025,10 @@ const routeMeta = {
     description:
       "Contacto técnico en San Miguel de Tucumán, Argentina, para automatización industrial, diagnóstico de fallas, cursos PLC Siemens, TIA Portal y PROFIBUS.",
   },
+  "/gracias": {
+    title: "Procesando tu operación | BOJ Automatización y Control",
+    description: "Estado de tu operación: acceso al material y activación de BOJ S7-PLC PRO.",
+  },
 };
 
 function getRoute() {
@@ -1169,6 +1172,9 @@ function RouteView({ route }) {
   if (route.startsWith("/recursos-tecnicos/")) return <TechnicalArticlePage route={route} />;
   if (route === "/obras") return <WorksPage />;
   if (route === "/contacto") return <ContactPage />;
+  // /gracias despacha pero NO integra KNOWN_ROUTES: así hereda robots
+  // "noindex, follow" (post-compra, fuera de sitemap y sin enlaces internos).
+  if (route === "/gracias") return <GraciasPage />;
   return <NotFound />;
 }
 
@@ -2222,9 +2228,75 @@ function S7Testimonials({ background = "light" }) {
   );
 }
 
+// Zona de compra parametrizada de la landing S7: única fuente del destino
+// comercial. El corte a Hotmart (bloque 3B) se hace editando SOLO
+// offer.course.checkout (status "live" + checkoutUrl), sin tocar JSX.
+// En "pending" se renderiza el CTA vigente sin cambios; "preview" muestra un
+// botón deshabilitado para revisar el estado futuro en un Preview.
+function purchaseCtaTarget() {
+  const checkout = offer.course.checkout;
+  const hasCheckoutUrl = typeof checkout.checkoutUrl === "string" && checkout.checkoutUrl.trim() !== "";
+  // live sin checkoutUrl NO es live: cae al CTA vigente (nunca un href vacío).
+  const isCheckoutLive = checkout.status === "live" && hasCheckoutUrl;
+  // Los claims finales exigen además la validación E2E del flujo (3B); abrir el
+  // checkout en una prueba controlada NO exige flowValidated.
+  const isCheckoutFlowValidated = isCheckoutLive && checkout.flowValidated === true;
+  return {
+    isLive: isCheckoutLive,
+    isPreview: checkout.status === "preview",
+    isFlowValidated: isCheckoutFlowValidated,
+    href: isCheckoutLive ? checkout.checkoutUrl : whatsappUrl(offer.course.purchaseMessage),
+    trackPayload: (source) => ({
+      item: "curso_s7_app_pro",
+      value: offer.course.priceValue,
+      currency: offer.course.priceCurrency,
+      source,
+      ...(isCheckoutLive ? { payment: "hotmart" } : {}),
+    }),
+  };
+}
+
+function PurchaseCTA({ source, className, children }) {
+  const target = purchaseCtaTarget();
+  if (target.isPreview) {
+    return (
+      <span className={`${className} is-disabled`} aria-disabled="true">
+        Checkout — próximamente
+      </span>
+    );
+  }
+  return (
+    <a
+      className={className}
+      href={target.href}
+      target="_blank"
+      rel="noreferrer"
+      onClick={() => track("begin_checkout", target.trackPayload(source))}
+    >
+      {target.isLive ? offer.course.checkout.ctaLabel : children}
+    </a>
+  );
+}
+
 function S7SalesLanding({ course, eyebrow }) {
-  const purchaseHref = whatsappUrl(offer.course.purchaseMessage);
-  const heroStyle = { "--s7-sales-hero-image": `url(${s7CourseCoverHero})` };
+  const purchaseTarget = purchaseCtaTarget();
+  const heroPurchaseAction = purchaseTarget.isPreview
+    ? { label: "Checkout — próximamente", href: "#", onClick: (event) => event.preventDefault() }
+    : {
+        label: purchaseTarget.isLive
+          ? offer.course.checkout.ctaLabel
+          : `Empezar ahora — Curso + App PRO · ${offer.course.price}`,
+        href: purchaseTarget.href,
+        external: true,
+        onClick: () => track("begin_checkout", purchaseTarget.trackPayload("hero")),
+      };
+  // "Pago seguro · Acceso inmediato" solo con el flujo Hotmart validado E2E
+  // (flowValidated). En pending, preview o live sin validar: copy neutral.
+  const guaranteeNote = purchaseTarget.isFlowValidated
+    ? "Pago seguro · Acceso inmediato · Garantía de 7 días"
+    : "Garantía de 7 días · Acceso digital";
+  // Vigencia de la promoción, formateada DD/MM/YYYY para el badge de lanzamiento.
+  const promoEnds = offer.course.promotionEndsAt.split("-").reverse().join("/");
 
   const scrollToCourseSection = (event, sectionId) => {
     event.preventDefault();
@@ -2251,6 +2323,16 @@ function S7SalesLanding({ course, eyebrow }) {
       icon: "ShieldCheck",
       title: "Enfocado en campo",
       text: "Herramientas y métodos que funcionan donde realmente se necesitan.",
+    },
+    {
+      icon: "Network",
+      title: "Relación entre síntomas, LEDs, red, módulos y señales",
+      text: "Conectá las piezas y entendé el sistema completo.",
+    },
+    {
+      icon: "ClipboardCheck",
+      title: "Uso de la app PRO como apoyo",
+      text: "Ayuda a ordenar hipótesis y verificaciones durante el diagnóstico.",
     },
   ];
 
@@ -2329,34 +2411,6 @@ function S7SalesLanding({ course, eyebrow }) {
     { icon: "Smartphone", label: "1 dispositivo" },
   ];
 
-  const differentiators = [
-    {
-      icon: "Factory",
-      title: "Fallas reales de planta",
-      text: "No teoría aislada: casos aplicados que aparecen en mantenimiento y producción.",
-    },
-    {
-      icon: "ScanSearch",
-      title: "Diagnóstico antes de intervención",
-      text: "Primero pensá, después actuá. Menos riesgo, mejores decisiones.",
-    },
-    {
-      icon: "ShieldCheck",
-      title: "Criterio de campo aplicado a PLC Siemens",
-      text: "Método probado en S7-300/400 y entornos industriales.",
-    },
-    {
-      icon: "Network",
-      title: "Relación entre síntomas, LEDs, red, módulos y señales",
-      text: "Conectá las piezas y entendé el sistema completo.",
-    },
-    {
-      icon: "ClipboardCheck",
-      title: "Uso de la app PRO como apoyo",
-      text: "Ayuda a ordenar hipótesis y verificaciones durante el diagnóstico.",
-    },
-  ];
-
   const audienceItems = [
     { icon: "Wrench", title: "Técnicos de mantenimiento industrial" },
     { icon: "Settings", title: "Automatistas y programadores PLC" },
@@ -2373,9 +2427,7 @@ function S7SalesLanding({ course, eyebrow }) {
     "Casos de falla y razonamiento técnico",
     "STEP 7 Classic / SIMATIC Manager / HW Config / Diagnostic Buffer",
     "1 mes de BOJ S7-PLC PRO",
-    "1 dispositivo",
     "Uso offline hasta 2 días",
-    "Acceso por navegador e instalación como app",
   ];
 
   const mistakes = [
@@ -2450,14 +2502,9 @@ function S7SalesLanding({ course, eyebrow }) {
         eyebrow="Diagnóstico industrial · Método BOJ"
         title="Cuando la línea está parada y todos te miran, dejá de adivinar."
         subtitle="Aprendé a diagnosticar fallas reales en PLC Siemens S7-300/400 —CPU, PROFIBUS, módulos y señales— con una secuencia probada: del síntoma a la causa con evidencia, no con prueba y error. Para mantenimiento que trabaja bajo presión."
-        primary={{
-          label: `Empezar ahora — Curso + App PRO · ${offer.course.price}`,
-          href: purchaseHref,
-          external: true,
-          onClick: () => track("begin_checkout", { item: "curso_s7_app_pro", value: offer.course.priceValue, currency: offer.course.priceCurrency, source: "hero" }),
-        }}
+        primary={heroPurchaseAction}
         secondary={{ label: "Ver qué incluye", href: "/cursos/s7-300-400", onClick: (event) => scrollToCourseSection(event, "curso-s7-incluye") }}
-        note="Pago seguro · Acceso inmediato · Garantía de 7 días"
+        note={guaranteeNote}
       />
 
       <S7ProofStrip />
@@ -2582,6 +2629,24 @@ function S7SalesLanding({ course, eyebrow }) {
               </div>
             </article>
           </div>
+
+          {/* Slot del video demo (bloque 3A): se activa cargando
+              offer.course.demoVideoUrl; con "" no se renderiza nada. */}
+          {offer.course.demoVideoUrl ? (
+            <div className="s7-sales-demo-video">
+              <p className="s7-sales-include-preview-label">
+                <ScanSearch size={16} aria-hidden="true" /> Mirá el sistema en acción
+              </p>
+              <div className="s7-sales-demo-video-frame">
+                <iframe
+                  src={offer.course.demoVideoUrl}
+                  title="Video demo del sistema de diagnóstico BOJ"
+                  loading="lazy"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
 
@@ -2606,23 +2671,6 @@ function S7SalesLanding({ course, eyebrow }) {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      <section className="s7-sales-section s7-sales-dark s7-sales-difference">
-        <div className="s7-sales-container">
-          <div className="s7-sales-centered-heading">
-            <p className="s7-sales-kicker">Qué hace diferente este curso</p>
-          </div>
-          <div className="s7-sales-difference-grid">
-            {differentiators.map((item) => (
-              <article className="s7-sales-difference-card" key={item.title}>
-                <Icon name={item.icon} size={38} />
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -2678,7 +2726,7 @@ function S7SalesLanding({ course, eyebrow }) {
           <div className="s7-sales-offer-panel">
             <div className="s7-sales-offer-product">
               <span className="s7-sales-launch">
-                <Clock size={15} aria-hidden="true" /> Precio de lanzamiento · por tiempo limitado
+                <Clock size={15} aria-hidden="true" /> Precio de lanzamiento · hasta el {promoEnds}
               </span>
               <p className="s7-sales-kicker">Oferta única</p>
               <h2>Curso Diagnóstico S7-300/400 + APP PRO</h2>
@@ -2686,7 +2734,11 @@ function S7SalesLanding({ course, eyebrow }) {
             </div>
 
             <div className="s7-sales-offer-price">
+              <span className="s7-sales-offer-regular">
+                Antes <del>{offer.course.regularPrice} USD</del>
+              </span>
               <strong>{offer.course.price}</strong>
+              <span className="s7-sales-offer-savings">Ahorrás {offer.course.promotionalSavings} USD</span>
               <p>Acceso digital al curso + herramienta PRO por 1 mes.</p>
               <div className="s7-sales-valuestack">
                 <div className="s7-sales-valuestack-row">
@@ -2713,16 +2765,26 @@ function S7SalesLanding({ course, eyebrow }) {
                   </li>
                 ))}
               </ul>
+              {/* "Cómo funciona la compra" (bloque 3A): copy del flujo DEFINITIVO
+                  (Hotmart). Solo se renderiza con el flujo validado E2E
+                  (checkout live + flowValidated, corte del bloque 3B). */}
+              {purchaseTarget.isFlowValidated ? (
+                <ol className="s7-sales-howto">
+                  <li>
+                    <strong>Pago seguro con Hotmart.</strong> Checkout cifrado, con tarjeta y los medios de pago de tu país.
+                  </li>
+                  <li>
+                    <strong>Entrega digital.</strong> Al acreditarse el pago recibís en tu email el acceso al material.
+                  </li>
+                  <li>
+                    <strong>Activación de tu mes de App PRO.</strong> Con el mismo email de la compra. Garantía de 7 días.
+                  </li>
+                </ol>
+              ) : null}
               <div className="s7-sales-offer-actions">
-                <a
-                  className="s7-sales-btn s7-sales-btn-primary"
-                  href={purchaseHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => track("begin_checkout", { item: "curso_s7_app_pro", value: offer.course.priceValue, currency: offer.course.priceCurrency, source: "offer" })}
-                >
+                <PurchaseCTA source="offer" className="s7-sales-btn s7-sales-btn-primary">
                   Comprar curso + APP PRO
-                </a>
+                </PurchaseCTA>
                 <a
                   className="s7-sales-btn s7-sales-btn-secondary"
                   href={appProductUrl}
@@ -2735,7 +2797,7 @@ function S7SalesLanding({ course, eyebrow }) {
               </div>
               <p className="s7-sales-offer-guarantee">
                 <ShieldCheck size={18} aria-hidden="true" />
-                Garantía de 7 días: si el material no es lo que esperabas, te devolvemos el pago.
+                {guaranteeNote}
               </p>
               <p className="s7-sales-offer-crosslink">
                 ¿Vas a usar la app de forma recurrente o en equipo? Mirá los{" "}
@@ -2761,14 +2823,14 @@ function S7SalesLanding({ course, eyebrow }) {
             <p className="s7-sales-kicker">Errores que este curso ayuda a evitar</p>
             <h2>Diagnosticar con método evita decisiones costosas.</h2>
           </div>
-          <div className="s7-sales-mistake-grid">
+          <ul className="s7-sales-mistakes-strip">
             {mistakes.map((item) => (
-              <article className="s7-sales-mistake-card" key={item}>
-                <TriangleAlert size={24} aria-hidden="true" />
-                <p>{item}</p>
-              </article>
+              <li key={item}>
+                <TriangleAlert size={18} aria-hidden="true" />
+                <span>{item}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -2801,25 +2863,34 @@ function S7SalesLanding({ course, eyebrow }) {
       <section className="s7-sales-final-cta">
         <div className="s7-sales-container">
           <div className="s7-sales-final-cta-panel">
-            <p>Si trabajás con PLC Siemens S7-300/400 y necesitás diagnosticar con más criterio, este curso te da método, estructura y apoyo técnico para intervenir mejor.</p>
-            <div className="s7-sales-final-actions">
-              <a
-                className="s7-sales-btn s7-sales-btn-primary"
-                href={purchaseHref}
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => track("begin_checkout", { item: "curso_s7_app_pro", value: offer.course.priceValue, currency: offer.course.priceCurrency, source: "final_cta" })}
-              >
-                Comprar curso + APP PRO — {offer.course.price}
-              </a>
-              <a className="s7-sales-btn s7-sales-btn-secondary" href="/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
-                Ver qué incluye
-              </a>
+            <div className="s7-sales-final-intro">
+              <p className="s7-sales-final-headline">Si trabajás con PLC Siemens S7-300/400 y necesitás diagnosticar con más criterio, este curso te da método, estructura y apoyo técnico para intervenir mejor.</p>
+              <span className="s7-sales-final-divider" aria-hidden="true" />
+              <p className="s7-sales-final-guarantee">
+                <ShieldCheck size={18} aria-hidden="true" />
+                {guaranteeNote}
+              </p>
             </div>
-            <p className="s7-sales-final-guarantee">
-              <ShieldCheck size={17} aria-hidden="true" />
-              Garantía de 7 días · Pago seguro · Acceso inmediato
-            </p>
+            <div className="s7-sales-final-col">
+              <PurchaseCTA source="final_cta" className="s7-sales-btn s7-sales-btn-primary s7-sales-final-primary">
+                Comprar curso + APP PRO — {offer.course.price}
+              </PurchaseCTA>
+              <div className="s7-sales-final-secondary-row">
+                <a className="s7-sales-btn s7-sales-btn-secondary" href="/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
+                  Ver qué incluye
+                </a>
+                <a
+                  className="s7-sales-btn s7-sales-btn-secondary"
+                  href={appProductUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => track("app_trial_click", { source: "final" })}
+                >
+                  Probar APP 48 hs
+                </a>
+              </div>
+              <p className="s7-sales-final-note"><span>Acceso digital · Curso + APP PRO</span></p>
+            </div>
           </div>
         </div>
       </section>
@@ -3276,31 +3347,6 @@ function AppPage() {
   );
 }
 
-function S7CourseSidePanel({ purchaseHref }) {
-  return (
-    <aside className="s7-course-side-panel">
-      <article className="s7-course-fast-facts s7-course-side-offer">
-        <p className="eyebrow">Oferta del curso</p>
-        <h3>Curso Diagnóstico S7-300/400 + APP PRO</h3>
-        <strong className="s7-course-side-price">147 USD</strong>
-        <div>
-          <span>Incluye</span>
-          <strong>Curso + 1 mes APP PRO</strong>
-        </div>
-        <div>
-          <span>Uso</span>
-          <strong>1 dispositivo · offline hasta 2 días</strong>
-        </div>
-        <a className="btn primary" href={purchaseHref} target="_blank" rel="noreferrer">
-          Comprar curso + APP PRO
-        </a>
-        <small>Acceso digital. Verificá siempre las conclusiones en campo.</small>
-      </article>
-      <CourseVisual type="s7" />
-    </aside>
-  );
-}
-
 function AppComparisonTable() {
   return (
     <div className="app-comparison-table" role="table" aria-label="Comparación BOJ S7-PLC Course Edition y PRO">
@@ -3538,6 +3584,60 @@ function CourseCTA() {
       secondaryLabel="Consultar capacitación"
       secondaryHref={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por cursos técnicos de automatización industrial.")}
     />
+  );
+}
+
+// Página post-compra (/gracias), construida en el bloque 3A pero NO enlazada,
+// noindex y fuera del sitemap. Se activa como retorno del checkout en el bloque
+// 3B. Copy neutro: no asume qué parámetros anexa Hotmart al volver (se verifica
+// en 3B); cubre el caso de pago pendiente sin leer la URL.
+function GraciasPage() {
+  useEffect(() => {
+    // Métrica de la página de retorno. La conversión "purchase" real se define
+    // en el bloque 3B (con fuente única y dedupe); acá no se registra purchase
+    // ni begin_checkout.
+    track("thank_you_page_view", { item: "curso_s7_app_pro" });
+  }, []);
+
+  return (
+    <PageShell
+      eyebrow="Compra"
+      title="Estamos procesando tu operación"
+      subtitle="Revisá el correo utilizado durante la compra. Si el pago todavía está pendiente, vas a recibir las instrucciones cuando se confirme."
+    >
+      <div className="gracias-steps">
+        <article className="gracias-step">
+          <h3>1 · Revisá tu email</h3>
+          <p>
+            Las instrucciones de acceso al material se envían al email que usaste en la compra. Si no las ves, revisá
+            la carpeta de spam o promociones.
+          </p>
+        </article>
+        <article className="gracias-step">
+          <h3>2 · Activá tu mes de BOJ S7-PLC PRO</h3>
+          <p>
+            Conservá el mismo email utilizado en la compra. Cuando tu acceso esté disponible, vas a recibir las
+            instrucciones para activar tu mes de BOJ S7-PLC PRO.
+          </p>
+        </article>
+        <article className="gracias-step">
+          <h3>3 · ¿Problemas con el acceso?</h3>
+          <p>
+            Escribinos y lo resolvemos: <a href={`mailto:${contact.email}`}>{contact.email}</a> o WhatsApp{" "}
+            <a href={whatsappUrl("Hola, acabo de comprar el curso S7-300/400 y tengo un problema con el acceso.")}>
+              {contact.whatsappDisplay}
+            </a>
+            .
+          </p>
+        </article>
+      </div>
+      <div className="gracias-actions">
+        <a className="btn primary" href={appProductUrl} target="_blank" rel="noreferrer">
+          Abrir la app
+        </a>
+        <SecondaryLink href="/">Volver al inicio</SecondaryLink>
+      </div>
+    </PageShell>
   );
 }
 
