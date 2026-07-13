@@ -22057,3 +22057,119 @@ h3,
   font-weight: 700;
   letter-spacing: 0.01em;
 }
+
+/* ── Panel de cierre S7: layout 2 columnas premium ──────────────────────── */
+.s7-sales-final-cta-panel {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+  gap: 0;
+  align-items: stretch;
+  padding: clamp(24px, 3vw, 40px);
+}
+
+.s7-sales-final-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: clamp(24px, 3vw, 44px);
+}
+
+.s7-sales-final-cta-panel .s7-sales-final-headline {
+  max-width: 460px;
+  margin: 0;
+  color: #eef8ff;
+  font-size: clamp(1.28rem, 1.85vw, 1.82rem);
+  font-weight: 900;
+  line-height: 1.24;
+  letter-spacing: 0;
+}
+
+.s7-sales-final-divider {
+  display: block;
+  width: 56px;
+  height: 2px;
+  margin: 18px 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #00c8ff, rgba(0, 200, 255, 0));
+}
+
+.s7-sales-final-cta-panel .s7-sales-final-guarantee {
+  margin: 0;
+  color: #cfe1ee;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.s7-sales-final-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  padding-left: clamp(24px, 3vw, 44px);
+  border-left: 1px solid rgba(0, 200, 255, 0.16);
+}
+
+.s7-sales-final-primary {
+  width: 100%;
+  min-height: 58px;
+  font-size: 1.05rem;
+  box-shadow: 0 20px 44px rgba(0, 183, 232, 0.42);
+}
+
+.s7-sales-final-primary:hover {
+  box-shadow: 0 24px 52px rgba(0, 183, 232, 0.5);
+}
+
+.s7-sales-final-secondary-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.s7-sales-final-secondary-row .s7-sales-btn-secondary {
+  width: 100%;
+}
+
+.s7-sales-final-cta-panel .s7-sales-final-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0 0;
+  color: rgba(207, 225, 238, 0.62);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.s7-sales-final-cta-panel .s7-sales-final-note span {
+  flex: none;
+  white-space: nowrap;
+}
+
+.s7-sales-final-cta-panel .s7-sales-final-note::before,
+.s7-sales-final-cta-panel .s7-sales-final-note::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 200, 255, 0.16);
+}
+
+@media (max-width: 900px) {
+  .s7-sales-final-cta-panel {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 22px 18px;
+  }
+
+  .s7-sales-final-intro {
+    padding-right: 0;
+  }
+
+  .s7-sales-final-col {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .s7-sales-final-secondary-row {
+    grid-template-columns: 1fr;
+  }
+}

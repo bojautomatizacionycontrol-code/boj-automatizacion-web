@@ -2863,28 +2863,34 @@ function S7SalesLanding({ course, eyebrow }) {
       <section className="s7-sales-final-cta">
         <div className="s7-sales-container">
           <div className="s7-sales-final-cta-panel">
-            <p>Si trabajás con PLC Siemens S7-300/400 y necesitás diagnosticar con más criterio, este curso te da método, estructura y apoyo técnico para intervenir mejor.</p>
-            <div className="s7-sales-final-actions">
-              <PurchaseCTA source="final_cta" className="s7-sales-btn s7-sales-btn-primary">
+            <div className="s7-sales-final-intro">
+              <p className="s7-sales-final-headline">Si trabajás con PLC Siemens S7-300/400 y necesitás diagnosticar con más criterio, este curso te da método, estructura y apoyo técnico para intervenir mejor.</p>
+              <span className="s7-sales-final-divider" aria-hidden="true" />
+              <p className="s7-sales-final-guarantee">
+                <ShieldCheck size={18} aria-hidden="true" />
+                {guaranteeNote}
+              </p>
+            </div>
+            <div className="s7-sales-final-col">
+              <PurchaseCTA source="final_cta" className="s7-sales-btn s7-sales-btn-primary s7-sales-final-primary">
                 Comprar curso + APP PRO — {offer.course.price}
               </PurchaseCTA>
-              <a className="s7-sales-btn s7-sales-btn-secondary" href="/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
-                Ver qué incluye
-              </a>
-              <a
-                className="s7-sales-btn s7-sales-btn-secondary"
-                href={appProductUrl}
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => track("app_trial_click", { source: "final" })}
-              >
-                Probar APP 48 hs
-              </a>
+              <div className="s7-sales-final-secondary-row">
+                <a className="s7-sales-btn s7-sales-btn-secondary" href="/cursos/s7-300-400" onClick={(event) => scrollToCourseSection(event, "curso-s7-incluye")}>
+                  Ver qué incluye
+                </a>
+                <a
+                  className="s7-sales-btn s7-sales-btn-secondary"
+                  href={appProductUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => track("app_trial_click", { source: "final" })}
+                >
+                  Probar APP 48 hs
+                </a>
+              </div>
+              <p className="s7-sales-final-note"><span>Acceso digital · Curso + APP PRO</span></p>
             </div>
-            <p className="s7-sales-final-guarantee">
-              <ShieldCheck size={17} aria-hidden="true" />
-              {guaranteeNote}
-            </p>
           </div>
         </div>
       </section>
