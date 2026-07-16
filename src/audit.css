@@ -49,9 +49,11 @@ button:disabled,
   max-width: 920px;
   margin: 0 auto;
   padding: clamp(24px, 4vw, 48px);
-  border: 1px solid rgba(82, 200, 255, 0.22);
+  border: 1px solid #d9e2ea;
   border-radius: 12px;
-  background: rgba(12, 30, 43, 0.84);
+  background: #ffffff;
+  color: #2b3a49;
+  box-shadow: 0 14px 34px rgba(7, 17, 28, 0.06);
 }
 
 .legal-page section + section {
@@ -60,23 +62,36 @@ button:disabled,
 
 .legal-page h2 {
   margin: 0 0 8px;
+  color: #0f1b27;
   font-size: clamp(1.2rem, 2.4vw, 1.55rem);
 }
 
 .legal-page p {
   margin: 0;
+  color: #33485a;
   line-height: 1.75;
 }
 
 .legal-updated,
 .legal-contact {
-  color: #a9c4d6;
+  color: #526779 !important;
 }
 
 .legal-contact {
   margin-top: 32px !important;
   padding-top: 20px;
-  border-top: 1px solid rgba(82, 200, 255, 0.18);
+  border-top: 1px solid #d9e2ea;
+}
+
+.legal-contact a {
+  color: #006f9e;
+  font-weight: 750;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.legal-contact a:hover {
+  color: #004f73;
 }
 
 .course-status-badge {
