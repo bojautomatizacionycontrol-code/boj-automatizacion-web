@@ -3,3 +3,6 @@ dist
 .chrome-headless-profile*/
 screenshot-*.png
 old-site-contact-sheet.jpg
+
+.vercel
+.env*
