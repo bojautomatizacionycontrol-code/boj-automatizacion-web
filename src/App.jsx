@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
+import { Analytics } from "@vercel/analytics/react";
+import { track as trackVercelEvent } from "@vercel/analytics";
 import {
   ArrowRight,
   Brain,
@@ -140,6 +142,7 @@ const ANALYTICS = {
 function track(event, params = {}) {
   if (typeof window === "undefined") return;
   try {
+    trackVercelEvent(event, params);
     if (typeof window.gtag === "function") window.gtag("event", event, params);
     if (Array.isArray(window.dataLayer)) window.dataLayer.push({ event, ...params });
     if (typeof window.fbq === "function") window.fbq("trackCustom", event, params);
@@ -730,6 +733,7 @@ const coursesAvailableCards = [
     title: "Introducción a TIA Portal con PLC S7-1200/1500",
     label: "TIA Portal S7-1200/1500",
     path: "/cursos/tia-portal",
+    upcoming: true,
     quickFacts: [
       { icon: "Gauge", title: "Nivel", text: "Inicial aplicado" },
       { icon: "MonitorCog", title: "Formato", text: "Material técnico en PDF y práctico" },
@@ -1025,6 +1029,22 @@ const routeMeta = {
     description:
       "Contacto técnico en San Miguel de Tucumán, Argentina, para automatización industrial, diagnóstico de fallas, cursos PLC Siemens, TIA Portal y PROFIBUS.",
   },
+  "/privacidad": {
+    title: "Política de privacidad | BOJ Automatización y Control",
+    description: "Información sobre datos personales, formularios, analítica y derechos de privacidad en el sitio de BOJ.",
+  },
+  "/terminos": {
+    title: "Términos y condiciones | BOJ Automatización y Control",
+    description: "Condiciones generales de uso del sitio, contratación de servicios y acceso a productos digitales BOJ.",
+  },
+  "/licencias": {
+    title: "Condiciones de licencia | BOJ S7-PLC PRO",
+    description: "Condiciones de acceso y uso de BOJ S7-PLC PRO y de las licencias incluidas con cursos y planes.",
+  },
+  "/reembolsos": {
+    title: "Política de reembolsos | BOJ Automatización y Control",
+    description: "Condiciones de garantía y reembolso aplicables a cursos y productos digitales comercializados por Hotmart.",
+  },
   "/gracias": {
     title: "Procesando tu operación | BOJ Automatización y Control",
     description: "Estado de tu operación: acceso al material y activación de BOJ S7-PLC PRO.",
@@ -1043,6 +1063,17 @@ function whatsappUrl(message = "Hola, escribo desde la web de BOJ Automatizació
 
 function mailtoUrl(subject, body) {
   return `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+async function sendContactForm(payload) {
+  const response = await fetch("/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(result.error || "No se pudo enviar la consulta.");
+  return result;
 }
 
 function Icon({ name, size = 22, className = "" }) {
@@ -1135,6 +1166,7 @@ function App() {
       </main>
       <Footer />
       <FloatingContact />
+      <Analytics />
     </>
   );
 }
@@ -1150,6 +1182,10 @@ const KNOWN_ROUTES = new Set([
   "/recursos-tecnicos",
   "/obras",
   "/contacto",
+  "/privacidad",
+  "/terminos",
+  "/licencias",
+  "/reembolsos",
 ]);
 
 // Fuente única de rutas conocidas (incluye la validación de los 5 slugs de recursos
@@ -1172,6 +1208,10 @@ function RouteView({ route }) {
   if (route.startsWith("/recursos-tecnicos/")) return <TechnicalArticlePage route={route} />;
   if (route === "/obras") return <WorksPage />;
   if (route === "/contacto") return <ContactPage />;
+  if (route === "/privacidad") return <LegalPage type="privacy" />;
+  if (route === "/terminos") return <LegalPage type="terms" />;
+  if (route === "/licencias") return <LegalPage type="licenses" />;
+  if (route === "/reembolsos") return <LegalPage type="refunds" />;
   // /gracias despacha pero NO integra KNOWN_ROUTES: así hereda robots
   // "noindex, follow" (post-compra, fuera de sitemap y sin enlaces internos).
   if (route === "/gracias") return <GraciasPage />;
@@ -1654,19 +1694,30 @@ function HomeContactSection() {
 }
 
 function LandingContactForm() {
-  function handleSubmit(event) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const body = [
-      `Nombre completo: ${data.get("name") || ""}`,
-      `Correo electrónico: ${data.get("email") || ""}`,
-      `Asunto: ${data.get("subject") || ""}`,
-      "",
-      "Mensaje:",
-      data.get("message") || "",
-    ].join("\n");
+  const [status, setStatus] = useState("idle");
+  const [feedback, setFeedback] = useState("");
 
-    window.location.href = mailtoUrl("Consulta desde la web BOJ", body);
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setStatus("sending");
+    setFeedback("");
+    const data = new FormData(event.currentTarget);
+    try {
+      await sendContactForm({
+        name: data.get("name") || "",
+        email: data.get("email") || "",
+        subject: data.get("subject") || "Consulta desde la web BOJ",
+        message: data.get("message") || "",
+        website: data.get("website") || "",
+      });
+      event.currentTarget.reset();
+      setStatus("success");
+      setFeedback("Consulta enviada. Respondemos normalmente dentro de 48 horas hábiles.");
+      track("contact_form_submit", { location: "home" });
+    } catch (error) {
+      setStatus("error");
+      setFeedback(error.message || "No se pudo enviar. También puede escribirnos por WhatsApp.");
+    }
   }
 
   return (
@@ -1677,9 +1728,11 @@ function LandingContactForm() {
       </div>
       <input name="subject" placeholder="Asunto" required />
       <textarea name="message" rows="5" placeholder="Mensaje" required />
-      <button className="home-btn primary" type="submit">
-        Enviar mensaje <ArrowRight size={18} />
+      <input className="form-honeypot" name="website" tabIndex="-1" autoComplete="off" aria-hidden="true" />
+      <button className="home-btn primary" type="submit" disabled={status === "sending"}>
+        {status === "sending" ? "Enviando…" : "Enviar mensaje"} <ArrowRight size={18} />
       </button>
+      {feedback ? <p className={`form-feedback ${status}`} role="status">{feedback}</p> : null}
     </form>
   );
 }
@@ -2032,8 +2085,9 @@ function CourseAvailableCard({ course }) {
         <img src={course.image} alt="" aria-hidden="true" loading="lazy" />
         <div aria-hidden="true" />
         <strong>{course.label}</strong>
+        {course.upcoming ? <span className="course-status-badge">Próximamente</span> : null}
         <a className="mock-btn mock-btn-primary" href={course.path}>
-          Ver curso <ArrowRight size={18} />
+          {course.upcoming ? "Ver adelanto" : "Ver curso"} <ArrowRight size={18} />
         </a>
       </div>
     </article>
@@ -3720,37 +3774,36 @@ function ContactForm() {
     message: "",
   });
 
-  const body = useMemo(
-    () =>
-      [
-        `Nombre: ${form.name}`,
-        `Empresa: ${form.company}`,
-        `Email: ${form.email}`,
-        `Teléfono: ${form.phone}`,
-        `Servicio de interés: ${form.interest}`,
-        "",
-        "Mensaje:",
-        form.message,
-      ].join("\n"),
-    [form]
-  );
+  const [status, setStatus] = useState("idle");
+  const [feedback, setFeedback] = useState("");
 
   function updateField(event) {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    window.location.href = mailtoUrl("Consulta desde la web BOJ", body);
+    setStatus("sending");
+    setFeedback("");
+    try {
+      await sendContactForm({ ...form, subject: `Consulta: ${form.interest}` });
+      setStatus("success");
+      setFeedback("Consulta enviada. Respondemos normalmente dentro de 48 horas hábiles.");
+      setForm({ name: "", company: "", email: "", phone: "", interest: "Diagnóstico de fallas", message: "" });
+      track("contact_form_submit", { location: "contact_page", interest: form.interest });
+    } catch (error) {
+      setStatus("error");
+      setFeedback(error.message || "No se pudo enviar. También puede escribirnos por WhatsApp.");
+    }
   }
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
       <h2>Enviar consulta</h2>
       <p>
-        El formulario prepara un email con los datos técnicos. Para urgencias o paradas de planta,
-        WhatsApp suele ser el camino más rápido.
+        La consulta llega a {contact.email}. Respondemos normalmente dentro de 48 horas hábiles.
+        Las fallas urgentes se coordinan por WhatsApp y están sujetas a disponibilidad.
       </p>
       <label>
         Nombre
@@ -3790,15 +3843,77 @@ function ContactForm() {
         />
       </label>
       <div className="button-row">
-        <button className="btn primary" type="submit">
-          Enviar consulta
+        <button className="btn primary" type="submit" disabled={status === "sending"}>
+          {status === "sending" ? "Enviando…" : "Enviar consulta"}
           <ArrowRight size={18} />
         </button>
         <a className="btn secondary" href={whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.")}>
           Contactar por WhatsApp
         </a>
       </div>
+      {feedback ? <p className={`form-feedback ${status}`} role="status">{feedback}</p> : null}
     </form>
+  );
+}
+
+const legalContent = {
+  privacy: {
+    title: "Política de privacidad",
+    intro: "Explica qué datos recopilamos en este sitio, para qué se utilizan y cómo puede ejercer sus derechos.",
+    sections: [
+      ["Responsable", `BOJ Automatización y Control. Contacto: ${contact.email}.`],
+      ["Datos que recopilamos", "El formulario puede solicitar nombre, empresa, correo, teléfono, servicio de interés y mensaje. También podemos registrar métricas anónimas o seudónimas de navegación y conversiones mediante Vercel Web Analytics."],
+      ["Finalidad", "Usamos los datos para responder consultas, coordinar servicios, facilitar acceso a productos adquiridos y mejorar el funcionamiento del sitio. No vendemos datos personales."],
+      ["Proveedores", "El formulario se procesa mediante Resend. Las compras se procesan en Hotmart y la activación de la app puede vincular el correo de compra con Supabase. Cada proveedor aplica sus propias condiciones de privacidad."],
+      ["Conservación y derechos", `Conservamos la información durante el tiempo necesario para atender la relación comercial y obligaciones aplicables. Puede solicitar acceso, corrección o eliminación escribiendo a ${contact.email}.`],
+    ],
+  },
+  terms: {
+    title: "Términos y condiciones",
+    intro: "Condiciones generales para utilizar el sitio y contratar servicios o productos digitales de BOJ.",
+    sections: [
+      ["Uso del sitio", "La información técnica es orientativa y no reemplaza procedimientos de planta, evaluación de riesgos, normativa aplicable ni intervención de personal autorizado."],
+      ["Servicios técnicos", "Alcance, agenda, entregables, costos y condiciones se confirman por propuesta. La atención urgente es coordinada y está sujeta a disponibilidad."],
+      ["Productos digitales", "El curso S7-300/400 es autoguiado e incluye dos PDF descargables y un mes de BOJ S7-PLC PRO desde la compra. El curso permanece accesible; la licencia PRO vence sin cobro automático."],
+      ["Propiedad intelectual", "La compra concede un derecho personal de uso y no autoriza redistribución, reventa, publicación o copia masiva."],
+      ["Marcas de terceros", "Siemens, SIMATIC, STEP 7, TIA Portal, S7-300 y S7-400 son marcas de sus respectivos titulares. BOJ es independiente y no está afiliada, patrocinada ni certificada por Siemens."],
+    ],
+  },
+  licenses: {
+    title: "Condiciones de licencia de BOJ S7-PLC PRO",
+    intro: "Reglas principales de acceso y uso de la herramienta de diagnóstico.",
+    sections: [
+      ["Activación", "La licencia incluida con el curso comienza en la fecha de compra y se vincula al correo registrado en Hotmart."],
+      ["Duración", "La licencia incluida dura un mes y finaliza sin renovación ni cobro automático."],
+      ["Alcance de uso", "La licencia es limitada, no exclusiva e intransferible."],
+      ["Limitación técnica", "BOJ S7-PLC PRO organiza síntomas, hipótesis y verificaciones. No controla el equipo ni sustituye un diagnóstico profesional."],
+      ["Soporte", `El soporte cubre acceso, activación y uso general de la app por correo. Contacto: ${contact.email}.`],
+    ],
+  },
+  refunds: {
+    title: "Política de reembolsos",
+    intro: "La compra del curso se procesa en Hotmart y cuenta con una garantía de reembolso de 7 días.",
+    sections: [
+      ["Curso S7-300/400", "Puede solicitar el reembolso dentro de los 7 días posteriores a la compra, de acuerdo con el flujo y las condiciones de Hotmart."],
+      ["Efectos del reembolso", "Una vez aprobado, se revoca el acceso al curso, a los PDF y a la licencia PRO incluida."],
+      ["Servicios técnicos", "Los servicios profesionales se rigen por la propuesta aceptada y por el trabajo coordinado o realizado."],
+      ["Ayuda", `Si tiene un problema de acceso, escriba a ${contact.email} desde el correo utilizado en Hotmart.`],
+    ],
+  },
+};
+
+function LegalPage({ type }) {
+  const page = legalContent[type];
+  return (
+    <PageShell eyebrow="Información legal" title={page.title} subtitle={page.intro}>
+      <article className="legal-page">
+        <p className="legal-updated">Última actualización: 16 de julio de 2026.</p>
+        {page.sections.map(([title, text]) => (
+          <section key={title}><h2>{title}</h2><p>{text}</p></section>
+        ))}
+        <p className="legal-contact">Consultas legales o de privacidad: <a href={`mailto:${contact.email}`}>{contact.email}</a>.</p>
+      </article>
+    </PageShell>
   );
 }
 
@@ -4418,6 +4533,13 @@ function MainFooter() {
             </a>
           ))}
         </nav>
+        <nav className="mock-footer-nav mock-footer-legal" aria-label="Información legal">
+          <h3>Legal</h3>
+          <a href="/privacidad">Privacidad</a>
+          <a href="/terminos">Términos</a>
+          <a href="/licencias">Licencias</a>
+          <a href="/reembolsos">Reembolsos</a>
+        </nav>
         <div className="mock-footer-social">
           <h3>Seguinos</h3>
           <div>
@@ -4427,7 +4549,7 @@ function MainFooter() {
         </div>
       </div>
       <div className="mock-footer-bottom">
-        <span>© {new Date().getFullYear()} BOJ Automatización y Control. Todos los derechos reservados.</span>
+        <span>© {new Date().getFullYear()} BOJ Automatización y Control. Todos los derechos reservados. BOJ es independiente y no está afiliada a Siemens.</span>
       </div>
     </footer>
   );

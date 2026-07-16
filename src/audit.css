@@ -1,0 +1,137 @@
+/* Ajustes finales de accesibilidad, formularios, legales y responsive. */
+html,
+body,
+#root {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+.form-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+button:disabled,
+.button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.form-feedback {
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(82, 200, 255, 0.35);
+  border-radius: 8px;
+  background: rgba(6, 31, 46, 0.85);
+  line-height: 1.45;
+}
+
+.form-feedback.success {
+  border-color: rgba(45, 212, 160, 0.55);
+  color: #baf7df;
+}
+
+.form-feedback.error {
+  border-color: rgba(255, 125, 125, 0.6);
+  color: #ffd0d0;
+}
+
+.legal-page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: clamp(24px, 4vw, 48px);
+  border: 1px solid rgba(82, 200, 255, 0.22);
+  border-radius: 12px;
+  background: rgba(12, 30, 43, 0.84);
+}
+
+.legal-page section + section {
+  margin-top: 28px;
+}
+
+.legal-page h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+}
+
+.legal-page p {
+  margin: 0;
+  line-height: 1.75;
+}
+
+.legal-updated,
+.legal-contact {
+  color: #a9c4d6;
+}
+
+.legal-contact {
+  margin-top: 32px !important;
+  padding-top: 20px;
+  border-top: 1px solid rgba(82, 200, 255, 0.18);
+}
+
+.course-status-badge {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border: 1px solid rgba(82, 200, 255, 0.45);
+  border-radius: 999px;
+  color: #78dcff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.site-footer.mock-footer .mock-footer-inner {
+  grid-template-columns: minmax(220px, 1.3fr) minmax(190px, 1fr) minmax(180px, 1fr) minmax(150px, 0.8fr) minmax(100px, auto);
+}
+
+.site-footer.mock-footer .mock-footer-legal {
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 1180px) {
+  .site-footer.mock-footer .mock-footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .site-footer.mock-footer .mock-footer-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mock-home-container,
+  .section-container,
+  .s7-sales-container,
+  .hero-copy,
+  .mock-home-hero-copy,
+  .s7-sales-hero-copy {
+    min-width: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  a,
+  li,
+  span {
+    overflow-wrap: anywhere;
+  }
+
+  .legal-page {
+    padding: 22px 18px;
+  }
+}
