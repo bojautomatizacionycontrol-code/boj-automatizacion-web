@@ -1,17 +1,17 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/inicio",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/inicio", "destination": "/index.html" },
-    { "source": "/servicios", "destination": "/index.html" },
-    { "source": "/cursos", "destination": "/index.html" },
-    { "source": "/cursos/:path*", "destination": "/index.html" },
-    { "source": "/app", "destination": "/index.html" },
-    { "source": "/recursos-tecnicos", "destination": "/index.html" },
-    { "source": "/recursos-tecnicos/:path*", "destination": "/index.html" },
-    { "source": "/obras", "destination": "/index.html" },
-    { "source": "/contacto", "destination": "/index.html" },
-    { "source": "/privacidad", "destination": "/index.html" },
-    { "source": "/terminos", "destination": "/index.html" },
-    { "source": "/licencias", "destination": "/index.html" },
-    { "source": "/reembolsos", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }

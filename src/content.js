@@ -10,7 +10,7 @@ export const contact = {
 };
 
 export const navItems = [
-  { label: "Inicio", path: "/inicio" },
+  { label: "Inicio", path: "/" },
   { label: "Servicios", path: "/servicios" },
   {
     label: "Cursos",
@@ -1268,3 +1268,112 @@ export const s7Testimonials = [
     role: "Técnico en controles automáticos",
   },
 ];
+
+// ───────────────────────────────────────────────────────────────────────────
+// Oferta comercial centralizada: fuente única de precios, planes y enlaces
+// de compra. Los valores aquí son los vigentes (no modificar sin decisión
+// comercial). SINCRONIZAR el precio del curso con el JSON-LD de index.html
+// (schema.org Course → "price": "147") ante cualquier cambio de precio.
+export const offer = {
+  // Curso Diagnóstico S7-300/400 + App PRO (bundle de lanzamiento)
+  course: {
+    // Precio ACTUAL vigente (hoy = promoción). Alimenta hero, total, CTA final y
+    // tracking. Al terminar la promoción, volver a "147 USD" / 147 y retirar la
+    // presentación de precio anterior/ahorro.
+    price: "97 USD",
+    priceValue: 97,
+    priceCurrency: "USD",
+    // Promoción temporal de lanzamiento: precio anterior (tachado) y ahorro.
+    regularPrice: 147,
+    promotionalPrice: 97,
+    promotionalSavings: 50,
+    promotionEndsAt: "2026-07-31",
+    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 97 USD.",
+    // Slot del video demo de la landing: con "" la sección no se renderiza.
+    demoVideoUrl: "",
+    // Estado del checkout definitivo (Hotmart). El corte del bloque 3B consiste
+    // en editar SOLO este objeto: status "live" + checkoutUrl real. Mientras
+    // status sea "pending", la web mantiene el flujo de compra vigente sin
+    // cambios. "preview" muestra un botón deshabilitado, solo para revisar el
+    // estado futuro en un Preview de Vercel (nunca en producción).
+    checkout: {
+      provider: "hotmart",
+      status: "live", // "pending" | "preview" | "live"
+      // true SOLO tras validar E2E el flujo Hotmart→entrega→licencia (3B).
+      // Con live sin validar, el checkout funciona pero los claims finales
+      // ("Pago seguro · Acceso inmediato", bloque "Cómo funciona la compra")
+      // siguen ocultos.
+      flowValidated: true,
+      checkoutUrl: "https://pay.hotmart.com/P106348963R",
+      productId: "",
+      offerId: "",
+      thankYouPath: "/gracias",
+      ctaLabel: "Comprar curso + APP PRO",
+      guaranteeDays: 7,
+      appMonths: 1,
+      devices: 1,
+    },
+  },
+  // App BOJ S7-PLC PRO
+  app: {
+    productUrl: "https://app.bojautomatizacion.com/",
+    trialPlan: {
+      title: "TRIAL",
+      price: "Gratis",
+      meta: "48 horas · Online · Funciones limitadas",
+      text: "Prueba inicial para conocer el flujo de diagnóstico de BOJ S7-PLC PRO antes de activar una licencia paga.",
+      bullets: [
+        "Acceso gratuito por 48 hs",
+        "Funciona solo online",
+        "Algunas funciones limitadas",
+        "Ideal para conocer la herramienta",
+      ],
+      button: "Probar gratis 48 hs",
+      url: "https://app.bojautomatizacion.com/",
+    },
+    proPlans: [
+      {
+        title: "Mensual",
+        price: "70 USD",
+        meta: "1 mes · 1 dispositivo",
+        text: "Acceso completo a la app BOJ S7-PLC PRO para uso puntual, pruebas extendidas o diagnóstico temporal.",
+        bullets: [
+          "Incluye solo app PRO",
+          "Funciona offline hasta 2 días",
+          "Acceso completo a diagnósticos PRO",
+        ],
+        button: "Elegir mensual",
+        url: "https://app.bojautomatizacion.com/",
+      },
+      {
+        title: "Profesional",
+        price: "350 USD",
+        meta: "6 meses · 2 dispositivos · App PRO + Curso",
+        text: "Plan recomendado para técnicos, automatistas, instrumentistas y personal de mantenimiento que necesitan usar la herramienta de forma recurrente y reforzar criterio técnico con material de apoyo.",
+        bullets: [
+          "Incluye app PRO",
+          "Incluye el curso con acceso permanente",
+          "Funciona offline hasta 2 días",
+          "Ideal para uso profesional recurrente",
+        ],
+        button: "Elegir profesional",
+        badge: "Más conveniente",
+        url: "https://app.bojautomatizacion.com/",
+      },
+      {
+        title: "Empresarial",
+        price: "800 USD",
+        meta: "6 meses · 10 dispositivos · App PRO + Curso",
+        text: "Plan pensado para empresas, equipos de mantenimiento, áreas de automatización, soporte técnico interno o varias estaciones de trabajo.",
+        bullets: [
+          "Incluye app PRO",
+          "Incluye el curso con acceso permanente",
+          "Funciona offline hasta 7 días",
+          "Pensado para equipos técnicos y empresas",
+        ],
+        button: "Elegir empresarial",
+        url: "https://app.bojautomatizacion.com/",
+      },
+    ],
+  },
+};
