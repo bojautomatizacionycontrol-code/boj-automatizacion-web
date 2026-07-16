@@ -75,8 +75,8 @@ export const whyBoj = [
 
 export const trustSignals = [
   {
-    value: "Más de 15 años",
-    label: "automatización industrial, diagnóstico de fallas y puesta en marcha en planta",
+    value: "Desde 2015",
+    label: "experiencia profesional en automatización, diagnóstico y puesta en marcha",
   },
   {
     value: "PLC Siemens",
@@ -384,7 +384,7 @@ export const courses = [
 
 export const s7Course = {
   title:
-    "Diagnóstico y resolución de fallas en PLC Siemens S7-300/400 con STEP 7 Classic",
+    "Curso técnico autoguiado de diagnóstico en PLC Siemens S7-300/400 + BOJ S7-PLC PRO",
   subtitle:
     "Curso aplicado para mantenimiento e ingeniería que necesitan diagnosticar fallas reales en planta: CPU, LEDs, Diagnostic Buffer, HW Config Online, PROFIBUS, módulos, señales de campo y decisiones bajo presión operativa.",
   positioning: [
@@ -404,11 +404,13 @@ export const s7Course = {
     "Estudiantes técnicos avanzados con base en PLC",
   ],
   includes: [
-    "Material técnico en PDF con foco aplicado",
-    "PDFs profesionales de consulta para diagnóstico",
+    "Dos manuales técnicos descargables en PDF con acceso permanente",
+    "Curso autoguiado, a su propio ritmo y sin duración fija",
     "Base conceptual sobre sistemas de control industrial",
     "Casos reales de planta y mantenimiento",
     "BOJ S7-PLC PRO incluida durante 1 mes",
+    "Actualizaciones futuras de los PDF incluidas sin costo",
+    "Versión actual en español; las futuras traducciones se agregarán al mismo acceso sin costo",
     "Ejemplos con tablero didáctico real",
     "Lectura de LEDs, CPU, Diagnostic Buffer y HW Config Online",
     "Procedimiento estructurado de búsqueda de causa probable",
@@ -466,7 +468,8 @@ export const s7Course = {
     "Integra BOJ S7-PLC PRO para llevar el método al tablero como apoyo técnico de campo.",
   ],
   appValue: [
-    "BOJ S7-PLC PRO está incluida durante 1 mes para ordenar síntomas, LEDs, PROFIBUS, señales y observaciones de campo.",
+    "BOJ S7-PLC PRO está incluida durante 1 mes desde la fecha de compra para ordenar síntomas, LEDs, PROFIBUS, señales y observaciones de campo.",
+    "La licencia se activa con el mismo correo utilizado en Hotmart y vence sin cobro automático.",
     "Funciona como guía rápida cuando hay presión operativa y no resulta conveniente depender de memoria o prueba y error.",
     "Permite aplicar el método del curso sobre estados de CPU y fallas PROFIBUS frecuentes.",
     "La versión PRO amplía el motor de diagnóstico, ramas avanzadas y biblioteca extendida de casos reales.",
@@ -991,17 +994,17 @@ export const projects = [
   },
   {
     title: "Sistema contra incendios con PLC S7-1500",
-    sector: "Industria / Seguridad",
+    sector: "Industria / Servicios auxiliares",
     role: "Programación y comisionamiento",
     highlights: [
-      "PLC Siemens S7-1500 con lógica de seguridad operativa.",
+      "PLC Siemens S7-1500 con secuencias de control y supervisión.",
       "Verificación de entradas, salidas y señales críticas.",
       "Pruebas de respuesta y comisionamiento en sitio.",
     ],
     client: "GETSA",
     year: "2017",
     description:
-      "Programación y comisionamiento de sistema contra incendios basado en PLC Siemens S7-1500, con señales críticas y lógica de seguridad operativa.",
+      "Programación y comisionamiento de un sistema contra incendios basado en PLC Siemens S7-1500, con verificación de señales y pruebas funcionales.",
     technologies: [
       "Siemens S7-1500",
       "TIA Portal",
