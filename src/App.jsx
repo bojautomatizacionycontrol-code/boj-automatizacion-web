@@ -3331,7 +3331,7 @@ function AppPage() {
                 </ul>
                 <a
                   className="mock-btn mock-btn-primary"
-                  href={appProductUrl}
+                  href={plan.url}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => track("plan_click", { plan: plan.title })}
