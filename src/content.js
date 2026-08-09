@@ -1343,7 +1343,7 @@ export const offer = {
           "Acceso completo a diagnósticos PRO",
         ],
         button: "Elegir mensual",
-        url: "https://app.bojautomatizacion.com/",
+        url: "https://pay.hotmart.com/B107066308U?off=pwoeyow0",
       },
       {
         title: "Profesional",
@@ -1358,7 +1358,7 @@ export const offer = {
         ],
         button: "Elegir profesional",
         badge: "Más conveniente",
-        url: "https://app.bojautomatizacion.com/",
+        url: "https://pay.hotmart.com/B107069067M?off=il4qpdnn",
       },
       {
         title: "Empresarial",
@@ -1372,7 +1372,7 @@ export const offer = {
           "Pensado para equipos técnicos y empresas",
         ],
         button: "Elegir empresarial",
-        url: "https://app.bojautomatizacion.com/",
+        url: "https://pay.hotmart.com/Q107075095G?off=p9gw4o5m",
       },
     ],
   },
