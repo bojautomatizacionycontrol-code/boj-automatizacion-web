@@ -22277,3 +22277,89 @@ h3,
     grid-template-columns: 1fr;
   }
 }
+
+/* /app: capacitación separada de la grilla principal de licencias. */
+.app-pro-training-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  padding: 20px 22px;
+  border: 1px solid rgba(35, 199, 244, 0.18);
+  border-left: 3px solid rgba(35, 199, 244, 0.72);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.028);
+}
+
+.app-pro-training-copy {
+  min-width: 0;
+}
+
+.app-pro-training-eyebrow {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--app-cyan-2);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+}
+
+.app-pro-training-strip h3 {
+  margin: 0 0 5px;
+  color: #ffffff;
+  font-size: 1.14rem;
+  line-height: 1.2;
+}
+
+.app-pro-training-strip p {
+  margin: 0;
+  color: rgba(246, 251, 255, 0.72);
+  font-size: 0.94rem;
+  line-height: 1.45;
+}
+
+.app-pro-training-action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.app-pro-training-action > strong {
+  color: #ffffff;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.app-pro-training-action .mock-btn {
+  flex: none;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .app-pro-training-strip {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .app-pro-training-action {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 760px) {
+  .app-pro-training-strip {
+    padding: 18px;
+  }
+
+  .app-pro-training-action {
+    display: grid;
+    justify-content: stretch;
+    gap: 12px;
+  }
+
+  .app-pro-training-action .mock-btn {
+    width: 100%;
+  }
+}

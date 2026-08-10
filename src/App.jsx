@@ -889,6 +889,7 @@ const s7AppCarousel = [
 const appTrialPlan = offer.app.trialPlan;
 
 const appProPlans = offer.app.proPlans;
+const appLicensePlans = appProPlans.filter(({ title }) => title !== "Curso + licencia");
 
 const appAudienceProfiles = [
   { icon: "Wrench", text: "Técnicos de mantenimiento industrial" },
@@ -3009,7 +3010,7 @@ function CourseLanding({ course, eyebrow, visual, ctas }) {
 }
 
 function AppPage() {
-  const pricingCards = [appTrialPlan, ...appProPlans];
+  const pricingCards = [appTrialPlan, ...appLicensePlans];
   const [activeScreenshot, setActiveScreenshot] = useState(null);
 
   useEffect(() => {
@@ -3302,7 +3303,7 @@ function AppPage() {
             <h2>Elige tu licencia PRO</h2>
             <p>Trial inicial y opciones pagas según modalidad, tiempo de uso, dispositivos y disponibilidad offline.</p>
             <p className="app-pro-plans-crosslink">
-              <strong>Curso + licencia</strong>, <strong>Profesional</strong> y <strong>Empresarial</strong> incluyen el{" "}
+              <strong>Profesional</strong> y <strong>Empresarial</strong> incluyen el{" "}
               <a href="/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.
             </p>
           </div>
@@ -3335,6 +3336,19 @@ function AppPage() {
               </article>
             ))}
           </div>
+          <aside className="app-pro-training-strip" aria-labelledby="app-pro-training-title">
+            <div className="app-pro-training-copy">
+              <span className="app-pro-training-eyebrow">FORMACIÓN TÉCNICA</span>
+              <h3 id="app-pro-training-title">¿También necesitás capacitación?</h3>
+              <p>Curso Diagnóstico S7-300/400 con acceso permanente + 1 mes de BOJ S7-PLC PRO.</p>
+            </div>
+            <div className="app-pro-training-action">
+              <strong>{offer.course.price} · Pago único</strong>
+              <a className="mock-btn mock-btn-outline" href="/cursos/s7-300-400">
+                Ver curso y contenidos <ArrowRight size={17} aria-hidden="true" />
+              </a>
+            </div>
+          </aside>
           <article className="app-pro-institutional">
             <Icon name="Landmark" size={34} />
             <div>
