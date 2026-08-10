@@ -22497,3 +22497,172 @@ h3,
     width: 100%;
   }
 }
+
+/* /app: guía breve para elegir plan sin duplicar precios ni destinos comerciales. */
+.app-pro-plan-guide {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0 20px;
+  padding: 20px;
+  border: 1px solid rgba(35, 199, 244, 0.2);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(35, 199, 244, 0.07), transparent 46%),
+    rgba(255, 255, 255, 0.025);
+}
+
+.app-pro-plan-guide-heading span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--app-cyan-2);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+}
+
+.app-pro-plan-guide-heading h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.25;
+}
+
+.app-pro-plan-guide ul {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app-pro-plan-guide li {
+  min-width: 0;
+}
+
+.app-pro-plan-guide li > a {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 5px;
+  min-height: 152px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  color: inherit;
+  background: rgba(2, 18, 29, 0.66);
+  text-decoration: none;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.app-pro-plan-guide li > a:hover {
+  border-color: rgba(35, 199, 244, 0.48);
+  background: rgba(5, 35, 52, 0.82);
+  transform: translateY(-2px);
+}
+
+.app-pro-plan-guide li > a:focus-visible,
+.app-pro-plan-card:focus-visible {
+  outline: 2px solid var(--app-cyan-2);
+  outline-offset: 3px;
+}
+
+.app-pro-plan-guide li > a > span:first-child {
+  color: rgba(246, 251, 255, 0.65);
+  font-size: 0.75rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.app-pro-plan-guide li > a > strong {
+  color: #ffffff;
+  font-size: 0.98rem;
+  line-height: 1.3;
+}
+
+.app-pro-plan-guide li > a > small {
+  color: rgba(246, 251, 255, 0.7);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.app-pro-plan-guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--app-cyan-2);
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.app-pro-plan-card {
+  scroll-margin-top: 104px;
+}
+
+.app-pro-purchase-confidence {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 18px;
+  margin: 18px 0 0;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.025);
+  list-style: none;
+}
+
+.app-pro-purchase-confidence li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(246, 251, 255, 0.76);
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.app-pro-purchase-confidence svg {
+  flex: none;
+  color: var(--app-cyan-2);
+}
+
+@media (max-width: 980px) {
+  .app-pro-plan-guide ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-pro-plan-guide li > a {
+    min-height: 138px;
+  }
+
+  .app-pro-purchase-confidence {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-pro-plan-guide {
+    padding: 16px;
+  }
+
+  .app-pro-plan-guide ul {
+    grid-template-columns: 1fr;
+  }
+
+  .app-pro-plan-guide li > a {
+    min-height: 0;
+  }
+
+  .app-pro-purchase-confidence {
+    padding: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-pro-plan-guide li > a {
+    transition: none;
+  }
+
+  .app-pro-plan-guide li > a:hover {
+    transform: none;
+  }
+}
