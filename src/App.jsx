@@ -397,16 +397,22 @@ const homeWorkLines = [
     icon: "Factory",
     title: "Servicios industriales",
     text: "Diagnóstico, automatización, migraciones y soporte técnico en planta.",
+    href: "/servicios",
+    cta: "Ver servicios",
   },
   {
     icon: "GraduationCap",
     title: "Capacitación técnica",
     text: "Cursos prácticos para mantenimiento y diagnóstico en sistemas Siemens.",
+    href: "/cursos",
+    cta: "Ver cursos",
   },
   {
     icon: "MonitorCog",
     title: "Herramientas digitales",
     text: "BOJ S7-PLC como apoyo para ordenar fallas en S7-300/400.",
+    href: "/app",
+    cta: "Conocer la app",
   },
 ];
 
@@ -1411,15 +1417,19 @@ function HomeLandingRedesign() {
           <h2>Servicios, formación y herramientas para mantenimiento industrial</h2>
           <div className="mock-work-grid">
             {homeWorkLines.map((item) => (
-              <article className="mock-work-card" key={item.title}>
+              <a className="mock-work-card" href={item.href} key={item.title}>
                 <span className="mock-icon-circle">
                   <Icon name={item.icon} size={32} />
                 </span>
-                <div>
+                <span className="mock-work-card-copy">
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
-                </div>
-              </article>
+                  <span className="mock-work-card-cta">
+                    {item.cta}
+                    <ArrowRight size={17} aria-hidden="true" />
+                  </span>
+                </span>
+              </a>
             ))}
           </div>
         </div>
