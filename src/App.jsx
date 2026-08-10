@@ -894,6 +894,41 @@ const appTrialPlan = offer.app.trialPlan;
 const appProPlans = offer.app.proPlans;
 const appLicensePlans = appProPlans.filter(({ title }) => title !== "Curso + licencia");
 
+const appPlanCardIds = {
+  TRIAL: "plan-trial",
+  "Suscripción mensual": "plan-subscription-monthly",
+  "Mensual de pago único": "plan-monthly-one-time",
+  "Profesional": "plan-professional",
+  "Empresarial": "plan-company",
+};
+
+const appPlanDecisionGuide = [
+  {
+    context: "Uso continuo",
+    title: "Suscripción mensual",
+    detail: "Pagás mes a mes y la licencia se renueva hasta que la canceles.",
+    target: appPlanCardIds["Suscripción mensual"],
+  },
+  {
+    context: "Trabajo puntual",
+    title: "Mensual de pago único",
+    detail: "Un mes de acceso sin renovación automática.",
+    target: appPlanCardIds["Mensual de pago único"],
+  },
+  {
+    context: "Uso profesional",
+    title: "Profesional",
+    detail: "Seis meses, dos dispositivos y curso incluido.",
+    target: appPlanCardIds.Profesional,
+  },
+  {
+    context: "Equipo técnico",
+    title: "Empresarial",
+    detail: "Seis meses, diez dispositivos y curso incluido.",
+    target: appPlanCardIds.Empresarial,
+  },
+];
+
 const appAudienceProfiles = [
   { icon: "Wrench", text: "Técnicos de mantenimiento industrial" },
   { icon: "Gauge", text: "Instrumentistas y electricistas de planta" },
@@ -3307,18 +3342,40 @@ function AppPage() {
       <section className="app-pro-plans-section" id="planes-pro">
         <div className="mock-home-container">
           <div className="app-pro-section-heading">
-            <h2>Elige tu licencia PRO</h2>
+            <h2>Elegí tu licencia PRO</h2>
             <p>Trial inicial y opciones pagas según modalidad, tiempo de uso, dispositivos y disponibilidad offline.</p>
             <p className="app-pro-plans-crosslink">
               <strong>Profesional</strong> y <strong>Empresarial</strong> incluyen el{" "}
               <a href="/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.
             </p>
           </div>
+          <nav className="app-pro-plan-guide" aria-labelledby="app-pro-plan-guide-title">
+            <div className="app-pro-plan-guide-heading">
+              <span>DECISIÓN RÁPIDA</span>
+              <h3 id="app-pro-plan-guide-title">¿Cuál encaja mejor con tu forma de trabajo?</h3>
+            </div>
+            <ul>
+              {appPlanDecisionGuide.map((option) => (
+                <li key={option.target}>
+                  <a href={`#${option.target}`} aria-label={`${option.context}: ver plan ${option.title}`}>
+                    <span>{option.context}</span>
+                    <strong>{option.title}</strong>
+                    <small>{option.detail}</small>
+                    <span className="app-pro-plan-guide-link">
+                      Ver plan <ArrowRight size={15} aria-hidden="true" />
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
           <div className="app-pro-plan-grid">
             {pricingCards.map((plan) => (
               <article
                 className={`app-pro-plan-card${plan.badge ? " featured" : ""}${plan.title === "TRIAL" ? " trial" : ""}`}
+                id={appPlanCardIds[plan.title]}
                 key={plan.title}
+                tabIndex={-1}
               >
                 {plan.badge ? <span className="app-pro-plan-badge">{plan.badge}</span> : null}
                 <h3>{plan.title}</h3>
@@ -3343,6 +3400,17 @@ function AppPage() {
               </article>
             ))}
           </div>
+          <ul className="app-pro-purchase-confidence" aria-label="Información antes de comprar">
+            <li>
+              <CheckCircle2 size={17} aria-hidden="true" /> Compra gestionada por Hotmart
+            </li>
+            <li>
+              <CheckCircle2 size={17} aria-hidden="true" /> Precio y modalidad visibles antes de confirmar
+            </li>
+            <li>
+              <CheckCircle2 size={17} aria-hidden="true" /> Activación con el email usado en la compra
+            </li>
+          </ul>
           <aside className="app-pro-training-strip" aria-labelledby="app-pro-training-title">
             <div className="app-pro-training-copy">
               <span className="app-pro-training-eyebrow">FORMACIÓN TÉCNICA</span>
