@@ -259,7 +259,7 @@ const projectVisuals = [
   step7Visual,
 ];
 
-// Imagen real (de services-works) por obra, en el mismo orden que `projects`.
+// Imagen ilustrativa (de services-works) por obra, en el mismo orden que `projects`.
 const projectWorkImageFiles = [
   "Generador industrial — para Generador WEG BT40.jpg",
   "Sistema contra incendios industrial — bombas, cañerías, válvulas.jpg",
@@ -1493,13 +1493,14 @@ function HomeObrasTeaser() {
       <div className="mock-home-container">
         <h2>Obras reales, no ejemplos de manual</h2>
         <p className="mock-obras-subtitle">
-          Ingeniería, programación, migraciones y puesta en marcha en plantas industriales. Cada caso, con su problema, intervención y resultado.
+          Ingeniería, programación, migraciones y puesta en marcha en plantas industriales. Los casos, clientes y alcances corresponden a trabajos realizados; las imágenes son ilustrativas.
         </p>
         <div className="mock-obras-grid">
           {featured.map((project, index) => (
             <article className="mock-obras-card" key={project.title}>
               <div className="mock-obras-media">
-                <img src={getServiceWorkImage(projectWorkImageFiles[index]) || projectVisuals[index]} alt={project.title} loading="lazy" />
+                <img src={getServiceWorkImage(projectWorkImageFiles[index]) || projectVisuals[index]} alt={`Imagen ilustrativa para ${project.title}`} loading="lazy" />
+                <span className="works-image-disclaimer">Imagen ilustrativa</span>
                 <span className="mock-obras-client">{project.client}</span>
               </div>
               <div className="mock-obras-body">
@@ -3507,7 +3508,7 @@ function TechnicalResourceCard({ resource }) {
 
   return (
     <article className="technical-resource-card">
-      <div className="resource-card-visual" aria-hidden={!visual}>
+      <div className="resource-card-visual" aria-hidden="true">
         {visual ? (
           <img src={visual} alt="" loading="lazy" />
         ) : (
@@ -3882,7 +3883,7 @@ const legalContent = {
     sections: [
       ["Uso del sitio", "La información técnica es orientativa y no reemplaza procedimientos de planta, evaluación de riesgos, normativa aplicable ni intervención de personal autorizado."],
       ["Servicios técnicos", "Alcance, agenda, entregables, costos y condiciones se confirman por propuesta. La atención urgente es coordinada y está sujeta a disponibilidad."],
-      ["Productos digitales", "El curso S7-300/400 es autoguiado e incluye dos PDF descargables y un mes de BOJ S7-PLC PRO desde la compra. El curso permanece accesible; la licencia PRO vence sin cobro automático."],
+      ["Productos digitales", "El curso S7-300/400 es autoguiado e incluye material técnico descargable, guías prácticas y un mes de BOJ S7-PLC PRO desde la compra. El curso permanece accesible; la licencia PRO vence sin cobro automático."],
       ["Propiedad intelectual", "La compra concede un derecho personal de uso y no autoriza redistribución, reventa, publicación o copia masiva."],
       ["Marcas de terceros", "Siemens, SIMATIC, STEP 7, TIA Portal, S7-300 y S7-400 son marcas de sus respectivos titulares. BOJ es independiente y no está afiliada, patrocinada ni certificada por Siemens."],
     ],
@@ -3903,7 +3904,7 @@ const legalContent = {
     intro: "La compra del curso se procesa en Hotmart y cuenta con una garantía de reembolso de 7 días.",
     sections: [
       ["Curso S7-300/400", "Puede solicitar el reembolso dentro de los 7 días posteriores a la compra, de acuerdo con el flujo y las condiciones de Hotmart."],
-      ["Efectos del reembolso", "Una vez aprobado, se revoca el acceso al curso, a los PDF y a la licencia PRO incluida."],
+      ["Efectos del reembolso", "Una vez aprobado, se revoca el acceso al curso, al material técnico y a la licencia PRO incluida."],
       ["Servicios técnicos", "Los servicios profesionales se rigen por la propuesta aceptada y por el trabajo coordinado o realizado."],
       ["Ayuda", `Si tiene un problema de acceso, escriba a ${contact.email} desde el correo utilizado en Hotmart.`],
     ],
@@ -4239,8 +4240,9 @@ function ProjectCard({ project, index }) {
   return (
     <article className="project-card">
       <div className="project-media">
-        <img className="project-photo" src={visual} alt={`Obra: ${project.title} — ${project.client}`} loading="lazy" />
+        <img className="project-photo" src={visual} alt={`Imagen ilustrativa para ${project.title}`} loading="lazy" />
         <span>OBRA {String(index).padStart(2, "0")}</span>
+        <span className="works-image-disclaimer">Imagen ilustrativa</span>
         <div className="project-media-overlay">
           <strong>{project.year}</strong>
           <small>{project.client}</small>

@@ -20668,6 +20668,31 @@ textarea {
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
 }
 
+.mock-obras-media .works-image-disclaimer,
+.project-media .works-image-disclaimer {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  bottom: auto;
+  left: auto;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  border-radius: 999px;
+  background: rgba(2, 11, 20, 0.8);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: none;
+  backdrop-filter: blur(6px);
+}
+
 .project-body {
   background: #ffffff;
 }
