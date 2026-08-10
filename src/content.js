@@ -1273,22 +1273,15 @@ export const s7Testimonials = [
 // Oferta comercial centralizada: fuente única de precios, planes y enlaces
 // de compra. Los valores aquí son los vigentes (no modificar sin decisión
 // comercial). SINCRONIZAR el precio del curso con el JSON-LD de index.html
-// (schema.org Course → "price": "147") ante cualquier cambio de precio.
+// (schema.org Course → Offer) ante cualquier cambio de precio.
 export const offer = {
-  // Curso Diagnóstico S7-300/400 + App PRO (bundle de lanzamiento)
+  // Curso Diagnóstico S7-300/400 + App PRO
   course: {
-    // Precio ACTUAL vigente (hoy = promoción). Alimenta hero, total, CTA final y
-    // tracking. Al terminar la promoción, volver a "147 USD" / 147 y retirar la
-    // presentación de precio anterior/ahorro.
-    price: "97 USD",
-    priceValue: 97,
+    // Precio vigente. Alimenta hero, total, CTA final y tracking.
+    price: "89 USD",
+    priceValue: 89,
     priceCurrency: "USD",
-    // Promoción temporal de lanzamiento: precio anterior (tachado) y ahorro.
-    regularPrice: 147,
-    promotionalPrice: 97,
-    promotionalSavings: 50,
-    promotionEndsAt: "2026-07-31",
-    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 97 USD.",
+    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 89 USD.",
     // Slot del video demo de la landing: con "" la sección no se renderiza.
     demoVideoUrl: "",
     // Estado del checkout definitivo (Hotmart). El corte del bloque 3B consiste
@@ -1304,7 +1297,7 @@ export const offer = {
       // ("Pago seguro · Acceso inmediato", bloque "Cómo funciona la compra")
       // siguen ocultos.
       flowValidated: true,
-      checkoutUrl: "https://pay.hotmart.com/P106348963R",
+      checkoutUrl: "https://pay.hotmart.com/P106348963R?off=srrm5ewf",
       productId: "",
       offerId: "",
       thankYouPath: "/gracias",
@@ -1333,22 +1326,54 @@ export const offer = {
     },
     proPlans: [
       {
-        title: "Mensual",
-        price: "70 USD",
-        meta: "1 mes · 1 dispositivo",
-        text: "Acceso completo a la app BOJ S7-PLC PRO para uso puntual, pruebas extendidas o diagnóstico temporal.",
+        title: "Suscripción mensual",
+        price: "49 USD",
+        meta: "Por mes · Renovación automática hasta cancelación · 1 dispositivo",
+        text: "Suscripción mensual a la app BOJ S7-PLC PRO, con renovación automática hasta cancelación.",
         bullets: [
-          "Incluye solo app PRO",
+          "Sin curso",
+          "1 dispositivo",
+          "Renovación automática hasta cancelación",
           "Funciona offline hasta 2 días",
           "Acceso completo a diagnósticos PRO",
         ],
-        button: "Elegir mensual",
-        url: "https://pay.hotmart.com/B107066308U?off=pwoeyow0",
+        button: "Elegir suscripción",
+        url: "https://pay.hotmart.com/C107081619V?off=yzyw7mys",
+      },
+      {
+        title: "Mensual de pago único",
+        price: "59 USD",
+        meta: "Pago único · 1 mes · Sin renovación automática · 1 dispositivo",
+        text: "Acceso completo a la app BOJ S7-PLC PRO por 1 mes, mediante un único pago y sin renovación automática.",
+        bullets: [
+          "Sin curso",
+          "1 dispositivo",
+          "Sin renovación automática",
+          "Funciona offline hasta 2 días",
+          "Acceso completo a diagnósticos PRO",
+        ],
+        button: "Elegir pago único",
+        url: "https://pay.hotmart.com/B107066308U?off=l23qsbj9",
+      },
+      {
+        title: "Curso + licencia",
+        price: "89 USD",
+        meta: "Pago único · Curso permanente · App PRO por 1 mes · 1 dispositivo",
+        text: "Curso Diagnóstico S7-300/400 con acceso permanente y licencia BOJ S7-PLC PRO por 1 mes.",
+        bullets: [
+          "Curso con acceso permanente",
+          "App PRO por 1 mes",
+          "1 dispositivo",
+          "Funciona offline hasta 2 días",
+          "Acceso completo a diagnósticos PRO",
+        ],
+        button: "Elegir curso + licencia",
+        url: "https://pay.hotmart.com/P106348963R?off=srrm5ewf",
       },
       {
         title: "Profesional",
-        price: "350 USD",
-        meta: "6 meses · 2 dispositivos · App PRO + Curso",
+        price: "249 USD",
+        meta: "Pago único · 6 meses · 2 dispositivos · App PRO + Curso",
         text: "Plan recomendado para técnicos, automatistas, instrumentistas y personal de mantenimiento que necesitan usar la herramienta de forma recurrente y reforzar criterio técnico con material de apoyo.",
         bullets: [
           "Incluye app PRO",
@@ -1358,12 +1383,12 @@ export const offer = {
         ],
         button: "Elegir profesional",
         badge: "Más conveniente",
-        url: "https://pay.hotmart.com/B107069067M?off=il4qpdnn",
+        url: "https://pay.hotmart.com/B107069067M?off=hea8bgc1",
       },
       {
         title: "Empresarial",
-        price: "800 USD",
-        meta: "6 meses · 10 dispositivos · App PRO + Curso",
+        price: "549 USD",
+        meta: "Pago único · 6 meses · 10 dispositivos · App PRO + Curso",
         text: "Plan pensado para empresas, equipos de mantenimiento, áreas de automatización, soporte técnico interno o varias estaciones de trabajo.",
         bullets: [
           "Incluye app PRO",
@@ -1372,7 +1397,7 @@ export const offer = {
           "Pensado para equipos técnicos y empresas",
         ],
         button: "Elegir empresarial",
-        url: "https://pay.hotmart.com/Q107075095G?off=p9gw4o5m",
+        url: "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq",
       },
     ],
   },
