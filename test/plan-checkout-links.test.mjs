@@ -5,20 +5,88 @@ import test from "node:test";
 import { offer } from "../src/content.js";
 
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
 
-const expectedPlanUrls = new Map([
-  ["Mensual", "https://pay.hotmart.com/B107066308U?off=pwoeyow0"],
-  ["Profesional", "https://pay.hotmart.com/B107069067M?off=il4qpdnn"],
-  ["Empresarial", "https://pay.hotmart.com/Q107075095G?off=p9gw4o5m"],
-]);
+const expectedPlanMatrix = [
+  {
+    title: "Suscripción mensual",
+    price: "49 USD",
+    meta: "Por mes · Renovación automática hasta cancelación · 1 dispositivo",
+    url: "https://pay.hotmart.com/C107081619V?off=yzyw7mys",
+  },
+  {
+    title: "Mensual de pago único",
+    price: "59 USD",
+    meta: "Pago único · 1 mes · Sin renovación automática · 1 dispositivo",
+    url: "https://pay.hotmart.com/B107066308U?off=l23qsbj9",
+  },
+  {
+    title: "Curso + licencia",
+    price: "89 USD",
+    meta: "Pago único · Curso permanente · App PRO por 1 mes · 1 dispositivo",
+    url: "https://pay.hotmart.com/P106348963R?off=srrm5ewf",
+  },
+  {
+    title: "Profesional",
+    price: "249 USD",
+    meta: "Pago único · 6 meses · 2 dispositivos · App PRO + Curso",
+    url: "https://pay.hotmart.com/B107069067M?off=hea8bgc1",
+  },
+  {
+    title: "Empresarial",
+    price: "549 USD",
+    meta: "Pago único · 6 meses · 10 dispositivos · App PRO + Curso",
+    url: "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq",
+  },
+];
 
-test("asocia cada plan PRO con su checkout oficial", () => {
-  const actualPlanUrls = new Map(offer.app.proPlans.map(({ title, url }) => [title, url]));
+test("publica cinco opciones pagas separadas con precio, modalidad y checkout exactos", () => {
+  const actualPlanMatrix = offer.app.proPlans.map(({ title, price, meta, url }) => ({ title, price, meta, url }));
 
-  assert.deepEqual(actualPlanUrls, expectedPlanUrls);
+  assert.deepEqual(actualPlanMatrix, expectedPlanMatrix);
+  assert.equal(new Set(actualPlanMatrix.map(({ title }) => title)).size, 5);
+  assert.equal(new Set(actualPlanMatrix.map(({ url }) => url)).size, 5);
 });
 
-test("el listado de planes renderiza exclusivamente la URL propia del plan", () => {
+test("mantiene las prestaciones indicadas para cada opción", () => {
+  const plans = new Map(offer.app.proPlans.map((plan) => [plan.title, plan]));
+
+  assert.deepEqual(plans.get("Suscripción mensual").bullets, [
+    "Sin curso",
+    "1 dispositivo",
+    "Renovación automática hasta cancelación",
+    "Funciona offline hasta 2 días",
+    "Acceso completo a diagnósticos PRO",
+  ]);
+  assert.deepEqual(plans.get("Mensual de pago único").bullets, [
+    "Sin curso",
+    "1 dispositivo",
+    "Sin renovación automática",
+    "Funciona offline hasta 2 días",
+    "Acceso completo a diagnósticos PRO",
+  ]);
+  assert.deepEqual(plans.get("Curso + licencia").bullets, [
+    "Curso con acceso permanente",
+    "App PRO por 1 mes",
+    "1 dispositivo",
+    "Funciona offline hasta 2 días",
+    "Acceso completo a diagnósticos PRO",
+  ]);
+  assert.deepEqual(plans.get("Profesional").bullets, [
+    "Incluye app PRO",
+    "Incluye el curso con acceso permanente",
+    "Funciona offline hasta 2 días",
+    "Ideal para uso profesional recurrente",
+  ]);
+  assert.deepEqual(plans.get("Empresarial").bullets, [
+    "Incluye app PRO",
+    "Incluye el curso con acceso permanente",
+    "Funciona offline hasta 7 días",
+    "Pensado para equipos técnicos y empresas",
+  ]);
+});
+
+test("el listado renderiza exclusivamente la URL propia de cada plan", () => {
   const listStart = appSource.indexOf("{pricingCards.map((plan) => (");
   const listEnd = appSource.indexOf('<article className="app-pro-institutional">', listStart);
   const planListSource = appSource.slice(listStart, listEnd);
@@ -29,11 +97,36 @@ test("el listado de planes renderiza exclusivamente la URL propia del plan", () 
   assert.doesNotMatch(planListSource, /href=\{appProductUrl\}/);
 });
 
-test("preserva Trial, Institucional y el checkout del curso", () => {
+test("actualiza el curso a 89 USD, pago único y su oferta exacta", () => {
+  assert.equal(offer.course.price, "89 USD");
+  assert.equal(offer.course.priceValue, 89);
+  assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
+  assert.equal(offer.course.checkout.appMonths, 1);
+  assert.equal(offer.course.checkout.devices, 1);
+  assert.equal("promotionEndsAt" in offer.course, false);
+  assert.match(appSource, /Pago único · curso con acceso permanente/);
+  assert.doesNotMatch(appSource, /Precio de lanzamiento/);
+  assert.match(indexSource, /"price": "89"/);
+  assert.match(indexSource, /https:\/\/pay\.hotmart\.com\/P106348963R\?off=srrm5ewf/);
+  assert.doesNotMatch(indexSource, /priceValidUntil/);
+});
+
+test("preserva Trial e Institucional sin alterar sus destinos", () => {
+  assert.deepEqual(offer.app.trialPlan, {
+    title: "TRIAL",
+    price: "Gratis",
+    meta: "48 horas · Online · Funciones limitadas",
+    text: "Prueba inicial para conocer el flujo de diagnóstico de BOJ S7-PLC PRO antes de activar una licencia paga.",
+    bullets: [
+      "Acceso gratuito por 48 hs",
+      "Funciona solo online",
+      "Algunas funciones limitadas",
+      "Ideal para conocer la herramienta",
+    ],
+    button: "Probar gratis 48 hs",
+    url: "https://app.bojautomatizacion.com/",
+  });
   assert.equal(offer.app.productUrl, "https://app.bojautomatizacion.com/");
-  assert.equal(offer.app.trialPlan.url, "https://app.bojautomatizacion.com/");
-  assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R");
-  assert.equal(offer.course.checkout.status, "live");
 
   const institutionalStart = appSource.indexOf('<article className="app-pro-institutional">');
   const institutionalEnd = appSource.indexOf("</article>", institutionalStart);

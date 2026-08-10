@@ -926,15 +926,15 @@ const appFaqItems = [
   },
   {
     question: "¿La app funciona offline?",
-    answer: "Depende del plan. El Trial funciona solo online. Mensual y Profesional permiten uso offline hasta 2 días. Empresarial permite uso offline hasta 7 días.",
+    answer: "Depende del plan. El Trial funciona solo online. Suscripción mensual, Mensual de pago único, Curso + licencia y Profesional permiten uso offline hasta 2 días. Empresarial permite uso offline hasta 7 días.",
   },
   {
     question: "¿Cuántos dispositivos puedo usar?",
-    answer: "Depende del plan. Mensual incluye 1 dispositivo, Profesional incluye 2 dispositivos y Empresarial incluye 10 dispositivos.",
+    answer: "Depende del plan. Suscripción mensual, Mensual de pago único y Curso + licencia incluyen 1 dispositivo; Profesional incluye 2 dispositivos y Empresarial incluye 10 dispositivos.",
   },
   {
     question: "¿Qué planes incluyen curso?",
-    answer: "El plan Profesional y el plan Empresarial incluyen app PRO + Curso. El plan Mensual incluye solo la app PRO.",
+    answer: "Curso + licencia, Profesional y Empresarial incluyen el curso con acceso permanente. Suscripción mensual y Mensual de pago único incluyen solo la app PRO.",
   },
   {
     question: "¿Necesito conectar la app directamente al PLC?",
@@ -2349,9 +2349,6 @@ function S7SalesLanding({ course, eyebrow }) {
   const guaranteeNote = purchaseTarget.isFlowValidated
     ? "Pago seguro · Acceso inmediato · Garantía de 7 días"
     : "Garantía de 7 días · Acceso digital";
-  // Vigencia de la promoción, formateada DD/MM/YYYY para el badge de lanzamiento.
-  const promoEnds = offer.course.promotionEndsAt.split("-").reverse().join("/");
-
   const scrollToCourseSection = (event, sectionId) => {
     event.preventDefault();
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -2780,31 +2777,28 @@ function S7SalesLanding({ course, eyebrow }) {
           <div className="s7-sales-offer-panel">
             <div className="s7-sales-offer-product">
               <span className="s7-sales-launch">
-                <Clock size={15} aria-hidden="true" /> Precio de lanzamiento · hasta el {promoEnds}
+                <CheckCircle2 size={15} aria-hidden="true" /> Pago único · curso con acceso permanente
               </span>
-              <p className="s7-sales-kicker">Oferta única</p>
+              <p className="s7-sales-kicker">Curso + licencia</p>
               <h2>Curso Diagnóstico S7-300/400 + APP PRO</h2>
               <span className="s7-sales-offer-tagline">Incluye 1 mes de BOJ S7-PLC PRO</span>
             </div>
 
             <div className="s7-sales-offer-price">
-              <span className="s7-sales-offer-regular">
-                Antes <del>{offer.course.regularPrice} USD</del>
-              </span>
+              <span className="s7-sales-offer-regular">Pago único</span>
               <strong>{offer.course.price}</strong>
-              <span className="s7-sales-offer-savings">Ahorrás {offer.course.promotionalSavings} USD</span>
-              <p>Acceso digital al curso + herramienta PRO por 1 mes.</p>
+              <p>Acceso permanente al curso + herramienta PRO por 1 mes.</p>
               <div className="s7-sales-valuestack">
                 <div className="s7-sales-valuestack-row">
                   <span>App BOJ S7-PLC PRO — 1 mes</span>
-                  <span className="s7-sales-valuestack-value">vale 70 USD</span>
+                  <span className="s7-sales-valuestack-value">vale 59 USD</span>
                 </div>
                 <div className="s7-sales-valuestack-row">
                   <span>Curso completo + Método BOJ</span>
                   <span className="s7-sales-valuestack-value">incluido</span>
                 </div>
                 <div className="s7-sales-valuestack-total">
-                  <span>Todo junto, hoy</span>
+                  <span>Pago único</span>
                   <strong>{offer.course.price}</strong>
                 </div>
               </div>
@@ -3306,9 +3300,9 @@ function AppPage() {
         <div className="mock-home-container">
           <div className="app-pro-section-heading">
             <h2>Elige tu licencia PRO</h2>
-            <p>Trial inicial y planes pagos según tiempo de uso, dispositivos y modalidad offline.</p>
+            <p>Trial inicial y opciones pagas según modalidad, tiempo de uso, dispositivos y disponibilidad offline.</p>
             <p className="app-pro-plans-crosslink">
-              Los planes <strong>Profesional</strong> y <strong>Empresarial</strong> incluyen el{" "}
+              <strong>Curso + licencia</strong>, <strong>Profesional</strong> y <strong>Empresarial</strong> incluyen el{" "}
               <a href="/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.
             </p>
           </div>
