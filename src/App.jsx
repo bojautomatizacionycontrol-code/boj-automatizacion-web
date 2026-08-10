@@ -748,6 +748,9 @@ const coursesAvailableCards = [
   },
 ];
 
+const featuredProjects = projects.slice(0, 3);
+const additionalProjects = projects.slice(3);
+
 const coursesLearningBlocks = [
   {
     icon: "FileSearch",
@@ -2086,8 +2089,11 @@ function CourseAvailableCard({ course }) {
       <div className="course-available-visual">
         <img src={course.image} alt="" aria-hidden="true" loading="lazy" />
         <div aria-hidden="true" />
+        <span className="visual-disclaimer">Imagen ilustrativa</span>
         <strong>{course.label}</strong>
-        {course.upcoming ? <span className="course-status-badge">Próximamente</span> : null}
+        <span className="course-status-badge">
+          {course.upcoming ? "Próximamente" : "Disponible"}
+        </span>
         <a className="mock-btn mock-btn-primary" href={course.path}>
           {course.upcoming ? "Ver adelanto" : "Ver curso"} <ArrowRight size={18} />
         </a>
@@ -3441,10 +3447,29 @@ function WorksPage() {
     >
       <PortfolioPrep />
       <div className="works-grid">
-        {projects.map((project, index) => (
+        {featuredProjects.map((project, index) => (
           <ProjectCard key={project.title} project={project} index={index + 1} />
         ))}
       </div>
+      {additionalProjects.length ? (
+        <details className="works-archive">
+          <summary>
+            <span className="works-archive-summary">
+              <strong>Ver {additionalProjects.length} obras adicionales</strong>
+              <small>Casos completos con problema, intervención y resultado</small>
+            </span>
+          </summary>
+          <div className="works-grid works-grid-archive">
+            {additionalProjects.map((project, index) => (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                index={index + featuredProjects.length + 1}
+              />
+            ))}
+          </div>
+        </details>
+      ) : null}
       <RouteCTA
         title="Intervenciones técnicas para problemas reales de planta"
         text="El análisis puede partir del problema operativo, revisar el estado técnico actual y definir una solución con alcance claro, pruebas y puesta en marcha."
@@ -3508,15 +3533,16 @@ function TechnicalResourceCard({ resource }) {
 
   return (
     <article className="technical-resource-card">
-      <div className="resource-card-visual" aria-hidden="true">
+      <div className="resource-card-visual">
         {visual ? (
-          <img src={visual} alt="" loading="lazy" />
+          <img src={visual} alt="" aria-hidden="true" loading="lazy" />
         ) : (
-          <div className="resource-card-fallback">
+          <div className="resource-card-fallback" aria-hidden="true">
             <Icon name="MonitorCog" />
             <span>Visual técnico editable</span>
           </div>
         )}
+        <span className="visual-disclaimer">Imagen ilustrativa</span>
         <span className="resource-status">{resource.status}</span>
       </div>
       <div className="technical-resource-body">

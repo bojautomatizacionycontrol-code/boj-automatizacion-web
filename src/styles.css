@@ -20669,7 +20669,9 @@ textarea {
 }
 
 .mock-obras-media .works-image-disclaimer,
-.project-media .works-image-disclaimer {
+.project-media .works-image-disclaimer,
+.course-available-visual .visual-disclaimer,
+.resource-card-visual .visual-disclaimer {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -20691,6 +20693,113 @@ textarea {
   text-transform: uppercase;
   text-shadow: none;
   backdrop-filter: blur(6px);
+}
+
+.course-status-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border: 1px solid rgba(98, 210, 255, 0.48);
+  border-radius: 999px;
+  background: rgba(2, 11, 20, 0.84);
+  color: #dff7ff;
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: none;
+  backdrop-filter: blur(6px);
+}
+
+.works-archive {
+  margin-top: 24px;
+}
+
+.works-archive > summary {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 18px;
+  border: 1px solid rgba(98, 210, 255, 0.28);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(0, 174, 234, 0.12), rgba(0, 174, 234, 0.03)),
+    rgba(3, 14, 24, 0.92);
+  color: #f7fbff;
+  cursor: pointer;
+  list-style: none;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
+}
+
+.works-archive > summary::-webkit-details-marker {
+  display: none;
+}
+
+.works-archive > summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(98, 210, 255, 0.4);
+  border-radius: 50%;
+  color: var(--cyan);
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.works-archive[open] > summary::after {
+  content: "\2212";
+}
+
+.works-archive > summary:focus-visible {
+  outline: 3px solid rgba(98, 210, 255, 0.72);
+  outline-offset: 3px;
+}
+
+.works-archive-summary {
+  display: grid;
+  gap: 4px;
+}
+
+.works-archive-summary strong {
+  font-size: 1rem;
+}
+
+.works-archive-summary small {
+  color: rgba(225, 241, 250, 0.74);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.works-grid-archive {
+  margin-top: 24px;
+}
+
+.works-grid-archive .project-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 720px;
+}
+
+@media (max-width: 760px) {
+  .works-archive > summary {
+    min-height: 64px;
+    padding: 14px;
+  }
+
+  .works-archive-summary small {
+    max-width: 28ch;
+  }
 }
 
 .project-body {

@@ -26,7 +26,11 @@ test("el curso se describe sin limitar el material a dos PDF", () => {
   assert.match(indexSource, /material técnico descargable, guías prácticas y acceso permanente/);
 });
 
-test("las imágenes de Recursos son decorativas de forma consistente", () => {
-  assert.match(appSource, /className="resource-card-visual" aria-hidden="true"/);
-  assert.doesNotMatch(appSource, /aria-hidden=\{!visual\}/);
+test("las imágenes de Recursos se identifican como ilustrativas y preservan el estado accesible", () => {
+  assert.match(appSource, /className="resource-card-visual"/);
+  assert.doesNotMatch(appSource, /className="resource-card-visual" aria-hidden="true"/);
+  assert.match(appSource, /<img src=\{visual\} alt="" aria-hidden="true" loading="lazy" \/>/);
+  assert.match(appSource, /className="resource-card-fallback" aria-hidden="true"/);
+  assert.match(appSource, /className="visual-disclaimer">Imagen ilustrativa<\/span>/);
+  assert.match(appSource, /className="resource-status">\{resource\.status\}<\/span>/);
 });
