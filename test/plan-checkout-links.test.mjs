@@ -40,7 +40,15 @@ const expectedPlanMatrix = [
   },
 ];
 
-test("publica cinco opciones pagas separadas con precio, modalidad y checkout exactos", () => {
+const expectedAppGridTitles = [
+  "TRIAL",
+  "Suscripción mensual",
+  "Mensual de pago único",
+  "Profesional",
+  "Empresarial",
+];
+
+test("preserva las cinco ofertas pagas con precio, modalidad y checkout exactos", () => {
   const actualPlanMatrix = offer.app.proPlans.map(({ title, price, meta, url }) => ({ title, price, meta, url }));
 
   assert.deepEqual(actualPlanMatrix, expectedPlanMatrix);
@@ -86,6 +94,40 @@ test("mantiene las prestaciones indicadas para cada opción", () => {
   ]);
 });
 
+test("separa Curso + licencia de la grilla principal y publica una única franja de capacitación", () => {
+  const appGridTitles = [
+    offer.app.trialPlan.title,
+    ...offer.app.proPlans.filter(({ title }) => title !== "Curso + licencia").map(({ title }) => title),
+  ];
+
+  assert.deepEqual(appGridTitles, expectedAppGridTitles);
+  assert.equal(appGridTitles.length, 5);
+  assert.doesNotMatch(appGridTitles.join("\n"), /Curso \+ licencia/);
+  assert.match(
+    appSource,
+    /const appLicensePlans = appProPlans\.filter\(\(\{ title \}\) => title !== "Curso \+ licencia"\);/
+  );
+  assert.match(appSource, /const pricingCards = \[appTrialPlan, \.\.\.appLicensePlans\];/);
+
+  const trainingStart = appSource.indexOf('<aside className="app-pro-training-strip"');
+  const institutionalStart = appSource.indexOf('<article className="app-pro-institutional">', trainingStart);
+  const trainingSource = appSource.slice(trainingStart, institutionalStart);
+
+  assert.notEqual(trainingStart, -1);
+  assert.notEqual(institutionalStart, -1);
+  assert.equal(appSource.match(/className="app-pro-training-strip"/g)?.length, 1);
+  assert.match(trainingSource, /FORMACIÓN TÉCNICA/);
+  assert.match(trainingSource, /¿También necesitás capacitación\?/);
+  assert.match(
+    trainingSource,
+    /Curso Diagnóstico S7-300\/400 con acceso permanente \+ 1 mes de BOJ S7-PLC PRO\./
+  );
+  assert.match(trainingSource, /\{offer\.course\.price\} · Pago único/);
+  assert.match(trainingSource, /Ver curso y contenidos/);
+  assert.match(trainingSource, /href="\/cursos\/s7-300-400"/);
+  assert.doesNotMatch(trainingSource, /target="_blank"|pay\.hotmart\.com/);
+});
+
 test("el listado renderiza exclusivamente la URL propia de cada plan", () => {
   const listStart = appSource.indexOf("{pricingCards.map((plan) => (");
   const listEnd = appSource.indexOf('<article className="app-pro-institutional">', listStart);
@@ -109,6 +151,8 @@ test("actualiza el curso a 89 USD, pago único y su oferta exacta", () => {
   assert.match(indexSource, /"price": "89"/);
   assert.match(indexSource, /https:\/\/pay\.hotmart\.com\/P106348963R\?off=srrm5ewf/);
   assert.doesNotMatch(indexSource, /priceValidUntil/);
+  assert.equal(appSource.match(/<PurchaseCTA\b/g)?.length, 2);
+  assert.equal(appSource.match(/href: purchaseTarget\.href/g)?.length, 1);
 });
 
 test("preserva Trial e Institucional sin alterar sus destinos", () => {
