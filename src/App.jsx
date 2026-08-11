@@ -2613,27 +2613,6 @@ function S7SalesLanding({ course, eyebrow }) {
 
       <S7ProofStrip />
 
-      <S7MethodStrip />
-
-      <section className="s7-sales-section s7-sales-problem">
-        <div className="s7-sales-container s7-sales-problem-grid">
-          <div className="s7-sales-section-copy">
-            <p className="s7-sales-kicker">Qué problema resuelve</p>
-            <h2>No es un curso de programación. Es para diagnosticar fallas reales en condiciones de planta.</h2>
-            <p>Aprendé a pensar como un técnico experto cuando la máquina está parada y la presión operativa es alta.</p>
-          </div>
-          <div className="s7-sales-problem-cards">
-            {problemCards.map((item) => (
-              <article className="s7-sales-light-card" key={item.title}>
-                <Icon name={item.icon} size={46} />
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="s7-sales-section s7-sales-dark s7-sales-learning">
         <div className="s7-sales-container">
           <div className="s7-sales-centered-heading">
@@ -2914,6 +2893,27 @@ function S7SalesLanding({ course, eyebrow }) {
                 módulo cambiado a ciegas ya vale más que el curso completo.
               </span>
             </p>
+          </div>
+        </div>
+      </section>
+
+      <S7MethodStrip />
+
+      <section className="s7-sales-section s7-sales-problem">
+        <div className="s7-sales-container s7-sales-problem-grid">
+          <div className="s7-sales-section-copy">
+            <p className="s7-sales-kicker">Qué problema resuelve</p>
+            <h2>No es un curso de programación. Es para diagnosticar fallas reales en condiciones de planta.</h2>
+            <p>Aprendé a pensar como un técnico experto cuando la máquina está parada y la presión operativa es alta.</p>
+          </div>
+          <div className="s7-sales-problem-cards">
+            {problemCards.map((item) => (
+              <article className="s7-sales-light-card" key={item.title}>
+                <Icon name={item.icon} size={46} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

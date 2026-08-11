@@ -22719,3 +22719,323 @@ h3,
     transform: none;
   }
 }
+
+/* App PRO: composición equilibrada para problemas y funcionamiento */
+.app-pro-problems-how-section {
+  padding: clamp(48px, 6vw, 76px) 0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(0, 174, 239, 0.08), transparent 34%),
+    linear-gradient(180deg, #f8fbfe 0%, #eef5fa 100%);
+}
+
+.app-pro-problems-how-grid {
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  align-items: stretch;
+  gap: clamp(20px, 2.4vw, 30px);
+}
+
+.app-pro-problems-panel,
+.app-pro-how-panel {
+  position: relative;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  padding: clamp(22px, 2.4vw, 30px);
+  overflow: hidden;
+  border: 1px solid rgba(19, 69, 101, 0.12);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 22px 50px rgba(18, 55, 78, 0.1);
+}
+
+.app-pro-problems-panel::before,
+.app-pro-how-panel::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--app-cyan-2), rgba(0, 174, 239, 0.16));
+  content: "";
+}
+
+.app-pro-problems-panel h2,
+.app-pro-how-panel h2 {
+  display: flex;
+  min-height: 2.25em;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin: 0 0 22px;
+  color: #061826;
+  font-size: clamp(1.65rem, 2.2vw, 2.15rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-align: left;
+}
+
+.app-pro-problem-grid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.app-pro-problem-grid .app-pro-problem-item,
+.app-pro-problem-grid .app-pro-problem-item:nth-child(3n),
+.app-pro-problem-grid .app-pro-problem-item:nth-last-child(-n + 3) {
+  display: grid;
+  min-height: 116px;
+  height: 100%;
+  grid-template-columns: 42px minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  align-content: center;
+  align-items: start;
+  gap: 4px 12px;
+  padding: 16px;
+  border: 1px solid rgba(19, 69, 101, 0.12);
+  border-radius: 13px;
+  background: linear-gradient(145deg, #ffffff 0%, #f5faff 100%);
+  text-align: left;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.app-pro-problem-grid .app-pro-problem-item:hover {
+  border-color: rgba(0, 174, 239, 0.34);
+  box-shadow: 0 12px 24px rgba(18, 55, 78, 0.08);
+  transform: translateY(-2px);
+}
+
+.app-pro-problem-item > svg {
+  grid-row: 1 / span 2;
+  align-self: center;
+  color: #029bd2;
+}
+
+.app-pro-problem-item h3 {
+  align-self: end;
+  margin: 0;
+  color: #071622;
+  font-size: 0.96rem;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.app-pro-problem-item p {
+  margin: 0;
+  color: #4f6575;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.app-pro-how-steps {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  align-content: stretch;
+  gap: 10px;
+}
+
+.app-pro-how-step-wrap {
+  position: relative;
+  display: block;
+  height: 100%;
+}
+
+.app-pro-how-step-wrap:not(:last-child)::after {
+  position: absolute;
+  bottom: -10px;
+  left: 19px;
+  z-index: 2;
+  height: 10px;
+  border-left: 2px dotted rgba(0, 174, 239, 0.34);
+  content: "";
+}
+
+.app-pro-how-step {
+  display: grid;
+  min-height: 116px;
+  height: 100%;
+  grid-template-columns: 38px 54px minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  align-content: center;
+  align-items: center;
+  justify-items: start;
+  gap: 4px 12px;
+  padding: 16px 18px;
+  border: 1px solid rgba(0, 153, 210, 0.2);
+  border-radius: 13px;
+  background: linear-gradient(135deg, rgba(233, 248, 255, 0.92), #ffffff 72%);
+  box-shadow: none;
+  text-align: left;
+}
+
+.app-pro-how-step .app-pro-step-number {
+  position: static;
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  grid-row: 1 / span 2;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #061826;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 900;
+}
+
+.app-pro-how-step .app-pro-step-icon-circle {
+  width: 52px;
+  height: 52px;
+  grid-row: 1 / span 2;
+  align-self: center;
+  border: 1px solid rgba(0, 174, 239, 0.26);
+  background: #edfaff;
+  color: #019bd4;
+}
+
+.app-pro-how-step h3 {
+  align-self: end;
+  margin: 0;
+  color: #071622;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.app-pro-how-step p {
+  align-self: start;
+  margin: 0;
+  color: #4f6575;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.app-pro-how-step-wrap .app-pro-step-arrow {
+  display: none;
+}
+
+@media (max-width: 1180px) {
+  .app-pro-problems-how-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-pro-problems-panel h2,
+  .app-pro-how-panel h2 {
+    min-height: 0;
+  }
+
+  .app-pro-problem-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-pro-how-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: 1fr;
+  }
+
+  .app-pro-how-step-wrap:not(:last-child)::after {
+    display: none;
+  }
+
+  .app-pro-how-step {
+    min-height: 190px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto 1fr;
+    align-content: start;
+    justify-items: center;
+    gap: 9px;
+    text-align: center;
+  }
+
+  .app-pro-how-step .app-pro-step-number,
+  .app-pro-how-step .app-pro-step-icon-circle,
+  .app-pro-how-step h3,
+  .app-pro-how-step p {
+    grid-row: auto;
+  }
+
+  .app-pro-how-step h3,
+  .app-pro-how-step p {
+    align-self: auto;
+    text-align: center;
+  }
+}
+
+@media (max-width: 760px) {
+  .app-pro-problems-how-section {
+    padding: 36px 0 42px;
+  }
+
+  .app-pro-problems-panel,
+  .app-pro-how-panel {
+    padding: 20px 16px;
+    border-radius: 17px;
+  }
+
+  .app-pro-problems-panel h2,
+  .app-pro-how-panel h2 {
+    margin-bottom: 18px;
+    font-size: clamp(1.55rem, 8vw, 1.9rem);
+  }
+
+  .app-pro-problem-grid,
+  .app-pro-how-steps {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
+
+  .app-pro-problem-grid .app-pro-problem-item,
+  .app-pro-problem-grid .app-pro-problem-item:nth-child(3n),
+  .app-pro-problem-grid .app-pro-problem-item:nth-last-child(-n + 3) {
+    min-height: 106px;
+    padding: 14px;
+  }
+
+  .app-pro-how-step {
+    min-height: 112px;
+    grid-template-columns: 36px 48px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    align-content: center;
+    justify-items: start;
+    padding: 14px;
+    text-align: left;
+  }
+
+  .app-pro-how-step .app-pro-step-number,
+  .app-pro-how-step .app-pro-step-icon-circle {
+    grid-row: 1 / span 2;
+  }
+
+  .app-pro-how-step .app-pro-step-icon-circle {
+    width: 46px;
+    height: 46px;
+  }
+
+  .app-pro-how-step h3,
+  .app-pro-how-step p {
+    align-self: auto;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-pro-problem-grid .app-pro-problem-item {
+    transition: none;
+  }
+
+  .app-pro-problem-grid .app-pro-problem-item:hover {
+    transform: none;
+  }
+}
