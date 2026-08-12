@@ -155,7 +155,7 @@ test("actualiza el curso a 89 USD, pago único y su oferta exacta", () => {
   assert.equal(appSource.match(/href: purchaseTarget\.href/g)?.length, 1);
 });
 
-test("preserva Trial e Institucional sin alterar sus destinos", () => {
+test("preserva Trial y deriva Institucional al contacto", () => {
   assert.deepEqual(offer.app.trialPlan, {
     title: "TRIAL",
     price: "Gratis",
@@ -178,6 +178,8 @@ test("preserva Trial e Institucional sin alterar sus destinos", () => {
 
   assert.notEqual(institutionalStart, -1);
   assert.notEqual(institutionalEnd, -1);
-  assert.match(institutionalSource, /href=\{appProductUrl\}/);
+  assert.match(institutionalSource, /href="\/contacto"/);
+  assert.doesNotMatch(institutionalSource, /href=\{appProductUrl\}/);
+  assert.doesNotMatch(institutionalSource, /target="_blank"/);
   assert.match(institutionalSource, /Consultar condiciones/);
 });
