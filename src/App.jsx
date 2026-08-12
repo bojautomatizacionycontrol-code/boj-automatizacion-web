@@ -1368,27 +1368,38 @@ function HeroAction({ action, variant }) {
 }
 
 // Hero unificado para toda la web: misma altura, estructura y tipografia.
-function Hero({ image, eyebrow, title, subtitle, primary, secondary, note }) {
+function Hero({ image, eyebrow, title, subtitle, primary, secondary, note, aside }) {
+  const content = (
+    <>
+      {eyebrow ? <p className="boj-hero-eyebrow">{eyebrow}</p> : null}
+      <h1 className="boj-hero-title">{title}</h1>
+      {subtitle ? <p className="boj-hero-subtitle">{subtitle}</p> : null}
+      {primary || secondary ? (
+        <div className="boj-hero-actions">
+          <HeroAction action={primary} variant="mock-btn-primary" />
+          <HeroAction action={secondary} variant="mock-btn-outline" />
+        </div>
+      ) : null}
+      {note ? (
+        <p className="boj-hero-note">
+          <ShieldCheck size={16} aria-hidden="true" />
+          <span>{note}</span>
+        </p>
+      ) : null}
+    </>
+  );
+
   return (
     <section className="boj-hero">
       {image ? <img className="boj-hero-bg" src={image} alt="" aria-hidden="true" /> : null}
       <div className="boj-hero-shade" aria-hidden="true" />
-      <div className="mock-home-container boj-hero-inner">
-        {eyebrow ? <p className="boj-hero-eyebrow">{eyebrow}</p> : null}
-        <h1 className="boj-hero-title">{title}</h1>
-        {subtitle ? <p className="boj-hero-subtitle">{subtitle}</p> : null}
-        {primary || secondary ? (
-          <div className="boj-hero-actions">
-            <HeroAction action={primary} variant="mock-btn-primary" />
-            <HeroAction action={secondary} variant="mock-btn-outline" />
-          </div>
-        ) : null}
-        {note ? (
-          <p className="boj-hero-note">
-            <ShieldCheck size={16} aria-hidden="true" />
-            <span>{note}</span>
-          </p>
-        ) : null}
+      <div className={`mock-home-container boj-hero-inner${aside ? " boj-hero-inner--with-aside" : ""}`}>
+        {aside ? (
+          <>
+            <div className="boj-hero-copy">{content}</div>
+            <div className="boj-hero-aside">{aside}</div>
+          </>
+        ) : content}
       </div>
     </section>
   );
@@ -1790,7 +1801,7 @@ function LandingContactForm() {
 function ServicesPage() {
   const scrollToServiceDetails = (event) => {
     event.preventDefault();
-    document.getElementById("servicios-principales")?.scrollIntoView({
+    document.getElementById("areas-de-servicio")?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
@@ -1800,18 +1811,51 @@ function ServicesPage() {
     <div className="services-redesign-page">
       <Hero
         image={heroServicios}
-        eyebrow="Servicios"
-        title="Servicios técnicos para reducir paradas y sostener automatización industrial"
-        subtitle="Diagnóstico, ingeniería, programación, redes, tableros y puesta en marcha con experiencia real en plantas industriales y foco en continuidad operativa."
+        eyebrow="Servicios industriales"
+        title="Diagnóstico e ingeniería para resolver fallas y sostener la operación"
+        subtitle="PLC, HMI, SCADA, redes, tableros e instrumentación. Relevamos el problema, ordenamos la causa probable y definimos el próximo paso técnico con evidencia de campo."
         primary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para solicitar un diagnóstico industrial.") }}
-        secondary={{ label: "Ver áreas de servicio", href: "/servicios", onClick: scrollToServiceDetails }}
+        secondary={{ label: "Ver qué podemos resolver", href: "/servicios#areas-de-servicio", onClick: scrollToServiceDetails }}
+        aside={(
+          <aside className="services-intake-card" aria-label="Datos útiles para iniciar un diagnóstico">
+            <p className="services-intake-eyebrow">Para orientar el primer contacto</p>
+            <h2>¿Qué está pasando en planta?</h2>
+            <ul>
+              <li>
+                <span>01</span>
+                <div>
+                  <strong>Falla o parada</strong>
+                  <p>PLC, HMI, red, señal o accionamiento.</p>
+                </div>
+              </li>
+              <li>
+                <span>02</span>
+                <div>
+                  <strong>Equipo involucrado</strong>
+                  <p>Marca, modelo y sector del proceso.</p>
+                </div>
+              </li>
+              <li>
+                <span>03</span>
+                <div>
+                  <strong>Evidencia disponible</strong>
+                  <p>Fotos, alarmas, backup o descripción breve.</p>
+                </div>
+              </li>
+            </ul>
+            <p className="services-intake-note">
+              <ClipboardCheck size={18} aria-hidden="true" />
+              <span>Con esos datos podemos ordenar alcance, riesgo y próximo paso técnico.</span>
+            </p>
+          </aside>
+        )}
       />
 
       <section className="services-workflow-section">
         <div className="mock-home-container">
           <div className="services-section-heading services-workflow-heading">
-            <h2>Cómo trabajamos</h2>
-            <p>Un enfoque técnico orientado a diagnóstico claro, decisión correcta y continuidad operativa.</p>
+            <h2>Un método para intervenir con criterio</h2>
+            <p>Del síntoma al próximo paso técnico, con evidencia, alcance claro y una intervención acorde al riesgo.</p>
           </div>
           <div className="services-workflow-grid">
             {serviceWorkflowCards.map((card) => (
@@ -1820,6 +1864,38 @@ function ServicesPage() {
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="services-redesign-section services-areas-section" id="areas-de-servicio">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-area-heading">
+            <h2>Qué necesitás resolver</h2>
+            <p>Elegí el punto de entrada más cercano al problema actual.</p>
+          </div>
+          <div className="services-area-grid">
+            {servicesAreaCards.map((card) => (
+              <article className="services-area-card" key={card.title}>
+                <Icon name={card.icon} size={30} />
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="services-redesign-section services-main-section" id="servicios-principales">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-main-heading">
+            <h2>Cómo podemos intervenir</h2>
+            <p>Alcance, aplicaciones y resultado esperado de cada servicio principal.</p>
+          </div>
+          <div className="services-main-grid">
+            {mainServiceCards.map((service) => (
+              <ServicePrimaryCard key={service.title} service={service} />
             ))}
           </div>
         </div>
@@ -1875,37 +1951,6 @@ function ServicesPage() {
                 </article>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      <section className="services-redesign-section services-areas-section" id="areas-de-servicio">
-        <div className="mock-home-container">
-          <div className="services-section-heading services-area-heading">
-            <h2>Áreas de servicio</h2>
-            <p>Servicios técnicos para automatización, diagnóstico y soporte industrial.</p>
-          </div>
-          <div className="services-area-grid">
-            {servicesAreaCards.map((card) => (
-              <article className="services-area-card" key={card.title}>
-                <Icon name={card.icon} size={30} />
-                <h3>{card.title}</h3>
-                <p>{card.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="services-redesign-section services-main-section" id="servicios-principales">
-        <div className="mock-home-container">
-          <div className="services-section-heading services-main-heading">
-            <h2>Servicios principales</h2>
-          </div>
-          <div className="services-main-grid">
-            {mainServiceCards.map((service) => (
-              <ServicePrimaryCard key={service.title} service={service} />
-            ))}
           </div>
         </div>
       </section>
