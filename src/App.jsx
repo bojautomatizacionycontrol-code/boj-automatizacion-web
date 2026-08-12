@@ -3535,8 +3535,8 @@ function AppPage() {
                 con múltiples usuarios o programas corporativos.
               </p>
             </div>
-            <a className="mock-btn mock-btn-outline" href={appProductUrl} target="_blank" rel="noreferrer">
-              Consultar condiciones <ExternalLink size={17} />
+            <a className="mock-btn mock-btn-outline" href="/contacto">
+              Consultar condiciones <ArrowRight size={17} aria-hidden="true" />
             </a>
           </article>
         </div>

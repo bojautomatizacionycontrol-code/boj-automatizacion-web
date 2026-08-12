@@ -6,6 +6,11 @@
       "source": "/inicio",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/contacto",
+      "permanent": true
     }
   ],
   "rewrites": [
