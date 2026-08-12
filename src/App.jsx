@@ -2604,8 +2604,8 @@ function S7SalesLanding({ course, eyebrow }) {
       <Hero
         image={heroCursoS7}
         eyebrow="Diagnóstico industrial · Método BOJ"
-        title="Cuando la línea está parada y todos te miran, dejá de adivinar."
-        subtitle="Aprendé a diagnosticar fallas reales en PLC Siemens S7-300/400 —CPU, PROFIBUS, módulos y señales— con una secuencia probada: del síntoma a la causa con evidencia, no con prueba y error. Para mantenimiento que trabaja bajo presión."
+        title="Diagnosticá fallas reales en PLC S7-300/400 con método y evidencia."
+        subtitle="Aprendé una secuencia práctica para interpretar síntomas, reunir evidencia y llegar a la causa probable en CPU, PROFIBUS, módulos y señales. Formación técnica para mantenimiento industrial que necesita decidir con criterio bajo presión."
         primary={heroPurchaseAction}
         secondary={{ label: "Ver qué incluye", href: "/cursos/s7-300-400", onClick: (event) => scrollToCourseSection(event, "curso-s7-incluye") }}
         note={guaranteeNote}
