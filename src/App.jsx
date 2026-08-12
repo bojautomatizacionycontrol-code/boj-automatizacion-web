@@ -250,6 +250,42 @@ const quickServices = [
   "App de diagnóstico",
 ];
 
+const contactDecisionPaths = [
+  {
+    eyebrow: "Urgencia en planta",
+    title: "Falla o línea detenida",
+    description:
+      "Si producción está afectada, compartí el síntoma, el equipo involucrado y la prioridad. Coordinamos disponibilidad y próximo paso.",
+    action: "Priorizar por WhatsApp",
+    icon: "TriangleAlert",
+    tone: "urgent",
+    href: whatsappUrl(
+      "Hola, necesito consultar por una falla o línea detenida. El equipo involucrado y el síntoma son:",
+    ),
+    external: true,
+  },
+  {
+    eyebrow: "Ingeniería",
+    title: "Proyecto, migración o tablero",
+    description:
+      "Contanos la instalación actual, el alcance y el objetivo para ordenar una primera revisión técnica sin perder contexto.",
+    action: "Preparar consulta",
+    icon: "Wrench",
+    tone: "project",
+    href: "#consulta-tecnica",
+  },
+  {
+    eyebrow: "Formación y software",
+    title: "Curso, App PRO o licencias",
+    description:
+      "Indicá si buscás capacitación, acceso individual o una solución para un equipo técnico y te orientamos hacia la opción adecuada.",
+    action: "Consultar opciones",
+    icon: "GraduationCap",
+    tone: "training",
+    href: "#consulta-tecnica",
+  },
+];
+
 const projectVisuals = [
   plantVisual,
   plcCabinetVisual,
@@ -3868,29 +3904,55 @@ function ContactPage() {
   return (
     <PageShell
       eyebrow="Contacto"
-      title="Contacto técnico para industria, mantenimiento e ingeniería"
-      subtitle="Consultá por diagnóstico, servicios, cursos o licencias BOJ S7-PLC PRO. También atendemos consultas por automatización, migraciones, tableros y redes industriales."
+      title="Hablemos del problema técnico o la solución que necesitás"
+      subtitle="Elegí el tipo de consulta y compartí el contexto esencial. Atendemos urgencias de planta, proyectos de automatización, cursos y licencias BOJ S7-PLC PRO."
       heroImage={heroContacto}
       heroPrimary={{ label: "Escribir por WhatsApp", href: whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica."), external: true }}
       heroSecondary={{ label: "Enviar email", href: `mailto:${contact.email}` }}
     >
-      <section className="contact-direct">
+      <section className="contact-direct contact-decision-intro">
         <div>
-          <p className="eyebrow">Atención directa técnica</p>
-          <h2>Consultá por diagnóstico, servicios, cursos o licencias BOJ S7-PLC PRO</h2>
+          <p className="eyebrow">Empezá por acá</p>
+          <h2>Elegí la consulta que mejor describe tu situación</h2>
           <p>
-            La consulta puede incluir el síntoma, el PLC o red involucrada, una foto del tablero
-            o la necesidad de capacitación. La primera respuesta busca ordenar prioridad,
-            alcance y acción posible.
+            Así llegamos a la primera conversación con el contexto correcto, sin hacerte repetir
+            información ni mezclar una urgencia de planta con una consulta comercial.
           </p>
         </div>
-        <PrimaryLink href={whatsappUrl("Hola, escribo desde la web de BOJ para solicitar atención técnica por una falla de planta, automatización, curso o migración.")}>
-          <Phone size={18} /> Escribir por WhatsApp
-        </PrimaryLink>
       </section>
-      <div className="contact-grid">
+
+      <div className="contact-route-grid" aria-label="Tipos de consulta">
+        {contactDecisionPaths.map((path) => {
+          const Icon = icons[path.icon];
+          return (
+            <a
+              className={`contact-route-card contact-route-card--${path.tone}`}
+              href={path.href}
+              key={path.title}
+              target={path.external ? "_blank" : undefined}
+              rel={path.external ? "noreferrer" : undefined}
+            >
+              <span className="contact-route-icon" aria-hidden="true">
+                <Icon size={22} />
+              </span>
+              <span className="contact-route-kicker">{path.eyebrow}</span>
+              <h3>{path.title}</h3>
+              <p>{path.description}</p>
+              <span className="contact-route-action">
+                {path.action} <ArrowRight size={17} aria-hidden="true" />
+              </span>
+            </a>
+          );
+        })}
+      </div>
+
+      <div className="contact-grid" id="consulta-tecnica">
         <div className="contact-panel">
-          <h2>BOJ Automatización y Control</h2>
+          <h2>Contacto y datos útiles</h2>
+          <p className="contact-panel-intro">
+            Si la consulta no es urgente, usá el formulario o escribinos por el canal que te resulte
+            más cómodo. La información llega al mismo equipo técnico.
+          </p>
           <ContactLine icon="Wrench" label="Responsable" value={contact.responsible} />
           <ContactLine icon="MapPin" label="Ubicación" value={contact.location} />
           <ContactLine icon="Mail" label="Email" value={contact.email} href={`mailto:${contact.email}`} />
@@ -3905,7 +3967,7 @@ function ContactPage() {
             <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
           </div>
           <div className="diagnostic-checklist">
-            <h3>Para acelerar una consulta técnica</h3>
+            <h3>Para darte una primera respuesta útil</h3>
             {contactChecklist.map((item) => (
               <CheckItem key={item}>{item}</CheckItem>
             ))}
@@ -3922,7 +3984,7 @@ function ContactPage() {
       </div>
 
       <section className="inner-section">
-        <h2>Consultas frecuentes</h2>
+        <h2>También podés consultar por</h2>
         <div className="function-grid">
           {quickServices.map((item) => (
             <CheckItem key={item}>{item}</CheckItem>
@@ -3969,10 +4031,10 @@ function ContactForm() {
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
-      <h2>Enviar consulta</h2>
+      <h2>Contanos el caso</h2>
       <p>
-        La consulta llega a {contact.email}. Respondemos normalmente dentro de 48 horas hábiles.
-        Las fallas urgentes se coordinan por WhatsApp y están sujetas a disponibilidad.
+        Completá los datos esenciales para derivar bien la consulta. Respondemos normalmente dentro
+        de 48 horas hábiles; las fallas urgentes se coordinan por WhatsApp y están sujetas a disponibilidad.
       </p>
       <label>
         Nombre
