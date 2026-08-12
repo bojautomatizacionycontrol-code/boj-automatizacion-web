@@ -3113,7 +3113,11 @@ function AppPage() {
       <section className="app-pro-problems-how-section">
         <div className="mock-home-container app-pro-problems-how-grid">
           <div className="app-pro-problems-panel">
-            <h2>Problemas que ayuda a resolver</h2>
+            <div className="app-pro-panel-heading">
+              <span className="app-pro-section-kicker">DIAGNÓSTICO EN CAMPO</span>
+              <h2>Problemas que ayuda a resolver</h2>
+              <p>Identificá el tipo de falla y ordená la búsqueda antes de intervenir el equipo.</p>
+            </div>
             <div className="app-pro-problem-grid">
               {appProblemItems.map((item) => (
                 <article className="app-pro-problem-item" key={item.title}>
@@ -3125,7 +3129,11 @@ function AppPage() {
             </div>
           </div>
           <div className="app-pro-how-panel">
-            <h2>Cómo funciona</h2>
+            <div className="app-pro-panel-heading">
+              <span className="app-pro-section-kicker">FLUJO DE TRABAJO</span>
+              <h2>Cómo funciona</h2>
+              <p>Del síntoma a una hipótesis priorizada y una verificación concreta en campo.</p>
+            </div>
             <div className="app-pro-how-steps">
               {appHowItWorks.map((item, index) => (
                 <div className="app-pro-how-step-wrap" key={item.title}>
@@ -3152,7 +3160,9 @@ function AppPage() {
       <section className="app-pro-dark-section app-pro-includes-section">
         <div className="mock-home-container">
           <div className="app-pro-section-heading">
+            <span className="app-pro-section-kicker">HERRAMIENTAS DE DIAGNÓSTICO</span>
             <h2>Qué incluye BOJ S7-PLC PRO</h2>
+            <p>Un entorno práctico para consultar, contrastar y documentar el diagnóstico desde el navegador.</p>
           </div>
           <div className="app-pro-include-grid">
             {appProIncludes.map((item) => (
@@ -3352,8 +3362,9 @@ function AppPage() {
       <section className="app-pro-plans-section" id="planes-pro">
         <div className="mock-home-container">
           <div className="app-pro-section-heading">
+            <span className="app-pro-section-kicker">LICENCIAS Y MODALIDADES</span>
             <h2>Elegí tu licencia PRO</h2>
-            <p>Trial inicial y opciones pagas según modalidad, tiempo de uso, dispositivos y disponibilidad offline.</p>
+            <p>Compará renovación, duración, dispositivos y uso offline antes de elegir.</p>
             <p className="app-pro-plans-crosslink">
               <strong>Profesional</strong> y <strong>Empresarial</strong> incluyen el{" "}
               <a href="/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.

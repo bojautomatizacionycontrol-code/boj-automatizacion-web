@@ -23039,3 +23039,124 @@ h3,
     transform: none;
   }
 }
+
+/* App PRO UX-2: jerarquía editorial y consistencia visual. */
+.app-pro-section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #008fca;
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.app-pro-section-kicker::before {
+  width: 1.5rem;
+  height: 2px;
+  flex: 0 0 auto;
+  background: currentColor;
+  content: "";
+}
+
+.app-pro-panel-heading {
+  display: flex;
+  min-height: 9.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 0 0 1.4rem;
+  padding-top: 0.15rem;
+}
+
+.app-pro-problems-panel .app-pro-panel-heading h2,
+.app-pro-how-panel .app-pro-panel-heading h2 {
+  min-height: 0;
+  align-items: initial;
+  margin: 0.65rem 0;
+}
+
+.app-pro-panel-heading > p {
+  max-width: 55ch;
+  margin: 0;
+  color: #4f6575;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.app-pro-page .app-pro-section-heading {
+  max-width: 47.5rem;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.app-pro-page .app-pro-section-heading .app-pro-section-kicker {
+  justify-content: center;
+}
+
+.app-pro-page .app-pro-section-heading > p:not(.app-pro-plans-crosslink) {
+  max-width: 42.5rem;
+  margin-right: auto;
+  margin-left: auto;
+  line-height: 1.55;
+}
+
+.app-pro-includes-section .app-pro-section-heading,
+.app-pro-plans-section .app-pro-section-heading {
+  margin-bottom: 1.85rem;
+}
+
+.app-pro-includes-section .app-pro-section-kicker {
+  color: #51d7ff;
+}
+
+.app-pro-includes-section .app-pro-section-heading > p {
+  color: rgba(230, 244, 252, 0.76);
+}
+
+.app-pro-includes-section .app-pro-include-card {
+  border: 1px solid rgba(81, 215, 255, 0.14);
+  background: linear-gradient(145deg, rgba(10, 38, 55, 0.96), rgba(5, 25, 38, 0.98));
+  box-shadow: 0 1rem 2.4rem rgba(0, 11, 20, 0.2);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.app-pro-includes-section .app-pro-include-card:hover {
+  border-color: rgba(81, 215, 255, 0.32);
+  box-shadow: 0 1.2rem 2.8rem rgba(0, 11, 20, 0.28);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1180px) {
+  .app-pro-panel-heading {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .app-pro-panel-heading {
+    margin-bottom: 1.15rem;
+  }
+
+  .app-pro-section-kicker {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+  }
+
+  .app-pro-page .app-pro-section-heading {
+    max-width: 32rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-pro-includes-section .app-pro-include-card {
+    transition: none;
+  }
+
+  .app-pro-includes-section .app-pro-include-card:hover {
+    transform: none;
+  }
+}
