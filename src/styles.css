@@ -23490,3 +23490,298 @@ h3,
     transform: none;
   }
 }
+
+/* App PRO: relación clara entre orientación inicial y diagnóstico online. */
+.app-pro-positioning-section {
+  padding: clamp(52px, 6vw, 82px) 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(0, 174, 239, 0.16), transparent 34%),
+    radial-gradient(circle at 88% 86%, rgba(40, 126, 255, 0.12), transparent 32%),
+    linear-gradient(145deg, #061826 0%, #0a2335 58%, #071c2b 100%);
+  color: #ffffff;
+}
+
+.app-pro-positioning-heading {
+  max-width: 850px;
+  margin: 0 auto clamp(26px, 3vw, 38px);
+  text-align: center;
+}
+
+.app-pro-positioning-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: #58d2f7;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+}
+
+.app-pro-positioning-eyebrow::before {
+  width: 24px;
+  height: 2px;
+  background: currentColor;
+  content: "";
+}
+
+.app-pro-positioning-heading h2 {
+  margin: 0.85rem 0 0.9rem;
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.app-pro-positioning-heading p {
+  max-width: 720px;
+  margin: 0 auto;
+  color: rgba(235, 247, 255, 0.75);
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  line-height: 1.65;
+  text-wrap: balance;
+}
+
+.app-pro-positioning-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 28px);
+}
+
+.app-pro-positioning-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: clamp(22px, 2.7vw, 32px);
+  overflow: hidden;
+  border: 1px solid rgba(137, 216, 245, 0.2);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.04));
+  box-shadow: 0 24px 55px rgba(0, 7, 13, 0.2);
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.app-pro-positioning-card::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #25c7f4, rgba(37, 199, 244, 0.14));
+  content: "";
+}
+
+.app-pro-positioning-card-secondary::before {
+  background: linear-gradient(90deg, #6fa8ff, rgba(111, 168, 255, 0.14));
+}
+
+.app-pro-positioning-card:hover {
+  border-color: rgba(88, 210, 247, 0.4);
+  transform: translateY(-3px);
+}
+
+.app-pro-positioning-card-heading {
+  display: grid;
+  grid-template-columns: 38px 52px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.app-pro-positioning-number {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(88, 210, 247, 0.35);
+  border-radius: 50%;
+  background: rgba(0, 174, 239, 0.12);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 900;
+}
+
+.app-pro-positioning-card-heading > svg {
+  width: 52px;
+  height: 52px;
+  padding: 11px;
+  border: 1px solid rgba(88, 210, 247, 0.24);
+  border-radius: 14px;
+  background: rgba(0, 174, 239, 0.1);
+  color: #58d2f7;
+}
+
+.app-pro-positioning-card-secondary .app-pro-positioning-card-heading > svg {
+  border-color: rgba(111, 168, 255, 0.28);
+  background: rgba(111, 168, 255, 0.1);
+  color: #8dbaff;
+}
+
+.app-pro-positioning-card-heading div > span {
+  display: block;
+  margin-bottom: 5px;
+  color: rgba(148, 222, 247, 0.72);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.app-pro-positioning-card h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  line-height: 1.15;
+}
+
+.app-pro-positioning-card > p {
+  margin: 0 0 18px;
+  color: rgba(235, 247, 255, 0.76);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.app-pro-positioning-card ul {
+  display: grid;
+  gap: 11px;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app-pro-positioning-card li {
+  position: relative;
+  padding-left: 24px;
+  color: rgba(244, 250, 255, 0.9);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.app-pro-positioning-card li::before {
+  position: absolute;
+  top: 0.08em;
+  left: 0;
+  color: #58d2f7;
+  font-weight: 900;
+  content: "✓";
+}
+
+.app-pro-positioning-summary {
+  display: flex;
+  max-width: 830px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 18px;
+  margin: clamp(22px, 3vw, 32px) auto 0;
+  padding: 14px 20px;
+  border: 1px solid rgba(88, 210, 247, 0.22);
+  border-radius: 999px;
+  background: rgba(1, 12, 20, 0.28);
+  color: rgba(235, 247, 255, 0.82);
+  font-size: 0.94rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.app-pro-positioning-summary strong {
+  color: #58d2f7;
+}
+
+.app-pro-positioning-summary span {
+  position: relative;
+}
+
+.app-pro-positioning-summary span::before {
+  margin-right: 18px;
+  color: rgba(88, 210, 247, 0.4);
+  content: "•";
+}
+
+@media (max-width: 900px) {
+  .app-pro-positioning-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-pro-positioning-card {
+    max-width: 720px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-pro-positioning-section {
+    padding: 42px 0 48px;
+  }
+
+  .app-pro-positioning-heading {
+    text-align: left;
+  }
+
+  .app-pro-positioning-eyebrow {
+    align-items: flex-start;
+    font-size: 0.67rem;
+  }
+
+  .app-pro-positioning-heading h2 {
+    font-size: clamp(1.85rem, 9vw, 2.45rem);
+    text-wrap: pretty;
+  }
+
+  .app-pro-positioning-heading p {
+    text-wrap: pretty;
+  }
+
+  .app-pro-positioning-card {
+    padding: 20px 17px;
+    border-radius: 16px;
+  }
+
+  .app-pro-positioning-card-heading {
+    grid-template-columns: 34px 46px minmax(0, 1fr);
+    gap: 9px;
+  }
+
+  .app-pro-positioning-number {
+    width: 34px;
+    height: 34px;
+  }
+
+  .app-pro-positioning-card-heading > svg {
+    width: 46px;
+    height: 46px;
+    padding: 10px;
+  }
+
+  .app-pro-positioning-card-heading div > span {
+    font-size: 0.61rem;
+  }
+
+  .app-pro-positioning-card h3 {
+    font-size: 1.16rem;
+  }
+
+  .app-pro-positioning-summary {
+    display: grid;
+    justify-items: start;
+    border-radius: 16px;
+    text-align: left;
+  }
+
+  .app-pro-positioning-summary span::before {
+    margin-right: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-pro-positioning-card {
+    transition: none;
+  }
+
+  .app-pro-positioning-card:hover {
+    transform: none;
+  }
+}
