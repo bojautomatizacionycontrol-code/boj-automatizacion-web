@@ -3169,9 +3169,9 @@ function AppPage() {
     <div className="app-pro-page">
       <Hero
         image={heroApp}
-        eyebrow="BOJ S7-PLC PRO"
-        title="Ordená el diagnóstico antes de cambiar un solo módulo."
-        subtitle="Cargá síntomas, LEDs y condiciones de campo: BOJ S7-PLC mantiene el contexto, ordena las hipótesis por evidencia y te dice qué verificar primero. Para Siemens S7-300/400, en planta y bajo presión."
+        eyebrow="ASISTENCIA DE DIAGNÓSTICO EN CAMPO"
+        title="Antes de conectar STEP 7, sabé qué buscar."
+        subtitle="Ingresá los síntomas, LEDs y condiciones que observás en el tablero. BOJ S7-PLC PRO ordena las causas posibles, prioriza las verificaciones y te ayuda a distinguir si el problema apunta a la CPU, la red, un módulo, la alimentación, una señal o la lógica."
         primary={{
           label: "Probar gratis 48 hs",
           href: appProductUrl,
@@ -3186,10 +3186,71 @@ function AppPage() {
             document.getElementById("planes-pro")?.scrollIntoView({ behavior: "smooth", block: "start" });
           },
         }}
-        note="Sin tarjeta de crédito · Acceso inmediato · Funciona en el navegador"
+        note="La app no se conecta directamente al PLC ni reemplaza STEP 7. Orienta el diagnóstico inicial y prepara una intervención con mayor criterio."
       />
 
       <S7ProofStrip />
+
+      <section className="app-pro-positioning-section" aria-labelledby="app-pro-positioning-title">
+        <div className="mock-home-container">
+          <div className="app-pro-positioning-heading">
+            <span className="app-pro-positioning-eyebrow">DOS ETAPAS, UN MISMO DIAGNÓSTICO</span>
+            <h2 id="app-pro-positioning-title">Orientá la falla primero. Profundizá sólo cuando haga falta.</h2>
+            <p>
+              BOJ S7-PLC PRO organiza la primera respuesta en campo y te ayuda a llegar al diagnóstico online con una
+              búsqueda más acotada.
+            </p>
+          </div>
+
+          <div className="app-pro-positioning-grid">
+            <article className="app-pro-positioning-card app-pro-positioning-card-primary">
+              <div className="app-pro-positioning-card-heading">
+                <span className="app-pro-positioning-number">1</span>
+                <Icon name="Smartphone" size={30} />
+                <div>
+                  <span>PRIMERA RESPUESTA</span>
+                  <h3>Orientación con BOJ S7-PLC</h3>
+                </div>
+              </div>
+              <p>
+                Cargá lo que observás en el tablero desde el celular, tablet o navegador. La app mantiene el contexto
+                del caso, prioriza hipótesis y te indica qué verificar primero.
+              </p>
+              <ul>
+                <li>Interpretá estados de CPU y combinaciones de LEDs.</li>
+                <li>Diferenciá indicios de red, alimentación, módulos, señales o lógica.</li>
+                <li>Evitá comenzar por pruebas que no tienen relación con el síntoma.</li>
+              </ul>
+            </article>
+
+            <article className="app-pro-positioning-card app-pro-positioning-card-secondary">
+              <div className="app-pro-positioning-card-heading">
+                <span className="app-pro-positioning-number">2</span>
+                <Icon name="MonitorCog" size={30} />
+                <div>
+                  <span>CONFIRMACIÓN ONLINE</span>
+                  <h3>Diagnóstico con STEP 7</h3>
+                </div>
+              </div>
+              <p>
+                Si el caso requiere diagnóstico online, llegás a STEP 7 con una hipótesis técnica y una búsqueda más
+                acotada para confirmar.
+              </p>
+              <ul>
+                <li>Sabés qué hardware, evento, bloque o registro conviene revisar.</li>
+                <li>Separás las observaciones de campo de la evidencia online.</li>
+                <li>Reducís intervenciones improvisadas y cambios de hardware sin fundamento.</li>
+              </ul>
+            </article>
+          </div>
+
+          <p className="app-pro-positioning-summary">
+            <strong>BOJ S7-PLC orienta.</strong>
+            <span>STEP 7 confirma.</span>
+            <span>El técnico decide.</span>
+          </p>
+        </div>
+      </section>
 
       <section className="app-pro-problems-how-section">
         <div className="mock-home-container app-pro-problems-how-grid">
