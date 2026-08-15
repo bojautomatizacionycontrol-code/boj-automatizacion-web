@@ -50,3 +50,10 @@ test("los caminos tienen foco visible y adaptación móvil", () => {
   assert.match(stylesSource, /@media \(max-width: 820px\)[\s\S]*?\.contact-route-grid\s*\{[\s\S]*?grid-template-columns: 1fr/);
   assert.match(stylesSource, /@media \(prefers-reduced-motion: reduce\)/);
 });
+
+test("los paneles principales de Contacto terminan alineados en escritorio", () => {
+  assert.match(
+    stylesSource,
+    /@media \(min-width: 1181px\) \{[\s\S]*?\.contact-grid\s*\{[\s\S]*?align-items: stretch;[\s\S]*?\.contact-grid > \.contact-panel\s*\{[\s\S]*?display: flex;[\s\S]*?flex-direction: column;[\s\S]*?\.contact-grid > \.contact-panel > \.button-row\s*\{[\s\S]*?margin-top: auto;/,
+  );
+});
