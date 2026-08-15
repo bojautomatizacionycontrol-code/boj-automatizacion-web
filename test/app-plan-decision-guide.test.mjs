@@ -31,7 +31,7 @@ test("la guía de decisión enlaza internamente a los cuatro planes pagos vigent
 
 test("la orientación comercial mantiene los derechos exactos de cada plan", () => {
   assert.match(appSource, /Uso continuo/);
-  assert.match(appSource, /Pagás mes a mes y la licencia se renueva hasta que la canceles\./);
+  assert.match(appSource, /Pagas mes a mes y la licencia se renueva hasta que la canceles\./);
   assert.match(appSource, /Trabajo puntual/);
   assert.match(appSource, /Un mes de acceso sin renovación automática\./);
   assert.match(appSource, /Seis meses, dos dispositivos y curso incluido\./);
@@ -46,7 +46,7 @@ test("la franja de confianza usa sólo hechos verificados y no altera checkouts"
   assert.notEqual(confidenceStart, -1);
   assert.match(confidenceSource, /Compra gestionada por Hotmart/);
   assert.match(confidenceSource, /Precio y modalidad visibles antes de confirmar/);
-  assert.match(confidenceSource, /Activación con el email usado en la compra/);
+  assert.match(confidenceSource, /Activación con el correo electrónico utilizado en la compra/);
   assert.doesNotMatch(confidenceSource, /garantiz|reembolso|descuento|pay\.hotmart\.com/iu);
   assert.match(appSource, /href=\{plan\.url\}/);
 });
@@ -56,6 +56,8 @@ test("la guía conserva foco visible, responsive y movimiento reducido", () => {
   assert.match(stylesSource, /\.app-pro-plan-card:focus-visible/);
   assert.match(stylesSource, /scroll-margin-top: 104px/);
   assert.match(stylesSource, /@media \(max-width: 980px\)[\s\S]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
-  assert.match(stylesSource, /@media \(max-width: 600px\)[\s\S]*grid-template-columns: 1fr/);
+  assert.match(stylesSource, /@media \(max-width: 600px\)[\s\S]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(stylesSource, /@media \(max-width: 600px\)[\s\S]*\.app-pro-plan-guide li > a > small\s*\{[\s\S]*display: none/);
+  assert.match(stylesSource, /@media \(max-width: 360px\)[\s\S]*grid-template-columns: 1fr/);
   assert.match(stylesSource, /@media \(prefers-reduced-motion: reduce\)/);
 });

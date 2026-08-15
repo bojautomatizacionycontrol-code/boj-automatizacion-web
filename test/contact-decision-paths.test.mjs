@@ -4,6 +4,14 @@ import { readFile } from "node:fs/promises";
 
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const decisionPathsSource = appSource.slice(
+  appSource.indexOf("const contactDecisionPaths = ["),
+  appSource.indexOf("const projectVisuals = ["),
+);
+const contactPageSource = appSource.slice(
+  appSource.indexOf("function ContactPage()"),
+  appSource.indexOf("function ContactForm()"),
+);
 
 test("Contacto presenta tres caminos de decisión claros", () => {
   assert.match(appSource, /const contactDecisionPaths = \[/);
@@ -14,9 +22,19 @@ test("Contacto presenta tres caminos de decisión claros", () => {
 });
 
 test("la urgencia deriva a WhatsApp y las demás consultas al formulario", () => {
-  assert.match(appSource, /action: "Priorizar por WhatsApp"[\s\S]*?external: true/);
-  assert.equal((appSource.match(/href: "#consulta-tecnica"/g) || []).length, 2);
+  assert.match(decisionPathsSource, /action: "Priorizar por WhatsApp"[\s\S]*?external: true/);
+  assert.equal((decisionPathsSource.match(/action: "Completar formulario"/g) || []).length, 2);
+  assert.equal((decisionPathsSource.match(/href: "#consulta-tecnica"/g) || []).length, 2);
   assert.match(appSource, /className="contact-grid" id="consulta-tecnica"/);
+});
+
+test("el hero de Contacto mantiene WhatsApp y deriva la alternativa al formulario real", () => {
+  assert.match(contactPageSource, /heroPrimary=\{\{ label: "Escribir por WhatsApp"[\s\S]*?external: true \}\}/);
+  assert.match(contactPageSource, /heroSecondary=\{\{ label: "Completar formulario", href: "#consulta-tecnica" \}\}/);
+  assert.doesNotMatch(
+    contactPageSource.slice(0, contactPageSource.indexOf(">", contactPageSource.indexOf("heroSecondary"))),
+    /mailto:/,
+  );
 });
 
 test("el envío existente y los campos obligatorios permanecen intactos", () => {
