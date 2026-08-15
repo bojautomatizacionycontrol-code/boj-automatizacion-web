@@ -23485,6 +23485,21 @@ h3,
   scroll-margin-top: 7rem;
 }
 
+@media (min-width: 1181px) {
+  .contact-grid {
+    align-items: stretch;
+  }
+
+  .contact-grid > .contact-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-grid > .contact-panel > .button-row {
+    margin-top: auto;
+  }
+}
+
 .contact-panel-intro {
   margin: -0.35rem 0 1.25rem;
   color: #526575;
@@ -24281,8 +24296,22 @@ h3,
   text-underline-offset: 0.2em;
 }
 
+#curso-s7-incluye,
 #curso-s7-compra {
   scroll-margin-top: 84px;
+}
+
+/* Mantiene inmóviles el texto contiguo y el siguiente bloque mientras cambia
+   la leyenda del manual. */
+.s7-sales-include-course .s7-flip-card .s7-flip-bar {
+  min-height: 66px;
+}
+
+.s7-sales-include-course .s7-flip-card .s7-flip-caption {
+  min-width: 0;
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
 }
 
 .app-pro-positioning-route {
