@@ -85,7 +85,6 @@ import heroServicios from "./assets/hero-servicios.jpg";
 import heroCursos from "./assets/hero-cursos.jpg";
 import heroCursoS7 from "./assets/hero-curso-s7.jpg";
 import heroCursoTia from "./assets/hero-curso-tia.jpg";
-import heroApp from "./assets/hero-app.jpg";
 import heroObras from "./assets/hero-obras.jpg";
 import heroRecursos from "./assets/hero-recursos.jpg";
 import heroContacto from "./assets/hero-contacto.jpg";
@@ -131,7 +130,7 @@ const appCarouselImages = Object.keys(appCarouselModules)
 
 // ───────────────────────────────────────────────────────────────────────────
 // Analítica / tracking de conversión.
-// Para ACTIVAR: completá los IDs abajo. Mientras estén vacíos, todo es no-op
+// Para ACTIVAR: completa los IDs abajo. Mientras estén vacíos, todo es no-op
 // seguro (no carga scripts, no rompe nada). track() sirve aunque no haya IDs.
 // GA4 → mide tráfico y embudo. Meta Pixel → remarketing al 95% que no compra.
 const ANALYTICS = {
@@ -255,7 +254,7 @@ const contactDecisionPaths = [
     eyebrow: "Urgencia en planta",
     title: "Falla o línea detenida",
     description:
-      "Si producción está afectada, compartí el síntoma, el equipo involucrado y la prioridad. Coordinamos disponibilidad y próximo paso.",
+      "Si la producción está afectada, comparte el síntoma, el equipo involucrado y la prioridad. Coordinamos la disponibilidad y el siguiente paso.",
     action: "Priorizar por WhatsApp",
     icon: "TriangleAlert",
     tone: "urgent",
@@ -268,8 +267,8 @@ const contactDecisionPaths = [
     eyebrow: "Ingeniería",
     title: "Proyecto, migración o tablero",
     description:
-      "Contanos la instalación actual, el alcance y el objetivo para ordenar una primera revisión técnica sin perder contexto.",
-    action: "Preparar consulta",
+      "Cuéntanos cuál es la instalación actual, el alcance y el objetivo para organizar una primera revisión técnica sin perder contexto.",
+    action: "Completar formulario",
     icon: "Wrench",
     tone: "project",
     href: "#consulta-tecnica",
@@ -278,8 +277,8 @@ const contactDecisionPaths = [
     eyebrow: "Formación y software",
     title: "Curso, App PRO o licencias",
     description:
-      "Indicá si buscás capacitación, acceso individual o una solución para un equipo técnico y te orientamos hacia la opción adecuada.",
-    action: "Consultar opciones",
+      "Indica si buscas formación, acceso individual o una solución para un equipo técnico y te orientaremos hacia la opción adecuada.",
+    action: "Completar formulario",
     icon: "GraduationCap",
     tone: "training",
     href: "#consulta-tecnica",
@@ -937,7 +936,7 @@ const appProPlans = offer.app.proPlans;
 const appLicensePlans = appProPlans.filter(({ title }) => title !== "Curso + licencia");
 
 const appPlanCardIds = {
-  TRIAL: "plan-trial",
+  "Prueba gratuita": "plan-trial",
   "Suscripción mensual": "plan-subscription-monthly",
   "Mensual de pago único": "plan-monthly-one-time",
   "Profesional": "plan-professional",
@@ -948,7 +947,7 @@ const appPlanDecisionGuide = [
   {
     context: "Uso continuo",
     title: "Suscripción mensual",
-    detail: "Pagás mes a mes y la licencia se renueva hasta que la canceles.",
+    detail: "Pagas mes a mes y la licencia se renueva hasta que la canceles.",
     target: appPlanCardIds["Suscripción mensual"],
   },
   {
@@ -982,7 +981,7 @@ const appAudienceProfiles = [
 const appAvailabilityItems = [
   { icon: "Globe", title: "Web", text: "Acceso inmediato desde navegador, sin instalación obligatoria." },
   { icon: "Smartphone", title: "Instalable", text: "Acceso directo desde dispositivo compatible para uso más cómodo." },
-  { icon: "WifiOff", title: "Offline según plan", text: "Disponibilidad offline variable según la licencia contratada." },
+  { icon: "WifiOff", title: "Sin conexión según el plan", text: "La disponibilidad sin conexión varía según la licencia contratada." },
 ];
 
 const appTrustMetrics = [
@@ -994,8 +993,8 @@ const appTrustMetrics = [
 
 const appFaqItems = [
   {
-    question: "¿Qué incluye el Trial gratuito?",
-    answer: "El Trial permite probar BOJ S7-PLC PRO durante 48 horas. Funciona solo online y algunas funciones pueden estar limitadas.",
+    question: "¿Qué incluye la prueba gratuita?",
+    answer: "La prueba gratuita permite utilizar BOJ S7-PLC PRO durante 48 horas. Funciona sólo en línea y algunas funciones pueden estar limitadas.",
   },
   {
     question: "¿La app se puede instalar?",
@@ -1006,8 +1005,8 @@ const appFaqItems = [
     answer: "No. También puede usarse desde el navegador ingresando a app.bojautomatizacion.com.",
   },
   {
-    question: "¿La app funciona offline?",
-    answer: "Depende del plan. El Trial funciona solo online. Suscripción mensual, Mensual de pago único, Curso + licencia y Profesional permiten uso offline hasta 2 días. Empresarial permite uso offline hasta 7 días.",
+    question: "¿La app funciona sin conexión?",
+    answer: "Depende del plan. La prueba gratuita funciona sólo en línea. Suscripción mensual, Mensual de pago único, Curso + licencia y Profesional permiten usarla sin conexión hasta 2 días. Empresarial permite usarla sin conexión hasta 7 días.",
   },
   {
     question: "¿Cuántos dispositivos puedo usar?",
@@ -1068,7 +1067,7 @@ const routeMeta = {
   "/app": {
     title: "BOJ S7-PLC PRO | App de diagnóstico PLC Siemens S7-300/400",
     description:
-      "BOJ S7-PLC PRO es una herramienta web de asistencia técnica para diagnóstico orientativo en PLC Siemens S7-300/400, con prueba inicial de 48 hs y licencias PRO.",
+      "BOJ S7-PLC PRO es una herramienta web de asistencia técnica para diagnóstico orientativo en PLC Siemens S7-300/400, con una prueba inicial de 48 horas y licencias PRO.",
   },
   "/recursos-tecnicos": {
     title: "Recursos técnicos Siemens | STEP 7, TIA Portal, MicroWIN y WinCC | BOJ",
@@ -1306,7 +1305,7 @@ function NotFound() {
     <PageShell
       eyebrow="Error 404"
       title="Página no encontrada"
-      subtitle="La página que buscás no existe o cambió de dirección. Volvé al inicio para seguir navegando."
+      subtitle="La página que buscas no existe o cambió de dirección. Vuelve al inicio para continuar navegando."
       heroPrimary={{ label: "Volver al inicio", href: "/" }}
     >
       <p className="notfound-help">
@@ -1319,6 +1318,18 @@ function NotFound() {
 function Header({ route }) {
   const [open, setOpen] = useState(false);
   const closeMenu = () => setOpen(false);
+  const defaultAction = {
+    label: "Solicitar diagnóstico",
+    href: whatsappUrl("Hola, escribo desde la web de BOJ Automatización y Control para solicitar un diagnóstico industrial."),
+  };
+  const routeAction =
+    route === "/app"
+      ? { label: "Ver planes PRO", href: "#planes-pro" }
+      : route === "/cursos/s7-300-400"
+        ? { label: "Ver curso y precio", href: "#curso-s7-compra" }
+        : route === "/contacto"
+          ? { label: "Completar consulta", href: "#consulta-tecnica" }
+          : defaultAction;
 
   return (
     <header className="site-header">
@@ -1362,10 +1373,10 @@ function Header({ route }) {
         <div className="mobile-nav-actions">
           <a
             className="header-action solid"
-            href={whatsappUrl("Hola, escribo desde la web de BOJ Automatización y Control para solicitar un diagnóstico industrial.")}
+            href={routeAction.href}
             onClick={closeMenu}
           >
-            Solicitar diagnóstico
+            {routeAction.label}
           </a>
         </div>
       </nav>
@@ -1373,10 +1384,10 @@ function Header({ route }) {
       <div className="header-actions">
         <a
           className="header-action solid"
-          href={whatsappUrl("Hola, escribo desde la web de BOJ Automatización y Control para solicitar un diagnóstico industrial.")}
+          href={routeAction.href}
           onClick={closeMenu}
         >
-          Solicitar diagnóstico
+          {routeAction.label}
         </a>
       </div>
 
@@ -1441,6 +1452,146 @@ function Hero({ image, eyebrow, title, subtitle, primary, secondary, note, aside
   );
 }
 
+function HomeHeroNavigator() {
+  const paths = [
+    {
+      icon: "TriangleAlert",
+      title: "Resolver una falla",
+      text: "Diagnóstico y asistencia para recuperar la operación.",
+      href: "/servicios",
+    },
+    {
+      icon: "GraduationCap",
+      title: "Formar al equipo",
+      text: "Capacitación aplicada a problemas reales de planta.",
+      href: "/cursos",
+    },
+    {
+      icon: "MonitorCog",
+      title: "Probar BOJ S7-PLC",
+      text: "Una guía digital para ordenar síntomas e hipótesis.",
+      href: "/app",
+    },
+  ];
+
+  return (
+    <div className="home-hero-navigator">
+      <span className="home-hero-navigator-eyebrow">ELIGE TU PUNTO DE ENTRADA</span>
+      <h2>¿Qué necesitas resolver?</h2>
+      <nav aria-label="Accesos a las soluciones principales">
+        {paths.map((path) => (
+          <a href={path.href} key={path.href}>
+            <span className="home-hero-navigator-icon">
+              <Icon name={path.icon} size={21} />
+            </span>
+            <span>
+              <strong>{path.title}</strong>
+              <small>{path.text}</small>
+            </span>
+            <ArrowRight size={17} aria-hidden="true" />
+          </a>
+        ))}
+      </nav>
+    </div>
+  );
+}
+
+function CourseHeroPreview() {
+  return (
+    <aside className="course-hero-preview" aria-label="Vista previa de la oferta del curso">
+      <div className="course-hero-preview-media">
+        <img src={manualPreviewImages[0]} alt="Portada del manual de diagnóstico S7-300/400" />
+        <span>Manual técnico profesional</span>
+      </div>
+      <div className="course-hero-preview-copy">
+        <span>CURSO + APP PRO</span>
+        <strong>{offer.course.price}</strong>
+        <small>Pago único · Acceso permanente al curso</small>
+        <ul>
+          <li><CheckCircle2 size={15} aria-hidden="true" /> Método de diagnóstico aplicado</li>
+          <li><CheckCircle2 size={15} aria-hidden="true" /> 1 mes de BOJ S7-PLC PRO</li>
+        </ul>
+      </div>
+    </aside>
+  );
+}
+
+function AppHeroDiagnosticPreview() {
+  const stages = [
+    { label: "Síntoma", value: "CPU STOP + BF" },
+    { label: "Hipótesis", value: "Red o nodo remoto" },
+    { label: "Verificación", value: "Evidencia priorizada" },
+  ];
+
+  return (
+    <aside className="app-hero-diagnostic-preview" aria-label="Ejemplo visual del flujo de diagnóstico de BOJ S7-PLC PRO">
+      <div className="app-hero-diagnostic-preview-head">
+        <span>FLUJO REAL DE LA HERRAMIENTA</span>
+        <small><span aria-hidden="true" /> CASO GUIADO</small>
+      </div>
+      <div className="app-hero-diagnostic-preview-screen">
+        <img src={appResultadoDiagnostico} alt="Resultado orientativo en BOJ S7-PLC PRO" />
+        <span className="app-hero-diagnostic-preview-focus" aria-hidden="true" />
+      </div>
+      <ol className="app-hero-diagnostic-preview-stages">
+        {stages.map((stage, index) => (
+          <li key={stage.label}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <small>{stage.label}</small>
+              <strong>{stage.value}</strong>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </aside>
+  );
+}
+
+function AppQuickCommercialAccess() {
+  const subscription = appLicensePlans.find(({ title }) => title === "Suscripción mensual");
+  const oneTime = appLicensePlans.find(({ title }) => title === "Mensual de pago único");
+
+  return (
+    <section className="app-pro-quick-access" aria-labelledby="app-pro-quick-access-title">
+      <div className="mock-home-container app-pro-quick-access-inner">
+        <div className="app-pro-quick-access-heading">
+          <span>EMPIEZA SIN COMPLICACIONES</span>
+          <h2 id="app-pro-quick-access-title">Prueba el flujo y elige la licencia cuando estés listo.</h2>
+        </div>
+        <dl className="app-pro-quick-access-facts">
+          <div>
+            <dt>Prueba gratuita</dt>
+            <dd>{appTrialPlan.price} · 48 horas</dd>
+          </div>
+          <div>
+            <dt>Suscripción</dt>
+            <dd>{subscription.price} por mes</dd>
+          </div>
+          <div>
+            <dt>Pago único</dt>
+            <dd>Desde {oneTime.price}</dd>
+          </div>
+        </dl>
+        <div className="app-pro-quick-access-actions">
+          <a
+            className="mock-btn mock-btn-primary"
+            href={appProductUrl}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => track("app_trial_click", { source: "quick_access" })}
+          >
+            Probar gratis <ExternalLink size={16} />
+          </a>
+          <a className="app-pro-quick-access-link" href="#planes-pro">
+            Ver planes y precios <ArrowRight size={16} aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HomePage() {
   return <HomeLandingRedesign />;
 }
@@ -1455,6 +1606,7 @@ function HomeLandingRedesign() {
         subtitle="Más de 15 años resolviendo fallas, paradas y puestas en marcha en planta. Servicios de automatización, un curso aplicado de diagnóstico y la app BOJ S7-PLC para mantenimiento industrial."
         primary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para solicitar un diagnóstico industrial.") }}
         secondary={{ label: "Ver cursos", href: "/cursos" }}
+        aside={<HomeHeroNavigator />}
       />
 
       <HomeClientStrip />
@@ -1541,7 +1693,7 @@ function HomeLandingRedesign() {
         <img src={plantVisual} alt="" aria-hidden="true" />
         <div className="mock-final-overlay" aria-hidden="true" />
         <div className="mock-home-container mock-final-content">
-          <h2>¿Tenés una falla, una máquina parada o necesitás capacitar a tu equipo?</h2>
+          <h2>¿Tienes una falla, una máquina detenida o necesitas formar a tu equipo?</h2>
           <p>Podemos ayudarte con diagnóstico, automatización y formación técnica aplicada.</p>
           <div className="mock-final-actions">
             <a
@@ -1552,7 +1704,7 @@ function HomeLandingRedesign() {
             </a>
             <a
               className="mock-btn mock-btn-outline"
-              href={mailtoUrl("Consulta técnica BOJ", "Hola, quiero realizar una consulta técnica.")}
+              href="/contacto"
             >
               <Mail size={18} /> Enviar consulta técnica
             </a>
@@ -1618,7 +1770,7 @@ function HomeObrasTeaser() {
 
 function AppDiagnosticMockup() {
   return (
-    <figure className="mock-app-visual real-app-capture app-product-composition" aria-label="Capturas reales de BOJ S7-PLC en escritorio y celular">
+    <figure className="mock-app-visual real-app-capture app-product-composition" aria-label="Capturas reales de BOJ S7-PLC en computadora y teléfono móvil">
       <div className="app-product-stage">
         <div className="app-desktop-frame">
           <div className="app-desktop-toolbar" aria-hidden="true">
@@ -1696,7 +1848,7 @@ function CourseHomeCard({ course }) {
       </figure>
       <div>
         <span className="course-mode">
-          <MonitorCog size={15} /> Curso online
+          <MonitorCog size={15} /> Curso en línea
         </span>
         <h3>{course.title}</h3>
         <p>{course.text}</p>
@@ -1715,7 +1867,7 @@ function AcademyCard() {
       <h3>Academia técnica BOJ</h3>
       <p>Formación aplicada a mantenimiento, diagnóstico y automatización real de planta.</p>
       <ul>
-        <li>Cursos online y presenciales</li>
+        <li>Cursos en línea y presenciales</li>
         <li>Materiales y recursos exclusivos</li>
         <li>Certificados de participación</li>
       </ul>
@@ -1775,14 +1927,14 @@ function HomeContactSection() {
         <div className="contact-info-card">
           <h2>Contacto</h2>
           <ContactLine icon="MapPin" label="Ubicación" value={contact.location} />
-          <ContactLine icon="Mail" label="Email" value={contact.email} href={`mailto:${contact.email}`} />
+          <ContactLine icon="Mail" label="Correo electrónico" value={contact.email} href={`mailto:${contact.email}`} />
           <ContactLine
             icon="Phone"
             label="WhatsApp"
             value={contact.whatsappDisplay}
             href={whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.")}
           />
-          <ContactLine icon="Clock" label="Atención" value="Lunes a viernes de 8:00 a 18:00 hs" />
+          <ContactLine icon="Clock" label="Atención" value="Lunes a viernes de 8:00 a 18:00" />
         </div>
         <LandingContactForm />
       </div>
@@ -1908,8 +2060,8 @@ function ServicesPage() {
       <section className="services-redesign-section services-areas-section" id="areas-de-servicio">
         <div className="mock-home-container">
           <div className="services-section-heading services-area-heading">
-            <h2>Qué necesitás resolver</h2>
-            <p>Elegí el punto de entrada más cercano al problema actual.</p>
+            <h2>Qué necesitas resolver</h2>
+            <p>Elige el punto de entrada más cercano al problema actual.</p>
           </div>
           <div className="services-area-grid">
             {servicesAreaCards.map((card) => (
@@ -2162,7 +2314,7 @@ function CoursesPage() {
 
       <section className="courses-final-cta">
         <div className="mock-home-container courses-final-cta-content">
-          <h2>¿Buscás capacitación técnica para vos o para tu equipo?</h2>
+          <h2>¿Buscas formación técnica para ti o para tu equipo?</h2>
           <p>
             Podemos orientarte según el nivel del grupo, el tipo de planta y el problema que necesitan resolver.
           </p>
@@ -2449,7 +2601,7 @@ function PurchaseCTA({ source, className, children }) {
   if (target.isPreview) {
     return (
       <span className={`${className} is-disabled`} aria-disabled="true">
-        Checkout — próximamente
+        Pago disponible próximamente
       </span>
     );
   }
@@ -2469,7 +2621,7 @@ function PurchaseCTA({ source, className, children }) {
 function S7SalesLanding({ course, eyebrow }) {
   const purchaseTarget = purchaseCtaTarget();
   const heroPurchaseAction = purchaseTarget.isPreview
-    ? { label: "Checkout — próximamente", href: "#", onClick: (event) => event.preventDefault() }
+    ? { label: "Pago disponible próximamente", href: "#", onClick: (event) => event.preventDefault() }
     : {
         label: purchaseTarget.isLive
           ? offer.course.checkout.ctaLabel
@@ -2492,7 +2644,7 @@ function S7SalesLanding({ course, eyebrow }) {
     {
       icon: "Zap",
       title: "Fallas reales",
-      text: "Situaciones típicas que enfrentás todos los días en planta.",
+      text: "Situaciones habituales que enfrentas todos los días en planta.",
     },
     {
       icon: "MonitorCog",
@@ -2502,7 +2654,7 @@ function S7SalesLanding({ course, eyebrow }) {
     {
       icon: "Clock",
       title: "Menos prueba y error",
-      text: "Ordená la búsqueda y reducí tiempos de máquina parada.",
+      text: "Ordena la búsqueda y reduce los tiempos de máquina detenida.",
     },
     {
       icon: "ShieldCheck",
@@ -2512,7 +2664,7 @@ function S7SalesLanding({ course, eyebrow }) {
     {
       icon: "Network",
       title: "Relación entre síntomas, LEDs, red, módulos y señales",
-      text: "Conectá las piezas y entendé el sistema completo.",
+      text: "Conecta las piezas y comprende el sistema completo.",
     },
     {
       icon: "ClipboardCheck",
@@ -2530,7 +2682,7 @@ function S7SalesLanding({ course, eyebrow }) {
     {
       icon: "MonitorCog",
       title: "Leer hardware online con STEP 7 / SIMATIC Manager",
-      text: "Comprendé tu sistema como un profesional.",
+      text: "Comprende el sistema con criterio profesional.",
     },
     {
       icon: "Cpu",
@@ -2540,7 +2692,7 @@ function S7SalesLanding({ course, eyebrow }) {
     {
       icon: "ClipboardCheck",
       title: "Usar Diagnostic Buffer con criterio técnico",
-      text: "Extraé, filtrá y entendé eventos que importan.",
+      text: "Extrae, filtra y analiza los eventos relevantes.",
     },
     {
       icon: "Network",
@@ -2550,12 +2702,12 @@ function S7SalesLanding({ course, eyebrow }) {
     {
       icon: "CircuitBoard",
       title: "Diferenciar falla de campo, red, módulo o lógica",
-      text: "Localizá el origen del problema sin perder tiempo.",
+      text: "Localiza el origen del problema sin perder tiempo.",
     },
     {
       icon: "Brain",
       title: "Construir una hipótesis defendible",
-      text: "Antes de intervenir, definí qué vas a verificar.",
+      text: "Antes de intervenir, define qué debes verificar.",
     },
     {
       icon: "RefreshCcw",
@@ -2587,7 +2739,7 @@ function S7SalesLanding({ course, eyebrow }) {
     "Diagnóstico por síntomas, LEDs, red, módulos y señales",
     "Hipótesis técnicas priorizadas",
     "Guía paso a paso",
-    "Uso offline hasta 2 días",
+    "Uso sin conexión hasta 2 días",
     "Acceso desde navegador e instalación como app",
   ];
 
@@ -2612,7 +2764,7 @@ function S7SalesLanding({ course, eyebrow }) {
     "Casos de falla y razonamiento técnico",
     "STEP 7 Classic / SIMATIC Manager / HW Config / Diagnostic Buffer",
     "1 mes de BOJ S7-PLC PRO",
-    "Uso offline hasta 2 días",
+    "Uso sin conexión hasta 2 días",
   ];
 
   const mistakes = [
@@ -2627,7 +2779,7 @@ function S7SalesLanding({ course, eyebrow }) {
   const courseFaqItems = [
     {
       question: "¿Qué recibo exactamente al comprar?",
-      answer: "Recibís un kit profesional de diagnóstico: material técnico estructurado, PDFs de consulta, método de análisis, casos de fallas reales y 1 mes de acceso a BOJ S7-PLC PRO.",
+      answer: "Recibes un conjunto profesional de recursos de diagnóstico: material técnico estructurado, documentos PDF de consulta, método de análisis, casos de fallas reales y 1 mes de acceso a BOJ S7-PLC PRO.",
     },
     {
       question: "¿El curso incluye la APP PRO?",
@@ -2635,7 +2787,7 @@ function S7SalesLanding({ course, eyebrow }) {
     },
     {
       question: "¿Por cuánto tiempo tengo la APP PRO?",
-      answer: "Incluye 1 mes de APP PRO para 1 dispositivo. Cuando vence el mes, podés renovarla si querés seguir usándola.",
+      answer: "Incluye 1 mes de APP PRO para 1 dispositivo. Cuando finaliza el mes, puedes renovarla si quieres seguir utilizándola.",
     },
     {
       question: "¿Sirve para S7-300 y S7-400?",
@@ -2667,7 +2819,7 @@ function S7SalesLanding({ course, eyebrow }) {
     },
     {
       question: "¿Qué pasa cuando vence el mes de APP PRO?",
-      answer: "El acceso mensual a la APP PRO finaliza. El material del curso queda según las condiciones de entrega definidas, y la app puede renovarse si necesitás continuar con acceso PRO.",
+      answer: "El acceso mensual a la APP PRO finaliza. El material del curso permanece disponible según las condiciones de entrega definidas, y la app puede renovarse si necesitas continuar con acceso PRO.",
     },
     {
       question: "¿La APP PRO reemplaza al curso?",
@@ -2685,11 +2837,12 @@ function S7SalesLanding({ course, eyebrow }) {
       <Hero
         image={heroCursoS7}
         eyebrow="Diagnóstico industrial · Método BOJ"
-        title="Diagnosticá fallas reales en PLC S7-300/400 con método y evidencia."
-        subtitle="Aprendé una secuencia práctica para interpretar síntomas, reunir evidencia y llegar a la causa probable en CPU, PROFIBUS, módulos y señales. Formación técnica para mantenimiento industrial que necesita decidir con criterio bajo presión."
+        title="Diagnostica fallas reales en PLC S7-300/400 con método y evidencia."
+        subtitle="Aprende una secuencia práctica para interpretar síntomas, reunir evidencia y llegar a la causa probable en CPU, PROFIBUS, módulos y señales. Formación técnica para mantenimiento industrial que necesita decidir con criterio bajo presión."
         primary={heroPurchaseAction}
         secondary={{ label: "Ver qué incluye", href: "/cursos/s7-300-400", onClick: (event) => scrollToCourseSection(event, "curso-s7-incluye") }}
         note={guaranteeNote}
+        aside={<CourseHeroPreview />}
       />
 
       <S7ProofStrip />
@@ -2727,7 +2880,7 @@ function S7SalesLanding({ course, eyebrow }) {
               <div className="s7-sales-include-body">
                 <div className="s7-sales-include-media">
                   <p className="s7-sales-include-preview-label">
-                    <ScanSearch size={16} aria-hidden="true" /> Mirá las primeras 8 páginas del manual
+                    <ScanSearch size={16} aria-hidden="true" /> Consulta las primeras 8 páginas del manual
                   </p>
                   <ManualFlipbook images={manualPreviewImages} pages={s7ManualPages} variant="card" />
                 </div>
@@ -2756,7 +2909,7 @@ function S7SalesLanding({ course, eyebrow }) {
               <div className="s7-sales-include-body">
                 <div className="s7-sales-include-media s7-sales-app-media">
                   <p className="s7-sales-include-preview-label">
-                    <ScanSearch size={16} aria-hidden="true" /> Recorré capturas reales de la app
+                    <ScanSearch size={16} aria-hidden="true" /> Explora capturas reales de la app
                   </p>
                   <ManualFlipbook
                     images={s7AppCarousel.map((s) => s.image)}
@@ -2779,7 +2932,7 @@ function S7SalesLanding({ course, eyebrow }) {
                     ))}
                   </div>
                   <div className="s7-sales-app-features">
-                    <p className="s7-sales-app-features-title">Con la app PRO podés:</p>
+                    <p className="s7-sales-app-features-title">Con la app PRO puedes:</p>
                     <ul>
                       {appIncludes.map((item) => (
                         <li key={item}>
@@ -2799,7 +2952,7 @@ function S7SalesLanding({ course, eyebrow }) {
           {offer.course.demoVideoUrl ? (
             <div className="s7-sales-demo-video">
               <p className="s7-sales-include-preview-label">
-                <ScanSearch size={16} aria-hidden="true" /> Mirá el sistema en acción
+                <ScanSearch size={16} aria-hidden="true" /> Consulta el sistema en acción
               </p>
               <div className="s7-sales-demo-video-frame">
                 <iframe
@@ -2817,7 +2970,7 @@ function S7SalesLanding({ course, eyebrow }) {
       <div className="s7-sales-confidence">
         <div className="s7-sales-container">
           <Icon name="ShieldCheck" size={26} />
-          <p>Perdé el miedo a conectarte al PLC y diagnosticá con <strong>criterio profesional.</strong></p>
+          <p>Conéctate al PLC con confianza y diagnostica con <strong>criterio profesional.</strong></p>
         </div>
       </div>
 
@@ -2882,7 +3035,7 @@ function S7SalesLanding({ course, eyebrow }) {
       <section className="s7-sales-section s7-sales-offer" id="curso-s7-compra">
         <div className="s7-sales-container">
           <div className="s7-sales-offer-heading">
-            <p className="s7-sales-kicker">Accedé al curso + BOJ S7-PLC PRO</p>
+            <p className="s7-sales-kicker">Accede al curso + BOJ S7-PLC PRO</p>
             <h2>Una oferta técnica para ordenar el diagnóstico antes de intervenir.</h2>
             <p>Una parada de máquina puede costar más que esta formación. El objetivo es que sepas ordenar el diagnóstico antes de cambiar hardware, reiniciar equipos o intervenir sin evidencia.</p>
           </div>
@@ -2932,13 +3085,13 @@ function S7SalesLanding({ course, eyebrow }) {
               {purchaseTarget.isFlowValidated ? (
                 <ol className="s7-sales-howto">
                   <li>
-                    <strong>Pago seguro con Hotmart.</strong> Checkout cifrado, con tarjeta y los medios de pago de tu país.
+                    <strong>Pago seguro con Hotmart.</strong> Proceso de pago cifrado, con tarjeta y los medios de pago disponibles en tu país.
                   </li>
                   <li>
-                    <strong>Entrega digital.</strong> Al acreditarse el pago recibís en tu email el acceso al material.
+                    <strong>Entrega digital.</strong> Al acreditarse el pago, recibes en tu correo electrónico el acceso al material.
                   </li>
                   <li>
-                    <strong>Activación de tu mes de App PRO.</strong> Con el mismo email de la compra. Garantía de 7 días.
+                    <strong>Activación de tu mes de App PRO.</strong> Con el mismo correo electrónico de la compra. Garantía de 7 días.
                   </li>
                 </ol>
               ) : null}
@@ -2953,7 +3106,7 @@ function S7SalesLanding({ course, eyebrow }) {
                   rel="noreferrer"
                   onClick={() => track("app_trial_click", { source: "offer" })}
                 >
-                  Probar APP 48 hs
+                  Probar APP durante 48 horas
                 </a>
               </div>
               <p className="s7-sales-offer-guarantee">
@@ -2961,10 +3114,10 @@ function S7SalesLanding({ course, eyebrow }) {
                 {guaranteeNote}
               </p>
               <p className="s7-sales-offer-crosslink">
-                ¿Vas a usar la app de forma recurrente o en equipo? Mirá los{" "}
+                ¿Vas a utilizar la app de forma recurrente o en equipo? Consulta los{" "}
                 <a href="/app">planes PRO (6 meses / varios dispositivos)</a>.
               </p>
-              <p className="s7-sales-offer-note">Acceso digital. Verificá siempre las conclusiones en campo antes de intervenir.</p>
+              <p className="s7-sales-offer-note">Acceso digital. Verifica siempre las conclusiones en campo antes de intervenir.</p>
             </div>
 
             <p className="s7-sales-offer-anchor">
@@ -2985,7 +3138,7 @@ function S7SalesLanding({ course, eyebrow }) {
           <div className="s7-sales-section-copy">
             <p className="s7-sales-kicker">Qué problema resuelve</p>
             <h2>No es un curso de programación. Es para diagnosticar fallas reales en condiciones de planta.</h2>
-            <p>Aprendé a pensar como un técnico experto cuando la máquina está parada y la presión operativa es alta.</p>
+            <p>Aprende a pensar como un técnico experto cuando la máquina está detenida y la presión operativa es alta.</p>
           </div>
           <div className="s7-sales-problem-cards">
             {problemCards.map((item) => (
@@ -3046,7 +3199,7 @@ function S7SalesLanding({ course, eyebrow }) {
         <div className="s7-sales-container">
           <div className="s7-sales-final-cta-panel">
             <div className="s7-sales-final-intro">
-              <p className="s7-sales-final-headline">Si trabajás con PLC Siemens S7-300/400 y necesitás diagnosticar con más criterio, este curso te da método, estructura y apoyo técnico para intervenir mejor.</p>
+              <p className="s7-sales-final-headline">Si trabajas con PLC Siemens S7-300/400 y necesitas diagnosticar con mayor criterio, este curso te ofrece método, estructura y apoyo técnico para intervenir mejor.</p>
               <span className="s7-sales-final-divider" aria-hidden="true" />
               <p className="s7-sales-final-guarantee">
                 <ShieldCheck size={18} aria-hidden="true" />
@@ -3068,7 +3221,7 @@ function S7SalesLanding({ course, eyebrow }) {
                   rel="noreferrer"
                   onClick={() => track("app_trial_click", { source: "final" })}
                 >
-                  Probar APP 48 hs
+                  Probar APP durante 48 horas
                 </a>
               </div>
               <p className="s7-sales-final-note"><span>Acceso digital · Curso + APP PRO</span></p>
@@ -3168,12 +3321,12 @@ function AppPage() {
   return (
     <div className="app-pro-page">
       <Hero
-        image={heroApp}
+        image={appProHeroLaptopVisual}
         eyebrow="ASISTENCIA DE DIAGNÓSTICO EN CAMPO"
-        title="Antes de conectar STEP 7, sabé qué buscar."
-        subtitle="Ingresá los síntomas, LEDs y condiciones que observás en el tablero. BOJ S7-PLC PRO ordena las causas posibles, prioriza las verificaciones y te ayuda a distinguir si el problema apunta a la CPU, la red, un módulo, la alimentación, una señal o la lógica."
+        title="Antes de conectar STEP 7, identifica qué debes revisar."
+        subtitle="Ingresa los síntomas, los LEDs y las condiciones que observas en el panel de control. BOJ S7-PLC PRO ordena las causas posibles, prioriza las verificaciones y te ayuda a distinguir si el problema apunta a la CPU, la red, un módulo, la alimentación, una señal o la lógica."
         primary={{
-          label: "Probar gratis 48 hs",
+          label: "Probar gratis durante 48 horas",
           href: appProductUrl,
           external: true,
           onClick: () => track("app_trial_click", { source: "app_hero" }),
@@ -3187,61 +3340,52 @@ function AppPage() {
           },
         }}
         note="La app no se conecta directamente al PLC ni reemplaza STEP 7. Orienta el diagnóstico inicial y prepara una intervención con mayor criterio."
+        aside={<AppHeroDiagnosticPreview />}
       />
 
       <S7ProofStrip />
+
+      <AppQuickCommercialAccess />
 
       <section className="app-pro-positioning-section" aria-labelledby="app-pro-positioning-title">
         <div className="mock-home-container">
           <div className="app-pro-positioning-heading">
             <span className="app-pro-positioning-eyebrow">DOS ETAPAS, UN MISMO DIAGNÓSTICO</span>
-            <h2 id="app-pro-positioning-title">Orientá la falla primero. Profundizá sólo cuando haga falta.</h2>
+            <h2 id="app-pro-positioning-title">Orienta el diagnóstico primero. Profundiza sólo cuando sea necesario.</h2>
             <p>
               BOJ S7-PLC PRO organiza la primera respuesta en campo y te ayuda a llegar al diagnóstico online con una
               búsqueda más acotada.
             </p>
           </div>
 
-          <div className="app-pro-positioning-grid">
-            <article className="app-pro-positioning-card app-pro-positioning-card-primary">
-              <div className="app-pro-positioning-card-heading">
-                <span className="app-pro-positioning-number">1</span>
-                <Icon name="Smartphone" size={30} />
-                <div>
-                  <span>PRIMERA RESPUESTA</span>
-                  <h3>Orientación con BOJ S7-PLC</h3>
-                </div>
+          <div className="app-pro-positioning-route" aria-label="Recorrido desde el síntoma hasta la decisión técnica">
+            <div className="app-pro-positioning-route-step">
+              <span className="app-pro-positioning-route-number">01</span>
+              <Icon name="Smartphone" size={27} />
+              <div>
+                <small>PRIMERA RESPUESTA</small>
+                <h3>Orientación con BOJ S7-PLC</h3>
+                <p>Registra síntomas, LEDs y condiciones de campo desde el teléfono móvil, la tableta o el navegador. La app conserva el contexto y prioriza qué verificar primero.</p>
               </div>
-              <p>
-                Cargá lo que observás en el tablero desde el celular, tablet o navegador. La app mantiene el contexto
-                del caso, prioriza hipótesis y te indica qué verificar primero.
-              </p>
-              <ul>
-                <li>Interpretá estados de CPU y combinaciones de LEDs.</li>
-                <li>Diferenciá indicios de red, alimentación, módulos, señales o lógica.</li>
-                <li>Evitá comenzar por pruebas que no tienen relación con el síntoma.</li>
-              </ul>
-            </article>
-
-            <article className="app-pro-positioning-card app-pro-positioning-card-secondary">
-              <div className="app-pro-positioning-card-heading">
-                <span className="app-pro-positioning-number">2</span>
-                <Icon name="MonitorCog" size={30} />
-                <div>
-                  <span>CONFIRMACIÓN ONLINE</span>
-                  <h3>Diagnóstico con STEP 7</h3>
-                </div>
+            </div>
+            <ArrowRight className="app-pro-positioning-route-arrow" size={24} aria-hidden="true" />
+            <div className="app-pro-positioning-route-step">
+              <span className="app-pro-positioning-route-number">02</span>
+              <Icon name="MonitorCog" size={27} />
+              <div>
+                <small>CONFIRMACIÓN ONLINE</small>
+                <h3>Diagnóstico con STEP 7</h3>
+                <p>Llegas con una hipótesis técnica y una búsqueda más acotada para revisar hardware, eventos, bloques o registros.</p>
               </div>
-              <p>
-                Si el caso requiere diagnóstico online, llegás a STEP 7 con una hipótesis técnica y una búsqueda más
-                acotada para confirmar.
-              </p>
-              <ul>
-                <li>Sabés qué hardware, evento, bloque o registro conviene revisar.</li>
-                <li>Separás las observaciones de campo de la evidencia online.</li>
-                <li>Reducís intervenciones improvisadas y cambios de hardware sin fundamento.</li>
-              </ul>
-            </article>
+            </div>
+            <ArrowRight className="app-pro-positioning-route-arrow" size={24} aria-hidden="true" />
+            <div className="app-pro-positioning-route-decision">
+              <Icon name="ShieldCheck" size={27} />
+              <div>
+                <small>DECISIÓN SEGURA</small>
+                <strong>El técnico evalúa la evidencia antes de intervenir.</strong>
+              </div>
+            </div>
           </div>
 
           <p className="app-pro-positioning-summary">
@@ -3258,7 +3402,7 @@ function AppPage() {
             <div className="app-pro-panel-heading">
               <span className="app-pro-section-kicker">DIAGNÓSTICO EN CAMPO</span>
               <h2>Problemas que ayuda a resolver</h2>
-              <p>Identificá el tipo de falla y ordená la búsqueda antes de intervenir el equipo.</p>
+              <p>Identifica el tipo de falla y ordena la búsqueda antes de intervenir el equipo.</p>
             </div>
             <div className="app-pro-problem-grid">
               {appProblemItems.map((item) => (
@@ -3321,7 +3465,7 @@ function AppPage() {
       <section className="app-pro-real-language-section">
         <div className="mock-home-container app-pro-real-language-grid">
           <div>
-            <h2>Capturas reales del kit profesional</h2>
+            <h2>Capturas reales de la herramienta profesional</h2>
             <div className="app-pro-real-view-grid">
               {appRealViews.map((item) => (
                 <article className="app-pro-real-view-card" key={item.title}>
@@ -3370,6 +3514,108 @@ function AppPage() {
         </div>
       ) : null}
 
+      <section className="app-pro-plans-section" id="planes-pro">
+        <div className="mock-home-container">
+          <div className="app-pro-section-heading">
+            <span className="app-pro-section-kicker">LICENCIAS Y MODALIDADES</span>
+            <h2>Elige tu licencia PRO</h2>
+            <p>Compara la renovación, la duración, los dispositivos y el uso sin conexión antes de elegir.</p>
+            <p className="app-pro-plans-crosslink">
+              <strong>Profesional</strong> y <strong>Empresarial</strong> incluyen el{" "}
+              <a href="/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.
+            </p>
+          </div>
+          <nav className="app-pro-plan-guide" aria-labelledby="app-pro-plan-guide-title">
+            <div className="app-pro-plan-guide-heading">
+              <span>DECISIÓN RÁPIDA</span>
+              <h3 id="app-pro-plan-guide-title">¿Cuál encaja mejor con tu forma de trabajo?</h3>
+            </div>
+            <ul>
+              {appPlanDecisionGuide.map((option) => (
+                <li key={option.target}>
+                  <a href={`#${option.target}`} aria-label={`${option.context}: ver plan ${option.title}`}>
+                    <span>{option.context}</span>
+                    <strong>{option.title}</strong>
+                    <small>{option.detail}</small>
+                    <span className="app-pro-plan-guide-link">
+                      Ver plan <ArrowRight size={15} aria-hidden="true" />
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="app-pro-plan-grid">
+            {pricingCards.map((plan) => (
+              <article
+                className={`app-pro-plan-card${plan.badge ? " featured" : ""}${plan.title === "Prueba gratuita" ? " trial" : ""}`}
+                id={appPlanCardIds[plan.title]}
+                key={plan.title}
+                tabIndex={-1}
+              >
+                {plan.badge ? <span className="app-pro-plan-badge">{plan.badge}</span> : null}
+                <h3>{plan.title}</h3>
+                <strong>{plan.price}</strong>
+                <span className="app-pro-plan-meta">{plan.meta}</span>
+                <ul>
+                  {plan.bullets.map((item) => (
+                    <li key={item}>
+                      <CheckCircle2 size={15} /> {item}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  className="mock-btn mock-btn-primary"
+                  href={plan.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => track("plan_click", { plan: plan.title })}
+                >
+                  {plan.button} <ExternalLink size={17} />
+                </a>
+              </article>
+            ))}
+          </div>
+          <ul className="app-pro-purchase-confidence" aria-label="Información antes de comprar">
+            <li>
+              <CheckCircle2 size={17} aria-hidden="true" /> Compra gestionada por Hotmart
+            </li>
+            <li>
+              <CheckCircle2 size={17} aria-hidden="true" /> Precio y modalidad visibles antes de confirmar
+            </li>
+            <li>
+              <CheckCircle2 size={17} aria-hidden="true" /> Activación con el correo electrónico utilizado en la compra
+            </li>
+          </ul>
+          <aside className="app-pro-training-strip" aria-labelledby="app-pro-training-title">
+            <div className="app-pro-training-copy">
+              <span className="app-pro-training-eyebrow">FORMACIÓN TÉCNICA</span>
+              <h3 id="app-pro-training-title">¿También necesitas formación?</h3>
+              <p>Curso Diagnóstico S7-300/400 con acceso permanente + 1 mes de BOJ S7-PLC PRO.</p>
+            </div>
+            <div className="app-pro-training-action">
+              <strong>{offer.course.price} · Pago único</strong>
+              <a className="mock-btn mock-btn-outline" href="/cursos/s7-300-400">
+                Ver curso y contenidos <ArrowRight size={17} aria-hidden="true" />
+              </a>
+            </div>
+          </aside>
+          <article className="app-pro-institutional">
+            <Icon name="Landmark" size={34} />
+            <div>
+              <h3>Institucional / Centros de formación: Precio personalizado.</h3>
+              <p>
+                Condiciones especiales para instituciones educativas, centros de formación técnica, empresas
+                con múltiples usuarios o programas corporativos.
+              </p>
+            </div>
+            <a className="mock-btn mock-btn-outline" href="/contacto">
+              Consultar condiciones <ArrowRight size={17} aria-hidden="true" />
+            </a>
+          </article>
+        </div>
+      </section>
+
       <section className="app-pro-dark-section app-pro-objection-section">
         <div className="mock-home-container app-pro-objection-grid">
           <div className="app-pro-objection-copy">
@@ -3388,7 +3634,7 @@ function AppPage() {
                 <li><X size={15} aria-hidden="true" /> Lista fija de fallas</li>
                 <li><X size={15} aria-hidden="true" /> No sigue tu síntoma</li>
                 <li><X size={15} aria-hidden="true" /> No prioriza por evidencia</li>
-                <li><X size={15} aria-hidden="true" /> Dependés de la memoria</li>
+                <li><X size={15} aria-hidden="true" /> Dependes de la memoria</li>
               </ul>
             </article>
             <article className="app-pro-objection-col app-pro-objection-good">
@@ -3500,129 +3746,6 @@ function AppPage() {
       </section>
 
       <S7Testimonials background="dark" />
-
-      <section className="app-pro-plans-section" id="planes-pro">
-        <div className="mock-home-container">
-          <div className="app-pro-section-heading">
-            <span className="app-pro-section-kicker">LICENCIAS Y MODALIDADES</span>
-            <h2>Elegí tu licencia PRO</h2>
-            <p>Compará renovación, duración, dispositivos y uso offline antes de elegir.</p>
-            <p className="app-pro-plans-crosslink">
-              <strong>Profesional</strong> y <strong>Empresarial</strong> incluyen el{" "}
-              <a href="/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.
-            </p>
-          </div>
-          <nav className="app-pro-plan-guide" aria-labelledby="app-pro-plan-guide-title">
-            <div className="app-pro-plan-guide-heading">
-              <span>DECISIÓN RÁPIDA</span>
-              <h3 id="app-pro-plan-guide-title">¿Cuál encaja mejor con tu forma de trabajo?</h3>
-            </div>
-            <ul>
-              {appPlanDecisionGuide.map((option) => (
-                <li key={option.target}>
-                  <a href={`#${option.target}`} aria-label={`${option.context}: ver plan ${option.title}`}>
-                    <span>{option.context}</span>
-                    <strong>{option.title}</strong>
-                    <small>{option.detail}</small>
-                    <span className="app-pro-plan-guide-link">
-                      Ver plan <ArrowRight size={15} aria-hidden="true" />
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <div className="app-pro-plan-grid">
-            {pricingCards.map((plan) => (
-              <article
-                className={`app-pro-plan-card${plan.badge ? " featured" : ""}${plan.title === "TRIAL" ? " trial" : ""}`}
-                id={appPlanCardIds[plan.title]}
-                key={plan.title}
-                tabIndex={-1}
-              >
-                {plan.badge ? <span className="app-pro-plan-badge">{plan.badge}</span> : null}
-                <h3>{plan.title}</h3>
-                <strong>{plan.price}</strong>
-                <span className="app-pro-plan-meta">{plan.meta}</span>
-                <ul>
-                  {plan.bullets.map((item) => (
-                    <li key={item}>
-                      <CheckCircle2 size={15} /> {item}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  className="mock-btn mock-btn-primary"
-                  href={plan.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => track("plan_click", { plan: plan.title })}
-                >
-                  {plan.button} <ExternalLink size={17} />
-                </a>
-              </article>
-            ))}
-          </div>
-          <ul className="app-pro-purchase-confidence" aria-label="Información antes de comprar">
-            <li>
-              <CheckCircle2 size={17} aria-hidden="true" /> Compra gestionada por Hotmart
-            </li>
-            <li>
-              <CheckCircle2 size={17} aria-hidden="true" /> Precio y modalidad visibles antes de confirmar
-            </li>
-            <li>
-              <CheckCircle2 size={17} aria-hidden="true" /> Activación con el email usado en la compra
-            </li>
-          </ul>
-          <aside className="app-pro-training-strip" aria-labelledby="app-pro-training-title">
-            <div className="app-pro-training-copy">
-              <span className="app-pro-training-eyebrow">FORMACIÓN TÉCNICA</span>
-              <h3 id="app-pro-training-title">¿También necesitás capacitación?</h3>
-              <p>Curso Diagnóstico S7-300/400 con acceso permanente + 1 mes de BOJ S7-PLC PRO.</p>
-            </div>
-            <div className="app-pro-training-action">
-              <strong>{offer.course.price} · Pago único</strong>
-              <a className="mock-btn mock-btn-outline" href="/cursos/s7-300-400">
-                Ver curso y contenidos <ArrowRight size={17} aria-hidden="true" />
-              </a>
-            </div>
-          </aside>
-          <article className="app-pro-institutional">
-            <Icon name="Landmark" size={34} />
-            <div>
-              <h3>Institucional / Centros de formación: A cotizar.</h3>
-              <p>
-                Condiciones especiales para instituciones educativas, centros de formación técnica, empresas
-                con múltiples usuarios o programas corporativos.
-              </p>
-            </div>
-            <a className="mock-btn mock-btn-outline" href="/contacto">
-              Consultar condiciones <ArrowRight size={17} aria-hidden="true" />
-            </a>
-          </article>
-        </div>
-      </section>
-
-      <section className="app-pro-trial-section" id="trial-48">
-        <div className="mock-home-container app-pro-trial-grid">
-          <div className="app-pro-trial-rocket">
-            <Icon name="Rocket" size={42} />
-          </div>
-          <div>
-            <h2>Prueba BOJ S7-PLC PRO durante 48 hs</h2>
-            <p>Acceso inmediato · Sin tarjeta de crédito · Funciona online · Ideal para conocer el flujo de diagnóstico</p>
-          </div>
-          <a
-            className="mock-btn mock-btn-light"
-            href={appProductUrl}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => track("app_trial_click", { source: "trial_section" })}
-          >
-            Probar gratis 48 hs <ExternalLink size={18} />
-          </a>
-        </div>
-      </section>
 
       <section className="app-pro-faq-section">
         <div className="mock-home-container">
@@ -3898,7 +4021,7 @@ function CourseCTA() {
   return (
     <RouteCTA
       title="Formación técnica aplicada"
-      text="Si trabajás con sistemas Siemens en planta y querés aprender a diagnosticar, interpretar fallas y trabajar con criterio técnico, podés ver los cursos disponibles de BOJ Automatización y Control."
+      text="Si trabajas con sistemas Siemens en planta y quieres aprender a diagnosticar, interpretar fallas y trabajar con criterio técnico, puedes consultar los cursos disponibles de BOJ Automatización y Control."
       primaryLabel="Ver cursos"
       primaryHref="/cursos"
       secondaryLabel="Consultar capacitación"
@@ -3914,7 +4037,7 @@ function CourseCTA() {
 function GraciasPage() {
   useEffect(() => {
     // Métrica de la página de retorno. La conversión "purchase" real se define
-    // en el bloque 3B (con fuente única y dedupe); acá no se registra purchase
+    // en el bloque 3B (con fuente única y dedupe); aquí no se registra purchase
     // ni begin_checkout.
     track("thank_you_page_view", { item: "curso_s7_app_pro" });
   }, []);
@@ -3923,27 +4046,27 @@ function GraciasPage() {
     <PageShell
       eyebrow="Compra"
       title="Estamos procesando tu operación"
-      subtitle="Revisá el correo utilizado durante la compra. Si el pago todavía está pendiente, vas a recibir las instrucciones cuando se confirme."
+      subtitle="Revisa el correo electrónico utilizado durante la compra. Si el pago todavía está pendiente, recibirás las instrucciones cuando se confirme."
     >
       <div className="gracias-steps">
         <article className="gracias-step">
-          <h3>1 · Revisá tu email</h3>
+          <h3>1 · Revisa tu correo electrónico</h3>
           <p>
-            Las instrucciones de acceso al material se envían al email que usaste en la compra. Si no las ves, revisá
+            Las instrucciones de acceso al material se envían al correo electrónico que utilizaste en la compra. Si no las ves, revisa
             la carpeta de spam o promociones.
           </p>
         </article>
         <article className="gracias-step">
-          <h3>2 · Activá tu mes de BOJ S7-PLC PRO</h3>
+          <h3>2 · Activa tu mes de BOJ S7-PLC PRO</h3>
           <p>
-            Conservá el mismo email utilizado en la compra. Cuando tu acceso esté disponible, vas a recibir las
+            Conserva el mismo correo electrónico utilizado en la compra. Cuando tu acceso esté disponible, recibirás las
             instrucciones para activar tu mes de BOJ S7-PLC PRO.
           </p>
         </article>
         <article className="gracias-step">
           <h3>3 · ¿Problemas con el acceso?</h3>
           <p>
-            Escribinos y lo resolvemos: <a href={`mailto:${contact.email}`}>{contact.email}</a> o WhatsApp{" "}
+            Escríbenos y lo resolveremos: <a href={`mailto:${contact.email}`}>{contact.email}</a> o WhatsApp{" "}
             <a href={whatsappUrl("Hola, acabo de comprar el curso S7-300/400 y tengo un problema con el acceso.")}>
               {contact.whatsappDisplay}
             </a>
@@ -3965,16 +4088,16 @@ function ContactPage() {
   return (
     <PageShell
       eyebrow="Contacto"
-      title="Hablemos del problema técnico o la solución que necesitás"
-      subtitle="Elegí el tipo de consulta y compartí el contexto esencial. Atendemos urgencias de planta, proyectos de automatización, cursos y licencias BOJ S7-PLC PRO."
+      title="Hablemos del problema técnico o la solución que necesitas"
+      subtitle="Elige el tipo de consulta y comparte el contexto esencial. Atendemos urgencias de planta, proyectos de automatización, cursos y licencias BOJ S7-PLC PRO."
       heroImage={heroContacto}
       heroPrimary={{ label: "Escribir por WhatsApp", href: whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica."), external: true }}
-      heroSecondary={{ label: "Enviar email", href: `mailto:${contact.email}` }}
+      heroSecondary={{ label: "Completar formulario", href: "#consulta-tecnica" }}
     >
       <section className="contact-direct contact-decision-intro">
         <div>
-          <p className="eyebrow">Empezá por acá</p>
-          <h2>Elegí la consulta que mejor describe tu situación</h2>
+          <p className="eyebrow">Empieza aquí</p>
+          <h2>Elige la consulta que mejor describe tu situación</h2>
           <p>
             Así llegamos a la primera conversación con el contexto correcto, sin hacerte repetir
             información ni mezclar una urgencia de planta con una consulta comercial.
@@ -4011,12 +4134,12 @@ function ContactPage() {
         <div className="contact-panel">
           <h2>Contacto y datos útiles</h2>
           <p className="contact-panel-intro">
-            Si la consulta no es urgente, usá el formulario o escribinos por el canal que te resulte
+            Si la consulta no es urgente, utiliza el formulario o escríbenos por el canal que te resulte
             más cómodo. La información llega al mismo equipo técnico.
           </p>
           <ContactLine icon="Wrench" label="Responsable" value={contact.responsible} />
           <ContactLine icon="MapPin" label="Ubicación" value={contact.location} />
-          <ContactLine icon="Mail" label="Email" value={contact.email} href={`mailto:${contact.email}`} />
+          <ContactLine icon="Mail" label="Correo electrónico" value={contact.email} href={`mailto:${contact.email}`} />
           <ContactLine
             icon="Phone"
             label="WhatsApp"
@@ -4037,7 +4160,7 @@ function ContactPage() {
             <PrimaryLink href={whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.")}>
               Contactar por WhatsApp
             </PrimaryLink>
-            <SecondaryLink href={`mailto:${contact.email}`}>Enviar email</SecondaryLink>
+            <SecondaryLink href={`mailto:${contact.email}`}>Enviar correo</SecondaryLink>
           </div>
         </div>
 
@@ -4045,7 +4168,7 @@ function ContactPage() {
       </div>
 
       <section className="inner-section">
-        <h2>También podés consultar por</h2>
+        <h2>También puedes consultar por</h2>
         <div className="function-grid">
           {quickServices.map((item) => (
             <CheckItem key={item}>{item}</CheckItem>
@@ -4092,9 +4215,9 @@ function ContactForm() {
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
-      <h2>Contanos el caso</h2>
+      <h2>Cuéntanos el caso</h2>
       <p>
-        Completá los datos esenciales para derivar bien la consulta. Respondemos normalmente dentro
+        Completa los datos esenciales para derivar correctamente la consulta. Respondemos normalmente dentro
         de 48 horas hábiles; las fallas urgentes se coordinan por WhatsApp y están sujetas a disponibilidad.
       </p>
       <label>
@@ -4107,7 +4230,7 @@ function ContactForm() {
       </label>
       <div className="form-row">
         <label>
-          Email
+          Correo electrónico
           <input name="email" type="email" value={form.email} onChange={updateField} required />
         </label>
         <label>
@@ -4130,7 +4253,7 @@ function ContactForm() {
           rows="5"
           value={form.message}
           onChange={updateField}
-          placeholder="Describa el síntoma, el equipo involucrado, el PLC o red industrial, o la capacitación requerida."
+          placeholder="Describe el síntoma, el equipo involucrado, el PLC o la red industrial, o la formación requerida."
           required
         />
       </label>
@@ -4834,7 +4957,7 @@ function MainFooter() {
           <a href="/reembolsos">Reembolsos</a>
         </nav>
         <div className="mock-footer-social">
-          <h3>Seguinos</h3>
+          <h3>Síguenos</h3>
           <div>
             <a href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">in</a>
             <a href={contact.linktree} target="_blank" rel="noreferrer" aria-label="Linktree">lt</a>
@@ -4854,7 +4977,7 @@ function FloatingContact() {
       <a href={whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.")} aria-label="Consultar por WhatsApp">
         <Phone size={20} />
       </a>
-      <a href={`mailto:${contact.email}`} aria-label="Enviar email">
+      <a href={`mailto:${contact.email}`} aria-label="Enviar correo electrónico">
         <Mail size={20} />
       </a>
     </div>

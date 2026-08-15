@@ -12,13 +12,13 @@ const stylesSource = fs.readFileSync(path.join(rootDir, "src", "styles.css"), "u
 test("App PRO presents the approved editorial hierarchy", () => {
   const expectedCopy = [
     "DIAGNÓSTICO EN CAMPO",
-    "Identificá el tipo de falla y ordená la búsqueda antes de intervenir el equipo.",
+    "Identifica el tipo de falla y ordena la búsqueda antes de intervenir el equipo.",
     "FLUJO DE TRABAJO",
     "Del síntoma a una hipótesis priorizada y una verificación concreta en campo.",
     "HERRAMIENTAS DE DIAGNÓSTICO",
     "Un entorno práctico para consultar, contrastar y documentar el diagnóstico desde el navegador.",
     "LICENCIAS Y MODALIDADES",
-    "Compará renovación, duración, dispositivos y uso offline antes de elegir.",
+    "Compara la renovación, la duración, los dispositivos y el uso sin conexión antes de elegir.",
   ];
 
   for (const copy of expectedCopy) {

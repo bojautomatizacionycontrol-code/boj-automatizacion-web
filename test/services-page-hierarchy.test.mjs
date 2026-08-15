@@ -64,6 +64,18 @@ test("el hero opcional y la tarjeta de orientacion tienen layout responsive", ()
   assert.match(appSource, /boj-hero-inner--with-aside/);
   assert.match(stylesSource, /\.services-redesign-page \.boj-hero-inner--with-aside/);
   assert.match(stylesSource, /\.services-intake-card/);
+  assert.match(
+    stylesSource,
+    /\.services-redesign-page \.boj-hero-inner--with-aside\s*\{[\s\S]*?width: min\(calc\(100% - 72px\), 1240px\);[\s\S]*?margin-inline: auto;/,
+  );
   assert.match(stylesSource, /@media \(max-width: 900px\)/);
+  assert.match(
+    stylesSource,
+    /@media \(max-width: 900px\)[\s\S]*?\.services-redesign-page \.boj-hero-inner--with-aside\s*\{[\s\S]*?width: min\(calc\(100% - 32px\), 720px\);/,
+  );
   assert.match(stylesSource, /@media \(max-width: 640px\)/);
+  assert.match(
+    stylesSource,
+    /@media \(max-width: 640px\)[\s\S]*?\.services-redesign-page \.boj-hero-inner--with-aside\s*\{[\s\S]*?width: min\(calc\(100% - 28px\), 560px\);/,
+  );
 });

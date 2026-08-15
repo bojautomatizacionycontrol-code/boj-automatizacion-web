@@ -41,7 +41,7 @@ const expectedPlanMatrix = [
 ];
 
 const expectedAppGridTitles = [
-  "TRIAL",
+  "Prueba gratuita",
   "Suscripción mensual",
   "Mensual de pago único",
   "Profesional",
@@ -63,33 +63,33 @@ test("mantiene las prestaciones indicadas para cada opción", () => {
     "Sin curso",
     "1 dispositivo",
     "Renovación automática hasta cancelación",
-    "Funciona offline hasta 2 días",
+    "Funciona sin conexión hasta 2 días",
     "Acceso completo a diagnósticos PRO",
   ]);
   assert.deepEqual(plans.get("Mensual de pago único").bullets, [
     "Sin curso",
     "1 dispositivo",
     "Sin renovación automática",
-    "Funciona offline hasta 2 días",
+    "Funciona sin conexión hasta 2 días",
     "Acceso completo a diagnósticos PRO",
   ]);
   assert.deepEqual(plans.get("Curso + licencia").bullets, [
     "Curso con acceso permanente",
     "App PRO por 1 mes",
     "1 dispositivo",
-    "Funciona offline hasta 2 días",
+    "Funciona sin conexión hasta 2 días",
     "Acceso completo a diagnósticos PRO",
   ]);
   assert.deepEqual(plans.get("Profesional").bullets, [
     "Incluye app PRO",
     "Incluye el curso con acceso permanente",
-    "Funciona offline hasta 2 días",
+    "Funciona sin conexión hasta 2 días",
     "Ideal para uso profesional recurrente",
   ]);
   assert.deepEqual(plans.get("Empresarial").bullets, [
     "Incluye app PRO",
     "Incluye el curso con acceso permanente",
-    "Funciona offline hasta 7 días",
+    "Funciona sin conexión hasta 7 días",
     "Pensado para equipos técnicos y empresas",
   ]);
 });
@@ -117,7 +117,7 @@ test("separa Curso + licencia de la grilla principal y publica una única franja
   assert.notEqual(institutionalStart, -1);
   assert.equal(appSource.match(/className="app-pro-training-strip"/g)?.length, 1);
   assert.match(trainingSource, /FORMACIÓN TÉCNICA/);
-  assert.match(trainingSource, /¿También necesitás capacitación\?/);
+  assert.match(trainingSource, /¿También necesitas formación\?/);
   assert.match(
     trainingSource,
     /Curso Diagnóstico S7-300\/400 con acceso permanente \+ 1 mes de BOJ S7-PLC PRO\./
@@ -155,19 +155,19 @@ test("actualiza el curso a 89 USD, pago único y su oferta exacta", () => {
   assert.equal(appSource.match(/href: purchaseTarget\.href/g)?.length, 1);
 });
 
-test("preserva Trial y deriva Institucional al contacto", () => {
+test("preserva la prueba gratuita y deriva Institucional al contacto", () => {
   assert.deepEqual(offer.app.trialPlan, {
-    title: "TRIAL",
+    title: "Prueba gratuita",
     price: "Gratis",
-    meta: "48 horas · Online · Funciones limitadas",
+    meta: "48 horas · En línea · Funciones limitadas",
     text: "Prueba inicial para conocer el flujo de diagnóstico de BOJ S7-PLC PRO antes de activar una licencia paga.",
     bullets: [
-      "Acceso gratuito por 48 hs",
-      "Funciona solo online",
+      "Acceso gratuito durante 48 horas",
+      "Funciona sólo en línea",
       "Algunas funciones limitadas",
       "Ideal para conocer la herramienta",
     ],
-    button: "Probar gratis 48 hs",
+    button: "Probar gratis durante 48 horas",
     url: "https://app.bojautomatizacion.com/",
   });
   assert.equal(offer.app.productUrl, "https://app.bojautomatizacion.com/");
