@@ -1514,7 +1514,6 @@ function Header({ route, language }) {
           );
         })}
         <div className="mobile-nav-actions">
-          <LanguageSwitcher route={route} language={language} onSelect={closeMenu} />
           <a
             className="header-action solid"
             href={routeAction.href}
@@ -1526,7 +1525,6 @@ function Header({ route, language }) {
       </nav>
 
       <div className="header-actions">
-        <LanguageSwitcher route={route} language={language} />
         <a
           className="header-action solid"
           href={routeAction.href}
@@ -1534,17 +1532,21 @@ function Header({ route, language }) {
         >
           {routeAction.label}
         </a>
+        <LanguageSwitcher route={route} language={language} />
       </div>
 
-      <button
-        className="nav-toggle"
-        type="button"
-        onClick={() => setOpen((value) => !value)}
-        aria-label={language === "en" ? "Open menu" : "Abrir menú"}
-        aria-expanded={open}
-      >
-        {open ? <X size={22} /> : <Menu size={22} />}
-      </button>
+      <div className="mobile-header-controls">
+        <LanguageSwitcher route={route} language={language} />
+        <button
+          className="nav-toggle"
+          type="button"
+          onClick={() => setOpen((value) => !value)}
+          aria-label={language === "en" ? "Open menu" : "Abrir menú"}
+          aria-expanded={open}
+        >
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
     </header>
   );
 }

@@ -9,6 +9,7 @@ const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "ut
 const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
 const sitemapSource = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
 const i18nSource = await readFile(new URL("../src/i18n.js", import.meta.url), "utf8");
+const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
 
 const expectedPairs = [
   ["/", "/en"],
@@ -52,6 +53,24 @@ test("el selector ofrece ES y EN, persiste la elección y no fuerza una redirecc
   assert.match(suggestionSource, /Continue in Spanish/);
   assert.doesNotMatch(suggestionSource, /location\.(?:assign|replace)|history\.replaceState/);
   assert.doesNotMatch(suggestionSource, /fetch\(|sendBeacon\(|XMLHttpRequest/);
+});
+
+test("mantiene el selector visible en el extremo derecho del encabezado", () => {
+  const headerStart = appSource.indexOf("function Header(");
+  const headerEnd = appSource.indexOf("function LanguageSwitcher", headerStart);
+  const headerSource = appSource.slice(headerStart, headerEnd);
+  const desktopActions = headerSource.slice(
+    headerSource.indexOf('<div className="header-actions">'),
+    headerSource.indexOf('<div className="mobile-header-controls">'),
+  );
+  const mobileControls = headerSource.slice(headerSource.indexOf('<div className="mobile-header-controls">'));
+
+  assert.ok(desktopActions.indexOf("routeAction.label") < desktopActions.indexOf("<LanguageSwitcher"));
+  assert.match(mobileControls, /<LanguageSwitcher route=\{route\} language=\{language\} \/>/);
+  assert.match(mobileControls, /className="nav-toggle"/);
+  assert.doesNotMatch(headerSource.slice(headerSource.indexOf('<div className="mobile-nav-actions">'), headerSource.indexOf("</nav>")), /LanguageSwitcher/);
+  assert.match(stylesSource, /\.mobile-header-controls\s*\{[\s\S]*?display:\s*none/);
+  assert.match(stylesSource, /@media \(max-width: 1100px\)[\s\S]*?\.site-header \.mobile-header-controls\s*\{[\s\S]*?display:\s*flex/);
 });
 
 test("recuerda una elección explícita en inglés sin redirigir por idioma del navegador", () => {
