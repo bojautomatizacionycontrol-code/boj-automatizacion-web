@@ -7,12 +7,17 @@ const contentSource = await readFile(new URL("../src/content.js", import.meta.ur
 const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
 
 test("las imágenes de Obras se identifican como ilustrativas", () => {
-  const labels = appSource.match(/className="works-image-disclaimer"/g) ?? [];
+  const homeStart = appSource.indexOf("function HomeObrasTeaser()");
+  const homeEnd = appSource.indexOf("function AppDiagnosticMockup(", homeStart);
+  const projectStart = appSource.indexOf("function ProjectCard(");
+  const projectEnd = appSource.indexOf("function PortfolioPrep()", projectStart);
+  const spanishWorksSource = `${appSource.slice(homeStart, homeEnd)}\n${appSource.slice(projectStart, projectEnd)}`;
+  const labels = spanishWorksSource.match(/className="works-image-disclaimer"/g) ?? [];
 
   assert.equal(labels.length, 2);
-  assert.match(appSource, /Los casos, clientes y alcances corresponden a trabajos realizados; las imágenes son ilustrativas\./);
-  assert.match(appSource, /alt=\{`Imagen ilustrativa para \$\{project\.title\}`\}/);
-  assert.doesNotMatch(appSource, /Imagen real \(de services-works\)/);
+  assert.match(spanishWorksSource, /Los casos, clientes y alcances corresponden a trabajos realizados; las imágenes son ilustrativas\./);
+  assert.match(spanishWorksSource, /alt=\{`Imagen ilustrativa para \$\{project\.title\}`\}/);
+  assert.doesNotMatch(spanishWorksSource, /Imagen real \(de services-works\)/);
 });
 
 test("el curso se describe sin limitar el material a dos PDF", () => {

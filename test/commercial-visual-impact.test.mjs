@@ -14,11 +14,14 @@ const sourceBetween = (startMarker, endMarker) => {
 };
 
 test("el encabezado adapta su CTA sin agregar checkouts nuevos", () => {
-  const headerSource = sourceBetween("function Header({ route })", "function HeroAction");
+  const headerSource = sourceBetween("function Header({ route, language })", "function LanguageSwitcher");
 
-  assert.match(headerSource, /route === "\/app"[\s\S]*?label: "Ver planes PRO", href: "#planes-pro"/);
-  assert.match(headerSource, /route === "\/cursos\/s7-300-400"[\s\S]*?label: "Ver curso y precio", href: "#curso-s7-compra"/);
-  assert.match(headerSource, /route === "\/contacto"[\s\S]*?label: "Completar consulta", href: "#consulta-tecnica"/);
+  assert.match(headerSource, /route === "\/app" \|\| route === "\/en\/app"/);
+  assert.match(headerSource, /"View PRO plans" : "Ver planes PRO"/);
+  assert.match(headerSource, /route === "\/cursos\/s7-300-400" \|\| route === "\/en\/courses\/s7-300-400"/);
+  assert.match(headerSource, /"View course and price" : "Ver curso y precio"/);
+  assert.match(headerSource, /route === "\/contacto" \|\| route === "\/en\/contact"/);
+  assert.match(headerSource, /"Send an inquiry" : "Completar consulta"/);
   assert.match(headerSource, /label: "Solicitar diagnóstico"/);
   assert.doesNotMatch(headerSource, /pay\.hotmart\.com/);
   assert.equal(headerSource.match(/\{routeAction\.label\}/g)?.length, 2);
@@ -44,7 +47,7 @@ test("inicio ofrece tres caminos claros dentro del hero", () => {
 });
 
 test("App muestra una demostración real y precios antes de la explicación extensa", () => {
-  const appPageSource = sourceBetween("function AppPage()", "function WorksPage()");
+  const appPageSource = sourceBetween("function AppPage()", "function AppComparisonTable()");
   const previewSource = sourceBetween("function AppHeroDiagnosticPreview()", "function AppQuickCommercialAccess()");
   const quickAccessSource = sourceBetween("function AppQuickCommercialAccess()", "function HomePage()");
 
@@ -69,7 +72,7 @@ test("App muestra una demostración real y precios antes de la explicación exte
 });
 
 test("el recorrido comercial muestra los planes antes de las objeciones y evita repetir el Trial", () => {
-  const appPageSource = sourceBetween("function AppPage()", "function WorksPage()");
+  const appPageSource = sourceBetween("function AppPage()", "function AppComparisonTable()");
   const realViews = appPageSource.indexOf('className="app-pro-real-language-section"');
   const plans = appPageSource.indexOf('className="app-pro-plans-section"');
   const objection = appPageSource.indexOf('className="app-pro-dark-section app-pro-objection-section"');

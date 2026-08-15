@@ -70,6 +70,16 @@ import {
   trustSignals,
   whyBoj,
 } from "./content.js";
+import {
+  englishApp,
+  englishCourses,
+  englishHome,
+  englishNavItems,
+  englishProjects,
+  englishS7Course,
+  englishServices,
+  languageRoutePairs,
+} from "./i18n.js";
 import bojLogo from "./assets/boj-logo-real-cropped.png";
 import appScreenshot from "./assets/APP.png";
 import appRealCapture from "./assets/boj-s7-plc-real-capture.png";
@@ -1129,12 +1139,71 @@ const routeMeta = {
     title: "Procesando tu operación | BOJ Automatización y Control",
     description: "Estado de tu operación: acceso al material y activación de BOJ S7-PLC PRO.",
   },
+  "/en": {
+    title: "BOJ Automation and Control | Siemens PLC diagnostics and engineering",
+    description:
+      "Industrial automation, Siemens PLC troubleshooting, technical training and BOJ S7-PLC diagnostic support for maintenance teams.",
+  },
+  "/en/services": {
+    title: "Industrial automation and diagnostics services | BOJ",
+    description:
+      "Technical services for Siemens PLCs, HMI, SCADA, PROFIBUS, PROFINET, migrations, instrumentation and industrial commissioning.",
+  },
+  "/en/courses": {
+    title: "Siemens PLC technical training | BOJ",
+    description:
+      "Applied online training for industrial diagnostics with Siemens S7-300/400, STEP 7 Classic and TIA Portal.",
+  },
+  "/en/courses/s7-300-400": {
+    title: "Siemens S7-300/400 industrial diagnostics course | BOJ",
+    description:
+      "Applied Siemens S7-300/400 diagnostics course with STEP 7 Classic, Diagnostic Buffer, HW Config Online, PROFIBUS and field cases.",
+  },
+  "/en/courses/tia-portal": {
+    title: "TIA Portal S7-1200/1500 course | BOJ",
+    description:
+      "Upcoming introductory TIA Portal training for Siemens S7-1200/1500 PLC systems, online diagnostics and industrial maintenance.",
+  },
+  "/en/app": {
+    title: "BOJ S7-PLC PRO | Siemens S7-300/400 diagnostics app",
+    description:
+      "Guided first-line diagnostic support for Siemens S7-300/400 systems, with prioritized technical hypotheses and field verification steps.",
+  },
+  "/en/projects": {
+    title: "Industrial automation projects | BOJ",
+    description:
+      "Selected industrial engineering, Siemens PLC, HMI, SCADA, migration and commissioning projects completed by BOJ.",
+  },
+  "/en/contact": {
+    title: "Technical contact | BOJ Automation and Control",
+    description:
+      "Contact BOJ for industrial diagnostics, Siemens PLC automation, technical training and BOJ S7-PLC licensing.",
+  },
 };
 
 function getRoute() {
   let path = window.location.pathname || "/";
   if (path.length > 1 && path.endsWith("/")) path = path.replace(/\/+$/, ""); // sin slash final salvo raíz
   return path;
+}
+
+function getRouteLanguage(route) {
+  return route === "/en" || route.startsWith("/en/") ? "en" : "es";
+}
+
+function getLocalizedPath(route, language) {
+  if (route === "/inicio" && language === "es") return "/";
+  const pair = languageRoutePairs.find((item) => item.es === route || item.en === route);
+  if (pair) return pair[language];
+  return language === "en" ? "/en" : "/";
+}
+
+function setLanguagePreference(language) {
+  try {
+    window.localStorage.setItem("boj-site-language", language);
+  } catch {
+    // El selector funciona aunque el navegador bloquee almacenamiento local.
+  }
 }
 
 function whatsappUrl(message = "Hola, escribo desde la web de BOJ Automatización y Control para realizar una consulta técnica.") {
@@ -1163,6 +1232,21 @@ function Icon({ name, size = 22, className = "" }) {
 
 function App() {
   const [route, setRoute] = useState(getRoute);
+  const language = getRouteLanguage(route);
+
+  useEffect(() => {
+    if (route !== "/" && route !== "/inicio") return;
+    let savedLanguage = null;
+    try {
+      savedLanguage = window.localStorage.getItem("boj-site-language");
+    } catch {
+      return;
+    }
+    if (savedLanguage === "en") {
+      window.history.replaceState(null, "", "/en");
+      setRoute("/en");
+    }
+  }, []);
 
   useEffect(() => {
     const onPopState = () => setRoute(getRoute());
@@ -1218,6 +1302,10 @@ function App() {
   }, [route]);
 
   useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
+  useEffect(() => {
     const meta = routeMeta[route] || routeMeta["/inicio"];
     document.title = meta.title;
 
@@ -1229,6 +1317,9 @@ function App() {
     setMeta('meta[name="description"]', "content", meta.description);
     setMeta('meta[property="og:title"]', "content", meta.title);
     setMeta('meta[property="og:description"]', "content", meta.description);
+    setMeta('meta[property="og:locale"]', "content", language === "en" ? "en_US" : "es_AR");
+    setMeta('meta[name="twitter:title"]', "content", meta.title);
+    setMeta('meta[name="twitter:description"]', "content", meta.description);
     setMeta('meta[name="robots"]', "content", isKnownRoute(route) ? "index, follow" : "noindex, follow");
 
     // canonical y og:url por ruta, con dominio de PRODUCCIÓN fijo (nunca
@@ -1236,16 +1327,35 @@ function App() {
     const canonicalUrl = "https://www.bojautomatizacion.com" + (route === "/inicio" ? "/" : route);
     setMeta('link[rel="canonical"]', "href", canonicalUrl);
     setMeta('meta[property="og:url"]', "content", canonicalUrl);
-  }, [route]);
+
+    const spanishPath = getLocalizedPath(route, "es");
+    const englishPath = getLocalizedPath(route, "en");
+    const alternates = [
+      ["es", spanishPath],
+      ["en", englishPath],
+      ["x-default", spanishPath],
+    ];
+    alternates.forEach(([hreflang, path]) => {
+      let alternate = document.querySelector(`link[rel="alternate"][hreflang="${hreflang}"]`);
+      if (!alternate) {
+        alternate = document.createElement("link");
+        alternate.setAttribute("rel", "alternate");
+        alternate.setAttribute("hreflang", hreflang);
+        document.head.appendChild(alternate);
+      }
+      alternate.setAttribute("href", `https://www.bojautomatizacion.com${path}`);
+    });
+  }, [language, route]);
 
   return (
     <>
-      <Header route={route} />
+      <Header route={route} language={language} />
       <main>
         <RouteView route={route} />
       </main>
-      <Footer />
-      <FloatingContact />
+      <Footer language={language} />
+      <FloatingContact language={language} />
+      <LanguageSuggestion route={route} language={language} />
       <Analytics />
     </>
   );
@@ -1266,6 +1376,14 @@ const KNOWN_ROUTES = new Set([
   "/terminos",
   "/licencias",
   "/reembolsos",
+  "/en",
+  "/en/services",
+  "/en/courses",
+  "/en/courses/s7-300-400",
+  "/en/courses/tia-portal",
+  "/en/app",
+  "/en/projects",
+  "/en/contact",
 ]);
 
 // Fuente única de rutas conocidas (incluye la validación de los 5 slugs de recursos
@@ -1292,10 +1410,18 @@ function RouteView({ route }) {
   if (route === "/terminos") return <LegalPage type="terms" />;
   if (route === "/licencias") return <LegalPage type="licenses" />;
   if (route === "/reembolsos") return <LegalPage type="refunds" />;
+  if (route === "/en") return <EnglishHomePage />;
+  if (route === "/en/services") return <EnglishServicesPage />;
+  if (route === "/en/courses") return <EnglishCoursesPage />;
+  if (route === "/en/courses/s7-300-400") return <EnglishS7CoursePage />;
+  if (route === "/en/courses/tia-portal") return <EnglishTiaCoursePage />;
+  if (route === "/en/app") return <EnglishAppPage />;
+  if (route === "/en/projects") return <EnglishProjectsPage />;
+  if (route === "/en/contact") return <EnglishContactPage />;
   // /gracias despacha pero NO integra KNOWN_ROUTES: así hereda robots
   // "noindex, follow" (post-compra, fuera de sitemap y sin enlaces internos).
   if (route === "/gracias") return <GraciasPage />;
-  return <NotFound />;
+  return route.startsWith("/en") ? <EnglishNotFound /> : <NotFound />;
 }
 
 // NotFound client-side (no es un HTTP 404 real: Vercel responde index.html). El
@@ -1315,33 +1441,50 @@ function NotFound() {
   );
 }
 
-function Header({ route }) {
+function EnglishNotFound() {
+  return (
+    <PageShell
+      eyebrow="Error 404"
+      title="Page not found"
+      subtitle="The page you requested does not exist or has moved. Return to the English home page to continue."
+      heroPrimary={{ label: "Back to home", href: "/en" }}
+    />
+  );
+}
+
+function Header({ route, language }) {
   const [open, setOpen] = useState(false);
   const closeMenu = () => setOpen(false);
-  const defaultAction = {
-    label: "Solicitar diagnóstico",
-    href: whatsappUrl("Hola, escribo desde la web de BOJ Automatización y Control para solicitar un diagnóstico industrial."),
-  };
+  const items = language === "en" ? englishNavItems : navItems;
+  const defaultAction = language === "en"
+    ? {
+        label: "Request diagnostics",
+        href: whatsappUrl("Hello, I am contacting BOJ to request support with an industrial diagnostics case."),
+      }
+    : {
+        label: "Solicitar diagnóstico",
+        href: whatsappUrl("Hola, escribo desde la web de BOJ Automatización y Control para solicitar un diagnóstico industrial."),
+      };
   const routeAction =
-    route === "/app"
-      ? { label: "Ver planes PRO", href: "#planes-pro" }
-      : route === "/cursos/s7-300-400"
-        ? { label: "Ver curso y precio", href: "#curso-s7-compra" }
-        : route === "/contacto"
-          ? { label: "Completar consulta", href: "#consulta-tecnica" }
+    route === "/app" || route === "/en/app"
+      ? { label: language === "en" ? "View PRO plans" : "Ver planes PRO", href: language === "en" ? "#en-pro-plans" : "#planes-pro" }
+      : route === "/cursos/s7-300-400" || route === "/en/courses/s7-300-400"
+        ? { label: language === "en" ? "View course and price" : "Ver curso y precio", href: language === "en" ? "#en-course-purchase" : "#curso-s7-compra" }
+        : route === "/contacto" || route === "/en/contact"
+          ? { label: language === "en" ? "Send an inquiry" : "Completar consulta", href: language === "en" ? "#en-contact-form" : "#consulta-tecnica" }
           : defaultAction;
 
   return (
     <header className="site-header">
-      <a className="brand" href="/" onClick={closeMenu} aria-label="Ir a inicio">
+      <a className="brand" href={language === "en" ? "/en" : "/"} onClick={closeMenu} aria-label={language === "en" ? "Go to home" : "Ir a inicio"}>
         <BrandLogo />
       </a>
 
-      <nav className={`main-nav ${open ? "is-open" : ""}`} aria-label="Navegación principal">
-        {navItems.map((item) => {
+      <nav className={`main-nav ${open ? "is-open" : ""}`} aria-label={language === "en" ? "Main navigation" : "Navegación principal"}>
+        {items.map((item) => {
           const active =
             route === item.path ||
-            (item.path === "/cursos" && route.startsWith("/cursos")) ||
+            (item.children && route.startsWith(`${item.path}/`)) ||
             (item.path === "/recursos-tecnicos" && route.startsWith("/recursos-tecnicos"));
           return (
             <div className="nav-item" key={item.path}>
@@ -1371,6 +1514,7 @@ function Header({ route }) {
           );
         })}
         <div className="mobile-nav-actions">
+          <LanguageSwitcher route={route} language={language} onSelect={closeMenu} />
           <a
             className="header-action solid"
             href={routeAction.href}
@@ -1382,6 +1526,7 @@ function Header({ route }) {
       </nav>
 
       <div className="header-actions">
+        <LanguageSwitcher route={route} language={language} />
         <a
           className="header-action solid"
           href={routeAction.href}
@@ -1395,12 +1540,102 @@ function Header({ route }) {
         className="nav-toggle"
         type="button"
         onClick={() => setOpen((value) => !value)}
-        aria-label="Abrir menú"
+        aria-label={language === "en" ? "Open menu" : "Abrir menú"}
         aria-expanded={open}
       >
         {open ? <X size={22} /> : <Menu size={22} />}
       </button>
     </header>
+  );
+}
+
+function LanguageSwitcher({ route, language, onSelect }) {
+  const spanishPath = getLocalizedPath(route, "es");
+  const englishPath = getLocalizedPath(route, "en");
+
+  const chooseLanguage = (nextLanguage) => {
+    setLanguagePreference(nextLanguage);
+    onSelect?.();
+  };
+
+  return (
+    <nav className="language-switcher" aria-label={language === "en" ? "Choose language" : "Elegir idioma"}>
+      <Globe size={15} aria-hidden="true" />
+      <a
+        className={language === "es" ? "active" : ""}
+        href={spanishPath}
+        hrefLang="es"
+        lang="es"
+        aria-current={language === "es" ? "page" : undefined}
+        aria-label="Ver sitio en español"
+        onClick={() => chooseLanguage("es")}
+      >
+        ES
+      </a>
+      <span aria-hidden="true">/</span>
+      <a
+        className={language === "en" ? "active" : ""}
+        href={englishPath}
+        hrefLang="en"
+        lang="en"
+        aria-current={language === "en" ? "page" : undefined}
+        aria-label="View site in English"
+        onClick={() => chooseLanguage("en")}
+      >
+        EN
+      </a>
+    </nav>
+  );
+}
+
+function LanguageSuggestion({ route, language }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (language === "en") {
+      setLanguagePreference("en");
+      setVisible(false);
+      return;
+    }
+
+    let savedLanguage = null;
+    try {
+      savedLanguage = window.localStorage.getItem("boj-site-language");
+    } catch {
+      // La detección sigue siendo opcional cuando no hay almacenamiento local.
+    }
+    if (savedLanguage) return;
+
+    const browserLanguage = window.navigator.languages?.[0] || window.navigator.language || "es";
+    if (!browserLanguage.toLowerCase().startsWith("es")) setVisible(true);
+  }, [language]);
+
+  if (!visible || language === "en") return null;
+
+  const continueInSpanish = () => {
+    setLanguagePreference("es");
+    setVisible(false);
+  };
+
+  return (
+    <aside className="language-suggestion" role="status" aria-label="Language suggestion">
+      <div className="language-suggestion-icon" aria-hidden="true">
+        <Globe size={20} />
+      </div>
+      <div>
+        <strong>English version available</strong>
+        <p>Would you prefer to view BOJ in English?</p>
+      </div>
+      <div className="language-suggestion-actions">
+        <a href={getLocalizedPath(route, "en")} onClick={() => setLanguagePreference("en")}>
+          View in English
+        </a>
+        <button type="button" onClick={continueInSpanish}>Continue in Spanish</button>
+      </div>
+      <button className="language-suggestion-close" type="button" onClick={continueInSpanish} aria-label="Dismiss language suggestion">
+        <X size={17} />
+      </button>
+    </aside>
   );
 }
 
@@ -1768,9 +2003,10 @@ function HomeObrasTeaser() {
   );
 }
 
-function AppDiagnosticMockup() {
+function AppDiagnosticMockup({ language = "es" }) {
+  const english = language === "en";
   return (
-    <figure className="mock-app-visual real-app-capture app-product-composition" aria-label="Capturas reales de BOJ S7-PLC en computadora y teléfono móvil">
+    <figure className="mock-app-visual real-app-capture app-product-composition" aria-label={english ? "Real BOJ S7-PLC views on a computer and mobile phone" : "Capturas reales de BOJ S7-PLC en computadora y teléfono móvil"}>
       <div className="app-product-stage">
         <div className="app-desktop-frame">
           <div className="app-desktop-toolbar" aria-hidden="true">
@@ -1781,17 +2017,17 @@ function AppDiagnosticMockup() {
           <div className="real-app-screen app-desktop-screen">
             <img
               src={appRealCapture}
-              alt="Captura real de BOJ S7-PLC con diagnóstico por estado de CPU"
+              alt={english ? "Real BOJ S7-PLC view with CPU state diagnostics" : "Captura real de BOJ S7-PLC con diagnóstico por estado de CPU"}
               loading="lazy"
             />
           </div>
           <div className="app-laptop-base" aria-hidden="true" />
         </div>
-        <div className="app-mobile-frame" aria-label="Vista mobile de BOJ S7-PLC">
+        <div className="app-mobile-frame" aria-label={english ? "Mobile view of BOJ S7-PLC" : "Vista mobile de BOJ S7-PLC"}>
           <div className="app-mobile-speaker" aria-hidden="true" />
           <img
             src={appScreenshot}
-            alt="Vista mobile de BOJ S7-PLC con diagnóstico por LEDs de CPU"
+            alt={english ? "Mobile BOJ S7-PLC view with CPU LED diagnostics" : "Vista mobile de BOJ S7-PLC con diagnóstico por LEDs de CPU"}
             loading="lazy"
           />
         </div>
@@ -3789,6 +4025,763 @@ function AppComparisonTable() {
   );
 }
 
+function EnglishAppHeroDiagnosticPreview() {
+  const stages = [
+    { label: "Symptom", value: "CPU STOP + BF" },
+    { label: "Hypothesis", value: "Network or remote node" },
+    { label: "Verification", value: "Prioritized evidence" },
+  ];
+
+  return (
+    <aside className="app-hero-diagnostic-preview" aria-label="Visual example of the BOJ S7-PLC PRO diagnostic workflow">
+      <div className="app-hero-diagnostic-preview-head">
+        <span>REAL TOOL WORKFLOW</span>
+        <small><span aria-hidden="true" /> GUIDED CASE</small>
+      </div>
+      <div className="app-hero-diagnostic-preview-screen">
+        <img src={appResultadoDiagnostico} alt="Guided result in BOJ S7-PLC PRO" />
+        <span className="app-hero-diagnostic-preview-focus" aria-hidden="true" />
+      </div>
+      <ol className="app-hero-diagnostic-preview-stages">
+        {stages.map((stage, index) => (
+          <li key={stage.label}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div><small>{stage.label}</small><strong>{stage.value}</strong></div>
+          </li>
+        ))}
+      </ol>
+    </aside>
+  );
+}
+
+function EnglishHomeHeroNavigator() {
+  return (
+    <div className="home-hero-navigator">
+      <span className="home-hero-navigator-eyebrow">CHOOSE YOUR STARTING POINT</span>
+      <h2>What do you need to solve?</h2>
+      <nav aria-label="Main solutions">
+        {englishHome.navigator.map((path) => (
+          <a href={path.href} key={path.href}>
+            <span className="home-hero-navigator-icon">
+              <Icon name={path.icon} size={21} />
+            </span>
+            <span>
+              <strong>{path.title}</strong>
+              <small>{path.text}</small>
+            </span>
+            <ArrowRight size={17} aria-hidden="true" />
+          </a>
+        ))}
+      </nav>
+    </div>
+  );
+}
+
+function EnglishHomePage() {
+  return (
+    <div className="mock-home english-page" data-language="en">
+      <Hero
+        image={heroInicio}
+        eyebrow="INDUSTRIAL AUTOMATION AND DIAGNOSTICS"
+        title="Siemens PLC troubleshooting and industrial automation"
+        subtitle="More than 15 years working with plant faults, commissioning and industrial control systems. Technical services, applied training and BOJ S7-PLC diagnostic support for maintenance teams."
+        primary={{
+          label: "Request diagnostics",
+          href: whatsappUrl("Hello, I am contacting BOJ to request support with an industrial diagnostics case."),
+          external: true,
+        }}
+        secondary={{ label: "View training", href: "/en/courses" }}
+        aside={<EnglishHomeHeroNavigator />}
+      />
+
+      <section className="mock-clients" data-home-section="clients">
+        <div className="mock-home-container mock-clients-inner">
+          <p className="mock-clients-label">Selected industrial clients</p>
+          <ul className="mock-clients-list">
+            {homeClientNames.map((name) => <li key={name}>{name}</li>)}
+          </ul>
+          <a className="mock-clients-link" href="/en/projects">
+            View completed projects <ArrowRight size={15} />
+          </a>
+        </div>
+      </section>
+
+      <section className="mock-section mock-work">
+        <div className="mock-home-container">
+          <h2>Services, training and tools for industrial maintenance</h2>
+          <div className="mock-work-grid">
+            {englishHome.workLines.map((item) => (
+              <a className="mock-work-card" href={item.href} key={item.title}>
+                <span className="mock-icon-circle"><Icon name={item.icon} size={32} /></span>
+                <span className="mock-work-card-copy">
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                  <span className="mock-work-card-cta">{item.cta}<ArrowRight size={17} /></span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mock-section mock-problems">
+        <div className="mock-home-container">
+          <h2>Problems we help solve</h2>
+          <p className="mock-problems-subtitle">
+            We start with the real symptom: a stopped CPU, an unstable network, inconsistent signals or equipment that no longer responds as expected.
+          </p>
+          <div className="mock-problems-grid">
+            {englishHome.problems.map((problem) => (
+              <article className="mock-problem-item" key={problem.text}>
+                <Icon name={problem.icon} size={36} />
+                <span>{problem.text}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mock-tech-strip">
+        <div className="mock-home-container">
+          <h2>Technical focus</h2>
+          <p className="mock-tech-subtitle">Industrial technologies and areas covered by our work.</p>
+          <div className="mock-tech-grid">
+            {englishHome.specialties.map((item) => (
+              <article className="mock-tech-card" key={item.title}>
+                <Icon name={item.icon} size={48} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mock-section mock-app">
+        <div className="mock-home-container mock-app-grid">
+          <div className="mock-app-copy">
+            <span className="section-badge">BOJ S7-PLC PRO</span>
+            <h2>A clearer first response before opening STEP 7</h2>
+            <p>
+              Enter CPU states, LEDs and field symptoms. The app organizes technical hypotheses and suggests what to verify first.
+            </p>
+            <ul>
+              <li>Symptom-based workflow</li>
+              <li>Prioritized technical hypotheses</li>
+              <li>Field verification guidance</li>
+            </ul>
+            <a className="mock-btn mock-btn-primary" href="/en/app">
+              Explore the app <ArrowRight size={18} />
+            </a>
+          </div>
+          <AppDiagnosticMockup language="en" />
+        </div>
+      </section>
+
+      <section className="mock-section mock-obras">
+        <div className="mock-home-container">
+          <h2>Industrial work, not theoretical examples</h2>
+          <p className="mock-obras-subtitle">
+            Selected engineering, PLC migration and commissioning work completed in real production environments. Images are illustrative; clients and project scopes are real.
+          </p>
+          <div className="mock-obras-grid">
+            {englishProjects.map((project) => {
+              const source = projects[project.sourceIndex];
+              return (
+                <article className="mock-obras-card" key={project.title}>
+                  <div className="mock-obras-media">
+                    <img src={getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]} alt="" loading="lazy" />
+                    <span className="works-image-disclaimer">Illustrative image</span>
+                    <span className="mock-obras-client">{source.client}</span>
+                  </div>
+                  <div className="mock-obras-body">
+                    <span className="mock-obras-year">{source.year}</span>
+                    <h3>{project.title}</h3>
+                    <p>{project.result}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+          <div className="mock-obras-cta">
+            <a className="mock-btn mock-btn-primary" href="/en/projects">
+              View selected projects <ArrowRight size={18} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="mock-final-cta">
+        <img src={plantVisual} alt="" aria-hidden="true" />
+        <div className="mock-final-overlay" aria-hidden="true" />
+        <div className="mock-home-container mock-final-content">
+          <h2>Do you have a plant fault, a stopped machine or a team that needs training?</h2>
+          <p>Tell us what is happening and we will help you identify the appropriate next step.</p>
+          <div className="mock-final-actions">
+            <a className="mock-btn mock-btn-whatsapp" href={whatsappUrl("Hello, I would like to discuss an industrial fault, automation project or technical training need.")}>
+              <Phone size={18} /> Contact us on WhatsApp
+            </a>
+            <a className="mock-btn mock-btn-outline" href="/en/contact">
+              <Mail size={18} /> Send a technical inquiry
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function EnglishServicesPage() {
+  return (
+    <div className="services-redesign-page english-page" data-language="en">
+      <Hero
+        image={heroServicios}
+        eyebrow="INDUSTRIAL SERVICES"
+        title="Diagnostics and engineering to restore and improve plant operation"
+        subtitle="PLC, HMI, SCADA, industrial networks, control panels and instrumentation. We organize the evidence, narrow down the likely cause and define the next technical step."
+        primary={{ label: "Request diagnostics", href: whatsappUrl("Hello, I need support with an industrial diagnostics or automation case."), external: true }}
+        secondary={{ label: "Explore services", href: "#en-service-areas" }}
+        aside={(
+          <aside className="services-intake-card" aria-label="Information that helps start a diagnostic assessment">
+            <p className="services-intake-eyebrow">Useful information for the first contact</p>
+            <h2>What is happening in the plant?</h2>
+            <ul>
+              <li><span>01</span><div><strong>Fault or stoppage</strong><p>PLC, HMI, network, signal or actuator.</p></div></li>
+              <li><span>02</span><div><strong>Equipment involved</strong><p>Brand, model and process area.</p></div></li>
+              <li><span>03</span><div><strong>Available evidence</strong><p>Photos, alarms, backup or a short description.</p></div></li>
+            </ul>
+            <p className="services-intake-note"><ClipboardCheck size={18} /><span>This is enough to organize scope, risk and the next technical action.</span></p>
+          </aside>
+        )}
+      />
+
+      <section className="services-workflow-section">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-workflow-heading">
+            <h2>A method for making better technical decisions</h2>
+            <p>From the symptom to a practical next step, with field evidence and a clear intervention scope.</p>
+          </div>
+          <div className="services-workflow-grid">
+            {englishServices.workflow.map((card) => (
+              <article className="services-workflow-card" key={card.title}>
+                <Icon name={card.icon} size={26} /><h3>{card.title}</h3><p>{card.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="services-redesign-section services-areas-section" id="en-service-areas">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-area-heading">
+            <h2>What do you need to solve?</h2>
+            <p>Choose the starting point that best matches the current situation.</p>
+          </div>
+          <div className="services-area-grid">
+            {englishServices.areas.map((card) => (
+              <article className="services-area-card" key={card.title}>
+                <Icon name={card.icon} size={30} /><h3>{card.title}</h3><p>{card.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="services-redesign-section services-main-section">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-main-heading">
+            <h2>How we can support your operation</h2>
+            <p>Scope, typical applications and expected outcome for each core service.</p>
+          </div>
+          <div className="services-main-grid">
+            {englishServices.primary.map((service) => (
+              <article className="services-primary-card" key={service.title}>
+                <div className="services-primary-head">
+                  <span><Icon name={service.icon} size={34} /></span>
+                  <div><h3>{service.title}</h3><p>{service.description}</p></div>
+                </div>
+                <div className="services-primary-body">
+                  <ServiceInfoBlock title="Applications">
+                    <ul>{service.applications.map((item) => <li key={item}>{item}</li>)}</ul>
+                  </ServiceInfoBlock>
+                  <ServiceInfoBlock title="Expected outcome"><p>{service.result}</p></ServiceInfoBlock>
+                  <ServiceInfoBlock title="When to contact us"><p>{service.when}</p></ServiceInfoBlock>
+                </div>
+                <a className="services-consult-link" href={whatsappUrl(`Hello, I would like to discuss ${service.title.toLowerCase()}.`)}>
+                  Discuss this service <ArrowRight size={16} />
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="services-field-section">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-field-heading">
+            <h2>Experience in industrial environments</h2>
+            <p>Work performed where operational continuity, safe commissioning and reliable diagnostics matter.</p>
+          </div>
+          <div className="services-field-grid">
+            {englishServices.field.map((card) => (
+              <article className="services-field-card" key={card.title}>
+                <Icon name={card.icon} size={30} /><h3>{card.title}</h3><p>{card.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="services-redesign-cta">
+        <img src={plantVisual} alt="" aria-hidden="true" />
+        <div className="services-redesign-cta-overlay" aria-hidden="true" />
+        <div className="mock-home-container services-redesign-cta-content">
+          <h2>Start with the symptom, the equipment and the evidence you already have</h2>
+          <p>We can use that information to define scope, risk and the most useful technical next step.</p>
+          <div className="services-redesign-actions">
+            <a className="mock-btn mock-btn-whatsapp" href={whatsappUrl("Hello, I would like to discuss an industrial technical service.")}>
+              <Phone size={18} /> Contact us on WhatsApp
+            </a>
+            <a className="mock-btn mock-btn-outline" href="/en/contact">Contact details <ArrowRight size={18} /></a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function EnglishCourseAvailableCard({ type }) {
+  const isS7 = type === "s7";
+  const course = isS7
+    ? {
+        label: "AVAILABLE NOW",
+        title: "Industrial diagnostics for Siemens S7-300/400",
+        image: courseS7400Visual,
+        path: "/en/courses/s7-300-400",
+        icon: "Cpu",
+        facts: [["Format", "Online"], ["Language", "Spanish"], ["Access", "Permanent"], ["Includes", "1 month PRO App"]],
+        bullets: ["STEP 7 Classic and SIMATIC Manager", "CPU states, SF/BF and Diagnostic Buffer", "PROFIBUS, modules and field signals"],
+      }
+    : {
+        label: "UPCOMING",
+        title: "TIA Portal for Siemens S7-1200/1500",
+        image: courseTiaPortalVisual,
+        path: "/en/courses/tia-portal",
+        icon: "MonitorCog",
+        facts: [["Format", "Online"], ["Level", "Introductory"], ["Status", "In preparation"]],
+        bullets: ["Hardware configuration", "Variables and LAD", "Online monitoring and basic diagnostics"],
+      };
+
+  return (
+    <article className="course-available-card">
+      <div className="course-available-content">
+        <div className="course-available-title-row"><span><Icon name={course.icon} size={30} /></span><h3>{course.title}</h3></div>
+        <div className="course-quick-facts">
+          {course.facts.map(([title, value]) => <div key={title}><span>{title}</span><strong>{value}</strong></div>)}
+        </div>
+        <ul className="course-available-bullets">
+          {course.bullets.map((item) => <li key={item}><CheckCircle2 size={16} />{item}</li>)}
+        </ul>
+      </div>
+      <div className="course-available-visual">
+        <img src={course.image} alt="" aria-hidden="true" loading="lazy" />
+        <strong>{course.label}</strong>
+        <span className="course-status-badge">{isS7 ? "Available" : "Upcoming"}</span>
+        <a className="mock-btn mock-btn-primary" href={course.path}>{isS7 ? "View course" : "View preview"} <ArrowRight size={18} /></a>
+      </div>
+    </article>
+  );
+}
+
+function EnglishCoursesPage() {
+  return (
+    <div className="courses-redesign-page english-page" data-language="en">
+      <Hero
+        image={heroCursos}
+        eyebrow="APPLIED TECHNICAL TRAINING"
+        title="Learn to troubleshoot industrial systems with a repeatable method"
+        subtitle="Training for maintenance technicians, automation specialists and engineers who work with Siemens PLC systems in real plant environments."
+        primary={{ label: "View available courses", href: "#en-courses-available" }}
+        secondary={{ label: "Ask about training", href: "/en/contact" }}
+      />
+      <section className="courses-light-section">
+        <div className="mock-home-container">
+          <div className="courses-section-heading courses-section-heading-dark"><h2>Training designed for field decisions</h2></div>
+          <div className="courses-benefit-grid">
+            {englishCourses.benefits.map((item) => (
+              <article className="courses-benefit-card" key={item.title}><Icon name={item.icon} size={30} /><h3>{item.title}</h3><p>{item.text}</p></article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="courses-available-section" id="en-courses-available">
+        <div className="mock-home-container">
+          <div className="courses-section-heading"><h2>Available training</h2><p>Choose the program that matches the Siemens platform you work with.</p></div>
+          <div className="courses-available-list"><EnglishCourseAvailableCard type="s7" /><EnglishCourseAvailableCard type="tia" /></div>
+        </div>
+      </section>
+      <section className="courses-light-section courses-learning-section">
+        <div className="mock-home-container">
+          <div className="courses-section-heading courses-section-heading-dark"><h2>What the training helps you improve</h2></div>
+          <div className="courses-learning-grid">
+            {englishCourses.learning.map((item) => <article className="courses-learning-card" key={item.text}><Icon name={item.icon} size={28} /><p>{item.text}</p></article>)}
+          </div>
+        </div>
+      </section>
+      <section className="courses-final-cta">
+        <div className="mock-home-container courses-final-cta-content">
+          <h2>Need training for a maintenance or automation team?</h2>
+          <p>Contact us to discuss the platform, audience and technical objectives.</p>
+          <div className="courses-actions"><a className="mock-btn mock-btn-primary" href="/en/contact">Discuss team training <ArrowRight size={18} /></a></div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function EnglishTiaCoursePage() {
+  return (
+    <PageShell
+      eyebrow="UPCOMING COURSE"
+      title="TIA Portal for Siemens S7-1200/1500"
+      subtitle="An introductory program focused on hardware configuration, variables, LAD, online monitoring and basic industrial diagnostics."
+      heroImage={heroCursoTia}
+      heroPrimary={{ label: "Ask about availability", href: "/en/contact" }}
+      heroSecondary={{ label: "View S7-300/400 course", href: "/en/courses/s7-300-400" }}
+    >
+      <section className="en-content-panel">
+        <div><p className="eyebrow">CURRENT STATUS</p><h2>Program in preparation</h2></div>
+        <p>The course is not currently offered for purchase. You can contact BOJ if you would like to receive information when the program becomes available.</p>
+      </section>
+    </PageShell>
+  );
+}
+
+function EnglishAppPage() {
+  const pricingCards = [appTrialPlan, ...appLicensePlans].map((plan) => ({
+    ...plan,
+    ...englishApp.planCopy[plan.title],
+    sourceTitle: plan.title,
+  }));
+  const [activeScreenshot, setActiveScreenshot] = useState(null);
+
+  useEffect(() => {
+    if (!activeScreenshot) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    const close = (event) => { if (event.key === "Escape") setActiveScreenshot(null); };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", close);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", close);
+    };
+  }, [activeScreenshot]);
+
+  return (
+    <div className="app-pro-page english-page" data-language="en">
+      <Hero
+        image={appProHeroLaptopVisual}
+        eyebrow="FIRST-LINE FIELD DIAGNOSTICS"
+        title="Before opening STEP 7, identify what you need to verify"
+        subtitle="Enter the symptoms, LEDs and conditions observed at the control panel. BOJ S7-PLC PRO organizes possible causes and helps you decide whether to investigate the CPU, network, modules, power, signals or logic."
+        primary={{ label: "Start the 48-hour free trial", href: appProductUrl, external: true, onClick: () => track("app_trial_click", { source: "app_en_hero" }) }}
+        secondary={{ label: "View PRO plans", href: "#en-pro-plans" }}
+        note="The app does not connect directly to the PLC and does not replace STEP 7 or qualified technical judgment."
+        aside={<EnglishAppHeroDiagnosticPreview />}
+      />
+
+      <section className="app-pro-positioning-section">
+        <div className="mock-home-container">
+          <div className="app-pro-positioning-heading">
+            <span className="app-pro-positioning-eyebrow">TWO STAGES, ONE DIAGNOSTIC PROCESS</span>
+            <h2>Orient the first response. Go deeper only when the evidence requires it.</h2>
+            <p>BOJ S7-PLC helps the field technician arrive at online diagnostics with a narrower and more useful search.</p>
+          </div>
+          <div className="app-pro-positioning-route" aria-label="Diagnostic workflow">
+            <div className="app-pro-positioning-route-step"><span className="app-pro-positioning-route-number">01</span><Icon name="Smartphone" size={27} /><div><small>FIRST RESPONSE</small><h3>Guidance with BOJ S7-PLC</h3><p>Record symptoms, LEDs and field conditions from a phone, tablet or browser.</p></div></div>
+            <ArrowRight className="app-pro-positioning-route-arrow" size={24} />
+            <div className="app-pro-positioning-route-step"><span className="app-pro-positioning-route-number">02</span><Icon name="MonitorCog" size={27} /><div><small>ONLINE CONFIRMATION</small><h3>Diagnostics with STEP 7</h3><p>Review hardware, events, blocks or registers with a more focused hypothesis.</p></div></div>
+            <ArrowRight className="app-pro-positioning-route-arrow" size={24} />
+            <div className="app-pro-positioning-route-decision"><Icon name="ShieldCheck" size={27} /><div><small>TECHNICAL DECISION</small><strong>The technician evaluates the evidence before intervening.</strong></div></div>
+          </div>
+          <p className="app-pro-positioning-summary"><strong>BOJ S7-PLC guides.</strong><span>STEP 7 confirms.</span><span>The technician decides.</span></p>
+        </div>
+      </section>
+
+      <section className="app-pro-problems-how-section">
+        <div className="mock-home-container app-pro-problems-how-grid">
+          <div className="app-pro-problems-panel">
+            <div className="app-pro-panel-heading"><span className="app-pro-section-kicker">FIELD DIAGNOSTICS</span><h2>Problems it helps organize</h2><p>Identify the fault category before changing hardware or intervening in the process.</p></div>
+            <div className="app-pro-problem-grid">{englishApp.problems.map((item) => <article className="app-pro-problem-item" key={item.title}><Icon name={item.icon} size={26} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
+          </div>
+          <div className="app-pro-how-panel">
+            <div className="app-pro-panel-heading"><span className="app-pro-section-kicker">WORKFLOW</span><h2>How it works</h2><p>From a symptom to prioritized hypotheses and practical field checks.</p></div>
+            <div className="app-pro-how-steps">
+              {englishApp.steps.map((item, index) => (
+                <div className="app-pro-how-step-wrap" key={item.title}>
+                  <article className="app-pro-how-step"><span className="app-pro-step-number">{index + 1}</span><div className="app-pro-step-icon-circle"><Icon name={item.icon} size={28} /></div><h3>{item.title}</h3><p>{item.text}</p></article>
+                  {index < englishApp.steps.length - 1 ? <span className="app-pro-step-arrow"><ArrowRight size={24} /></span> : null}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="app-pro-dark-section app-pro-includes-section">
+        <div className="mock-home-container">
+          <div className="app-pro-section-heading"><span className="app-pro-section-kicker">DIAGNOSTIC TOOLS</span><h2>What BOJ S7-PLC PRO includes</h2><p>A practical environment for reviewing and documenting first-line diagnostics.</p></div>
+          <div className="app-pro-include-grid">{englishApp.includes.map((item) => <article className="app-pro-include-card" key={item.title}><Icon name={item.icon} size={30} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
+        </div>
+      </section>
+
+      <section className="app-pro-real-language-section">
+        <div className="mock-home-container app-pro-real-language-grid">
+          <div>
+            <h2>Real views of the professional tool</h2>
+            <div className="app-pro-real-view-grid">
+              {englishApp.views.map((copy, index) => {
+                const source = appRealViews[index];
+                const item = { ...source, ...copy };
+                return (
+                  <article className="app-pro-real-view-card" key={item.title}>
+                    <figure><button className="app-pro-real-view-trigger" type="button" onClick={() => setActiveScreenshot(item)} aria-label={`Enlarge screenshot: ${item.title}`}><img src={item.image} alt={item.title} loading="lazy" style={{ objectPosition: item.position }} /></button></figure>
+                    <div><h3>{item.title}</h3><p>{item.text}</p></div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+          <div className="app-pro-language-card"><h2>Available in 6 languages</h2><div className="app-pro-language-list">{["Spanish", "English", "Portuguese", "German", "French", "Italian"].map((item) => <span key={item}>{item}</span>)}</div><p>Built for technicians, companies and maintenance teams working across different countries.</p></div>
+        </div>
+      </section>
+
+      {activeScreenshot ? (
+        <div className="app-pro-lightbox" role="dialog" aria-modal="true" aria-labelledby="en-app-lightbox-title" onClick={() => setActiveScreenshot(null)}>
+          <div className="app-pro-lightbox-panel" onClick={(event) => event.stopPropagation()}>
+            <button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Close enlarged screenshot"><X size={20} /></button>
+            <img src={activeScreenshot.image} alt={activeScreenshot.title} />
+            <div className="app-pro-lightbox-copy"><h2 id="en-app-lightbox-title">{activeScreenshot.title}</h2><p>{activeScreenshot.text}</p></div>
+          </div>
+        </div>
+      ) : null}
+
+      <section className="app-pro-plans-section" id="en-pro-plans">
+        <div className="mock-home-container">
+          <div className="app-pro-section-heading">
+            <span className="app-pro-section-kicker">LICENSES AND OPTIONS</span>
+            <h2>Choose your PRO license</h2>
+            <p>Compare renewal, duration, devices and offline availability before choosing.</p>
+            <p className="app-pro-plans-crosslink"><strong>Professional</strong> and <strong>Business</strong> include the <a href="/en/courses/s7-300-400">S7-300/400 diagnostics course</a>.</p>
+          </div>
+          <div className="app-pro-plan-grid">
+            {pricingCards.map((plan) => (
+              <article className={`app-pro-plan-card${plan.badge ? " featured" : ""}${plan.sourceTitle === "Prueba gratuita" ? " trial" : ""}`} id={`en-plan-${plan.sourceTitle.toLowerCase().replaceAll(" ", "-")}`} key={plan.sourceTitle}>
+                {plan.badge ? <span className="app-pro-plan-badge">{plan.badge}</span> : null}
+                <h3>{plan.title}</h3><strong>{plan.price}</strong><span className="app-pro-plan-meta">{plan.meta}</span>
+                <ul>{plan.bullets.map((item) => <li key={item}><CheckCircle2 size={15} />{item}</li>)}</ul>
+                <a className="mock-btn mock-btn-primary" href={plan.url} target="_blank" rel="noreferrer" onClick={() => track("plan_click", { plan: plan.sourceTitle, language: "en" })}>{plan.button} <ExternalLink size={17} /></a>
+              </article>
+            ))}
+          </div>
+          <ul className="app-pro-purchase-confidence" aria-label="Purchase information">
+            <li><CheckCircle2 size={17} />Purchase processed by Hotmart</li>
+            <li><CheckCircle2 size={17} />Price and billing model shown before confirmation</li>
+            <li><CheckCircle2 size={17} />Activation uses the email address entered during purchase</li>
+          </ul>
+          <aside className="app-pro-training-strip">
+            <div className="app-pro-training-copy"><span className="app-pro-training-eyebrow">TECHNICAL TRAINING</span><h3>Do you also need structured training?</h3><p>Permanent access to the S7-300/400 diagnostics course plus one month of BOJ S7-PLC PRO.</p></div>
+            <div className="app-pro-training-action"><strong>{offer.course.price} · One-time payment</strong><a className="mock-btn mock-btn-outline" href="/en/courses/s7-300-400">View course content <ArrowRight size={17} /></a></div>
+          </aside>
+          <article className="app-pro-institutional">
+            <Icon name="Landmark" size={34} /><div><h3>Companies and training centers: tailored pricing</h3><p>Special conditions for organizations, technical training programs and teams with multiple users.</p></div><a className="mock-btn mock-btn-outline" href="/en/contact">Request information <ArrowRight size={17} /></a>
+          </article>
+        </div>
+      </section>
+
+      <section className="app-pro-value-row-section">
+        <div className="mock-home-container app-pro-value-row-grid">
+          <article className="app-pro-offline-card"><h2>Access and availability</h2><p className="app-pro-offline-intro">Use the app from a modern browser or install it on a compatible device.</p><div className="app-pro-offline-items"><div><Icon name="Globe" size={34} /><h3>Web access</h3><p>No mandatory software installation.</p></div><div><Icon name="Smartphone" size={34} /><h3>Installable</h3><p>Direct access on compatible devices.</p></div><div><Icon name="WifiOff" size={34} /><h3>Offline by plan</h3><p>Offline duration depends on the selected license.</p></div></div></article>
+          <article className="app-pro-cost-card"><div><h2>A plant stoppage can cost more than a license</h2><p>BOJ S7-PLC PRO helps organize symptoms and evidence before hardware is changed or equipment is restarted without a clear reason.</p><ul className="app-pro-cost-bullets"><li>Reduce trial and error under pressure.</li><li>Prioritize evidence before intervening.</li><li>Prepare a more focused STEP 7 session.</li></ul><strong className="app-pro-cost-emphasis">Less guesswork. Better technical judgment.</strong></div><div className="app-pro-cost-visual" aria-hidden="true"><span /><span /><span /><span /><b><TriangleAlert size={24} /></b></div></article>
+          <article className="app-pro-audience-card"><h2>Who it is for</h2><p className="app-pro-audience-intro">For professionals and teams troubleshooting Siemens S7-300/400 systems.</p><div className="app-pro-audience-list">{englishApp.audience.map((item) => <div className="app-pro-audience-item" key={item.text}><Icon name={item.icon} size={18} /><span>{item.text}</span></div>)}</div><p className="app-pro-audience-note">It supports the technician; it does not replace qualified technical judgment.</p></article>
+        </div>
+      </section>
+
+      <section className="app-pro-trust-section">
+        <div className="mock-home-container app-pro-trust-grid">
+          <img className="app-pro-trust-avatar" src={walterBojAvatar} alt="Walter Adrián Boj" loading="lazy" />
+          <div className="app-pro-trust-copy"><h2>Developed with plant experience</h2><p>BOJ S7-PLC PRO was developed by Walter Adrián Boj, an industrial automation specialist with experience in Siemens PLC diagnostics, maintenance, programming and industrial networks.</p><a className="mock-btn mock-btn-outline" href={contact.linkedin} target="_blank" rel="noreferrer">View professional profile <ExternalLink size={17} /></a></div>
+          <div className="app-pro-trust-metrics"><article><Icon name="Clock" size={22} /><h3>15+ years</h3><p>Industrial automation and diagnostics experience.</p></article><article><Icon name="Cpu" size={22} /><h3>Siemens PLC</h3><p>Focused on real S7-300/400 plant faults.</p></article><article><Icon name="ShieldCheck" size={22} /><h3>Field method</h3><p>A structured process designed to reduce guesswork.</p></article></div>
+        </div>
+      </section>
+
+      <section className="app-pro-faq-section">
+        <div className="mock-home-container"><div className="app-pro-section-heading app-pro-section-heading-dark"><h2>Frequently asked questions</h2></div><div className="app-pro-faq-grid">{englishApp.faq.map((item) => <details className="app-pro-faq-item" key={item.question}><summary>{item.question}<ChevronDown size={16} /></summary><p>{item.answer}</p></details>)}</div></div>
+      </section>
+    </div>
+  );
+}
+
+function EnglishS7CoursePage() {
+  const checkoutUrl = offer.course.checkout.checkoutUrl;
+  const checkoutAction = (source) => () => track("course_checkout_click", { source, language: "en" });
+
+  return (
+    <div className="english-course-page english-page" data-language="en">
+      <Hero
+        image={heroCursoS7}
+        eyebrow="APPLIED ONLINE COURSE"
+        title="Industrial diagnostics in Siemens S7-300/400 systems"
+        subtitle="Learn a field-oriented method for CPU states, Diagnostic Buffer, online hardware, PROFIBUS, modules and signals. Includes permanent course access and one month of BOJ S7-PLC PRO. Course materials are currently available in Spanish."
+        primary={{ label: "Buy course + PRO App", href: checkoutUrl, external: true, onClick: checkoutAction("en_course_hero") }}
+        secondary={{ label: "See what is included", href: "#en-course-includes" }}
+        note="Course language: Spanish · One-time payment · Permanent course access · 1 month of BOJ S7-PLC PRO · 1 device"
+        aside={(
+          <aside className="course-hero-preview" aria-label="Course offer preview">
+            <div className="course-hero-preview-media"><img src={manualPreviewImages[0]} alt="Cover of the S7-300/400 diagnostics manual" /><span>Professional technical manual</span></div>
+            <div className="course-hero-preview-copy"><span>COURSE + PRO APP</span><strong>{offer.course.price}</strong><small>One-time payment · Permanent course access</small><ul><li><CheckCircle2 size={15} />Applied diagnostics method</li><li><CheckCircle2 size={15} />1 month of BOJ S7-PLC PRO</li></ul></div>
+          </aside>
+        )}
+      />
+
+      <section className="en-course-section" id="en-course-includes">
+        <div className="mock-home-container">
+          <div className="en-section-heading"><span>COMPLETE OFFER</span><h2>Course, technical manual and guided diagnostics app</h2><p>A single training package designed to connect technical understanding with field decisions.</p></div>
+          <div className="en-course-includes-grid">
+            <article className="en-course-visual-card"><img src={courseS7400Visual} alt="Siemens S7-300/400 industrial diagnostics training" loading="lazy" /><div><strong>{offer.course.price}</strong><span>One-time payment</span></div></article>
+            <article className="en-course-list-card"><span className="en-course-language-note">COURSE CONTENT IN SPANISH</span><h3>What is included</h3><ul>{englishS7Course.includes.map((item) => <li key={item}><CheckCircle2 size={17} />{item}</li>)}</ul></article>
+          </div>
+        </div>
+      </section>
+
+      <section className="en-course-section en-course-section-dark">
+        <div className="mock-home-container">
+          <div className="en-section-heading"><span>LEARNING OUTCOMES</span><h2>A repeatable diagnostic process for real plant situations</h2></div>
+          <div className="en-course-outcome-grid">{englishS7Course.outcomes.map((item, index) => <article key={item}><span>{String(index + 1).padStart(2, "0")}</span><p>{item}</p></article>)}</div>
+        </div>
+      </section>
+
+      <section className="en-course-section">
+        <div className="mock-home-container en-course-two-columns">
+          <div><div className="en-section-heading"><span>PROGRAM</span><h2>Technical modules</h2></div><ol className="en-course-module-list">{englishS7Course.modules.map((item) => <li key={item}>{item}</li>)}</ol></div>
+          <div><div className="en-section-heading"><span>AUDIENCE</span><h2>Who this course is for</h2></div><ul className="en-course-audience-list">{englishS7Course.audience.map((item) => <li key={item}><CheckCircle2 size={17} />{item}</li>)}</ul></div>
+        </div>
+      </section>
+
+      <section className="en-course-purchase-strip" id="en-course-purchase">
+        <div className="mock-home-container">
+          <div><span>COURSE + 1 MONTH PRO APP</span><h2>{offer.course.price} · One-time payment</h2><p>Permanent course access, technical material and one PRO App license for one device.</p></div>
+          <a className="mock-btn mock-btn-primary" href={checkoutUrl} target="_blank" rel="noreferrer" onClick={checkoutAction("en_course_mid")}>Buy course + PRO App <ExternalLink size={17} /></a>
+        </div>
+      </section>
+
+      <section className="en-course-section en-course-faq-section">
+        <div className="mock-home-container"><div className="en-section-heading"><span>QUESTIONS</span><h2>Frequently asked questions</h2></div><div className="app-pro-faq-grid">{englishS7Course.faq.map((item) => <details className="app-pro-faq-item" key={item.question}><summary>{item.question}<ChevronDown size={16} /></summary><p>{item.answer}</p></details>)}</div></div>
+      </section>
+
+      <section className="en-course-final-cta">
+        <div className="mock-home-container"><div><h2>Build a clearer method for your next S7-300/400 fault</h2><p>Study at your own pace and use BOJ S7-PLC PRO as guided support during the first month.</p></div><a className="mock-btn mock-btn-primary" href={checkoutUrl} target="_blank" rel="noreferrer" onClick={checkoutAction("en_course_final")}>Buy for {offer.course.price} <ExternalLink size={17} /></a></div>
+      </section>
+    </div>
+  );
+}
+
+function EnglishProjectsPage() {
+  return (
+    <PageShell
+      eyebrow="INDUSTRIAL PROJECTS"
+      title="Engineering and automation work completed in real plants"
+      subtitle="Selected cases involving PLC programming, HMI, SCADA, control panels, migrations and commissioning."
+      heroImage={heroObras}
+      heroPrimary={{ label: "Discuss a similar project", href: whatsappUrl("Hello, I would like to discuss an industrial automation project similar to your previous work."), external: true }}
+      heroSecondary={{ label: "View services", href: "/en/services" }}
+    >
+      <section className="portfolio-prep"><div><p className="eyebrow">REAL PROJECT EXPERIENCE</p><h2>Each case is presented as a problem, intervention and result</h2><p>Client names and project scopes correspond to completed work. Images are illustrative unless otherwise stated.</p></div><div className="asset-slots"><span>Engineering</span><span>PLC / HMI / SCADA</span><span>Commissioning</span></div></section>
+      <div className="works-grid">
+        {englishProjects.map((project, index) => {
+          const source = projects[project.sourceIndex];
+          const visual = getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length];
+          return (
+            <article className="project-card" key={project.title}>
+              <div className="project-media"><img className="project-photo" src={visual} alt="" loading="lazy" /><span>PROJECT {String(index + 1).padStart(2, "0")}</span><span className="works-image-disclaimer">Illustrative image</span><div className="project-media-overlay"><strong>{source.year}</strong><small>{source.client}</small></div></div>
+              <div className="project-body"><div className="project-title-row"><h2>{project.title}</h2></div><p className="project-meta-line">{project.sector} · {project.role}</p><p>{project.description}</p><div className="tag-list">{project.technologies.map((tech) => <span key={tech}>{tech}</span>)}</div><div className="project-result-grid"><div><h3>Initial problem</h3><p>{project.problem}</p></div><div><h3>Intervention</h3><p>{project.intervention}</p></div><div><h3>Result</h3><p>{project.result}</p></div></div></div>
+            </article>
+          );
+        })}
+      </div>
+      <RouteCTA title="Technical work for real plant problems" text="Tell us what the system is doing, what equipment is involved and what evidence is available." primaryLabel="Discuss a similar project" primaryHref={whatsappUrl("Hello, I would like to discuss an industrial automation project.")} secondaryLabel="View services" secondaryHref="/en/services" />
+    </PageShell>
+  );
+}
+
+const englishContactServices = ["Industrial fault diagnostics", "Industrial automation", "PLC migration", "Technical training", "BOJ S7-PLC licensing", "Other inquiry"];
+
+function EnglishContactForm() {
+  const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", interest: englishContactServices[0], message: "", website: "" });
+  const [status, setStatus] = useState("idle");
+  const [feedback, setFeedback] = useState("");
+  const updateField = (event) => setForm((current) => ({ ...current, [event.target.name]: event.target.value }));
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setStatus("sending");
+    setFeedback("");
+    try {
+      await sendContactForm({ ...form, subject: `English website inquiry: ${form.interest}` });
+      setStatus("success");
+      setFeedback("Your inquiry has been sent. We normally reply within two business days.");
+      setForm({ name: "", company: "", email: "", phone: "", interest: englishContactServices[0], message: "", website: "" });
+      track("contact_form_submit", { location: "contact_page", language: "en", interest: form.interest });
+    } catch (error) {
+      setStatus("error");
+      setFeedback(error.message || "The message could not be sent. You can also contact us on WhatsApp.");
+    }
+  }
+
+  return (
+    <form className="contact-form" onSubmit={handleSubmit} id="en-contact-form">
+      <h2>Tell us about your case</h2><p>Provide the essential context so we can route your inquiry correctly. Urgent plant faults are coordinated through WhatsApp and depend on availability.</p>
+      <label>Name<input name="name" value={form.name} onChange={updateField} required /></label>
+      <label>Company<input name="company" value={form.company} onChange={updateField} /></label>
+      <div className="form-row"><label>Email<input name="email" type="email" value={form.email} onChange={updateField} required /></label><label>Phone<input name="phone" value={form.phone} onChange={updateField} /></label></div>
+      <label>Area of interest<select name="interest" value={form.interest} onChange={updateField}>{englishContactServices.map((service) => <option key={service}>{service}</option>)}</select></label>
+      <label>Message<textarea name="message" rows="5" value={form.message} onChange={updateField} placeholder="Describe the symptom, equipment, PLC or industrial network involved, or the training you need." required /></label>
+      <input className="form-honeypot" name="website" value={form.website} onChange={updateField} tabIndex="-1" autoComplete="off" aria-hidden="true" />
+      <div className="button-row"><button className="btn primary" type="submit" disabled={status === "sending"}>{status === "sending" ? "Sending…" : "Send inquiry"}<ArrowRight size={18} /></button><a className="btn secondary" href={whatsappUrl("Hello, I am contacting BOJ from the English website.")}>Contact us on WhatsApp</a></div>
+      {feedback ? <p className={`form-feedback ${status}`} role="status">{feedback}</p> : null}
+    </form>
+  );
+}
+
+function EnglishContactPage() {
+  const checklist = ["PLC or HMI brand and model", "CPU state and visible LEDs", "Main symptom", "Whether the fault is permanent or intermittent", "Photos or online screenshots, if available"];
+  return (
+    <PageShell
+      eyebrow="CONTACT"
+      title="Tell us about the technical problem or solution you need"
+      subtitle="Contact BOJ about plant faults, automation projects, technical training or BOJ S7-PLC licensing."
+      heroImage={heroContacto}
+      heroPrimary={{ label: "Contact us on WhatsApp", href: whatsappUrl("Hello, I am contacting BOJ from the English website."), external: true }}
+      heroSecondary={{ label: "Complete the form", href: "#en-contact-form" }}
+    >
+      <section className="contact-direct contact-decision-intro"><div><p className="eyebrow">START HERE</p><h2>Share the context that best describes your situation</h2><p>A short description helps us separate an urgent plant fault from an engineering, training or licensing inquiry.</p></div></section>
+      <div className="contact-grid">
+        <div className="contact-panel">
+          <h2>Contact details</h2><p className="contact-panel-intro">Use the form, email or WhatsApp. The information reaches the same technical team.</p>
+          <ContactLine icon="Wrench" label="Technical contact" value={contact.responsible} />
+          <ContactLine icon="MapPin" label="Location" value={contact.location} />
+          <ContactLine icon="Mail" label="Email" value={contact.email} href={`mailto:${contact.email}`} />
+          <ContactLine icon="Phone" label="WhatsApp" value={contact.whatsappDisplay} href={whatsappUrl("Hello, I am contacting BOJ from the English website.")} />
+          <div className="social-placeholders"><a href={contact.linktree} target="_blank" rel="noreferrer">BOJ Linktree</a><a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a></div>
+          <div className="diagnostic-checklist"><h3>Information that helps us give a useful first response</h3>{checklist.map((item) => <CheckItem key={item}>{item}</CheckItem>)}</div>
+          <div className="button-row"><PrimaryLink href={whatsappUrl("Hello, I am contacting BOJ from the English website.")}>Contact us on WhatsApp</PrimaryLink><SecondaryLink href={`mailto:${contact.email}`}>Send email</SecondaryLink></div>
+        </div>
+        <EnglishContactForm />
+      </div>
+    </PageShell>
+  );
+}
+
 function WorksPage() {
   return (
     <PageShell
@@ -4911,53 +5904,63 @@ function FinalCTA() {
   );
 }
 
-function Footer() {
-  return <MainFooter />;
+function Footer({ language }) {
+  return <MainFooter language={language} />;
 }
 
-function MainFooter() {
-  const footerLinks = [
-    { label: "Inicio", path: "/" },
-    { label: "Servicios", path: "/servicios" },
-    { label: "Cursos", path: "/cursos" },
-    { label: "Recursos", path: "/recursos-tecnicos" },
-    { label: "App", path: "/app" },
-    { label: "Obras", path: "/obras" },
-    { label: "Contacto", path: "/contacto" },
-  ];
+function MainFooter({ language }) {
+  const english = language === "en";
+  const footerLinks = english
+    ? [
+        { label: "Home", path: "/en" },
+        { label: "Services", path: "/en/services" },
+        { label: "Training", path: "/en/courses" },
+        { label: "App", path: "/en/app" },
+        { label: "Projects", path: "/en/projects" },
+        { label: "Contact", path: "/en/contact" },
+      ]
+    : [
+        { label: "Inicio", path: "/" },
+        { label: "Servicios", path: "/servicios" },
+        { label: "Cursos", path: "/cursos" },
+        { label: "Recursos", path: "/recursos-tecnicos" },
+        { label: "App", path: "/app" },
+        { label: "Obras", path: "/obras" },
+        { label: "Contacto", path: "/contacto" },
+      ];
 
   return (
     <footer className="site-footer mock-footer">
       <div className="mock-home-container mock-footer-inner">
         <div className="mock-footer-brand">
           <BrandLogo compact />
-          <p>Soluciones para diagnóstico y eficiencia en automatización.</p>
+          <p>{english ? "Industrial diagnostics, automation and technical training." : "Soluciones para diagnóstico y eficiencia en automatización."}</p>
         </div>
-        <div className="mock-footer-contact" aria-label="Datos de contacto">
-          <h3>Contacto</h3>
+        <div className="mock-footer-contact" aria-label={english ? "Contact details" : "Datos de contacto"}>
+          <h3>{english ? "Contact" : "Contacto"}</h3>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
           <a href="https://www.bojautomatizacion.com" target="_blank" rel="noreferrer">
             www.bojautomatizacion.com
           </a>
           <span>{contact.location}</span>
         </div>
-        <nav className="mock-footer-nav" aria-label="Navegación del footer">
-          <h3>Navegación</h3>
+        <nav className="mock-footer-nav" aria-label={english ? "Footer navigation" : "Navegación del footer"}>
+          <h3>{english ? "Navigation" : "Navegación"}</h3>
           {footerLinks.map((item) => (
             <a key={item.path} href={item.path}>
               {item.label}
             </a>
           ))}
         </nav>
-        <nav className="mock-footer-nav mock-footer-legal" aria-label="Información legal">
+        <nav className="mock-footer-nav mock-footer-legal" aria-label={english ? "Legal information in Spanish" : "Información legal"}>
           <h3>Legal</h3>
-          <a href="/privacidad">Privacidad</a>
-          <a href="/terminos">Términos</a>
-          <a href="/licencias">Licencias</a>
-          <a href="/reembolsos">Reembolsos</a>
+          <a href="/privacidad">{english ? "Privacy policy (ES)" : "Privacidad"}</a>
+          <a href="/terminos">{english ? "Terms (ES)" : "Términos"}</a>
+          <a href="/licencias">{english ? "Licenses (ES)" : "Licencias"}</a>
+          <a href="/reembolsos">{english ? "Refunds (ES)" : "Reembolsos"}</a>
         </nav>
         <div className="mock-footer-social">
-          <h3>Síguenos</h3>
+          <h3>{english ? "Follow BOJ" : "Síguenos"}</h3>
           <div>
             <a href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">in</a>
             <a href={contact.linktree} target="_blank" rel="noreferrer" aria-label="Linktree">lt</a>
@@ -4965,19 +5968,24 @@ function MainFooter() {
         </div>
       </div>
       <div className="mock-footer-bottom">
-        <span>© {new Date().getFullYear()} BOJ Automatización y Control. Todos los derechos reservados. BOJ es independiente y no está afiliada a Siemens.</span>
+        <span>
+          {english
+            ? `© ${new Date().getFullYear()} BOJ Automation and Control. All rights reserved. BOJ is independent and is not affiliated with Siemens.`
+            : `© ${new Date().getFullYear()} BOJ Automatización y Control. Todos los derechos reservados. BOJ es independiente y no está afiliada a Siemens.`}
+        </span>
       </div>
     </footer>
   );
 }
 
-function FloatingContact() {
+function FloatingContact({ language }) {
+  const english = language === "en";
   return (
-    <div className="floating-contact" aria-label="Contactos rápidos">
-      <a href={whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.")} aria-label="Consultar por WhatsApp">
+    <div className="floating-contact" aria-label={english ? "Quick contact options" : "Contactos rápidos"}>
+      <a href={whatsappUrl(english ? "Hello, I am contacting BOJ from the English website." : "Hola, escribo desde la web de BOJ para realizar una consulta técnica.")} aria-label={english ? "Contact BOJ on WhatsApp" : "Consultar por WhatsApp"}>
         <Phone size={20} />
       </a>
-      <a href={`mailto:${contact.email}`} aria-label="Enviar correo electrónico">
+      <a href={`mailto:${contact.email}`} aria-label={english ? "Send email" : "Enviar correo electrónico"}>
         <Mail size={20} />
       </a>
     </div>

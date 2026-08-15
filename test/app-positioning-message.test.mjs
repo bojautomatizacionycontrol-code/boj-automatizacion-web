@@ -22,18 +22,21 @@ test("el hero explica qué hace la app y su relación con STEP 7", () => {
 });
 
 test("presenta una explicación integrada en dos etapas antes del flujo operativo", () => {
-  const proofStrip = appSource.indexOf("<S7ProofStrip />", appSource.indexOf("function AppPage"));
-  const quickAccess = appSource.indexOf("<AppQuickCommercialAccess />", proofStrip);
-  const positioningStart = appSource.indexOf('<section className="app-pro-positioning-section"', proofStrip);
-  const positioningEnd = appSource.indexOf('<section className="app-pro-problems-how-section">', positioningStart);
-  const positioningSource = appSource.slice(positioningStart, positioningEnd);
+  const appPageStart = appSource.indexOf("function AppPage");
+  const appPageEnd = appSource.indexOf("function AppComparisonTable", appPageStart);
+  const appPageSource = appSource.slice(appPageStart, appPageEnd);
+  const proofStrip = appPageSource.indexOf("<S7ProofStrip />");
+  const quickAccess = appPageSource.indexOf("<AppQuickCommercialAccess />", proofStrip);
+  const positioningStart = appPageSource.indexOf('<section className="app-pro-positioning-section"', proofStrip);
+  const positioningEnd = appPageSource.indexOf('<section className="app-pro-problems-how-section">', positioningStart);
+  const positioningSource = appPageSource.slice(positioningStart, positioningEnd);
 
   assert.notEqual(proofStrip, -1);
   assert.notEqual(quickAccess, -1);
   assert.notEqual(positioningStart, -1);
   assert.notEqual(positioningEnd, -1);
   assert.ok(proofStrip < quickAccess && quickAccess < positioningStart && positioningStart < positioningEnd);
-  assert.equal(appSource.match(/className="app-pro-positioning-section"/g)?.length, 1);
+  assert.equal(appPageSource.match(/className="app-pro-positioning-section"/g)?.length, 1);
 
   const expectedCopy = [
     "DOS ETAPAS, UN MISMO DIAGNÓSTICO",

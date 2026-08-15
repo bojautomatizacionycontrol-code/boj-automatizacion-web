@@ -6,6 +6,9 @@ import { offer } from "../src/content.js";
 
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
+const spanishAppPageStart = appSource.indexOf("function AppPage()");
+const spanishAppPageEnd = appSource.indexOf("function AppComparisonTable()", spanishAppPageStart);
+const spanishAppPageSource = appSource.slice(spanishAppPageStart, spanishAppPageEnd);
 
 const expectedPlanMatrix = [
   {
@@ -109,13 +112,13 @@ test("separa Curso + licencia de la grilla principal y publica una única franja
   );
   assert.match(appSource, /const pricingCards = \[appTrialPlan, \.\.\.appLicensePlans\];/);
 
-  const trainingStart = appSource.indexOf('<aside className="app-pro-training-strip"');
-  const institutionalStart = appSource.indexOf('<article className="app-pro-institutional">', trainingStart);
-  const trainingSource = appSource.slice(trainingStart, institutionalStart);
+  const trainingStart = spanishAppPageSource.indexOf('<aside className="app-pro-training-strip"');
+  const institutionalStart = spanishAppPageSource.indexOf('<article className="app-pro-institutional">', trainingStart);
+  const trainingSource = spanishAppPageSource.slice(trainingStart, institutionalStart);
 
   assert.notEqual(trainingStart, -1);
   assert.notEqual(institutionalStart, -1);
-  assert.equal(appSource.match(/className="app-pro-training-strip"/g)?.length, 1);
+  assert.equal(spanishAppPageSource.match(/className="app-pro-training-strip"/g)?.length, 1);
   assert.match(trainingSource, /FORMACIÓN TÉCNICA/);
   assert.match(trainingSource, /¿También necesitas formación\?/);
   assert.match(
@@ -129,9 +132,9 @@ test("separa Curso + licencia de la grilla principal y publica una única franja
 });
 
 test("el listado renderiza exclusivamente la URL propia de cada plan", () => {
-  const listStart = appSource.indexOf("{pricingCards.map((plan) => (");
-  const listEnd = appSource.indexOf('<article className="app-pro-institutional">', listStart);
-  const planListSource = appSource.slice(listStart, listEnd);
+  const listStart = spanishAppPageSource.indexOf("{pricingCards.map((plan) => (");
+  const listEnd = spanishAppPageSource.indexOf('<article className="app-pro-institutional">', listStart);
+  const planListSource = spanishAppPageSource.slice(listStart, listEnd);
 
   assert.notEqual(listStart, -1);
   assert.notEqual(listEnd, -1);
@@ -172,9 +175,9 @@ test("preserva la prueba gratuita y deriva Institucional al contacto", () => {
   });
   assert.equal(offer.app.productUrl, "https://app.bojautomatizacion.com/");
 
-  const institutionalStart = appSource.indexOf('<article className="app-pro-institutional">');
-  const institutionalEnd = appSource.indexOf("</article>", institutionalStart);
-  const institutionalSource = appSource.slice(institutionalStart, institutionalEnd);
+  const institutionalStart = spanishAppPageSource.indexOf('<article className="app-pro-institutional">');
+  const institutionalEnd = spanishAppPageSource.indexOf("</article>", institutionalStart);
+  const institutionalSource = spanishAppPageSource.slice(institutionalStart, institutionalEnd);
 
   assert.notEqual(institutionalStart, -1);
   assert.notEqual(institutionalEnd, -1);
