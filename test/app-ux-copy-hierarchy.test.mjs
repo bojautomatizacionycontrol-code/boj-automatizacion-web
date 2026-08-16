@@ -10,6 +10,9 @@ const appSource = fs.readFileSync(path.join(rootDir, "src", "App.jsx"), "utf8");
 const stylesSource = fs.readFileSync(path.join(rootDir, "src", "styles.css"), "utf8");
 
 test("App PRO presents the approved editorial hierarchy", () => {
+  const appPageStart = appSource.indexOf("function AppPage()");
+  const appPageEnd = appSource.indexOf("function AppComparisonTable()", appPageStart);
+  const appPageSource = appSource.slice(appPageStart, appPageEnd);
   const expectedCopy = [
     "DIAGNÓSTICO EN CAMPO",
     "Identifica el tipo de falla y ordena la búsqueda antes de intervenir el equipo.",
@@ -22,16 +25,16 @@ test("App PRO presents the approved editorial hierarchy", () => {
   ];
 
   for (const copy of expectedCopy) {
-    assert.ok(appSource.includes(copy), `Missing approved App PRO copy: ${copy}`);
+    assert.ok(appPageSource.includes(copy), `Missing approved App PRO copy: ${copy}`);
   }
 
   assert.equal(
-    (appSource.match(/className="app-pro-section-kicker"/g) ?? []).length,
+    (appPageSource.match(/className="app-pro-section-kicker"/g) ?? []).length,
     4,
     "The App PRO page must expose four section kickers",
   );
   assert.equal(
-    (appSource.match(/className="app-pro-panel-heading"/g) ?? []).length,
+    (appPageSource.match(/className="app-pro-panel-heading"/g) ?? []).length,
     2,
     "The two operational panels must share the same heading structure",
   );

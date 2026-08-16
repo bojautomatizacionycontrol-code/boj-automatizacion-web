@@ -18,4 +18,20 @@
   <url><loc>https://www.bojautomatizacion.com/terminos</loc><priority>0.3</priority></url>
   <url><loc>https://www.bojautomatizacion.com/licencias</loc><priority>0.3</priority></url>
   <url><loc>https://www.bojautomatizacion.com/reembolsos</loc><priority>0.3</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/en</loc><priority>1.0</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/en/services</loc><priority>0.8</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/en/courses</loc><priority>0.8</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/en/courses/s7-300-400</loc><priority>0.9</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/en/courses/tia-portal</loc><priority>0.7</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/en/app</loc><priority>0.8</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/en/projects</loc><priority>0.7</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/en/contact</loc><priority>0.7</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/pt</loc><priority>1.0</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/pt/servicos</loc><priority>0.8</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/pt/cursos</loc><priority>0.8</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/pt/cursos/s7-300-400</loc><priority>0.9</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/pt/cursos/tia-portal</loc><priority>0.7</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/pt/app</loc><priority>0.8</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/pt/projetos</loc><priority>0.7</priority></url>
+  <url><loc>https://www.bojautomatizacion.com/pt/contato</loc><priority>0.7</priority></url>
 </urlset>
