@@ -16,13 +16,19 @@ const sourceBetween = (startMarker, endMarker) => {
 test("el encabezado adapta su CTA sin agregar checkouts nuevos", () => {
   const headerSource = sourceBetween("function Header({ route, language })", "function LanguageSwitcher");
 
-  assert.match(headerSource, /route === "\/app" \|\| route === "\/en\/app"/);
-  assert.match(headerSource, /"View PRO plans" : "Ver planes PRO"/);
-  assert.match(headerSource, /route === "\/cursos\/s7-300-400" \|\| route === "\/en\/courses\/s7-300-400"/);
-  assert.match(headerSource, /"View course and price" : "Ver curso y precio"/);
-  assert.match(headerSource, /route === "\/contacto" \|\| route === "\/en\/contact"/);
-  assert.match(headerSource, /"Send an inquiry" : "Completar consulta"/);
-  assert.match(headerSource, /label: "Solicitar diagnóstico"/);
+  assert.match(headerSource, /\["\/app", "\/en\/app", "\/pt\/app"\]\.includes\(route\)/);
+  assert.match(headerSource, /plansLabel: "Ver planes PRO"/);
+  assert.match(headerSource, /plansLabel: "View PRO plans"/);
+  assert.match(headerSource, /plansLabel: "Ver planos PRO"/);
+  assert.match(headerSource, /\["\/cursos\/s7-300-400", "\/en\/courses\/s7-300-400", "\/pt\/cursos\/s7-300-400"\]\.includes\(route\)/);
+  assert.match(headerSource, /courseLabel: "Ver curso y precio"/);
+  assert.match(headerSource, /courseLabel: "View course and price"/);
+  assert.match(headerSource, /courseLabel: "Ver curso e preço"/);
+  assert.match(headerSource, /\["\/contacto", "\/en\/contact", "\/pt\/contato"\]\.includes\(route\)/);
+  assert.match(headerSource, /contactLabel: "Completar consulta"/);
+  assert.match(headerSource, /contactLabel: "Send an inquiry"/);
+  assert.match(headerSource, /contactLabel: "Enviar uma consulta"/);
+  assert.match(headerSource, /diagnosticLabel: "Solicitar diagnóstico"/);
   assert.doesNotMatch(headerSource, /pay\.hotmart\.com/);
   assert.equal(headerSource.match(/\{routeAction\.label\}/g)?.length, 2);
 });
