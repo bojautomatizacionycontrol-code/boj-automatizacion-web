@@ -2666,7 +2666,7 @@ function S7ProofStrip() {
 
 function S7MethodStrip() {
   return (
-    <section className="s7-sales-section s7-method">
+    <section className="s7-sales-section s7-method" data-surface="light">
       <div className="s7-sales-container">
         <div className="s7-sales-section-heading">
           <p className="s7-sales-kicker">El Método BOJ</p>
@@ -2801,7 +2801,7 @@ function S7Testimonials({ background = "light" }) {
       .toUpperCase();
 
   return (
-    <section className={`s7-sales-section s7-testimonials s7-testimonials-${background}`}>
+    <section className={`s7-sales-section s7-testimonials s7-testimonials-${background}`} data-surface={background}>
       <div className="s7-sales-container">
         <div className="s7-sales-centered-heading">
           <p className="s7-sales-kicker">Lo que dicen los técnicos</p>
@@ -3106,7 +3106,7 @@ function S7SalesLanding({ course, eyebrow }) {
 
       <S7ProofStrip />
 
-      <section className="s7-sales-section s7-sales-dark s7-sales-learning">
+      <section className="s7-sales-section s7-sales-dark s7-sales-learning" data-surface="dark">
         <div className="s7-sales-container">
           <div className="s7-sales-centered-heading">
             <p className="s7-sales-kicker">Qué vas a aprender</p>
@@ -3125,7 +3125,7 @@ function S7SalesLanding({ course, eyebrow }) {
         </div>
       </section>
 
-      <section className="s7-sales-section s7-sales-includes" id="curso-s7-incluye">
+      <section className="s7-sales-section s7-sales-includes" id="curso-s7-incluye" data-surface="light">
         <div className="s7-sales-container">
           <div className="s7-sales-section-heading">
             <p className="s7-sales-kicker">Qué incluye</p>
@@ -3226,14 +3226,14 @@ function S7SalesLanding({ course, eyebrow }) {
         </div>
       </section>
 
-      <div className="s7-sales-confidence">
+      <div className="s7-sales-confidence" data-surface="dark">
         <div className="s7-sales-container">
           <Icon name="ShieldCheck" size={26} />
           <p>Conéctate al PLC con confianza y diagnostica con <strong>criterio profesional.</strong></p>
         </div>
       </div>
 
-      <section className="s7-sales-section s7-sales-program" id="curso-s7-programa">
+      <section className="s7-sales-section s7-sales-program" id="curso-s7-programa" data-surface="light">
         <div className="s7-sales-container">
           <div className="s7-sales-section-heading">
             <p className="s7-sales-kicker">Programa del curso</p>
@@ -3250,7 +3250,7 @@ function S7SalesLanding({ course, eyebrow }) {
         </div>
       </section>
 
-      <section className="s7-sales-section s7-sales-audience">
+      <section className="s7-sales-section s7-sales-dark s7-sales-audience" data-surface="dark">
         <div className="s7-sales-container">
           <div className="s7-sales-section-heading s7-sales-section-heading-compact">
             <p className="s7-sales-kicker">Para quién es</p>
@@ -3268,7 +3268,7 @@ function S7SalesLanding({ course, eyebrow }) {
         </div>
       </section>
 
-      <section className="s7-sales-section s7-sales-instructor">
+      <section className="s7-sales-section s7-sales-instructor" data-surface="light">
         <div className="s7-sales-container s7-sales-instructor-grid">
           <img
             className="s7-sales-instructor-avatar"
@@ -3291,7 +3291,7 @@ function S7SalesLanding({ course, eyebrow }) {
         </div>
       </section>
 
-      <section className="s7-sales-section s7-sales-offer" id="curso-s7-compra">
+      <section className="s7-sales-section s7-sales-offer" id="curso-s7-compra" data-surface="dark">
         <div className="s7-sales-container">
           <div className="s7-sales-offer-heading">
             <p className="s7-sales-kicker">Accede al curso + BOJ S7-PLC PRO</p>
@@ -3392,7 +3392,7 @@ function S7SalesLanding({ course, eyebrow }) {
 
       <S7MethodStrip />
 
-      <section className="s7-sales-section s7-sales-problem">
+      <section className="s7-sales-section s7-sales-dark s7-sales-problem" data-surface="dark">
         <div className="s7-sales-container s7-sales-problem-grid">
           <div className="s7-sales-section-copy">
             <p className="s7-sales-kicker">Qué problema resuelve</p>
@@ -3411,7 +3411,7 @@ function S7SalesLanding({ course, eyebrow }) {
         </div>
       </section>
 
-      <section className="s7-sales-section s7-sales-dark s7-sales-mistakes">
+      <section className="s7-sales-section s7-sales-mistakes s7-sales-mistakes-light" data-surface="light">
         <div className="s7-sales-container">
           <div className="s7-sales-centered-heading">
             <p className="s7-sales-kicker">Errores que este curso ayuda a evitar</p>
@@ -3428,9 +3428,9 @@ function S7SalesLanding({ course, eyebrow }) {
         </div>
       </section>
 
-      <S7Testimonials background="light" />
+      <S7Testimonials background="dark" />
 
-      <section className="s7-sales-section s7-sales-faq">
+      <section className="s7-sales-section s7-sales-faq" data-surface="light">
         <div className="s7-sales-container">
           <div className="s7-sales-section-heading">
             <p className="s7-sales-kicker">Preguntas frecuentes</p>
@@ -3454,7 +3454,7 @@ function S7SalesLanding({ course, eyebrow }) {
         </div>
       </section>
 
-      <section className="s7-sales-final-cta">
+      <section className="s7-sales-final-cta" data-surface="dark">
         <div className="s7-sales-container">
           <div className="s7-sales-final-cta-panel">
             <div className="s7-sales-final-intro">
