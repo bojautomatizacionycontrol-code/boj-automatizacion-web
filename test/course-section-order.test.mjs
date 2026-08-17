@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
 
 test("el método BOJ y el problema aparecen después de la oferta comercial", () => {
   const offerIndex = appSource.indexOf('className="s7-sales-section s7-sales-offer" id="curso-s7-compra"');
@@ -51,4 +52,28 @@ test("la landing del curso alterna superficies claras y oscuras sin reordenar su
   surfaceMarkers.forEach(([, surface], index) => {
     if (index > 0) assert.notEqual(surface, surfaceMarkers[index - 1][1]);
   });
+});
+
+test("los problemas forman dos filas de tres tarjetas en escritorio", () => {
+  const cardsStart = appSource.indexOf("const problemCards = [");
+  const cardsEnd = appSource.indexOf("const learningCards = [", cardsStart);
+  const cardsSource = appSource.slice(cardsStart, cardsEnd);
+
+  assert.equal(cardsSource.match(/title:/g)?.length, 6);
+  assert.match(
+    stylesSource,
+    /\.s7-sales-problem-cards\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);/,
+  );
+});
+
+test("los errores reutilizan la visual de tarjetas sobre la sección clara", () => {
+  const mistakesStart = appSource.indexOf('className="s7-sales-section s7-sales-mistakes s7-sales-mistakes-light"');
+  const mistakesEnd = appSource.indexOf("<S7Testimonials", mistakesStart);
+  const mistakesSource = appSource.slice(mistakesStart, mistakesEnd);
+
+  assert.match(mistakesSource, /className="s7-sales-container s7-sales-problem-grid"/);
+  assert.match(mistakesSource, /className="s7-sales-problem-cards s7-sales-mistakes-cards"/);
+  assert.match(mistakesSource, /className="s7-sales-light-card"/);
+  assert.doesNotMatch(mistakesSource, /s7-sales-mistakes-strip/);
+  assert.match(stylesSource, /\.s7-sales-mistakes-cards \.s7-sales-light-card h3/);
 });

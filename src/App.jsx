@@ -93,6 +93,7 @@ import appRealCapture from "./assets/boj-s7-plc-real-capture.png";
 import appProHeroLaptopVisual from "./assets/app-pro-hero-background-v2.jpg";
 import appPanelPrincipalDiagnostico from "./assets/app-panel-principal-diagnostico.jpg";
 import appResultadoDiagnostico from "./assets/app-resultado-diagnostico.jpg";
+import appSadDevicePreview from "./assets/app-sad-device-preview.png";
 import appDiagnosticoGuiado from "./assets/app-diagnostico-guiado.jpg";
 import appHipotesisPriorizadas from "./assets/app-hipotesis-priorizadas.jpg";
 import walterBojAvatar from "./assets/walter-boj-avatar-field.jpeg";
@@ -1824,9 +1825,11 @@ function AppHeroDiagnosticPreview() {
         <span>FLUJO REAL DE LA HERRAMIENTA</span>
         <small><span aria-hidden="true" /> CASO GUIADO</small>
       </div>
-      <div className="app-hero-diagnostic-preview-screen">
-        <img src={appResultadoDiagnostico} alt="Resultado orientativo en BOJ S7-PLC PRO" />
-        <span className="app-hero-diagnostic-preview-focus" aria-hidden="true" />
+      <div className="app-hero-diagnostic-preview-screen app-hero-diagnostic-preview-screen--device-composite">
+        <img
+          src={appSadDevicePreview}
+          alt="BOJ S7-PLC PRO en una computadora y un teléfono con el diagnóstico guiado visible"
+        />
       </div>
       <ol className="app-hero-diagnostic-preview-stages">
         {stages.map((stage, index) => (
@@ -3457,19 +3460,19 @@ function S7SalesLanding({ course, eyebrow }) {
       </section>
 
       <section className="s7-sales-section s7-sales-mistakes s7-sales-mistakes-light" data-surface="light">
-        <div className="s7-sales-container">
-          <div className="s7-sales-centered-heading">
+        <div className="s7-sales-container s7-sales-problem-grid">
+          <div className="s7-sales-section-copy">
             <p className="s7-sales-kicker">Errores que este curso ayuda a evitar</p>
             <h2>Diagnosticar con método evita decisiones costosas.</h2>
           </div>
-          <ul className="s7-sales-mistakes-strip">
+          <div className="s7-sales-problem-cards s7-sales-mistakes-cards">
             {mistakes.map((item) => (
-              <li key={item}>
-                <TriangleAlert size={18} aria-hidden="true" />
-                <span>{item}</span>
-              </li>
+              <article className="s7-sales-light-card" key={item}>
+                <TriangleAlert size={46} aria-hidden="true" />
+                <h3>{item}</h3>
+              </article>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
@@ -3543,15 +3546,29 @@ function TiaCoursePage() {
       course={tiaCourse}
       eyebrow="Curso introductorio"
       visual="tia"
-      ctas={[
-        { label: "Comprar o consultar curso", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar por el curso de TIA Portal con PLC S7-1200/1500.") },
-        { label: "Consultar por el curso", href: mailtoUrl("Consulta curso TIA Portal", "Hola, escribo desde la web de BOJ para consultar por el curso de Introducción a TIA Portal.") },
-      ]}
+      afterHero={<CoursePreparationStrip />}
     />
   );
 }
 
-function CourseLanding({ course, eyebrow, visual, ctas }) {
+function CoursePreparationStrip() {
+  return (
+    <section className="course-preparation-strip" aria-label="Estado del curso">
+      <div className="section-container course-preparation-strip-inner">
+        <span className="course-preparation-strip-icon" aria-hidden="true">
+          <Clock size={21} />
+        </span>
+        <div className="course-preparation-strip-copy">
+          <span>CURSO EN PREPARACIÓN</span>
+          <strong>Estamos desarrollando el programa y sus materiales técnicos.</strong>
+          <p>La inscripción todavía no está habilitada. Publicaremos aquí la información cuando el curso esté disponible.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CourseLanding({ course, eyebrow, visual, ctas = [], afterHero = null }) {
   return (
     <PageShell
       eyebrow={eyebrow}
@@ -3560,6 +3577,7 @@ function CourseLanding({ course, eyebrow, visual, ctas }) {
       heroImage={heroCursoTia}
       heroPrimary={ctas[0]}
       heroSecondary={ctas[1]}
+      afterHero={afterHero}
     >
       <div className="training-strip page-strip">
         <span>Aplicado a mantenimiento</span>
@@ -3579,21 +3597,23 @@ function CourseLanding({ course, eyebrow, visual, ctas }) {
           <InfoBlock title={course.includes ? "Programa técnico" : "Contenido de base"} items={course.modules} numbered />
           <InfoBlock title="Impacto profesional y operativo" items={course.benefits} />
           <InfoBlock title="Errores técnicos que el curso ayuda a evitar" items={course.avoidMistakes} />
-          <div className="button-row">
-            {ctas.map((cta, index) =>
-              index === 0 ? (
-                <PrimaryLink key={cta.label} href={cta.href}>
-                  {cta.label}
-                </PrimaryLink>
-              ) : (
-                <SecondaryLink key={cta.label} href={cta.href}>
-                  {cta.label}
-                </SecondaryLink>
-              )
-            )}
-          </div>
+          {ctas.length > 0 ? (
+            <div className="button-row">
+              {ctas.map((cta, index) =>
+                index === 0 ? (
+                  <PrimaryLink key={cta.label} href={cta.href}>
+                    {cta.label}
+                  </PrimaryLink>
+                ) : (
+                  <SecondaryLink key={cta.label} href={cta.href}>
+                    {cta.label}
+                  </SecondaryLink>
+                )
+              )}
+            </div>
+          ) : null}
         </div>
-        <CourseVisual type={visual} />
+        <CourseVisual type={visual} course={course} />
       </div>
     </PageShell>
   );
@@ -5560,7 +5580,7 @@ function LegalPage({ type }) {
   );
 }
 
-function PageShell({ eyebrow, title, subtitle, heroImage, heroPrimary, heroSecondary, children }) {
+function PageShell({ eyebrow, title, subtitle, heroImage, heroPrimary, heroSecondary, afterHero, children }) {
   return (
     <>
       <Hero
@@ -5571,6 +5591,7 @@ function PageShell({ eyebrow, title, subtitle, heroImage, heroPrimary, heroSecon
         primary={heroPrimary}
         secondary={heroSecondary}
       />
+      {afterHero}
       <section className="section boj-shell-body">
         <div className="section-container">{children}</div>
       </section>
@@ -6049,7 +6070,7 @@ function AppMockup() {
   );
 }
 
-function CourseVisual({ type }) {
+function CourseVisual({ type, course }) {
   if (type === "s7") {
     return (
       <aside className="course-side-visual s7">
@@ -6086,17 +6107,18 @@ function CourseVisual({ type }) {
       <figure className="course-side-photo">
         <img src={plcCabinetVisual} alt="PLC Siemens para curso TIA Portal" loading="lazy" />
       </figure>
-      <div className="ladder-lines">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="status-cluster">
-        <b>RUN</b>
-        <b>STOP</b>
-        <b>SF</b>
-        <b>BF</b>
+      <div className="tia-course-side-copy">
+        <span>PROGRAMA EN DESARROLLO</span>
+        <h2>Una base ordenada para trabajar en TIA Portal</h2>
+        <p>El contenido conectará configuración, programación y diagnóstico inicial en un recorrido aplicado.</p>
+        <ul>
+          {course?.learnItems?.slice(0, 3).map((item) => (
+            <li key={item}>
+              <CheckCircle2 size={17} aria-hidden="true" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </aside>
   );
