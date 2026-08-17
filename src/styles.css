@@ -21997,6 +21997,68 @@ textarea {
 .s7-testimonials-dark .s7-sales-centered-heading h2 {
   color: #ffffff;
 }
+
+/* Curso S7: ritmo visual alternado entre los bloques principales. */
+.s7-sales-audience.s7-sales-dark,
+.s7-sales-problem.s7-sales-dark {
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(0, 200, 255, 0.13), transparent 30%),
+    linear-gradient(rgba(0, 200, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 200, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, #020d1e 0%, #061827 100%);
+  background-size: auto, 36px 36px, 36px 36px, auto;
+}
+
+.s7-sales-audience.s7-sales-dark .s7-sales-section-heading h2,
+.s7-sales-problem.s7-sales-dark .s7-sales-section-copy h2 {
+  color: #ffffff;
+}
+
+.s7-sales-problem.s7-sales-dark .s7-sales-section-copy p:not(.s7-sales-kicker) {
+  color: #c9d8e5;
+}
+
+.s7-sales-audience.s7-sales-dark .s7-sales-audience-card,
+.s7-sales-problem.s7-sales-dark .s7-sales-light-card {
+  border-color: rgba(0, 200, 255, 0.24);
+  background: rgba(8, 36, 56, 0.78);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.s7-sales-audience.s7-sales-dark .s7-sales-audience-card h3,
+.s7-sales-problem.s7-sales-dark .s7-sales-light-card h3 {
+  color: #ffffff;
+}
+
+.s7-sales-problem.s7-sales-dark .s7-sales-light-card p {
+  color: #c9d8e5;
+}
+
+.s7-sales-audience.s7-sales-dark .s7-sales-audience-note {
+  color: #dff7ff;
+  border-color: rgba(0, 200, 255, 0.3);
+  background: rgba(0, 183, 232, 0.1);
+}
+
+.s7-sales-mistakes-light {
+  border-top: 1px solid rgba(5, 40, 70, 0.1);
+  background: linear-gradient(180deg, #f7fbff 0%, #eef4f8 100%);
+}
+
+.s7-sales-mistakes-light .s7-sales-centered-heading h2 {
+  color: var(--s7-ink);
+}
+
+.s7-sales-mistakes-light .s7-sales-mistakes-strip li {
+  padding: 14px 16px;
+  border: 1px solid rgba(5, 40, 70, 0.13);
+  border-radius: 10px;
+  color: #23394c;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(4, 24, 42, 0.055);
+}
+
 .s7-testimonials-grid {
   margin-top: 30px;
   display: grid;
