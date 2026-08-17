@@ -38,7 +38,7 @@ test("la tarjeta lateral de TIA completa el espacio con información del program
   assert.doesNotMatch(tiaVisualSource, /ladder-lines|status-cluster/);
 });
 
-test("el hero español de App usa la composición adjunta sin recortarla", async () => {
+test("el hero español de App usa la composición adjunta sin deformarla", async () => {
   const previewSource = sourceBetween("function AppHeroDiagnosticPreview()", "function AppQuickCommercialAccess()");
 
   await access(new URL("../src/assets/app-sad-device-preview.png", import.meta.url));
@@ -47,6 +47,20 @@ test("el hero español de App usa la composición adjunta sin recortarla", async
   assert.match(previewSource, /app-hero-diagnostic-preview-screen--device-composite/);
   assert.doesNotMatch(previewSource, /app-hero-diagnostic-preview-focus/);
   assert.match(stylesSource, /\.app-hero-diagnostic-preview-screen--device-composite img\s*\{[\s\S]*?object-fit:\s*contain;/);
+});
+
+test("el hero de App elimina el fondo claro sin alterar la captura", () => {
+  const previewSource = sourceBetween("function AppHeroDiagnosticPreview()", "function AppQuickCommercialAccess()");
+  const compositeStyles = stylesSource.slice(
+    stylesSource.lastIndexOf(".app-hero-diagnostic-preview-screen--device-composite {"),
+    stylesSource.indexOf(".app-hero-diagnostic-preview-focus")
+  );
+
+  assert.match(previewSource, /clipPath id="app-hero-device-silhouette" clipPathUnits="objectBoundingBox"/);
+  assert.equal((previewSource.match(/<rect /g) ?? []).length, 2);
+  assert.match(compositeStyles, /background:\s*transparent;/);
+  assert.match(compositeStyles, /clip-path:\s*url\("#app-hero-device-silhouette"\);/);
+  assert.doesNotMatch(compositeStyles, /background:\s*#e9f7fb;/);
 });
 
 test("el nuevo estado y la información lateral tienen adaptación móvil", () => {

@@ -25191,14 +25191,25 @@ html[lang="pt-BR"] .main-nav {
 
 .app-hero-diagnostic-preview-screen--device-composite {
   aspect-ratio: 797 / 453;
-  border-color: rgba(104, 214, 242, 0.38);
-  background: #e9f7fb;
-  box-shadow: 0 14px 35px rgba(0, 10, 18, 0.28);
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.app-hero-diagnostic-preview-clip {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
 }
 
 .app-hero-diagnostic-preview-screen--device-composite img {
   object-fit: contain;
   object-position: center;
+  -webkit-clip-path: url("#app-hero-device-silhouette");
+  clip-path: url("#app-hero-device-silhouette");
+  filter: drop-shadow(0 16px 18px rgba(0, 8, 15, 0.34));
 }
 
 .app-hero-diagnostic-preview-focus {

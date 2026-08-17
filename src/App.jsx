@@ -1826,6 +1826,14 @@ function AppHeroDiagnosticPreview() {
         <small><span aria-hidden="true" /> CASO GUIADO</small>
       </div>
       <div className="app-hero-diagnostic-preview-screen app-hero-diagnostic-preview-screen--device-composite">
+        <svg className="app-hero-diagnostic-preview-clip" aria-hidden="true" focusable="false">
+          <defs>
+            <clipPath id="app-hero-device-silhouette" clipPathUnits="objectBoundingBox">
+              <rect x="0.0276" y="0.0199" width="0.8632" height="0.8234" rx="0.022" ry="0.039" />
+              <rect x="0.7403" y="0.181" width="0.2119" height="0.7616" rx="0.031" ry="0.053" />
+            </clipPath>
+          </defs>
+        </svg>
         <img
           src={appSadDevicePreview}
           alt="BOJ S7-PLC PRO en una computadora y un teléfono con el diagnóstico guiado visible"
