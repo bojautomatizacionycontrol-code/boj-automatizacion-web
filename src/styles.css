@@ -15480,6 +15480,61 @@ textarea {
   font-weight: 900;
 }
 
+.course-preparation-strip {
+  border-top: 1px solid rgba(0, 174, 234, 0.18);
+  border-bottom: 1px solid #d6e4ec;
+  background: linear-gradient(90deg, #f8fbfd 0%, #edf7fb 52%, #f8fbfd 100%);
+}
+
+.course-preparation-strip-inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 15px;
+  padding-block: 15px;
+}
+
+.course-preparation-strip-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  color: #087ca8;
+  border: 1px solid rgba(0, 174, 234, 0.24);
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(2, 83, 120, 0.1);
+  place-items: center;
+}
+
+.course-preparation-strip-copy {
+  display: grid;
+  grid-template-columns: auto minmax(260px, 0.82fr) minmax(300px, 1fr);
+  align-items: center;
+  gap: 12px 20px;
+  min-width: 0;
+}
+
+.course-preparation-strip-copy > span {
+  color: #087ca8;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.course-preparation-strip-copy strong {
+  color: #071421;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.course-preparation-strip-copy p {
+  margin: 0;
+  color: #496173;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
 .course-landing {
   grid-template-columns: minmax(0, 1fr) minmax(330px, 0.44fr);
   gap: 28px;
@@ -15524,6 +15579,62 @@ textarea {
 .step7-shot img {
   object-fit: contain;
   background: #06101a;
+}
+
+.tia-course-side-copy {
+  margin-top: 18px;
+  padding: 20px;
+  border: 1px solid #d4e3eb;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(2, 13, 30, 0.07);
+}
+
+.tia-course-side-copy > span {
+  display: block;
+  margin-bottom: 8px;
+  color: #0088b8;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.tia-course-side-copy h2 {
+  margin: 0;
+  color: #071421;
+  font-size: 1.18rem;
+  line-height: 1.2;
+}
+
+.tia-course-side-copy p {
+  margin: 10px 0 0;
+  color: #496173;
+  font-size: 0.9rem;
+  line-height: 1.48;
+}
+
+.tia-course-side-copy ul {
+  display: grid;
+  gap: 10px;
+  margin: 17px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px solid #e0eaf0;
+  list-style: none;
+}
+
+.tia-course-side-copy li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 9px;
+  color: #263f51;
+  font-size: 0.87rem;
+  line-height: 1.42;
+}
+
+.tia-course-side-copy li svg {
+  margin-top: 2px;
+  color: #00aeea;
 }
 
 .contact-grid {
@@ -16213,6 +16324,19 @@ textarea {
   .contact-grid,
   .course-landing {
     gap: 16px;
+  }
+
+  .course-preparation-strip-inner {
+    align-items: start;
+  }
+
+  .course-preparation-strip-copy {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .course-preparation-strip-copy > span {
+    white-space: normal;
   }
 
   .form-row {
@@ -18741,7 +18865,7 @@ textarea {
 
 .s7-sales-problem-cards {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -22046,17 +22170,16 @@ textarea {
   background: linear-gradient(180deg, #f7fbff 0%, #eef4f8 100%);
 }
 
-.s7-sales-mistakes-light .s7-sales-centered-heading h2 {
+.s7-sales-mistakes-light .s7-sales-section-copy h2 {
   color: var(--s7-ink);
 }
 
-.s7-sales-mistakes-light .s7-sales-mistakes-strip li {
-  padding: 14px 16px;
-  border: 1px solid rgba(5, 40, 70, 0.13);
-  border-radius: 10px;
-  color: #23394c;
-  background: #ffffff;
-  box-shadow: 0 10px 24px rgba(4, 24, 42, 0.055);
+.s7-sales-mistakes-cards .s7-sales-light-card h3 {
+  color: var(--s7-ink);
+}
+
+.s7-sales-mistakes-cards .s7-sales-light-card svg {
+  color: #d88b12;
 }
 
 .s7-testimonials-grid {
@@ -22234,40 +22357,6 @@ h3,
   font-family: var(--font-display);
   letter-spacing: 0.14em;
   font-weight: 600;
-}
-
-/* ── Bloque 3A: franja compacta de errores (reemplaza cards) ─────────────── */
-.s7-sales-mistakes-strip {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px 28px;
-  max-width: 880px;
-  margin-inline: auto;
-}
-
-.s7-sales-mistakes-strip li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 0.98rem;
-  line-height: 1.45;
-  color: rgba(226, 238, 248, 0.92);
-}
-
-.s7-sales-mistakes-strip li svg {
-  flex-shrink: 0;
-  margin-top: 2px;
-  color: #f5b84b;
-}
-
-@media (max-width: 640px) {
-  .s7-sales-mistakes-strip {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
 }
 
 /* ── Bloque 3A: en móvil la APP PRO se muestra antes que el curso.
@@ -25098,6 +25187,18 @@ html[lang="pt-BR"] .main-nav {
   height: 100%;
   object-fit: cover;
   object-position: center top;
+}
+
+.app-hero-diagnostic-preview-screen--device-composite {
+  aspect-ratio: 797 / 453;
+  border-color: rgba(104, 214, 242, 0.38);
+  background: #e9f7fb;
+  box-shadow: 0 14px 35px rgba(0, 10, 18, 0.28);
+}
+
+.app-hero-diagnostic-preview-screen--device-composite img {
+  object-fit: contain;
+  object-position: center;
 }
 
 .app-hero-diagnostic-preview-focus {
