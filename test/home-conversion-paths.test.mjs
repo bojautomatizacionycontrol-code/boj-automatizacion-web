@@ -3,35 +3,61 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
-const styleSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const i18nSource = await readFile(new URL("../src/i18n.js", import.meta.url), "utf8");
 
-const workLinesBlock = appSource.match(
-  /const homeWorkLines = \[(?<content>[\s\S]*?)\n\];/,
-)?.groups?.content;
+const sourceBetween = (source, startMarker, endMarker) => {
+  const start = source.indexOf(startMarker);
+  const end = source.indexOf(endMarker, start);
+  assert.notEqual(start, -1, `No se encontró el inicio: ${startMarker}`);
+  assert.notEqual(end, -1, `No se encontró el final: ${endMarker}`);
+  return source.slice(start, end);
+};
 
-test("la portada ofrece tres rutas internas claras", () => {
-  assert.ok(workLinesBlock, "No se encontró homeWorkLines");
+test("el hero de la portada ofrece tres rutas internas claras", () => {
+  const navigatorSource = sourceBetween(appSource, "function HomeHeroNavigator()", "function CourseHeroPreview()");
 
   const routes = [
-    ["Servicios industriales", "/servicios", "Ver servicios"],
-    ["Capacitación técnica", "/cursos", "Ver cursos"],
-    ["Herramientas digitales", "/app", "Conocer la app"],
+    ["Servicios industriales", "/servicios"],
+    ["Capacitación técnica", "/cursos"],
+    ["Probar App BOJ S7-PLC", "/app"],
   ];
 
-  for (const [title, href, cta] of routes) {
-    assert.match(workLinesBlock, new RegExp(`title: "${title}"[\\s\\S]*?href: "${href}"[\\s\\S]*?cta: "${cta}"`));
+  for (const [title, href] of routes) {
+    assert.match(navigatorSource, new RegExp(`title: "${title}"[\\s\\S]*?href: "${href}"`));
   }
 
-  assert.equal((workLinesBlock.match(/href:/g) ?? []).length, 3);
-  assert.equal((workLinesBlock.match(/cta:/g) ?? []).length, 3);
+  assert.equal((navigatorSource.match(/href:/g) ?? []).length, 3);
+  assert.match(navigatorSource, /<nav aria-label="Accesos a las soluciones principales">/);
+  assert.match(navigatorSource, /<a href=\{path\.href\} key=\{path\.href\}>/);
+  assert.doesNotMatch(navigatorSource, /target=|pay\.hotmart\.com/);
 });
 
-test("las rutas se renderizan como enlaces accesibles sin navegación externa", () => {
-  assert.match(appSource, /<a className="mock-work-card" href=\{item\.href\} key=\{item\.title\}>/);
-  assert.match(appSource, /className="mock-work-card-cta"/);
-  assert.match(appSource, /<ArrowRight size=\{17\} aria-hidden="true" \/>/);
-  assert.doesNotMatch(appSource, /<a className="mock-work-card"[^>]*target=/);
-  assert.match(styleSource, /\.mock-work-card:focus-visible\s*\{/);
-  assert.match(styleSource, /\.mock-work-card-cta\s*\{[\s\S]*?min-height:\s*44px;/);
-  assert.match(styleSource, /@media \(prefers-reduced-motion: reduce\)/);
+test("el bloque redundante de tres tarjetas ya no se renderiza en ningún idioma", () => {
+  const removedHeadings = [
+    "Servicios, formación y herramientas para mantenimiento industrial",
+    "Services, training and tools for industrial maintenance",
+    "Serviços, formação e ferramentas para manutenção industrial",
+  ];
+
+  for (const heading of removedHeadings) {
+    assert.doesNotMatch(appSource, new RegExp(heading));
+  }
+
+  assert.doesNotMatch(appSource, /data-home-section="worklines"|homeWorkLines|\.workLines\.map/);
+  assert.doesNotMatch(i18nSource, /workLines:/);
+});
+
+test("inglés y portugués conservan los mismos tres recorridos en el hero", () => {
+  const translatedRoutes = [
+    ["Industrial services", "/en/services"],
+    ["Technical training", "/en/courses"],
+    ["Try the BOJ S7-PLC App", "/en/app"],
+    ["Serviços industriais", "/pt/servicos"],
+    ["Capacitação técnica", "/pt/cursos"],
+    ["Testar o App BOJ S7-PLC", "/pt/app"],
+  ];
+
+  for (const [title, href] of translatedRoutes) {
+    assert.match(i18nSource, new RegExp(`title: "${title}"[\\s\\S]*?href: "${href}"`));
+  }
 });

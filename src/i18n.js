@@ -46,43 +46,20 @@ export const englishHome = {
   navigator: [
     {
       icon: "TriangleAlert",
-      title: "Solve a plant fault",
+      title: "Industrial services",
       text: "Diagnostics and technical support to restore operation.",
       href: "/en/services",
     },
     {
       icon: "GraduationCap",
-      title: "Train your team",
+      title: "Technical training",
       text: "Applied training based on real industrial problems.",
       href: "/en/courses",
     },
     {
       icon: "MonitorCog",
-      title: "Try BOJ S7-PLC",
+      title: "Try the BOJ S7-PLC App",
       text: "A digital guide for symptoms and technical hypotheses.",
-      href: "/en/app",
-    },
-  ],
-  workLines: [
-    {
-      icon: "ScanSearch",
-      title: "Industrial diagnostics",
-      text: "Structured troubleshooting for PLCs, HMIs, networks, signals and field equipment.",
-      cta: "View services",
-      href: "/en/services",
-    },
-    {
-      icon: "GraduationCap",
-      title: "Technical training",
-      text: "Practical Siemens PLC training for maintenance technicians and engineering teams.",
-      cta: "View training",
-      href: "/en/courses",
-    },
-    {
-      icon: "Smartphone",
-      title: "BOJ S7-PLC app",
-      text: "Guided first-line diagnostics for Siemens S7-300/400 systems.",
-      cta: "Explore the app",
       href: "/en/app",
     },
   ],
@@ -326,43 +303,20 @@ export const portugueseHome = {
   navigator: [
     {
       icon: "TriangleAlert",
-      title: "Resolver uma falha na planta",
+      title: "Serviços industriais",
       text: "Diagnóstico e suporte técnico para restabelecer a operação.",
       href: "/pt/servicos",
     },
     {
       icon: "GraduationCap",
-      title: "Capacitar sua equipe",
+      title: "Capacitação técnica",
       text: "Formação aplicada com base em problemas industriais reais.",
       href: "/pt/cursos",
     },
     {
       icon: "MonitorCog",
-      title: "Conhecer o BOJ S7-PLC",
+      title: "Testar o App BOJ S7-PLC",
       text: "Um guia digital para sintomas e hipóteses técnicas.",
-      href: "/pt/app",
-    },
-  ],
-  workLines: [
-    {
-      icon: "ScanSearch",
-      title: "Diagnóstico industrial",
-      text: "Análise estruturada de falhas em PLCs, IHMs, redes, sinais e equipamentos de campo.",
-      cta: "Ver serviços",
-      href: "/pt/servicos",
-    },
-    {
-      icon: "GraduationCap",
-      title: "Formação técnica",
-      text: "Capacitação prática em PLC Siemens para técnicos de manutenção e equipes de engenharia.",
-      cta: "Ver cursos",
-      href: "/pt/cursos",
-    },
-    {
-      icon: "Smartphone",
-      title: "App BOJ S7-PLC",
-      text: "Diagnóstico guiado de primeira linha para sistemas Siemens S7-300/400.",
-      cta: "Conhecer o app",
       href: "/pt/app",
     },
   ],
