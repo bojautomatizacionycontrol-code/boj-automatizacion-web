@@ -2331,7 +2331,7 @@ function ServicesPage() {
         )}
       />
 
-      <section className="services-redesign-section services-areas-section" id="areas-de-servicio">
+      <section className="services-redesign-section services-areas-section" id="areas-de-servicio" data-surface="light">
         <div className="mock-home-container">
           <div className="services-section-heading services-area-heading">
             <h2>Qué necesitas resolver</h2>
@@ -2349,7 +2349,7 @@ function ServicesPage() {
         </div>
       </section>
 
-      <section className="services-redesign-section services-main-section" id="servicios-principales">
+      <section className="services-redesign-section services-main-section" id="servicios-principales" data-surface="dark">
         <div className="mock-home-container">
           <div className="services-section-heading services-main-heading">
             <h2>Cómo podemos intervenir</h2>
@@ -2363,7 +2363,7 @@ function ServicesPage() {
         </div>
       </section>
 
-      <section className="services-field-section">
+      <section className="services-field-section" data-surface="light">
         <div className="mock-home-container">
           <div className="services-section-heading services-field-heading">
             <h2>Experiencia en campo industrial</h2>
@@ -2384,7 +2384,7 @@ function ServicesPage() {
         </div>
       </section>
 
-      <section className="services-redesign-section services-secondary-section">
+      <section className="services-redesign-section services-secondary-section" data-surface="dark">
         <div className="mock-home-container">
           <div className="services-section-heading services-secondary-heading">
             <h2>Servicios complementarios</h2>
@@ -2398,7 +2398,7 @@ function ServicesPage() {
         </div>
       </section>
 
-      <section className="services-workflow-section">
+      <section className="services-workflow-section" data-surface="light">
         <div className="mock-home-container">
           <div className="services-section-heading services-workflow-heading">
             <h2>Un método para intervenir con criterio</h2>
@@ -2416,7 +2416,7 @@ function ServicesPage() {
         </div>
       </section>
 
-      <section className="services-redesign-cta">
+      <section className="services-redesign-cta" data-surface="dark">
         <img src={plantVisual} alt="" aria-hidden="true" />
         <div className="services-redesign-cta-overlay" aria-hidden="true" />
         <div className="mock-home-container services-redesign-cta-content">

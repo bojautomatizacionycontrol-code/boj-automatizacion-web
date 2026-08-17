@@ -41,6 +41,29 @@ test("la pagina ordena decision, alcance y evidencia antes del cierre comercial"
   });
 });
 
+test("las seis secciones comerciales alternan superficies claras y oscuras", () => {
+  const expectedSurfaces = [
+    ["services-areas-section", "light"],
+    ["services-main-section", "dark"],
+    ["services-field-section", "light"],
+    ["services-secondary-section", "dark"],
+    ["services-workflow-section", "light"],
+    ["services-redesign-cta", "dark"],
+  ];
+
+  for (const [className, surface] of expectedSurfaces) {
+    assert.match(
+      servicesSource,
+      new RegExp(`<section className="[^"]*${className}[^"]*"[^>]*data-surface="${surface}"`),
+    );
+  }
+
+  assert.deepEqual(
+    [...servicesSource.matchAll(/data-surface="(light|dark)"/g)].map((match) => match[1]),
+    ["light", "dark", "light", "dark", "light", "dark"],
+  );
+});
+
 test("la reorganizacion conserva los servicios vigentes y elimina las obras destacadas", () => {
   [
     "serviceWorkflowCards",

@@ -16728,6 +16728,103 @@ textarea {
   color: #008fc7;
 }
 
+/* Alternating section rhythm for the Spanish Services page. */
+.services-redesign-page > .services-main-section[data-surface="dark"],
+.services-redesign-page > .services-secondary-section[data-surface="dark"] {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    radial-gradient(circle at 84% 8%, rgba(0, 174, 234, 0.14), transparent 32%),
+    linear-gradient(180deg, #061827 0%, #020d1e 100%);
+  background-size: 48px 48px, 48px 48px, auto, auto;
+  border-block: 1px solid rgba(0, 174, 234, 0.18);
+  color: #ffffff;
+}
+
+.services-redesign-page > [data-surface="dark"] .services-section-heading h2 {
+  color: #ffffff;
+}
+
+.services-redesign-page > [data-surface="dark"] .services-section-heading > p {
+  color: rgba(238, 248, 255, 0.8);
+}
+
+.services-redesign-page > [data-surface="dark"] .services-primary-card,
+.services-redesign-page > [data-surface="dark"] .services-secondary-card {
+  border-color: rgba(0, 174, 234, 0.22);
+  background:
+    linear-gradient(145deg, rgba(13, 39, 58, 0.94), rgba(4, 18, 31, 0.98)),
+    #071521;
+  color: #ffffff;
+  box-shadow:
+    0 22px 50px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.services-redesign-page > [data-surface="dark"] .services-primary-head {
+  border-bottom-color: rgba(168, 215, 236, 0.18);
+}
+
+.services-redesign-page > [data-surface="dark"] .services-primary-card h3,
+.services-redesign-page > [data-surface="dark"] .services-secondary-card h3 {
+  color: #ffffff;
+}
+
+.services-redesign-page > [data-surface="dark"] .services-primary-head p,
+.services-redesign-page > [data-surface="dark"] .services-info-block p,
+.services-redesign-page > [data-surface="dark"] .services-secondary-card p {
+  color: rgba(238, 248, 255, 0.76);
+}
+
+.services-redesign-page > [data-surface="dark"] .services-info-block {
+  border-color: rgba(168, 215, 236, 0.17);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.services-redesign-page > [data-surface="dark"] .services-info-block h4,
+.services-redesign-page > [data-surface="dark"] .services-consult-link {
+  color: #36c8f3;
+}
+
+.services-redesign-page > [data-surface="dark"] .services-info-block li,
+.services-redesign-page > [data-surface="dark"] .services-secondary-card li {
+  color: rgba(238, 248, 255, 0.8);
+}
+
+.services-redesign-page > [data-surface="light"] .services-section-heading h2 {
+  color: #071421;
+}
+
+.services-redesign-page > [data-surface="light"] .services-section-heading > p {
+  color: #4f6577;
+}
+
+.services-redesign-page > .services-field-section[data-surface="light"] {
+  background:
+    radial-gradient(circle at 82% 8%, rgba(0, 174, 234, 0.1), transparent 32%),
+    linear-gradient(180deg, #ffffff 0%, #f3f7fb 100%);
+  border-block: 1px solid #d8e3ec;
+  color: #071421;
+}
+
+.services-redesign-page > .services-field-section[data-surface="light"] .services-field-card {
+  border-color: rgba(7, 37, 62, 0.12);
+  background: #ffffff;
+  box-shadow: 0 16px 38px rgba(2, 13, 30, 0.08);
+}
+
+.services-redesign-page > .services-field-section[data-surface="light"] .services-field-card svg {
+  color: #008fc7;
+}
+
+.services-redesign-page > .services-field-section[data-surface="light"] .services-field-card h3 {
+  color: #071421;
+}
+
+.services-redesign-page > .services-field-section[data-surface="light"] .services-field-card p {
+  color: #52687a;
+}
+
 .services-redesign-cta {
   min-height: 300px;
 }
