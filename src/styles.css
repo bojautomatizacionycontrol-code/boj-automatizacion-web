@@ -22344,6 +22344,324 @@ h3,
   color: #7dd3fc;
 }
 
+/* Curso S7: panel de oferta con jerarquía y columnas equilibradas. */
+.s7-sales-offer-panel {
+  grid-template-columns: minmax(0, 1.12fr) minmax(340px, 0.88fr);
+  grid-template-areas:
+    "summary summary"
+    "content process"
+    "decision decision"
+    "anchor anchor";
+  gap: 20px;
+  padding: 24px;
+  align-items: stretch;
+}
+
+.s7-sales-offer-summary {
+  grid-area: summary;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr);
+  gap: 28px;
+  align-items: stretch;
+  padding: 28px;
+  border: 1px solid rgba(207, 227, 239, 0.14);
+  border-radius: 12px;
+  background:
+    linear-gradient(155deg, rgba(0, 183, 232, 0.09), transparent 42%),
+    rgba(1, 16, 31, 0.64);
+}
+
+.s7-sales-offer-summary .s7-sales-offer-product,
+.s7-sales-offer-summary .s7-sales-offer-price {
+  grid-area: auto;
+  min-width: 0;
+}
+
+.s7-sales-offer-summary .s7-sales-offer-product {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 28px;
+  border-right: 1px solid rgba(207, 227, 239, 0.18);
+}
+
+.s7-sales-offer-product .s7-sales-launch {
+  max-width: 100%;
+  line-height: 1.25;
+}
+
+.s7-sales-offer-summary .s7-sales-offer-price {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.72fr) minmax(260px, 1.28fr);
+  grid-template-areas:
+    "regular stack"
+    "amount stack"
+    "copy stack";
+  column-gap: 26px;
+  align-content: center;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.s7-sales-offer-summary .s7-sales-offer-price > .s7-sales-offer-regular {
+  grid-area: regular;
+}
+
+.s7-sales-offer-summary .s7-sales-offer-price > strong {
+  grid-area: amount;
+  font-size: clamp(3.8rem, 5vw, 5rem);
+}
+
+.s7-sales-offer-summary .s7-sales-offer-price > p {
+  grid-area: copy;
+}
+
+.s7-sales-offer-summary .s7-sales-valuestack {
+  grid-area: stack;
+  align-self: center;
+  margin-top: 0;
+  padding: 0 0 0 26px;
+  border-top: 0;
+  border-left: 1px solid rgba(207, 227, 239, 0.18);
+}
+
+.s7-sales-offer-content {
+  grid-area: content;
+  gap: 22px;
+  justify-content: flex-start;
+  padding: 28px;
+}
+
+.s7-sales-offer-content-heading h3,
+.s7-sales-offer-process-heading h3 {
+  margin: 6px 0 0;
+  color: #ffffff;
+  font-size: 1.28rem;
+  line-height: 1.2;
+}
+
+.s7-sales-offer-groups {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.82fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.s7-sales-offer-group {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid rgba(0, 200, 255, 0.18);
+  border-radius: 11px;
+  background: rgba(0, 200, 255, 0.045);
+}
+
+.s7-sales-offer-group-app {
+  background:
+    linear-gradient(160deg, rgba(0, 200, 255, 0.1), transparent 68%),
+    rgba(0, 200, 255, 0.035);
+}
+
+.s7-sales-offer-group-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.s7-sales-offer-group-heading svg {
+  flex: none;
+  color: var(--s7-cyan-2);
+}
+
+.s7-sales-offer-group-heading h4 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.s7-sales-offer-group .s7-sales-offer-list {
+  grid-template-columns: 1fr;
+  grid-template-rows: none;
+  grid-auto-flow: row;
+  gap: 11px;
+}
+
+.s7-sales-offer-group .s7-sales-offer-list li + li {
+  margin-top: 0;
+}
+
+.s7-sales-offer-process {
+  grid-area: process;
+  min-width: 0;
+  padding: 28px;
+  border: 1px solid rgba(207, 227, 239, 0.14);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.s7-sales-offer-process-heading {
+  margin-bottom: 14px;
+}
+
+.s7-sales-offer-process .s7-sales-howto {
+  margin: 0;
+  gap: 9px;
+}
+
+.s7-sales-offer-process .s7-sales-howto li {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 5px 10px;
+  align-items: start;
+  padding: 14px;
+  border: 1px solid rgba(207, 227, 239, 0.1);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.s7-sales-offer-process .s7-sales-howto li::before {
+  margin-top: 1px;
+}
+
+.s7-sales-offer-process .s7-sales-howto li strong,
+.s7-sales-offer-process .s7-sales-howto li span {
+  min-width: 0;
+}
+
+.s7-sales-offer-process .s7-sales-howto li span {
+  grid-column: 2;
+  color: #cfe1ee;
+}
+
+.s7-sales-offer-decision {
+  grid-area: decision;
+  display: grid;
+  grid-template-columns: minmax(430px, 1fr) minmax(340px, 0.9fr);
+  gap: 26px;
+  align-items: center;
+  padding: 22px 24px;
+  border: 1px solid rgba(207, 227, 239, 0.14);
+  border-radius: 12px;
+  background:
+    linear-gradient(100deg, rgba(0, 200, 255, 0.075), transparent 48%),
+    rgba(255, 255, 255, 0.035);
+}
+
+.s7-sales-offer-decision .s7-sales-offer-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.s7-sales-offer-decision .s7-sales-btn {
+  width: 100%;
+  min-width: 0;
+}
+
+.s7-sales-offer-decision-copy {
+  display: grid;
+  gap: 10px;
+  padding-left: 26px;
+  border-left: 1px solid rgba(207, 227, 239, 0.15);
+}
+
+.s7-sales-offer-decision-copy .s7-sales-offer-guarantee,
+.s7-sales-offer-decision-copy .s7-sales-offer-crosslink,
+.s7-sales-offer-decision-copy .s7-sales-offer-note {
+  margin: 0;
+}
+
+.s7-sales-offer-anchor {
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .s7-sales-offer-panel {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "summary"
+      "content"
+      "process"
+      "decision"
+      "anchor";
+  }
+
+  .s7-sales-offer-summary {
+    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+    gap: 22px;
+  }
+
+  .s7-sales-offer-summary .s7-sales-offer-product {
+    padding-right: 22px;
+  }
+
+  .s7-sales-offer-summary .s7-sales-offer-price {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "regular"
+      "amount"
+      "copy"
+      "stack";
+  }
+
+  .s7-sales-offer-summary .s7-sales-valuestack {
+    margin-top: 18px;
+    padding: 16px 0 0;
+    border-top: 1px solid rgba(207, 227, 239, 0.18);
+    border-left: 0;
+  }
+
+  .s7-sales-offer-groups {
+    grid-template-columns: minmax(0, 1.35fr) minmax(210px, 0.85fr);
+  }
+
+  .s7-sales-offer-decision {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .s7-sales-offer-decision-copy {
+    padding: 18px 0 0;
+    border-top: 1px solid rgba(207, 227, 239, 0.15);
+    border-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .s7-sales-offer-panel {
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .s7-sales-offer-summary,
+  .s7-sales-offer-content,
+  .s7-sales-offer-process,
+  .s7-sales-offer-decision {
+    padding: 20px;
+  }
+
+  .s7-sales-offer-summary {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .s7-sales-offer-summary .s7-sales-offer-product {
+    padding: 0 0 22px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(207, 227, 239, 0.18);
+  }
+
+  .s7-sales-offer-groups,
+  .s7-sales-offer-decision .s7-sales-offer-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .s7-sales-offer-anchor {
+    padding: 14px 16px;
+  }
+}
+
 /* Botón deshabilitado del estado "preview" del checkout. */
 .s7-sales-btn.is-disabled,
 .mock-btn.is-disabled {

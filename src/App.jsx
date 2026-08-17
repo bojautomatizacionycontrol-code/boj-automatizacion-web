@@ -3300,60 +3300,103 @@ function S7SalesLanding({ course, eyebrow }) {
           </div>
 
           <div className="s7-sales-offer-panel">
-            <div className="s7-sales-offer-product">
-              <span className="s7-sales-launch">
-                <CheckCircle2 size={15} aria-hidden="true" /> Pago único · curso con acceso permanente
-              </span>
-              <p className="s7-sales-kicker">Curso + licencia</p>
-              <h2>Curso Diagnóstico S7-300/400 + APP PRO</h2>
-              <span className="s7-sales-offer-tagline">Incluye 1 mes de BOJ S7-PLC PRO</span>
-            </div>
+            <div className="s7-sales-offer-summary">
+              <div className="s7-sales-offer-product">
+                <span className="s7-sales-launch">
+                  <CheckCircle2 size={15} aria-hidden="true" /> Pago único · curso con acceso permanente
+                </span>
+                <p className="s7-sales-kicker">Curso + licencia</p>
+                <h2>Curso Diagnóstico S7-300/400 + APP PRO</h2>
+                <span className="s7-sales-offer-tagline">Incluye 1 mes de BOJ S7-PLC PRO</span>
+              </div>
 
-            <div className="s7-sales-offer-price">
-              <span className="s7-sales-offer-regular">Pago único</span>
-              <strong>{offer.course.price}</strong>
-              <p>Acceso permanente al curso + herramienta PRO por 1 mes.</p>
-              <div className="s7-sales-valuestack">
-                <div className="s7-sales-valuestack-row">
-                  <span>App BOJ S7-PLC PRO — 1 mes</span>
-                  <span className="s7-sales-valuestack-value">vale 59 USD</span>
-                </div>
-                <div className="s7-sales-valuestack-row">
-                  <span>Curso completo + Método BOJ</span>
-                  <span className="s7-sales-valuestack-value">incluido</span>
-                </div>
-                <div className="s7-sales-valuestack-total">
-                  <span>Pago único</span>
-                  <strong>{offer.course.price}</strong>
+              <div className="s7-sales-offer-price">
+                <span className="s7-sales-offer-regular">Pago único</span>
+                <strong>{offer.course.price}</strong>
+                <p>Acceso permanente al curso + herramienta PRO por 1 mes.</p>
+                <div className="s7-sales-valuestack">
+                  <div className="s7-sales-valuestack-row">
+                    <span>App BOJ S7-PLC PRO — 1 mes</span>
+                    <span className="s7-sales-valuestack-value">vale 59 USD</span>
+                  </div>
+                  <div className="s7-sales-valuestack-row">
+                    <span>Curso completo + Método BOJ</span>
+                    <span className="s7-sales-valuestack-value">incluido</span>
+                  </div>
+                  <div className="s7-sales-valuestack-total">
+                    <span>Pago único</span>
+                    <strong>{offer.course.price}</strong>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div className="s7-sales-offer-content">
-              <ul className="s7-sales-offer-list">
-                {offerIncludes.map((item) => (
-                  <li key={item}>
-                    <CheckCircle2 size={18} aria-hidden="true" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              {/* "Cómo funciona la compra" (bloque 3A): copy del flujo DEFINITIVO
-                  (Hotmart). Solo se renderiza con el flujo validado E2E
-                  (checkout live + flowValidated, corte del bloque 3B). */}
-              {purchaseTarget.isFlowValidated ? (
+              <div className="s7-sales-offer-content-heading">
+                <p className="s7-sales-kicker">Contenido de la oferta</p>
+                <h3>Todo lo que recibes</h3>
+              </div>
+
+              <div className="s7-sales-offer-groups">
+                <div className="s7-sales-offer-group">
+                  <div className="s7-sales-offer-group-heading">
+                    <Icon name="GraduationCap" size={22} />
+                    <h4>Formación técnica</h4>
+                  </div>
+                  <ul className="s7-sales-offer-list">
+                    {offerIncludes.slice(0, 5).map((item) => (
+                      <li key={item}>
+                        <CheckCircle2 size={18} aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="s7-sales-offer-group s7-sales-offer-group-app">
+                  <div className="s7-sales-offer-group-heading">
+                    <Icon name="Smartphone" size={22} />
+                    <h4>App PRO incluida</h4>
+                  </div>
+                  <ul className="s7-sales-offer-list">
+                    {offerIncludes.slice(5).map((item) => (
+                      <li key={item}>
+                        <CheckCircle2 size={18} aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* "Cómo funciona la compra" (bloque 3A): copy del flujo DEFINITIVO
+                (Hotmart). Solo se renderiza con el flujo validado E2E
+                (checkout live + flowValidated, corte del bloque 3B). */}
+            {purchaseTarget.isFlowValidated ? (
+              <div className="s7-sales-offer-process">
+                <div className="s7-sales-offer-process-heading">
+                  <p className="s7-sales-kicker">Compra y acceso</p>
+                  <h3>Cómo funciona</h3>
+                </div>
                 <ol className="s7-sales-howto">
                   <li>
-                    <strong>Pago seguro con Hotmart.</strong> Proceso de pago cifrado, con tarjeta y los medios de pago disponibles en tu país.
+                    <strong>Pago seguro con Hotmart.</strong>
+                    <span>Proceso de pago cifrado, con tarjeta y los medios de pago disponibles en tu país.</span>
                   </li>
                   <li>
-                    <strong>Entrega digital.</strong> Al acreditarse el pago, recibes en tu correo electrónico el acceso al material.
+                    <strong>Entrega digital.</strong>
+                    <span>Al acreditarse el pago, recibes en tu correo electrónico el acceso al material.</span>
                   </li>
                   <li>
-                    <strong>Activación de tu mes de App PRO.</strong> Con el mismo correo electrónico de la compra. Garantía de 7 días.
+                    <strong>Activación de tu mes de App PRO.</strong>
+                    <span>Con el mismo correo electrónico de la compra. Garantía de 7 días.</span>
                   </li>
                 </ol>
-              ) : null}
+              </div>
+            ) : null}
+
+            <div className="s7-sales-offer-decision">
               <div className="s7-sales-offer-actions">
                 <PurchaseCTA source="offer" className="s7-sales-btn s7-sales-btn-primary">
                   Comprar curso + APP PRO
@@ -3368,15 +3411,17 @@ function S7SalesLanding({ course, eyebrow }) {
                   Probar APP durante 48 horas
                 </a>
               </div>
-              <p className="s7-sales-offer-guarantee">
-                <ShieldCheck size={18} aria-hidden="true" />
-                {guaranteeNote}
-              </p>
-              <p className="s7-sales-offer-crosslink">
-                ¿Vas a utilizar la app de forma recurrente o en equipo? Consulta los{" "}
-                <a href="/app">planes PRO (6 meses / varios dispositivos)</a>.
-              </p>
-              <p className="s7-sales-offer-note">Acceso digital. Verifica siempre las conclusiones en campo antes de intervenir.</p>
+              <div className="s7-sales-offer-decision-copy">
+                <p className="s7-sales-offer-guarantee">
+                  <ShieldCheck size={18} aria-hidden="true" />
+                  {guaranteeNote}
+                </p>
+                <p className="s7-sales-offer-crosslink">
+                  ¿Vas a utilizar la app de forma recurrente o en equipo? Consulta los{" "}
+                  <a href="/app">planes PRO (6 meses / varios dispositivos)</a>.
+                </p>
+                <p className="s7-sales-offer-note">Acceso digital. Verifica siempre las conclusiones en campo antes de intervenir.</p>
+              </div>
             </div>
 
             <p className="s7-sales-offer-anchor">
