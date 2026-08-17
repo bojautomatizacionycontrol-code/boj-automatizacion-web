@@ -444,30 +444,6 @@ const landingProjects = [
   },
 ];
 
-const homeWorkLines = [
-  {
-    icon: "Factory",
-    title: "Servicios industriales",
-    text: "Diagnóstico, automatización, migraciones y soporte técnico en planta.",
-    href: "/servicios",
-    cta: "Ver servicios",
-  },
-  {
-    icon: "GraduationCap",
-    title: "Capacitación técnica",
-    text: "Cursos prácticos para mantenimiento y diagnóstico en sistemas Siemens.",
-    href: "/cursos",
-    cta: "Ver cursos",
-  },
-  {
-    icon: "MonitorCog",
-    title: "Herramientas digitales",
-    text: "BOJ S7-PLC como apoyo para ordenar fallas en S7-300/400.",
-    href: "/app",
-    cta: "Conocer la app",
-  },
-];
-
 const homeProblems = [
   { icon: "ShieldCheck", text: "Máquinas detenidas\nsin causa clara" },
   { icon: "Wrench", text: "Fallas SF / BF /\nSTOP en PLC Siemens" },
@@ -590,83 +566,6 @@ const servicesExperienceCards = [
     icon: "ClipboardCheck",
     title: "Ingeniería y puesta en marcha",
     text: "Validación en campo, pruebas SAT, documentación y asistencia técnica.",
-  },
-];
-
-const servicesFeaturedWorks = [
-  {
-    title: "Generador WEG BT40",
-    meta: "Ledesma · 2024",
-    description: "Ingeniería, conexionado y puesta en marcha de generador BT40 de 42 MW. Usina Ingenio.",
-    imageFiles: [
-      "Generador industrial — para Generador WEG BT40.jpg",
-      "generador_industrial_sobre_fondo_minimalista.png",
-    ],
-  },
-  {
-    title: "Evaporador",
-    meta: "CALSA · 2024",
-    description: "Corrección y agregado de nuevas bombas y señales en programación y HMI.",
-    imageFiles: [
-      "Evaporador  equipo de proceso — para Evaporador CALSA.jpg",
-      "sistema_industrial_en_ambiente_minimalista.png",
-    ],
-  },
-  {
-    title: "Generadores Siemens TG3/TG4",
-    meta: "Generación Mediterránea · 2019",
-    description: "Programación de PLC, HMI y SCADA de servicios para nuevas turbinas generadoras.",
-    imageFiles: [
-      "Turbina o generador industrial — para Generadores Siemens TG3TG4.jpg",
-      "turbina_industrial_en_estudio_brillante.png",
-    ],
-  },
-  {
-    title: "Compresores",
-    meta: "TGN Tucumán / TGN Jujuy · 2018",
-    description: "Upgrade de tableros de control de motocompresores.",
-    imageFiles: [
-      "Motocompresor industrial — para Compresores TGN.jpg",
-      "componente_industrial_en_estudio_minimalista.png",
-    ],
-  },
-  {
-    title: "Sistema contra incendios",
-    meta: "GETSA · 2017",
-    description: "Programación y comisionamiento de sistema contra incendios con PLC S7-1500.",
-    imageFiles: [
-      "Sistema contra incendios industrial — bombas, cañerías, válvulas.jpg",
-      "sistema_industrial_con_bomba_y_tubería.png",
-      "sistema_industrial_con_bomba_y_tuberia.png",
-    ],
-  },
-  {
-    title: "Gasómetro",
-    meta: "Gasnor · 2017",
-    description: "Programación de gasómetro en PLC S7-1200 y HMI para calibración de medidores.",
-    imageFiles: [
-      "Medición de gas  gasómetro — tuberías, instrumentación, skid de medición.jpg",
-      "montaje_industrial_de_proceso_modular.png",
-    ],
-  },
-  {
-    title: "Planta de agua",
-    meta: "YPF · 2016",
-    description: "Upgrade de PLC S5-95U a S7-1500 en planta de agua.",
-    imageFiles: [
-      "Planta de agua  bombeo industrial — bombas, cañerías, tratamiento.jpg",
-      "sistema_industrial_de_tratamiento_de_agua.png",
-    ],
-  },
-  {
-    title: "Central de lubricación",
-    meta: "Ledesma · 2016",
-    description: "Programación de PLC S7-1500 y HMI TP1200 para central de lubricación.",
-    imageFiles: [
-      "Central de lubricación industrial — bombas, manifold, líneas de lubricación.jpg",
-      "sistema_hidráulico_de_control_en_pared.png",
-      "sistema_hidraulico_de_control_en_pared.png",
-    ],
   },
 ];
 
@@ -1852,19 +1751,19 @@ function HomeHeroNavigator() {
   const paths = [
     {
       icon: "TriangleAlert",
-      title: "Resolver una falla",
+      title: "Servicios industriales",
       text: "Diagnóstico y asistencia para recuperar la operación.",
       href: "/servicios",
     },
     {
       icon: "GraduationCap",
-      title: "Formar al equipo",
+      title: "Capacitación técnica",
       text: "Capacitación aplicada a problemas reales de planta.",
       href: "/cursos",
     },
     {
       icon: "MonitorCog",
-      title: "Probar BOJ S7-PLC",
+      title: "Probar App BOJ S7-PLC",
       text: "Una guía digital para ordenar síntomas e hipótesis.",
       href: "/app",
     },
@@ -2007,29 +1906,6 @@ function HomeLandingRedesign() {
 
       <HomeClientStrip />
 
-      <section className="mock-section mock-work" data-home-section="worklines">
-        <div className="mock-home-container">
-          <h2>Servicios, formación y herramientas para mantenimiento industrial</h2>
-          <div className="mock-work-grid">
-            {homeWorkLines.map((item) => (
-              <a className="mock-work-card" href={item.href} key={item.title}>
-                <span className="mock-icon-circle">
-                  <Icon name={item.icon} size={32} />
-                </span>
-                <span className="mock-work-card-copy">
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                  <span className="mock-work-card-cta">
-                    {item.cta}
-                    <ArrowRight size={17} aria-hidden="true" />
-                  </span>
-                </span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="mock-section mock-problems" data-home-section="problems">
         <div className="mock-home-container">
           <h2>Problemas que resolvemos.</h2>
@@ -2134,7 +2010,7 @@ function HomeObrasTeaser() {
   return (
     <section className="mock-section mock-obras" data-home-section="obras">
       <div className="mock-home-container">
-        <h2>Obras reales, no ejemplos de manual</h2>
+        <h2>Obras realizadas</h2>
         <p className="mock-obras-subtitle">
           Ingeniería, programación, migraciones y puesta en marcha en plantas industriales. Los casos, clientes y alcances corresponden a trabajos realizados; las imágenes son ilustrativas.
         </p>
@@ -2455,24 +2331,6 @@ function ServicesPage() {
         )}
       />
 
-      <section className="services-workflow-section">
-        <div className="mock-home-container">
-          <div className="services-section-heading services-workflow-heading">
-            <h2>Un método para intervenir con criterio</h2>
-            <p>Del síntoma al próximo paso técnico, con evidencia, alcance claro y una intervención acorde al riesgo.</p>
-          </div>
-          <div className="services-workflow-grid">
-            {serviceWorkflowCards.map((card) => (
-              <article className="services-workflow-card" key={card.title}>
-                <Icon name={card.icon} size={26} />
-                <h3>{card.title}</h3>
-                <p>{card.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="services-redesign-section services-areas-section" id="areas-de-servicio">
         <div className="mock-home-container">
           <div className="services-section-heading services-area-heading">
@@ -2526,39 +2384,6 @@ function ServicesPage() {
         </div>
       </section>
 
-      <section className="services-redesign-section services-works-section">
-        <div className="mock-home-container">
-          <div className="services-section-heading services-works-heading">
-            <h2>Obras e intervenciones destacadas</h2>
-            <p>
-              Selección de trabajos técnicos realizados en automatización, migraciones, tableros, PLC, HMI
-              y puesta en marcha.
-            </p>
-          </div>
-          <div className="services-works-grid">
-            {servicesFeaturedWorks.map((work) => {
-              const imageSrc = getServiceWorkImage(work.imageFiles);
-
-              return (
-                <article
-                  className={`services-work-card${imageSrc ? "" : " services-work-card--missing-media"}`}
-                  key={`${work.title}-${work.meta}`}
-                >
-                  <div className="services-work-media" aria-hidden="true">
-                    {imageSrc ? <img src={imageSrc} alt="" loading="lazy" /> : null}
-                  </div>
-                  <div className="services-work-content">
-                    <h3>{work.title}</h3>
-                    <p>{work.meta}</p>
-                    <span>{work.description}</span>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       <section className="services-redesign-section services-secondary-section">
         <div className="mock-home-container">
           <div className="services-section-heading services-secondary-heading">
@@ -2568,6 +2393,24 @@ function ServicesPage() {
           <div className="services-secondary-grid">
             {secondaryServiceCards.map((service) => (
               <ServiceSecondaryCard key={service.title} service={service} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="services-workflow-section">
+        <div className="mock-home-container">
+          <div className="services-section-heading services-workflow-heading">
+            <h2>Un método para intervenir con criterio</h2>
+            <p>Del síntoma al próximo paso técnico, con evidencia, alcance claro y una intervención acorde al riesgo.</p>
+          </div>
+          <div className="services-workflow-grid">
+            {serviceWorkflowCards.map((card) => (
+              <article className="services-workflow-card" key={card.title}>
+                <Icon name={card.icon} size={26} />
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
             ))}
           </div>
         </div>
@@ -4286,24 +4129,6 @@ function EnglishHomePage() {
         </div>
       </section>
 
-      <section className="mock-section mock-work">
-        <div className="mock-home-container">
-          <h2>Services, training and tools for industrial maintenance</h2>
-          <div className="mock-work-grid">
-            {englishHome.workLines.map((item) => (
-              <a className="mock-work-card" href={item.href} key={item.title}>
-                <span className="mock-icon-circle"><Icon name={item.icon} size={32} /></span>
-                <span className="mock-work-card-copy">
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                  <span className="mock-work-card-cta">{item.cta}<ArrowRight size={17} /></span>
-                </span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="mock-section mock-problems">
         <div className="mock-home-container">
           <h2>Problems we help solve</h2>
@@ -4360,7 +4185,7 @@ function EnglishHomePage() {
 
       <section className="mock-section mock-obras">
         <div className="mock-home-container">
-          <h2>Industrial work, not theoretical examples</h2>
+          <h2>Completed projects</h2>
           <p className="mock-obras-subtitle">
             Selected engineering, PLC migration and commissioning work completed in real production environments. Images are illustrative; clients and project scopes are real.
           </p>
@@ -5007,11 +4832,10 @@ function PortugueseHomePage() {
         aside={<PortugueseHomeHeroNavigator />}
       />
       <section className="mock-clients" data-home-section="clients"><div className="mock-home-container mock-clients-inner"><p className="mock-clients-label">Alguns clientes industriais</p><ul className="mock-clients-list">{homeClientNames.map((name) => <li key={name}>{name}</li>)}</ul><a className="mock-clients-link" href="/pt/projetos">Ver projetos realizados <ArrowRight size={15} /></a></div></section>
-      <section className="mock-section mock-work"><div className="mock-home-container"><h2>Serviços, formação e ferramentas para manutenção industrial</h2><div className="mock-work-grid">{portugueseHome.workLines.map((item) => <a className="mock-work-card" href={item.href} key={item.title}><span className="mock-icon-circle"><Icon name={item.icon} size={32} /></span><span className="mock-work-card-copy"><h3>{item.title}</h3><p>{item.text}</p><span className="mock-work-card-cta">{item.cta}<ArrowRight size={17} /></span></span></a>)}</div></div></section>
       <section className="mock-section mock-problems"><div className="mock-home-container"><h2>Problemas que ajudamos a resolver</h2><p className="mock-problems-subtitle">Partimos do sintoma real: uma CPU parada, uma rede instável, sinais inconsistentes ou um equipamento que já não responde como deveria.</p><div className="mock-problems-grid">{portugueseHome.problems.map((problem) => <article className="mock-problem-item" key={problem.text}><Icon name={problem.icon} size={36} /><span>{problem.text}</span></article>)}</div></div></section>
       <section className="mock-tech-strip"><div className="mock-home-container"><h2>Foco técnico</h2><p className="mock-tech-subtitle">Tecnologias industriais e áreas abrangidas pelo nosso trabalho.</p><div className="mock-tech-grid">{portugueseHome.specialties.map((item) => <article className="mock-tech-card" key={item.title}><Icon name={item.icon} size={48} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div></section>
       <section className="mock-section mock-app"><div className="mock-home-container mock-app-grid"><div className="mock-app-copy"><span className="section-badge">BOJ S7-PLC PRO</span><h2>Uma primeira resposta mais clara antes de abrir o STEP 7</h2><p>Informe estados da CPU, LEDs e sintomas de campo. O app organiza hipóteses técnicas e sugere o que verificar primeiro.</p><ul><li>Fluxo orientado por sintomas</li><li>Hipóteses técnicas priorizadas</li><li>Orientação para verificação em campo</li></ul><a className="mock-btn mock-btn-primary" href="/pt/app">Conhecer o app <ArrowRight size={18} /></a></div><AppDiagnosticMockup language="pt" /></div></section>
-      <section className="mock-section mock-obras"><div className="mock-home-container"><h2>Trabalho industrial, não exemplos teóricos</h2><p className="mock-obras-subtitle">Projetos selecionados de engenharia, migração de PLC e comissionamento realizados em ambientes reais de produção. As imagens são ilustrativas; os clientes e escopos são reais.</p><div className="mock-obras-grid">{portugueseProjects.map((project) => { const source = projects[project.sourceIndex]; return <article className="mock-obras-card" key={project.title}><div className="mock-obras-media"><img src={getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]} alt="" loading="lazy" /><span className="works-image-disclaimer">Imagem ilustrativa</span><span className="mock-obras-client">{source.client}</span></div><div className="mock-obras-body"><span className="mock-obras-year">{source.year}</span><h3>{project.title}</h3><p>{project.result}</p></div></article>; })}</div><div className="mock-obras-cta"><a className="mock-btn mock-btn-primary" href="/pt/projetos">Ver projetos selecionados <ArrowRight size={18} /></a></div></div></section>
+      <section className="mock-section mock-obras"><div className="mock-home-container"><h2>Projetos realizados</h2><p className="mock-obras-subtitle">Projetos selecionados de engenharia, migração de PLC e comissionamento realizados em ambientes reais de produção. As imagens são ilustrativas; os clientes e escopos são reais.</p><div className="mock-obras-grid">{portugueseProjects.map((project) => { const source = projects[project.sourceIndex]; return <article className="mock-obras-card" key={project.title}><div className="mock-obras-media"><img src={getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]} alt="" loading="lazy" /><span className="works-image-disclaimer">Imagem ilustrativa</span><span className="mock-obras-client">{source.client}</span></div><div className="mock-obras-body"><span className="mock-obras-year">{source.year}</span><h3>{project.title}</h3><p>{project.result}</p></div></article>; })}</div><div className="mock-obras-cta"><a className="mock-btn mock-btn-primary" href="/pt/projetos">Ver projetos selecionados <ArrowRight size={18} /></a></div></div></section>
       <section className="mock-final-cta"><img src={plantVisual} alt="" aria-hidden="true" /><div className="mock-final-overlay" aria-hidden="true" /><div className="mock-home-container mock-final-content"><h2>Sua planta tem uma falha, uma máquina parada ou uma equipe que precisa de capacitação?</h2><p>Conte-nos o que está acontecendo e ajudaremos a identificar o próximo passo adequado.</p><div className="mock-final-actions"><a className="mock-btn mock-btn-whatsapp" href={whatsappUrl("Olá, gostaria de conversar sobre uma falha industrial, um projeto de automação ou uma necessidade de capacitação técnica.")}><Phone size={18} /> Falar pelo WhatsApp</a><a className="mock-btn mock-btn-outline" href="/pt/contato"><Mail size={18} /> Enviar consulta técnica</a></div></div></section>
     </div>
   );

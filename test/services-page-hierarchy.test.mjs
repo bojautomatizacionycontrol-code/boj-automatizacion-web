@@ -24,12 +24,11 @@ test("servicios abre con una propuesta clara y una orientacion inicial", () => {
 
 test("la pagina ordena decision, alcance y evidencia antes del cierre comercial", () => {
   const orderedMarkers = [
-    "services-workflow-section",
     "services-areas-section",
     "services-main-section",
     "services-field-section",
-    "services-works-section",
     "services-secondary-section",
+    "services-workflow-section",
     "services-redesign-cta",
   ];
 
@@ -42,18 +41,20 @@ test("la pagina ordena decision, alcance y evidencia antes del cierre comercial"
   });
 });
 
-test("la reorganizacion conserva todas las familias de contenido y sus enlaces", () => {
+test("la reorganizacion conserva los servicios vigentes y elimina las obras destacadas", () => {
   [
     "serviceWorkflowCards",
     "servicesAreaCards",
     "mainServiceCards",
     "servicesExperienceCards",
-    "servicesFeaturedWorks",
     "secondaryServiceCards",
   ].forEach((collection) => {
     assert.equal(servicesSource.match(new RegExp(`${collection}\\.map`, "g"))?.length, 1);
   });
 
+  assert.doesNotMatch(appSource, /const servicesFeaturedWorks =/);
+  assert.doesNotMatch(servicesSource, /services-works-section|Obras e intervenciones destacadas/);
+  assert.equal(servicesSource.match(/services-workflow-section/g)?.length, 1);
   assert.match(servicesSource, /Solicitar diagnóstico/);
   assert.match(servicesSource, /whatsappUrl\(/);
   assert.match(servicesSource, /href="\/contacto"/);

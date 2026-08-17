@@ -38,9 +38,9 @@ test("inicio ofrece tres caminos claros dentro del hero", () => {
   const homeSource = sourceBetween("function HomeLandingRedesign()", "function HomeClientStrip()");
 
   const expectedPaths = [
-    ["Resolver una falla", "/servicios"],
-    ["Formar al equipo", "/cursos"],
-    ["Probar BOJ S7-PLC", "/app"],
+    ["Servicios industriales", "/servicios"],
+    ["Capacitación técnica", "/cursos"],
+    ["Probar App BOJ S7-PLC", "/app"],
   ];
 
   for (const [label, href] of expectedPaths) {

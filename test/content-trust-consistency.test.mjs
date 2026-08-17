@@ -15,6 +15,10 @@ test("las imágenes de Obras se identifican como ilustrativas", () => {
   const labels = spanishWorksSource.match(/className="works-image-disclaimer"/g) ?? [];
 
   assert.equal(labels.length, 2);
+  assert.match(spanishWorksSource, /<h2>Obras realizadas<\/h2>/);
+  assert.match(appSource, /<h2>Completed projects<\/h2>/);
+  assert.match(appSource, /<h2>Projetos realizados<\/h2>/);
+  assert.doesNotMatch(appSource, /Obras reales, no ejemplos de manual|Industrial work, not theoretical examples|Trabalho industrial, não exemplos teóricos/);
   assert.match(spanishWorksSource, /Los casos, clientes y alcances corresponden a trabajos realizados; las imágenes son ilustrativas\./);
   assert.match(spanishWorksSource, /alt=\{`Imagen ilustrativa para \$\{project\.title\}`\}/);
   assert.doesNotMatch(spanishWorksSource, /Imagen real \(de services-works\)/);
