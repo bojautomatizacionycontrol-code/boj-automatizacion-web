@@ -54,8 +54,8 @@ test("inicio ofrece tres caminos claros dentro del hero", () => {
 
 test("App muestra una demostración real y precios antes de la explicación extensa", () => {
   const appPageSource = sourceBetween("function AppPage()", "function AppComparisonTable()");
-  const previewSource = sourceBetween("function AppHeroDiagnosticPreview()", "function AppQuickCommercialAccess()");
-  const quickAccessSource = sourceBetween("function AppQuickCommercialAccess()", "function HomePage()");
+  const previewSource = sourceBetween('const appHeroPreviewCopy = {', 'const appQuickAccessCopy = {');
+  const quickAccessSource = sourceBetween('const appQuickAccessCopy = {', 'const localizedPlanGuideCopy = {');
 
   assert.match(appPageSource, /image=\{appProHeroLaptopVisual\}/);
   assert.match(appPageSource, /aside=\{<AppHeroDiagnosticPreview \/>\}/);
@@ -70,10 +70,13 @@ test("App muestra una demostración real y precios antes de la explicación exte
   const positioning = appPageSource.indexOf('className="app-pro-positioning-section"');
   assert.ok(proofStrip < quickAccess && quickAccess < positioning);
 
-  assert.match(quickAccessSource, /\{appTrialPlan\.price\} · 48 horas/);
-  assert.match(quickAccessSource, /\{subscription\.price\} por mes/);
-  assert.match(quickAccessSource, /Desde \{oneTime\.price\}/);
-  assert.match(quickAccessSource, /href="#planes-pro"/);
+  assert.match(quickAccessSource, /trialDuration: "48 horas"/);
+  assert.match(quickAccessSource, /: appTrialPlan\.price/);
+  assert.match(quickAccessSource, /subscriptionSuffix: "por mes"/);
+  assert.match(quickAccessSource, /oneTimePrefix: "Desde"/);
+  assert.match(quickAccessSource, /plansHref: "#planes-pro"/);
+  assert.match(quickAccessSource, /\{subscription\.price\} \{copy\.subscriptionSuffix\}/);
+  assert.match(quickAccessSource, /\{copy\.oneTimePrefix\} \{oneTime\.price\}/);
   assert.match(quickAccessSource, /href=\{appProductUrl\}/);
   assert.doesNotMatch(quickAccessSource, /pay\.hotmart\.com/);
 });
@@ -105,7 +108,7 @@ test("la consulta final de inicio usa el formulario interno", () => {
 });
 
 test("el curso se diferencia con una vista previa sin alterar sus checkouts", () => {
-  const previewSource = sourceBetween("function CourseHeroPreview()", "function AppHeroDiagnosticPreview()");
+  const previewSource = sourceBetween("function CourseHeroPreview()", "const appHeroPreviewCopy = {");
   const salesSource = sourceBetween("function S7SalesLanding", "function AppPage()");
 
   assert.match(previewSource, /manualPreviewImages\[0\]/);

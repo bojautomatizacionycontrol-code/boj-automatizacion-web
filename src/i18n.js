@@ -130,6 +130,26 @@ export const englishServices = {
     { icon: "ShieldCheck", title: "Controlled intervention", text: "Technical decisions adapted to operational risk and plant conditions." },
     { icon: "ClipboardCheck", title: "Traceable work", text: "Scope, tests and technical outcomes documented for operation and maintenance." },
   ],
+  secondary: [
+    {
+      icon: "Gauge",
+      title: "Instrumentation and field signals",
+      text: "Verification and troubleshooting of analog, digital and process signals.",
+      applications: ["Sensors and transmitters", "Signal loops", "Scaling and calibration", "PLC input and output checks"],
+    },
+    {
+      icon: "CircuitBoard",
+      title: "Industrial electrical systems and control panels",
+      text: "Technical support for control panels, field wiring and operating reliability.",
+      applications: ["Control circuits", "Field wiring", "Panel modifications", "Electrical fault isolation"],
+    },
+    {
+      icon: "GraduationCap",
+      title: "Industrial technical training",
+      text: "Applied training for maintenance and automation teams.",
+      applications: ["Siemens PLC diagnostics", "Industrial networks", "Field troubleshooting method", "Programs adapted to the team"],
+    },
+  ],
 };
 
 export const englishCourses = {
@@ -263,6 +283,63 @@ export const englishS7Course = {
   ],
 };
 
+export const englishTiaCourse = {
+  title: "Introduction to TIA Portal with Siemens S7-1200/1500 PLCs",
+  subtitle: "An introductory course for building a structured foundation in TIA Portal: hardware, tags, LAD, downloading, online monitoring and initial diagnostics.",
+  audience: [
+    "Technicians starting with TIA Portal",
+    "Technical students",
+    "Programmers moving from STEP 7 Classic",
+    "Maintenance personnel",
+    "Industrial electricians",
+  ],
+  modules: [
+    "Introduction to TIA Portal",
+    "Siemens S7-1200 and S7-1500 families",
+    "Project creation",
+    "Hardware configuration",
+    "PLC tags",
+    "Basic LAD programming",
+    "Timers and counters",
+    "OB, FC, FB and DB blocks",
+    "Downloading to the PLC",
+    "Online monitoring",
+    "Basic diagnostics",
+    "Introduction to HMI",
+  ],
+  learnItems: [
+    "Create a project from scratch with S7-1200/1500 hardware and a clear basic structure.",
+    "Organize tags, blocks and LAD logic so the project remains maintainable.",
+    "Download to the PLC, monitor online and understand initial diagnostics.",
+    "Connect programming decisions with real maintenance and commissioning needs.",
+  ],
+  benefits: [
+    "Understand the structure of TIA Portal.",
+    "Program from scratch with an orderly approach.",
+    "Download and monitor online without improvising.",
+    "Prepare for real projects with modern PLCs.",
+    "Build more maintainable projects from the first version.",
+  ],
+  outcomes: [
+    "Create a project from scratch and configure S7-1200/1500 hardware.",
+    "Program basic LAD logic with tags, timers, counters and blocks.",
+    "Download, monitor online and perform an initial diagnosis.",
+    "Prepare for real projects with a structured foundation.",
+  ],
+  avoidMistakes: [
+    "Creating tags without a naming convention.",
+    "Programming everything in one block without structure.",
+    "Downloading to the PLC without checking hardware or communication.",
+    "Confusing online monitoring with a complete diagnosis.",
+    "Advancing a project without documenting signals or architecture.",
+  ],
+  difference: [
+    "It introduces TIA Portal through technical order, not screen memorization.",
+    "It connects hardware, tags, blocks and monitoring with real plant situations.",
+    "It builds a solid foundation for programming, diagnostics and clearer maintenance communication.",
+  ],
+};
+
 export const englishProjects = [
   {
     sourceIndex: 0,
@@ -386,6 +463,26 @@ export const portugueseServices = {
     { icon: "Factory", title: "Ambientes reais de produção", text: "Experiência em energia, petróleo e gás, alimentos, manufatura e sistemas auxiliares." },
     { icon: "ShieldCheck", title: "Intervenção controlada", text: "Decisões técnicas adaptadas ao risco operacional e às condições da planta." },
     { icon: "ClipboardCheck", title: "Trabalho rastreável", text: "Escopo, testes e resultados técnicos documentados para operação e manutenção." },
+  ],
+  secondary: [
+    {
+      icon: "Gauge",
+      title: "Instrumentação e sinais de campo",
+      text: "Verificação e diagnóstico de sinais analógicos, digitais e de processo.",
+      applications: ["Sensores e transmissores", "Malhas de sinal", "Escalonamento e calibração", "Verificação de entradas e saídas do PLC"],
+    },
+    {
+      icon: "CircuitBoard",
+      title: "Elétrica industrial e painéis",
+      text: "Suporte técnico para painéis de controle, cabeamento de campo e confiabilidade operacional.",
+      applications: ["Circuitos de comando", "Cabeamento de campo", "Modificações em painéis", "Localização de falhas elétricas"],
+    },
+    {
+      icon: "GraduationCap",
+      title: "Capacitação técnica industrial",
+      text: "Formação aplicada para equipes de manutenção e automação.",
+      applications: ["Diagnóstico de PLC Siemens", "Redes industriais", "Método de diagnóstico em campo", "Programas adaptados à equipe"],
+    },
   ],
 };
 
@@ -517,6 +614,63 @@ export const portugueseS7Course = {
     { question: "Quais sistemas Siemens são abordados?", answer: "O foco principal é Siemens S7-300/400 com STEP 7 Classic, incluindo estados da CPU, hardware, PROFIBUS, módulos e sinais de campo." },
     { question: "O que está incluído no App PRO?", answer: "A oferta inclui um mês de BOJ S7-PLC PRO para um dispositivo, sem renovação automática." },
     { question: "Qual é o prazo para solicitar reembolso?", answer: "A compra é processada pela Hotmart e inclui garantia de reembolso de 7 dias, conforme o processo e as condições aplicáveis da Hotmart." },
+  ],
+};
+
+export const portugueseTiaCourse = {
+  title: "Introdução ao TIA Portal com PLC Siemens S7-1200/1500",
+  subtitle: "Curso introdutório para construir uma base organizada no TIA Portal: hardware, variáveis, LAD, carga, monitoramento e diagnóstico inicial.",
+  audience: [
+    "Técnicos que estão começando no TIA Portal",
+    "Estudantes de áreas técnicas",
+    "Programadores que vêm do STEP 7 Classic",
+    "Profissionais de manutenção",
+    "Eletricistas industriais",
+  ],
+  modules: [
+    "Introdução ao TIA Portal",
+    "Famílias Siemens S7-1200 e S7-1500",
+    "Criação de projeto",
+    "Configuração de hardware",
+    "Variáveis do PLC",
+    "Programação LAD básica",
+    "Temporizadores e contadores",
+    "Blocos OB, FC, FB e DB",
+    "Carga no PLC",
+    "Monitoramento online",
+    "Diagnóstico básico",
+    "Introdução à IHM",
+  ],
+  learnItems: [
+    "Criar um projeto do zero com hardware S7-1200/1500 e uma estrutura básica clara.",
+    "Organizar variáveis, blocos e lógica LAD para manter o projeto sustentável.",
+    "Carregar no PLC, monitorar online e compreender diagnósticos iniciais.",
+    "Relacionar a programação com necessidades reais de manutenção e comissionamento.",
+  ],
+  benefits: [
+    "Compreender a estrutura do TIA Portal.",
+    "Programar do zero com organização.",
+    "Carregar e monitorar online sem improvisar.",
+    "Preparar-se para projetos reais com PLCs modernos.",
+    "Construir projetos mais sustentáveis desde a primeira versão.",
+  ],
+  outcomes: [
+    "Criar um projeto do zero e configurar hardware S7-1200/1500.",
+    "Programar lógica LAD básica com variáveis, temporizadores, contadores e blocos.",
+    "Carregar, monitorar online e realizar um diagnóstico inicial.",
+    "Preparar-se para projetos reais com uma base organizada.",
+  ],
+  avoidMistakes: [
+    "Criar variáveis sem um critério de nomes.",
+    "Programar tudo em um único bloco sem estrutura.",
+    "Carregar no PLC sem revisar hardware ou comunicação.",
+    "Confundir monitoramento online com diagnóstico completo.",
+    "Avançar no projeto sem documentar sinais ou arquitetura.",
+  ],
+  difference: [
+    "Apresenta o TIA Portal com organização técnica, sem depender da memorização de telas.",
+    "Relaciona hardware, variáveis, blocos e monitoramento com situações reais de planta.",
+    "Constrói uma base sólida para programar, diagnosticar e comunicar-se melhor com a manutenção.",
   ],
 };
 

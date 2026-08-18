@@ -151,18 +151,25 @@ test("la landing inglesa del curso conserva precio, oferta y tres CTA al checkou
   const pageStart = appSource.indexOf("function EnglishS7CoursePage()");
   const pageEnd = appSource.indexOf("function EnglishProjectsPage()", pageStart);
   const pageSource = appSource.slice(pageStart, pageEnd);
+  const landingStart = appSource.indexOf("function LocalizedS7SalesLanding(");
+  const landingEnd = appSource.indexOf("function EnglishS7CoursePage()", landingStart);
+  const landingSource = appSource.slice(landingStart, landingEnd);
+  const copyStart = appSource.indexOf("const localizedS7SalesCopy = {");
+  const copyEnd = appSource.indexOf("function LocalizedS7MethodStrip", copyStart);
+  const copySource = appSource.slice(copyStart, copyEnd);
 
   assert.equal(offer.course.price, "89 USD");
   assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
-  assert.match(pageSource, /const checkoutUrl = offer\.course\.checkout\.checkoutUrl/);
-  assert.equal(pageSource.match(/href=\{checkoutUrl\}/g)?.length, 2);
-  assert.equal(pageSource.match(/href: checkoutUrl/g)?.length, 1);
-  assert.match(pageSource, /One-time payment/);
-  assert.match(pageSource, /Permanent course access/);
-  assert.match(pageSource, /one month of BOJ S7-PLC PRO/i);
-  assert.match(pageSource, /Course materials are currently available in Spanish/);
-  assert.match(pageSource, /COURSE CONTENT IN SPANISH/);
-  assert.doesNotMatch(pageSource, /priceValidUntil|promotion/i);
+  assert.match(pageSource, /LocalizedS7SalesLanding language="en" courseCopy=\{englishS7Course\}/);
+  assert.match(landingSource, /const checkoutUrl = offer\.course\.checkout\.checkoutUrl/);
+  assert.equal(landingSource.match(/href=\{checkoutUrl\}/g)?.length, 2);
+  assert.equal(landingSource.match(/href: checkoutUrl/g)?.length, 1);
+  assert.match(copySource, /One-time payment/);
+  assert.match(copySource, /Permanent course access/);
+  assert.match(copySource, /1 month of BOJ S7-PLC PRO/i);
+  assert.match(copySource, /Course materials are currently available in Spanish/);
+  assert.match(copySource, /Course language: Spanish/);
+  assert.doesNotMatch(`${pageSource}${landingSource}${copySource}`, /priceValidUntil|promotion/i);
 });
 
 test("la versión portuguesa toma precios y href de la fuente comercial vigente", () => {
@@ -198,15 +205,22 @@ test("la landing portuguesa conserva la oferta y los tres CTA del curso, con avi
   const pageStart = appSource.indexOf("function PortugueseS7CoursePage()");
   const pageEnd = appSource.indexOf("function PortugueseProjectsPage()", pageStart);
   const pageSource = appSource.slice(pageStart, pageEnd);
+  const landingStart = appSource.indexOf("function LocalizedS7SalesLanding(");
+  const landingEnd = appSource.indexOf("function EnglishS7CoursePage()", landingStart);
+  const landingSource = appSource.slice(landingStart, landingEnd);
+  const copyStart = appSource.indexOf("const localizedS7SalesCopy = {");
+  const copyEnd = appSource.indexOf("function LocalizedS7MethodStrip", copyStart);
+  const copySource = appSource.slice(copyStart, copyEnd);
 
   assert.equal(offer.course.price, "89 USD");
   assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
-  assert.match(pageSource, /const checkoutUrl = offer\.course\.checkout\.checkoutUrl/);
-  assert.equal(pageSource.match(/href=\{checkoutUrl\}/g)?.length, 2);
-  assert.equal(pageSource.match(/href: checkoutUrl/g)?.length, 1);
-  assert.match(pageSource, /Pagamento único/);
-  assert.match(pageSource, /Acesso permanente/);
-  assert.match(pageSource, /conteúdo do curso está disponível em espanhol/i);
-  assert.match(pageSource, /CONTEÚDO DO CURSO EM ESPANHOL/);
-  assert.doesNotMatch(pageSource, /priceValidUntil|promoção vencida/i);
+  assert.match(pageSource, /LocalizedS7SalesLanding language="pt" courseCopy=\{portugueseS7Course\}/);
+  assert.match(landingSource, /const checkoutUrl = offer\.course\.checkout\.checkoutUrl/);
+  assert.equal(landingSource.match(/href=\{checkoutUrl\}/g)?.length, 2);
+  assert.equal(landingSource.match(/href: checkoutUrl/g)?.length, 1);
+  assert.match(copySource, /Pagamento único/);
+  assert.match(copySource, /Acesso permanente/);
+  assert.match(copySource, /conteúdo do curso está disponível em espanhol/i);
+  assert.match(copySource, /Idioma do curso: espanhol/);
+  assert.doesNotMatch(`${pageSource}${landingSource}${copySource}`, /priceValidUntil|promoção vencida/i);
 });
