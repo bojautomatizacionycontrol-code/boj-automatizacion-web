@@ -14,8 +14,8 @@ const sourceBetween = (startMarker, endMarker) => {
 };
 
 test("TIA Portal informa que está en preparación y no ofrece botones de consulta", () => {
-  const pageSource = sourceBetween("function TiaCoursePage()", "function CoursePreparationStrip()");
-  const statusSource = sourceBetween("function CoursePreparationStrip()", "function CourseLanding(");
+  const pageSource = sourceBetween("function TiaCoursePage()", "const coursePreparationCopy = {");
+  const statusSource = sourceBetween("const coursePreparationCopy = {", "const courseLandingCopy = {");
   const landingSource = sourceBetween("function CourseLanding(", "function AppPage()");
 
   assert.match(pageSource, /afterHero=\{<CoursePreparationStrip \/>\}/);
@@ -28,18 +28,18 @@ test("TIA Portal informa que está en preparación y no ofrece botones de consul
 });
 
 test("la tarjeta lateral de TIA completa el espacio con información del programa", () => {
-  const visualSource = sourceBetween("function CourseVisual(", "function ClientLogoBand()");
+  const visualSource = sourceBetween("const tiaCourseVisualCopy = {", "function ClientLogoBand()");
   const tiaVisualSource = visualSource.slice(visualSource.indexOf('className="course-side-visual tia"'));
 
   assert.match(tiaVisualSource, /tia-course-side-copy/);
-  assert.match(tiaVisualSource, /PROGRAMA EN DESARROLLO/);
-  assert.match(tiaVisualSource, /Una base ordenada para trabajar en TIA Portal/);
+  assert.match(visualSource, /PROGRAMA EN DESARROLLO/);
+  assert.match(visualSource, /Una base ordenada para trabajar en TIA Portal/);
   assert.match(tiaVisualSource, /course\?\.learnItems\?\.slice\(0, 3\)/);
   assert.doesNotMatch(tiaVisualSource, /ladder-lines|status-cluster/);
 });
 
 test("el hero español de App usa la composición adjunta sin deformarla", async () => {
-  const previewSource = sourceBetween("function AppHeroDiagnosticPreview()", "function AppQuickCommercialAccess()");
+  const previewSource = sourceBetween('const appHeroPreviewCopy = {', 'const appQuickAccessCopy = {');
 
   await access(new URL("../src/assets/app-sad-device-preview.png", import.meta.url));
   assert.match(appSource, /import appSadDevicePreview from "\.\/assets\/app-sad-device-preview\.png"/);
@@ -50,7 +50,7 @@ test("el hero español de App usa la composición adjunta sin deformarla", async
 });
 
 test("el hero de App elimina el fondo claro sin alterar la captura", () => {
-  const previewSource = sourceBetween("function AppHeroDiagnosticPreview()", "function AppQuickCommercialAccess()");
+  const previewSource = sourceBetween('const appHeroPreviewCopy = {', 'const appQuickAccessCopy = {');
   const compositeStyles = stylesSource.slice(
     stylesSource.lastIndexOf(".app-hero-diagnostic-preview-screen--device-composite {"),
     stylesSource.indexOf(".app-hero-diagnostic-preview-focus")

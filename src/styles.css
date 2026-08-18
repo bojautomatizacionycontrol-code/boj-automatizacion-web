@@ -22223,6 +22223,17 @@ textarea {
 .s7-testimonials-dark .s7-testimonial-card blockquote {
   color: #d6e6f0;
 }
+.s7-testimonial-language-note {
+  margin-top: -8px;
+  color: #6f8495;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.s7-testimonials-dark .s7-testimonial-language-note {
+  color: #8fa8b8;
+}
 .s7-testimonial-card figcaption {
   display: flex;
   align-items: center;

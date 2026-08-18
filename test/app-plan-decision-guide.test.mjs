@@ -20,11 +20,11 @@ test("la guía de decisión enlaza internamente a los cuatro planes pagos vigent
 
   assert.match(appSource, /href=\{`#\$\{option\.target\}`\}/);
   assert.match(appSource, /id=\{appPlanCardIds\[plan\.title\]\}/);
+  const appPageStart = appSource.indexOf("function AppPage()");
+  const guideStart = appSource.indexOf('<nav className="app-pro-plan-guide"', appPageStart);
+  const guideEnd = appSource.indexOf('<div className="app-pro-plan-grid">', guideStart);
   assert.doesNotMatch(
-    appSource.slice(
-      appSource.indexOf('<nav className="app-pro-plan-guide"'),
-      appSource.indexOf('<div className="app-pro-plan-grid">')
-    ),
+    appSource.slice(guideStart, guideEnd),
     /pay\.hotmart\.com|target="_blank"/
   );
 });
