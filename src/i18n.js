@@ -182,17 +182,14 @@ export const englishApp = {
   ],
   includes: [
     { icon: "FileSearch", title: "LED and symptom diagnostics", text: "Interpret common operating states and fault symptoms." },
-    { icon: "ClipboardCheck", title: "Prioritized technical hypotheses", text: "Possible causes arranged by relevance and evidence." },
+    { icon: "ClipboardCheck", title: "Prioritized technical hypotheses", text: "Hypotheses prioritized according to the available evidence and its relative weight." },
     { icon: "ShieldCheck", title: "Step-by-step verification", text: "Clear checks to perform safely in the field." },
     { icon: "Cpu", title: "Focused on S7-300/400", text: "Technical guidance for classic Siemens CPUs and modules." },
     { icon: "MonitorCog", title: "Installable web interface", text: "Browser access with installation on compatible devices." },
     { icon: "Settings", title: "Support for teams", text: "A shared method that reduces improvisation during diagnostics." },
   ],
   views: [
-    { title: "Main diagnostics panel", text: "Symptoms, LEDs and active results in a single working view." },
-    { title: "Guided result and suggested actions", text: "Main hypothesis, supporting evidence and recommended checks." },
-    { title: "Diagnostics by stages", text: "Guided subflows for modules, interfaces, racks and communication." },
-    { title: "Prioritized technical hypotheses", text: "Possible causes ordered by the evidence entered by the user." },
+    { title: "Guided diagnostics by stages", text: "A guided subflow for modules, interfaces, racks and communication." },
   ],
   planCopy: {
     "Prueba gratuita": {
@@ -210,7 +207,7 @@ export const englishApp = {
     },
     "Mensual de pago único": {
       title: "One-time monthly license",
-      meta: "One-time payment · 1 month · No automatic renewal · 1 device",
+      meta: "One-time payment · 1 calendar month · No automatic renewal · 1 device",
       bullets: ["App only, no course", "1 device", "No automatic renewal", "Offline use for up to 2 days", "Full PRO diagnostics"],
       button: "Choose one-time payment",
     },
@@ -516,17 +513,14 @@ export const portugueseApp = {
   ],
   includes: [
     { icon: "FileSearch", title: "Diagnóstico por LEDs e sintomas", text: "Interprete estados comuns de operação e sintomas de falha." },
-    { icon: "ClipboardCheck", title: "Hipóteses técnicas priorizadas", text: "Possíveis causas organizadas por relevância e evidência." },
+    { icon: "ClipboardCheck", title: "Hipóteses técnicas priorizadas", text: "Hipóteses priorizadas conforme às evidências disponíveis e ao seu peso relativo." },
     { icon: "ShieldCheck", title: "Verificação passo a passo", text: "Verificações claras para realizar com segurança em campo." },
     { icon: "Cpu", title: "Foco em S7-300/400", text: "Orientação técnica para CPUs e módulos Siemens clássicos." },
     { icon: "MonitorCog", title: "Interface web instalável", text: "Acesso pelo navegador e instalação em dispositivos compatíveis." },
     { icon: "Settings", title: "Suporte para equipes", text: "Um método compartilhado que reduz improvisações durante o diagnóstico." },
   ],
   views: [
-    { title: "Painel principal de diagnóstico", text: "Sintomas, LEDs e resultados ativos em uma única visão de trabalho." },
-    { title: "Resultado guiado e ações sugeridas", text: "Hipótese principal, evidências de apoio e verificações recomendadas." },
-    { title: "Diagnóstico por etapas", text: "Fluxos guiados para módulos, interfaces, racks e comunicação." },
-    { title: "Hipóteses técnicas priorizadas", text: "Possíveis causas ordenadas pelas evidências informadas pelo usuário." },
+    { title: "Diagnóstico guiado por etapas", text: "Um subfluxo guiado para módulos, interfaces, racks e comunicação." },
   ],
   planCopy: {
     "Prueba gratuita": {
@@ -544,7 +538,7 @@ export const portugueseApp = {
     },
     "Mensual de pago único": {
       title: "Licença mensal de pagamento único",
-      meta: "Pagamento único · 1 mês · Sem renovação automática · 1 dispositivo",
+      meta: "Pagamento único · 1 mês-calendário · Sem renovação automática · 1 dispositivo",
       bullets: ["Somente o app, sem curso", "1 dispositivo", "Sem renovação automática", "Uso offline por até 2 dias", "Diagnóstico PRO completo"],
       button: "Escolher pagamento único",
     },

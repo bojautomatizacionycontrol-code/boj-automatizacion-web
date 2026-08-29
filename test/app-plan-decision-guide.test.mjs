@@ -33,7 +33,7 @@ test("la orientación comercial mantiene los derechos exactos de cada plan", () 
   assert.match(appSource, /Uso continuo/);
   assert.match(appSource, /Pagas mes a mes y la licencia se renueva hasta que la canceles\./);
   assert.match(appSource, /Trabajo puntual/);
-  assert.match(appSource, /Un mes de acceso sin renovación automática\./);
+  assert.match(appSource, /Un mes calendario de acceso sin renovación automática\./);
   assert.match(appSource, /Seis meses, dos dispositivos y curso incluido\./);
   assert.match(appSource, /Seis meses, diez dispositivos y curso incluido\./);
 });

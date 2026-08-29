@@ -90,14 +90,8 @@ import {
   portugueseTiaCourse,
 } from "./i18n.js";
 import bojLogo from "./assets/boj-logo-real-cropped.png";
-import appScreenshot from "./assets/APP.png";
-import appRealCapture from "./assets/boj-s7-plc-real-capture.png";
-import appProHeroLaptopVisual from "./assets/app-pro-hero-background-v2.jpg";
-import appPanelPrincipalDiagnostico from "./assets/app-panel-principal-diagnostico.jpg";
-import appResultadoDiagnostico from "./assets/app-resultado-diagnostico.jpg";
-import appSadDevicePreview from "./assets/app-sad-device-preview.png";
+import appProHeroLaptopVisual from "./assets/hero-app.jpg";
 import appDiagnosticoGuiado from "./assets/app-diagnostico-guiado.jpg";
-import appHipotesisPriorizadas from "./assets/app-hipotesis-priorizadas.jpg";
 import walterBojAvatar from "./assets/walter-boj-avatar-field.jpeg";
 import heroIndustrialCover from "./assets/boj-hero-industrial-cover-v4.jpg";
 import heroInicio from "./assets/hero-inicio.jpg";
@@ -110,7 +104,6 @@ import heroRecursos from "./assets/hero-recursos.jpg";
 import heroContacto from "./assets/hero-contacto.jpg";
 import courseS7400Visual from "./assets/course-s7-400.jpg";
 import s7IncludePlc400Visual from "./assets/services-works/PLC400.jpg";
-import s7IncludeAppPanelVisual from "./assets/services-works/panel app 2.png";
 import courseTiaPortalVisual from "./assets/course-tia-portal.jpg";
 import step7ManagerVisual from "./assets/11.png";
 import step7HwConfigVisual from "./assets/12.png";
@@ -127,7 +120,11 @@ import engineeringVisual from "./assets/old-site/29-255f90e7.jpg";
 import plantVisual from "./assets/old-site/35-47edf350.jpg";
 import aerialPlantVisual from "./assets/old-site/43-00658318.jpg";
 
-const serviceWorkImageModules = import.meta.glob("./assets/services-works/*.{png,jpg,jpeg,webp}", {
+const serviceWorkImageModules = import.meta.glob([
+  "./assets/services-works/*.{png,jpg,jpeg,webp}",
+  "!./assets/services-works/panel app.png",
+  "!./assets/services-works/panel app 2.png",
+], {
   eager: true,
   import: "default",
 });
@@ -139,14 +136,6 @@ const manualPreviewModules = import.meta.glob("./assets/manual-preview/*.jpg", {
 const manualPreviewImages = Object.keys(manualPreviewModules)
   .sort()
   .map((key) => manualPreviewModules[key]);
-
-const appCarouselModules = import.meta.glob("./assets/app-carousel/*.jpg", {
-  eager: true,
-  import: "default",
-});
-const appCarouselImages = Object.keys(appCarouselModules)
-  .sort()
-  .map((key) => appCarouselModules[key]);
 
 // ───────────────────────────────────────────────────────────────────────────
 // Analítica / tracking de conversión.
@@ -759,7 +748,7 @@ const appProIncludes = [
   {
     icon: "ClipboardCheck",
     title: "Hipótesis técnicas priorizadas",
-    text: "Causas posibles ordenadas por probabilidad.",
+    text: "Hipótesis priorizadas según la evidencia disponible y su peso relativo.",
   },
   {
     icon: "ShieldCheck",
@@ -801,12 +790,12 @@ const appHowItWorks = [
   {
     icon: "Brain",
     title: "La app ordena hipótesis",
-    text: "Recibes causas probables organizadas por prioridad.",
+    text: "Recibes causas posibles priorizadas según la evidencia disponible.",
   },
   {
     icon: "CheckCircle2",
     title: "Verificas en campo",
-    text: "Sigues una guía paso a paso para validar la causa probable.",
+    text: "Sigues una guía paso a paso para verificar cada causa posible.",
   },
 ];
 
@@ -814,45 +803,23 @@ const appLanguages = ["Español", "English", "Português", "Deutsch", "Français
 
 const appRealViews = [
   {
-    title: "Panel principal de diagnóstico",
-    text: "Vista general del entorno de diagnóstico, síntomas, LEDs y resultados activos.",
-    image: appPanelPrincipalDiagnostico,
-    position: "center top",
-  },
-  {
-    title: "Resultado orientativo y acciones sugeridas",
-    text: "Hipótesis principal, evidencias consideradas, pruebas recomendadas y validación posterior.",
-    image: appResultadoDiagnostico,
-    position: "center top",
-  },
-  {
-    title: "Subflujos guiados y diagnóstico por etapas",
+    title: "Subflujo guiado y diagnóstico por etapas",
     text: "Asistencia paso a paso para aislar fallas en módulos, IM, base y comunicación.",
     image: appDiagnosticoGuiado,
     position: "center top",
   },
-  {
-    title: "Hipótesis técnicas priorizadas",
-    text: "Ordenamiento de causas probables según LEDs, red, módulos y evidencia ingresada.",
-    image: appHipotesisPriorizadas,
-    position: "center top",
-  },
 ];
 
-// Carrusel de capturas de la app para el cuadro 2 de "Qué incluye".
-// appCarouselImages ordenado por nombre: [0]=01-panel-principal, [1]=02-resultado,
-// [2]=03-hipotesis, [3]=04-estado-cpu. Mostramos primero las que mejor encuadran.
+// Vista comercial conservada: no expone porcentajes ni lenguaje probabilístico.
 const s7AppCarousel = [
-  { label: "Diagnóstico por estado de CPU y LEDs", image: appCarouselImages[3] },
-  { label: "Resultado orientativo y acciones sugeridas", image: appCarouselImages[1] },
-  { label: "Hipótesis técnicas priorizadas", image: appCarouselImages[2] },
-  { label: "Panel principal de diagnóstico", image: appCarouselImages[0] },
+  { label: "Subflujo guiado y verificación por etapas", image: appDiagnosticoGuiado },
 ];
 
 const appTrialPlan = offer.app.trialPlan;
 
 const appProPlans = offer.app.proPlans;
 const appLicensePlans = appProPlans.filter(({ title }) => title !== "Curso + licencia");
+const legalAppOffers = appLicensePlans.filter(({ contract }) => contract);
 
 const appPlanCardIds = {
   "Prueba gratuita": "plan-trial",
@@ -872,7 +839,7 @@ const appPlanDecisionGuide = [
   {
     context: "Trabajo puntual",
     title: "Mensual de pago único",
-    detail: "Un mes de acceso sin renovación automática.",
+    detail: "Un mes calendario de acceso sin renovación automática.",
     target: appPlanCardIds["Mensual de pago único"],
   },
   {
@@ -1819,7 +1786,7 @@ const appHeroPreviewCopy = {
     ariaLabel: "Ejemplo visual del flujo de diagnóstico de BOJ S7-PLC PRO",
     eyebrow: "FLUJO REAL DE LA HERRAMIENTA",
     caseLabel: "CASO GUIADO",
-    imageAlt: "BOJ S7-PLC PRO en una computadora y un teléfono con el diagnóstico guiado visible",
+    imageAlt: "Pantalla de diagnóstico guiado de BOJ S7-PLC PRO",
     stages: [
       { label: "Síntoma", value: "CPU STOP + BF" },
       { label: "Hipótesis", value: "Red o nodo remoto" },
@@ -1830,7 +1797,7 @@ const appHeroPreviewCopy = {
     ariaLabel: "Visual example of the BOJ S7-PLC PRO diagnostic workflow",
     eyebrow: "REAL TOOL WORKFLOW",
     caseLabel: "GUIDED CASE",
-    imageAlt: "BOJ S7-PLC PRO on a computer and phone with the guided diagnostic workflow visible",
+    imageAlt: "BOJ S7-PLC PRO guided diagnostic screen",
     stages: [
       { label: "Symptom", value: "CPU STOP + BF" },
       { label: "Hypothesis", value: "Network or remote node" },
@@ -1841,7 +1808,7 @@ const appHeroPreviewCopy = {
     ariaLabel: "Exemplo visual do fluxo de diagnóstico do BOJ S7-PLC PRO",
     eyebrow: "FLUXO REAL DA FERRAMENTA",
     caseLabel: "CASO GUIADO",
-    imageAlt: "BOJ S7-PLC PRO em um computador e um celular com o diagnóstico guiado visível",
+    imageAlt: "Tela de diagnóstico guiado do BOJ S7-PLC PRO",
     stages: [
       { label: "Sintoma", value: "CPU STOP + BF" },
       { label: "Hipótese", value: "Rede ou nó remoto" },
@@ -1859,17 +1826,9 @@ function AppHeroDiagnosticPreview({ language = "es" }) {
         <span>{copy.eyebrow}</span>
         <small><span aria-hidden="true" /> {copy.caseLabel}</small>
       </div>
-      <div className="app-hero-diagnostic-preview-screen app-hero-diagnostic-preview-screen--device-composite">
-        <svg className="app-hero-diagnostic-preview-clip" aria-hidden="true" focusable="false">
-          <defs>
-            <clipPath id="app-hero-device-silhouette" clipPathUnits="objectBoundingBox">
-              <rect x="0.0276" y="0.0199" width="0.8632" height="0.8234" rx="0.022" ry="0.039" />
-              <rect x="0.7403" y="0.181" width="0.2119" height="0.7616" rx="0.031" ry="0.053" />
-            </clipPath>
-          </defs>
-        </svg>
+      <div className="app-hero-diagnostic-preview-screen">
         <img
-          src={appSadDevicePreview}
+          src={appDiagnosticoGuiado}
           alt={copy.imageAlt}
         />
       </div>
@@ -1989,7 +1948,7 @@ const localizedPlanGuideCopy = {
     options: [
       ["I want to explore first", "Free trial", "48 hours with no payment", "Prueba gratuita"],
       ["I use it every month", "Monthly subscription", "Automatic renewal until cancelled", "Suscripción mensual"],
-      ["I only need one month", "One-time monthly license", "One month with no automatic renewal", "Mensual de pago único"],
+      ["I only need one calendar month", "One-time monthly license", "One calendar month with no automatic renewal", "Mensual de pago único"],
       ["I work independently", "Professional", "6 months, 2 devices and course", "Profesional"],
       ["We are a maintenance team", "Business", "6 months, 10 devices and course", "Empresarial"],
     ],
@@ -2002,7 +1961,7 @@ const localizedPlanGuideCopy = {
     options: [
       ["Quero conhecer primeiro", "Teste gratuito", "48 horas sem pagamento", "Prueba gratuita"],
       ["Uso todos os meses", "Assinatura mensal", "Renovação automática até o cancelamento", "Suscripción mensual"],
-      ["Preciso somente de um mês", "Licença mensal avulsa", "Um mês sem renovação automática", "Mensual de pago único"],
+      ["Preciso somente de um mês-calendário", "Licença mensal avulsa", "Um mês-calendário sem renovação automática", "Mensual de pago único"],
       ["Trabalho de forma independente", "Profissional", "6 meses, 2 dispositivos e curso", "Profesional"],
       ["Somos uma equipe de manutenção", "Empresarial", "6 meses, 10 dispositivos e curso", "Empresarial"],
     ],
@@ -2241,23 +2200,23 @@ function HomeObrasTeaser() {
 function AppDiagnosticMockup({ language = "es" }) {
   const visualCopy = language === "en"
     ? {
-        figure: "Real BOJ S7-PLC views on a computer and mobile phone",
-        desktop: "Real BOJ S7-PLC view with CPU state diagnostics",
+        figure: "Real BOJ S7-PLC guided diagnostic view on desktop and mobile formats",
+        desktop: "Real BOJ S7-PLC guided diagnostic view",
         mobileFrame: "Mobile view of BOJ S7-PLC",
-        mobile: "Mobile BOJ S7-PLC view with CPU LED diagnostics",
+        mobile: "BOJ S7-PLC guided diagnostic view in a mobile frame",
       }
     : language === "pt"
       ? {
-          figure: "Imagens reais do BOJ S7-PLC em computador e celular",
-          desktop: "Imagem real do BOJ S7-PLC com diagnóstico pelo estado da CPU",
+          figure: "Imagem real do diagnóstico guiado do BOJ S7-PLC em formatos desktop e móvel",
+          desktop: "Imagem real do diagnóstico guiado do BOJ S7-PLC",
           mobileFrame: "Visualização móvel do BOJ S7-PLC",
-          mobile: "Visualização móvel do BOJ S7-PLC com diagnóstico por LEDs da CPU",
+          mobile: "Diagnóstico guiado do BOJ S7-PLC em um quadro móvel",
         }
       : {
-          figure: "Capturas reales de BOJ S7-PLC en computadora y teléfono móvil",
-          desktop: "Captura real de BOJ S7-PLC con diagnóstico por estado de CPU",
+          figure: "Captura real del diagnóstico guiado de BOJ S7-PLC en formatos de escritorio y móvil",
+          desktop: "Captura real del diagnóstico guiado de BOJ S7-PLC",
           mobileFrame: "Vista mobile de BOJ S7-PLC",
-          mobile: "Vista mobile de BOJ S7-PLC con diagnóstico por LEDs de CPU",
+          mobile: "Diagnóstico guiado de BOJ S7-PLC en un marco móvil",
         };
   return (
     <figure className="mock-app-visual real-app-capture app-product-composition" aria-label={visualCopy.figure}>
@@ -2270,7 +2229,7 @@ function AppDiagnosticMockup({ language = "es" }) {
           </div>
           <div className="real-app-screen app-desktop-screen">
             <img
-              src={appRealCapture}
+              src={appDiagnosticoGuiado}
               alt={visualCopy.desktop}
               loading="lazy"
             />
@@ -2280,7 +2239,7 @@ function AppDiagnosticMockup({ language = "es" }) {
         <div className="app-mobile-frame" aria-label={visualCopy.mobileFrame}>
           <div className="app-mobile-speaker" aria-hidden="true" />
           <img
-            src={appScreenshot}
+            src={appDiagnosticoGuiado}
             alt={visualCopy.mobile}
             loading="lazy"
           />
@@ -2943,18 +2902,22 @@ function ManualFlipbook({ images, pages, variant = "full", orientation = "portra
   return (
     <div className={`s7-flip s7-flip-${variant} s7-flip-${orientation}`}>
       <div className="s7-flip-stage">
-        <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label={copy.previous}>
-          <ArrowRight size={variant === "card" ? 20 : 24} />
-        </button>
+        {total > 1 ? (
+          <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label={copy.previous}>
+            <ArrowRight size={variant === "card" ? 20 : 24} />
+          </button>
+        ) : null}
         <button type="button" className="s7-flip-page" onClick={() => setZoom(true)} aria-label={`Ampliar: ${caption}`}>
           <img src={images[index]} alt={`${altPrefix} — ${caption}`} loading="lazy" />
           <span className="s7-flip-zoom" aria-hidden="true">
             <ScanSearch size={16} /> {copy.enlarge}
           </span>
         </button>
-        <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label={copy.next}>
-          <ArrowRight size={variant === "card" ? 20 : 24} />
-        </button>
+        {total > 1 ? (
+          <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label={copy.next}>
+            <ArrowRight size={variant === "card" ? 20 : 24} />
+          </button>
+        ) : null}
       </div>
       <div className="s7-flip-bar">
         <span className="s7-flip-caption">{caption}</span>
@@ -2985,13 +2948,17 @@ function ManualFlipbook({ images, pages, variant = "full", orientation = "portra
                 <button type="button" className="s7-flip-lightbox-close" onClick={() => setZoom(false)} aria-label={copy.close}>
                   <X size={20} />
                 </button>
-                <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label={copy.previous}>
-                  <ArrowRight size={26} />
-                </button>
+                {total > 1 ? (
+                  <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label={copy.previous}>
+                    <ArrowRight size={26} />
+                  </button>
+                ) : null}
                 <img src={images[index]} alt={`${altPrefix} — ${caption}`} />
-                <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label={copy.next}>
-                  <ArrowRight size={26} />
-                </button>
+                {total > 1 ? (
+                  <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label={copy.next}>
+                    <ArrowRight size={26} />
+                  </button>
+                ) : null}
                 <span className="s7-flip-lightbox-caption">{caption} · {index + 1} / {total}</span>
               </div>
             </div>,
@@ -4071,7 +4038,7 @@ function AppPage() {
       <section className="app-pro-real-language-section">
         <div className="mock-home-container app-pro-real-language-grid">
           <div>
-            <h2>Capturas reales de la herramienta profesional</h2>
+            <h2>Captura real de la herramienta profesional</h2>
             <div className="app-pro-real-view-grid">
               {appRealViews.map((item) => (
                 <article className="app-pro-real-view-card" key={item.title}>
@@ -4100,7 +4067,7 @@ function AppPage() {
                 <span key={language}>{language}</span>
               ))}
             </div>
-            <p>Interfaz preparada para técnicos, empresas y equipos de mantenimiento en distintos países.</p>
+            <p className="app-pro-language-disclosure">Interfaz disponible en seis idiomas. El contenido técnico especializado y los documentos legales se proporcionan actualmente en español.</p>
           </div>
         </div>
       </section>
@@ -4877,7 +4844,7 @@ function EnglishAppPage() {
       <section className="app-pro-real-language-section">
         <div className="mock-home-container app-pro-real-language-grid">
           <div>
-            <h2>Real views of the professional tool</h2>
+            <h2>Real view of the professional tool</h2>
             <div className="app-pro-real-view-grid">
               {englishApp.views.map((copy, index) => {
                 const source = appRealViews[index];
@@ -4891,7 +4858,7 @@ function EnglishAppPage() {
               })}
             </div>
           </div>
-          <div className="app-pro-language-card"><h2>Available in 6 languages</h2><div className="app-pro-language-list">{["Spanish", "English", "Portuguese", "German", "French", "Italian"].map((item) => <span key={item}>{item}</span>)}</div><p>Built for technicians, companies and maintenance teams working across different countries.</p></div>
+          <div className="app-pro-language-card"><h2>Available in 6 languages</h2><div className="app-pro-language-list">{["Spanish", "English", "Portuguese", "German", "French", "Italian"].map((item) => <span key={item}>{item}</span>)}</div><p className="app-pro-language-disclosure">Interface available in six languages. Specialized technical content and legal documents are currently provided in Spanish.</p></div>
         </div>
       </section>
 
@@ -5592,7 +5559,7 @@ function PortugueseAppPage() {
 
       <section className="app-pro-dark-section app-pro-includes-section"><div className="mock-home-container"><div className="app-pro-section-heading"><span className="app-pro-section-kicker">FERRAMENTAS DE DIAGNÓSTICO</span><h2>O que o BOJ S7-PLC PRO inclui</h2><p>Um ambiente prático para revisar e documentar diagnósticos de primeira linha.</p></div><div className="app-pro-include-grid">{portugueseApp.includes.map((item) => <article className="app-pro-include-card" key={item.title}><Icon name={item.icon} size={30} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div></section>
 
-      <section className="app-pro-real-language-section"><div className="mock-home-container app-pro-real-language-grid"><div><h2>Imagens reais da ferramenta profissional</h2><div className="app-pro-real-view-grid">{portugueseApp.views.map((copy, index) => { const source = appRealViews[index]; const item = { ...source, ...copy }; return <article className="app-pro-real-view-card" key={item.title}><figure><button className="app-pro-real-view-trigger" type="button" onClick={() => setActiveScreenshot(item)} aria-label={`Ampliar captura: ${item.title}`}><img src={item.image} alt={item.title} loading="lazy" style={{ objectPosition: item.position }} /></button></figure><div><h3>{item.title}</h3><p>{item.text}</p></div></article>; })}</div></div><div className="app-pro-language-card"><h2>Disponível em 6 idiomas</h2><div className="app-pro-language-list">{["Espanhol", "Inglês", "Português", "Alemão", "Francês", "Italiano"].map((item) => <span key={item}>{item}</span>)}</div><p>Desenvolvido para técnicos, empresas e equipes de manutenção que trabalham em diferentes países.</p></div></div></section>
+      <section className="app-pro-real-language-section"><div className="mock-home-container app-pro-real-language-grid"><div><h2>Imagem real da ferramenta profissional</h2><div className="app-pro-real-view-grid">{portugueseApp.views.map((copy, index) => { const source = appRealViews[index]; const item = { ...source, ...copy }; return <article className="app-pro-real-view-card" key={item.title}><figure><button className="app-pro-real-view-trigger" type="button" onClick={() => setActiveScreenshot(item)} aria-label={`Ampliar captura: ${item.title}`}><img src={item.image} alt={item.title} loading="lazy" style={{ objectPosition: item.position }} /></button></figure><div><h3>{item.title}</h3><p>{item.text}</p></div></article>; })}</div></div><div className="app-pro-language-card"><h2>Disponível em 6 idiomas</h2><div className="app-pro-language-list">{["Espanhol", "Inglês", "Português", "Alemão", "Francês", "Italiano"].map((item) => <span key={item}>{item}</span>)}</div><p className="app-pro-language-disclosure">Interface disponível em seis idiomas. O conteúdo técnico especializado e os documentos legais são fornecidos atualmente em espanhol.</p></div></div></section>
 
       {activeScreenshot ? <div className="app-pro-lightbox" role="dialog" aria-modal="true" aria-labelledby="pt-app-lightbox-title" onClick={() => setActiveScreenshot(null)}><div className="app-pro-lightbox-panel" onClick={(event) => event.stopPropagation()}><button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Fechar captura ampliada"><X size={20} /></button><img src={activeScreenshot.image} alt={activeScreenshot.title} /><div className="app-pro-lightbox-copy"><h2 id="pt-app-lightbox-title">{activeScreenshot.title}</h2><p>{activeScreenshot.text}</p></div></div></div> : null}
 
@@ -6177,6 +6144,7 @@ const legalContent = {
   privacy: {
     title: "Política de privacidad",
     intro: "Explica qué datos recopilamos en este sitio, para qué se utilizan y cómo puede ejercer sus derechos.",
+    updated: "16 de julio de 2026",
     sections: [
       ["Responsable", `BOJ Automatización y Control. Contacto: ${contact.email}.`],
       ["Datos que recopilamos", "El formulario puede solicitar nombre, empresa, correo, teléfono, servicio de interés y mensaje. También podemos registrar métricas anónimas o seudónimas de navegación y conversiones mediante Vercel Web Analytics."],
@@ -6188,10 +6156,19 @@ const legalContent = {
   terms: {
     title: "Términos y condiciones",
     intro: "Condiciones generales para utilizar el sitio y contratar servicios o productos digitales de BOJ.",
+    updated: "29 de agosto de 2026",
+    showAppOffers: true,
+    offerIntro: "Estas son las cuatro ofertas de BOJ S7-PLC PRO publicadas para compra. Los precios se expresan en dólares estadounidenses y el checkout muestra la modalidad antes de confirmar el pago.",
     sections: [
       ["Uso del sitio", "La información técnica es orientativa y no reemplaza procedimientos de planta, evaluación de riesgos, normativa aplicable ni intervención de personal autorizado."],
       ["Servicios técnicos", "Alcance, agenda, entregables, costos y condiciones se confirman por propuesta. La atención urgente es coordinada y está sujeta a disponibilidad."],
-      ["Productos digitales", "El curso S7-300/400 es autoguiado e incluye material técnico descargable, guías prácticas y un mes de BOJ S7-PLC PRO desde la compra. El curso permanece accesible; la licencia PRO vence sin cobro automático."],
+      ["Prueba y alcance de BOJ S7-PLC PRO", "La prueba gratuita dura 48 horas, funciona en línea y tiene funciones limitadas. El alcance técnico de BOJ S7-PLC PRO se limita a sistemas Siemens S7-300/400 compatibles. La app organiza síntomas, evidencias, hipótesis priorizadas y verificaciones; no se conecta al PLC, no controla equipos y no reemplaza STEP 7, los procedimientos de seguridad ni el criterio de personal autorizado."],
+      ["Compra, activación y Hotmart", `Hotmart procesa los pagos de las ofertas publicadas. BOJ proporciona la licencia, el contenido incluido y el soporte de acceso. La activación se vincula al correo informado durante la compra; si necesita ayuda, escriba a ${contact.email} desde ese mismo correo.`],
+      ["Suscripción, cancelación y vigencia", "La suscripción mensual se renueva automáticamente hasta su cancelación. La cancelación se realiza desde la cuenta de comprador en Hotmart, evita cobros futuros y no revoca de inmediato el período ya pagado: el acceso continúa hasta su fecha de vencimiento. Las otras tres ofertas son pagos únicos sin renovación automática."],
+      ["Licencia mensual de pago único", "Su vigencia es de un mes calendario. En una licencia nueva o vencida, comienza cuando BOJ procesa la confirmación de pago de Hotmart y activa la licencia; si ya existe una licencia vigente, el mes se suma a su vencimiento actual. Finaliza en la fecha y hora UTC equivalente del mes siguiente; si ese día no existe, finaliza el último día de ese mes a la misma hora UTC. La activación posterior en un dispositivo no reinicia ni extiende el plazo. Es un pago único, no se renueva automáticamente y una nueva vigencia requiere una nueva compra."],
+      ["Curso incluido", "Las licencias Profesional y Empresarial incluyen acceso permanente al curso Diagnóstico S7-300/400, con material técnico descargable, guías prácticas y contenidos de apoyo. La suscripción mensual y la licencia mensual de pago único no incluyen el curso."],
+      ["Garantía y reembolsos", "Los cuatro checkouts de BOJ S7-PLC PRO muestran una garantía de 7 días. En una suscripción, la posibilidad de reembolso corresponde a la transacción inicial de adhesión; cancelar la renovación no equivale a solicitar un reembolso. El trámite se realiza mediante el flujo de Hotmart."],
+      ["Idioma", "Interfaz disponible en seis idiomas. El contenido técnico especializado y los documentos legales se proporcionan actualmente en español."],
       ["Propiedad intelectual", "La compra concede un derecho personal de uso y no autoriza redistribución, reventa, publicación o copia masiva."],
       ["Marcas de terceros", "Siemens, SIMATIC, STEP 7, TIA Portal, S7-300 y S7-400 son marcas de sus respectivos titulares. BOJ es independiente y no está afiliada, patrocinada ni certificada por Siemens."],
     ],
@@ -6199,20 +6176,32 @@ const legalContent = {
   licenses: {
     title: "Condiciones de licencia de BOJ S7-PLC PRO",
     intro: "Reglas principales de acceso y uso de la herramienta de diagnóstico.",
+    updated: "29 de agosto de 2026",
+    showAppOffers: true,
+    offerIntro: "Cada oferta define una duración, un límite de dispositivos, una modalidad de renovación y una ventana de funcionamiento sin conexión.",
     sections: [
-      ["Activación", "La licencia incluida con el curso comienza en la fecha de compra y se vincula al correo registrado en Hotmart."],
-      ["Duración", "La licencia incluida dura un mes y finaliza sin renovación ni cobro automático."],
+      ["Prueba gratuita", "La prueba inicial dura 48 horas, funciona sólo en línea y ofrece funciones limitadas. No constituye una licencia paga ni habilita funcionamiento sin conexión."],
+      ["Activación", "Las licencias pagas se vinculan al correo registrado en Hotmart. La duración y el límite de dispositivos dependen de la oferta adquirida."],
+      ["Duración, renovación y cancelación", "La suscripción se renueva cada mes hasta su cancelación. Cancelarla en la cuenta de comprador de Hotmart evita cobros futuros y mantiene el acceso hasta el final del período ya pagado. La licencia mensual de pago único dura un mes calendario: en una licencia nueva o vencida, comienza cuando BOJ procesa la confirmación de pago de Hotmart y activa la licencia; si existe una licencia vigente, el mes se suma a su vencimiento actual. Finaliza en la fecha y hora UTC equivalente del mes siguiente o, si ese día no existe, el último día de ese mes a la misma hora UTC. Una activación posterior en un dispositivo no reinicia ni extiende el plazo. Es un pago único sin renovación automática y una nueva vigencia requiere una nueva compra. Profesional y Empresarial también vencen al finalizar su plazo y no se renuevan automáticamente."],
+      ["Dispositivos y funcionamiento sin conexión", "La suscripción y la licencia mensual de pago único admiten 1 dispositivo; Profesional admite hasta 2 y Empresarial hasta 10. Las tres primeras licencias pueden funcionar sin conexión hasta 2 días desde la última validación en línea correcta; Empresarial, hasta 7 días. Al agotarse esa ventana, la app requiere volver a validar en línea."],
       ["Alcance de uso", "La licencia es limitada, no exclusiva e intransferible."],
-      ["Limitación técnica", "BOJ S7-PLC PRO organiza síntomas, hipótesis y verificaciones. No controla el equipo ni sustituye un diagnóstico profesional."],
-      ["Soporte", `El soporte cubre acceso, activación y uso general de la app por correo. Contacto: ${contact.email}.`],
+      ["Limitación técnica", "El alcance técnico de BOJ S7-PLC PRO se limita a sistemas Siemens S7-300/400 compatibles. La app organiza síntomas, evidencias, hipótesis priorizadas y verificaciones. No se conecta al PLC, no controla equipos y no sustituye STEP 7, los procedimientos de seguridad ni un diagnóstico profesional."],
+      ["Reembolso o contracargo", "Cuando Hotmart confirma un reembolso o contracargo, se revoca el acceso correspondiente a esa compra."],
+      ["Soporte e idioma", `El soporte cubre acceso, activación y uso general de la app por correo: ${contact.email}. La interfaz está disponible en seis idiomas; el contenido técnico especializado y los documentos legales se proporcionan actualmente en español.`],
     ],
   },
   refunds: {
     title: "Política de reembolsos",
-    intro: "La compra del curso se procesa en Hotmart y cuenta con una garantía de reembolso de 7 días.",
+    intro: "Las compras digitales se procesan en Hotmart y las ofertas publicadas muestran una garantía de reembolso de 7 días.",
+    updated: "29 de agosto de 2026",
+    showAppOffers: true,
+    offerIntro: "La garantía publicada para las cuatro ofertas de BOJ S7-PLC PRO es de 7 días y se tramita mediante el proceso de Hotmart.",
     sections: [
-      ["Curso S7-300/400", "Puede solicitar el reembolso dentro de los 7 días posteriores a la compra, de acuerdo con el flujo y las condiciones de Hotmart."],
+      ["Ofertas de BOJ S7-PLC PRO", "Puede solicitar un reembolso dentro del período de garantía de 7 días configurado para la oferta adquirida, mediante el flujo de Hotmart. En la suscripción mensual, esa posibilidad corresponde a la transacción inicial de adhesión y no a cada renovación posterior."],
+      ["Cancelación no es reembolso", "Cancelar la suscripción mensual detiene los cobros futuros y conserva el acceso hasta el final del período ya pagado; no devuelve automáticamente el pago. El reembolso debe solicitarse por separado dentro del período aplicable."],
+      ["Cómo solicitarlo", `La solicitud puede iniciarse en refund.hotmart.com con los datos de la compra o mediante el soporte de BOJ en ${contact.email}. La aprobación y el procesamiento siguen el flujo de Hotmart.`],
       ["Efectos del reembolso", "Una vez aprobado, se revoca el acceso al curso, al material técnico y a la licencia PRO incluida."],
+      ["Curso S7-300/400", "La oferta independiente del curso también se procesa en Hotmart y muestra una garantía de 7 días. Si el reembolso es aprobado, se revocan el curso, su material y la licencia PRO incluida."],
       ["Servicios técnicos", "Los servicios profesionales se rigen por la propuesta aceptada y por el trabajo coordinado o realizado."],
       ["Ayuda", `Si tiene un problema de acceso, escriba a ${contact.email} desde el correo utilizado en Hotmart.`],
     ],
@@ -6224,7 +6213,30 @@ function LegalPage({ type }) {
   return (
     <PageShell eyebrow="Información legal" title={page.title} subtitle={page.intro}>
       <article className="legal-page">
-        <p className="legal-updated">Última actualización: 16 de julio de 2026.</p>
+        <p className="legal-updated">Última actualización: {page.updated}.</p>
+        {page.showAppOffers ? (
+          <section className="legal-offers" aria-labelledby={`${type}-offers-title`}>
+            <h2 id={`${type}-offers-title`}>Ofertas BOJ S7-PLC PRO publicadas</h2>
+            <p>{page.offerIntro}</p>
+            <div className="legal-offer-grid">
+              {legalAppOffers.map((plan) => (
+                <section className="legal-offer-card" aria-label={plan.contract.checkoutName} key={plan.contract.checkoutName}>
+                  <h3>{plan.contract.checkoutName}</h3>
+                  <p className="legal-offer-price">{plan.price}</p>
+                  <dl className="legal-offer-facts">
+                    <dt>Duración</dt><dd>{plan.contract.duration}</dd>
+                    <dt>Dispositivos</dt><dd>{plan.contract.devices}</dd>
+                    <dt>Renovación</dt><dd>{plan.contract.renewal}</dd>
+                    <dt>Curso</dt><dd>{plan.contract.course}</dd>
+                    <dt>Sin conexión</dt><dd>{plan.contract.offline}</dd>
+                    <dt>Garantía</dt><dd>{plan.contract.warranty}</dd>
+                    <dt>Cancelación</dt><dd>{plan.contract.cancellation}</dd>
+                  </dl>
+                </section>
+              ))}
+            </div>
+          </section>
+        ) : null}
         {page.sections.map(([title, text]) => (
           <section key={title}><h2>{title}</h2><p>{text}</p></section>
         ))}
@@ -6717,7 +6729,7 @@ function AppMockup() {
           <small>Course Edition</small>
         </div>
         <figure className="app-screenshot-frame">
-          <img src={appScreenshot} alt="Captura de BOJ S7-PLC con diagnóstico por LEDs CPU Siemens S7-300/400" loading="lazy" />
+          <img src={appDiagnosticoGuiado} alt="Captura de BOJ S7-PLC con un subflujo de diagnóstico guiado" loading="lazy" />
         </figure>
       </div>
     </div>

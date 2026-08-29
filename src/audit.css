@@ -94,6 +94,66 @@ button:disabled,
   color: #004f73;
 }
 
+.legal-offers {
+  margin-top: 28px;
+}
+
+.legal-offer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.legal-offer-grid .legal-offer-card {
+  min-width: 0;
+  margin-top: 0;
+  padding: 20px;
+  border: 1px solid #cfdae4;
+  border-radius: 10px;
+  background: #f7fafc;
+}
+
+.legal-offer-card h3 {
+  margin: 0;
+  color: #0f1b27;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.legal-page .legal-offer-price {
+  margin-top: 8px;
+  color: #006f9e;
+  font-size: 1.2rem;
+  font-weight: 850;
+}
+
+.legal-offer-facts {
+  display: grid;
+  grid-template-columns: minmax(92px, 0.7fr) minmax(0, 1.3fr);
+  gap: 8px 12px;
+  margin: 18px 0 0;
+}
+
+.legal-offer-facts dt,
+.legal-offer-facts dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.legal-offer-facts dt {
+  color: #455d70;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.legal-offer-facts dd {
+  color: #213748;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
 .course-status-badge {
   display: inline-flex;
   width: fit-content;
@@ -148,5 +208,13 @@ button:disabled,
 
   .legal-page {
     padding: 22px 18px;
+  }
+
+  .legal-offer-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .legal-offer-facts {
+    grid-template-columns: minmax(86px, 0.65fr) minmax(0, 1.35fr);
   }
 }

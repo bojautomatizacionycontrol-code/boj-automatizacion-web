@@ -86,8 +86,8 @@ test("App reutiliza la captura y todos los bloques comerciales de español en EN
   }
 
   const preview = sourceBetween("const appHeroPreviewCopy =", "const appQuickAccessCopy =");
-  assert.match(preview, /src=\{appSadDevicePreview\}/);
-  assert.match(preview, /app-hero-diagnostic-preview-screen--device-composite/);
+  assert.match(preview, /src=\{appDiagnosticoGuiado\}/);
+  assert.doesNotMatch(preview, /appSadDevicePreview|app-hero-diagnostic-preview-screen--device-composite/);
   assert.doesNotMatch(preview, /appResultadoDiagnostico|app-hero-diagnostic-preview-focus/);
 });
 
