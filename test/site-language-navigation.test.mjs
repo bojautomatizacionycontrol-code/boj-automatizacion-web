@@ -10,6 +10,7 @@ import {
   portugueseApp,
   portugueseNavItems,
 } from "../src/i18n.js";
+import { getRouteMetadata } from "../src/route-metadata.js";
 
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
@@ -93,7 +94,7 @@ test("mantiene el selector visible en el extremo derecho del encabezado", () => 
 
 test("recuerda una elección explícita en inglés o portugués sin redirigir por idioma del navegador", () => {
   const appStart = appSource.indexOf("function App()");
-  const appEnd = appSource.indexOf("const KNOWN_ROUTES", appStart);
+  const appEnd = appSource.indexOf("function RouteView", appStart);
   const appComponentSource = appSource.slice(appStart, appEnd);
 
   assert.match(appComponentSource, /savedLanguage === "en" \|\| savedLanguage === "pt"/);
@@ -106,7 +107,15 @@ test("actualiza idioma, metadatos, canonical y hreflang por ruta", () => {
   assert.match(appSource, /meta\[property="og:locale"\]/);
   assert.match(appSource, /meta\[name="twitter:title"\]/);
   assert.match(appSource, /meta\[name="twitter:description"\]/);
-  assert.match(appSource, /link\[rel="alternate"\]\[hreflang=/);
+  assert.match(appSource, /link\[rel="alternate"\]\[hreflang\]/);
+
+  assert.deepEqual(getRouteMetadata("/app").alternates.map(({ hreflang }) => hreflang), [
+    "es",
+    "en",
+    "pt-BR",
+    "x-default",
+  ]);
+  assert.deepEqual(getRouteMetadata("/terminos").alternates, []);
 
   assert.match(indexSource, /rel="alternate" hreflang="es" href="https:\/\/www\.bojautomatizacion\.com\/"/);
   assert.match(indexSource, /rel="alternate" hreflang="en" href="https:\/\/www\.bojautomatizacion\.com\/en"/);

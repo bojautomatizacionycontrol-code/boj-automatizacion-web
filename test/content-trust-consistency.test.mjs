@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
+import { getRouteMetadata } from "../src/route-metadata.js";
+
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 const contentSource = await readFile(new URL("../src/content.js", import.meta.url), "utf8");
 const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
@@ -32,7 +34,9 @@ test("el curso se describe sin limitar el material a dos PDF", () => {
 
   assert.match(appSource, /material técnico descargable, guías prácticas/);
   assert.match(contentSource, /Material técnico descargable en PDF con acceso permanente/);
-  assert.match(indexSource, /material técnico descargable, guías prácticas y acceso permanente/);
+  assert.doesNotMatch(indexSource, /"@type": "Course"|"@type": "Offer"/);
+  const courseJsonLd = getRouteMetadata("/cursos/s7-300-400").jsonLd;
+  assert.ok(courseJsonLd["@graph"].some((node) => node["@type"] === "Course"));
 });
 
 test("las imágenes de Recursos se identifican como ilustrativas y preservan el estado accesible", () => {

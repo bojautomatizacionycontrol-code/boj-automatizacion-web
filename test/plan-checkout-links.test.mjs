@@ -3,9 +3,9 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { offer } from "../src/content.js";
+import { getRouteMetadata } from "../src/route-metadata.js";
 
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
-const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
 const spanishAppPageStart = appSource.indexOf("function AppPage()");
 const spanishAppPageEnd = appSource.indexOf("function AppComparisonTable()", spanishAppPageStart);
 const spanishAppPageSource = appSource.slice(spanishAppPageStart, spanishAppPageEnd);
@@ -151,9 +151,11 @@ test("actualiza el curso a 89 USD, pago único y su oferta exacta", () => {
   assert.equal("promotionEndsAt" in offer.course, false);
   assert.match(appSource, /Pago único · curso con acceso permanente/);
   assert.doesNotMatch(appSource, /Precio de lanzamiento/);
-  assert.match(indexSource, /"price": "89"/);
-  assert.match(indexSource, /https:\/\/pay\.hotmart\.com\/P106348963R\?off=srrm5ewf/);
-  assert.doesNotMatch(indexSource, /priceValidUntil/);
+  const courseSchema = getRouteMetadata("/cursos/s7-300-400").jsonLd["@graph"]
+    .find((node) => node["@type"] === "Course");
+  assert.equal(courseSchema.offers.price, "89");
+  assert.equal(courseSchema.offers.url, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
+  assert.equal("priceValidUntil" in courseSchema.offers, false);
   assert.equal(appSource.match(/<PurchaseCTA\b/g)?.length, 2);
   assert.equal(appSource.match(/href: purchaseTarget\.href/g)?.length, 1);
 });
