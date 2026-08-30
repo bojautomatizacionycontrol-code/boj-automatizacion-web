@@ -20,7 +20,7 @@ const expectedPlanMatrix = [
   {
     title: "Mensual de pago único",
     price: "59 USD",
-    meta: "Pago único · 1 mes · Sin renovación automática · 1 dispositivo",
+    meta: "Pago único · 1 mes calendario · Sin renovación automática · 1 dispositivo",
     url: "https://pay.hotmart.com/B107066308U?off=l23qsbj9",
   },
   {

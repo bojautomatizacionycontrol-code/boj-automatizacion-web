@@ -59,8 +59,8 @@ test("App muestra una demostración real y precios antes de la explicación exte
 
   assert.match(appPageSource, /image=\{appProHeroLaptopVisual\}/);
   assert.match(appPageSource, /aside=\{<AppHeroDiagnosticPreview \/>\}/);
-  assert.match(previewSource, /appSadDevicePreview/);
-  assert.match(previewSource, /app-hero-diagnostic-preview-screen--device-composite/);
+  assert.match(previewSource, /appDiagnosticoGuiado/);
+  assert.doesNotMatch(previewSource, /appSadDevicePreview|app-hero-diagnostic-preview-screen--device-composite/);
   assert.match(previewSource, /Síntoma/);
   assert.match(previewSource, /Hipótesis/);
   assert.match(previewSource, /Verificación/);

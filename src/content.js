@@ -1,13 +1,30 @@
 export const contact = {
   brand: "BOJ Automatización y Control",
   responsible: "Walter Adrián Boj",
-  location: "San Miguel de Tucumán, Argentina",
+  location: "Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina",
   email: "contacto@bojautomatizacion.com",
-  whatsappDisplay: "+54 9 381 5327469",
+  whatsappDisplay: "+54 381 5327469",
   whatsappNumber: "5493815327469",
   linktree: "https://linktr.ee/bojautomatizacionycontrol",
   linkedin: "https://www.linkedin.com/in/adrianboj4/",
 };
+
+export const commercialIdentity = Object.freeze({
+  seller: "Hexa Group Holding SAS",
+  owner: "Walter Adrián Boj",
+  ownedBrands: "BOJ Automatización y BOJ S7-PLC",
+  authorization: "Comercialización autorizada por el titular",
+  address: "Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina",
+  institutionalEmail: "contacto@hexagroup.com.ar",
+  supportEmail: "contacto@bojautomatizacion.com",
+  phone: "+54 381 5327469",
+  hours: "Lunes a viernes de 9:00 a 16:00, hora argentina, excepto feriados",
+  responseTime: "Dentro de 48 horas hábiles",
+  website: "www.bojautomatizacion.com",
+  taxStatus: "Responsable Inscripto",
+  invoicing: "Factura electrónica y factura E para exportaciones, según corresponda",
+  supportOwner: "Walter Adrián Boj",
+});
 
 export const navItems = [
   { label: "Inicio", path: "/" },
@@ -538,7 +555,7 @@ export const appHero = {
   title: "BOJ S7-PLC",
   subtitle: "Herramienta de diagnóstico industrial para PLC Siemens S7-300/400",
   text:
-    "Herramienta digital técnica diseñada para guiar el diagnóstico de fallas reales en planta, interpretar estados de CPU, analizar fallas PROFIBUS y ordenar hipótesis de causa probable.",
+    "Herramienta digital técnica diseñada para guiar el diagnóstico de fallas reales en planta, interpretar estados de CPU, analizar fallas PROFIBUS y priorizar hipótesis según la evidencia disponible y su peso relativo.",
   note:
     "No reemplaza el criterio profesional: ayuda a sostener un método cuando hay presión, poco tiempo y síntomas mezclados.",
 };
@@ -561,7 +578,7 @@ export const appCapabilities = [
   },
   {
     title: "Prioriza hipótesis",
-    text: "Ordena causas probables según evidencia; no muestra listas indiscriminadas ni pretende adivinar la falla.",
+    text: "Prioriza hipótesis según la evidencia disponible y su peso relativo; no muestra listas indiscriminadas ni pretende adivinar la falla.",
     icon: "Gauge",
   },
   {
@@ -601,8 +618,8 @@ export const appDiagnosticModules = [
     items: ["Un esclavo caído", "Varios esclavos", "ET200 offline", "Dirección duplicada", "24 VDC", "Mantenimiento reciente"],
   },
   {
-    title: "Hipótesis ponderadas",
-    text: "Ranking de causas probables según respuestas y evidencia. La app orienta verificaciones, no adivina.",
+    title: "Hipótesis priorizadas",
+    text: "Hipótesis priorizadas según la evidencia disponible y su peso relativo. La app orienta verificaciones, no adivina.",
     items: ["OB82/OB86 faltante", "HW Config mismatch", "FRCE activo", "Conector flojo", "Borne flojo", "Falla por vibración"],
   },
   {
@@ -1330,6 +1347,16 @@ export const offer = {
         price: "49 USD",
         meta: "Por mes · Renovación automática hasta cancelación · 1 dispositivo",
         text: "Suscripción mensual a la app BOJ S7-PLC PRO, con renovación automática hasta cancelación.",
+        contract: {
+          checkoutName: "Suscripción Mensual BOJ S7-PLC PRO",
+          duration: "Mensual mientras la suscripción permanezca activa",
+          devices: "1 dispositivo",
+          renewal: "Renovación automática mensual hasta cancelación",
+          course: "No incluido",
+          offline: "Hasta 2 días desde la última validación en línea correcta",
+          warranty: "7 días para la transacción inicial de adhesión, según el proceso de Hotmart",
+          cancellation: "La cancelación desde la cuenta de comprador en Hotmart evita cobros futuros y mantiene el acceso hasta el final del período ya pagado.",
+        },
         bullets: [
           "Sin curso",
           "1 dispositivo",
@@ -1343,8 +1370,18 @@ export const offer = {
       {
         title: "Mensual de pago único",
         price: "59 USD",
-        meta: "Pago único · 1 mes · Sin renovación automática · 1 dispositivo",
-        text: "Acceso completo a la app BOJ S7-PLC PRO por 1 mes, mediante un único pago y sin renovación automática.",
+        meta: "Pago único · 1 mes calendario · Sin renovación automática · 1 dispositivo",
+        text: "Acceso completo a la app BOJ S7-PLC PRO durante 1 mes calendario, mediante un único pago y sin renovación automática.",
+        contract: {
+          checkoutName: "Licencia Mensual BOJ S7-PLC PRO",
+          duration: "1 mes calendario",
+          devices: "1 dispositivo",
+          renewal: "Sin renovación automática",
+          course: "No incluido",
+          offline: "Hasta 2 días desde la última validación en línea correcta",
+          warranty: "7 días, según el proceso de Hotmart",
+          cancellation: "No aplica: es un pago único sin renovación automática.",
+        },
         bullets: [
           "Sin curso",
           "1 dispositivo",
@@ -1375,6 +1412,16 @@ export const offer = {
         price: "249 USD",
         meta: "Pago único · 6 meses · 2 dispositivos · App PRO + Curso",
         text: "Plan recomendado para técnicos, automatistas, instrumentistas y personal de mantenimiento que necesitan usar la herramienta de forma recurrente y reforzar criterio técnico con material de apoyo.",
+        contract: {
+          checkoutName: "Licencia Profesional BOJ S7-PLC PRO + Curso",
+          duration: "6 meses",
+          devices: "Hasta 2 dispositivos",
+          renewal: "Sin renovación automática",
+          course: "Incluido con acceso permanente",
+          offline: "Hasta 2 días desde la última validación en línea correcta",
+          warranty: "7 días, según el proceso de Hotmart",
+          cancellation: "No aplica: es un pago único sin renovación automática.",
+        },
         bullets: [
           "Incluye app PRO",
           "Incluye el curso con acceso permanente",
@@ -1390,6 +1437,16 @@ export const offer = {
         price: "549 USD",
         meta: "Pago único · 6 meses · 10 dispositivos · App PRO + Curso",
         text: "Plan pensado para empresas, equipos de mantenimiento, áreas de automatización, soporte técnico interno o varias estaciones de trabajo.",
+        contract: {
+          checkoutName: "Licencia Empresarial BOJ S7-PLC PRO + Curso",
+          duration: "6 meses",
+          devices: "Hasta 10 dispositivos",
+          renewal: "Sin renovación automática",
+          course: "Incluido con acceso permanente",
+          offline: "Hasta 7 días desde la última validación en línea correcta",
+          warranty: "7 días, según el proceso de Hotmart",
+          cancellation: "No aplica: es un pago único sin renovación automática.",
+        },
         bullets: [
           "Incluye app PRO",
           "Incluye el curso con acceso permanente",

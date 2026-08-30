@@ -15954,6 +15954,20 @@ textarea {
   font-size: max(0.9375rem, 15px);
 }
 
+.app-pro-language-card .app-pro-language-disclosure {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(0, 111, 158, 0.3);
+  border-radius: 10px;
+  background: #eef8fc;
+  color: #17384b;
+  font-size: max(0.9375rem, 15px);
+  font-weight: 750;
+  line-height: 1.5;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
 .app-pro-trust-grid {
   grid-template-columns: 132px minmax(300px, 0.95fr) minmax(420px, 1.2fr);
   align-items: center;
@@ -20101,6 +20115,10 @@ textarea {
 
 .app-pro-real-view-grid {
   gap: 18px;
+}
+
+.app-pro-real-view-card:only-child {
+  grid-column: 1 / -1;
 }
 
 .app-pro-real-view-card {

@@ -38,29 +38,23 @@ test("la tarjeta lateral de TIA completa el espacio con información del program
   assert.doesNotMatch(tiaVisualSource, /ladder-lines|status-cluster/);
 });
 
-test("el hero español de App usa la composición adjunta sin deformarla", async () => {
+test("el hero español de App usa una captura guiada sin porcentajes probabilísticos", async () => {
   const previewSource = sourceBetween('const appHeroPreviewCopy = {', 'const appQuickAccessCopy = {');
 
-  await access(new URL("../src/assets/app-sad-device-preview.png", import.meta.url));
-  assert.match(appSource, /import appSadDevicePreview from "\.\/assets\/app-sad-device-preview\.png"/);
-  assert.match(previewSource, /src=\{appSadDevicePreview\}/);
-  assert.match(previewSource, /app-hero-diagnostic-preview-screen--device-composite/);
+  await access(new URL("../src/assets/app-diagnostico-guiado.jpg", import.meta.url));
+  assert.match(appSource, /import appDiagnosticoGuiado from "\.\/assets\/app-diagnostico-guiado\.jpg"/);
+  assert.match(previewSource, /src=\{appDiagnosticoGuiado\}/);
+  assert.doesNotMatch(previewSource, /appSadDevicePreview|app-hero-diagnostic-preview-screen--device-composite/);
   assert.doesNotMatch(previewSource, /app-hero-diagnostic-preview-focus/);
-  assert.match(stylesSource, /\.app-hero-diagnostic-preview-screen--device-composite img\s*\{[\s\S]*?object-fit:\s*contain;/);
+  assert.match(stylesSource, /\.app-hero-diagnostic-preview-screen img\s*\{[\s\S]*?object-fit:\s*cover;/);
 });
 
-test("el hero de App elimina el fondo claro sin alterar la captura", () => {
+test("el hero de App no activa las capturas históricas con semántica probabilística", () => {
   const previewSource = sourceBetween('const appHeroPreviewCopy = {', 'const appQuickAccessCopy = {');
-  const compositeStyles = stylesSource.slice(
-    stylesSource.lastIndexOf(".app-hero-diagnostic-preview-screen--device-composite {"),
-    stylesSource.indexOf(".app-hero-diagnostic-preview-focus")
-  );
 
-  assert.match(previewSource, /clipPath id="app-hero-device-silhouette" clipPathUnits="objectBoundingBox"/);
-  assert.equal((previewSource.match(/<rect /g) ?? []).length, 2);
-  assert.match(compositeStyles, /background:\s*transparent;/);
-  assert.match(compositeStyles, /clip-path:\s*url\("#app-hero-device-silhouette"\);/);
-  assert.doesNotMatch(compositeStyles, /background:\s*#e9f7fb;/);
+  assert.match(appSource, /import appProHeroLaptopVisual from "\.\/assets\/hero-app\.jpg"/);
+  assert.doesNotMatch(appSource, /app-pro-hero-background-v2|app-sad-device-preview|app-panel-principal-diagnostico|app-resultado-diagnostico|app-hipotesis-priorizadas|assets\/app-carousel/);
+  assert.doesNotMatch(previewSource, /clipPath|app-hero-device-silhouette/);
 });
 
 test("el nuevo estado y la información lateral tienen adaptación móvil", () => {
