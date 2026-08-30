@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { offer } from "../src/content.js";
+import { commercialIdentity, contact, offer } from "../src/content.js";
 
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 const contentSource = await readFile(new URL("../src/content.js", import.meta.url), "utf8");
@@ -10,7 +10,7 @@ const i18nSource = await readFile(new URL("../src/i18n.js", import.meta.url), "u
 const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
 const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
 const legalStylesSource = await readFile(new URL("../src/audit.css", import.meta.url), "utf8");
-const reviewSource = await readFile(new URL("../COMMERCIAL_ALIGNMENT_V8_17_23.md", import.meta.url), "utf8");
+const reviewSource = await readFile(new URL("../COMMERCIAL_ALIGNMENT_V8_17_24.md", import.meta.url), "utf8");
 
 const publicTextCorpus = [appSource, contentSource, i18nSource, indexSource].join("\n");
 
@@ -157,7 +157,74 @@ test("centraliza las cuatro ofertas verificadas sin alterar precios ni checkouts
   assert.equal(new Set(actualOffers.map(({ url }) => url)).size, 4);
 });
 
-test("actualiza los tres documentos comerciales y conserva privacidad separada", () => {
+test("publica identidad comercial ratificada en los tres documentos y conserva privacidad separada", () => {
+  const expectedIdentity = {
+    seller: "Hexa Group Holding SAS",
+    owner: "Walter Adrián Boj",
+    ownedBrands: "BOJ Automatización y BOJ S7-PLC",
+    authorization: "Comercialización autorizada por el titular",
+    address: "Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina",
+    institutionalEmail: "contacto@hexagroup.com.ar",
+    supportEmail: "contacto@bojautomatizacion.com",
+    phone: "+54 381 5327469",
+    hours: "Lunes a viernes de 9:00 a 16:00, hora argentina, excepto feriados",
+    responseTime: "Dentro de 48 horas hábiles",
+    website: "www.bojautomatizacion.com",
+    taxStatus: "Responsable Inscripto",
+    invoicing: "Factura electrónica y factura E para exportaciones, según corresponda",
+    supportOwner: "Walter Adrián Boj",
+  };
+
+  assert.deepEqual(commercialIdentity, expectedIdentity);
+  assert.equal(Object.isFrozen(commercialIdentity), true);
+  assert.equal(contact.location, commercialIdentity.address);
+  assert.equal(contact.whatsappDisplay, commercialIdentity.phone);
+  assert.equal(contact.whatsappNumber, "5493815327469");
+  assert.equal(appSource.match(/showCommercialIdentity:\s*true/g)?.length, 3);
+  assert.match(appSource, /<strong>Vendedor y facturador:<\/strong> \{commercialIdentity\.seller\}/);
+  assert.match(appSource, /La comercialización[\s\S]*?está autorizada por el titular/);
+  assert.match(appSource, /className="legal-business-facts"/);
+  assert.match(appSource, /commercialIdentity\.institutionalEmail/);
+  assert.match(appSource, /commercialIdentity\.supportEmail/);
+  assert.match(appSource, /commercialIdentity\.taxStatus/);
+  assert.match(appSource, /commercialIdentity\.invoicing/);
+  assert.doesNotMatch(publicTextCorpus, /\bCUIT\b|\b\d{2}-\d{8}-\d\b/);
+  assert.doesNotMatch(publicTextCorpus, /contrato exclusivo firmado|autorización exclusiva/i);
+
+  const privacyStart = appSource.indexOf("  privacy: {");
+  const privacyEnd = appSource.indexOf("  terms: {", privacyStart);
+  const privacySource = appSource.slice(privacyStart, privacyEnd);
+  assert.match(privacySource, /updated: "16 de julio de 2026"/);
+  assert.match(privacySource, /No vendemos datos personales/);
+  assert.doesNotMatch(privacySource, /showCommercialIdentity|Hexa Group Holding SAS/);
+
+  assert.doesNotMatch(appSource, /Lunes a viernes de 8:00 a 18:00|Respondemos normalmente dentro/);
+  assert.doesNotMatch(publicTextCorpus, /San Miguel de Tucumán|\+54 9 381 5327469|\+5493815327469/);
+  assert.match(indexSource, /"telephone": "\+543815327469"/);
+  assert.match(indexSource, /"streetAddress": "Culpina 63, piso 5°, departamento C"/);
+  assert.equal((indexSource.match(/"Ciudad Autónoma de Buenos Aires"/g) || []).length, 2);
+  assert.match(appSource, /value=\{commercialIdentity\.hours\}/);
+  assert.equal((appSource.match(/Respondemos dentro de 48 horas hábiles/g) || []).length, 3);
+  assert.match(legalStylesSource, /\.legal-business-facts\s*\{[\s\S]*?grid-template-columns:\s*minmax\(190px,/);
+  assert.match(legalStylesSource, /@media \(max-width: 760px\)[\s\S]*?\.legal-business-facts\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\);/);
+});
+
+test("distingue el efecto del reembolso según el contenido real de cada oferta", () => {
+  assert.match(appSource, /\["Suscripción y Mensual", "Si Hotmart aprueba el reembolso, se revoca la licencia BOJ S7-PLC PRO vinculada a esa compra\. Estas dos ofertas no incluyen curso ni materiales; la licencia mensual de pago único tampoco incluye acceso permanente\."\]/);
+  assert.match(appSource, /\["Profesional y Empresarial", "Si Hotmart aprueba el reembolso, se revocan la licencia BOJ S7-PLC PRO y el acceso permanente al curso y sus materiales vinculados a esa compra\."\]/);
+  assert.doesNotMatch(appSource, /Una vez aprobado, se revoca el acceso al curso, al material técnico y a la licencia PRO incluida/);
+
+  const appOffers = offer.app.proPlans.filter(({ title }) => title !== "Curso + licencia");
+  assert.deepEqual(appOffers.map(({ contract }) => contract.course), [
+    "No incluido",
+    "No incluido",
+    "Incluido con acceso permanente",
+    "Incluido con acceso permanente",
+  ]);
+  assert.doesNotMatch(JSON.stringify(appOffers), /TIA Portal|S7-1200|S7-1500/i);
+});
+
+test("actualiza los tres documentos comerciales y conserva el contrato técnico", () => {
   assert.equal(appSource.match(/showAppOffers:\s*true/g)?.length, 3);
   assert.match(appSource, /Ofertas BOJ S7-PLC PRO publicadas/);
   assert.match(appSource, /La prueba gratuita dura 48 horas/);
@@ -168,28 +235,37 @@ test("actualiza los tres documentos comerciales y conserva privacidad separada",
   assert.match(appSource, /Su vigencia es de un mes calendario\./);
   assert.match(appSource, /fecha y hora UTC equivalente del mes siguiente/);
   assert.match(appSource, /La activación posterior en un dispositivo no reinicia ni extiende el plazo/);
-  assert.match(appSource, /updated: "16 de julio de 2026"/);
-  assert.match(appSource, /updated: "29 de agosto de 2026"/);
+  assert.equal(appSource.match(/updated: "30 de agosto de 2026"/g)?.length, 3);
   assert.match(legalStylesSource, /\.legal-offer-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,/);
   assert.match(legalStylesSource, /@media \(max-width: 760px\)[\s\S]*?\.legal-offer-grid\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\);/);
 });
 
-test("mantiene la advertencia jurídica interna y registra la alineación de mes calendario", () => {
-  const draftMarker = "BORRADOR PENDIENTE DE REVISIÓN JURÍDICA PROFESIONAL";
+test("registra v8.17.24, la evidencia externa y la aprobación provisional sin simular una verificación local", () => {
+  const approvalMarker = "APROBACIÓN PROVISIONAL DEL PROPIETARIO REGISTRADA — REVISIÓN JURÍDICA PROFESIONAL PENDIENTE";
+  const exactHotmartDescription = "Licencia Mensual BOJ S7-PLC PRO para 1 dispositivo. Vigencia: un mes calendario. Pago único, sin renovación automática, sin curso ni acceso permanente.";
 
-  assert.ok(reviewSource.includes(draftMarker));
-  assert.doesNotMatch(publicTextCorpus, new RegExp(draftMarker));
+  assert.ok(reviewSource.includes(approvalMarker));
+  assert.doesNotMatch(publicTextCorpus, new RegExp(approvalMarker));
   assert.doesNotMatch(publicTextCorpus, /\b(?:30 días|30 days|30 dias)\b/i);
   assert.match(contentSource, /Pago único · 1 mes calendario · Sin renovación automática · 1 dispositivo/);
   assert.match(i18nSource, /One-time payment · 1 calendar month · No automatic renewal · 1 device/);
   assert.match(i18nSource, /Pagamento único · 1 mês-calendário · Sem renovação automática · 1 dispositivo/);
-  assert.match(reviewSource, /Estado anterior observado[\s\S]*?Licencia de uso por 30 días/);
+  assert.match(reviewSource, /^# Alineación comercial con BOJ S7-PLC v8\.17\.24/m);
+  assert.doesNotMatch(reviewSource, /v8\.17\.23/);
+  assert.match(reviewSource, /## Evidencia local del repositorio/);
+  assert.match(reviewSource, /## Evidencia externa de Hotmart/);
+  assert.match(reviewSource, /ninguna prueba local del repositorio pretende sustituirla/);
+  assert.match(reviewSource, /## Aprobación provisional del propietario/);
+  assert.match(reviewSource, /sin dictamen jurídico profesional previo/);
+  assert.doesNotMatch(reviewSource, /revisad[oa] por (?:un )?abogad[oa]|revisión jurídica profesional completada/i);
+  assert.ok(reviewSource.includes(exactHotmartDescription));
+  assert.match(reviewSource, /El primer intento histórico[\s\S]*?no persistió/);
+  assert.match(reviewSource, /segundo y último intento autorizado[\s\S]*?una sola vez el botón \*\*Guardar\*\*/);
+  assert.match(reviewSource, /No hubo un tercer guardado/);
+  assert.match(reviewSource, /Producto `8271939`, checkout `B107066308U`, oferta `l23qsbj9`, precio USD 59, pago único y garantía de 7 días/);
   assert.match(reviewSource, /make_interval\(months => 1\)/);
   assert.match(reviewSource, /2023-01-31 14:30:45 \| 2023-02-28 14:30:45 \| 28 días/);
   assert.match(reviewSource, /2024-01-31 14:30:45 \| 2024-02-29 14:30:45 \| 29 días/);
   assert.match(reviewSource, /2024-02-29 14:30:45 \| 2024-03-29 14:30:45 \| 29 días/);
-  assert.match(reviewSource, /se pulsó \*\*Guardar\*\* una sola vez/);
-  assert.match(reviewSource, /Permanecieron iguales producto `8271939`[\s\S]*?oferta `59,00 USD`[\s\S]*?garantía de 7 días/);
-  assert.match(reviewSource, /revisión jurídica profesional continúa siendo obligatoria/);
-  assert.doesNotMatch(reviewSource, /sin commit, push, Draft PR ni Preview remoto/);
+  assert.match(reviewSource, /cuenta Hotmart personal pendiente de migración[\s\S]*?riesgo administrativo aceptado/);
 });

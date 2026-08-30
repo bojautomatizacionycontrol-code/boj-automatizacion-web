@@ -50,6 +50,7 @@ import {
   appRealCases,
   authorityHighlights,
   clientLogoSlots,
+  commercialIdentity,
   contact,
   contactChecklist,
   courses,
@@ -993,7 +994,7 @@ const routeMeta = {
   "/contacto": {
     title: "Contacto técnico | BOJ Automatización y Control",
     description:
-      "Contacto técnico en San Miguel de Tucumán, Argentina, para automatización industrial, diagnóstico de fallas, cursos PLC Siemens, TIA Portal y PROFIBUS.",
+      "Contacto técnico en Ciudad Autónoma de Buenos Aires, Argentina, para automatización industrial, diagnóstico de fallas, cursos PLC Siemens, TIA Portal y PROFIBUS.",
   },
   "/privacidad": {
     title: "Política de privacidad | BOJ Automatización y Control",
@@ -2383,7 +2384,7 @@ function HomeContactSection() {
             value={contact.whatsappDisplay}
             href={whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.")}
           />
-          <ContactLine icon="Clock" label="Atención" value="Lunes a viernes de 8:00 a 18:00" />
+          <ContactLine icon="Clock" label="Atención" value={commercialIdentity.hours} />
         </div>
         <LandingContactForm />
       </div>
@@ -2410,7 +2411,7 @@ function LandingContactForm() {
       });
       event.currentTarget.reset();
       setStatus("success");
-      setFeedback("Consulta enviada. Respondemos normalmente dentro de 48 horas hábiles.");
+      setFeedback("Consulta enviada. Respondemos dentro de 48 horas hábiles.");
       track("contact_form_submit", { location: "home" });
     } catch (error) {
       setStatus("error");
@@ -6073,7 +6074,7 @@ function ContactForm() {
     try {
       await sendContactForm({ ...form, subject: `Consulta: ${form.interest}` });
       setStatus("success");
-      setFeedback("Consulta enviada. Respondemos normalmente dentro de 48 horas hábiles.");
+      setFeedback("Consulta enviada. Respondemos dentro de 48 horas hábiles.");
       setForm({ name: "", company: "", email: "", phone: "", interest: "Diagnóstico de fallas", message: "" });
       track("contact_form_submit", { location: "contact_page", interest: form.interest });
     } catch (error) {
@@ -6086,8 +6087,8 @@ function ContactForm() {
     <form className="contact-form" onSubmit={handleSubmit}>
       <h2>Cuéntanos el caso</h2>
       <p>
-        Completa los datos esenciales para derivar correctamente la consulta. Respondemos normalmente dentro
-        de 48 horas hábiles; las fallas urgentes se coordinan por WhatsApp y están sujetas a disponibilidad.
+        Completa los datos esenciales para derivar correctamente la consulta. Respondemos dentro de 48 horas hábiles;
+        las fallas urgentes se coordinan por WhatsApp y están sujetas a disponibilidad.
       </p>
       <label>
         Nombre
@@ -6156,7 +6157,8 @@ const legalContent = {
   terms: {
     title: "Términos y condiciones",
     intro: "Condiciones generales para utilizar el sitio y contratar servicios o productos digitales de BOJ.",
-    updated: "29 de agosto de 2026",
+    updated: "30 de agosto de 2026",
+    showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "Estas son las cuatro ofertas de BOJ S7-PLC PRO publicadas para compra. Los precios se expresan en dólares estadounidenses y el checkout muestra la modalidad antes de confirmar el pago.",
     sections: [
@@ -6176,7 +6178,8 @@ const legalContent = {
   licenses: {
     title: "Condiciones de licencia de BOJ S7-PLC PRO",
     intro: "Reglas principales de acceso y uso de la herramienta de diagnóstico.",
-    updated: "29 de agosto de 2026",
+    updated: "30 de agosto de 2026",
+    showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "Cada oferta define una duración, un límite de dispositivos, una modalidad de renovación y una ventana de funcionamiento sin conexión.",
     sections: [
@@ -6193,14 +6196,16 @@ const legalContent = {
   refunds: {
     title: "Política de reembolsos",
     intro: "Las compras digitales se procesan en Hotmart y las ofertas publicadas muestran una garantía de reembolso de 7 días.",
-    updated: "29 de agosto de 2026",
+    updated: "30 de agosto de 2026",
+    showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "La garantía publicada para las cuatro ofertas de BOJ S7-PLC PRO es de 7 días y se tramita mediante el proceso de Hotmart.",
     sections: [
       ["Ofertas de BOJ S7-PLC PRO", "Puede solicitar un reembolso dentro del período de garantía de 7 días configurado para la oferta adquirida, mediante el flujo de Hotmart. En la suscripción mensual, esa posibilidad corresponde a la transacción inicial de adhesión y no a cada renovación posterior."],
       ["Cancelación no es reembolso", "Cancelar la suscripción mensual detiene los cobros futuros y conserva el acceso hasta el final del período ya pagado; no devuelve automáticamente el pago. El reembolso debe solicitarse por separado dentro del período aplicable."],
       ["Cómo solicitarlo", `La solicitud puede iniciarse en refund.hotmart.com con los datos de la compra o mediante el soporte de BOJ en ${contact.email}. La aprobación y el procesamiento siguen el flujo de Hotmart.`],
-      ["Efectos del reembolso", "Una vez aprobado, se revoca el acceso al curso, al material técnico y a la licencia PRO incluida."],
+      ["Suscripción y Mensual", "Si Hotmart aprueba el reembolso, se revoca la licencia BOJ S7-PLC PRO vinculada a esa compra. Estas dos ofertas no incluyen curso ni materiales; la licencia mensual de pago único tampoco incluye acceso permanente."],
+      ["Profesional y Empresarial", "Si Hotmart aprueba el reembolso, se revocan la licencia BOJ S7-PLC PRO y el acceso permanente al curso y sus materiales vinculados a esa compra."],
       ["Curso S7-300/400", "La oferta independiente del curso también se procesa en Hotmart y muestra una garantía de 7 días. Si el reembolso es aprobado, se revocan el curso, su material y la licencia PRO incluida."],
       ["Servicios técnicos", "Los servicios profesionales se rigen por la propuesta aceptada y por el trabajo coordinado o realizado."],
       ["Ayuda", `Si tiene un problema de acceso, escriba a ${contact.email} desde el correo utilizado en Hotmart.`],
@@ -6214,6 +6219,28 @@ function LegalPage({ type }) {
     <PageShell eyebrow="Información legal" title={page.title} subtitle={page.intro}>
       <article className="legal-page">
         <p className="legal-updated">Última actualización: {page.updated}.</p>
+        {page.showCommercialIdentity ? (
+          <section className="legal-business" aria-labelledby={`${type}-business-title`}>
+            <h2 id={`${type}-business-title`}>Identidad comercial y atención</h2>
+            <p>
+              <strong>Vendedor y facturador:</strong> {commercialIdentity.seller}. <strong>Titular:</strong>
+              {" "}{commercialIdentity.owner}, titular de {commercialIdentity.ownedBrands}. La comercialización
+              {" "}por {commercialIdentity.seller} está autorizada por el titular.
+            </p>
+            <dl className="legal-business-facts">
+              <dt>Domicilio comercial informado</dt><dd>{commercialIdentity.address}</dd>
+              <dt>Correo institucional</dt><dd><a href={`mailto:${commercialIdentity.institutionalEmail}`}>{commercialIdentity.institutionalEmail}</a></dd>
+              <dt>Soporte, privacidad, reclamos y reembolsos</dt><dd><a href={`mailto:${commercialIdentity.supportEmail}`}>{commercialIdentity.supportEmail}</a></dd>
+              <dt>Teléfono y WhatsApp</dt><dd>{commercialIdentity.phone}</dd>
+              <dt>Atención</dt><dd>{commercialIdentity.hours}</dd>
+              <dt>Respuesta</dt><dd>{commercialIdentity.responseTime}</dd>
+              <dt>Responsable interno de soporte</dt><dd>{commercialIdentity.supportOwner}</dd>
+              <dt>Condición fiscal declarada</dt><dd>{commercialIdentity.taxStatus}</dd>
+              <dt>Facturación</dt><dd>{commercialIdentity.invoicing}</dd>
+              <dt>Sitio</dt><dd>{commercialIdentity.website}</dd>
+            </dl>
+          </section>
+        ) : null}
         {page.showAppOffers ? (
           <section className="legal-offers" aria-labelledby={`${type}-offers-title`}>
             <h2 id={`${type}-offers-title`}>Ofertas BOJ S7-PLC PRO publicadas</h2>

@@ -1,13 +1,30 @@
 export const contact = {
   brand: "BOJ Automatización y Control",
   responsible: "Walter Adrián Boj",
-  location: "San Miguel de Tucumán, Argentina",
+  location: "Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina",
   email: "contacto@bojautomatizacion.com",
-  whatsappDisplay: "+54 9 381 5327469",
+  whatsappDisplay: "+54 381 5327469",
   whatsappNumber: "5493815327469",
   linktree: "https://linktr.ee/bojautomatizacionycontrol",
   linkedin: "https://www.linkedin.com/in/adrianboj4/",
 };
+
+export const commercialIdentity = Object.freeze({
+  seller: "Hexa Group Holding SAS",
+  owner: "Walter Adrián Boj",
+  ownedBrands: "BOJ Automatización y BOJ S7-PLC",
+  authorization: "Comercialización autorizada por el titular",
+  address: "Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina",
+  institutionalEmail: "contacto@hexagroup.com.ar",
+  supportEmail: "contacto@bojautomatizacion.com",
+  phone: "+54 381 5327469",
+  hours: "Lunes a viernes de 9:00 a 16:00, hora argentina, excepto feriados",
+  responseTime: "Dentro de 48 horas hábiles",
+  website: "www.bojautomatizacion.com",
+  taxStatus: "Responsable Inscripto",
+  invoicing: "Factura electrónica y factura E para exportaciones, según corresponda",
+  supportOwner: "Walter Adrián Boj",
+});
 
 export const navItems = [
   { label: "Inicio", path: "/" },
