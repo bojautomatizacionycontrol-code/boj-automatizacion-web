@@ -152,6 +152,73 @@ const manualPreviewImages = Object.keys(manualPreviewModules)
   .sort()
   .map((key) => manualPreviewModules[key]);
 
+const m2ImageModules = import.meta.glob("./assets/m2/*.{avif,webp}", {
+  eager: true,
+  import: "default",
+});
+
+const heroM2Spec = (stem) => ({
+  stem,
+  width: 1672,
+  height: 941,
+  widths: [640, 960, 1672],
+  formats: ["avif", "webp"],
+  sizes: "100vw",
+});
+
+const m2ImageSpecs = new Map([
+  [heroInicio, heroM2Spec("hero-inicio")],
+  [heroServicios, heroM2Spec("hero-servicios")],
+  [heroCursos, heroM2Spec("hero-cursos")],
+  [heroCursoS7, heroM2Spec("hero-curso-s7")],
+  [heroCursoTia, heroM2Spec("hero-curso-tia")],
+  [appProHeroLaptopVisual, heroM2Spec("hero-app")],
+  [heroObras, heroM2Spec("hero-obras")],
+  [heroRecursos, heroM2Spec("hero-recursos")],
+  [heroContacto, heroM2Spec("hero-contacto")],
+  [courseS7400Visual, { stem: "course-s7-400", width: 2172, height: 724, widths: [640, 960, 1280], formats: ["avif", "webp"], sizes: "(max-width: 760px) 100vw, 35vw" }],
+  [courseTiaPortalVisual, { stem: "course-tia-portal", width: 2172, height: 724, widths: [640, 960, 1280], formats: ["avif", "webp"], sizes: "(max-width: 760px) 100vw, 35vw" }],
+  [bojLogo, { stem: "boj-logo-real-cropped", width: 730, height: 232, widths: [240, 480], formats: ["webp"], sizes: "232px" }],
+]);
+
+function getM2SourceSet(spec, format) {
+  return spec.widths
+    .map((width) => `${m2ImageModules[`./assets/m2/${spec.stem}-${width}.${format}`]} ${width}w`)
+    .join(", ");
+}
+
+function M2Picture({ src, alt, className, sizes, loading = "lazy", decoding = "async", fetchPriority, ...imageProps }) {
+  const spec = m2ImageSpecs.get(src);
+  if (!spec) {
+    return <img src={src} alt={alt} className={className} loading={loading} decoding={decoding} {...imageProps} />;
+  }
+  const resolvedSizes = sizes || spec.sizes;
+  return (
+    <picture className="m2-picture">
+      {spec.formats.map((format) => (
+        <source
+          key={format}
+          type={`image/${format}`}
+          srcSet={getM2SourceSet(spec, format)}
+          sizes={resolvedSizes}
+        />
+      ))}
+      <img
+        src={src}
+        alt={alt}
+        className={className}
+        width={spec.width}
+        height={spec.height}
+        sizes={resolvedSizes}
+        loading={loading}
+        decoding={decoding}
+        fetchPriority={fetchPriority}
+        {...imageProps}
+      />
+    </picture>
+  );
+}
+
 // ───────────────────────────────────────────────────────────────────────────
 // Analítica / tracking de conversión.
 // Para ACTIVAR: completa los IDs abajo. Mientras estén vacíos, todo es no-op
@@ -1128,10 +1195,16 @@ function App() {
     upsertMeta('meta[property="og:type"]', { property: "og:type", content: meta.ogType });
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: meta.title });
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: meta.description });
+    upsertMeta('meta[property="og:image"]', { property: "og:image", content: meta.image });
+    upsertMeta('meta[property="og:image:type"]', { property: "og:image:type", content: meta.imageType });
+    upsertMeta('meta[property="og:image:width"]', { property: "og:image:width", content: String(meta.imageWidth) });
+    upsertMeta('meta[property="og:image:height"]', { property: "og:image:height", content: String(meta.imageHeight) });
     upsertMeta('meta[property="og:image:alt"]', { property: "og:image:alt", content: meta.imageAlt });
     upsertMeta('meta[property="og:locale"]', { property: "og:locale", content: meta.locale });
     upsertMeta('meta[name="twitter:title"]', { name: "twitter:title", content: meta.title });
     upsertMeta('meta[name="twitter:description"]', { name: "twitter:description", content: meta.description });
+    upsertMeta('meta[name="twitter:image"]', { name: "twitter:image", content: meta.image });
+    upsertMeta('meta[name="twitter:image:alt"]', { name: "twitter:image:alt", content: meta.imageAlt });
 
     let canonical = document.querySelector('link[rel="canonical"]');
     let ogUrl = document.querySelector('meta[property="og:url"]');
@@ -1647,7 +1720,16 @@ function Hero({ image, eyebrow, title, subtitle, primary, secondary, note, aside
 
   return (
     <section className="boj-hero">
-      {image ? <img className="boj-hero-bg" src={image} alt="" aria-hidden="true" /> : null}
+      {image ? (
+        <M2Picture
+          className="boj-hero-bg"
+          src={image}
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          fetchPriority="high"
+        />
+      ) : null}
       <div className="boj-hero-shade" aria-hidden="true" />
       <div className={`mock-home-container boj-hero-inner${aside ? " boj-hero-inner--with-aside" : ""}`}>
         {aside ? (
@@ -1709,7 +1791,7 @@ function CourseHeroPreview() {
   return (
     <aside className="course-hero-preview" aria-label="Vista previa de la oferta del curso">
       <div className="course-hero-preview-media">
-        <img src={manualPreviewImages[0]} alt="Portada del manual de diagnóstico S7-300/400" />
+        <img src={manualPreviewImages[0]} alt="Portada del manual de diagnóstico S7-300/400" width="1100" height="1556" decoding="async" />
         <span>Manual técnico profesional</span>
       </div>
       <div className="course-hero-preview-copy">
@@ -1774,6 +1856,9 @@ function AppHeroDiagnosticPreview({ language = "es" }) {
         <img
           src={appDiagnosticoGuiado}
           alt={copy.imageAlt}
+          width="1474"
+          height="588"
+          decoding="async"
         />
       </div>
       <ol className="app-hero-diagnostic-preview-stages">
@@ -2063,7 +2148,7 @@ function HomeLandingRedesign() {
       <HomeObrasTeaser />
 
       <section className="mock-final-cta" data-home-section="cta">
-        <img src={plantVisual} alt="" aria-hidden="true" />
+        <img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" />
         <div className="mock-final-overlay" aria-hidden="true" />
         <div className="mock-home-container mock-final-content">
           <h2>¿Tienes una falla, una máquina detenida o necesitas formar a tu equipo?</h2>
@@ -2175,7 +2260,10 @@ function AppDiagnosticMockup({ language = "es" }) {
             <img
               src={appDiagnosticoGuiado}
               alt={visualCopy.desktop}
+              width="1474"
+              height="588"
               loading="lazy"
+              decoding="async"
             />
           </div>
           <div className="app-laptop-base" aria-hidden="true" />
@@ -2185,7 +2273,10 @@ function AppDiagnosticMockup({ language = "es" }) {
           <img
             src={appDiagnosticoGuiado}
             alt={visualCopy.mobile}
+            width="1474"
+            height="588"
             loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
@@ -2237,7 +2328,7 @@ function CourseHomeCard({ course }) {
   return (
     <article className="course-home-card">
       <figure>
-        <img src={course.image} alt="" loading="lazy" />
+        <M2Picture src={course.image} alt="" loading="lazy" />
       </figure>
       <div>
         <span className="course-mode">
@@ -2561,7 +2652,7 @@ function ServicesPage() {
       </section>
 
       <section className="services-redesign-cta" data-surface="dark">
-        <img src={plantVisual} alt="" aria-hidden="true" />
+        <img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" />
         <div className="services-redesign-cta-overlay" aria-hidden="true" />
         <div className="mock-home-container services-redesign-cta-content">
           <h2>Cuando una falla, migración o mejora requiere criterio técnico</h2>
@@ -2765,7 +2856,7 @@ function CourseAvailableCard({ course }) {
         </ul>
       </div>
       <div className="course-available-visual">
-        <img src={course.image} alt="" aria-hidden="true" loading="lazy" />
+        <M2Picture src={course.image} alt="" aria-hidden="true" loading="lazy" />
         <div aria-hidden="true" />
         <span className="visual-disclaimer">Imagen ilustrativa</span>
         <strong>{course.label}</strong>
@@ -3441,7 +3532,10 @@ function S7SalesLanding({ course, eyebrow }) {
             className="s7-sales-instructor-avatar"
             src={walterBojAvatar}
             alt="Walter Adrián Boj, especialista en automatización y diagnóstico de PLC Siemens"
+            width="1086"
+            height="1448"
             loading="lazy"
+            decoding="async"
           />
           <div className="s7-sales-instructor-copy">
             <p className="s7-sales-kicker">Quién te enseña</p>
@@ -4257,7 +4351,7 @@ function AppPage() {
 
       <section className="app-pro-trust-section">
         <div className="mock-home-container app-pro-trust-grid">
-          <img className="app-pro-trust-avatar" src={walterBojAvatar} alt="Walter Adrián Boj" loading="lazy" />
+          <img className="app-pro-trust-avatar" src={walterBojAvatar} alt="Walter Adrián Boj" width="1086" height="1448" loading="lazy" decoding="async" />
           <div className="app-pro-trust-copy">
             <h2>Desarrollada con criterio de planta</h2>
             <p>
@@ -4469,7 +4563,7 @@ function EnglishHomePage() {
       </section>
 
       <section className="mock-final-cta">
-        <img src={plantVisual} alt="" aria-hidden="true" />
+        <img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" />
         <div className="mock-final-overlay" aria-hidden="true" />
         <div className="mock-home-container mock-final-content">
           <h2>Do you have a plant fault, a stopped machine or a team that needs training?</h2>
@@ -4604,7 +4698,7 @@ function EnglishServicesPage() {
       </section>
 
       <section className="services-redesign-cta" data-surface="dark">
-        <img src={plantVisual} alt="" aria-hidden="true" />
+        <img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" />
         <div className="services-redesign-cta-overlay" aria-hidden="true" />
         <div className="mock-home-container services-redesign-cta-content">
           <h2>Start with the symptom, the equipment and the evidence you already have</h2>
@@ -4655,7 +4749,7 @@ function EnglishCourseAvailableCard({ type }) {
         </ul>
       </div>
       <div className="course-available-visual">
-        <img src={course.image} alt="" aria-hidden="true" loading="lazy" />
+        <M2Picture src={course.image} alt="" aria-hidden="true" loading="lazy" />
         <strong>{course.label}</strong>
         <span className="course-status-badge">{isS7 ? "Available" : "Upcoming"}</span>
         <a className="mock-btn mock-btn-primary" href={course.path}>{isS7 ? "View course" : "View preview"} <ArrowRight size={18} /></a>
@@ -4865,7 +4959,7 @@ function EnglishAppPage() {
 
       <section className="app-pro-trust-section">
         <div className="mock-home-container app-pro-trust-grid">
-          <img className="app-pro-trust-avatar" src={walterBojAvatar} alt="Walter Adrián Boj" loading="lazy" />
+          <img className="app-pro-trust-avatar" src={walterBojAvatar} alt="Walter Adrián Boj" width="1086" height="1448" loading="lazy" decoding="async" />
           <div className="app-pro-trust-copy"><h2>Developed with plant experience</h2><p>BOJ S7-PLC PRO was developed by Walter Adrián Boj, an industrial automation specialist with experience in Siemens PLC diagnostics, maintenance, programming and industrial networks.</p><a className="mock-btn mock-btn-outline" href={contact.linkedin} target="_blank" rel="noreferrer">View professional profile <ExternalLink size={17} /></a></div>
           <div className="app-pro-trust-metrics"><article><Icon name="Clock" size={22} /><h3>15+ years</h3><p>Industrial automation and diagnostics experience.</p></article><article><Icon name="Cpu" size={22} /><h3>Siemens PLC</h3><p>Focused on real S7-300/400 plant faults.</p></article><article><Icon name="ShieldCheck" size={22} /><h3>Field method</h3><p>A structured process designed to reduce guesswork.</p></article></div>
         </div>
@@ -5089,7 +5183,7 @@ function LocalizedS7SalesLanding({ language, courseCopy }) {
         note={copy.note}
         aside={(
           <aside className="course-hero-preview" aria-label={copy.heroPreviewAria}>
-            <div className="course-hero-preview-media"><img src={manualPreviewImages[0]} alt={copy.manualAlt} /><span>{copy.manualLabel}</span></div>
+            <div className="course-hero-preview-media"><img src={manualPreviewImages[0]} alt={copy.manualAlt} width="1100" height="1556" decoding="async" /><span>{copy.manualLabel}</span></div>
             <div className="course-hero-preview-copy"><span>{copy.bundleLabel}</span><strong>{offer.course.price}</strong><small>{copy.paymentMeta}</small><ul>{copy.heroBullets.map((item) => <li key={item}><CheckCircle2 size={15} />{item}</li>)}</ul></div>
           </aside>
         )}
@@ -5140,7 +5234,7 @@ function LocalizedS7SalesLanding({ language, courseCopy }) {
       </section>
 
       <section className={`s7-sales-section s7-sales-instructor localized-s7-${language}`} data-surface="light">
-        <div className="s7-sales-container s7-sales-instructor-grid"><img className="s7-sales-instructor-avatar" src={walterBojAvatar} alt="Walter Adrián Boj" loading="lazy" /><div className="s7-sales-instructor-copy"><p className="s7-sales-kicker">{copy.instructorKicker}</p><h2>Walter Adrián Boj</h2><p>{copy.instructorText}</p><a className="s7-sales-btn s7-sales-btn-secondary" href={contact.linkedin} target="_blank" rel="noreferrer">{copy.profile}</a></div></div>
+        <div className="s7-sales-container s7-sales-instructor-grid"><img className="s7-sales-instructor-avatar" src={walterBojAvatar} alt="Walter Adrián Boj" width="1086" height="1448" loading="lazy" decoding="async" /><div className="s7-sales-instructor-copy"><p className="s7-sales-kicker">{copy.instructorKicker}</p><h2>Walter Adrián Boj</h2><p>{copy.instructorText}</p><a className="s7-sales-btn s7-sales-btn-secondary" href={contact.linkedin} target="_blank" rel="noreferrer">{copy.profile}</a></div></div>
       </section>
 
       <section className={`s7-sales-section s7-sales-offer localized-s7-${language}`} id={copy.purchaseId} data-surface="dark">
@@ -5444,7 +5538,7 @@ function PortugueseHomePage() {
       <section className="mock-tech-strip"><div className="mock-home-container"><h2>Foco técnico</h2><p className="mock-tech-subtitle">Tecnologias industriais e áreas abrangidas pelo nosso trabalho.</p><div className="mock-tech-grid">{portugueseHome.specialties.map((item) => <article className="mock-tech-card" key={item.title}><Icon name={item.icon} size={48} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div></section>
       <section className="mock-section mock-app"><div className="mock-home-container mock-app-grid"><div className="mock-app-copy"><span className="section-badge">BOJ S7-PLC PRO</span><h2>Uma primeira resposta mais clara antes de abrir o STEP 7</h2><p>Informe estados da CPU, LEDs e sintomas de campo. O app organiza hipóteses técnicas e sugere o que verificar primeiro.</p><ul><li>Fluxo orientado por sintomas</li><li>Hipóteses técnicas priorizadas</li><li>Orientação para verificação em campo</li></ul><a className="mock-btn mock-btn-primary" href="/pt/app">Conhecer o app <ArrowRight size={18} /></a></div><AppDiagnosticMockup language="pt" /></div></section>
       <section className="mock-section mock-obras"><div className="mock-home-container"><h2>Projetos realizados</h2><p className="mock-obras-subtitle">Projetos selecionados de engenharia, migração de PLC e comissionamento realizados em ambientes reais de produção. As imagens são ilustrativas; os clientes e escopos são reais.</p><div className="mock-obras-grid">{portugueseProjects.map((project) => { const source = projects[project.sourceIndex]; return <article className="mock-obras-card" key={project.title}><div className="mock-obras-media"><img src={getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]} alt="" loading="lazy" /><span className="works-image-disclaimer">Imagem ilustrativa</span><span className="mock-obras-client">{source.client}</span></div><div className="mock-obras-body"><span className="mock-obras-year">{source.year}</span><h3>{project.title}</h3><p>{project.result}</p></div></article>; })}</div><div className="mock-obras-cta"><a className="mock-btn mock-btn-primary" href="/pt/projetos">Ver projetos selecionados <ArrowRight size={18} /></a></div></div></section>
-      <section className="mock-final-cta"><img src={plantVisual} alt="" aria-hidden="true" /><div className="mock-final-overlay" aria-hidden="true" /><div className="mock-home-container mock-final-content"><h2>Sua planta tem uma falha, uma máquina parada ou uma equipe que precisa de capacitação?</h2><p>Conte-nos o que está acontecendo e ajudaremos a identificar o próximo passo adequado.</p><div className="mock-final-actions"><a className="mock-btn mock-btn-whatsapp" href={whatsappUrl("Olá, gostaria de conversar sobre uma falha industrial, um projeto de automação ou uma necessidade de capacitação técnica.")}><Phone size={18} /> Falar pelo WhatsApp</a><a className="mock-btn mock-btn-outline" href="/pt/contato"><Mail size={18} /> Enviar consulta técnica</a></div></div></section>
+      <section className="mock-final-cta"><img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" /><div className="mock-final-overlay" aria-hidden="true" /><div className="mock-home-container mock-final-content"><h2>Sua planta tem uma falha, uma máquina parada ou uma equipe que precisa de capacitação?</h2><p>Conte-nos o que está acontecendo e ajudaremos a identificar o próximo passo adequado.</p><div className="mock-final-actions"><a className="mock-btn mock-btn-whatsapp" href={whatsappUrl("Olá, gostaria de conversar sobre uma falha industrial, um projeto de automação ou uma necessidade de capacitação técnica.")}><Phone size={18} /> Falar pelo WhatsApp</a><a className="mock-btn mock-btn-outline" href="/pt/contato"><Mail size={18} /> Enviar consulta técnica</a></div></div></section>
     </div>
   );
 }
@@ -5458,7 +5552,7 @@ function PortugueseServicesPage() {
       <section className="services-field-section" data-surface="light"><div className="mock-home-container"><div className="services-section-heading services-field-heading"><h2>Experiência em ambientes industriais</h2><p>Trabalho realizado onde continuidade operacional, partida segura e diagnóstico confiável são essenciais.</p></div><div className="services-field-grid">{portugueseServices.field.map((card) => <article className="services-field-card" key={card.title}><Icon name={card.icon} size={30} /><h3>{card.title}</h3><p>{card.text}</p></article>)}</div></div></section>
       <section className="services-redesign-section services-secondary-section" data-surface="dark"><div className="mock-home-container"><div className="services-section-heading services-secondary-heading"><h2>Serviços complementares</h2><p>Suporte técnico para sinais, painéis e capacitação aplicada à manutenção industrial.</p></div><div className="services-secondary-grid">{portugueseServices.secondary.map((service) => <ServiceSecondaryCard key={service.title} service={service} />)}</div></div></section>
       <section className="services-workflow-section" data-surface="light"><div className="mock-home-container"><div className="services-section-heading services-workflow-heading"><h2>Um método para tomar melhores decisões técnicas</h2><p>Do sintoma ao próximo passo prático, com evidências de campo e um escopo de intervenção claro.</p></div><div className="services-workflow-grid">{portugueseServices.workflow.map((card) => <article className="services-workflow-card" key={card.title}><Icon name={card.icon} size={26} /><h3>{card.title}</h3><p>{card.text}</p></article>)}</div></div></section>
-      <section className="services-redesign-cta" data-surface="dark"><img src={plantVisual} alt="" aria-hidden="true" /><div className="services-redesign-cta-overlay" aria-hidden="true" /><div className="mock-home-container services-redesign-cta-content"><h2>Comece pelo sintoma, pelo equipamento e pelas evidências que já possui</h2><p>Podemos usar essas informações para definir o escopo, o risco e o próximo passo técnico mais útil.</p><div className="services-redesign-actions"><a className="mock-btn mock-btn-whatsapp" href={whatsappUrl("Olá, gostaria de conversar sobre um serviço técnico industrial.")}><Phone size={18} /> Falar pelo WhatsApp</a><a className="mock-btn mock-btn-outline" href="/pt/contato">Dados de contato <ArrowRight size={18} /></a></div></div></section>
+      <section className="services-redesign-cta" data-surface="dark"><img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" /><div className="services-redesign-cta-overlay" aria-hidden="true" /><div className="mock-home-container services-redesign-cta-content"><h2>Comece pelo sintoma, pelo equipamento e pelas evidências que já possui</h2><p>Podemos usar essas informações para definir o escopo, o risco e o próximo passo técnico mais útil.</p><div className="services-redesign-actions"><a className="mock-btn mock-btn-whatsapp" href={whatsappUrl("Olá, gostaria de conversar sobre um serviço técnico industrial.")}><Phone size={18} /> Falar pelo WhatsApp</a><a className="mock-btn mock-btn-outline" href="/pt/contato">Dados de contato <ArrowRight size={18} /></a></div></div></section>
     </div>
   );
 }
@@ -5468,7 +5562,7 @@ function PortugueseCourseAvailableCard({ type }) {
   const course = isS7
     ? { label: "DISPONÍVEL AGORA", title: "Diagnóstico industrial para Siemens S7-300/400", image: courseS7400Visual, path: "/pt/cursos/s7-300-400", icon: "Cpu", facts: [["Formato", "Online"], ["Idioma", "Espanhol"], ["Acesso", "Permanente"], ["Inclui", "1 mês de App PRO"]], bullets: ["STEP 7 Classic e SIMATIC Manager", "Estados da CPU, SF/BF e Diagnostic Buffer", "PROFIBUS, módulos e sinais de campo"] }
     : { label: "EM PREPARAÇÃO", title: "TIA Portal para Siemens S7-1200/1500", image: courseTiaPortalVisual, path: "/pt/cursos/tia-portal", icon: "MonitorCog", facts: [["Formato", "Online"], ["Nível", "Introdutório"], ["Status", "Em preparação"]], bullets: ["Configuração de hardware", "Variáveis e LAD", "Monitoramento online e diagnóstico básico"] };
-  return <article className="course-available-card"><div className="course-available-content"><div className="course-available-title-row"><span><Icon name={course.icon} size={30} /></span><h3>{course.title}</h3></div><div className="course-quick-facts">{course.facts.map(([title, value]) => <div key={title}><span>{title}</span><strong>{value}</strong></div>)}</div><ul className="course-available-bullets">{course.bullets.map((item) => <li key={item}><CheckCircle2 size={16} />{item}</li>)}</ul></div><div className="course-available-visual"><img src={course.image} alt="" aria-hidden="true" loading="lazy" /><strong>{course.label}</strong><span className="course-status-badge">{isS7 ? "Disponível" : "Em breve"}</span><a className="mock-btn mock-btn-primary" href={course.path}>{isS7 ? "Ver curso" : "Ver prévia"} <ArrowRight size={18} /></a></div></article>;
+  return <article className="course-available-card"><div className="course-available-content"><div className="course-available-title-row"><span><Icon name={course.icon} size={30} /></span><h3>{course.title}</h3></div><div className="course-quick-facts">{course.facts.map(([title, value]) => <div key={title}><span>{title}</span><strong>{value}</strong></div>)}</div><ul className="course-available-bullets">{course.bullets.map((item) => <li key={item}><CheckCircle2 size={16} />{item}</li>)}</ul></div><div className="course-available-visual"><M2Picture src={course.image} alt="" aria-hidden="true" loading="lazy" /><strong>{course.label}</strong><span className="course-status-badge">{isS7 ? "Disponível" : "Em breve"}</span><a className="mock-btn mock-btn-primary" href={course.path}>{isS7 ? "Ver curso" : "Ver prévia"} <ArrowRight size={18} /></a></div></article>;
 }
 
 function PortugueseCoursesPage() {
@@ -5527,7 +5621,7 @@ function PortugueseAppPage() {
 
       <section className="app-pro-value-row-section"><div className="mock-home-container app-pro-value-row-grid"><article className="app-pro-offline-card"><h2>Acesso e disponibilidade</h2><p className="app-pro-offline-intro">Use o app em um navegador moderno ou instale-o em um dispositivo compatível.</p><div className="app-pro-offline-items"><div><Icon name="Globe" size={34} /><h3>Acesso web</h3><p>Sem instalação obrigatória de software.</p></div><div><Icon name="Smartphone" size={34} /><h3>Instalável</h3><p>Acesso direto em dispositivos compatíveis.</p></div><div><Icon name="WifiOff" size={34} /><h3>Offline conforme o plano</h3><p>A duração offline depende da licença escolhida.</p></div></div></article><article className="app-pro-cost-card"><div><h2>Uma parada de planta pode custar mais do que uma licença</h2><p>O BOJ S7-PLC PRO ajuda a organizar sintomas e evidências antes de trocar hardware ou reiniciar equipamentos sem uma causa clara.</p><ul className="app-pro-cost-bullets"><li>Reduza a tentativa e erro sob pressão.</li><li>Priorize evidências antes de intervir.</li><li>Prepare uma sessão mais focada no STEP 7.</li></ul><strong className="app-pro-cost-emphasis">Menos suposições. Melhor critério técnico.</strong></div><div className="app-pro-cost-visual" aria-hidden="true"><span /><span /><span /><span /><b><TriangleAlert size={24} /></b></div></article><article className="app-pro-audience-card"><h2>Para quem é</h2><p className="app-pro-audience-intro">Para profissionais e equipes que diagnosticam sistemas Siemens S7-300/400.</p><div className="app-pro-audience-list">{portugueseApp.audience.map((item) => <div className="app-pro-audience-item" key={item.text}><Icon name={item.icon} size={18} /><span>{item.text}</span></div>)}</div><p className="app-pro-audience-note">Apoia o técnico; não substitui o critério técnico qualificado.</p></article></div></section>
 
-      <section className="app-pro-trust-section"><div className="mock-home-container app-pro-trust-grid"><img className="app-pro-trust-avatar" src={walterBojAvatar} alt="Walter Adrián Boj" loading="lazy" /><div className="app-pro-trust-copy"><h2>Desenvolvido com experiência de planta</h2><p>O BOJ S7-PLC PRO foi desenvolvido por Walter Adrián Boj, especialista em automação industrial com experiência em diagnóstico de PLC Siemens, manutenção, programação e redes industriais.</p><a className="mock-btn mock-btn-outline" href={contact.linkedin} target="_blank" rel="noreferrer">Ver perfil profissional <ExternalLink size={17} /></a></div><div className="app-pro-trust-metrics"><article><Icon name="Clock" size={22} /><h3>Mais de 15 anos</h3><p>Experiência em automação e diagnóstico industrial.</p></article><article><Icon name="Cpu" size={22} /><h3>PLC Siemens</h3><p>Foco em falhas reais de planta com S7-300/400.</p></article><article><Icon name="ShieldCheck" size={22} /><h3>Método de campo</h3><p>Processo estruturado para reduzir suposições.</p></article></div></div></section>
+      <section className="app-pro-trust-section"><div className="mock-home-container app-pro-trust-grid"><img className="app-pro-trust-avatar" src={walterBojAvatar} alt="Walter Adrián Boj" width="1086" height="1448" loading="lazy" decoding="async" /><div className="app-pro-trust-copy"><h2>Desenvolvido com experiência de planta</h2><p>O BOJ S7-PLC PRO foi desenvolvido por Walter Adrián Boj, especialista em automação industrial com experiência em diagnóstico de PLC Siemens, manutenção, programação e redes industriais.</p><a className="mock-btn mock-btn-outline" href={contact.linkedin} target="_blank" rel="noreferrer">Ver perfil profissional <ExternalLink size={17} /></a></div><div className="app-pro-trust-metrics"><article><Icon name="Clock" size={22} /><h3>Mais de 15 anos</h3><p>Experiência em automação e diagnóstico industrial.</p></article><article><Icon name="Cpu" size={22} /><h3>PLC Siemens</h3><p>Foco em falhas reais de planta com S7-300/400.</p></article><article><Icon name="ShieldCheck" size={22} /><h3>Método de campo</h3><p>Processo estruturado para reduzir suposições.</p></article></div></div></section>
       <S7Testimonials background="dark" language="pt" />
 
       <section className="app-pro-faq-section"><div className="mock-home-container"><div className="app-pro-section-heading app-pro-section-heading-dark"><h2>Perguntas frequentes</h2></div><div className="app-pro-faq-grid">{portugueseApp.faq.map((item) => <details className="app-pro-faq-item" key={item.question}><summary>{item.question}<ChevronDown size={16} /></summary><p>{item.answer}</p></details>)}</div></div></section>
@@ -6313,7 +6407,12 @@ function SectionHeader({ eyebrow, title, text }) {
 function BrandLogo({ compact = false }) {
   return (
     <span className={`brand-logo ${compact ? "compact" : ""}`}>
-      <img src={bojLogo} alt="BOJ Automatización y Control" />
+      <M2Picture
+        src={bojLogo}
+        alt="BOJ Automatización y Control"
+        loading="eager"
+        sizes={compact ? "232px" : "(max-width: 900px) 176px, 196px"}
+      />
     </span>
   );
 }

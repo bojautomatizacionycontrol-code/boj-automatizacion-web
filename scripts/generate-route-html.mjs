@@ -1,4 +1,4 @@
-import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -29,9 +29,15 @@ export function renderRouteMetadataFragment(metadata) {
     `    <meta property="og:locale" content="${metadata.locale}" />`,
     `    <meta property="og:title" content="${escapeHtml(metadata.title)}" />`,
     `    <meta property="og:description" content="${escapeHtml(metadata.description)}" />`,
+    `    <meta property="og:image" content="${escapeHtml(metadata.image)}" />`,
+    `    <meta property="og:image:type" content="${metadata.imageType}" />`,
+    `    <meta property="og:image:width" content="${metadata.imageWidth}" />`,
+    `    <meta property="og:image:height" content="${metadata.imageHeight}" />`,
     `    <meta property="og:image:alt" content="${escapeHtml(metadata.imageAlt)}" />`,
     `    <meta name="twitter:title" content="${escapeHtml(metadata.title)}" />`,
     `    <meta name="twitter:description" content="${escapeHtml(metadata.description)}" />`,
+    `    <meta name="twitter:image" content="${escapeHtml(metadata.image)}" />`,
+    `    <meta name="twitter:image:alt" content="${escapeHtml(metadata.imageAlt)}" />`,
   ];
 
   if (metadata.canonical) {
@@ -114,8 +120,38 @@ export function validateRouteHtml(html, metadata) {
   );
   requireExactOccurrence(
     html,
+    `<meta property="og:image" content="${escapeHtml(metadata.image)}" />`,
+    `og:image ${metadata.route}`
+  );
+  requireExactOccurrence(
+    html,
+    `<meta property="og:image:type" content="${metadata.imageType}" />`,
+    `og:image:type ${metadata.route}`
+  );
+  requireExactOccurrence(
+    html,
+    `<meta property="og:image:width" content="${metadata.imageWidth}" />`,
+    `og:image:width ${metadata.route}`
+  );
+  requireExactOccurrence(
+    html,
+    `<meta property="og:image:height" content="${metadata.imageHeight}" />`,
+    `og:image:height ${metadata.route}`
+  );
+  requireExactOccurrence(
+    html,
     `<meta property="og:image:alt" content="${escapeHtml(metadata.imageAlt)}" />`,
     `og:image:alt ${metadata.route}`
+  );
+  requireExactOccurrence(
+    html,
+    `<meta name="twitter:image" content="${escapeHtml(metadata.image)}" />`,
+    `twitter:image ${metadata.route}`
+  );
+  requireExactOccurrence(
+    html,
+    `<meta name="twitter:image:alt" content="${escapeHtml(metadata.imageAlt)}" />`,
+    `twitter:image:alt ${metadata.route}`
   );
 
   if (metadata.canonical) {
@@ -173,6 +209,12 @@ export function validateRouteHtml(html, metadata) {
   if (occurrences(html, /<meta\s+name="robots"/g) !== 1) {
     throw new Error(`SEO-BUILD: robots duplicado en ${metadata.route}`);
   }
+  if (occurrences(html, /<meta\s+property="og:image"/g) !== 1) {
+    throw new Error(`SEO-BUILD: og:image duplicada en ${metadata.route}`);
+  }
+  if (occurrences(html, /<meta\s+name="twitter:image"/g) !== 1) {
+    throw new Error(`SEO-BUILD: twitter:image duplicada en ${metadata.route}`);
+  }
   if (occurrences(html, /<title>/g) !== 1) {
     throw new Error(`SEO-BUILD: title duplicado en ${metadata.route}`);
   }
@@ -220,6 +262,19 @@ export async function validateBuiltAssets(html, outDir) {
   }
 }
 
+export async function validateFingerprintAssets(outDir) {
+  const assetsDir = join(outDir, "assets");
+  const entries = await readdir(assetsDir, { withFileTypes: true });
+  if (!entries.length) throw new Error("WEB-M2: dist/assets no puede estar vacío");
+  const fingerprintPattern = /-[A-Za-z0-9_-]{8,}\.[A-Za-z0-9]+$/;
+  for (const entry of entries) {
+    if (!entry.isFile() || !fingerprintPattern.test(entry.name)) {
+      throw new Error(`WEB-M2: asset no inmutable o sin fingerprint: ${entry.name}`);
+    }
+  }
+  return entries.map((entry) => entry.name);
+}
+
 export function outputFileForRoute(outDir, route) {
   if (route === "/") return join(outDir, "index.html");
   return join(outDir, `${route.slice(1)}.html`);
@@ -228,6 +283,7 @@ export function outputFileForRoute(outDir, route) {
 export async function generateRouteHtml(outDir = resolve("dist")) {
   const templatePath = join(outDir, "index.html");
   const template = await readFile(templatePath, "utf8");
+  await validateFingerprintAssets(outDir);
   await validateBuiltAssets(template, outDir);
   const generated = [];
 

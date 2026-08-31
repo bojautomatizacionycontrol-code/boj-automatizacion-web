@@ -3,6 +3,65 @@ import { languageRoutePairs } from "./i18n.js";
 
 export const SITE_ORIGIN = "https://www.bojautomatizacion.com";
 
+export const SOCIAL_IMAGE_WIDTH = 1200;
+export const SOCIAL_IMAGE_HEIGHT = 630;
+export const SOCIAL_IMAGE_TYPE = "image/jpeg";
+
+const socialImageAltByLanguage = Object.freeze({
+  es: Object.freeze({
+    institutional: "BOJ Automatización y Control",
+    services: "BOJ Automatización y Control — servicios industriales",
+    app: "BOJ S7-PLC PRO — asistencia de diagnóstico industrial",
+    course: "BOJ — formación técnica en PLC Siemens",
+    resources: "BOJ — recursos técnicos Siemens",
+    contact: "BOJ Automatización y Control — contacto técnico",
+  }),
+  en: Object.freeze({
+    institutional: "BOJ Automation and Control",
+    services: "BOJ Automation and Control — industrial services",
+    app: "BOJ S7-PLC PRO — industrial diagnostic assistance",
+    course: "BOJ — Siemens PLC technical training",
+    resources: "BOJ — Siemens technical resources",
+    contact: "BOJ Automation and Control — technical contact",
+  }),
+  "pt-BR": Object.freeze({
+    institutional: "BOJ Automação e Controle",
+    services: "BOJ Automação e Controle — serviços industriais",
+    app: "BOJ S7-PLC PRO — assistência de diagnóstico industrial",
+    course: "BOJ — formação técnica em PLC Siemens",
+    resources: "BOJ — recursos técnicos Siemens",
+    contact: "BOJ Automação e Controle — contato técnico",
+  }),
+});
+
+export function getSocialImageFamily(route) {
+  const localizedPath = route.replace(/^\/(?:en|pt)(?=\/|$)/, "") || "/";
+  if (["/servicios", "/services", "/servicos", "/obras", "/projects", "/projetos"].includes(localizedPath)) {
+    return "services";
+  }
+  if (localizedPath === "/app") return "app";
+  if (localizedPath === "/cursos" || localizedPath.startsWith("/cursos/") || localizedPath === "/courses" || localizedPath.startsWith("/courses/")) {
+    return "course";
+  }
+  if (localizedPath === "/recursos-tecnicos" || localizedPath.startsWith("/recursos-tecnicos/")) {
+    return "resources";
+  }
+  if (["/contacto", "/contact", "/contato"].includes(localizedPath)) return "contact";
+  return "institutional";
+}
+
+function getSocialImageMetadata(route, lang) {
+  const imageFamily = getSocialImageFamily(route);
+  return {
+    imageFamily,
+    image: `${SITE_ORIGIN}/og-${imageFamily}-1200x630.jpg`,
+    imageType: SOCIAL_IMAGE_TYPE,
+    imageWidth: SOCIAL_IMAGE_WIDTH,
+    imageHeight: SOCIAL_IMAGE_HEIGHT,
+    imageAlt: socialImageAltByLanguage[lang][imageFamily],
+  };
+}
+
 const homeMetadata = Object.freeze({
   title: "BOJ Automatización y Control | PLC Siemens, diagnóstico y mantenimiento industrial",
   description:
@@ -363,11 +422,7 @@ function getNotFoundMetadata(route) {
     lang,
     locale: lang === "en" ? "en_US" : lang === "pt-BR" ? "pt_BR" : "es_AR",
     ogType: "website",
-    imageAlt: lang === "en"
-      ? "BOJ Automation and Control — Siemens S7 PLC diagnostics"
-      : lang === "pt-BR"
-        ? "BOJ Automação e Controle — diagnóstico de falhas em PLC Siemens S7"
-        : "BOJ Automatización y Control — diagnóstico de fallas en PLC Siemens S7",
+    ...getSocialImageMetadata(route, lang),
     canonical: null,
     robots: "noindex, follow",
     indexable: false,
@@ -391,11 +446,7 @@ export function getRouteMetadata(route) {
     lang,
     locale: lang === "en" ? "en_US" : lang === "pt-BR" ? "pt_BR" : "es_AR",
     ogType: appRouteSet.has(path) ? "product" : "website",
-    imageAlt: lang === "en"
-      ? "BOJ Automation and Control — Siemens S7 PLC diagnostics"
-      : lang === "pt-BR"
-        ? "BOJ Automação e Controle — diagnóstico de falhas em PLC Siemens S7"
-        : "BOJ Automatización y Control — diagnóstico de fallas en PLC Siemens S7",
+    ...getSocialImageMetadata(path, lang),
     canonical: absoluteUrl(path),
     robots: indexable ? "index, follow" : "noindex, follow",
     indexable,

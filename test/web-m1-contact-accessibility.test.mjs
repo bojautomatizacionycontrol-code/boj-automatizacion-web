@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const appSource = (await readFile(new URL("../src/App.jsx", import.meta.url), "utf8")).replaceAll("\r\n", "\n");
 const cssSource = await readFile(new URL("../src/m1-accessibility.css", import.meta.url), "utf8");
 
 function sha256(value) {

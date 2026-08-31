@@ -968,7 +968,7 @@ export const technicalResources = [
     officialLinks: [
       {
         label: "Siemens WinCC en TIA Portal",
-        href: "https://www.siemens.com/global/en/products/automation/industry-software/automation-software/tia-portal/software/wincc-tia-portal.html",
+        href: "https://www.siemens.com/en-us/products/simatic-hmi/wincc-unified-engineering/",
         text: "Página oficial de Siemens sobre WinCC dentro del ecosistema TIA Portal.",
       },
       {
