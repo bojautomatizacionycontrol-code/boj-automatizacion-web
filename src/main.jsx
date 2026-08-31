@@ -3,7 +3,6 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App.jsx";
 import { loadRouteComponent } from "./routes/manifest.jsx";
 import "./styles.css";
-import "./styles/commercial-impact.css";
 import "./audit.css";
 import "./m1-accessibility.css";
 

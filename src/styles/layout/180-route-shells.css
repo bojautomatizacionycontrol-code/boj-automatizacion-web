@@ -1,0 +1,206 @@
+
+/* =====================================================================
+   BOJ AUDIT — Hero unificado para toda la web (misma altura/estructura/tipografia).
+   ===================================================================== */
+.boj-hero {
+  position: relative;
+  min-height: clamp(440px, 34vw, 500px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #020b14;
+}
+
+.m2-picture {
+  display: contents;
+}
+
+.boj-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center right;
+  filter: brightness(1.05) contrast(1.02);
+}
+
+.boj-hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(2, 11, 20, 0.92) 0%, rgba(2, 11, 20, 0.72) 38%, rgba(2, 11, 20, 0.34) 68%, rgba(2, 11, 20, 0.5) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(2, 11, 20, 0.55));
+}
+
+.boj-hero-inner {
+  position: relative;
+  z-index: 1;
+  padding: 44px 0;
+}
+
+.boj-hero-eyebrow {
+  margin: 0 0 12px;
+  color: #2fc6f0;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.boj-hero-title {
+  max-width: 760px;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2.1rem, 3vw, 3.3rem);
+  line-height: 1.08;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.boj-hero-subtitle {
+  max-width: 650px;
+  margin: 16px 0 0;
+  color: rgba(248, 251, 255, 0.92);
+  font-size: clamp(1rem, 1.2vw, 1.18rem);
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.boj-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 26px;
+}
+
+@media (max-width: 640px) {
+  .boj-hero {
+    min-height: 460px;
+  }
+
+  .boj-hero-actions {
+    width: 100%;
+  }
+
+  .boj-hero-actions .mock-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+/* =====================================================================
+   BOJ AUDIT — Paginas internas (PageShell) a tema CLARO, consistente
+   con el resto del sitio. El cuerpo hereda texto oscuro; se convierten
+   los paneles/inputs oscuros. Las bandas de CTA (.route-cta) quedan
+   oscuras a proposito, como el CTA final del home.
+   ===================================================================== */
+.boj-shell-body {
+  background: #f6f8fb;
+  color: #2b3a49;
+}
+
+.boj-shell-body .eyebrow {
+  color: #0a82b4;
+}
+
+/* Paneles de intro: oscuro -> claro */
+.boj-shell-body .resources-intro-panel,
+.boj-shell-body .contact-direct,
+.boj-shell-body .portfolio-prep {
+  border-color: #d9e2ea;
+  background: #ffffff;
+  color: #2b3a49;
+  box-shadow: 0 14px 34px rgba(7, 17, 28, 0.06);
+}
+
+.boj-shell-body .resources-intro-panel h2,
+.boj-shell-body .contact-direct h2,
+.boj-shell-body .portfolio-prep h2 {
+  color: #0f1b27 !important;
+}
+
+.boj-shell-body .resources-intro-panel p,
+.boj-shell-body .contact-direct p,
+.boj-shell-body .portfolio-prep p {
+  color: #3a4a59;
+}
+
+/* Slots del portfolio (Obras) */
+.boj-shell-body .asset-slots span {
+  border-color: #cfe0ea;
+  color: #3a4a59;
+  background: #f3f8fb;
+}
+
+/* Paneles de contacto */
+.boj-shell-body .contact-panel,
+.boj-shell-body .contact-form {
+  border-color: #d9e2ea;
+  background: #ffffff;
+  box-shadow: 0 14px 34px rgba(7, 17, 28, 0.06);
+}
+
+.boj-shell-body label {
+  color: #1d2b3a;
+}
+
+.boj-shell-body input,
+.boj-shell-body select,
+.boj-shell-body textarea {
+  color: #1d2b3a;
+  border-color: #d3deea;
+  background: #ffffff;
+}
+
+.boj-shell-body .diagnostic-checklist {
+  border-color: #cfe6f2;
+  background: #f2f9fd;
+}
+
+/* Visual lateral del curso TIA */
+.boj-shell-body .course-side-visual {
+  border-color: #d9e2ea;
+  background: #eef4f8;
+}
+
+/* Boton secundario en paginas claras (no en la banda oscura route-cta,
+   que mantiene su override propio con !important) */
+.boj-shell-body .btn.secondary {
+  color: #0b80b3;
+  border-color: rgba(11, 128, 179, 0.5);
+  background: #ffffff;
+}
+
+.boj-shell-body .btn.secondary:hover {
+  background: #eef7fb;
+}
+
+/* CheckItems y links sociales: texto oscuro en pagina clara */
+.boj-shell-body .check-item,
+.boj-shell-body .resources-intro-panel .check-item {
+  color: #2b3a49;
+}
+
+.boj-shell-body .social-placeholders a {
+  color: #1d2b3a;
+  border-color: #d3deea;
+  background: #ffffff;
+}
+
+.boj-shell-body .contact-line small {
+  color: #5f7181;
+}
+
+/* El texto del check va en un span: forzar el color oscuro heredado */
+.boj-shell-body .check-item span {
+  color: inherit;
+}
+
+/* =====================================================================
+   BOJ AUDIT — Conversión de ventas (jun 2026)
+   Hero note · proof strip · Método BOJ · flipbook del manual ·
+   value-stack + launch · testimonios · garantía final.
+   Bloque al final del archivo para ganar la cascada. Colores explícitos
+   (proof y testimonios se reusan fuera de .s7-sales-page).
+   ===================================================================== */

@@ -1,6 +1,16 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { readFile, readdir } from "node:fs/promises";
+import { join, relative } from "node:path";
 import { gzipSync } from "node:zlib";
+
+import { getRouteMetadata, publicRoutePaths } from "../src/route-metadata.js";
+import { validateBuiltCsp } from "./csp-policy.mjs";
+import {
+  getSameDocumentFragmentIds,
+  outputFileForRoute,
+  validateBuiltAssets,
+  validateHtmlBudgets,
+  validatePrerenderedRouteHtml,
+} from "./generate-route-html.mjs";
 
 const ROUTE_ENTRIES = Object.freeze([
   "src/routes/home.jsx",
@@ -51,7 +61,71 @@ function enforceBudget(label, actual, budget) {
   }
 }
 
+function portableRelativePath(root, filePath) {
+  return relative(root, filePath).replaceAll("\\", "/");
+}
+
+async function collectHtmlFiles(directory, root = directory, files = []) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  for (const entry of entries) {
+    const entryPath = join(directory, entry.name);
+    if (entry.isDirectory()) await collectHtmlFiles(entryPath, root, files);
+    else if (entry.isFile() && entry.name.toLowerCase().endsWith(".html")) {
+      files.push(portableRelativePath(root, entryPath));
+    }
+  }
+  return files;
+}
+
+function extractBuildYear(html, route) {
+  const matches = [...html.matchAll(/<div id="root" data-boj-route="[^"]+" data-boj-build-year="(\d{4})">/g)];
+  if (matches.length !== 1) {
+    throw new Error(`PRERENDER-BUILD: ${route} debe declarar un único año de build; actual=${matches.length}`);
+  }
+  return Number(matches[0][1]);
+}
+
+export async function verifyPrerenderedHtmlBuild(outDir) {
+  const notFoundRoute = "/__boj_not_found__";
+  const expected = [
+    ...publicRoutePaths.map((route) => ({ route, filePath: outputFileForRoute(outDir, route) })),
+    { route: notFoundRoute, filePath: join(outDir, "404.html") },
+  ];
+  const expectedPaths = new Set(expected.map(({ filePath }) => portableRelativePath(outDir, filePath)));
+  const actualPaths = new Set(await collectHtmlFiles(outDir));
+  const missing = [...expectedPaths].filter((filePath) => !actualPaths.has(filePath));
+  const unexpected = [...actualPaths].filter((filePath) => !expectedPaths.has(filePath));
+  if (missing.length || unexpected.length || actualPaths.size !== expectedPaths.size) {
+    throw new Error(
+      `PRERENDER-BUILD: matriz HTML distinta de 35+404; ` +
+      `actual=${actualPaths.size} faltantes=${missing.join(",") || "0"} ` +
+      `sobrantes=${unexpected.join(",") || "0"}`
+    );
+  }
+
+  const documents = [];
+  let fragments = 0;
+  for (const { route, filePath } of expected) {
+    const html = await readFile(filePath, "utf8");
+    const buildYear = extractBuildYear(html, route);
+    const markup = validatePrerenderedRouteHtml(html, getRouteMetadata(route), route, buildYear);
+    fragments += getSameDocumentFragmentIds(markup, route).length;
+    await validateBuiltAssets(html, outDir);
+    documents.push({ label: portableRelativePath(outDir, filePath), html });
+  }
+
+  const budgets = validateHtmlBudgets(documents);
+  const csp = await validateBuiltCsp(expected.map(({ filePath }) => filePath));
+  return Object.freeze({
+    files: expected.length,
+    fragments,
+    budgets,
+    csp,
+  });
+}
+
 export async function verifyWebM3Build(outDir) {
+  const html = await verifyPrerenderedHtmlBuild(outDir);
   const manifest = JSON.parse(await readFile(join(outDir, ".vite", "manifest.json"), "utf8"));
   const entry = requireRecord(manifest, "index.html");
   if (!entry.isEntry) throw new Error("WEB-M3-BUDGET: index.html no identifica el entrypoint cliente");
@@ -102,6 +176,7 @@ export async function verifyWebM3Build(outDir) {
     current.gzip > largest.gzip ? current : largest
   );
   return {
+    html,
     entry: entrySize,
     largestRoute,
     css: cssSize,

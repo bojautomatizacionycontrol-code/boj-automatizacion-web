@@ -3,25 +3,27 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
+import { readCssBundle } from "./helpers/css-source.mjs";
+
 const normalizeLf = (value) => value.replaceAll("\r\n", "\n").replaceAll("\r", "\n");
 const sha256 = (value) => createHash("sha256").update(normalizeLf(value)).digest("hex");
 
-const [mainSource, appSource, manifestSource, deferredSource, manualSource, stylesSource, commercialStyles] = await Promise.all([
+const [mainSource, appSource, manifestSource, deferredSource, manualSource, stylesSource] = await Promise.all([
   readFile(new URL("../src/main.jsx", import.meta.url), "utf8"),
   readFile(new URL("../src/App.jsx", import.meta.url), "utf8"),
   readFile(new URL("../src/routes/manifest.jsx", import.meta.url), "utf8"),
   readFile(new URL("../src/components/DeferredManualFlipbook.jsx", import.meta.url), "utf8"),
   readFile(new URL("../src/components/ManualFlipbook.jsx", import.meta.url), "utf8"),
-  readFile(new URL("../src/styles.css", import.meta.url), "utf8"),
-  readFile(new URL("../src/styles/commercial-impact.css", import.meta.url), "utf8"),
+  readCssBundle(),
 ]);
 
 test("mantiene el CSS modularizado byte-equivalente al cierre WEB-M2", () => {
   assert.equal(
-    sha256(normalizeLf(stylesSource) + normalizeLf(commercialStyles)),
+    sha256(stylesSource),
     "e995f8d894b14711d838f8b3aebea312061b389ebe31ae166ea079e11ab89a5a"
   );
-  assert.match(mainSource, /import "\.\/styles\.css";[\s\S]*import "\.\/styles\/commercial-impact\.css";/);
+  assert.match(mainSource, /import "\.\/styles\.css";[\s\S]*import "\.\/audit\.css";[\s\S]*import "\.\/m1-accessibility\.css";/);
+  assert.doesNotMatch(mainSource, /commercial-impact\.css/);
 });
 
 test("conserva ocho familias de ruta dinámicas sin volver a importar páginas desde el entry", () => {
@@ -34,18 +36,19 @@ test("conserva ocho familias de ruta dinámicas sin volver a importar páginas d
   assert.doesNotMatch(manifestSource, /<RouteChunkBoundary key=/);
 });
 
-test("difiere ManualFlipbook por visibilidad o intención y conserva una vista SSR dimensionada", () => {
+test("difiere ManualFlipbook hasta intersección real o activación y conserva dimensiones", () => {
   assert.match(deferredSource, /import\("\.\/ManualFlipbook\.jsx"\)/);
-  assert.match(deferredSource, /new IntersectionObserver/);
-  assert.match(deferredSource, /onPointerEnter=\{enhance\}/);
-  assert.match(deferredSource, /onFocusCapture=\{enhance\}/);
+  assert.match(deferredSource, /new window\.IntersectionObserver/);
+  assert.match(deferredSource, /entry\.isIntersecting && entry\.intersectionRatio > 0/);
+  assert.match(deferredSource, /rootMargin: "0px", threshold: 0/);
   assert.match(deferredSource, /onClick=\{onActivate\}/);
-  assert.match(deferredSource, /width=\{dimensions\.width\}[\s\S]*height=\{dimensions\.height\}/);
-  assert.match(deferredSource, /hostRef\.current\?\.contains\(activeElement\)[\s\S]*querySelector\("\.s7-flip-page"\)\?\.focus/);
+  assert.match(deferredSource, /data-intrinsic-width=\{dimensions\.width\}[\s\S]*data-intrinsic-height=\{dimensions\.height\}/);
+  assert.match(deferredSource, /hostRef\.current\?\.contains\(activeElement\)/);
+  assert.match(deferredSource, /restoreFocusAfterLoadRef[\s\S]*querySelector\("\.s7-flip-page"\)\?\.focus/);
   assert.match(manualSource, /width=\{imageDimensions\.width\}[\s\S]*height=\{imageDimensions\.height\}/);
   assert.match(manualSource, /returnFocusAfterZoomRef[\s\S]*requestAnimationFrame[\s\S]*pageButtonRef\.current\?\.focus/);
   assert.match(manualSource, /ref=\{pageButtonRef\}[\s\S]*<AccessibleDialog[\s\S]*onClose=\{closeZoom\}/);
-  assert.doesNotMatch(deferredSource, /setTimeout\(enhance, 1200\)/);
+  assert.doesNotMatch(deferredSource, /requestIdleCallback|setTimeout|onPointerEnter|onFocusCapture/);
 });
 
 test("captura fallos de prefetch y evita un page_view transitorio del sentinel 404", () => {

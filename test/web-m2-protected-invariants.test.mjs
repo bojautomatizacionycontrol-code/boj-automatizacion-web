@@ -80,7 +80,7 @@ const protectedFileHashes = {
   "./web-m1-contact-accessibility.test.mjs": "B275449C88F3E67E5F1B21EA612F56A3B130D877A6478B958690B2000BB954BF",
   "./web-m1-protected-invariants.test.mjs": "D4E20FFEFB5553473C87C0BBF1FA06257C7153153A9E31ED6F7314A4B3DB8889",
   "./web-m1-tia-future-state.test.mjs": "75CD071DBA0F5182FF97E89D0C4A9B41254889F7732B94C031B6358FD16A1E31",
-  "./web-m1-visual-accessibility.test.mjs": "E064737C8D9B842ACD1AE2D9D045D908D67D6DC72D3583529A1539048E97B0BA",
+  "./web-m1-visual-accessibility.test.mjs": "1772545D1BC68F4E9D0015B40D47D8657AFBF22079FCFFB1E18F8896FAD68CA3",
 };
 
 test("archivos de backend seguridad rutas base y WEB-M1 permanecen exactos", async () => {

@@ -1,10 +1,11 @@
 import { readRuntimeAppSource } from "./helpers/runtime-app-source.mjs";
+import { readCssBundle } from "./helpers/css-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const appSource = await readRuntimeAppSource();
-const baseCss = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const baseCss = await readCssBundle();
 const auditCss = await readFile(new URL("../src/audit.css", import.meta.url), "utf8");
 const m1Css = await readFile(new URL("../src/m1-accessibility.css", import.meta.url), "utf8");
 

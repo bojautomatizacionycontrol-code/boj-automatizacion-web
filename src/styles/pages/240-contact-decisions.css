@@ -1,0 +1,152 @@
+
+/* Contact decision paths */
+.contact-direct.contact-decision-intro {
+  display: block;
+  margin-bottom: 1rem;
+  padding: 1.35rem 1.45rem;
+  border: 1px solid rgba(5, 160, 210, 0.18);
+  border-radius: 14px;
+  background:
+    linear-gradient(110deg, rgba(8, 169, 216, 0.08), rgba(8, 169, 216, 0) 52%),
+    #ffffff;
+  box-shadow: 0 18px 42px rgba(5, 36, 56, 0.07);
+}
+
+.contact-decision-intro h2 {
+  max-width: 36rem;
+  margin: 0.25rem 0 0.5rem;
+  text-wrap: balance;
+}
+
+.contact-decision-intro p:last-child {
+  max-width: 52rem;
+  margin: 0;
+  color: #526575;
+  line-height: 1.65;
+}
+
+.contact-route-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0 0 2rem;
+}
+
+.contact-route-card {
+  --contact-route-accent: #079bca;
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 19rem;
+  flex-direction: column;
+  padding: 1.4rem;
+  overflow: hidden;
+  color: #071d2b;
+  text-decoration: none;
+  border: 1px solid rgba(19, 68, 94, 0.16);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 16px 36px rgba(5, 36, 56, 0.08);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.contact-route-card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  content: "";
+  background: var(--contact-route-accent);
+}
+
+.contact-route-card--urgent {
+  --contact-route-accent: #e27232;
+}
+
+.contact-route-card--training {
+  --contact-route-accent: #345cc9;
+}
+
+.contact-route-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--contact-route-accent) 48%, transparent);
+  box-shadow: 0 22px 46px rgba(5, 36, 56, 0.13);
+}
+
+.contact-route-card:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--contact-route-accent) 48%, white);
+  outline-offset: 3px;
+}
+
+.contact-route-icon {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1.2rem;
+  color: var(--contact-route-accent);
+  border: 1px solid color-mix(in srgb, var(--contact-route-accent) 24%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--contact-route-accent) 9%, white);
+  place-items: center;
+}
+
+.contact-route-kicker {
+  color: var(--contact-route-accent);
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.11em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.contact-route-card h3 {
+  margin: 0.45rem 0 0.65rem;
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.contact-route-card p {
+  flex: 1;
+  margin: 0;
+  color: #526575;
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.contact-route-action {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+  color: var(--contact-route-accent);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.contact-route-action svg {
+  transition: transform 180ms ease;
+}
+
+.contact-route-card:hover .contact-route-action svg {
+  transform: translateX(3px);
+}
+
+#consulta-tecnica {
+  scroll-margin-top: 7rem;
+}
+
+@media (min-width: 1181px) {
+  .contact-grid {
+    align-items: stretch;
+  }
+
+  .contact-grid > .contact-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-grid > .contact-panel > .button-row {
+    margin-top: auto;
+  }
+}

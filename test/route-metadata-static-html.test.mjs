@@ -57,7 +57,9 @@ ${renderRouteMetadataFragment(metadata)}
 
 function prerenderFixture(route, buildYear) {
   return `<a class="skip-link" href="#main-content">Saltar al contenido principal</a>` +
-    `<header><nav aria-label="Navegación principal"><a href="/">BOJ</a></nav></header>` +
+    `<header><nav aria-label="Navegación principal">` +
+    `<a href="/">BOJ</a><a href="/servicios">Servicios</a><a href="/cursos">Cursos</a>` +
+    `<a href="/app">App</a><a href="/contacto">Contacto</a></nav></header>` +
     `<main id="main-content"><h1>Contenido técnico de ${route}</h1>` +
     `<p>Diagnóstico industrial, automatización y formación técnica con información útil disponible antes de ejecutar JavaScript.</p></main>` +
     `<footer>© ${buildYear} BOJ Automatización y Control</footer>`;
