@@ -2,11 +2,14 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
+import { readCssBundle } from "./helpers/css-source.mjs";
+
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
-const styleSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const technicalRoutesSource = await readFile(new URL("../src/TechnicalRoutes.jsx", import.meta.url), "utf8");
+const styleSource = await readCssBundle();
 
 test("Cursos diferencia visuales ilustrativos y disponibilidad", () => {
-  const illustrativeLabels = appSource.match(/className="visual-disclaimer">Imagen ilustrativa/g) ?? [];
+  const illustrativeLabels = `${appSource}\n${technicalRoutesSource}`.match(/className="visual-disclaimer">Imagen ilustrativa/g) ?? [];
 
   assert.equal(illustrativeLabels.length, 2);
   assert.match(appSource, /className="course-status-badge"/);

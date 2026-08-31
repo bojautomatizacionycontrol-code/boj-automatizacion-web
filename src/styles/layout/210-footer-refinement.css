@@ -1,0 +1,104 @@
+
+/* Global footer visual alignment ─────────────────────────────────────────────
+   Override final AISLADO del footer global (MainFooter). Solo reordena grilla,
+   alineación y espaciado. No cambia contenido, textos ni enlaces, y NO toca las
+   capas CSS históricas del footer (se conservan). Scope .site-footer.mock-footer
+   para ser la fuente efectiva sin !important. */
+.site-footer.mock-footer {
+  padding-top: clamp(40px, 4vw, 52px);
+}
+
+.site-footer.mock-footer .mock-footer-inner {
+  grid-template-columns:
+    minmax(250px, 1.35fr)
+    minmax(230px, 1fr)
+    minmax(240px, 1fr)
+    minmax(110px, auto);
+  column-gap: clamp(40px, 4vw, 56px);
+  row-gap: 34px;
+  align-items: start;
+}
+
+/* Encabezados de columna: ritmo consistente, sin doble espaciado */
+.site-footer.mock-footer h3 {
+  margin: 0 0 4px;
+}
+
+/* Columna 1 — marca: estructura consistente + párrafo acotado + alineación óptica */
+.site-footer.mock-footer .mock-footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 4px;
+}
+.site-footer.mock-footer .mock-footer-brand p {
+  margin: 0;
+  max-width: 34ch;
+}
+
+/* Columna 2 — contacto: ritmo vertical uniforme + wrap seguro */
+.site-footer.mock-footer .mock-footer-contact {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+.site-footer.mock-footer .mock-footer-contact a,
+.site-footer.mock-footer .mock-footer-contact span {
+  overflow-wrap: anywhere;
+}
+
+/* Columna 3 — navegación: encabezado full-width + 7 enlaces en 2 columnas */
+.site-footer.mock-footer .mock-footer-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 28px;
+  row-gap: 8px;
+  align-content: start;
+  justify-content: start;
+}
+.site-footer.mock-footer .mock-footer-nav h3 {
+  grid-column: 1 / -1;
+}
+
+/* Columna 4 — redes: encabezado + iconos en fila, ancho ajustado */
+.site-footer.mock-footer .mock-footer-social {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.site-footer.mock-footer .mock-footer-social > div {
+  display: flex;
+  gap: 10px;
+}
+
+/* Barra inferior — copyright integrado, borde superior sutil */
+.site-footer.mock-footer .mock-footer-bottom {
+  margin-top: clamp(28px, 3vw, 40px);
+  padding: 18px 0;
+  border-top: 1px solid rgba(35, 199, 244, 0.16);
+  text-align: center;
+}
+
+/* Tablet ≤1180px — 2 columnas: marca+contacto / navegación+redes */
+@media (max-width: 1180px) {
+  .site-footer.mock-footer .mock-footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(32px, 5vw, 56px);
+    row-gap: 34px;
+  }
+}
+
+/* Móvil ≤760px — 1 columna, orden natural marca→contacto→navegación→redes */
+@media (max-width: 760px) {
+  .site-footer.mock-footer .mock-footer-inner {
+    grid-template-columns: 1fr;
+    row-gap: 26px;
+  }
+}
+
+/* Pantallas muy angostas ≤360px — navegación a 1 columna si 2 no entran limpias */
+@media (max-width: 360px) {
+  .site-footer.mock-footer .mock-footer-nav {
+    grid-template-columns: 1fr;
+  }
+}

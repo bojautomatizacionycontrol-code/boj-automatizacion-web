@@ -3,12 +3,13 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { commercialIdentity, contact, offer } from "../src/content.js";
+import { readCssBundle } from "./helpers/css-source.mjs";
 
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 const contentSource = await readFile(new URL("../src/content.js", import.meta.url), "utf8");
 const i18nSource = await readFile(new URL("../src/i18n.js", import.meta.url), "utf8");
 const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const stylesSource = await readCssBundle();
 const legalStylesSource = await readFile(new URL("../src/audit.css", import.meta.url), "utf8");
 const reviewSource = await readFile(new URL("../COMMERCIAL_ALIGNMENT_V8_17_24.md", import.meta.url), "utf8");
 

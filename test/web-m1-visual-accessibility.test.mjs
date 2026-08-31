@@ -2,8 +2,11 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
+import { readCssBundle } from "./helpers/css-source.mjs";
+
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
-const baseCss = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const technicalRoutesSource = await readFile(new URL("../src/TechnicalRoutes.jsx", import.meta.url), "utf8");
+const baseCss = await readCssBundle();
 const auditCss = await readFile(new URL("../src/audit.css", import.meta.url), "utf8");
 const m1Css = await readFile(new URL("../src/m1-accessibility.css", import.meta.url), "utf8");
 
@@ -68,8 +71,8 @@ test("movimiento reducido, H1 y grilla de cinco planes quedan normalizados", () 
 test("corrige saltos evitables de encabezado sin cambiar sus textos", () => {
   assert.match(appSource, /<h2 className="s7-sales-kicker">Qué vas a aprender<\/h2>/);
   assert.match(appSource, /<h2 className="s7-sales-kicker">\{copy\.learningKicker\}<\/h2>/);
-  assert.match(appSource, /<section className="article-section"[\s\S]*?<h2>\{section\.title\}<\/h2>/);
-  assert.match(appSource, /<h2>Documentación, soporte técnico y referencias del fabricante<\/h2>/);
+  assert.match(technicalRoutesSource, /<section className="article-section"[\s\S]*?<h2>\{section\.title\}<\/h2>/);
+  assert.match(technicalRoutesSource, /<h2>Documentación, soporte técnico y referencias del fabricante<\/h2>/);
   assert.equal((appSource.match(/<article className="gracias-step">\s*<h2>/g) || []).length, 3);
   assert.equal((appSource.match(/<h2>\{footerCopy\./g) || []).length, 3);
 });

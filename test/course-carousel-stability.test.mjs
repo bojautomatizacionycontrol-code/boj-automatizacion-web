@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+import { readCssBundle } from "./helpers/css-source.mjs";
+
+const stylesSource = await readCssBundle();
 
 test("el carrusel del manual reserva una altura estable para todas sus leyendas", () => {
   assert.match(

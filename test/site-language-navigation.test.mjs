@@ -11,12 +11,13 @@ import {
   portugueseNavItems,
 } from "../src/i18n.js";
 import { getRouteMetadata } from "../src/route-metadata.js";
+import { readCssBundle } from "./helpers/css-source.mjs";
 
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
 const sitemapSource = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
 const i18nSource = await readFile(new URL("../src/i18n.js", import.meta.url), "utf8");
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const stylesSource = await readCssBundle();
 
 const expectedPairs = [
   ["/", "/en", "/pt"],

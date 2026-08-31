@@ -1,0 +1,770 @@
+
+/* =====================================================================
+   BOJ AUDIT IMPROVEMENTS — bloque propio para ganar la cascada.
+   Mantener todo lo nuevo acá para no chocar con reglas duplicadas.
+   ===================================================================== */
+
+/* Hero: línea de prueba técnica */
+.mock-hero-proof {
+  max-width: 650px;
+  margin: 22px 0 0;
+  color: rgba(248, 251, 255, 0.74);
+  font-size: 0.86rem;
+  line-height: 1.5;
+  font-weight: 650;
+  letter-spacing: 0.015em;
+}
+
+/* Franja de clientes (texto, sin logos) */
+.mock-clients {
+  background: #ffffff;
+  border-bottom: 1px solid #d9e2ea;
+  padding: 16px 0;
+}
+
+.mock-clients-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 26px;
+}
+
+.mock-clients-label {
+  margin: 0;
+  color: var(--mock-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.mock-clients-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mock-clients-list li {
+  color: #1d2b3a;
+  font-size: 1rem;
+  font-weight: 850;
+  letter-spacing: 0.01em;
+}
+
+.mock-clients-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #0a82b4;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mock-clients-link:hover {
+  text-decoration: underline;
+}
+
+/* Teaser de obras reales en el home */
+.mock-obras {
+  background: #f7f9fc;
+  border-top: 1px solid #d9e2ea;
+}
+
+.mock-obras-subtitle {
+  max-width: 720px;
+  margin: 0 auto 24px;
+  text-align: center;
+  color: #3a4a59;
+  font-size: 1rem;
+  line-height: 1.42;
+  font-weight: 560;
+}
+
+.mock-obras-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.5vw, 28px);
+}
+
+.mock-obras-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccd8e4;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(7, 17, 28, 0.05);
+}
+
+.mock-obras-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.mock-obras-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mock-obras-client {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(2, 11, 20, 0.82);
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.mock-obras-body {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mock-obras-year {
+  color: #0a82b4;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.mock-obras-body h3 {
+  margin: 0;
+  font-size: 1.04rem;
+  line-height: 1.18;
+  font-weight: 900;
+  color: var(--mock-ink);
+}
+
+.mock-obras-body p {
+  margin: 4px 0 0;
+  color: #2b3a49;
+  font-size: 0.9rem;
+  line-height: 1.32;
+  font-weight: 540;
+}
+
+.mock-obras-cta {
+  margin-top: 26px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .mock-obras-grid {
+    grid-template-columns: 1fr;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .mock-clients-inner {
+    gap: 8px 18px;
+  }
+}
+
+/* Curso: programa / temario (14 módulos) */
+.s7-sales-program {
+  background: var(--s7-light);
+}
+
+.s7-sales-program-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 26px;
+}
+
+.s7-sales-program-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 15px 18px;
+  border: 1px solid #d3deea;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(7, 17, 28, 0.04);
+}
+
+.s7-sales-program-item > span:last-child {
+  color: #233140;
+  font-weight: 650;
+  line-height: 1.32;
+  font-size: 0.98rem;
+}
+
+.s7-sales-program-num {
+  flex: none;
+  min-width: 30px;
+  color: #0b80b3;
+  font-weight: 900;
+  font-size: 1.05rem;
+}
+
+/* Curso: bloque de instructor */
+.s7-sales-instructor {
+  background: var(--s7-light);
+  border-top: 1px solid #e0e8f0;
+}
+
+.s7-sales-instructor-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 34px;
+  align-items: center;
+}
+
+.s7-sales-instructor-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 1px solid #d3deea;
+  box-shadow: 0 14px 30px rgba(7, 17, 28, 0.12);
+}
+
+.s7-sales-instructor-copy h2 {
+  margin: 6px 0 12px;
+  color: var(--s7-ink);
+  font-size: clamp(1.7rem, 2.4vw, 2.1rem);
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.s7-sales-instructor-copy > p {
+  max-width: 680px;
+  margin: 0 0 18px;
+  color: #2b3a49;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  font-weight: 540;
+}
+
+.s7-sales-instructor .s7-sales-btn-secondary {
+  display: inline-flex;
+  border: 1px solid #0b80b3;
+  color: #0b80b3;
+  background: #ffffff;
+}
+
+.s7-sales-instructor .s7-sales-btn-secondary:hover {
+  background: #eef7fb;
+}
+
+/* Curso: garantía y cruce de precios en la oferta */
+.s7-sales-offer-guarantee {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: #d7ffe9;
+  font-weight: 750;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.s7-sales-offer-guarantee svg {
+  flex: none;
+  color: #4fe3a0;
+}
+
+.s7-sales-offer-crosslink {
+  margin: 0;
+  color: #b9cddb;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.s7-sales-offer-crosslink a {
+  color: #2fc6f0;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.s7-sales-offer-crosslink a:hover {
+  text-decoration: underline;
+}
+
+/* App: cruce de precios hacia el curso */
+.app-pro-plans-crosslink {
+  margin: 10px 0 0;
+  color: #c4d6e4;
+  font-size: 0.96rem;
+  line-height: 1.45;
+}
+
+.app-pro-plans-crosslink a {
+  color: #2fb6e8;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.app-pro-plans-crosslink a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 760px) {
+  .s7-sales-program-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .s7-sales-instructor-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 22px;
+  }
+
+  .s7-sales-instructor-copy > p {
+    margin-inline: auto;
+  }
+}
+
+/* App: objeción "¿no es solo una tabla?" (sección oscura) */
+.app-pro-objection-section {
+  padding: 42px 0;
+}
+
+.app-pro-objection-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 38px;
+  align-items: center;
+}
+
+.app-pro-objection-copy h2 {
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-size: clamp(1.5rem, 2.2vw, 2.05rem);
+  font-weight: 900;
+  line-height: 1.12;
+}
+
+.app-pro-objection-copy p {
+  margin: 0;
+  color: #cfe1ee;
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.app-pro-objection-copy strong {
+  color: #ffffff;
+}
+
+.app-pro-objection-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.app-pro-objection-col {
+  padding: 20px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(160, 190, 210, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.app-pro-objection-col h3 {
+  margin: 0 0 12px;
+  font-size: 1.02rem;
+  font-weight: 900;
+}
+
+.app-pro-objection-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.app-pro-objection-col li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.app-pro-objection-col li svg {
+  flex: none;
+  margin-top: 1px;
+}
+
+.app-pro-objection-bad h3 {
+  color: #9fb3c2;
+}
+
+.app-pro-objection-bad li {
+  color: #aebeca;
+}
+
+.app-pro-objection-bad li svg {
+  color: #7d8f9d;
+}
+
+.app-pro-objection-good {
+  border-color: rgba(0, 174, 234, 0.4);
+  background: rgba(0, 174, 234, 0.08);
+}
+
+.app-pro-objection-good h3 {
+  color: #ffffff;
+}
+
+.app-pro-objection-good li {
+  color: #e4f2fb;
+}
+
+.app-pro-objection-good li svg {
+  color: #4fe3a0;
+}
+
+@media (max-width: 820px) {
+  .app-pro-objection-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* =====================================================================
+   BOJ AUDIT — Lote visual: heroes mas claros + alturas similares,
+   recursos simetricos, pagina Obras on-brand con fotos reales.
+   ===================================================================== */
+
+/* --- Heroes: alturas similares (440-500px) en home, app y curso --- */
+.mock-hero,
+.s7-sales-hero {
+  min-height: clamp(440px, 34vw, 500px);
+}
+
+.app-pro-hero {
+  height: auto;
+  min-height: clamp(440px, 34vw, 500px);
+  max-height: none;
+}
+
+/* --- Heroes: imagenes mas claras (menos overlay oscuro) --- */
+.mock-hero-bg {
+  opacity: 1;
+  filter: brightness(1.07) contrast(1.02) saturate(1.02);
+}
+
+.app-pro-hero-bg {
+  filter: brightness(1.08) contrast(1) saturate(1.02);
+}
+
+.mock-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(2, 11, 20, 0.8) 0%, rgba(2, 11, 20, 0.56) 38%, rgba(2, 11, 20, 0.24) 70%, rgba(2, 11, 20, 0.48) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(2, 11, 20, 0.46));
+}
+
+.app-pro-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(2, 11, 20, 0.84) 0%, rgba(2, 11, 20, 0.62) 40%, rgba(2, 11, 20, 0.3) 70%, rgba(2, 11, 20, 0.1) 100%),
+    linear-gradient(180deg, rgba(2, 11, 20, 0.04) 0%, rgba(2, 11, 20, 0.3) 100%);
+}
+
+.s7-sales-hero {
+  background-image:
+    linear-gradient(90deg, rgba(0, 12, 24, 0.8) 0%, rgba(0, 12, 24, 0.56) 46%, rgba(0, 12, 24, 0.2) 100%),
+    var(--s7-sales-hero-image);
+}
+
+/* --- Recursos: imagenes del mismo tamano (simetria de los 5 bloques) --- */
+.resource-card-visual {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  min-height: 0;
+  height: auto;
+}
+
+.resource-card-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Obras: cards claras on-brand con la foto real visible --- */
+.project-card {
+  border: 1px solid #ccd8e4;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 14px 34px rgba(7, 17, 28, 0.08);
+  color: #1d2b3a;
+}
+
+.project-media {
+  background: #06101a;
+}
+
+.project-media::after {
+  background: linear-gradient(
+    180deg,
+    rgba(3, 8, 13, 0.34) 0%,
+    rgba(3, 8, 13, 0) 26%,
+    rgba(3, 8, 13, 0) 52%,
+    rgba(3, 8, 13, 0.62) 100%
+  );
+}
+
+.project-photo {
+  opacity: 1;
+  filter: saturate(1) contrast(1.02);
+}
+
+.project-media span {
+  color: #ffffff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.mock-obras-media .works-image-disclaimer,
+.project-media .works-image-disclaimer,
+.course-available-visual .visual-disclaimer,
+.resource-card-visual .visual-disclaimer {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  bottom: auto;
+  left: auto;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  border-radius: 999px;
+  background: rgba(2, 11, 20, 0.8);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: none;
+  backdrop-filter: blur(6px);
+}
+
+.course-status-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border: 1px solid rgba(98, 210, 255, 0.48);
+  border-radius: 999px;
+  background: rgba(2, 11, 20, 0.84);
+  color: #dff7ff;
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: none;
+  backdrop-filter: blur(6px);
+}
+
+.works-archive {
+  margin-top: 24px;
+}
+
+.works-archive > summary {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 18px;
+  border: 1px solid rgba(98, 210, 255, 0.28);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(0, 174, 234, 0.12), rgba(0, 174, 234, 0.03)),
+    rgba(3, 14, 24, 0.92);
+  color: #f7fbff;
+  cursor: pointer;
+  list-style: none;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
+}
+
+.works-archive > summary::-webkit-details-marker {
+  display: none;
+}
+
+.works-archive > summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(98, 210, 255, 0.4);
+  border-radius: 50%;
+  color: var(--cyan);
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.works-archive[open] > summary::after {
+  content: "\2212";
+}
+
+.works-archive > summary:focus-visible {
+  outline: 3px solid rgba(98, 210, 255, 0.72);
+  outline-offset: 3px;
+}
+
+.works-archive-summary {
+  display: grid;
+  gap: 4px;
+}
+
+.works-archive-summary strong {
+  font-size: 1rem;
+}
+
+.works-archive-summary small {
+  color: rgba(225, 241, 250, 0.74);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.works-grid-archive {
+  margin-top: 24px;
+}
+
+.works-grid-archive .project-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 720px;
+}
+
+@media (max-width: 760px) {
+  .works-archive > summary {
+    min-height: 64px;
+    padding: 14px;
+  }
+
+  .works-archive-summary small {
+    max-width: 28ch;
+  }
+}
+
+.project-body {
+  background: #ffffff;
+}
+
+.project-title-row {
+  grid-template-columns: 1fr;
+}
+
+.project-body h2 {
+  color: #0f1b27;
+}
+
+.project-body > p,
+.project-result-grid p {
+  color: #3a4a59;
+}
+
+.project-result-grid h3 {
+  color: #0a82b4;
+}
+
+.project-result-grid > div {
+  border: 1px solid #e0e8f0;
+  background: #f7f9fc;
+}
+
+.tag-list span {
+  border: 1px solid #d3deea;
+  background: #eef4f8;
+  color: #1d2b3a;
+}
+
+@media (max-width: 760px) {
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .project-media {
+    min-height: 210px;
+  }
+}
+
+/* --- Obras: pulido de legibilidad (PortfolioPrep + RouteCTA) --- */
+/* Titulo de la card superior: estaba oscuro sobre fondo oscuro.
+   !important para ganar a reglas legacy de mayor especificidad. */
+.portfolio-prep h2 {
+  color: #f4f8fc !important;
+}
+
+/* Boton secundario del CTA final: se veia apagado/deshabilitado. */
+.route-cta .btn.secondary {
+  color: #eaf6ff !important;
+  border-color: rgba(98, 210, 255, 0.6) !important;
+  background: rgba(98, 210, 255, 0.18) !important;
+}
+
+.route-cta .btn.secondary:hover {
+  border-color: rgba(98, 210, 255, 0.95) !important;
+  background: rgba(98, 210, 255, 0.28) !important;
+}
+
+/* --- Obras: mas informacion por obra (sector/rol + alcance) --- */
+.project-meta-line {
+  margin: 2px 0 14px;
+  color: #0a82b4;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+}
+
+.project-highlights {
+  list-style: none;
+  margin: 14px 0 4px;
+  padding: 14px 16px;
+  display: grid;
+  gap: 9px;
+  border: 1px solid #e0e8f0;
+  border-radius: 10px;
+  background: #f7f9fc;
+}
+
+.project-highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #2b3a49;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  font-weight: 540;
+}
+
+.project-highlights li svg {
+  flex: none;
+  margin-top: 2px;
+  color: #0a82b4;
+}

@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { track as trackVercelEvent } from "@vercel/analytics";
-import AccessibleDialog from "./AccessibleDialog.jsx";
+import AccessibleDialog from "./DeferredAccessibleDialog.jsx";
 import {
   focusHashTarget,
   createFocusLayer,
@@ -125,9 +125,6 @@ import step7HwConfigVisual from "./assets/12.png";
 import step7LadderVisual from "./assets/13.png";
 import step7ClassicVisual from "./assets/siemens-software-step7-basic.jpg";
 import tiaPortalResourceVisual from "./assets/TIA_Portal_1.png";
-import microWinResourceVisual from "./assets/MicroWin-1.png";
-import logoSoftComfortResourceVisual from "./assets/Logo comfort - 1.jpg";
-import winccResourceVisual from "./assets/WinCC-1.jfif";
 import plcCabinetVisual from "./assets/old-site/07-0852e6d5.jpg";
 import panelDiagnosticVisual from "./assets/old-site/panel-diagnostic-optimized.jpg";
 import step7Visual from "./assets/old-site/25-58d80e46.jpg";
@@ -151,6 +148,102 @@ const manualPreviewModules = import.meta.glob("./assets/manual-preview/*.jpg", {
 const manualPreviewImages = Object.keys(manualPreviewModules)
   .sort()
   .map((key) => manualPreviewModules[key]);
+const manualPreviewDimensions = manualPreviewImages.map(() => ({ width: 1100, height: 1556 }));
+
+const LazyManualFlipbook = lazy(() => import("./ManualFlipbook.jsx"));
+const LazyTechnicalRoutes = lazy(() => import("./TechnicalRoutes.jsx"));
+
+function ManualFlipbookFallback({ images, pages, variant = "full", orientation = "portrait", observerRef }) {
+  if (!images.length) return null;
+
+  return (
+    <div
+      ref={observerRef}
+      className={`s7-flip s7-flip-${variant} s7-flip-${orientation}`}
+      data-deferred-manual-flipbook=""
+      aria-hidden="true"
+    >
+      <div className="s7-flip-stage">
+        <span className="s7-flip-page" />
+      </div>
+      <div className="s7-flip-bar">
+        <span className="s7-flip-caption">{pages?.[0]?.label}</span>
+        <span className="s7-flip-counter">1 / {images.length}</span>
+      </div>
+    </div>
+  );
+}
+
+function DeferredManualFlipbook(props) {
+  const placeholderRef = useRef(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    if (shouldLoad) return undefined;
+    if (!("IntersectionObserver" in window)) {
+      setShouldLoad(true);
+      return undefined;
+    }
+
+    const placeholder = placeholderRef.current;
+    if (!placeholder) return undefined;
+
+    const observer = new window.IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting && entry.intersectionRatio > 0)) {
+        setShouldLoad(true);
+        observer.disconnect();
+      }
+    }, { root: null, rootMargin: "0px", threshold: 0 });
+
+    observer.observe(placeholder);
+    return () => observer.disconnect();
+  }, [shouldLoad]);
+
+  if (!shouldLoad) {
+    return <ManualFlipbookFallback {...props} observerRef={placeholderRef} />;
+  }
+
+  return (
+    <Suspense fallback={<ManualFlipbookFallback {...props} />}>
+      <LazyManualFlipbook {...props} />
+    </Suspense>
+  );
+}
+
+const technicalRoutePrimitives = {
+  CheckItem,
+  Icon,
+  NotFound,
+  PageShell,
+  PrimaryLink,
+  RouteCTA,
+  SectionHeader,
+  whatsappUrl,
+};
+
+function DeferredTechnicalRoutes({ route }) {
+  const resource = technicalResources.find((item) => item.path === route);
+  const fallback = route === "/recursos-tecnicos"
+    ? {
+        eyebrow: "Recursos técnicos",
+        title: "Biblioteca técnica Siemens para automatización industrial",
+        subtitle: "Guías aplicadas sobre herramientas Siemens utilizadas en planta: STEP 7 SIMATIC Manager, TIA Portal, MicroWIN, LOGO! Soft Comfort y SIMATIC WinCC.",
+        heroImage: heroRecursos,
+        heroPrimary: { label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.") },
+        heroSecondary: { label: "Ver cursos", href: "/cursos" },
+      }
+    : {
+        eyebrow: "Recurso técnico",
+        title: resource?.title || "Recurso técnico",
+        subtitle: resource?.subtitle || "Contenido técnico aplicado a mantenimiento industrial.",
+      };
+
+  return (
+    <Suspense fallback={<PageShell {...fallback} />}>
+      <LazyTechnicalRoutes route={route} primitives={technicalRoutePrimitives} />
+    </Suspense>
+  );
+}
 
 const m2ImageModules = import.meta.glob("./assets/m2/*.{avif,webp}", {
   eager: true,
@@ -400,14 +493,6 @@ const projectWorkImageFiles = [
 const courseVisuals = {
   s7: step7HwConfigVisual,
   tia: plcCabinetVisual,
-};
-
-const resourceVisuals = {
-  simaticManager: [step7HwConfigVisual, step7ManagerVisual, step7LadderVisual],
-  tiaPortal: [tiaPortalResourceVisual],
-  microWin: [microWinResourceVisual],
-  logoSoftComfort: [logoSoftComfortResourceVisual],
-  wincc: [winccResourceVisual],
 };
 
 const homeTrustIndicators = [
@@ -894,7 +979,7 @@ const appRealViews = [
 
 // Vista comercial conservada: no expone porcentajes ni lenguaje probabilístico.
 const s7AppCarousel = [
-  { label: "Subflujo guiado y verificación por etapas", image: appDiagnosticoGuiado },
+  { label: "Subflujo guiado y verificación por etapas", image: appDiagnosticoGuiado, width: 1474, height: 588 },
 ];
 
 const appTrialPlan = offer.app.trialPlan;
@@ -1269,8 +1354,9 @@ function RouteView({ route }) {
   if (route === "/cursos/s7-300-400") return <S7CoursePage />;
   if (route === "/cursos/tia-portal") return <TiaCoursePage />;
   if (route === "/app") return <AppPage />;
-  if (route === "/recursos-tecnicos") return <TechnicalResourcesPage />;
-  if (route.startsWith("/recursos-tecnicos/")) return <TechnicalArticlePage route={route} />;
+  if (route === "/recursos-tecnicos" || route.startsWith("/recursos-tecnicos/")) {
+    return <DeferredTechnicalRoutes route={route} />;
+  }
   if (route === "/obras") return <WorksPage />;
   if (route === "/contacto") return <ContactPage />;
   if (route === "/privacidad") return <LegalPage type="privacy" />;
@@ -2204,7 +2290,14 @@ function HomeObrasTeaser() {
           {featured.map((project, index) => (
             <article className="mock-obras-card" key={project.title}>
               <div className="mock-obras-media">
-                <img src={getServiceWorkImage(projectWorkImageFiles[index]) || projectVisuals[index]} alt={`Imagen ilustrativa para ${project.title}`} loading="lazy" />
+                <img
+                  src={getServiceWorkImage(projectWorkImageFiles[index]) || projectVisuals[index]}
+                  alt={`Imagen ilustrativa para ${project.title}`}
+                  width="1280"
+                  height="960"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <span className="works-image-disclaimer">Imagen ilustrativa</span>
                 <span className="mock-obras-client">{project.client}</span>
               </div>
@@ -2939,106 +3032,6 @@ function S7MethodStrip() {
   );
 }
 
-const manualFlipbookCopy = {
-  es: { previous: "Anterior", next: "Siguiente", enlarge: "Ampliar", close: "Cerrar vista ampliada", pages: "Páginas del manual", goTo: "Ir a la página", page: "Página" },
-  en: { previous: "Previous", next: "Next", enlarge: "Enlarge", close: "Close enlarged view", pages: "Manual pages", goTo: "Go to page", page: "Page" },
-  pt: { previous: "Anterior", next: "Próxima", enlarge: "Ampliar", close: "Fechar visualização ampliada", pages: "Páginas do manual", goTo: "Ir para a página", page: "Página" },
-};
-
-function ManualFlipbook({ images, pages, variant = "full", orientation = "portrait", altPrefix = "Vista previa del manual", language = "es" }) {
-  const total = images.length;
-  const [index, setIndex] = useState(0);
-  const [zoom, setZoom] = useState(false);
-  const copy = manualFlipbookCopy[language] || manualFlipbookCopy.es;
-  const go = (target) => setIndex((current) => (target + total) % total || 0);
-
-  if (!total) return null;
-  const caption = pages[index]?.label || `${copy.page} ${index + 1}`;
-  const handleDialogKeyDown = (event) => {
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      go(index - 1);
-    } else if (event.key === "ArrowRight") {
-      event.preventDefault();
-      go(index + 1);
-    }
-  };
-
-  return (
-    <div className={`s7-flip s7-flip-${variant} s7-flip-${orientation}`}>
-      <div className="s7-flip-stage">
-        {total > 1 ? (
-          <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label={copy.previous}>
-            <ArrowRight size={variant === "card" ? 20 : 24} />
-          </button>
-        ) : null}
-        <button type="button" className="s7-flip-page" onClick={() => setZoom(true)} aria-label={`${copy.enlarge}: ${caption}`}>
-          <img src={images[index]} alt={`${altPrefix} — ${caption}`} loading="lazy" />
-          <span className="s7-flip-zoom" aria-hidden="true">
-            <ScanSearch size={16} /> {copy.enlarge}
-          </span>
-        </button>
-        {total > 1 ? (
-          <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label={copy.next}>
-            <ArrowRight size={variant === "card" ? 20 : 24} />
-          </button>
-        ) : null}
-      </div>
-      <div className="s7-flip-bar">
-        <span className="s7-flip-caption">{caption}</span>
-        <span className="s7-flip-counter">{index + 1} / {total}</span>
-      </div>
-      {variant === "full" ? (
-        <div className="s7-flip-thumbs" role="tablist" aria-label={copy.pages}>
-          {images.map((image, i) => (
-            <button
-              key={image}
-              type="button"
-              className={`s7-flip-thumb${i === index ? " active" : ""}`}
-              onClick={() => setIndex(i)}
-              aria-label={`${copy.goTo} ${i + 1}`}
-              aria-selected={i === index}
-              role="tab"
-            >
-              <img src={image} alt="" loading="lazy" />
-            </button>
-          ))}
-        </div>
-      ) : null}
-
-      <AccessibleDialog
-        open={zoom}
-        onClose={() => setZoom(false)}
-        ariaLabel={`${copy.enlarge}: ${caption}`}
-        className={`s7-flip-lightbox s7-flip-${orientation}`}
-        panelClassName="s7-flip-lightbox-inner"
-        onDialogKeyDown={handleDialogKeyDown}
-      >
-        <button
-          type="button"
-          className="s7-flip-lightbox-close"
-          onClick={() => setZoom(false)}
-          aria-label={copy.close}
-          data-dialog-initial-focus
-        >
-          <X size={20} />
-        </button>
-        {total > 1 ? (
-          <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label={copy.previous}>
-            <ArrowRight size={26} />
-          </button>
-        ) : null}
-        <img src={images[index]} alt={`${altPrefix} — ${caption}`} />
-        {total > 1 ? (
-          <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label={copy.next}>
-            <ArrowRight size={26} />
-          </button>
-        ) : null}
-        <span className="s7-flip-lightbox-caption">{caption} · {index + 1} / {total}</span>
-      </AccessibleDialog>
-    </div>
-  );
-}
 
 const s7TestimonialsCopy = {
   es: { kicker: "Lo que dicen los técnicos", title: "Resultados reales en planta, no promesas." },
@@ -3399,7 +3392,12 @@ function S7SalesLanding({ course, eyebrow }) {
                   <p className="s7-sales-include-preview-label">
                     <ScanSearch size={16} aria-hidden="true" /> Consulta las primeras 8 páginas del manual
                   </p>
-                  <ManualFlipbook images={manualPreviewImages} pages={s7ManualPages} variant="card" />
+                  <DeferredManualFlipbook
+                    images={manualPreviewImages}
+                    dimensions={manualPreviewDimensions}
+                    pages={s7ManualPages}
+                    variant="card"
+                  />
                 </div>
                 <div className="s7-sales-include-main">
                   <div className="s7-sales-include-list">
@@ -3428,8 +3426,9 @@ function S7SalesLanding({ course, eyebrow }) {
                   <p className="s7-sales-include-preview-label">
                     <ScanSearch size={16} aria-hidden="true" /> Explora capturas reales de la app
                   </p>
-                  <ManualFlipbook
+                  <DeferredManualFlipbook
                     images={s7AppCarousel.map((s) => s.image)}
+                    dimensions={s7AppCarousel.map(({ width, height }) => ({ width, height }))}
                     pages={s7AppCarousel}
                     variant="card"
                     orientation="landscape"
@@ -5207,7 +5206,7 @@ function LocalizedS7SalesLanding({ language, courseCopy }) {
             <article className="s7-sales-include-card s7-sales-include-course">
               <span className="s7-sales-include-number">1</span><h3>{copy.courseCardTitle}</h3>
               <div className="s7-sales-include-body">
-                <div className="s7-sales-include-media"><p className="s7-sales-include-preview-label"><ScanSearch size={16} aria-hidden="true" /> {copy.manualPreview}</p><ManualFlipbook images={manualPreviewImages} pages={manualPages} variant="card" language={language} /></div>
+                <div className="s7-sales-include-media"><p className="s7-sales-include-preview-label"><ScanSearch size={16} aria-hidden="true" /> {copy.manualPreview}</p><DeferredManualFlipbook images={manualPreviewImages} dimensions={manualPreviewDimensions} pages={manualPages} variant="card" language={language} /></div>
                 <div className="s7-sales-include-main"><div className="s7-sales-include-list">{courseCopy.includes.map((item) => <div className="s7-sales-include-item" key={item}><CheckCircle2 size={20} aria-hidden="true" /><div><h4>{item}</h4></div></div>)}</div><p className="s7-sales-include-note">{copy.experienceNote}</p></div>
               </div>
             </article>
@@ -5215,7 +5214,7 @@ function LocalizedS7SalesLanding({ language, courseCopy }) {
             <article className="s7-sales-include-card s7-sales-include-app">
               <span className="s7-sales-include-number">2</span><h3>{copy.appCardTitle}</h3>
               <div className="s7-sales-include-body">
-                <div className="s7-sales-include-media s7-sales-app-media"><p className="s7-sales-include-preview-label"><ScanSearch size={16} aria-hidden="true" /> {copy.appPreview}</p><ManualFlipbook images={s7AppCarousel.map((item) => item.image)} pages={appPages} variant="card" orientation="landscape" language={language} /></div>
+                <div className="s7-sales-include-media s7-sales-app-media"><p className="s7-sales-include-preview-label"><ScanSearch size={16} aria-hidden="true" /> {copy.appPreview}</p><DeferredManualFlipbook images={s7AppCarousel.map((item) => item.image)} dimensions={s7AppCarousel.map(({ width, height }) => ({ width, height }))} pages={appPages} variant="card" orientation="landscape" language={language} /></div>
                 <div className="s7-sales-app-copy"><p className="s7-sales-app-lead">{copy.appLead}</p><div className="s7-sales-app-specs"><span className="s7-sales-app-spec"><CalendarCheck size={18} />1 {language === "en" ? "month" : "mês"}</span><span className="s7-sales-app-spec"><Smartphone size={18} />1 {language === "en" ? "device" : "dispositivo"}</span></div><div className="s7-sales-app-features"><p className="s7-sales-app-features-title">{copy.appFeaturesTitle}</p><ul>{copy.appFeatures.map((item) => <li key={item}><CheckCircle2 size={17} aria-hidden="true" /><span>{item}</span></li>)}</ul></div></div>
               </div>
             </article>
@@ -5790,199 +5789,6 @@ function WorksPage() {
   );
 }
 
-function TechnicalResourcesPage() {
-  return (
-    <PageShell
-      eyebrow="Recursos técnicos"
-      title="Biblioteca técnica Siemens para automatización industrial"
-      subtitle="Guías aplicadas sobre herramientas Siemens utilizadas en planta: STEP 7 SIMATIC Manager, TIA Portal, MicroWIN, LOGO! Soft Comfort y SIMATIC WinCC."
-      heroImage={heroRecursos}
-      heroPrimary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.") }}
-      heroSecondary={{ label: "Ver cursos", href: "/cursos" }}
-    >
-      <section className="resources-intro-panel">
-        <div>
-          <p className="eyebrow">Consulta técnica orientada a planta</p>
-          <h2>Software, diagnóstico y mantenimiento explicados con criterio industrial</h2>
-          <p>
-            Esta sección reúne recursos para técnicos de mantenimiento, instrumentistas,
-            programadores PLC, ingenieros y estudiantes técnicos que necesitan comprender qué
-            herramienta corresponde usar, qué permite diagnosticar y cómo se aplica en sistemas
-            Siemens instalados.
-          </p>
-        </div>
-        <div className="resource-intro-checks">
-          <CheckItem>Contenido técnico sin instaladores no oficiales ni atajos riesgosos.</CheckItem>
-          <CheckItem>Enfoque aplicado a planta, diagnóstico, respaldo y puesta en marcha.</CheckItem>
-          <CheckItem>Conexión directa con cursos y servicios técnicos de BOJ.</CheckItem>
-        </div>
-      </section>
-
-      <section className="inner-section">
-        <SectionHeader
-          eyebrow="Biblioteca"
-          title="Recursos disponibles"
-          text="Cada recurso abre una página interna con explicación técnica, aplicaciones típicas, importancia para mantenimiento y enlaces oficiales Siemens."
-        />
-        <div className="resources-index-grid">
-          {technicalResources.map((resource) => (
-            <TechnicalResourceCard key={resource.id} resource={resource} />
-          ))}
-        </div>
-      </section>
-
-      <CourseCTA />
-    </PageShell>
-  );
-}
-
-function TechnicalResourceCard({ resource }) {
-  const visual = resourceVisuals[resource.visualKey]?.[0];
-
-  return (
-    <article className="technical-resource-card">
-      <div className="resource-card-visual">
-        {visual ? (
-          <img src={visual} alt="" aria-hidden="true" loading="lazy" />
-        ) : (
-          <div className="resource-card-fallback" aria-hidden="true">
-            <Icon name="MonitorCog" />
-            <span>Visual técnico editable</span>
-          </div>
-        )}
-        <span className="visual-disclaimer">Imagen ilustrativa</span>
-        <span className="resource-status">{resource.status}</span>
-      </div>
-      <div className="technical-resource-body">
-        <h3>{resource.title}</h3>
-        <p>{resource.description}</p>
-        <div className="article-tags compact">
-          {resource.meta.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </div>
-        <PrimaryLink href={resource.path}>
-          Ver recurso <ArrowRight size={17} />
-        </PrimaryLink>
-      </div>
-    </article>
-  );
-}
-
-function TechnicalArticlePage({ route }) {
-  const resource = technicalResources.find((item) => item.path === route);
-  if (!resource) return <NotFound />;
-
-  return (
-    <PageShell eyebrow="Recurso técnico" title={resource.title} subtitle={resource.subtitle}>
-      <article className="technical-article resource-article">
-        <div className="article-kicker">
-          <span>{resource.status}</span>
-          <span>Aplicado a mantenimiento industrial</span>
-        </div>
-        <p className="article-lead">{resource.description}</p>
-        <div className="article-tags">
-          {resource.meta.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </div>
-
-        <TechnicalResourceVisual resource={resource} />
-
-        {resource.sections.map((section) => (
-          <section className="article-section" key={section.title}>
-            <h2>{section.title}</h2>
-            <p>{section.text}</p>
-            {section.items ? (
-              <ul className="article-list">
-                {section.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            ) : null}
-          </section>
-        ))}
-
-        <OfficialLinksBlock links={resource.officialLinks} />
-        <CourseCTA />
-      </article>
-    </PageShell>
-  );
-}
-
-function TechnicalResourceVisual({ resource }) {
-  const visuals = resourceVisuals[resource.visualKey] || [];
-
-  if (!visuals.length) {
-    return (
-      <div className="resource-visual-panel fallback">
-        <Icon name="MonitorCog" size={34} />
-        <div>
-          <strong>Espacio visual técnico</strong>
-          <span>Preparado para cargar capturas reales desde la carpeta assets.</span>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className={`resource-visual-panel ${visuals.length > 1 ? "has-collage" : ""}`}>
-      <div className="resource-main-image">
-        <img src={visuals[0]} alt={`${resource.title} aplicado a automatización industrial`} loading="lazy" />
-      </div>
-      {visuals.length > 1 ? (
-        <div className="resource-secondary-grid">
-          {visuals.slice(1).map((image, index) => (
-            <img
-              key={image}
-              src={image}
-              alt={`${resource.title} captura técnica ${index + 2}`}
-              loading="lazy"
-            />
-          ))}
-        </div>
-      ) : null}
-    </div>
-  );
-}
-
-function OfficialLinksBlock({ links }) {
-  return (
-    <section className="official-links-panel">
-      <div>
-        <p className="eyebrow">Fuentes y enlaces oficiales</p>
-        <h2>Documentación, soporte técnico y referencias del fabricante</h2>
-        <p>
-          Para descargas, documentación y soporte técnico, se recomienda consultar siempre fuentes
-          oficiales del fabricante. Evitar instaladores no oficiales reduce riesgos técnicos,
-          legales y de seguridad.
-        </p>
-      </div>
-      <div className="official-link-grid">
-        {links.map((link) => (
-          <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
-            <strong>{link.label}</strong>
-            <span>{link.text}</span>
-            <ExternalLink size={16} />
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function CourseCTA() {
-  return (
-    <RouteCTA
-      title="Formación técnica aplicada"
-      text="Si trabajas con sistemas Siemens en planta y quieres aprender a diagnosticar, interpretar fallas y trabajar con criterio técnico, puedes consultar los cursos disponibles de BOJ Automatización y Control."
-      primaryLabel="Ver cursos"
-      primaryHref="/cursos"
-      secondaryLabel="Consultar capacitación"
-      secondaryHref={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por cursos técnicos de automatización industrial.")}
-    />
-  );
-}
 
 // Página post-compra (/gracias), construida en el bloque 3A pero NO enlazada,
 // noindex y fuera del sitemap. Se activa como retorno del checkout en el bloque

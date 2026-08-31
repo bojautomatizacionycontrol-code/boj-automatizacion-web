@@ -1,0 +1,446 @@
+
+@media (max-width: 1180px) {
+  .site-header {
+    min-height: 68px;
+  }
+
+  .nav-toggle {
+    display: grid;
+  }
+
+  .header-cta {
+    display: none;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    padding: 10px 20px 18px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(3, 8, 13, 0.98);
+  }
+
+  .main-nav.is-open {
+    display: grid;
+  }
+
+  .nav-item > a {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .submenu {
+    position: static;
+    min-width: 0;
+    display: grid;
+    margin: 0 0 8px 10px;
+    border: 0;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background: transparent;
+  }
+}
+
+@media (max-width: 1040px) {
+  .site-header {
+    gap: 10px;
+  }
+
+  .brand-logo {
+    width: 150px;
+    height: 44px;
+  }
+
+  .nav-item > a,
+  .submenu a {
+    padding: 9px 8px;
+    font-size: 0.78rem;
+  }
+
+  .header-cta {
+    padding-inline: 11px;
+    font-size: 0.82rem;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 76px;
+  }
+
+  .industrial-panel {
+    opacity: 0.28;
+    right: -120px;
+    width: 520px;
+  }
+
+  .feature-grid,
+  .card-grid.three,
+  .function-grid,
+  .method-grid,
+  .app-module-grid,
+  .audience-grid,
+  .resources-index-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .split-section,
+  .app-intro,
+  .app-page-grid,
+  .contact-grid,
+  .contact-direct,
+  .course-landing,
+  .authority-grid,
+  .evidence-grid,
+  .app-field-panel,
+  .app-evidence-panel,
+  .service-principles,
+  .official-links-panel,
+  .resources-intro-panel,
+  .route-cta,
+  .portfolio-prep,
+  .workflow-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .route-cta .button-row {
+    justify-content: flex-start;
+  }
+
+  .course-side-visual {
+    position: static;
+    min-height: 420px;
+  }
+
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .project-media {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 820px) {
+  .site-header {
+    min-height: 68px;
+  }
+
+  .nav-toggle {
+    display: grid;
+  }
+
+  .header-cta {
+    display: none;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    padding: 10px 20px 18px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(3, 8, 13, 0.98);
+  }
+
+  .main-nav.is-open {
+    display: grid;
+  }
+
+  .nav-item > a {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .submenu {
+    position: static;
+    min-width: 0;
+    display: grid;
+    margin: 0 0 8px 10px;
+    border: 0;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background: transparent;
+  }
+
+  .section-container {
+    width: min(calc(100% - 28px), var(--container));
+  }
+
+  .hero-content > *,
+  .hero-metrics,
+  .hero-proof-grid,
+  .hero-subtitle {
+    max-width: calc(100vw - 28px);
+  }
+
+  .section,
+  .final-cta {
+    padding: 64px 0;
+  }
+
+  .page-hero {
+    padding: 72px 0 58px;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(1.72rem, 5.35vw, 2.35rem);
+    line-height: 1.08;
+  }
+
+  .hero-positioning {
+    max-width: 100%;
+    font-size: 0.98rem;
+  }
+
+  .feature-grid,
+  .card-grid.three,
+  .card-grid.two,
+  .course-grid,
+  .check-grid,
+  .function-grid,
+  .app-module-grid,
+  .app-version-grid,
+  .case-grid,
+  .audience-grid,
+  .method-grid,
+  .logo-strip,
+  .service-columns,
+  .service-proof-grid,
+  .project-result-grid,
+  .footer-grid,
+  .trust-grid,
+  .training-strip,
+  .asset-slots,
+  .hero-proof-grid,
+  .authority-list,
+  .evidence-visual-grid,
+  .resources-index-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .evidence-visual-grid {
+    grid-template-rows: repeat(3, 180px);
+  }
+
+  .evidence-photo.large {
+    grid-row: auto;
+  }
+
+  .trust-item,
+  .trust-item:last-child {
+    border-inline: 1px solid var(--line);
+    min-height: auto;
+  }
+
+  .page-hero::after {
+    display: none;
+  }
+
+  .industrial-panel {
+    display: none;
+  }
+
+  .hero-asset-visual {
+    display: none;
+  }
+
+  .hero-actions,
+  .button-row {
+    align-items: stretch;
+  }
+
+  .hero-actions .btn,
+  .button-row .btn {
+    width: 100%;
+  }
+
+  .comparison-row.header {
+    display: none;
+  }
+
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .comparison-row span {
+    border-left: 0;
+    padding: 5px 0;
+  }
+
+  .comparison-row span:nth-child(2)::before {
+    content: "Course Edition: ";
+    color: var(--cyan);
+    font-weight: 900;
+  }
+
+  .comparison-row span:nth-child(3)::before {
+    content: "PRO: ";
+    color: var(--orange);
+    font-weight: 900;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    display: grid;
+  }
+
+  .floating-contact {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand small {
+    max-width: 160px;
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand-logo {
+    width: 136px;
+    height: 42px;
+  }
+
+  .hero {
+    padding: 58px 0 56px;
+  }
+
+  .hero-content > * {
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: clamp(1.62rem, 8.3vw, 2.22rem);
+    line-height: 1.04;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(1.42rem, 6.7vw, 1.82rem);
+    line-height: 1.08;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    line-height: 1.35;
+  }
+
+  .hero-subtitle {
+    font-size: 0.96rem;
+    line-height: 1.65;
+  }
+
+  .hero-positioning {
+    width: 100%;
+    padding: 12px 13px;
+    font-size: 0.9rem;
+    overflow-wrap: anywhere;
+  }
+
+  .feature-card,
+  .service-card,
+  .info-card,
+  .version-card,
+  .technical-note,
+  .technical-article,
+  .official-links-panel,
+  .resources-intro-panel,
+  .technical-resource-body,
+  .resource-visual-panel.fallback,
+  .contact-panel,
+  .contact-form,
+  .service-detail,
+  .service-principles,
+  .route-cta,
+  .portfolio-prep,
+  .app-field-panel,
+  .app-module-card,
+  .app-evidence-panel,
+  .workflow-panel,
+  .contact-direct,
+  .project-body,
+  .course-card-body {
+    padding: 20px;
+  }
+
+  .method-card {
+    min-height: auto;
+  }
+
+  .step7-collage {
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .step7-secondary-grid {
+    gap: 10px;
+  }
+
+  .step7-shot figcaption {
+    font-size: 0.66rem;
+  }
+
+  .service-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .project-title-row {
+    grid-template-columns: 1fr;
+  }
+
+  .phone-frame {
+    min-height: 580px;
+  }
+
+  .app-screenshot-shell {
+    width: min(100%, 340px);
+    padding: 10px;
+  }
+
+  .app-screenshot-frame {
+    max-height: 560px;
+  }
+
+  .resource-secondary-grid,
+  .step7-secondary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .resource-card-visual img {
+    height: 150px;
+  }
+
+  .resource-main-image img {
+    max-height: 300px;
+  }
+
+  .resource-secondary-grid img {
+    height: 160px;
+  }
+
+  .article-lead {
+    font-size: 0.98rem;
+  }
+
+  .diagnostic-screen {
+    min-height: 500px;
+  }
+}

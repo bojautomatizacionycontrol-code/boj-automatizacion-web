@@ -2,8 +2,10 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
+import { readCssBundle } from "./helpers/css-source.mjs";
+
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const stylesSource = await readCssBundle();
 
 test("el método BOJ y el problema aparecen después de la oferta comercial", () => {
   const offerIndex = appSource.indexOf('className="s7-sales-section s7-sales-offer" id="curso-s7-compra"');

@@ -2,8 +2,10 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
+import { readCssBundle } from "./helpers/css-source.mjs";
+
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const stylesSource = await readCssBundle();
 const decisionPathsSource = appSource.slice(
   appSource.indexOf("const contactDecisionPaths = ["),
   appSource.indexOf("const projectVisuals = ["),

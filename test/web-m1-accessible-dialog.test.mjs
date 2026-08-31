@@ -4,12 +4,15 @@ import test from "node:test";
 
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 const dialogSource = await readFile(new URL("../src/AccessibleDialog.jsx", import.meta.url), "utf8");
+const deferredDialogSource = await readFile(new URL("../src/DeferredAccessibleDialog.jsx", import.meta.url), "utf8");
+const flipbookSource = await readFile(new URL("../src/ManualFlipbook.jsx", import.meta.url), "utf8");
 const utilitySource = await readFile(new URL("../src/accessibility.js", import.meta.url), "utf8");
-const flipbookSource = appSource.slice(appSource.indexOf("function ManualFlipbook("), appSource.indexOf("const s7TestimonialsCopy"));
 
 test("lightboxes y visor reutilizan una única primitiva con portal y nombre", () => {
-  assert.equal((appSource.match(/<AccessibleDialog/g) || []).length, 4);
+  assert.equal(((appSource + flipbookSource).match(/<AccessibleDialog/g) || []).length, 4);
   assert.doesNotMatch(appSource, /createPortal|role="dialog"/);
+  assert.match(deferredDialogSource, /lazy\(\(\) => import\("\.\/AccessibleDialog\.jsx"\)\)/);
+  assert.match(deferredDialogSource, /if \(!open\) return null/);
   assert.match(dialogSource, /createPortal\(/);
   assert.match(dialogSource, /role="dialog"/);
   assert.match(dialogSource, /aria-modal="true"/);

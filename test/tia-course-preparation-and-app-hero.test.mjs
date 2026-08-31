@@ -2,8 +2,10 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
+import { readCssBundle } from "./helpers/css-source.mjs";
+
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const stylesSource = await readCssBundle();
 
 const sourceBetween = (startMarker, endMarker) => {
   const start = appSource.indexOf(startMarker);

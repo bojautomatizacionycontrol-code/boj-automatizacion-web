@@ -4,10 +4,12 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
+import { readCssBundleSync } from "./helpers/css-source.mjs";
+
 const testDir = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(testDir, "..");
 const appSource = fs.readFileSync(path.join(rootDir, "src", "App.jsx"), "utf8");
-const stylesSource = fs.readFileSync(path.join(rootDir, "src", "styles.css"), "utf8");
+const stylesSource = readCssBundleSync();
 
 test("App PRO presents the approved editorial hierarchy", () => {
   const appPageStart = appSource.indexOf("function AppPage()");

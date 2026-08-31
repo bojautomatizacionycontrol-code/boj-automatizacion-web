@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import test from "node:test";
 
 import { renderRouteMetadataFragment, validateFingerprintAssets } from "../scripts/generate-route-html.mjs";
+import { readCssBundle } from "./helpers/css-source.mjs";
 import {
   getRouteMetadata,
   getSocialImageFamily,
@@ -20,7 +21,7 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 const appSource = await readFile(join(root, "src", "App.jsx"), "utf8");
 const indexSource = await readFile(join(root, "index.html"), "utf8");
 const contentSource = await readFile(join(root, "src", "content.js"), "utf8");
-const stylesSource = await readFile(join(root, "src", "styles.css"), "utf8");
+const stylesSource = await readCssBundle();
 const vercelConfig = JSON.parse(await readFile(join(root, "vercel.json"), "utf8"));
 
 function sha256(buffer) {

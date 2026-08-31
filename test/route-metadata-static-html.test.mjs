@@ -21,6 +21,10 @@ import {
   validateBuiltAssets,
   validateRouteHtml,
 } from "../scripts/generate-route-html.mjs";
+import {
+  STATIC_SHELL_END,
+  STATIC_SHELL_START,
+} from "../scripts/render-static-shell.mjs";
 
 const sitemapSource = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
 const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
@@ -40,6 +44,26 @@ ${renderRouteMetadataFragment(metadata)}
   </body>
 </html>`;
 }
+
+function fixtureStaticShell(route) {
+  const h1 = route === "/__boj_not_found__" ? "Página no encontrada" : `Contenido útil para ${route}`;
+  const intro = `Introducción suficientemente descriptiva y estable para identificar la ruta física ${route} sin ejecutar JavaScript.`;
+  return {
+    route,
+    h1,
+    intro,
+    markup: `${STATIC_SHELL_START}
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+<header class="site-header"><nav class="main-nav"><a href="/">Inicio</a><a href="/servicios">Servicios</a><a href="/cursos">Cursos</a><a href="/app">App</a><a href="/contacto">Contacto</a></nav></header>
+<main id="main-content"><section class="boj-hero"><img src="/assets/shell-fixture-abcd1234.png" alt="" fetchPriority="high" /><h1>${h1}</h1><p class="boj-hero-subtitle">${intro}</p></section></main>
+<noscript><footer class="site-footer"><nav><a href="/recursos-tecnicos">Recursos</a></nav></footer></noscript>
+${STATIC_SHELL_END}`,
+  };
+}
+
+const fixtureStaticShellRenderer = {
+  render: async (route) => fixtureStaticShell(route),
+};
 
 test("inventaría 34 rutas indexables y una ruta transaccional noindex", () => {
   assert.equal(indexableRoutePaths.length, 34);
@@ -159,9 +183,10 @@ test("genera 35 shells físicos y 404 con el mismo entrypoint SPA", async () => 
     await mkdir(join(directory, "assets"), { recursive: true });
     await writeFile(join(directory, "assets", "index-fixture-abcd1234.js"), "export {};", "utf8");
     await writeFile(join(directory, "assets", "index-fixture-abcd1234.css"), "body {}", "utf8");
+    await writeFile(join(directory, "assets", "shell-fixture-abcd1234.png"), "fixture", "utf8");
     await writeFile(join(directory, "favicon-fixture.png"), "fixture", "utf8");
     await writeFile(join(directory, "og-institutional-1200x630.jpg"), "fixture", "utf8");
-    const generated = await generateRouteHtml(directory);
+    const generated = await generateRouteHtml(directory, { staticShellRenderer: fixtureStaticShellRenderer });
     assert.equal(generated.length, 36);
 
     for (const route of publicRoutePaths) {
@@ -169,6 +194,8 @@ test("genera 35 shells físicos y 404 con el mismo entrypoint SPA", async () => 
       const metadata = getRouteMetadata(route);
       validateRouteHtml(html, metadata);
       assert.match(html, /src="\/assets\/index-fixture-abcd1234\.js"/);
+      assert.match(html, /BOJ_STATIC_SHELL_START/);
+      assert.equal((html.match(/<h1\b/g) || []).length, 1);
     }
 
     const notFound = await readFile(join(directory, "404.html"), "utf8");

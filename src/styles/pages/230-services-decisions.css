@@ -1,0 +1,156 @@
+
+/* Services decision-path polish */
+.services-redesign-page .boj-hero {
+  min-height: clamp(560px, 47vw, 640px);
+}
+
+.services-redesign-page .boj-hero-inner--with-aside {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(19rem, 0.72fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  width: min(calc(100% - 72px), 1240px);
+  margin-inline: auto;
+}
+
+.services-redesign-page .boj-hero-copy,
+.services-redesign-page .boj-hero-aside {
+  min-width: 0;
+}
+
+.services-redesign-page .boj-hero-copy .boj-hero-title {
+  max-width: 47rem;
+}
+
+.services-redesign-page .boj-hero-copy .boj-hero-subtitle {
+  max-width: 44rem;
+}
+
+.services-intake-card {
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  color: #fff;
+  border: 1px solid rgba(69, 213, 255, 0.34);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(4, 25, 39, 0.94), rgba(5, 45, 65, 0.88));
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.services-intake-eyebrow {
+  margin: 0 0 0.45rem;
+  color: #45d5ff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.services-intake-card h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  line-height: 1.12;
+}
+
+.services-intake-card ul {
+  display: grid;
+  gap: 0.85rem;
+  margin: 1.25rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.services-intake-card li {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  align-items: start;
+  gap: 0.8rem;
+}
+
+.services-intake-card li > span {
+  display: grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  color: #45d5ff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  border: 1px solid rgba(69, 213, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(69, 213, 255, 0.08);
+  place-items: center;
+}
+
+.services-intake-card strong {
+  display: block;
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.services-intake-card li p {
+  margin: 0.2rem 0 0;
+  color: rgba(233, 246, 252, 0.75);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.services-intake-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin: 0;
+  padding-top: 1rem;
+  color: rgba(233, 246, 252, 0.82);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  border-top: 1px solid rgba(129, 207, 235, 0.2);
+}
+
+.services-intake-note svg {
+  flex: 0 0 auto;
+  margin-top: 0.1rem;
+  color: #45d5ff;
+}
+
+@media (max-width: 900px) {
+  .services-redesign-page .boj-hero {
+    min-height: 0;
+  }
+
+  .services-redesign-page .boj-hero-inner--with-aside {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: min(calc(100% - 32px), 720px);
+    padding-top: 52px;
+    padding-bottom: 52px;
+  }
+
+  .services-redesign-page .boj-hero-aside {
+    width: 100%;
+    max-width: 42rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .services-redesign-page .boj-hero-inner--with-aside {
+    width: min(calc(100% - 28px), 560px);
+    padding-top: 38px;
+    padding-bottom: 38px;
+  }
+
+  .services-intake-card {
+    padding: 1.15rem;
+    border-radius: 13px;
+  }
+
+  .services-intake-card li {
+    grid-template-columns: 2.15rem minmax(0, 1fr);
+    gap: 0.65rem;
+  }
+
+  .services-intake-card li > span {
+    width: 2.15rem;
+    height: 2.15rem;
+  }
+}

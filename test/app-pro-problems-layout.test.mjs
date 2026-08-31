@@ -2,7 +2,9 @@ import assert from "node:assert/strict"
 import { readFile } from "node:fs/promises"
 import test from "node:test"
 
-const styles = await readFile(new URL("../src/styles.css", import.meta.url), "utf8")
+import { readCssBundle } from "./helpers/css-source.mjs"
+
+const styles = await readCssBundle()
 const marker = "/* App PRO: composición equilibrada para problemas y funcionamiento */"
 const layoutStart = styles.lastIndexOf(marker)
 

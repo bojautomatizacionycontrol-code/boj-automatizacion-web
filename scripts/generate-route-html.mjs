@@ -8,6 +8,11 @@ import {
   SITE_ORIGIN,
 } from "../src/route-metadata.js";
 import { serializeJsonLd, validateBuiltCsp } from "./csp-policy.mjs";
+import {
+  createStaticShellRenderer,
+  injectStaticShell,
+  validateStaticShellHtml,
+} from "./render-static-shell.mjs";
 
 export const ROUTE_METADATA_START = "<!-- BOJ_ROUTE_METADATA_START -->";
 export const ROUTE_METADATA_END = "<!-- BOJ_ROUTE_METADATA_END -->";
@@ -262,6 +267,39 @@ export async function validateBuiltAssets(html, outDir) {
   }
 }
 
+export async function validateStaticShellAssets(html, outDir) {
+  const shellStart = html.indexOf("<!-- BOJ_STATIC_SHELL_START -->");
+  const shellEnd = html.indexOf("<!-- BOJ_STATIC_SHELL_END -->", shellStart);
+  if (shellStart === -1 || shellEnd === -1) {
+    throw new Error("WEB-M3: no se puede validar assets de un shell ausente");
+  }
+  const shell = html.slice(shellStart, shellEnd);
+  const references = new Set();
+  for (const match of shell.matchAll(/\b(?:src|srcSet|srcset)="([^"]+)"/g)) {
+    for (const candidate of match[1].split(",")) {
+      const reference = candidate.trim().split(/\s+/)[0];
+      if (reference.startsWith("/")) references.add(reference);
+    }
+  }
+
+  if (!references.size) throw new Error("WEB-M3: shell sin assets visuales");
+  for (const reference of references) {
+    if (!reference.startsWith("/assets/")) {
+      throw new Error(`WEB-M3: asset no compilado dentro del shell: ${reference}`);
+    }
+    const relativePath = decodeURIComponent(reference).replace(/^\/+/, "");
+    if (!relativePath || relativePath.includes("..")) {
+      throw new Error(`WEB-M3: referencia de asset inválida: ${reference}`);
+    }
+    const assetPath = join(outDir, relativePath);
+    const asset = await stat(assetPath).catch(() => null);
+    if (!asset?.isFile()) {
+      throw new Error(`WEB-M3: asset del shell inexistente: ${reference}`);
+    }
+  }
+  return [...references];
+}
+
 export async function validateFingerprintAssets(outDir) {
   const assetsDir = join(outDir, "assets");
   const entries = await readdir(assetsDir, { withFileTypes: true });
@@ -280,31 +318,44 @@ export function outputFileForRoute(outDir, route) {
   return join(outDir, `${route.slice(1)}.html`);
 }
 
-export async function generateRouteHtml(outDir = resolve("dist")) {
+export async function generateRouteHtml(outDir = resolve("dist"), options = {}) {
   const templatePath = join(outDir, "index.html");
   const template = await readFile(templatePath, "utf8");
   await validateFingerprintAssets(outDir);
   await validateBuiltAssets(template, outDir);
   const generated = [];
+  const ownsRenderer = !options.staticShellRenderer;
+  const staticShellRenderer = options.staticShellRenderer || await createStaticShellRenderer(outDir);
 
-  for (const route of publicRoutePaths) {
-    const metadata = getRouteMetadata(route);
-    const html = injectRouteMetadata(template, metadata);
-    validateRouteHtml(html, metadata);
-    const destination = outputFileForRoute(outDir, route);
-    await mkdir(dirname(destination), { recursive: true });
-    await writeFile(destination, html, "utf8");
-    generated.push(destination);
+  try {
+    for (const route of publicRoutePaths) {
+      const metadata = getRouteMetadata(route);
+      const shell = await staticShellRenderer.render(route);
+      const html = injectStaticShell(injectRouteMetadata(template, metadata), shell.markup);
+      validateRouteHtml(html, metadata);
+      validateStaticShellHtml(html, shell);
+      await validateStaticShellAssets(html, outDir);
+      const destination = outputFileForRoute(outDir, route);
+      await mkdir(dirname(destination), { recursive: true });
+      await writeFile(destination, html, "utf8");
+      generated.push(destination);
+    }
+
+    const notFoundRoute = "/__boj_not_found__";
+    const notFoundMetadata = getRouteMetadata(notFoundRoute);
+    const notFoundShell = await staticShellRenderer.render(notFoundRoute);
+    const notFoundHtml = injectStaticShell(injectRouteMetadata(template, notFoundMetadata), notFoundShell.markup);
+    validateRouteHtml(notFoundHtml, notFoundMetadata);
+    validateStaticShellHtml(notFoundHtml, notFoundShell);
+    await validateStaticShellAssets(notFoundHtml, outDir);
+    const notFoundPath = join(outDir, "404.html");
+    await writeFile(notFoundPath, notFoundHtml, "utf8");
+    generated.push(notFoundPath);
+
+    return generated;
+  } finally {
+    if (ownsRenderer) await staticShellRenderer.close();
   }
-
-  const notFoundMetadata = getRouteMetadata("/__boj_not_found__");
-  const notFoundHtml = injectRouteMetadata(template, notFoundMetadata);
-  validateRouteHtml(notFoundHtml, notFoundMetadata);
-  const notFoundPath = join(outDir, "404.html");
-  await writeFile(notFoundPath, notFoundHtml, "utf8");
-  generated.push(notFoundPath);
-
-  return generated;
 }
 
 const invokedPath = process.argv[1] ? pathToFileURL(resolve(process.argv[1])).href : "";
