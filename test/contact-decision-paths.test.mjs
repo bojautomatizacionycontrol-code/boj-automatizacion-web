@@ -1,16 +1,18 @@
+import { readRuntimeAppSource, readRuntimeStylesSource } from "./helpers/runtime-app-source.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
-const decisionPathsSource = appSource.slice(
-  appSource.indexOf("const contactDecisionPaths = ["),
-  appSource.indexOf("const projectVisuals = ["),
+const appSource = await readRuntimeAppSource();
+const complianceSource = await readFile(new URL("../src/routes/compliance.jsx", import.meta.url), "utf8");
+const stylesSource = await readRuntimeStylesSource();
+const decisionPathsSource = complianceSource.slice(
+  complianceSource.indexOf("const contactDecisionPaths = ["),
+  complianceSource.indexOf("const legalAppOffers ="),
 );
-const contactPageSource = appSource.slice(
-  appSource.indexOf("function ContactPage()"),
-  appSource.indexOf("function ContactForm()"),
+const contactPageSource = complianceSource.slice(
+  complianceSource.indexOf("function ContactPage()"),
+  complianceSource.indexOf("function ContactForm()"),
 );
 
 test("Contacto presenta tres caminos de decisión claros", () => {

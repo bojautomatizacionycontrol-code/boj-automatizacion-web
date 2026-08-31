@@ -1,9 +1,10 @@
+import { readRuntimeStylesSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const appSource = await readFile(new URL("../src/routes/app.jsx", import.meta.url), "utf8");
+const stylesSource = await readRuntimeStylesSource();
 
 test("el hero explica qué hace la app y su relación con STEP 7", () => {
   const expectedCopy = [
@@ -23,7 +24,7 @@ test("el hero explica qué hace la app y su relación con STEP 7", () => {
 
 test("presenta una explicación integrada en dos etapas antes del flujo operativo", () => {
   const appPageStart = appSource.indexOf("function AppPage");
-  const appPageEnd = appSource.indexOf("function AppComparisonTable", appPageStart);
+  const appPageEnd = appSource.indexOf("function EnglishAppHeroDiagnosticPreview", appPageStart);
   const appPageSource = appSource.slice(appPageStart, appPageEnd);
   const proofStrip = appPageSource.indexOf("<S7ProofStrip />");
   const quickAccess = appPageSource.indexOf("<AppQuickCommercialAccess />", proofStrip);

@@ -1,5 +1,6 @@
 node_modules 
 dist 
+.prerender/
 .chrome-headless-profile*/
 screenshot-*.png
 old-site-contact-sheet.jpg

@@ -1,3 +1,4 @@
+import { readRuntimeAppSource, readRuntimeStylesSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -12,11 +13,11 @@ import {
 } from "../src/i18n.js";
 import { getRouteMetadata } from "../src/route-metadata.js";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
 const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
 const sitemapSource = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
 const i18nSource = await readFile(new URL("../src/i18n.js", import.meta.url), "utf8");
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const stylesSource = await readRuntimeStylesSource();
 
 const expectedPairs = [
   ["/", "/en", "/pt"],
@@ -93,8 +94,8 @@ test("mantiene el selector visible en el extremo derecho del encabezado", () => 
 });
 
 test("recuerda una elección explícita en inglés o portugués sin redirigir por idioma del navegador", () => {
-  const appStart = appSource.indexOf("function App()");
-  const appEnd = appSource.indexOf("function RouteView", appStart);
+  const appStart = appSource.indexOf("function App({");
+  const appEnd = appSource.indexOf("function Header", appStart);
   const appComponentSource = appSource.slice(appStart, appEnd);
 
   assert.match(appComponentSource, /savedLanguage === "en" \|\| savedLanguage === "pt"/);
@@ -149,7 +150,7 @@ test("la versión inglesa toma precios y href de la fuente comercial vigente", (
   ]);
 
   const englishAppStart = appSource.indexOf("function EnglishAppPage()");
-  const englishAppEnd = appSource.indexOf("function EnglishS7CoursePage()", englishAppStart);
+  const englishAppEnd = appSource.indexOf("function PortugueseAppHeroDiagnosticPreview()", englishAppStart);
   const englishAppSource = appSource.slice(englishAppStart, englishAppEnd);
   assert.match(englishAppSource, /const pricingCards = \[appTrialPlan, \.\.\.appLicensePlans\]/);
   assert.equal(englishAppSource.match(/href=\{plan\.url\}/g)?.length, 1);
@@ -158,7 +159,7 @@ test("la versión inglesa toma precios y href de la fuente comercial vigente", (
 
 test("la landing inglesa del curso conserva precio, oferta y tres CTA al checkout único", () => {
   const pageStart = appSource.indexOf("function EnglishS7CoursePage()");
-  const pageEnd = appSource.indexOf("function EnglishProjectsPage()", pageStart);
+  const pageEnd = appSource.indexOf("function PortugueseS7CoursePage()", pageStart);
   const pageSource = appSource.slice(pageStart, pageEnd);
   const landingStart = appSource.indexOf("function LocalizedS7SalesLanding(");
   const landingEnd = appSource.indexOf("function EnglishS7CoursePage()", landingStart);
@@ -202,7 +203,7 @@ test("la versión portuguesa toma precios y href de la fuente comercial vigente"
   ]);
 
   const pageStart = appSource.indexOf("function PortugueseAppPage()");
-  const pageEnd = appSource.indexOf("function PortugueseS7CoursePage()", pageStart);
+  const pageEnd = appSource.indexOf("function AppRoutes", pageStart);
   const pageSource = appSource.slice(pageStart, pageEnd);
   assert.match(pageSource, /const pricingCards = \[appTrialPlan, \.\.\.appLicensePlans\]/);
   assert.equal(pageSource.match(/href=\{plan\.url\}/g)?.length, 1);
@@ -212,7 +213,7 @@ test("la versión portuguesa toma precios y href de la fuente comercial vigente"
 
 test("la landing portuguesa conserva la oferta y los tres CTA del curso, con aviso de idioma", () => {
   const pageStart = appSource.indexOf("function PortugueseS7CoursePage()");
-  const pageEnd = appSource.indexOf("function PortugueseProjectsPage()", pageStart);
+  const pageEnd = appSource.indexOf("function CourseS7Routes", pageStart);
   const pageSource = appSource.slice(pageStart, pageEnd);
   const landingStart = appSource.indexOf("function LocalizedS7SalesLanding(");
   const landingEnd = appSource.indexOf("function EnglishS7CoursePage()", landingStart);

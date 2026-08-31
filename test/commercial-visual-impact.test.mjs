@@ -1,9 +1,10 @@
+import { readRuntimeAppSource, readRuntimeStylesSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
+const stylesSource = await readRuntimeStylesSource();
 
 const sourceBetween = (startMarker, endMarker) => {
   const start = appSource.indexOf(startMarker);
@@ -34,7 +35,7 @@ test("el encabezado adapta su CTA sin agregar checkouts nuevos", () => {
 });
 
 test("inicio ofrece tres caminos claros dentro del hero", () => {
-  const navigatorSource = sourceBetween("function HomeHeroNavigator()", "function CourseHeroPreview()");
+  const navigatorSource = sourceBetween("function HomeHeroNavigator()", "function HomePage()");
   const homeSource = sourceBetween("function HomeLandingRedesign()", "function HomeClientStrip()");
 
   const expectedPaths = [
@@ -53,7 +54,7 @@ test("inicio ofrece tres caminos claros dentro del hero", () => {
 });
 
 test("App muestra una demostración real y precios antes de la explicación extensa", () => {
-  const appPageSource = sourceBetween("function AppPage()", "function AppComparisonTable()");
+  const appPageSource = sourceBetween("function AppPage()", "function EnglishAppHeroDiagnosticPreview()");
   const previewSource = sourceBetween('const appHeroPreviewCopy = {', 'const appQuickAccessCopy = {');
   const quickAccessSource = sourceBetween('const appQuickAccessCopy = {', 'const localizedPlanGuideCopy = {');
 
@@ -82,7 +83,7 @@ test("App muestra una demostración real y precios antes de la explicación exte
 });
 
 test("el recorrido comercial muestra los planes antes de las objeciones y evita repetir el Trial", () => {
-  const appPageSource = sourceBetween("function AppPage()", "function AppComparisonTable()");
+  const appPageSource = sourceBetween("function AppPage()", "function EnglishAppHeroDiagnosticPreview()");
   const realViews = appPageSource.indexOf('className="app-pro-real-language-section"');
   const plans = appPageSource.indexOf('className="app-pro-plans-section"');
   const objection = appPageSource.indexOf('className="app-pro-dark-section app-pro-objection-section"');
@@ -108,8 +109,8 @@ test("la consulta final de inicio usa el formulario interno", () => {
 });
 
 test("el curso se diferencia con una vista previa sin alterar sus checkouts", () => {
-  const previewSource = sourceBetween("function CourseHeroPreview()", "const appHeroPreviewCopy = {");
-  const salesSource = sourceBetween("function S7SalesLanding", "function AppPage()");
+  const previewSource = sourceBetween("function CourseHeroPreview()", "function S7CoursePage()");
+  const salesSource = sourceBetween("function S7SalesLanding", "const localizedS7SalesCopy =");
 
   assert.match(previewSource, /manualPreviewImages\[0\]/);
   assert.match(previewSource, /\{offer\.course\.price\}/);

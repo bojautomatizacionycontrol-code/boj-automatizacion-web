@@ -1,7 +1,8 @@
+import { readRuntimeAppSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import test from "node:test";
 
 import {
@@ -13,17 +14,30 @@ import {
 } from "../src/route-metadata.js";
 import {
   generateRouteHtml,
+  extractPrerenderedMarkup,
   injectRouteMetadata,
+  injectPrerenderedRoot,
+  normalizeRootTemplate,
   outputFileForRoute,
   renderRouteMetadataFragment,
+  ROOT_SHELL,
   ROUTE_METADATA_END,
   ROUTE_METADATA_START,
   validateBuiltAssets,
+  validatePrerenderMarkup,
+  validatePrerenderedRouteHtml,
   validateRouteHtml,
 } from "../scripts/generate-route-html.mjs";
+import { serializeJsonLd as serializeBuildJsonLd } from "../scripts/csp-policy.mjs";
+import { serializeJsonLd as serializeClientJsonLd } from "../src/json-ld.js";
+import {
+  getRouteFamily,
+  routeFamilies,
+  routeFamilyByPath,
+} from "../src/routes/route-families.js";
 
 const sitemapSource = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
 const vercelConfig = JSON.parse(await readFile(new URL("../vercel.json", import.meta.url), "utf8"));
 
 function templateFor(metadata = getRouteMetadata("/")) {
@@ -39,6 +53,16 @@ ${renderRouteMetadataFragment(metadata)}
     <script type="module" crossorigin src="/assets/index-fixture-abcd1234.js"></script>
   </body>
 </html>`;
+}
+
+function prerenderFixture(route, buildYear) {
+  return `<a class="skip-link" href="#main-content">Saltar al contenido principal</a>` +
+    `<header><nav aria-label="Navegación principal">` +
+    `<a href="/">BOJ</a><a href="/servicios">Servicios</a><a href="/cursos">Cursos</a>` +
+    `<a href="/app">App</a><a href="/contacto">Contacto</a></nav></header>` +
+    `<main id="main-content"><h1>Contenido técnico de ${route}</h1>` +
+    `<p>Diagnóstico industrial, automatización y formación técnica con información útil disponible antes de ejecutar JavaScript.</p></main>` +
+    `<footer>© ${buildYear} BOJ Automatización y Control</footer>`;
 }
 
 test("inventaría 34 rutas indexables y una ruta transaccional noindex", () => {
@@ -152,7 +176,7 @@ test("emite JSON-LD relevante sin ofertas, ratings ni curso global", () => {
   assert.equal(getRouteMetadata("/gracias").jsonLd, null);
 });
 
-test("genera 35 shells físicos y 404 con el mismo entrypoint SPA", async () => {
+test("genera 35 HTML prerenderizados y 404 con el mismo entrypoint hidratable", async () => {
   const directory = await mkdtemp(join(tmpdir(), "boj-route-html-"));
   try {
     await writeFile(join(directory, "index.html"), templateFor(), "utf8");
@@ -160,23 +184,119 @@ test("genera 35 shells físicos y 404 con el mismo entrypoint SPA", async () => 
     await writeFile(join(directory, "assets", "index-fixture-abcd1234.js"), "export {};", "utf8");
     await writeFile(join(directory, "assets", "index-fixture-abcd1234.css"), "body {}", "utf8");
     await writeFile(join(directory, "favicon-fixture.png"), "fixture", "utf8");
-    await writeFile(join(directory, "og-institutional-1200x630.jpg"), "fixture", "utf8");
-    const generated = await generateRouteHtml(directory);
+    const socialImages = new Set(
+      [...publicRoutePaths, "/__boj_not_found__"]
+        .map((route) => new URL(getRouteMetadata(route).image).pathname.replace(/^\/+/, ""))
+    );
+    for (const image of socialImages) {
+      const imagePath = join(directory, image);
+      await mkdir(dirname(imagePath), { recursive: true });
+      await writeFile(imagePath, "fixture", "utf8");
+    }
+    const buildYear = 2026;
+    const generated = await generateRouteHtml(directory, {
+      renderRoute: async (route, year) => prerenderFixture(route, year),
+      buildYear,
+    });
     assert.equal(generated.length, 36);
 
     for (const route of publicRoutePaths) {
       const html = await readFile(outputFileForRoute(directory, route), "utf8");
       const metadata = getRouteMetadata(route);
-      validateRouteHtml(html, metadata);
+      validatePrerenderedRouteHtml(html, metadata, route, buildYear);
+      assert.equal(extractPrerenderedMarkup(html, route, buildYear), prerenderFixture(route, buildYear));
+      assert.match(html, new RegExp(`data-boj-route="${route.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
       assert.match(html, /src="\/assets\/index-fixture-abcd1234\.js"/);
     }
 
     const notFound = await readFile(join(directory, "404.html"), "utf8");
+    validatePrerenderedRouteHtml(
+      notFound,
+      getRouteMetadata("/__boj_not_found__"),
+      "/__boj_not_found__",
+      buildYear
+    );
     assert.match(notFound, /<meta name="robots" content="noindex, follow" \/>/);
     assert.doesNotMatch(notFound, /rel="canonical"|data-boj-route-alternate|boj-route-jsonld/);
+
+    const firstPass = await Promise.all(generated.map((path) => readFile(path, "utf8")));
+    const regenerated = await generateRouteHtml(directory, {
+      renderRoute: async (route, year) => prerenderFixture(route, year),
+      buildYear,
+    });
+    const secondPass = await Promise.all(regenerated.map((path) => readFile(path, "utf8")));
+    assert.deepEqual(secondPass, firstPass);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
+});
+
+test("mapea las 35 rutas públicas a chunks exactos y reserva compliance para el 404", () => {
+  const mappedPublicRoutes = Object.keys(routeFamilyByPath)
+    .filter((route) => route !== "/inicio")
+    .sort();
+  assert.deepEqual(mappedPublicRoutes, [...publicRoutePaths].sort());
+  assert.deepEqual(
+    Object.fromEntries(Object.entries(routeFamilies).map(([family, routes]) => [family, routes.length])),
+    { home: 4, services: 6, coursesIndex: 3, courseS7: 3, courseTia: 3, app: 3, resources: 6, compliance: 8 }
+  );
+  for (const [route, family] of Object.entries(routeFamilyByPath)) {
+    assert.equal(getRouteFamily(route), family, route);
+  }
+  for (const route of ["/__boj_not_found__", "/cursos/desconocido", "/en/courses/unknown", "/recursos-tecnicos/desconocido"]) {
+    assert.equal(getRouteFamily(route), "compliance", route);
+  }
+});
+
+test("serializa JSON-LD igual en prerender y navegación cliente", () => {
+  for (const route of [...publicRoutePaths, "/__boj_not_found__"]) {
+    const jsonLd = getRouteMetadata(route).jsonLd;
+    if (jsonLd) assert.equal(serializeClientJsonLd(jsonLd), serializeBuildJsonLd(jsonLd), route);
+  }
+  const unsafe = { value: "</script><script>alert(1)</script>" };
+  assert.equal(serializeClientJsonLd(unsafe), serializeBuildJsonLd(unsafe));
+  assert.doesNotMatch(serializeClientJsonLd(unsafe), /</);
+});
+
+test("rechaza root inútil, fallback de Suspense y contenido inline incompatible con CSP", () => {
+  const validMarkup = prerenderFixture("/app", 2026);
+  validatePrerenderMarkup(validMarkup, "/app");
+  const html = injectPrerenderedRoot(templateFor(), "/app", 2026, validMarkup);
+  assert.equal(normalizeRootTemplate(html), templateFor());
+
+  assert.throws(() => validatePrerenderMarkup("", "/app"), /markup vacío/);
+  assert.throws(
+    () => validatePrerenderMarkup(validMarkup.replace("<main", '<div class="route-loading"></div><main'), "/app"),
+    /Suspense/
+  );
+  assert.throws(
+    () => validatePrerenderMarkup(validMarkup.replace("<main", '<!--$!--><template data-msg="suspended"></template><main'), "/app"),
+    /Suspense/
+  );
+  assert.throws(
+    () => validatePrerenderMarkup(validMarkup.replace("<h1", '<h1 style="color:red"'), "/app"),
+    /estilo inline/
+  );
+  assert.throws(
+    () => validatePrerenderMarkup(validMarkup.replace("</main>", "<script>bad()</script></main>"), "/app"),
+    /script inline/
+  );
+  assert.throws(
+    () => validatePrerenderMarkup(validMarkup.replace(/<h1[\s\S]*?<\/h1>/, ""), "/app"),
+    /h1/
+  );
+  validatePrerenderMarkup(
+    validMarkup.replace("</main>", '<img src="/assets/fixture.webp" alt="" width="640" height="480" /></main>'),
+    "/app"
+  );
+  assert.throws(
+    () => validatePrerenderMarkup(validMarkup.replace("</main>", '<img src="/assets/fixture.webp" alt="" height="480" /></main>'), "/app"),
+    /sin width intrínseco válido/
+  );
+  assert.throws(
+    () => validatePrerenderMarkup(validMarkup.replace("</main>", '<img src="/assets/fixture.webp" alt="" width="640" height="0" /></main>'), "/app"),
+    /sin height intrínseco válido/
+  );
 });
 
 test("los controles negativos rechazan metadata raíz, lang, duplicados y JSON-LD corruptos", () => {
@@ -235,6 +355,33 @@ test("rechaza assets compilados faltantes y entrypoints duplicados", async () =>
     await assert.rejects(
       validateBuiltAssets(valid.replace("</body>", '<script type="module" src="/assets/duplicate.js"></script></body>'), directory),
       /único entrypoint/
+    );
+    await assert.rejects(
+      validateBuiltAssets(valid.replace(ROOT_SHELL, '<div id="root"><main><img src="/assets/missing-body-abcd1234.webp" alt="" /></main></div>'), directory),
+      /asset referenciado inexistente/
+    );
+    for (const invalidReference of [
+      "assets/relative-abcd1234.webp",
+      "https://cdn.example.com/external.webp",
+      "data:image/webp;base64,AAAA",
+      "/src/assets/source.webp",
+      "/.prerender/leak.webp",
+      "undefined",
+    ]) {
+      await assert.rejects(
+        validateBuiltAssets(
+          valid.replace(ROOT_SHELL, `<div id="root"><main><img src="${invalidReference}" alt="" /></main></div>`),
+          directory
+        ),
+        /asset relativo|asset no publicable|asset vacía/
+      );
+    }
+    await assert.rejects(
+      validateBuiltAssets(
+        valid.replace(ROOT_SHELL, '<div id="root"><main><picture><source srcset="/assets/index-fixture-abcd1234.css 1x, assets/relative.webp 2x" /></picture></main></div>'),
+        directory
+      ),
+      /asset relativo/
     );
   } finally {
     await rm(directory, { recursive: true, force: true });

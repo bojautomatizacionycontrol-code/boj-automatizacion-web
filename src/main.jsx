@@ -1,6 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App.jsx";
+import { loadRouteComponent } from "./routes/manifest.jsx";
 import "./styles.css";
 import "./audit.css";
 import "./m1-accessibility.css";
@@ -36,8 +37,44 @@ function migrateLegacyHash() {
 
 migrateLegacyHash();
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+function normalizedBrowserRoute() {
+  let route = window.location.pathname || "/";
+  if (route.length > 1 && route.endsWith("/")) route = route.replace(/\/+$/, "");
+  return route;
+}
+
+async function bootstrap() {
+  const rootElement = document.getElementById("root");
+  const prerenderedRoute = rootElement.dataset.bojRoute;
+  const browserRoute = normalizedBrowserRoute();
+  const legacyRouteMismatch = Boolean(
+    rootElement.hasChildNodes() &&
+    prerenderedRoute &&
+    prerenderedRoute !== "/__boj_not_found__" &&
+    prerenderedRoute !== browserRoute
+  );
+  const initialRoute = legacyRouteMismatch || !prerenderedRoute ? browserRoute : prerenderedRoute;
+  const buildYear = Number(rootElement.dataset.bojBuildYear) || new Date().getFullYear();
+  const InitialRouteComponent = await loadRouteComponent(initialRoute);
+  const tree = (
+    <React.StrictMode>
+      <App initialRoute={initialRoute} initialRouteComponent={InitialRouteComponent} buildYear={buildYear} />
+    </React.StrictMode>
+  );
+
+  if (rootElement.hasChildNodes() && !legacyRouteMismatch) {
+    hydrateRoot(rootElement, tree, {
+      onRecoverableError(error) {
+        console.error("WEB-M3 hydration recovery", error);
+      },
+    });
+    return;
+  }
+
+  if (legacyRouteMismatch) rootElement.replaceChildren();
+  createRoot(rootElement).render(tree);
+}
+
+bootstrap().catch((error) => {
+  console.error("WEB-M3 bootstrap failed", error);
+});
