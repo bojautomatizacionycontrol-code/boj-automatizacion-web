@@ -1,7 +1,7 @@
 :root {
   color-scheme: dark;
   font-family:
-    "Geist", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   --bg: #071017;
   --bg-strong: #03080d;
@@ -21204,6 +21204,10 @@ textarea {
   background: #020b14;
 }
 
+.m2-picture {
+  display: contents;
+}
+
 .boj-hero-bg {
   position: absolute;
   inset: 0;
@@ -22338,10 +22342,10 @@ textarea {
 
 /* =====================================================================
    BOJ AUDIT — Identidad premium #1: tipografia display + acento refinado.
-   Space Grotesk (display tecnico-premium) en titulos; Inter en cuerpo.
+   Geist como tipografia principal con fallback de sistema.
    ===================================================================== */
 :root {
-  --font-display: "Geist", "Hanken Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Geist", "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
   --boj-accent: #0e7c99;
   --boj-accent-bright: #19a8cb;
 }

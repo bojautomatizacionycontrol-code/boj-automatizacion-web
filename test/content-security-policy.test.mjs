@@ -36,9 +36,12 @@ function mutatePolicy(policy, directive, transform) {
 test("configura una CSP enforce global, exacta y sintácticamente válida", () => {
   const policy = validateVercelCspConfig(vercelConfig);
   assert.equal(getConfiguredCsp(vercelConfig), buildContentSecurityPolicy());
-  assert.equal(vercelConfig.headers.length, 1);
-  assert.equal(vercelConfig.headers[0].source, CSP_HEADER_SOURCE);
-  assert.equal(vercelConfig.headers[0].headers[0].key, CSP_HEADER_NAME);
+  const cspRules = vercelConfig.headers.filter((rule) =>
+    rule.headers.some((header) => header.key.toLowerCase() === CSP_HEADER_NAME.toLowerCase())
+  );
+  assert.equal(cspRules.length, 1);
+  assert.equal(cspRules[0].source, CSP_HEADER_SOURCE);
+  assert.equal(cspRules[0].headers.filter((header) => header.key === CSP_HEADER_NAME).length, 1);
   assert.doesNotMatch(policy, /report-uri|report-to/i);
 });
 

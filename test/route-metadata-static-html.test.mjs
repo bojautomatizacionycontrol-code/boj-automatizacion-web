@@ -32,11 +32,11 @@ function templateFor(metadata = getRouteMetadata("/")) {
   <head>
 ${renderRouteMetadataFragment(metadata)}
     <link rel="icon" href="/favicon-fixture.png" />
-    <link rel="stylesheet" href="/assets/index-fixture.css" />
+    <link rel="stylesheet" href="/assets/index-fixture-abcd1234.css" />
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" crossorigin src="/assets/index-fixture.js"></script>
+    <script type="module" crossorigin src="/assets/index-fixture-abcd1234.js"></script>
   </body>
 </html>`;
 }
@@ -157,9 +157,10 @@ test("genera 35 shells físicos y 404 con el mismo entrypoint SPA", async () => 
   try {
     await writeFile(join(directory, "index.html"), templateFor(), "utf8");
     await mkdir(join(directory, "assets"), { recursive: true });
-    await writeFile(join(directory, "assets", "index-fixture.js"), "export {};", "utf8");
-    await writeFile(join(directory, "assets", "index-fixture.css"), "body {}", "utf8");
+    await writeFile(join(directory, "assets", "index-fixture-abcd1234.js"), "export {};", "utf8");
+    await writeFile(join(directory, "assets", "index-fixture-abcd1234.css"), "body {}", "utf8");
     await writeFile(join(directory, "favicon-fixture.png"), "fixture", "utf8");
+    await writeFile(join(directory, "og-institutional-1200x630.jpg"), "fixture", "utf8");
     const generated = await generateRouteHtml(directory);
     assert.equal(generated.length, 36);
 
@@ -167,7 +168,7 @@ test("genera 35 shells físicos y 404 con el mismo entrypoint SPA", async () => 
       const html = await readFile(outputFileForRoute(directory, route), "utf8");
       const metadata = getRouteMetadata(route);
       validateRouteHtml(html, metadata);
-      assert.match(html, /src="\/assets\/index-fixture\.js"/);
+      assert.match(html, /src="\/assets\/index-fixture-abcd1234\.js"/);
     }
 
     const notFound = await readFile(join(directory, "404.html"), "utf8");
@@ -221,13 +222,14 @@ test("rechaza assets compilados faltantes y entrypoints duplicados", async () =>
   const directory = await mkdtemp(join(tmpdir(), "boj-route-assets-"));
   try {
     await mkdir(join(directory, "assets"), { recursive: true });
-    await writeFile(join(directory, "assets", "index-fixture.js"), "export {};", "utf8");
-    await writeFile(join(directory, "assets", "index-fixture.css"), "body {}", "utf8");
+    await writeFile(join(directory, "assets", "index-fixture-abcd1234.js"), "export {};", "utf8");
+    await writeFile(join(directory, "assets", "index-fixture-abcd1234.css"), "body {}", "utf8");
     await writeFile(join(directory, "favicon-fixture.png"), "fixture", "utf8");
+    await writeFile(join(directory, "og-institutional-1200x630.jpg"), "fixture", "utf8");
     const valid = templateFor();
     await validateBuiltAssets(valid, directory);
     await assert.rejects(
-      validateBuiltAssets(valid.replace("/assets/index-fixture.css", "/assets/missing.css"), directory),
+      validateBuiltAssets(valid.replace("/assets/index-fixture-abcd1234.css", "/assets/missing.css"), directory),
       /asset referenciado inexistente/
     );
     await assert.rejects(
