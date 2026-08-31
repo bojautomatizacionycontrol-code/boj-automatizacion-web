@@ -193,7 +193,7 @@ test("los controles negativos rechazan metadata raíz, lang, duplicados y JSON-L
     /description duplicada/
   );
   assert.throws(
-    () => validateRouteHtml(valid.replace('"@context": "https://schema.org"', '"@context": INVALID'), metadata),
+    () => validateRouteHtml(valid.replace('"@context":"https://schema.org"', '"@context":INVALID'), metadata),
     /JSON/
   );
   assert.throws(
