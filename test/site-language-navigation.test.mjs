@@ -85,7 +85,7 @@ test("mantiene el selector visible en el extremo derecho del encabezado", () => 
   const mobileControls = headerSource.slice(headerSource.indexOf('<div className="mobile-header-controls">'));
 
   assert.ok(desktopActions.indexOf("routeAction.label") < desktopActions.indexOf("<LanguageSwitcher"));
-  assert.match(mobileControls, /<LanguageSwitcher route=\{route\} language=\{language\} \/>/);
+  assert.match(mobileControls, /<LanguageSwitcher route=\{route\} language=\{language\} onSelect=\{closeMenu\} \/>/);
   assert.match(mobileControls, /className="nav-toggle"/);
   assert.doesNotMatch(headerSource.slice(headerSource.indexOf('<div className="mobile-nav-actions">'), headerSource.indexOf("</nav>")), /LanguageSwitcher/);
   assert.match(stylesSource, /\.mobile-header-controls\s*\{[\s\S]*?display:\s*none/);

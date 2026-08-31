@@ -25,7 +25,8 @@ test("la urgencia deriva a WhatsApp y las demás consultas al formulario", () =>
   assert.match(decisionPathsSource, /action: "Priorizar por WhatsApp"[\s\S]*?external: true/);
   assert.equal((decisionPathsSource.match(/action: "Completar formulario"/g) || []).length, 2);
   assert.equal((decisionPathsSource.match(/href: "#consulta-tecnica"/g) || []).length, 2);
-  assert.match(appSource, /className="contact-grid" id="consulta-tecnica"/);
+  assert.match(appSource, /<h2 id="consulta-tecnica" tabIndex=\{-1\}>Cuéntanos el caso<\/h2>/);
+  assert.doesNotMatch(appSource, /className="contact-grid" id="consulta-tecnica"/);
 });
 
 test("el hero de Contacto mantiene WhatsApp y deriva la alternativa al formulario real", () => {
@@ -39,8 +40,8 @@ test("el hero de Contacto mantiene WhatsApp y deriva la alternativa al formulari
 
 test("el envío existente y los campos obligatorios permanecen intactos", () => {
   assert.match(appSource, /await sendContactForm\(\{ \.\.\.form, subject:/);
-  assert.match(appSource, /<input name="name"[^>]*required/);
-  assert.match(appSource, /<input name="email" type="email"[^>]*required/);
+  assert.match(appSource, /name="name"[^>]*autoComplete="name"[^>]*required/);
+  assert.match(appSource, /name="email" type="email"[^>]*autoComplete="email"[^>]*required/);
   assert.match(appSource, /name="message"[\s\S]*?required/);
 });
 

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./styles.css";
 import "./audit.css";
+import "./m1-accessibility.css";
 
 // Compatibilidad con enlaces antiguos de hash-routing (#/ruta). ANTES de montar
 // React: si la URL trae un hash de RUTA legacy, lo convierte a una URL limpia con

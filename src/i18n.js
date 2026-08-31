@@ -18,7 +18,7 @@ export const englishNavItems = [
     path: "/en/courses",
     children: [
       { label: "S7-300/400 diagnostics", path: "/en/courses/s7-300-400" },
-      { label: "TIA Portal S7-1200/1500", path: "/en/courses/tia-portal" },
+      { label: "TIA Portal S7-1200/1500 — Upcoming", path: "/en/courses/tia-portal" },
     ],
   },
   { label: "App", path: "/en/app" },
@@ -34,7 +34,7 @@ export const portugueseNavItems = [
     path: "/pt/cursos",
     children: [
       { label: "Diagnóstico S7-300/400", path: "/pt/cursos/s7-300-400" },
-      { label: "TIA Portal S7-1200/1500", path: "/pt/cursos/tia-portal" },
+      { label: "TIA Portal S7-1200/1500 — Em preparação", path: "/pt/cursos/tia-portal" },
     ],
   },
   { label: "App", path: "/pt/app" },
@@ -281,8 +281,8 @@ export const englishS7Course = {
 };
 
 export const englishTiaCourse = {
-  title: "Introduction to TIA Portal with Siemens S7-1200/1500 PLCs",
-  subtitle: "An introductory course for building a structured foundation in TIA Portal: hardware, tags, LAD, downloading, online monitoring and initial diagnostics.",
+  title: "Upcoming: introduction to TIA Portal with Siemens S7-1200/1500 PLCs",
+  subtitle: "This future introductory course is in preparation. Enrollment is not open yet.",
   audience: [
     "Technicians starting with TIA Portal",
     "Technical students",
@@ -612,8 +612,8 @@ export const portugueseS7Course = {
 };
 
 export const portugueseTiaCourse = {
-  title: "Introdução ao TIA Portal com PLC Siemens S7-1200/1500",
-  subtitle: "Curso introdutório para construir uma base organizada no TIA Portal: hardware, variáveis, LAD, carga, monitoramento e diagnóstico inicial.",
+  title: "Em preparação: introdução ao TIA Portal com PLC Siemens S7-1200/1500",
+  subtitle: "Este futuro curso introdutório está em preparação. As inscrições ainda não estão abertas.",
   audience: [
     "Técnicos que estão começando no TIA Portal",
     "Estudantes de áreas técnicas",

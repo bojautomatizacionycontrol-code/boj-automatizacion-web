@@ -34,7 +34,7 @@ export const navItems = [
     path: "/cursos",
     children: [
       { label: "Diagnóstico S7-300/400", path: "/cursos/s7-300-400" },
-      { label: "TIA Portal S7-1200/1500", path: "/cursos/tia-portal" },
+      { label: "TIA Portal S7-1200/1500 — Próximamente", path: "/cursos/tia-portal" },
     ],
   },
   { label: "App", path: "/app" },
@@ -381,14 +381,14 @@ export const courses = [
   {
     id: "tia",
     path: "/cursos/tia-portal",
-    title: "Introducción a TIA Portal con PLC S7-1200/1500",
-    shortTitle: "TIA Portal S7-1200/1500",
+    title: "Próximamente: introducción a TIA Portal con PLC S7-1200/1500",
+    shortTitle: "TIA Portal S7-1200/1500 — Próximamente",
     level: "Inicial aplicado",
-    mode: "Curso introductorio con enfoque práctico",
+    mode: "Curso futuro en preparación; inscripción todavía no habilitada",
     audience:
       "Técnicos que necesitan incorporar TIA Portal, estudiantes avanzados, programadores con experiencia en STEP 7 Classic y personal de mantenimiento.",
     learn:
-      "Crear proyectos, configurar hardware, ordenar variables, programar LAD básico, cargar al PLC y monitorear online.",
+      "Contenido previsto: proyectos, hardware, variables, LAD básico, carga al PLC y monitoreo online.",
     outcomes: [
       "Crear y cargar proyectos básicos en TIA Portal con estructura.",
       "Comprender estructura de hardware, variables, bloques y monitoreo online.",
@@ -494,9 +494,9 @@ export const s7Course = {
 };
 
 export const tiaCourse = {
-  title: "Introducción a TIA Portal con PLC Siemens S7-1200/1500",
+  title: "Próximamente: introducción a TIA Portal con PLC Siemens S7-1200/1500",
   subtitle:
-    "Curso introductorio para incorporar TIA Portal con una base ordenada: hardware, variables, LAD, carga, monitoreo y diagnóstico inicial.",
+    "Curso futuro en preparación para incorporar TIA Portal con una base ordenada. La inscripción todavía no está habilitada.",
   audience: [
     "Técnicos que necesitan iniciar en TIA Portal",
     "Estudiantes",
@@ -745,7 +745,7 @@ export const technicalResources = [
       "Entorno moderno de ingeniería Siemens para PLC, HMI, redes, drives y sistemas integrados de automatización.",
     description:
       "Plataforma actual para ingeniería Siemens: programación S7-1200/S7-1500, HMI WinCC, PROFINET, diagnóstico online, drives y puesta en marcha integrada.",
-    status: "Disponible",
+    status: "Recurso informativo disponible",
     visualKey: "tiaPortal",
     meta: ["S7-1200/1500", "TIA Portal", "PROFINET", "WinCC"],
     sections: [
