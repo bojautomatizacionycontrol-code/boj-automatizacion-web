@@ -111,6 +111,11 @@ test("deja fuera del build las capturas históricas con porcentajes o causas pro
     "app-resultado-diagnostico.jpg",
     "app-hipotesis-priorizadas.jpg",
     "assets/app-carousel",
+    "app-pro-real-capture.png",
+    "app-boj-s7-plc-pro-dashboard.png",
+    "app-pro-hero-exact.png",
+    "app-pro-hero-background.png",
+    "app-pro-hero-laptop.jpg",
   ];
 
   for (const visual of inactiveVisuals) {
@@ -121,7 +126,15 @@ test("deja fuera del build las capturas históricas con porcentajes o causas pro
   assert.match(appSource, /const s7AppCarousel = \[[\s\S]*?image: appDiagnosticoGuiado[\s\S]*?\];/);
   assert.match(appSource, /"!\.\.\/assets\/services-works\/panel app\.png"/);
   assert.match(appSource, /"!\.\.\/assets\/services-works\/panel app 2\.png"/);
-  assert.match(stylesSource, /\.app-pro-real-view-card:only-child\s*\{[\s\S]*?grid-column:\s*1 \/ -1;/);
+  for (const activeVisual of [
+    "app-seleccion-sintoma-v8-17-24.jpg",
+    "app-verificacion-guiada-v8-17-24.jpg",
+    "app-registro-intervencion-v8-17-24.jpg",
+  ]) {
+    assert.ok(appSource.includes(activeVisual), `Falta la captura vigente: ${activeVisual}`);
+  }
+  assert.match(stylesSource, /\.app-pro-page \.app-pro-real-gallery\s*\{/);
+  assert.match(stylesSource, /\.app-pro-page \.app-pro-real-selector button\[aria-pressed="true"\]/);
 });
 
 test("muestra la divulgación lingüística exacta antes de cada grilla de compra", () => {

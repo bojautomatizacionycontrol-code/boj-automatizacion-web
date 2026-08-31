@@ -5,6 +5,8 @@ import {
   ArrowRight,
   CheckCircle2,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   ExternalLink,
   TriangleAlert,
   X,
@@ -13,6 +15,9 @@ import { contact, offer } from "../content.js";
 import { englishApp, portugueseApp } from "../i18n.js";
 import appProHeroLaptopVisual from "../assets/hero-app.jpg";
 import appDiagnosticoGuiado from "../assets/app-diagnostico-guiado.jpg";
+import appSeleccionSintoma from "../assets/app-seleccion-sintoma-v8-17-24.jpg";
+import appVerificacionGuiada from "../assets/app-verificacion-guiada-v8-17-24.jpg";
+import appRegistroIntervencion from "../assets/app-registro-intervencion-v8-17-24.jpg";
 import walterBojAvatar from "../assets/walter-boj-avatar-field.jpeg";
 import { track } from "../app/shared-eager.jsx";
 import { Hero, Icon, S7ProofStrip, S7Testimonials, appLicensePlans, appProductUrl } from "./shared.jsx";
@@ -81,12 +86,48 @@ const appLanguages = ["Español", "English", "Português", "Deutsch", "Français
 
 const appRealViews = [
   {
-    title: "Subflujo guiado y diagnóstico por etapas",
-    text: "Asistencia paso a paso para aislar fallas en módulos, IM, base y comunicación.",
-    image: appDiagnosticoGuiado,
-    position: "center top",
+    id: "symptom-entry",
+    title: "Elige el síntoma observado",
+    text: "Filtra por CPU, redes, señales o actuadores y comienza desde la condición real de planta.",
+    image: appSeleccionSintoma,
+    width: 1000,
+    height: 455,
+  },
+  {
+    id: "guided-verification",
+    title: "Verifica con una pregunta concreta",
+    text: "Cada etapa explica por qué se pregunta, qué revisar y qué acción realizar antes de avanzar.",
+    image: appVerificacionGuiada,
+    width: 1460,
+    height: 675,
+  },
+  {
+    id: "intervention-record",
+    title: "Documenta la intervención",
+    text: "Registra equipo, área, responsable y criticidad para convertir el diagnóstico en un trabajo trazable.",
+    image: appRegistroIntervencion,
+    width: 1000,
+    height: 390,
   },
 ];
+
+const appRealViewCopyByLanguage = {
+  en: {
+    "symptom-entry": { title: "Start from the observed symptom", text: "Filter by CPU, networks, signals or actuators and begin with the actual field condition." },
+    "guided-verification": { title: "Verify with one concrete question", text: "Each stage explains why it asks, what to inspect and which action to take before moving on." },
+    "intervention-record": { title: "Document the intervention", text: "Record the equipment, area, technician and criticality to keep the diagnostic work traceable." },
+  },
+  pt: {
+    "symptom-entry": { title: "Comece pelo sintoma observado", text: "Filtre por CPU, redes, sinais ou atuadores e parta da condição real encontrada em campo." },
+    "guided-verification": { title: "Verifique com uma pergunta concreta", text: "Cada etapa explica por que pergunta, o que revisar e qual ação executar antes de avançar." },
+    "intervention-record": { title: "Documente a intervenção", text: "Registre equipamento, área, responsável e criticidade para manter o diagnóstico rastreável." },
+  },
+};
+
+const localizeAppRealViews = (language) => appRealViews.map((item) => ({ ...item, ...appRealViewCopyByLanguage[language][item.id] }));
+
+const englishAppRealViews = localizeAppRealViews("en");
+const portugueseAppRealViews = localizeAppRealViews("pt");
 
 const appTrialPlan = offer.app.trialPlan;
 
@@ -459,6 +500,87 @@ function LocalizedAppObjection({ language }) {
   );
 }
 
+function AppRealViewGallery({ views, onOpen, idPrefix, expandLabel, selectorLabel }) {
+  const [activeId, setActiveId] = useState(views[0]?.id);
+  const activeIndex = Math.max(0, views.findIndex((item) => item.id === activeId));
+  const activeView = views[activeIndex] || views[0];
+
+  if (!activeView) return null;
+
+  const viewerId = `${idPrefix}-viewer`;
+
+  return (
+    <div className="app-pro-real-gallery">
+      <figure className="app-pro-real-viewer" id={viewerId}>
+        <button
+          className="app-pro-real-viewer-trigger"
+          type="button"
+          onClick={() => onOpen(activeView)}
+          aria-label={`${expandLabel}: ${activeView.title}`}
+        >
+          <span className="app-pro-real-viewer-frame">
+            <img
+              className="app-pro-real-view-image"
+              src={activeView.image}
+              alt={activeView.title}
+              width={activeView.width}
+              height={activeView.height}
+              loading="lazy"
+              decoding="async"
+            />
+            <span className="app-pro-real-viewer-zoom" aria-hidden="true">{expandLabel}</span>
+          </span>
+        </button>
+        <figcaption>
+          <span className="app-pro-real-viewer-index" aria-hidden="true">{String(activeIndex + 1).padStart(2, "0")}</span>
+          <div>
+            <h3>{activeView.title}</h3>
+            <p>{activeView.text}</p>
+          </div>
+        </figcaption>
+      </figure>
+
+      <ol className="app-pro-real-selector" aria-label={selectorLabel}>
+        {views.map((item, index) => (
+          <li key={item.id}>
+            <button
+              type="button"
+              aria-controls={viewerId}
+              aria-pressed={item.id === activeView.id}
+              onClick={() => setActiveId(item.id)}
+            >
+              <span className="app-pro-real-selector-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+              <span>
+                <strong>{item.title}</strong>
+                <small>{item.text}</small>
+              </span>
+            </button>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function AppRealViewDialogNavigation({ views, activeView, onChange, previousLabel, nextLabel, ofLabel }) {
+  if (!activeView || views.length < 2) return null;
+
+  const activeIndex = Math.max(0, views.findIndex((item) => item.id === activeView.id));
+  const selectOffset = (offset) => onChange(views[(activeIndex + offset + views.length) % views.length]);
+
+  return (
+    <div className="app-pro-lightbox-navigation">
+      <button type="button" onClick={() => selectOffset(-1)} aria-label={previousLabel}>
+        <ChevronLeft size={20} aria-hidden="true" />
+      </button>
+      <span aria-live="polite">{activeIndex + 1} {ofLabel} {views.length}</span>
+      <button type="button" onClick={() => selectOffset(1)} aria-label={nextLabel}>
+        <ChevronRight size={20} aria-hidden="true" />
+      </button>
+    </div>
+  );
+}
+
 function AppPage() {
   const pricingCards = [appTrialPlan, ...appLicensePlans];
   const [activeScreenshot, setActiveScreenshot] = useState(null);
@@ -608,31 +730,30 @@ function AppPage() {
       </section>
 
       <section className="app-pro-real-language-section">
-        <div className="mock-home-container app-pro-real-language-grid">
-          <div>
-            <h2>Captura real de la herramienta profesional</h2>
-            <div className="app-pro-real-view-grid">
-              {appRealViews.map((item) => (
-                <article className="app-pro-real-view-card" key={item.title}>
-                  <figure>
-                    <button
-                      className="app-pro-real-view-trigger"
-                      type="button"
-                      onClick={() => setActiveScreenshot(item)}
-                      aria-label={`Ampliar captura: ${item.title}`}
-                    >
-                      <img className="app-pro-real-view-image" src={item.image} alt={item.title} width="1474" height="588" loading="lazy" decoding="async" />
-                    </button>
-                  </figure>
-                  <div>
-                    <h3>{item.title}</h3>
-                    <p>{item.text}</p>
-                  </div>
-                </article>
-              ))}
+        <div className="mock-home-container app-pro-real-language-grid app-pro-real-language-grid--guided">
+          <div className="app-pro-real-gallery-shell">
+            <div className="app-pro-real-gallery-heading">
+              <span className="app-pro-real-gallery-eyebrow">RECORRIDO REAL DE LA APP</span>
+              <h2>Tres vistas reales del flujo profesional</h2>
+              <p>Observa cómo la herramienta recibe el síntoma, guía una comprobación concreta y prepara el registro técnico.</p>
+            </div>
+            <AppRealViewGallery
+              views={appRealViews}
+              onOpen={setActiveScreenshot}
+              idPrefix="es-app-real"
+              expandLabel="Ampliar captura"
+              selectorLabel="Seleccionar vista real de la herramienta"
+            />
+            <div className="app-pro-real-gallery-actions">
+              <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
+                Probar gratis durante 48 horas <ExternalLink size={17} aria-hidden="true" />
+              </a>
+              <a className="mock-btn mock-btn-outline" href="#planes-pro">
+                Ver planes PRO <ArrowRight size={17} aria-hidden="true" />
+              </a>
             </div>
           </div>
-          <div className="app-pro-language-card">
+          <div className="app-pro-language-card app-pro-language-card--compact">
             <h2>Disponible en 6 idiomas</h2>
             <div className="app-pro-language-list">
               {appLanguages.map((language) => (
@@ -654,10 +775,20 @@ function AppPage() {
         <button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Cerrar captura ampliada" data-dialog-initial-focus>
           <X size={20} />
         </button>
-        <img src={activeScreenshot?.image} alt={activeScreenshot?.title || ""} width="1474" height="588" decoding="async" />
+        <img src={activeScreenshot?.image} alt={activeScreenshot?.title || ""} width={activeScreenshot?.width || 1474} height={activeScreenshot?.height || 588} decoding="async" />
         <div className="app-pro-lightbox-copy">
-          <h2 id="app-pro-lightbox-title">{activeScreenshot?.title}</h2>
-          <p>{activeScreenshot?.text}</p>
+          <div>
+            <h2 id="app-pro-lightbox-title">{activeScreenshot?.title}</h2>
+            <p>{activeScreenshot?.text}</p>
+          </div>
+          <AppRealViewDialogNavigation
+            views={appRealViews}
+            activeView={activeScreenshot}
+            onChange={setActiveScreenshot}
+            previousLabel="Captura anterior"
+            nextLabel="Captura siguiente"
+            ofLabel="de"
+          />
         </div>
       </AccessibleDialog>
 
@@ -992,30 +1123,40 @@ function EnglishAppPage() {
       </section>
 
       <section className="app-pro-real-language-section">
-        <div className="mock-home-container app-pro-real-language-grid">
-          <div>
-            <h2>Real view of the professional tool</h2>
-            <div className="app-pro-real-view-grid">
-              {englishApp.views.map((copy, index) => {
-                const source = appRealViews[index];
-                const item = { ...source, ...copy };
-                return (
-                  <article className="app-pro-real-view-card" key={item.title}>
-                    <figure><button className="app-pro-real-view-trigger" type="button" onClick={() => setActiveScreenshot(item)} aria-label={`Enlarge screenshot: ${item.title}`}><img className="app-pro-real-view-image" src={item.image} alt={item.title} width="1474" height="588" loading="lazy" decoding="async" /></button></figure>
-                    <div><h3>{item.title}</h3><p>{item.text}</p></div>
-                  </article>
-                );
-              })}
+        <div className="mock-home-container app-pro-real-language-grid app-pro-real-language-grid--guided">
+          <div className="app-pro-real-gallery-shell">
+            <div className="app-pro-real-gallery-heading">
+              <span className="app-pro-real-gallery-eyebrow">REAL APP WORKFLOW</span>
+              <h2>Three real views of the professional workflow</h2>
+              <p>See how the tool receives the symptom, guides one concrete check and prepares the technical record.</p>
+            </div>
+            <AppRealViewGallery
+              views={englishAppRealViews}
+              onOpen={setActiveScreenshot}
+              idPrefix="en-app-real"
+              expandLabel="Enlarge screenshot"
+              selectorLabel="Select a real view of the tool"
+            />
+            <div className="app-pro-real-gallery-actions">
+              <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
+                Start the 48-hour free trial <ExternalLink size={17} aria-hidden="true" />
+              </a>
+              <a className="mock-btn mock-btn-outline" href="#en-pro-plans">
+                View PRO plans <ArrowRight size={17} aria-hidden="true" />
+              </a>
             </div>
           </div>
-          <div className="app-pro-language-card"><h2>Available in 6 languages</h2><div className="app-pro-language-list">{["Spanish", "English", "Portuguese", "German", "French", "Italian"].map((item) => <span key={item}>{item}</span>)}</div><p className="app-pro-language-disclosure">Interface available in six languages. Specialized technical content and legal documents are currently provided in Spanish.</p></div>
+          <div className="app-pro-language-card app-pro-language-card--compact"><h2>Available in 6 languages</h2><div className="app-pro-language-list">{["Spanish", "English", "Portuguese", "German", "French", "Italian"].map((item) => <span key={item}>{item}</span>)}</div><p className="app-pro-language-disclosure">Interface available in six languages. Specialized technical content and legal documents are currently provided in Spanish.</p></div>
         </div>
       </section>
 
       <AccessibleDialog open={Boolean(activeScreenshot)} onClose={() => setActiveScreenshot(null)} labelledBy="en-app-lightbox-title" className="app-pro-lightbox" panelClassName="app-pro-lightbox-panel">
         <button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Close enlarged screenshot" data-dialog-initial-focus><X size={20} /></button>
-        <img src={activeScreenshot?.image} alt={activeScreenshot?.title || ""} width="1474" height="588" decoding="async" />
-        <div className="app-pro-lightbox-copy"><h2 id="en-app-lightbox-title">{activeScreenshot?.title}</h2><p>{activeScreenshot?.text}</p></div>
+        <img src={activeScreenshot?.image} alt={activeScreenshot?.title || ""} width={activeScreenshot?.width || 1474} height={activeScreenshot?.height || 588} decoding="async" />
+        <div className="app-pro-lightbox-copy">
+          <div><h2 id="en-app-lightbox-title">{activeScreenshot?.title}</h2><p>{activeScreenshot?.text}</p></div>
+          <AppRealViewDialogNavigation views={englishAppRealViews} activeView={activeScreenshot} onChange={setActiveScreenshot} previousLabel="Previous screenshot" nextLabel="Next screenshot" ofLabel="of" />
+        </div>
       </AccessibleDialog>
 
       <section className="app-pro-plans-section" id="en-pro-plans">
@@ -1105,9 +1246,35 @@ function PortugueseAppPage() {
 
       <section className="app-pro-dark-section app-pro-includes-section"><div className="mock-home-container"><div className="app-pro-section-heading"><span className="app-pro-section-kicker">FERRAMENTAS DE DIAGNÓSTICO</span><h2>O que o BOJ S7-PLC PRO inclui</h2><p>Um ambiente prático para revisar e documentar diagnósticos de primeira linha.</p></div><div className="app-pro-include-grid">{portugueseApp.includes.map((item) => <article className="app-pro-include-card" key={item.title}><Icon name={item.icon} size={30} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div></section>
 
-      <section className="app-pro-real-language-section"><div className="mock-home-container app-pro-real-language-grid"><div><h2>Imagem real da ferramenta profissional</h2><div className="app-pro-real-view-grid">{portugueseApp.views.map((copy, index) => { const source = appRealViews[index]; const item = { ...source, ...copy }; return <article className="app-pro-real-view-card" key={item.title}><figure><button className="app-pro-real-view-trigger" type="button" onClick={() => setActiveScreenshot(item)} aria-label={`Ampliar captura: ${item.title}`}><img className="app-pro-real-view-image" src={item.image} alt={item.title} width="1474" height="588" loading="lazy" decoding="async" /></button></figure><div><h3>{item.title}</h3><p>{item.text}</p></div></article>; })}</div></div><div className="app-pro-language-card"><h2>Disponível em 6 idiomas</h2><div className="app-pro-language-list">{["Espanhol", "Inglês", "Português", "Alemão", "Francês", "Italiano"].map((item) => <span key={item}>{item}</span>)}</div><p className="app-pro-language-disclosure">Interface disponível em seis idiomas. O conteúdo técnico especializado e os documentos legais são fornecidos atualmente em espanhol.</p></div></div></section>
+      <section className="app-pro-real-language-section">
+        <div className="mock-home-container app-pro-real-language-grid app-pro-real-language-grid--guided">
+          <div className="app-pro-real-gallery-shell">
+            <div className="app-pro-real-gallery-heading">
+              <span className="app-pro-real-gallery-eyebrow">FLUXO REAL DO APP</span>
+              <h2>Três vistas reais do fluxo profissional</h2>
+              <p>Veja como a ferramenta recebe o sintoma, orienta uma verificação concreta e prepara o registro técnico.</p>
+            </div>
+            <AppRealViewGallery
+              views={portugueseAppRealViews}
+              onOpen={setActiveScreenshot}
+              idPrefix="pt-app-real"
+              expandLabel="Ampliar captura"
+              selectorLabel="Selecionar uma vista real da ferramenta"
+            />
+            <div className="app-pro-real-gallery-actions">
+              <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
+                Iniciar teste gratuito de 48 horas <ExternalLink size={17} aria-hidden="true" />
+              </a>
+              <a className="mock-btn mock-btn-outline" href="#pt-planos-pro">
+                Ver planos PRO <ArrowRight size={17} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+          <div className="app-pro-language-card app-pro-language-card--compact"><h2>Disponível em 6 idiomas</h2><div className="app-pro-language-list">{["Espanhol", "Inglês", "Português", "Alemão", "Francês", "Italiano"].map((item) => <span key={item}>{item}</span>)}</div><p className="app-pro-language-disclosure">Interface disponível em seis idiomas. O conteúdo técnico especializado e os documentos legais são fornecidos atualmente em espanhol.</p></div>
+        </div>
+      </section>
 
-      <AccessibleDialog open={Boolean(activeScreenshot)} onClose={() => setActiveScreenshot(null)} labelledBy="pt-app-lightbox-title" className="app-pro-lightbox" panelClassName="app-pro-lightbox-panel"><button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Fechar captura ampliada" data-dialog-initial-focus><X size={20} /></button><img src={activeScreenshot?.image} alt={activeScreenshot?.title || ""} width="1474" height="588" decoding="async" /><div className="app-pro-lightbox-copy"><h2 id="pt-app-lightbox-title">{activeScreenshot?.title}</h2><p>{activeScreenshot?.text}</p></div></AccessibleDialog>
+      <AccessibleDialog open={Boolean(activeScreenshot)} onClose={() => setActiveScreenshot(null)} labelledBy="pt-app-lightbox-title" className="app-pro-lightbox" panelClassName="app-pro-lightbox-panel"><button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Fechar captura ampliada" data-dialog-initial-focus><X size={20} /></button><img src={activeScreenshot?.image} alt={activeScreenshot?.title || ""} width={activeScreenshot?.width || 1474} height={activeScreenshot?.height || 588} decoding="async" /><div className="app-pro-lightbox-copy"><div><h2 id="pt-app-lightbox-title">{activeScreenshot?.title}</h2><p>{activeScreenshot?.text}</p></div><AppRealViewDialogNavigation views={portugueseAppRealViews} activeView={activeScreenshot} onChange={setActiveScreenshot} previousLabel="Captura anterior" nextLabel="Próxima captura" ofLabel="de" /></div></AccessibleDialog>
 
       <section className="app-pro-plans-section" id="pt-planos-pro"><div className="mock-home-container"><div className="app-pro-section-heading"><span className="app-pro-section-kicker">LICENÇAS E OPÇÕES</span><h2>Escolha sua licença PRO</h2><p>Compare renovação, duração, dispositivos e disponibilidade offline antes de escolher.</p><p className="app-pro-plans-crosslink"><strong>Profissional</strong> e <strong>Empresarial</strong> incluem o <a href="/pt/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.</p></div><LocalizedAppPlanGuide language="pt" /><div className="app-pro-plan-grid">{pricingCards.map((plan) => <article className={`app-pro-plan-card${plan.badge ? " featured" : ""}${plan.sourceTitle === "Prueba gratuita" ? " trial" : ""}`} id={`pt-plano-${plan.sourceTitle.toLowerCase().replaceAll(" ", "-")}`} key={plan.sourceTitle}>{plan.badge ? <span className="app-pro-plan-badge">{plan.badge}</span> : null}<h3>{plan.title}</h3><strong>{plan.price}</strong><span className="app-pro-plan-meta">{plan.meta}</span><ul>{plan.bullets.map((item) => <li key={item}><CheckCircle2 size={15} />{item}</li>)}</ul><a className="mock-btn mock-btn-primary" href={plan.url} target="_blank" rel="noreferrer" onClick={() => track("plan_click", { plan: plan.sourceTitle, language: "pt" })}>{plan.button} <ExternalLink size={17} /></a></article>)}</div><ul className="app-pro-purchase-confidence" aria-label="Informações da compra"><li><CheckCircle2 size={17} />Compra processada pela Hotmart</li><li><CheckCircle2 size={17} />Preço e modalidade exibidos antes da confirmação</li><li><CheckCircle2 size={17} />A ativação usa o e-mail informado durante a compra</li></ul><aside className="app-pro-training-strip"><div className="app-pro-training-copy"><span className="app-pro-training-eyebrow">FORMAÇÃO TÉCNICA</span><h3>Também precisa de capacitação estruturada?</h3><p>Acesso permanente ao curso de diagnóstico S7-300/400, em espanhol, mais um mês de BOJ S7-PLC PRO.</p></div><div className="app-pro-training-action"><strong>{offer.course.price} · Pagamento único</strong><a className="mock-btn mock-btn-outline" href="/pt/cursos/s7-300-400">Ver conteúdo do curso <ArrowRight size={17} /></a></div></aside><article className="app-pro-institutional"><Icon name="Landmark" size={34} /><div><h3>Empresas e centros de formação: condições personalizadas</h3><p>Condições especiais para organizações, programas de capacitação técnica e equipes com vários usuários.</p></div><a className="mock-btn mock-btn-outline" href="/pt/contato">Solicitar informações <ArrowRight size={17} /></a></article></div></section>
 
