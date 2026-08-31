@@ -1,9 +1,10 @@
+import { readRuntimeAppSource, readRuntimeStylesSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
-const styleSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
+const styleSource = await readRuntimeStylesSource();
 
 test("Cursos diferencia visuales ilustrativos y disponibilidad", () => {
   const illustrativeLabels = appSource.match(/className="visual-disclaimer">Imagen ilustrativa/g) ?? [];

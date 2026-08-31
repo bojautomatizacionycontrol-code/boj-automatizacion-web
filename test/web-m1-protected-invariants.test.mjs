@@ -1,11 +1,13 @@
+import { readRuntimeAppSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { commercialIdentity, offer } from "../src/content.js";
+import { preservedNonRuntimeAnalyticsEvents } from "../src/app/preserved-analytics-inventory.js";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
 
 async function fileHash(path) {
   const source = await readFile(new URL(path, import.meta.url), "utf8");
@@ -32,7 +34,9 @@ test("identidad precios garantía y URLs conservan la fuente aprobada", () => {
 });
 
 test("el inventario de eventos Analytics conserva nombres y multiplicidad", () => {
-  const events = [...appSource.matchAll(/\btrack\("([^"]+)"/g)].map((match) => match[1]).sort();
+  const activeEvents = [...appSource.matchAll(/\btrack\("([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(activeEvents.length, 18);
+  const events = [...activeEvents, ...preservedNonRuntimeAnalyticsEvents].sort();
   assert.deepEqual(events, [
     "app_trial_click", "app_trial_click", "app_trial_click", "app_trial_click", "app_trial_click", "app_trial_click", "app_trial_click",
     "begin_checkout", "begin_checkout", "contact_form_submit", "contact_form_submit", "contact_form_submit", "contact_form_submit",

@@ -1,8 +1,9 @@
+import { readRuntimeStylesSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const stylesSource = await readRuntimeStylesSource();
 
 test("el carrusel del manual reserva una altura estable para todas sus leyendas", () => {
   assert.match(

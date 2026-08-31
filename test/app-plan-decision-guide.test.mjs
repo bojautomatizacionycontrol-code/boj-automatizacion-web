@@ -1,9 +1,10 @@
+import { readRuntimeAppSource, readRuntimeStylesSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
+const stylesSource = await readRuntimeStylesSource();
 
 test("la guía de decisión enlaza internamente a los cuatro planes pagos vigentes", () => {
   const expectedTargets = {

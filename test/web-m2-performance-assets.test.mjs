@@ -1,3 +1,4 @@
+import { readRuntimeAppSource, readRuntimeStylesSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
@@ -17,10 +18,10 @@ import {
 } from "../src/route-metadata.js";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const appSource = await readFile(join(root, "src", "App.jsx"), "utf8");
+const appSource = await readRuntimeAppSource();
 const indexSource = await readFile(join(root, "index.html"), "utf8");
 const contentSource = await readFile(join(root, "src", "content.js"), "utf8");
-const stylesSource = await readFile(join(root, "src", "styles.css"), "utf8");
+const stylesSource = await readRuntimeStylesSource();
 const vercelConfig = JSON.parse(await readFile(join(root, "vercel.json"), "utf8"));
 
 function sha256(buffer) {

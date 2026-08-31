@@ -1,11 +1,12 @@
+import { readRuntimeAppSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
 const dialogSource = await readFile(new URL("../src/AccessibleDialog.jsx", import.meta.url), "utf8");
 const utilitySource = await readFile(new URL("../src/accessibility.js", import.meta.url), "utf8");
-const flipbookSource = appSource.slice(appSource.indexOf("function ManualFlipbook("), appSource.indexOf("const s7TestimonialsCopy"));
+const flipbookSource = appSource.slice(appSource.indexOf("function ManualFlipbook("), appSource.indexOf("function purchaseCtaTarget"));
 
 test("lightboxes y visor reutilizan una única primitiva con portal y nombre", () => {
   assert.equal((appSource.match(/<AccessibleDialog/g) || []).length, 4);

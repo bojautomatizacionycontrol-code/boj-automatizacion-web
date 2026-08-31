@@ -1,8 +1,9 @@
+import { readRuntimeAppSource } from "./helpers/runtime-app-source.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
 const vercelConfig = JSON.parse(await readFile(new URL("../vercel.json", import.meta.url), "utf8"));
 
 test("/contact redirige permanentemente a la ruta canónica /contacto", () => {

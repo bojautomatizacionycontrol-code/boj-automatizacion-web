@@ -1,3 +1,4 @@
+import { readRuntimeAppSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -10,7 +11,7 @@ import {
   portugueseTiaCourse,
 } from "../src/i18n.js";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
 
 function sourceBetween(startMarker, endMarker) {
   const start = appSource.indexOf(startMarker);
@@ -31,8 +32,8 @@ function assertOrdered(source, markers) {
 
 test("Servicios mantiene en EN y PT el mismo orden visual alternado de español", () => {
   const pages = [
-    sourceBetween("function EnglishServicesPage()", "function EnglishCourseAvailableCard"),
-    sourceBetween("function PortugueseServicesPage()", "function PortugueseCourseAvailableCard"),
+    sourceBetween("function EnglishServicesPage()", "function EnglishProjectsPage"),
+    sourceBetween("function PortugueseServicesPage()", "function PortugueseProjectsPage"),
   ];
   const markers = [
     "services-areas-section",
@@ -61,8 +62,8 @@ test("Servicios mantiene en EN y PT el mismo orden visual alternado de español"
 
 test("App reutiliza la captura y todos los bloques comerciales de español en EN y PT", () => {
   const pages = [
-    sourceBetween("function EnglishAppPage()", "const localizedS7SalesCopy ="),
-    sourceBetween("function PortugueseAppPage()", "function PortugueseS7CoursePage()"),
+    sourceBetween("function EnglishAppPage()", "function PortugueseAppHeroDiagnosticPreview()"),
+    sourceBetween("function PortugueseAppPage()", "function AppRoutes"),
   ];
 
   for (const page of pages) {
@@ -92,8 +93,8 @@ test("App reutiliza la captura y todos los bloques comerciales de español en EN
 });
 
 test("TIA Portal conserva la landing completa y traducida en los tres idiomas", () => {
-  const englishPage = sourceBetween("function EnglishTiaCoursePage()", "function EnglishAppPage()");
-  const portuguesePage = sourceBetween("function PortugueseTiaCoursePage()", "function PortugueseAppPage()");
+  const englishPage = sourceBetween("function EnglishTiaCoursePage()", "function PortugueseTiaCoursePage()");
+  const portuguesePage = sourceBetween("function PortugueseTiaCoursePage()", "function InfoBlock");
 
   assert.match(englishPage, /course=\{englishTiaCourse\}/);
   assert.match(englishPage, /afterHero=\{<CoursePreparationStrip language="en" \/>\}/);
@@ -137,8 +138,8 @@ test("el curso S7 comparte las catorce secciones y tres CTA de compra en EN y PT
 });
 
 test("Contacto agrega los mismos caminos de decisión y cierre útil en EN y PT", () => {
-  const englishPage = sourceBetween("function EnglishContactPage()", "function PortugueseAppHeroDiagnosticPreview()");
-  const portuguesePage = sourceBetween("function PortugueseContactPage()", "function WorksPage()");
+  const englishPage = sourceBetween("function EnglishContactPage()", "const portugueseContactServices");
+  const portuguesePage = sourceBetween("function PortugueseContactPage()", "function GraciasPage()");
 
   for (const [page, language] of [[englishPage, "en"], [portuguesePage, "pt"]]) {
     assert.match(page, new RegExp(`<LocalizedContactDecisionGrid language="${language}" \\/>`));

@@ -1,3 +1,4 @@
+import { readRuntimeAppSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -5,9 +6,9 @@ import test from "node:test";
 import { offer } from "../src/content.js";
 import { getRouteMetadata } from "../src/route-metadata.js";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
 const spanishAppPageStart = appSource.indexOf("function AppPage()");
-const spanishAppPageEnd = appSource.indexOf("function AppComparisonTable()", spanishAppPageStart);
+const spanishAppPageEnd = appSource.indexOf("function EnglishAppHeroDiagnosticPreview()", spanishAppPageStart);
 const spanishAppPageSource = appSource.slice(spanishAppPageStart, spanishAppPageEnd);
 
 const expectedPlanMatrix = [

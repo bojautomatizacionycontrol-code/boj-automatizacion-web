@@ -1,8 +1,9 @@
+import { readRuntimeAppSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
 const utilitySource = await readFile(new URL("../src/accessibility.js", import.meta.url), "utf8");
 const headerSource = appSource.slice(appSource.indexOf("function Header("), appSource.indexOf("function LanguageSwitcher("));
 

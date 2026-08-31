@@ -1,9 +1,11 @@
+import { readRuntimeAppSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { buildContentSecurityPolicy } from "../scripts/csp-policy.mjs";
+import { preservedNonRuntimeAnalyticsEvents } from "../src/app/preserved-analytics-inventory.js";
 import {
   commercialIdentity,
   courses,
@@ -43,11 +45,18 @@ function sourceBlock(source, startMarker, endMarker) {
   return source.slice(start, end);
 }
 
-const [appSource, contentSource, routeSource, vercelSource] = await Promise.all([
+const [appSource, shellSource, sharedEagerSource, complianceSource, tiaSource, contentSource, routeSource, vercelSource, mainSource, packageSource, buildSource] = await Promise.all([
+  readRuntimeAppSource(),
   sourceFile("../src/App.jsx"),
+  sourceFile("../src/app/shared-eager.jsx"),
+  sourceFile("../src/routes/compliance.jsx"),
+  sourceFile("../src/routes/course-tia.jsx"),
   sourceFile("../src/content.js"),
   sourceFile("../src/route-metadata.js"),
   sourceFile("../vercel.json"),
+  sourceFile("../src/main.jsx"),
+  sourceFile("../package.json"),
+  sourceFile("../scripts/build.mjs"),
 ]);
 const vercelConfig = JSON.parse(vercelSource);
 
@@ -58,27 +67,37 @@ const protectedFileHashes = {
   "../src/accessibility.js": "59DEFB57B8006063543B5282EE57FC7A0FF215050ADCA714389E4FE62F78B892",
   "../src/i18n.js": "B17FBCE573031D949BEAEB4097BB13C666E00233609D1BD32F76E6B28FDD3FC0",
   "../src/m1-accessibility.css": "65A5411E4EFDE3DD5231779640AC34D1DB032CB622A12A0E44DD7CDA8B98DA87",
-  "../src/main.jsx": "3933D301D4E071DF78575B254F5EF7A4CE963A755978DFDCA7FF4EF1A38A3EE1",
+  "../src/app/preserved-analytics-inventory.js": "1EC89D5816FB33278F5A9724CF9AB909687845763DBE05581753086ACE781149",
   "../scripts/csp-policy.mjs": "696D7C2CB8A01960612C132D94D5B8266D3BB19C2108199BBB72C1042E5931D7",
   "../public/sitemap.xml": "42799F7D6F42AD873881D4CBC65F5B8E8557FB4968C4EA552ABB0157FC91032D",
   "../public/robots.txt": "928DAC7480C646B5F7E1285CF8DC5E8A529EF5AD728F724FFB110AA6E3AB8FAB",
-  "../package.json": "B5CEFB6A445E1BE524C0A74F0A6EE6DE2836A1D9D0E2C023EABFB0DE9E74467B",
   "../package-lock.json": "9B6B206FDF31963376A261C207D9F11D7319DC2A00DC82582583A7F91897FCC5",
-  "./contact-decision-paths.test.mjs": "AA94C8DC9C1431E89109EDAE401823467B252E2DDD61C6E65FF9484D02E71018",
-  "./site-language-navigation.test.mjs": "D68E97020C577430981BE3B34B21CD91F745F5E16C96628579B362DAF671A30F",
+  "./contact-decision-paths.test.mjs": "A3455113BA19591BC447E39F1E29F41D8A2979B5FB2A775091DFBA4BEFA0061D",
+  "./site-language-navigation.test.mjs": "42345C58E8F35826B68CDA763121859169E626CFE1DFE84A56F4EB84C4042349",
   "./web-m1-accessibility-behavior.test.mjs": "DA4F6F57CF72D2973F89525947DC415822B8DE7A51341291927FA922082D36CB",
-  "./web-m1-accessible-dialog.test.mjs": "CC992F671208161F1D4FE128153C8EAFC2AF25DB57DC6F57DCC931351AC302BA",
-  "./web-m1-accessible-navigation.test.mjs": "4BD616A2771F962DA4B8BAD01B0AA6D08A70F824A5321906A79903CD4BFA589F",
-  "./web-m1-contact-accessibility.test.mjs": "87660D7AAC0DEB01006CCFCE97AD92985567C21E80E3651E5F6F6C124BF39803",
-  "./web-m1-protected-invariants.test.mjs": "FE99B252E3D1A3455281B92AECD5015B64C032DD96F79EB7972D94477C0B8A23",
+  "./web-m1-accessible-dialog.test.mjs": "C8BE063490D2941FE0FE5CB13601933BBA02EC91A02F1F434449777F647C19FE",
+  "./web-m1-accessible-navigation.test.mjs": "22B28DD4A72E694E9F7450F336B0510FD7628486B8791DC15CB7B5002A6166C0",
+  "./web-m1-contact-accessibility.test.mjs": "B275449C88F3E67E5F1B21EA612F56A3B130D877A6478B958690B2000BB954BF",
+  "./web-m1-protected-invariants.test.mjs": "D4E20FFEFB5553473C87C0BBF1FA06257C7153153A9E31ED6F7314A4B3DB8889",
   "./web-m1-tia-future-state.test.mjs": "75CD071DBA0F5182FF97E89D0C4A9B41254889F7732B94C031B6358FD16A1E31",
-  "./web-m1-visual-accessibility.test.mjs": "DB2D283309CDC1A224C17AD22F7AB04EB8F8FED8423B28615FE6DB7A6DC1F5BC",
+  "./web-m1-visual-accessibility.test.mjs": "E064737C8D9B842ACD1AE2D9D045D908D67D6DC72D3583529A1539048E97B0BA",
 };
 
 test("archivos de backend seguridad rutas base y WEB-M1 permanecen exactos", async () => {
   for (const [path, expectedHash] of Object.entries(protectedFileHashes)) {
     assert.equal(await fileHash(path), expectedHash, path);
   }
+});
+
+test("la entrada WEB-M3 hidrata el prerender sin relajar las protecciones previas", () => {
+  assert.match(mainSource, /hydrateRoot\(rootElement, tree/);
+  assert.match(mainSource, /createRoot\(rootElement\)\.render\(tree\)/);
+  assert.match(mainSource, /rootElement\.dataset\.bojRoute/);
+  assert.match(mainSource, /loadRouteComponent\(initialRoute\)/);
+  assert.match(packageSource, /"build": "node scripts\/build\.mjs"/);
+  assert.equal((buildSource.match(/await viteBuild\(\{/g) || []).length, 2);
+  assert.match(buildSource, /ssr: join\(rootDir, "src", "entry-server\.jsx"\)/);
+  assert.match(buildSource, /await rm\(prerenderDir, \{ recursive: true, force: true \}\)/);
 });
 
 test("contenido comercial fiscal legal y de App conserva los bloques aprobados", () => {
@@ -132,19 +151,20 @@ test("technicalResources sólo admite cambiar el href oficial de WinCC", () => {
 });
 
 test("Analytics contacto encabezado legal y wrappers TIA conservan sus bloques", () => {
-  for (const [startMarker, endMarker, expectedHash] of [
-    ["const ANALYTICS = {", "const getServiceWorkImage", "CAE153CB29DDAE639EDFD1C79200F816B23D45A038CF307435778486E46EB6D1"],
-    ["function whatsappUrl(", "function Icon(", "6F02F5CA9FE3F4FD4DD92D1114456D5AB2C796778BAAC5F7D73F3A266001F752"],
-    ["function Header(", "function LanguageSwitcher(", "3B3E8AF45039AF070B64B0350D7B02A5FD13CC3998AC42E141A4DAAA99C6C147"],
-    ["function TiaCoursePage(", "const coursePreparationCopy", "9719C62AA8D2E1AEA14C61822189459BCF403493C249D4FD251FFF43631BEFA2"],
-    ["function EnglishTiaCoursePage(", "function EnglishAppPage(", "882A4BA3C741D20FFB20A4FC8FED9D536A81680337C114F15428A0CB99BBA2B4"],
-    ["function PortugueseTiaCoursePage(", "function PortugueseAppPage(", "9689C6EDE8F0C09422D32051365C9B621CB2DA824934C2A62CB0156314841B5A"],
-    ["function EnglishContactForm(", "function EnglishContactPage(", "752F9FD389C967F59AAFB2881856345247BE9F0D7E5467B78EA5DE052A7D09C5"],
-    ["function PortugueseContactForm(", "function PortugueseContactPage(", "CFA0269E18B56A065C901F7B531916725E827C97344F8B680BBEFDCEA1B87D5F"],
-    ["function ContactForm(", "const legalContent", "4AA70FE49BD12F6B09B36D27C93924A8F85142E123EC7019E4D2CCD51A946637"],
-    ["const legalContent = {", "function PageShell(", "FBE4254312D0D77DB58F4B0428DF8192D35045CD2443B2CA0E497B6FEEB39C4D"],
+  for (const [source, startMarker, endMarker, expectedHash] of [
+    [shellSource, "const ANALYTICS = {", "let analyticsBootstrapped", "EF666E0300C7D1CB178A06B96DCD41A2BA007694E0DF93DFBB335545EFC30437"],
+    [sharedEagerSource, "function track(", "function whatsappUrl", "4D35DA98A35C6066A4D4C088A2EC4C64BB039FD618F1B42A04721D8C2E6B98D8"],
+    [shellSource, "function initAnalytics", "function getRoute", "29ECFCDA94234F06FECD57B00FEC61FE1976498E547242EBC2C78F1AE1D6BD9A"],
+    [shellSource, "function Header(", "function LanguageSwitcher(", "3B3E8AF45039AF070B64B0350D7B02A5FD13CC3998AC42E141A4DAAA99C6C147"],
+    [tiaSource, "function TiaCoursePage(", "const coursePreparationCopy", "9719C62AA8D2E1AEA14C61822189459BCF403493C249D4FD251FFF43631BEFA2"],
+    [tiaSource, "function EnglishTiaCoursePage(", "function PortugueseTiaCoursePage(", "882A4BA3C741D20FFB20A4FC8FED9D536A81680337C114F15428A0CB99BBA2B4"],
+    [tiaSource, "function PortugueseTiaCoursePage(", "function InfoBlock", "9689C6EDE8F0C09422D32051365C9B621CB2DA824934C2A62CB0156314841B5A"],
+    [complianceSource, "function EnglishContactForm(", "function EnglishContactPage(", "752F9FD389C967F59AAFB2881856345247BE9F0D7E5467B78EA5DE052A7D09C5"],
+    [complianceSource, "function PortugueseContactForm(", "function PortugueseContactPage(", "CFA0269E18B56A065C901F7B531916725E827C97344F8B680BBEFDCEA1B87D5F"],
+    [complianceSource, "function ContactForm(", "const legalContent", "4AA70FE49BD12F6B09B36D27C93924A8F85142E123EC7019E4D2CCD51A946637"],
+    [complianceSource, "const legalContent = {", "function ContactLine(", "FBE4254312D0D77DB58F4B0428DF8192D35045CD2443B2CA0E497B6FEEB39C4D"],
   ]) {
-    assert.equal(sha256(sourceBlock(appSource, startMarker, endMarker)), expectedHash, startMarker);
+    assert.equal(sha256(sourceBlock(source, startMarker, endMarker)), expectedHash, startMarker);
   }
 
   const transportStart = appSource.indexOf("async function sendContactForm");
@@ -155,7 +175,10 @@ test("Analytics contacto encabezado legal y wrappers TIA conservan sus bloques",
     "6B40DD2E08229E5EDA129227CBB6F4380682464F25DCA2452C68C65009C86D0E"
   );
 
-  const events = [...appSource.matchAll(/\btrack\("([^"]+)"/g)].map((match) => match[1]).sort();
+  const activeEvents = [...appSource.matchAll(/\btrack\("([^"]+)"/g)].map((match) => match[1]).sort();
+  assert.equal(activeEvents.length, 18);
+  assert.equal(sha256(activeEvents.join("\n")), "45ED069A8354DDE0EA38C9E85EFCE8B5A7B76E90817AEE5A0A6C01339C2ADEE6");
+  const events = [...activeEvents, ...preservedNonRuntimeAnalyticsEvents].sort();
   assert.equal(events.length, 19);
   assert.equal(sha256(events.join("\n")), "06FB5CC516F2ED1E3A8D1F7EA92977B90DD3B674BA95BC17FE36277C71C28E25");
 });

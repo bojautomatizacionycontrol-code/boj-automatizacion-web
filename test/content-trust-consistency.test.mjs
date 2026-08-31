@@ -1,10 +1,11 @@
+import { readRuntimeAppSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { getRouteMetadata } from "../src/route-metadata.js";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
 const contentSource = await readFile(new URL("../src/content.js", import.meta.url), "utf8");
 const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
 
@@ -42,7 +43,7 @@ test("el curso se describe sin limitar el material a dos PDF", () => {
 test("las imágenes de Recursos se identifican como ilustrativas y preservan el estado accesible", () => {
   assert.match(appSource, /className="resource-card-visual"/);
   assert.doesNotMatch(appSource, /className="resource-card-visual" aria-hidden="true"/);
-  assert.match(appSource, /<img src=\{visual\} alt="" aria-hidden="true" loading="lazy" \/>/);
+  assert.match(appSource, /<img src=\{visual\} alt="" aria-hidden="true" width=\{dimensions\.width\} height=\{dimensions\.height\} loading="lazy" decoding="async" \/>/);
   assert.match(appSource, /className="resource-card-fallback" aria-hidden="true"/);
   assert.match(appSource, /className="visual-disclaimer">Imagen ilustrativa<\/span>/);
   assert.match(appSource, /className="resource-status">\{resource\.status\}<\/span>/);

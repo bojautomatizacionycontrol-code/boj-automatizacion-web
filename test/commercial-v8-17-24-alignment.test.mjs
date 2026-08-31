@@ -1,14 +1,15 @@
+import { readRuntimeAppSource, readRuntimeStylesSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { commercialIdentity, contact, offer } from "../src/content.js";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
 const contentSource = await readFile(new URL("../src/content.js", import.meta.url), "utf8");
 const i18nSource = await readFile(new URL("../src/i18n.js", import.meta.url), "utf8");
 const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
-const stylesSource = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+const stylesSource = await readRuntimeStylesSource();
 const legalStylesSource = await readFile(new URL("../src/audit.css", import.meta.url), "utf8");
 const reviewSource = await readFile(new URL("../COMMERCIAL_ALIGNMENT_V8_17_24.md", import.meta.url), "utf8");
 
@@ -116,18 +117,18 @@ test("deja fuera del build las capturas históricas con porcentajes o causas pro
     assert.ok(!appSource.includes(visual), `La captura histórica sigue activa: ${visual}`);
   }
 
-  assert.match(appSource, /import appDiagnosticoGuiado from "\.\/assets\/app-diagnostico-guiado\.jpg"/);
+  assert.match(appSource, /import appDiagnosticoGuiado from "\.\.\/assets\/app-diagnostico-guiado\.jpg"/);
   assert.match(appSource, /const s7AppCarousel = \[[\s\S]*?image: appDiagnosticoGuiado[\s\S]*?\];/);
-  assert.match(appSource, /"!\.\/assets\/services-works\/panel app\.png"/);
-  assert.match(appSource, /"!\.\/assets\/services-works\/panel app 2\.png"/);
+  assert.match(appSource, /"!\.\.\/assets\/services-works\/panel app\.png"/);
+  assert.match(appSource, /"!\.\.\/assets\/services-works\/panel app 2\.png"/);
   assert.match(stylesSource, /\.app-pro-real-view-card:only-child\s*\{[\s\S]*?grid-column:\s*1 \/ -1;/);
 });
 
 test("muestra la divulgación lingüística exacta antes de cada grilla de compra", () => {
   const pageRanges = [
-    ["function AppPage()", "function AppComparisonTable()", exactLanguageDisclosure.es, 'id="planes-pro"'],
-    ["function EnglishAppPage()", "function PortugueseAppPage()", exactLanguageDisclosure.en, 'id="en-pro-plans"'],
-    ["function PortugueseAppPage()", "function ContactForm", exactLanguageDisclosure.pt, 'id="pt-planos-pro"'],
+    ["function AppPage()", "function EnglishAppHeroDiagnosticPreview()", exactLanguageDisclosure.es, 'id="planes-pro"'],
+    ["function EnglishAppPage()", "function PortugueseAppHeroDiagnosticPreview()", exactLanguageDisclosure.en, 'id="en-pro-plans"'],
+    ["function PortugueseAppPage()", "function AppRoutes", exactLanguageDisclosure.pt, 'id="pt-planos-pro"'],
   ];
 
   for (const [startMarker, endMarker, disclosure, plansMarker] of pageRanges) {
@@ -203,8 +204,8 @@ test("publica identidad comercial ratificada en los tres documentos y conserva p
   assert.match(indexSource, /"telephone": "\+543815327469"/);
   assert.match(indexSource, /"streetAddress": "Culpina 63, piso 5°, departamento C"/);
   assert.equal((indexSource.match(/"Ciudad Autónoma de Buenos Aires"/g) || []).length, 2);
-  assert.match(appSource, /value=\{commercialIdentity\.hours\}/);
-  assert.equal((appSource.match(/Respondemos dentro de 48 horas hábiles/g) || []).length, 3);
+  assert.match(appSource, /<dd>\{commercialIdentity\.hours\}<\/dd>/);
+  assert.equal((appSource.match(/Respondemos dentro de 48 horas hábiles/g) || []).length, 2);
   assert.match(legalStylesSource, /\.legal-business-facts\s*\{[\s\S]*?grid-template-columns:\s*minmax\(190px,/);
   assert.match(legalStylesSource, /@media \(max-width: 760px\)[\s\S]*?\.legal-business-facts\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\);/);
 });

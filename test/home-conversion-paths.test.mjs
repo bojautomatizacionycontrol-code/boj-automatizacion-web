@@ -1,8 +1,9 @@
+import { readRuntimeAppSource } from "./helpers/runtime-app-source.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+const appSource = await readRuntimeAppSource();
 const i18nSource = await readFile(new URL("../src/i18n.js", import.meta.url), "utf8");
 
 const sourceBetween = (source, startMarker, endMarker) => {
@@ -14,7 +15,7 @@ const sourceBetween = (source, startMarker, endMarker) => {
 };
 
 test("el hero de la portada ofrece tres rutas internas claras", () => {
-  const navigatorSource = sourceBetween(appSource, "function HomeHeroNavigator()", "function CourseHeroPreview()");
+  const navigatorSource = sourceBetween(appSource, "function HomeHeroNavigator()", "function HomePage()");
 
   const routes = [
     ["Servicios industriales", "/servicios"],
