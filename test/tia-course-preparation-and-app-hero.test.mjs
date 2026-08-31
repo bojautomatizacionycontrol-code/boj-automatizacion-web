@@ -47,7 +47,15 @@ test("el hero español de App usa una captura guiada sin porcentajes probabilís
   assert.match(previewSource, /src=\{appDiagnosticoGuiado\}/);
   assert.doesNotMatch(previewSource, /appSadDevicePreview|app-hero-diagnostic-preview-screen--device-composite/);
   assert.doesNotMatch(previewSource, /app-hero-diagnostic-preview-focus/);
-  assert.match(stylesSource, /\.app-hero-diagnostic-preview-screen img\s*\{[\s\S]*?object-fit:\s*cover;/);
+  assert.match(
+    stylesSource,
+    /\.app-hero-diagnostic-preview-screen img\s*\{[^}]*object-fit:\s*cover;[^}]*object-position:\s*left top;[^}]*filter:\s*brightness\(1\.18\) contrast\(1\.04\) saturate\(1\.04\);[^}]*transform:\s*scale\(1\.34\);/
+  );
+  assert.match(
+    stylesSource,
+    /\.app-hero-diagnostic-preview\s*\{[^}]*color:\s*#102c3b;[^}]*linear-gradient\(145deg, rgba\(248, 253, 255, 0\.98\), rgba\(218, 242, 249, 0\.95\)\);/
+  );
+  assert.doesNotMatch(stylesSource, /\.app-hero-diagnostic-preview-screen img\s*\{[^}]*object-fit:\s*contain;/);
 });
 
 test("el hero de App no activa las capturas históricas con semántica probabilística", () => {
