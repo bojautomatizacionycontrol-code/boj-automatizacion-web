@@ -7,6 +7,7 @@ import {
   publicRoutePaths,
   SITE_ORIGIN,
 } from "../src/route-metadata.js";
+import { serializeJsonLd, validateBuiltCsp } from "./csp-policy.mjs";
 
 export const ROUTE_METADATA_START = "<!-- BOJ_ROUTE_METADATA_START -->";
 export const ROUTE_METADATA_END = "<!-- BOJ_ROUTE_METADATA_END -->";
@@ -17,10 +18,6 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
-}
-
-function safeJson(value) {
-  return JSON.stringify(value, null, 2).replaceAll("<", "\\u003c");
 }
 
 export function renderRouteMetadataFragment(metadata) {
@@ -51,7 +48,7 @@ export function renderRouteMetadataFragment(metadata) {
   lines.push(`    <title>${escapeHtml(metadata.title)}</title>`);
 
   if (metadata.jsonLd) {
-    lines.push(`    <script id="boj-route-jsonld" type="application/ld+json">${safeJson(metadata.jsonLd)}</script>`);
+    lines.push(`    <script id="boj-route-jsonld" type="application/ld+json">${serializeJsonLd(metadata.jsonLd)}</script>`);
   }
 
   lines.push(ROUTE_METADATA_END);
@@ -257,5 +254,7 @@ export async function generateRouteHtml(outDir = resolve("dist")) {
 const invokedPath = process.argv[1] ? pathToFileURL(resolve(process.argv[1])).href : "";
 if (invokedPath === import.meta.url) {
   const generated = await generateRouteHtml();
+  const csp = await validateBuiltCsp(generated);
   console.log(`SEO_ROUTE_HTML: ${generated.length - 1} routes + 404`);
+  console.log(`CSP_BUILD: ${csp.generatedFiles} HTML, ${csp.inlineScripts} JSON-LD, ${csp.hashes} hashes`);
 }
