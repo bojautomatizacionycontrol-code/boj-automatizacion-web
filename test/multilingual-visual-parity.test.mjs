@@ -60,7 +60,7 @@ test("Servicios mantiene en EN y PT el mismo orden visual alternado de español"
   }
 });
 
-test("App reutiliza la captura y todos los bloques comerciales de español en EN y PT", () => {
+test("App reutiliza la galería real y todos los bloques comerciales de español en EN y PT", () => {
   const pages = [
     sourceBetween("function EnglishAppPage()", "function PortugueseAppHeroDiagnosticPreview()"),
     sourceBetween("function PortugueseAppPage()", "function AppRoutes"),
@@ -83,6 +83,7 @@ test("App reutiliza la captura y todos los bloques comerciales de español en EN
       "app-pro-faq-section",
     ]);
     assert.match(page, /LocalizedAppPlanGuide/);
+    assert.match(page, /<AppRealViewGallery/);
     assert.equal(page.match(/href=\{plan\.url\}/g)?.length, 1);
   }
 
@@ -90,6 +91,11 @@ test("App reutiliza la captura y todos los bloques comerciales de español en EN
   assert.match(preview, /src=\{appDiagnosticoGuiado\}/);
   assert.doesNotMatch(preview, /appSadDevicePreview|app-hero-diagnostic-preview-screen--device-composite/);
   assert.doesNotMatch(preview, /appResultadoDiagnostico|app-hero-diagnostic-preview-focus/);
+  assert.match(appSource, /const appRealViewCopyByLanguage = \{/);
+  assert.match(appSource, /const englishAppRealViews = localizeAppRealViews\("en"\)/);
+  assert.match(appSource, /const portugueseAppRealViews = localizeAppRealViews\("pt"\)/);
+  assert.equal((appSource.match(/<AppRealViewGallery/g) || []).length, 3);
+  assert.doesNotMatch(appSource, /englishApp\.views\.map|portugueseApp\.views\.map/);
 });
 
 test("TIA Portal conserva la landing completa y traducida en los tres idiomas", () => {

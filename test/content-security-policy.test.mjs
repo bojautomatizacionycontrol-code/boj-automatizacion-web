@@ -83,7 +83,8 @@ test("genera 34 hashes JSON-LD exactos y deterministas desde las 35 rutas", () =
 test("clasifica las propiedades React sin abrir style-src-attr y mantiene dormantes integraciones no usadas", () => {
   assert.equal((appSource.match(/style=\{\{/g) || []).length, 0);
   assert.doesNotMatch(appSource, /style=\{\{ objectPosition: item\.position \}\}/);
-  assert.equal((appSource.match(/className="app-pro-real-view-image"/g) || []).length, 3);
+  assert.equal((appSource.match(/className="app-pro-real-view-image"/g) || []).length, 1);
+  assert.equal((appSource.match(/<AppRealViewGallery/g) || []).length, 3);
   assert.doesNotMatch(appSource, /<style\b|dangerouslySetInnerHTML/);
   assert.match(indexSource, /https:\/\/fonts\.googleapis\.com\/css2/);
   assert.match(indexSource, /rel="preconnect" href="https:\/\/fonts\.gstatic\.com"/);
