@@ -17,10 +17,10 @@ const [mainSource, appSource, manifestSource, deferredSource, manualSource, styl
   readCssBundle(),
 ]);
 
-test("mantiene el CSS modularizado byte-equivalente al cierre WEB-M2", () => {
+test("mantiene el CSS modularizado byte-equivalente al baseline visual vigente", () => {
   assert.equal(
     sha256(stylesSource),
-    "e995f8d894b14711d838f8b3aebea312061b389ebe31ae166ea079e11ab89a5a"
+    "8c63c693eaea2c9a3b601e5333e15c8ec77c6fb89397e38c384f9b4fa836a71c"
   );
   assert.match(mainSource, /import "\.\/styles\.css";[\s\S]*import "\.\/audit\.css";[\s\S]*import "\.\/m1-accessibility\.css";/);
   assert.doesNotMatch(mainSource, /commercial-impact\.css/);

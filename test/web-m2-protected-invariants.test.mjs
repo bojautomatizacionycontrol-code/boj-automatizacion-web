@@ -167,15 +167,16 @@ test("Analytics contacto encabezado legal y wrappers TIA conservan sus bloques",
     assert.equal(sha256(sourceBlock(source, startMarker, endMarker)), expectedHash, startMarker);
   }
 
-  const transportStart = appSource.indexOf("async function sendContactForm");
-  const transportEnd = appSource.indexOf("\n}\n", transportStart) + 2;
+  const normalizedAppSource = normalizeLf(appSource);
+  const transportStart = normalizedAppSource.indexOf("async function sendContactForm");
+  const transportEnd = normalizedAppSource.indexOf("\n}\n", transportStart) + 2;
   assert.ok(transportStart >= 0 && transportEnd > transportStart);
   assert.equal(
-    sha256(appSource.slice(transportStart, transportEnd)),
+    sha256(normalizedAppSource.slice(transportStart, transportEnd)),
     "6B40DD2E08229E5EDA129227CBB6F4380682464F25DCA2452C68C65009C86D0E"
   );
 
-  const activeEvents = [...appSource.matchAll(/\btrack\("([^"]+)"/g)].map((match) => match[1]).sort();
+  const activeEvents = [...normalizedAppSource.matchAll(/\btrack\("([^"]+)"/g)].map((match) => match[1]).sort();
   assert.equal(activeEvents.length, 18);
   assert.equal(sha256(activeEvents.join("\n")), "45ED069A8354DDE0EA38C9E85EFCE8B5A7B76E90817AEE5A0A6C01339C2ADEE6");
   const events = [...activeEvents, ...preservedNonRuntimeAnalyticsEvents].sort();

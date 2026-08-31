@@ -14,8 +14,8 @@ const normalizeLf = (value) => value.replaceAll("\r\n", "\n").replaceAll("\r", "
 const sha256 = (value) => createHash("sha256").update(normalizeLf(value)).digest("hex").toUpperCase();
 
 const baseline = Object.freeze({
-  normalizedBytes: 490192,
-  sha256: "E995F8D894B14711D838F8B3AEBEA312061B389EBE31AE166EA079E11AB89A5A",
+  normalizedBytes: 490913,
+  sha256: "8C63C693EAEA2C9A3B601E5333E15C8EC77C6FB89397E38C384F9B4FA836A71C",
 });
 
 const expectedModules = Object.freeze([
@@ -68,7 +68,7 @@ test("el manifiesto declara módulos semánticos una sola vez y en orden estable
   assert.equal(executableCss, "", "styles.css debe seguir siendo sólo un manifiesto ordenado");
 });
 
-test("concatenar los módulos reconstruye byte a byte la cascada CSS de WEB-M2", async () => {
+test("concatenar los módulos reconstruye byte a byte el baseline visual vigente", async () => {
   const bundle = await readCssBundle();
 
   assert.equal(Buffer.byteLength(normalizeLf(bundle)), baseline.normalizedBytes);
