@@ -1,7 +1,17 @@
-import { useEffect, useMemo, useState } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { track as trackVercelEvent } from "@vercel/analytics";
+import AccessibleDialog from "./AccessibleDialog.jsx";
+import {
+  focusHashTarget,
+  createFocusLayer,
+  handleEscapeKey,
+  lockPageScroll,
+  prefersReducedMotion,
+  restoreFocusFromLayer,
+  setElementsInert,
+  trapTabKey,
+} from "./accessibility.js";
 import {
   ArrowRight,
   Brain,
@@ -962,6 +972,50 @@ async function sendContactForm(payload) {
   return result;
 }
 
+function validateContactValues(values, messages, { requireSubject = false } = {}) {
+  const errors = {};
+  if (!String(values.name || "").trim()) errors.name = messages.name;
+  const email = String(values.email || "").trim();
+  if (!email) errors.email = messages.email;
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = messages.emailInvalid;
+  if (requireSubject && !String(values.subject || "").trim()) errors.subject = messages.subject;
+  if (!String(values.message || "").trim()) errors.message = messages.message;
+  return errors;
+}
+
+function clearContactFieldError(setErrors, field, value) {
+  const normalizedValue = String(value || "").trim();
+  const isValid = field === "email"
+    ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedValue)
+    : Boolean(normalizedValue);
+  if (!isValid) return;
+  setErrors((current) => {
+    if (!current[field]) return current;
+    const next = { ...current };
+    delete next[field];
+    return next;
+  });
+}
+
+function ContactFieldError({ id, message }) {
+  return message ? <span className="field-error" id={id}>{message}</span> : null;
+}
+
+function ContactErrorSummary({ errors, fields, title, summaryRef }) {
+  const entries = Object.entries(errors);
+  if (!entries.length) return null;
+  return (
+    <div className="form-error-summary" role="alert" tabIndex={-1} ref={summaryRef}>
+      <h3>{title}</h3>
+      <ul>
+        {entries.map(([field, message]) => (
+          <li key={field}><a href={`#${fields[field]}`}>{message}</a></li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function Icon({ name, size = 22, className = "" }) {
   const Component = icons[name] || Wrench;
   return <Component size={size} className={className} aria-hidden="true" />;
@@ -1010,7 +1064,12 @@ function App() {
       if (anchor.target && anchor.target !== "_self") return;
       if (anchor.hasAttribute("download")) return;
       const href = anchor.getAttribute("href");
-      if (!href || href.startsWith("#")) return; // anclas intra-página, sin cambio
+      if (!href) return;
+      if (href.startsWith("#")) {
+        event.preventDefault();
+        focusHashTarget(href, { updateHistory: true });
+        return;
+      }
       let url;
       try {
         url = new URL(anchor.href);
@@ -1035,8 +1094,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const animationFrame = window.requestAnimationFrame(() => {
+      if (!focusHashTarget(window.location.hash)) {
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
+      }
+    });
     track("page_view", { page_path: route });
+    return () => window.cancelAnimationFrame(animationFrame);
   }, [route]);
 
   useEffect(() => {
@@ -1110,8 +1174,11 @@ function App() {
 
   return (
     <>
+      <a className="skip-link" href="#main-content">
+        {language === "en" ? "Skip to main content" : language === "pt" ? "Ir para o conteúdo principal" : "Saltar al contenido principal"}
+      </a>
       <Header route={route} language={language} />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <RouteView route={route} />
       </main>
       <Footer language={language} />
@@ -1200,6 +1267,9 @@ function PortugueseNotFound() {
 
 function Header({ route, language }) {
   const [open, setOpen] = useState(false);
+  const headerRef = useRef(null);
+  const navRef = useRef(null);
+  const toggleRef = useRef(null);
   const closeMenu = () => setOpen(false);
   const headerCopy = {
     es: {
@@ -1207,6 +1277,7 @@ function Header({ route, language }) {
       homeLabel: "Ir a inicio",
       navLabel: "Navegación principal",
       menuLabel: "Abrir menú",
+      closeMenuLabel: "Cerrar menú",
       diagnosticLabel: "Solicitar diagnóstico",
       diagnosticMessage: "Hola, escribo desde la web de BOJ Automatización y Control para solicitar un diagnóstico industrial.",
       plansLabel: "Ver planes PRO",
@@ -1221,6 +1292,7 @@ function Header({ route, language }) {
       homeLabel: "Go to home",
       navLabel: "Main navigation",
       menuLabel: "Open menu",
+      closeMenuLabel: "Close menu",
       diagnosticLabel: "Request diagnostics",
       diagnosticMessage: "Hello, I am contacting BOJ to request support with an industrial diagnostics case.",
       plansLabel: "View PRO plans",
@@ -1235,6 +1307,7 @@ function Header({ route, language }) {
       homeLabel: "Ir para o início",
       navLabel: "Navegação principal",
       menuLabel: "Abrir menu",
+      closeMenuLabel: "Fechar menu",
       diagnosticLabel: "Solicitar diagnóstico",
       diagnosticMessage: "Olá, estou entrando em contato com a BOJ para solicitar suporte em um caso de diagnóstico industrial.",
       plansLabel: "Ver planos PRO",
@@ -1259,13 +1332,80 @@ function Header({ route, language }) {
           ? { label: headerCopy.contactLabel, href: headerCopy.contactAnchor }
           : defaultAction;
 
+  useEffect(() => {
+    setOpen(false);
+  }, [language, route]);
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 1101px)");
+    const handleViewportChange = (event) => {
+      if (event.matches) setOpen(false);
+    };
+    desktopQuery.addEventListener("change", handleViewportChange);
+    return () => desktopQuery.removeEventListener("change", handleViewportChange);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const focusLayer = createFocusLayer();
+    const restoreScroll = lockPageScroll();
+    const background = Array.from(document.querySelectorAll("#root > *:not(.site-header)"));
+    const restoreBackground = setElementsInert(background);
+    const animationFrame = window.requestAnimationFrame(() => {
+      (navRef.current?.querySelector("a[href]") || toggleRef.current)?.focus({ preventScroll: true });
+    });
+
+    const handleKeyDown = (event) => {
+      if (handleEscapeKey(event, () => setOpen(false))) return;
+      trapTabKey(event, headerRef.current, toggleRef.current);
+    };
+
+    const containFocus = (event) => {
+      if (!headerRef.current?.contains(event.target)) {
+        (navRef.current?.querySelector("a[href]") || toggleRef.current)?.focus({ preventScroll: true });
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("focusin", containFocus);
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("focusin", containFocus);
+      restoreBackground();
+      restoreScroll();
+      const visibleReturnTarget = toggleRef.current?.getClientRects().length
+        ? toggleRef.current
+        : navRef.current?.querySelector("a[href]") || headerRef.current?.querySelector(".brand");
+      restoreFocusFromLayer(focusLayer, visibleReturnTarget, { requireVisible: true });
+    };
+  }, [open]);
+
+  const handleRouteAction = (event) => {
+    if (!open || !routeAction.href.startsWith("#")) {
+      closeMenu();
+      return;
+    }
+    event.preventDefault();
+    setOpen(false);
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => focusHashTarget(routeAction.href, { updateHistory: true }));
+    });
+  };
+
   return (
-    <header className="site-header">
+    <header className="site-header" data-menu-open={open ? "true" : "false"} ref={headerRef}>
       <a className="brand" href={headerCopy.homePath} onClick={closeMenu} aria-label={headerCopy.homeLabel}>
         <BrandLogo />
       </a>
 
-      <nav className={`main-nav ${open ? "is-open" : ""}`} aria-label={headerCopy.navLabel}>
+      <nav
+        className={`main-nav ${open ? "is-open" : ""}`}
+        id="site-primary-navigation"
+        ref={navRef}
+        aria-label={headerCopy.navLabel}
+      >
         {items.map((item) => {
           const active =
             route === item.path ||
@@ -1302,7 +1442,7 @@ function Header({ route, language }) {
           <a
             className="header-action solid"
             href={routeAction.href}
-            onClick={closeMenu}
+            onClick={handleRouteAction}
           >
             {routeAction.label}
           </a>
@@ -1313,21 +1453,23 @@ function Header({ route, language }) {
         <a
           className="header-action solid"
           href={routeAction.href}
-          onClick={closeMenu}
+          onClick={handleRouteAction}
         >
           {routeAction.label}
         </a>
-        <LanguageSwitcher route={route} language={language} />
+        <LanguageSwitcher route={route} language={language} onSelect={closeMenu} />
       </div>
 
       <div className="mobile-header-controls">
-        <LanguageSwitcher route={route} language={language} />
+        <LanguageSwitcher route={route} language={language} onSelect={closeMenu} />
         <button
+          ref={toggleRef}
           className="nav-toggle"
           type="button"
           onClick={() => setOpen((value) => !value)}
-          aria-label={headerCopy.menuLabel}
+          aria-label={open ? headerCopy.closeMenuLabel : headerCopy.menuLabel}
           aria-expanded={open}
+          aria-controls="site-primary-navigation"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -1476,11 +1618,17 @@ function HeroAction({ action, variant }) {
 }
 
 // Hero unificado para toda la web: misma altura, estructura y tipografia.
+function HeroTitle({ title }) {
+  if (typeof title !== "string" || !title.includes("S7-300/400")) return title;
+  const [before, ...after] = title.split("S7-300/400");
+  return <>{before}<span className="nowrap-technical-token">S7-300/400</span>{after.join("S7-300/400")}</>;
+}
+
 function Hero({ image, eyebrow, title, subtitle, primary, secondary, note, aside }) {
   const content = (
     <>
       {eyebrow ? <p className="boj-hero-eyebrow">{eyebrow}</p> : null}
-      <h1 className="boj-hero-title">{title}</h1>
+      <h1 className="boj-hero-title"><HeroTitle title={title} /></h1>
       {subtitle ? <p className="boj-hero-subtitle">{subtitle}</p> : null}
       {primary || secondary ? (
         <div className="boj-hero-actions">
@@ -2190,21 +2338,52 @@ function HomeContactSection() {
 function LandingContactForm() {
   const [status, setStatus] = useState("idle");
   const [feedback, setFeedback] = useState("");
+  const [errors, setErrors] = useState({});
+  const summaryRef = useRef(null);
+  const fields = {
+    name: "home-contact-name",
+    email: "home-contact-email",
+    subject: "home-contact-subject",
+    message: "home-contact-message",
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
+    const formElement = event.currentTarget;
+    const data = new FormData(formElement);
+    const values = {
+      name: data.get("name") || "",
+      email: data.get("email") || "",
+      subject: data.get("subject") || "",
+      message: data.get("message") || "",
+    };
+    const nextErrors = validateContactValues(values, {
+      name: "Ingresa tu nombre.",
+      email: "Ingresa tu correo electrónico.",
+      emailInvalid: "Ingresa un correo electrónico válido.",
+      subject: "Ingresa el asunto de la consulta.",
+      message: "Escribe el mensaje de la consulta.",
+    }, { requireSubject: true });
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors);
+      setStatus("idle");
+      setFeedback("");
+      window.requestAnimationFrame(() => summaryRef.current?.focus());
+      return;
+    }
+
+    setErrors({});
     setStatus("sending");
     setFeedback("");
-    const data = new FormData(event.currentTarget);
     try {
       await sendContactForm({
-        name: data.get("name") || "",
-        email: data.get("email") || "",
-        subject: data.get("subject") || "Consulta desde la web BOJ",
-        message: data.get("message") || "",
+        name: values.name,
+        email: values.email,
+        subject: values.subject || "Consulta desde la web BOJ",
+        message: values.message,
         website: data.get("website") || "",
       });
-      event.currentTarget.reset();
+      formElement.reset();
       setStatus("success");
       setFeedback("Consulta enviada. Respondemos dentro de 48 horas hábiles.");
       track("contact_form_submit", { location: "home" });
@@ -2215,18 +2394,33 @@ function LandingContactForm() {
   }
 
   return (
-    <form className="landing-contact-form" onSubmit={handleSubmit}>
+    <form className="landing-contact-form" onSubmit={handleSubmit} noValidate aria-labelledby="home-contact-form-title">
+      <h2 className="visually-hidden" id="home-contact-form-title">Enviar una consulta</h2>
+      <ContactErrorSummary errors={errors} fields={fields} title="Revisa los campos indicados" summaryRef={summaryRef} />
       <div className="form-row">
-        <input name="name" placeholder="Nombre completo" required />
-        <input name="email" type="email" placeholder="Correo electrónico" required />
+        <div className="form-field">
+          <label htmlFor={fields.name}>Nombre completo</label>
+          <input id={fields.name} name="name" autoComplete="name" aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? `${fields.name}-error` : undefined} onInput={(event) => clearContactFieldError(setErrors, "name", event.currentTarget.value)} required />
+          <ContactFieldError id={`${fields.name}-error`} message={errors.name} />
+        </div>
+        <div className="form-field">
+          <label htmlFor={fields.email}>Correo electrónico</label>
+          <input id={fields.email} name="email" type="email" autoComplete="email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? `${fields.email}-error` : undefined} onInput={(event) => clearContactFieldError(setErrors, "email", event.currentTarget.value)} required />
+          <ContactFieldError id={`${fields.email}-error`} message={errors.email} />
+        </div>
       </div>
-      <input name="subject" placeholder="Asunto" required />
-      <textarea name="message" rows="5" placeholder="Mensaje" required />
+      <label htmlFor={fields.subject}>Asunto</label>
+      <input id={fields.subject} name="subject" aria-invalid={Boolean(errors.subject)} aria-describedby={errors.subject ? `${fields.subject}-error` : undefined} onInput={(event) => clearContactFieldError(setErrors, "subject", event.currentTarget.value)} required />
+      <ContactFieldError id={`${fields.subject}-error`} message={errors.subject} />
+      <label htmlFor={fields.message}>Mensaje</label>
+      <textarea id={fields.message} name="message" rows="5" aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? `${fields.message}-error` : undefined} onInput={(event) => clearContactFieldError(setErrors, "message", event.currentTarget.value)} required />
+      <ContactFieldError id={`${fields.message}-error`} message={errors.message} />
       <input className="form-honeypot" name="website" tabIndex="-1" autoComplete="off" aria-hidden="true" />
       <button className="home-btn primary" type="submit" disabled={status === "sending"}>
         {status === "sending" ? "Enviando…" : "Enviar mensaje"} <ArrowRight size={18} />
       </button>
-      {feedback ? <p className={`form-feedback ${status}`} role="status">{feedback}</p> : null}
+      <p className="form-privacy-note">Consulta cómo tratamos estos datos en la <a href="/privacidad">Política de privacidad</a>.</p>
+      {feedback ? <p className={`form-feedback ${status}`} role={status === "error" ? "alert" : "status"}>{feedback}</p> : null}
     </form>
   );
 }
@@ -2234,10 +2428,7 @@ function LandingContactForm() {
 function ServicesPage() {
   const scrollToServiceDetails = (event) => {
     event.preventDefault();
-    document.getElementById("areas-de-servicio")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    focusHashTarget("#areas-de-servicio");
   };
 
   return (
@@ -2461,10 +2652,7 @@ function ServiceSecondaryCard({ service }) {
 function CoursesPage() {
   const scrollToCourses = (event) => {
     event.preventDefault();
-    document.getElementById("cursos-disponibles")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    focusHashTarget("#cursos-disponibles");
   };
 
   return (
@@ -2474,7 +2662,7 @@ function CoursesPage() {
         eyebrow="Cursos"
         title="Cursos técnicos Siemens orientados a diagnóstico real de planta"
         subtitle="Formación aplicada para técnicos, instrumentistas, electricistas e ingenieros que necesitan diagnosticar, programar y actuar con criterio frente a fallas reales."
-        primary={{ label: "Ver cursos disponibles", href: "/cursos", onClick: scrollToCourses }}
+        primary={{ label: "Ver formación disponible y futura", href: "/cursos", onClick: scrollToCourses }}
         secondary={{ label: "Consultar capacitación", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar por capacitación técnica industrial.") }}
       />
 
@@ -2498,7 +2686,7 @@ function CoursesPage() {
       <section className="courses-available-section" id="cursos-disponibles">
         <div className="mock-home-container">
           <div className="courses-section-heading">
-            <h2>Cursos disponibles</h2>
+            <h2>Formación disponible y futura</h2>
           </div>
           <div className="courses-available-list">
             {coursesAvailableCards.map((course) => (
@@ -2673,27 +2861,17 @@ function ManualFlipbook({ images, pages, variant = "full", orientation = "portra
   const copy = manualFlipbookCopy[language] || manualFlipbookCopy.es;
   const go = (target) => setIndex((current) => (target + total) % total || 0);
 
-  useEffect(() => {
-    const onKey = (event) => {
-      if (event.key === "ArrowLeft") setIndex((c) => (c - 1 + total) % total);
-      else if (event.key === "ArrowRight") setIndex((c) => (c + 1) % total);
-      else if (event.key === "Escape") setZoom(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [total]);
-
-  useEffect(() => {
-    if (!zoom) return undefined;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previous;
-    };
-  }, [zoom]);
-
   if (!total) return null;
   const caption = pages[index]?.label || `${copy.page} ${index + 1}`;
+  const handleDialogKeyDown = (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      go(index - 1);
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      go(index + 1);
+    }
+  };
 
   return (
     <div className={`s7-flip s7-flip-${variant} s7-flip-${orientation}`}>
@@ -2703,7 +2881,7 @@ function ManualFlipbook({ images, pages, variant = "full", orientation = "portra
             <ArrowRight size={variant === "card" ? 20 : 24} />
           </button>
         ) : null}
-        <button type="button" className="s7-flip-page" onClick={() => setZoom(true)} aria-label={`Ampliar: ${caption}`}>
+        <button type="button" className="s7-flip-page" onClick={() => setZoom(true)} aria-label={`${copy.enlarge}: ${caption}`}>
           <img src={images[index]} alt={`${altPrefix} — ${caption}`} loading="lazy" />
           <span className="s7-flip-zoom" aria-hidden="true">
             <ScanSearch size={16} /> {copy.enlarge}
@@ -2737,30 +2915,36 @@ function ManualFlipbook({ images, pages, variant = "full", orientation = "portra
         </div>
       ) : null}
 
-      {zoom
-        ? createPortal(
-            <div className={`s7-flip-lightbox s7-flip-${orientation}`} role="dialog" aria-modal="true" onClick={() => setZoom(false)}>
-              <div className="s7-flip-lightbox-inner" onClick={(event) => event.stopPropagation()}>
-                <button type="button" className="s7-flip-lightbox-close" onClick={() => setZoom(false)} aria-label={copy.close}>
-                  <X size={20} />
-                </button>
-                {total > 1 ? (
-                  <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label={copy.previous}>
-                    <ArrowRight size={26} />
-                  </button>
-                ) : null}
-                <img src={images[index]} alt={`${altPrefix} — ${caption}`} />
-                {total > 1 ? (
-                  <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label={copy.next}>
-                    <ArrowRight size={26} />
-                  </button>
-                ) : null}
-                <span className="s7-flip-lightbox-caption">{caption} · {index + 1} / {total}</span>
-              </div>
-            </div>,
-            document.body
-          )
-        : null}
+      <AccessibleDialog
+        open={zoom}
+        onClose={() => setZoom(false)}
+        ariaLabel={`${copy.enlarge}: ${caption}`}
+        className={`s7-flip-lightbox s7-flip-${orientation}`}
+        panelClassName="s7-flip-lightbox-inner"
+        onDialogKeyDown={handleDialogKeyDown}
+      >
+        <button
+          type="button"
+          className="s7-flip-lightbox-close"
+          onClick={() => setZoom(false)}
+          aria-label={copy.close}
+          data-dialog-initial-focus
+        >
+          <X size={20} />
+        </button>
+        {total > 1 ? (
+          <button type="button" className="s7-flip-nav s7-flip-prev" onClick={() => go(index - 1)} aria-label={copy.previous}>
+            <ArrowRight size={26} />
+          </button>
+        ) : null}
+        <img src={images[index]} alt={`${altPrefix} — ${caption}`} />
+        {total > 1 ? (
+          <button type="button" className="s7-flip-nav s7-flip-next" onClick={() => go(index + 1)} aria-label={copy.next}>
+            <ArrowRight size={26} />
+          </button>
+        ) : null}
+        <span className="s7-flip-lightbox-caption">{caption} · {index + 1} / {total}</span>
+      </AccessibleDialog>
     </div>
   );
 }
@@ -2879,7 +3063,7 @@ function S7SalesLanding({ course, eyebrow }) {
     : "Garantía de 7 días · Acceso digital";
   const scrollToCourseSection = (event, sectionId) => {
     event.preventDefault();
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    focusHashTarget(`#${sectionId}`);
   };
 
   const problemCards = [
@@ -3092,7 +3276,7 @@ function S7SalesLanding({ course, eyebrow }) {
       <section className="s7-sales-section s7-sales-dark s7-sales-learning" data-surface="dark">
         <div className="s7-sales-container">
           <div className="s7-sales-centered-heading">
-            <p className="s7-sales-kicker">Qué vas a aprender</p>
+            <h2 className="s7-sales-kicker">Qué vas a aprender</h2>
           </div>
           <div className="s7-sales-learning-grid">
             {learningCards.map((item) => (
@@ -3524,7 +3708,7 @@ function TiaCoursePage() {
   return (
     <CourseLanding
       course={tiaCourse}
-      eyebrow="Curso introductorio"
+      eyebrow="CURSO TIA — PRÓXIMAMENTE"
       visual="tia"
       afterHero={<CoursePreparationStrip />}
     />
@@ -3668,25 +3852,6 @@ function AppPage() {
   const pricingCards = [appTrialPlan, ...appLicensePlans];
   const [activeScreenshot, setActiveScreenshot] = useState(null);
 
-  useEffect(() => {
-    if (!activeScreenshot) return undefined;
-
-    const previousOverflow = document.body.style.overflow;
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        setActiveScreenshot(null);
-      }
-    };
-
-    document.body.style.overflow = "hidden";
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [activeScreenshot]);
-
   return (
     <div className="app-pro-page">
       <Hero
@@ -3705,7 +3870,7 @@ function AppPage() {
           href: "#planes-pro",
           onClick: (event) => {
             event.preventDefault();
-            document.getElementById("planes-pro")?.scrollIntoView({ behavior: "smooth", block: "start" });
+            focusHashTarget("#planes-pro");
           },
         }}
         note="La app no se conecta directamente al PLC ni reemplaza STEP 7. Orienta el diagnóstico inicial y prepara una intervención con mayor criterio."
@@ -3868,20 +4033,22 @@ function AppPage() {
         </div>
       </section>
 
-      {activeScreenshot ? (
-        <div className="app-pro-lightbox" role="dialog" aria-modal="true" aria-labelledby="app-pro-lightbox-title" onClick={() => setActiveScreenshot(null)}>
-          <div className="app-pro-lightbox-panel" onClick={(event) => event.stopPropagation()}>
-            <button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Cerrar captura ampliada">
-              <X size={20} />
-            </button>
-            <img src={activeScreenshot.image} alt={activeScreenshot.title} />
-            <div className="app-pro-lightbox-copy">
-              <h2 id="app-pro-lightbox-title">{activeScreenshot.title}</h2>
-              <p>{activeScreenshot.text}</p>
-            </div>
-          </div>
+      <AccessibleDialog
+        open={Boolean(activeScreenshot)}
+        onClose={() => setActiveScreenshot(null)}
+        labelledBy="app-pro-lightbox-title"
+        className="app-pro-lightbox"
+        panelClassName="app-pro-lightbox-panel"
+      >
+        <button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Cerrar captura ampliada" data-dialog-initial-focus>
+          <X size={20} />
+        </button>
+        <img src={activeScreenshot?.image} alt={activeScreenshot?.title || ""} />
+        <div className="app-pro-lightbox-copy">
+          <h2 id="app-pro-lightbox-title">{activeScreenshot?.title}</h2>
+          <p>{activeScreenshot?.text}</p>
         </div>
-      ) : null}
+      </AccessibleDialog>
 
       <section className="app-pro-plans-section" id="planes-pro">
         <div className="mock-home-container">
@@ -4505,7 +4672,7 @@ function EnglishCoursesPage() {
         eyebrow="APPLIED TECHNICAL TRAINING"
         title="Learn to troubleshoot industrial systems with a repeatable method"
         subtitle="Training for maintenance technicians, automation specialists and engineers who work with Siemens PLC systems in real plant environments."
-        primary={{ label: "View available courses", href: "#en-courses-available" }}
+        primary={{ label: "View available and upcoming training", href: "#en-courses-available" }}
         secondary={{ label: "Ask about training", href: "/en/contact" }}
       />
       <section className="courses-light-section">
@@ -4520,7 +4687,7 @@ function EnglishCoursesPage() {
       </section>
       <section className="courses-available-section" id="en-courses-available">
         <div className="mock-home-container">
-          <div className="courses-section-heading"><h2>Available training</h2><p>Choose the program that matches the Siemens platform you work with.</p></div>
+          <div className="courses-section-heading"><h2>Available and upcoming training</h2><p>Choose the program that matches the Siemens platform you work with.</p></div>
           <div className="courses-available-list"><EnglishCourseAvailableCard type="s7" /><EnglishCourseAvailableCard type="tia" /></div>
         </div>
       </section>
@@ -4547,7 +4714,7 @@ function EnglishTiaCoursePage() {
   return (
     <CourseLanding
       course={englishTiaCourse}
-      eyebrow="INTRODUCTORY COURSE"
+      eyebrow="TIA COURSE — UPCOMING"
       visual="tia"
       language="en"
       afterHero={<CoursePreparationStrip language="en" />}
@@ -4562,18 +4729,6 @@ function EnglishAppPage() {
     sourceTitle: plan.title,
   }));
   const [activeScreenshot, setActiveScreenshot] = useState(null);
-
-  useEffect(() => {
-    if (!activeScreenshot) return undefined;
-    const previousOverflow = document.body.style.overflow;
-    const close = (event) => { if (event.key === "Escape") setActiveScreenshot(null); };
-    document.body.style.overflow = "hidden";
-    document.addEventListener("keydown", close);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", close);
-    };
-  }, [activeScreenshot]);
 
   return (
     <div className="app-pro-page english-page" data-language="en">
@@ -4658,15 +4813,11 @@ function EnglishAppPage() {
         </div>
       </section>
 
-      {activeScreenshot ? (
-        <div className="app-pro-lightbox" role="dialog" aria-modal="true" aria-labelledby="en-app-lightbox-title" onClick={() => setActiveScreenshot(null)}>
-          <div className="app-pro-lightbox-panel" onClick={(event) => event.stopPropagation()}>
-            <button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Close enlarged screenshot"><X size={20} /></button>
-            <img src={activeScreenshot.image} alt={activeScreenshot.title} />
-            <div className="app-pro-lightbox-copy"><h2 id="en-app-lightbox-title">{activeScreenshot.title}</h2><p>{activeScreenshot.text}</p></div>
-          </div>
-        </div>
-      ) : null}
+      <AccessibleDialog open={Boolean(activeScreenshot)} onClose={() => setActiveScreenshot(null)} labelledBy="en-app-lightbox-title" className="app-pro-lightbox" panelClassName="app-pro-lightbox-panel">
+        <button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Close enlarged screenshot" data-dialog-initial-focus><X size={20} /></button>
+        <img src={activeScreenshot?.image} alt={activeScreenshot?.title || ""} />
+        <div className="app-pro-lightbox-copy"><h2 id="en-app-lightbox-title">{activeScreenshot?.title}</h2><p>{activeScreenshot?.text}</p></div>
+      </AccessibleDialog>
 
       <section className="app-pro-plans-section" id="en-pro-plans">
         <div className="mock-home-container">
@@ -4948,7 +5099,7 @@ function LocalizedS7SalesLanding({ language, courseCopy }) {
 
       <section className={`s7-sales-section s7-sales-dark s7-sales-learning localized-s7-${language}`} data-surface="dark">
         <div className="s7-sales-container">
-          <div className="s7-sales-centered-heading"><p className="s7-sales-kicker">{copy.learningKicker}</p></div>
+          <div className="s7-sales-centered-heading"><h2 className="s7-sales-kicker">{copy.learningKicker}</h2></div>
           <div className="s7-sales-learning-grid">
             {courseCopy.modules.map((item, index) => <article className="s7-sales-dark-card" key={item}><Icon name={learningIcons[index]} size={34} /><div><h3>{item}</h3><p>{courseCopy.outcomes[index % courseCopy.outcomes.length]}</p></div></article>)}
           </div>
@@ -5171,10 +5322,30 @@ function EnglishContactForm() {
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", interest: englishContactServices[0], message: "", website: "" });
   const [status, setStatus] = useState("idle");
   const [feedback, setFeedback] = useState("");
-  const updateField = (event) => setForm((current) => ({ ...current, [event.target.name]: event.target.value }));
+  const [errors, setErrors] = useState({});
+  const summaryRef = useRef(null);
+  const fields = { name: "en-contact-name", company: "en-contact-company", email: "en-contact-email", phone: "en-contact-phone", interest: "en-contact-interest", message: "en-contact-message" };
+  const updateField = (event) => {
+    setForm((current) => ({ ...current, [event.target.name]: event.target.value }));
+    clearContactFieldError(setErrors, event.target.name, event.target.value);
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
+    const nextErrors = validateContactValues(form, {
+      name: "Enter your name.",
+      email: "Enter your email address.",
+      emailInvalid: "Enter a valid email address.",
+      message: "Describe your inquiry.",
+    });
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors);
+      setStatus("idle");
+      setFeedback("");
+      window.requestAnimationFrame(() => summaryRef.current?.focus());
+      return;
+    }
+    setErrors({});
     setStatus("sending");
     setFeedback("");
     try {
@@ -5190,16 +5361,19 @@ function EnglishContactForm() {
   }
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit} id="en-contact-form">
-      <h2>Tell us about your case</h2><p>Provide the essential context so we can route your inquiry correctly. Urgent plant faults are coordinated through WhatsApp and depend on availability.</p>
-      <label>Name<input name="name" value={form.name} onChange={updateField} required /></label>
-      <label>Company<input name="company" value={form.company} onChange={updateField} /></label>
-      <div className="form-row"><label>Email<input name="email" type="email" value={form.email} onChange={updateField} required /></label><label>Phone<input name="phone" value={form.phone} onChange={updateField} /></label></div>
-      <label>Area of interest<select name="interest" value={form.interest} onChange={updateField}>{englishContactServices.map((service) => <option key={service}>{service}</option>)}</select></label>
-      <label>Message<textarea name="message" rows="5" value={form.message} onChange={updateField} placeholder="Describe the symptom, equipment, PLC or industrial network involved, or the training you need." required /></label>
+    <form className="contact-form" onSubmit={handleSubmit} noValidate aria-labelledby="en-contact-form">
+      <h2 id="en-contact-form" tabIndex={-1}>Tell us about your case</h2>
+      <p>Provide the essential context so we can route your inquiry correctly. Urgent plant faults are coordinated through WhatsApp and depend on availability.</p>
+      <ContactErrorSummary errors={errors} fields={fields} title="Check the highlighted fields" summaryRef={summaryRef} />
+      <label htmlFor={fields.name}>Name</label><input id={fields.name} name="name" autoComplete="name" value={form.name} onChange={updateField} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? `${fields.name}-error` : undefined} required /><ContactFieldError id={`${fields.name}-error`} message={errors.name} />
+      <label htmlFor={fields.company}>Company</label><input id={fields.company} name="company" autoComplete="organization" value={form.company} onChange={updateField} />
+      <div className="form-row"><div><label htmlFor={fields.email}>Email</label><input id={fields.email} name="email" type="email" autoComplete="email" value={form.email} onChange={updateField} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? `${fields.email}-error` : undefined} required /><ContactFieldError id={`${fields.email}-error`} message={errors.email} /></div><div><label htmlFor={fields.phone}>Phone</label><input id={fields.phone} name="phone" type="tel" autoComplete="tel" value={form.phone} onChange={updateField} /></div></div>
+      <label htmlFor={fields.interest}>Area of interest</label><select id={fields.interest} name="interest" value={form.interest} onChange={updateField}>{englishContactServices.map((service) => <option key={service}>{service}</option>)}</select>
+      <label htmlFor={fields.message}>Message</label><textarea id={fields.message} name="message" rows="5" value={form.message} onChange={updateField} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? `${fields.message}-error` : undefined} placeholder="Describe the symptom, equipment, PLC or industrial network involved, or the training you need." required /><ContactFieldError id={`${fields.message}-error`} message={errors.message} />
       <input className="form-honeypot" name="website" value={form.website} onChange={updateField} tabIndex="-1" autoComplete="off" aria-hidden="true" />
       <div className="button-row"><button className="btn primary" type="submit" disabled={status === "sending"}>{status === "sending" ? "Sending…" : "Send inquiry"}<ArrowRight size={18} /></button><a className="btn secondary" href={whatsappUrl("Hello, I am contacting BOJ from the English website.")}>Contact us on WhatsApp</a></div>
-      {feedback ? <p className={`form-feedback ${status}`} role="status">{feedback}</p> : null}
+      <p className="form-privacy-note">See how these details are handled in the <a href="/privacidad" hrefLang="es">privacy policy (Spanish)</a>.</p>
+      {feedback ? <p className={`form-feedback ${status}`} role={status === "error" ? "alert" : "status"}>{feedback}</p> : null}
     </form>
   );
 }
@@ -5300,9 +5474,9 @@ function PortugueseCourseAvailableCard({ type }) {
 function PortugueseCoursesPage() {
   return (
     <div className="courses-redesign-page portuguese-page" data-language="pt">
-      <Hero image={heroCursos} eyebrow="FORMAÇÃO TÉCNICA APLICADA" title="Aprenda a diagnosticar sistemas industriais com um método repetível" subtitle="Formação para técnicos de manutenção, especialistas em automação e engenheiros que trabalham com sistemas PLC Siemens em ambientes reais de planta." primary={{ label: "Ver cursos disponíveis", href: "#pt-cursos-disponiveis" }} secondary={{ label: "Consultar sobre formação", href: "/pt/contato" }} />
+      <Hero image={heroCursos} eyebrow="FORMAÇÃO TÉCNICA APLICADA" title="Aprenda a diagnosticar sistemas industriais com um método repetível" subtitle="Formação para técnicos de manutenção, especialistas em automação e engenheiros que trabalham com sistemas PLC Siemens em ambientes reais de planta." primary={{ label: "Ver formação disponível e futura", href: "#pt-cursos-disponiveis" }} secondary={{ label: "Consultar sobre formação", href: "/pt/contato" }} />
       <section className="courses-light-section"><div className="mock-home-container"><div className="courses-section-heading courses-section-heading-dark"><h2>Formação orientada a decisões em campo</h2></div><div className="courses-benefit-grid">{portugueseCourses.benefits.map((item) => <article className="courses-benefit-card" key={item.title}><Icon name={item.icon} size={30} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div></section>
-      <section className="courses-available-section" id="pt-cursos-disponiveis"><div className="mock-home-container"><div className="courses-section-heading"><h2>Formação disponível</h2><p>Escolha o programa correspondente à plataforma Siemens com a qual você trabalha.</p></div><div className="courses-available-list"><PortugueseCourseAvailableCard type="s7" /><PortugueseCourseAvailableCard type="tia" /></div></div></section>
+      <section className="courses-available-section" id="pt-cursos-disponiveis"><div className="mock-home-container"><div className="courses-section-heading"><h2>Formação disponível e futura</h2><p>Escolha o programa correspondente à plataforma Siemens com a qual você trabalha.</p></div><div className="courses-available-list"><PortugueseCourseAvailableCard type="s7" /><PortugueseCourseAvailableCard type="tia" /></div></div></section>
       <section className="courses-light-section courses-learning-section"><div className="mock-home-container"><div className="courses-section-heading courses-section-heading-dark"><h2>O que a formação ajuda a melhorar</h2></div><div className="courses-learning-grid">{portugueseCourses.learning.map((item) => <article className="courses-learning-card" key={item.text}><Icon name={item.icon} size={28} /><p>{item.text}</p></article>)}</div></div></section>
       <section className="courses-final-cta"><div className="mock-home-container courses-final-cta-content"><h2>Precisa capacitar uma equipe de manutenção ou automação?</h2><p>Entre em contato para conversar sobre a plataforma, o público e os objetivos técnicos.</p><div className="courses-actions"><a className="mock-btn mock-btn-primary" href="/pt/contato">Consultar formação para equipes <ArrowRight size={18} /></a></div></div></section>
     </div>
@@ -5313,7 +5487,7 @@ function PortugueseTiaCoursePage() {
   return (
     <CourseLanding
       course={portugueseTiaCourse}
-      eyebrow="CURSO INTRODUTÓRIO"
+      eyebrow="CURSO TIA — EM PREPARAÇÃO"
       visual="tia"
       language="pt"
       afterHero={<CoursePreparationStrip language="pt" />}
@@ -5328,18 +5502,6 @@ function PortugueseAppPage() {
     sourceTitle: plan.title,
   }));
   const [activeScreenshot, setActiveScreenshot] = useState(null);
-
-  useEffect(() => {
-    if (!activeScreenshot) return undefined;
-    const previousOverflow = document.body.style.overflow;
-    const close = (event) => { if (event.key === "Escape") setActiveScreenshot(null); };
-    document.body.style.overflow = "hidden";
-    document.addEventListener("keydown", close);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", close);
-    };
-  }, [activeScreenshot]);
 
   return (
     <div className="app-pro-page portuguese-page" data-language="pt">
@@ -5357,7 +5519,7 @@ function PortugueseAppPage() {
 
       <section className="app-pro-real-language-section"><div className="mock-home-container app-pro-real-language-grid"><div><h2>Imagem real da ferramenta profissional</h2><div className="app-pro-real-view-grid">{portugueseApp.views.map((copy, index) => { const source = appRealViews[index]; const item = { ...source, ...copy }; return <article className="app-pro-real-view-card" key={item.title}><figure><button className="app-pro-real-view-trigger" type="button" onClick={() => setActiveScreenshot(item)} aria-label={`Ampliar captura: ${item.title}`}><img src={item.image} alt={item.title} loading="lazy" style={{ objectPosition: item.position }} /></button></figure><div><h3>{item.title}</h3><p>{item.text}</p></div></article>; })}</div></div><div className="app-pro-language-card"><h2>Disponível em 6 idiomas</h2><div className="app-pro-language-list">{["Espanhol", "Inglês", "Português", "Alemão", "Francês", "Italiano"].map((item) => <span key={item}>{item}</span>)}</div><p className="app-pro-language-disclosure">Interface disponível em seis idiomas. O conteúdo técnico especializado e os documentos legais são fornecidos atualmente em espanhol.</p></div></div></section>
 
-      {activeScreenshot ? <div className="app-pro-lightbox" role="dialog" aria-modal="true" aria-labelledby="pt-app-lightbox-title" onClick={() => setActiveScreenshot(null)}><div className="app-pro-lightbox-panel" onClick={(event) => event.stopPropagation()}><button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Fechar captura ampliada"><X size={20} /></button><img src={activeScreenshot.image} alt={activeScreenshot.title} /><div className="app-pro-lightbox-copy"><h2 id="pt-app-lightbox-title">{activeScreenshot.title}</h2><p>{activeScreenshot.text}</p></div></div></div> : null}
+      <AccessibleDialog open={Boolean(activeScreenshot)} onClose={() => setActiveScreenshot(null)} labelledBy="pt-app-lightbox-title" className="app-pro-lightbox" panelClassName="app-pro-lightbox-panel"><button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Fechar captura ampliada" data-dialog-initial-focus><X size={20} /></button><img src={activeScreenshot?.image} alt={activeScreenshot?.title || ""} /><div className="app-pro-lightbox-copy"><h2 id="pt-app-lightbox-title">{activeScreenshot?.title}</h2><p>{activeScreenshot?.text}</p></div></AccessibleDialog>
 
       <section className="app-pro-plans-section" id="pt-planos-pro"><div className="mock-home-container"><div className="app-pro-section-heading"><span className="app-pro-section-kicker">LICENÇAS E OPÇÕES</span><h2>Escolha sua licença PRO</h2><p>Compare renovação, duração, dispositivos e disponibilidade offline antes de escolher.</p><p className="app-pro-plans-crosslink"><strong>Profissional</strong> e <strong>Empresarial</strong> incluem o <a href="/pt/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.</p></div><LocalizedAppPlanGuide language="pt" /><div className="app-pro-plan-grid">{pricingCards.map((plan) => <article className={`app-pro-plan-card${plan.badge ? " featured" : ""}${plan.sourceTitle === "Prueba gratuita" ? " trial" : ""}`} id={`pt-plano-${plan.sourceTitle.toLowerCase().replaceAll(" ", "-")}`} key={plan.sourceTitle}>{plan.badge ? <span className="app-pro-plan-badge">{plan.badge}</span> : null}<h3>{plan.title}</h3><strong>{plan.price}</strong><span className="app-pro-plan-meta">{plan.meta}</span><ul>{plan.bullets.map((item) => <li key={item}><CheckCircle2 size={15} />{item}</li>)}</ul><a className="mock-btn mock-btn-primary" href={plan.url} target="_blank" rel="noreferrer" onClick={() => track("plan_click", { plan: plan.sourceTitle, language: "pt" })}>{plan.button} <ExternalLink size={17} /></a></article>)}</div><ul className="app-pro-purchase-confidence" aria-label="Informações da compra"><li><CheckCircle2 size={17} />Compra processada pela Hotmart</li><li><CheckCircle2 size={17} />Preço e modalidade exibidos antes da confirmação</li><li><CheckCircle2 size={17} />A ativação usa o e-mail informado durante a compra</li></ul><aside className="app-pro-training-strip"><div className="app-pro-training-copy"><span className="app-pro-training-eyebrow">FORMAÇÃO TÉCNICA</span><h3>Também precisa de capacitação estruturada?</h3><p>Acesso permanente ao curso de diagnóstico S7-300/400, em espanhol, mais um mês de BOJ S7-PLC PRO.</p></div><div className="app-pro-training-action"><strong>{offer.course.price} · Pagamento único</strong><a className="mock-btn mock-btn-outline" href="/pt/cursos/s7-300-400">Ver conteúdo do curso <ArrowRight size={17} /></a></div></aside><article className="app-pro-institutional"><Icon name="Landmark" size={34} /><div><h3>Empresas e centros de formação: condições personalizadas</h3><p>Condições especiais para organizações, programas de capacitação técnica e equipes com vários usuários.</p></div><a className="mock-btn mock-btn-outline" href="/pt/contato">Solicitar informações <ArrowRight size={17} /></a></article></div></section>
 
@@ -5394,9 +5556,27 @@ function PortugueseContactForm() {
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", interest: portugueseContactServices[0], message: "", website: "" });
   const [status, setStatus] = useState("idle");
   const [feedback, setFeedback] = useState("");
-  const updateField = (event) => setForm((current) => ({ ...current, [event.target.name]: event.target.value }));
+  const [errors, setErrors] = useState({});
+  const summaryRef = useRef(null);
+  const fields = { name: "pt-contact-name", company: "pt-contact-company", email: "pt-contact-email", phone: "pt-contact-phone", interest: "pt-contact-interest", message: "pt-contact-message" };
+  const updateField = (event) => {
+    setForm((current) => ({ ...current, [event.target.name]: event.target.value }));
+    clearContactFieldError(setErrors, event.target.name, event.target.value);
+  };
   async function handleSubmit(event) {
-    event.preventDefault(); setStatus("sending"); setFeedback("");
+    event.preventDefault();
+    const nextErrors = validateContactValues(form, {
+      name: "Informe seu nome.",
+      email: "Informe seu e-mail.",
+      emailInvalid: "Informe um e-mail válido.",
+      message: "Descreva sua consulta.",
+    });
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors); setStatus("idle"); setFeedback("");
+      window.requestAnimationFrame(() => summaryRef.current?.focus());
+      return;
+    }
+    setErrors({}); setStatus("sending"); setFeedback("");
     try {
       await sendContactForm({ ...form, subject: `Consulta do site em português: ${form.interest}` });
       setStatus("success"); setFeedback("Sua consulta foi enviada. Normalmente respondemos em até dois dias úteis.");
@@ -5404,7 +5584,22 @@ function PortugueseContactForm() {
       track("contact_form_submit", { location: "contact_page", language: "pt", interest: form.interest });
     } catch (error) { setStatus("error"); setFeedback(error.message || "Não foi possível enviar a mensagem. Você também pode falar conosco pelo WhatsApp."); }
   }
-  return <form className="contact-form" onSubmit={handleSubmit} id="pt-formulario-contato"><h2>Conte-nos sobre seu caso</h2><p>Informe o contexto essencial para encaminharmos sua consulta corretamente. Falhas urgentes de planta são coordenadas pelo WhatsApp e dependem de disponibilidade.</p><label>Nome<input name="name" value={form.name} onChange={updateField} required /></label><label>Empresa<input name="company" value={form.company} onChange={updateField} /></label><div className="form-row"><label>E-mail<input name="email" type="email" value={form.email} onChange={updateField} required /></label><label>Telefone<input name="phone" value={form.phone} onChange={updateField} /></label></div><label>Área de interesse<select name="interest" value={form.interest} onChange={updateField}>{portugueseContactServices.map((service) => <option key={service}>{service}</option>)}</select></label><label>Mensagem<textarea name="message" rows="5" value={form.message} onChange={updateField} placeholder="Descreva o sintoma, equipamento, PLC ou rede industrial envolvida, ou a formação necessária." required /></label><input className="form-honeypot" name="website" value={form.website} onChange={updateField} tabIndex="-1" autoComplete="off" aria-hidden="true" /><div className="button-row"><button className="btn primary" type="submit" disabled={status === "sending"}>{status === "sending" ? "Enviando…" : "Enviar consulta"}<ArrowRight size={18} /></button><a className="btn secondary" href={whatsappUrl("Olá, estou entrando em contato com a BOJ pelo site em português.")}>Falar pelo WhatsApp</a></div>{feedback ? <p className={`form-feedback ${status}`} role="status">{feedback}</p> : null}</form>;
+  return (
+    <form className="contact-form" onSubmit={handleSubmit} noValidate aria-labelledby="pt-formulario-contato">
+      <h2 id="pt-formulario-contato" tabIndex={-1}>Conte-nos sobre seu caso</h2>
+      <p>Informe o contexto essencial para encaminharmos sua consulta corretamente. Falhas urgentes de planta são coordenadas pelo WhatsApp e dependem de disponibilidade.</p>
+      <ContactErrorSummary errors={errors} fields={fields} title="Revise os campos indicados" summaryRef={summaryRef} />
+      <label htmlFor={fields.name}>Nome</label><input id={fields.name} name="name" autoComplete="name" value={form.name} onChange={updateField} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? `${fields.name}-error` : undefined} required /><ContactFieldError id={`${fields.name}-error`} message={errors.name} />
+      <label htmlFor={fields.company}>Empresa</label><input id={fields.company} name="company" autoComplete="organization" value={form.company} onChange={updateField} />
+      <div className="form-row"><div><label htmlFor={fields.email}>E-mail</label><input id={fields.email} name="email" type="email" autoComplete="email" value={form.email} onChange={updateField} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? `${fields.email}-error` : undefined} required /><ContactFieldError id={`${fields.email}-error`} message={errors.email} /></div><div><label htmlFor={fields.phone}>Telefone</label><input id={fields.phone} name="phone" type="tel" autoComplete="tel" value={form.phone} onChange={updateField} /></div></div>
+      <label htmlFor={fields.interest}>Área de interesse</label><select id={fields.interest} name="interest" value={form.interest} onChange={updateField}>{portugueseContactServices.map((service) => <option key={service}>{service}</option>)}</select>
+      <label htmlFor={fields.message}>Mensagem</label><textarea id={fields.message} name="message" rows="5" value={form.message} onChange={updateField} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? `${fields.message}-error` : undefined} placeholder="Descreva o sintoma, equipamento, PLC ou rede industrial envolvida, ou a formação necessária." required /><ContactFieldError id={`${fields.message}-error`} message={errors.message} />
+      <input className="form-honeypot" name="website" value={form.website} onChange={updateField} tabIndex="-1" autoComplete="off" aria-hidden="true" />
+      <div className="button-row"><button className="btn primary" type="submit" disabled={status === "sending"}>{status === "sending" ? "Enviando…" : "Enviar consulta"}<ArrowRight size={18} /></button><a className="btn secondary" href={whatsappUrl("Olá, estou entrando em contato com a BOJ pelo site em português.")}>Falar pelo WhatsApp</a></div>
+      <p className="form-privacy-note">Veja como tratamos estes dados na <a href="/privacidad" hrefLang="es">política de privacidade (em espanhol)</a>.</p>
+      {feedback ? <p className={`form-feedback ${status}`} role={status === "error" ? "alert" : "status"}>{feedback}</p> : null}
+    </form>
+  );
 }
 
 function PortugueseContactPage() {
@@ -5602,7 +5797,7 @@ function TechnicalArticlePage({ route }) {
 
         {resource.sections.map((section) => (
           <section className="article-section" key={section.title}>
-            <h3>{section.title}</h3>
+            <h2>{section.title}</h2>
             <p>{section.text}</p>
             {section.items ? (
               <ul className="article-list">
@@ -5662,7 +5857,7 @@ function OfficialLinksBlock({ links }) {
     <section className="official-links-panel">
       <div>
         <p className="eyebrow">Fuentes y enlaces oficiales</p>
-        <h3>Documentación, soporte técnico y referencias del fabricante</h3>
+        <h2>Documentación, soporte técnico y referencias del fabricante</h2>
         <p>
           Para descargas, documentación y soporte técnico, se recomienda consultar siempre fuentes
           oficiales del fabricante. Evitar instaladores no oficiales reduce riesgos técnicos,
@@ -5715,21 +5910,21 @@ function GraciasPage() {
     >
       <div className="gracias-steps">
         <article className="gracias-step">
-          <h3>1 · Revisa tu correo electrónico</h3>
+          <h2>1 · Revisa tu correo electrónico</h2>
           <p>
             Las instrucciones de acceso al material se envían al correo electrónico que utilizaste en la compra. Si no las ves, revisa
             la carpeta de spam o promociones.
           </p>
         </article>
         <article className="gracias-step">
-          <h3>2 · Activa tu mes de BOJ S7-PLC PRO</h3>
+          <h2>2 · Activa tu mes de BOJ S7-PLC PRO</h2>
           <p>
             Conserva el mismo correo electrónico utilizado en la compra. Cuando tu acceso esté disponible, recibirás las
             instrucciones para activar tu mes de BOJ S7-PLC PRO.
           </p>
         </article>
         <article className="gracias-step">
-          <h3>3 · ¿Problemas con el acceso?</h3>
+          <h2>3 · ¿Problemas con el acceso?</h2>
           <p>
             Escríbenos y lo resolveremos: <a href={`mailto:${contact.email}`}>{contact.email}</a> o WhatsApp{" "}
             <a href={whatsappUrl("Hola, acabo de comprar el curso S7-300/400 y tengo un problema con el acceso.")}>
@@ -5795,7 +5990,7 @@ function ContactPage() {
         })}
       </div>
 
-      <div className="contact-grid" id="consulta-tecnica">
+      <div className="contact-grid">
         <div className="contact-panel">
           <h2>Contacto y datos útiles</h2>
           <p className="contact-panel-intro">
@@ -5856,14 +6051,32 @@ function ContactForm() {
 
   const [status, setStatus] = useState("idle");
   const [feedback, setFeedback] = useState("");
+  const [errors, setErrors] = useState({});
+  const summaryRef = useRef(null);
+  const fields = { name: "es-contact-name", company: "es-contact-company", email: "es-contact-email", phone: "es-contact-phone", interest: "es-contact-interest", message: "es-contact-message" };
 
   function updateField(event) {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
+    clearContactFieldError(setErrors, name, value);
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
+    const nextErrors = validateContactValues(form, {
+      name: "Ingresa tu nombre.",
+      email: "Ingresa tu correo electrónico.",
+      emailInvalid: "Ingresa un correo electrónico válido.",
+      message: "Describe tu consulta.",
+    });
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors);
+      setStatus("idle");
+      setFeedback("");
+      window.requestAnimationFrame(() => summaryRef.current?.focus());
+      return;
+    }
+    setErrors({});
     setStatus("sending");
     setFeedback("");
     try {
@@ -5879,49 +6092,48 @@ function ContactForm() {
   }
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit}>
-      <h2>Cuéntanos el caso</h2>
+    <form className="contact-form" onSubmit={handleSubmit} noValidate aria-labelledby="consulta-tecnica">
+      <h2 id="consulta-tecnica" tabIndex={-1}>Cuéntanos el caso</h2>
       <p>
         Completa los datos esenciales para derivar correctamente la consulta. Respondemos dentro de 48 horas hábiles;
         las fallas urgentes se coordinan por WhatsApp y están sujetas a disponibilidad.
       </p>
-      <label>
-        Nombre
-        <input name="name" value={form.name} onChange={updateField} required />
-      </label>
-      <label>
-        Empresa
-        <input name="company" value={form.company} onChange={updateField} />
-      </label>
+      <ContactErrorSummary errors={errors} fields={fields} title="Revisa los campos indicados" summaryRef={summaryRef} />
+      <label htmlFor={fields.name}>Nombre</label>
+      <input id={fields.name} name="name" autoComplete="name" value={form.name} onChange={updateField} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? `${fields.name}-error` : undefined} required />
+      <ContactFieldError id={`${fields.name}-error`} message={errors.name} />
+      <label htmlFor={fields.company}>Empresa</label>
+      <input id={fields.company} name="company" autoComplete="organization" value={form.company} onChange={updateField} />
       <div className="form-row">
-        <label>
-          Correo electrónico
-          <input name="email" type="email" value={form.email} onChange={updateField} required />
-        </label>
-        <label>
-          Teléfono
-          <input name="phone" value={form.phone} onChange={updateField} />
-        </label>
+        <div>
+          <label htmlFor={fields.email}>Correo electrónico</label>
+          <input id={fields.email} name="email" type="email" autoComplete="email" value={form.email} onChange={updateField} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? `${fields.email}-error` : undefined} required />
+          <ContactFieldError id={`${fields.email}-error`} message={errors.email} />
+        </div>
+        <div>
+          <label htmlFor={fields.phone}>Teléfono</label>
+          <input id={fields.phone} name="phone" type="tel" autoComplete="tel" value={form.phone} onChange={updateField} />
+        </div>
       </div>
-      <label>
-        Servicio de interés
-        <select name="interest" value={form.interest} onChange={updateField}>
-          {quickServices.map((service) => (
-            <option key={service}>{service}</option>
-          ))}
-        </select>
-      </label>
-      <label>
-        Mensaje
-        <textarea
-          name="message"
-          rows="5"
-          value={form.message}
-          onChange={updateField}
-          placeholder="Describe el síntoma, el equipo involucrado, el PLC o la red industrial, o la formación requerida."
-          required
-        />
-      </label>
+      <label htmlFor={fields.interest}>Servicio de interés</label>
+      <select id={fields.interest} name="interest" value={form.interest} onChange={updateField}>
+        {quickServices.map((service) => (
+          <option key={service}>{service}</option>
+        ))}
+      </select>
+      <label htmlFor={fields.message}>Mensaje</label>
+      <textarea
+        id={fields.message}
+        name="message"
+        rows="5"
+        value={form.message}
+        onChange={updateField}
+        aria-invalid={Boolean(errors.message)}
+        aria-describedby={errors.message ? `${fields.message}-error` : undefined}
+        placeholder="Describe el síntoma, el equipo involucrado, el PLC o la red industrial, o la formación requerida."
+        required
+      />
+      <ContactFieldError id={`${fields.message}-error`} message={errors.message} />
       <div className="button-row">
         <button className="btn primary" type="submit" disabled={status === "sending"}>
           {status === "sending" ? "Enviando…" : "Enviar consulta"}
@@ -5931,7 +6143,8 @@ function ContactForm() {
           Contactar por WhatsApp
         </a>
       </div>
-      {feedback ? <p className={`form-feedback ${status}`} role="status">{feedback}</p> : null}
+      <p className="form-privacy-note">Consulta cómo tratamos estos datos en la <a href="/privacidad">Política de privacidad</a>.</p>
+      {feedback ? <p className={`form-feedback ${status}`} role={status === "error" ? "alert" : "status"}>{feedback}</p> : null}
     </form>
   );
 }
@@ -6750,7 +6963,7 @@ function MainFooter({ language }) {
           <p>{footerCopy.description}</p>
         </div>
         <div className="mock-footer-contact" aria-label={footerCopy.contactAria}>
-          <h3>{footerCopy.contact}</h3>
+          <h2>{footerCopy.contact}</h2>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
           <a href="https://www.bojautomatizacion.com" target="_blank" rel="noreferrer">
             www.bojautomatizacion.com
@@ -6758,7 +6971,7 @@ function MainFooter({ language }) {
           <span>{contact.location}</span>
         </div>
         <nav className="mock-footer-nav" aria-label={footerCopy.navigationAria}>
-          <h3>{footerCopy.navigation}</h3>
+          <h2>{footerCopy.navigation}</h2>
           {footerLinks.map((item) => (
             <a key={item.path} href={item.path}>
               {item.label}
@@ -6766,14 +6979,14 @@ function MainFooter({ language }) {
           ))}
         </nav>
         <nav className="mock-footer-nav mock-footer-legal" aria-label={footerCopy.legalAria}>
-          <h3>Legal</h3>
+          <h2>Legal</h2>
           <a href="/privacidad">{footerCopy.legal[0]}</a>
           <a href="/terminos">{footerCopy.legal[1]}</a>
           <a href="/licencias">{footerCopy.legal[2]}</a>
           <a href="/reembolsos">{footerCopy.legal[3]}</a>
         </nav>
         <div className="mock-footer-social">
-          <h3>{footerCopy.follow}</h3>
+          <h2>{footerCopy.follow}</h2>
           <div>
             <a href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">in</a>
             <a href={contact.linktree} target="_blank" rel="noreferrer" aria-label="Linktree">lt</a>

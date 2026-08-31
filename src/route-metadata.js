@@ -18,9 +18,9 @@ export const routeMetadata = Object.freeze({
       "Servicios técnicos para planta: PLC Siemens, diagnóstico de fallas, redes PROFIBUS/PROFINET, migraciones, instrumentación, tableros y puesta en marcha en Argentina.",
   },
   "/cursos": {
-    title: "Cursos técnicos PLC Siemens y TIA Portal | BOJ",
+    title: "Formación PLC Siemens disponible y futura | BOJ",
     description:
-      "Cursos técnicos aplicados de diagnóstico en PLC Siemens S7-300/400, STEP 7 Classic y TIA Portal para mantenimiento industrial en Argentina.",
+      "Curso de diagnóstico S7-300/400 disponible y futuro curso TIA Portal S7-1200/1500 en preparación para mantenimiento industrial.",
   },
   "/cursos/s7-300-400": {
     title: "Curso diagnóstico industrial PLC Siemens S7-300/400 | BOJ",
@@ -28,9 +28,9 @@ export const routeMetadata = Object.freeze({
       "Curso aplicado de diagnóstico industrial en PLC Siemens S7-300/400 con STEP 7 Classic, Diagnostic Buffer, HW Config Online, PROFIBUS y fallas reales de planta.",
   },
   "/cursos/tia-portal": {
-    title: "Curso TIA Portal S7-1200/1500 | BOJ",
+    title: "Curso TIA Portal S7-1200/1500 — Próximamente | BOJ",
     description:
-      "Curso introductorio de TIA Portal para PLC Siemens S7-1200/1500: hardware, variables, LAD, carga, monitoreo online y diagnóstico básico.",
+      "Curso futuro en preparación sobre TIA Portal para PLC Siemens S7-1200/1500. La inscripción todavía no está habilitada.",
   },
   "/app": {
     title: "BOJ S7-PLC PRO | App de diagnóstico PLC Siemens S7-300/400",
@@ -108,9 +108,9 @@ export const routeMetadata = Object.freeze({
       "Technical services for Siemens PLCs, HMI, SCADA, PROFIBUS, PROFINET, migrations, instrumentation and industrial commissioning.",
   },
   "/en/courses": {
-    title: "Siemens PLC technical training | BOJ",
+    title: "Available and upcoming Siemens PLC training | BOJ",
     description:
-      "Applied online training for industrial diagnostics with Siemens S7-300/400, STEP 7 Classic and TIA Portal.",
+      "Available Siemens S7-300/400 diagnostics training and an upcoming TIA Portal S7-1200/1500 course now in preparation.",
   },
   "/en/courses/s7-300-400": {
     title: "Siemens S7-300/400 industrial diagnostics course | BOJ",
@@ -118,9 +118,9 @@ export const routeMetadata = Object.freeze({
       "Applied Siemens S7-300/400 diagnostics course with STEP 7 Classic, Diagnostic Buffer, HW Config Online, PROFIBUS and field cases.",
   },
   "/en/courses/tia-portal": {
-    title: "TIA Portal S7-1200/1500 course | BOJ",
+    title: "TIA Portal S7-1200/1500 course — Upcoming | BOJ",
     description:
-      "Upcoming introductory TIA Portal training for Siemens S7-1200/1500 PLC systems, online diagnostics and industrial maintenance.",
+      "Upcoming introductory TIA Portal course for Siemens S7-1200/1500 PLC systems. Enrollment is not open yet.",
   },
   "/en/app": {
     title: "BOJ S7-PLC PRO | Siemens S7-300/400 diagnostics app",
@@ -148,9 +148,9 @@ export const routeMetadata = Object.freeze({
       "Serviços técnicos para PLC Siemens, IHM, SCADA, PROFIBUS, PROFINET, migrações, instrumentação e comissionamento industrial.",
   },
   "/pt/cursos": {
-    title: "Cursos técnicos de PLC Siemens | BOJ",
+    title: "Formação disponível e futura de PLC Siemens | BOJ",
     description:
-      "Formação online aplicada em diagnóstico industrial com Siemens S7-300/400, STEP 7 Classic e TIA Portal.",
+      "Formação disponível em diagnóstico Siemens S7-300/400 e futuro curso TIA Portal S7-1200/1500 em preparação.",
   },
   "/pt/cursos/s7-300-400": {
     title: "Curso de diagnóstico industrial Siemens S7-300/400 | BOJ",
@@ -158,9 +158,9 @@ export const routeMetadata = Object.freeze({
       "Curso aplicado de diagnóstico Siemens S7-300/400 com STEP 7 Classic, Diagnostic Buffer, HW Config Online, PROFIBUS e casos de campo. Conteúdo em espanhol.",
   },
   "/pt/cursos/tia-portal": {
-    title: "Curso TIA Portal S7-1200/1500 | BOJ",
+    title: "Curso TIA Portal S7-1200/1500 — Em preparação | BOJ",
     description:
-      "Próximo curso introdutório de TIA Portal para PLC Siemens S7-1200/1500, diagnóstico online e manutenção industrial.",
+      "Curso futuro de TIA Portal para PLC Siemens S7-1200/1500, atualmente em preparação. As inscrições ainda não estão abertas.",
   },
   "/pt/app": {
     title: "BOJ S7-PLC PRO | App de diagnóstico Siemens S7-300/400",

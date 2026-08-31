@@ -3491,7 +3491,7 @@ textarea {
   padding: 13px 14px;
   color: var(--text);
   background: rgba(255, 255, 255, 0.045);
-  outline: none;
+  outline: 2px solid transparent;
 }
 
 input:focus,
