@@ -10,7 +10,8 @@ import {
   portugueseHome,
   portugueseProjects,
 } from "../i18n.js";
-import appDiagnosticoGuiado from "../assets/app-diagnostico-guiado.jpg";
+import appSeleccionSintoma from "../assets/app-seleccion-sintoma-v8-17-24.jpg";
+import appVerificacionGuiada from "../assets/app-verificacion-guiada-v8-17-24.jpg";
 import heroInicio from "../assets/hero-inicio.jpg";
 import plantVisual from "../assets/old-site/35-47edf350.jpg";
 import { whatsappUrl } from "../app/shared-eager.jsx";
@@ -262,23 +263,23 @@ function HomeObrasTeaser() {
 function AppDiagnosticMockup({ language = "es" }) {
   const visualCopy = language === "en"
     ? {
-        figure: "Real BOJ S7-PLC guided diagnostic view on desktop and mobile formats",
-        desktop: "Real BOJ S7-PLC guided diagnostic view",
-        mobileFrame: "Mobile view of BOJ S7-PLC",
-        mobile: "BOJ S7-PLC guided diagnostic view in a mobile frame",
+        figure: "Current BOJ S7-PLC screens presented in desktop and phone frames",
+        desktop: "Current BOJ S7-PLC guided verification screen",
+        mobileFrame: "BOJ S7-PLC symptom selection shown in a phone frame",
+        mobile: "Current BOJ S7-PLC symptom selection screen in a phone frame",
       }
     : language === "pt"
       ? {
-          figure: "Imagem real do diagnóstico guiado do BOJ S7-PLC em formatos desktop e móvel",
-          desktop: "Imagem real do diagnóstico guiado do BOJ S7-PLC",
-          mobileFrame: "Visualização móvel do BOJ S7-PLC",
-          mobile: "Diagnóstico guiado do BOJ S7-PLC em um quadro móvel",
+          figure: "Telas atuais do BOJ S7-PLC apresentadas em quadros de computador e telefone",
+          desktop: "Tela atual de verificação guiada do BOJ S7-PLC",
+          mobileFrame: "Seleção de sintomas do BOJ S7-PLC apresentada em um quadro de telefone",
+          mobile: "Tela atual de seleção de sintomas do BOJ S7-PLC em um quadro de telefone",
         }
       : {
-          figure: "Captura real del diagnóstico guiado de BOJ S7-PLC en formatos de escritorio y móvil",
-          desktop: "Captura real del diagnóstico guiado de BOJ S7-PLC",
-          mobileFrame: "Vista mobile de BOJ S7-PLC",
-          mobile: "Diagnóstico guiado de BOJ S7-PLC en un marco móvil",
+          figure: "Pantallas actuales de BOJ S7-PLC presentadas en marcos de computadora y teléfono",
+          desktop: "Pantalla actual de verificación guiada de BOJ S7-PLC",
+          mobileFrame: "Selección de síntomas de BOJ S7-PLC presentada en un marco de teléfono",
+          mobile: "Pantalla actual de selección de síntomas de BOJ S7-PLC en un marco de teléfono",
         };
   return (
     <figure className="mock-app-visual real-app-capture app-product-composition" aria-label={visualCopy.figure}>
@@ -291,10 +292,10 @@ function AppDiagnosticMockup({ language = "es" }) {
           </div>
           <div className="real-app-screen app-desktop-screen">
             <img
-              src={appDiagnosticoGuiado}
+              src={appVerificacionGuiada}
               alt={visualCopy.desktop}
-              width="1474"
-              height="588"
+              width="1460"
+              height="675"
               loading="lazy"
               decoding="async"
             />
@@ -304,10 +305,10 @@ function AppDiagnosticMockup({ language = "es" }) {
         <div className="app-mobile-frame" aria-label={visualCopy.mobileFrame}>
           <div className="app-mobile-speaker" aria-hidden="true" />
           <img
-            src={appDiagnosticoGuiado}
+            src={appSeleccionSintoma}
             alt={visualCopy.mobile}
-            width="1474"
-            height="588"
+            width="1000"
+            height="455"
             loading="lazy"
             decoding="async"
           />

@@ -397,13 +397,21 @@
 
 .app-product-stage {
   position: relative;
-  width: min(100%, 860px);
+  box-sizing: border-box;
+  width: min(100%, 797px);
+  aspect-ratio: 797 / 453;
   margin-left: auto;
-  padding: 8px clamp(34px, 4.2vw, 54px) 56px 0;
+  padding: 0;
+  isolation: isolate;
 }
 
 .app-desktop-frame {
-  position: relative;
+  position: absolute;
+  top: 2%;
+  left: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 87%;
   padding: 8px;
   border: 7px solid #08111c;
   border-bottom-width: 13px;
@@ -452,13 +460,16 @@
 
 .app-desktop-screen {
   border-radius: 9px;
+  overflow: hidden;
+  background: #020b14;
 }
 
 .app-desktop-screen img {
   display: block;
   width: 100%;
-  aspect-ratio: 1917 / 916;
-  object-fit: contain;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: cover;
   object-position: center top;
   background: #020b14;
 }
@@ -474,9 +485,11 @@
 
 .app-mobile-frame {
   position: absolute;
-  right: 0;
-  bottom: 6px;
-  width: clamp(148px, 16vw, 186px);
+  top: 16%;
+  right: 5%;
+  bottom: auto;
+  box-sizing: border-box;
+  width: 20.7%;
   aspect-ratio: 9 / 18.5;
   padding: 16px 8px 10px;
   border: 7px solid #060d16;
@@ -516,7 +529,7 @@
   height: 100%;
   border-radius: 20px;
   object-fit: cover;
-  object-position: center top;
+  object-position: left top;
   background: #07111d;
 }
 
@@ -540,9 +553,8 @@
   }
 
   .app-product-stage {
-    width: min(100%, 820px);
+    width: min(100%, 797px);
     margin-inline: auto;
-    padding-right: clamp(34px, 7vw, 62px);
   }
 }
 
@@ -560,7 +572,7 @@
   }
 
   .app-product-stage {
-    padding: 0 30px 48px 0;
+    padding: 0;
   }
 
   .app-desktop-frame {
@@ -587,8 +599,10 @@
   }
 
   .app-mobile-frame {
-    width: clamp(104px, 30vw, 132px);
-    bottom: 4px;
+    top: 10%;
+    right: 2%;
+    bottom: auto;
+    width: clamp(104px, 23vw, 124px);
     border-width: 5px;
     border-radius: 22px;
     padding: 12px 5px 7px;
@@ -607,12 +621,13 @@
 
 @media (max-width: 430px) {
   .app-product-stage {
-    padding-right: 18px;
-    padding-bottom: 42px;
+    aspect-ratio: 797 / 500;
   }
 
   .app-mobile-frame {
     width: 96px;
+    top: 8%;
+    right: 0;
   }
 }
 
