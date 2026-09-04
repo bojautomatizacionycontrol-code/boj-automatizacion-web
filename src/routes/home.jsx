@@ -304,14 +304,16 @@ function AppDiagnosticMockup({ language = "es" }) {
         </div>
         <div className="app-mobile-frame" aria-label={visualCopy.mobileFrame}>
           <div className="app-mobile-speaker" aria-hidden="true" />
-          <img
-            src={appSeleccionSintoma}
-            alt={visualCopy.mobile}
-            width="1000"
-            height="455"
-            loading="lazy"
-            decoding="async"
-          />
+          <div className="app-mobile-screen">
+            <img
+              src={appSeleccionSintoma}
+              alt={visualCopy.mobile}
+              width="1000"
+              height="455"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
         </div>
       </div>
     </figure>

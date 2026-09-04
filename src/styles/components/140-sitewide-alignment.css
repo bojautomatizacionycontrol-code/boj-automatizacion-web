@@ -523,12 +523,20 @@
   z-index: 2;
 }
 
-.app-mobile-frame img {
-  display: block;
+.app-mobile-screen {
   width: 100%;
   height: 100%;
+  overflow: hidden;
   border-radius: 20px;
-  object-fit: cover;
+  background: #07111d;
+}
+
+.app-mobile-screen img {
+  display: block;
+  width: 420%;
+  max-width: none;
+  height: auto;
+  object-fit: contain;
   object-position: left top;
   background: #07111d;
 }
@@ -614,7 +622,7 @@
     height: 4px;
   }
 
-  .app-mobile-frame img {
+  .app-mobile-screen {
     border-radius: 15px;
   }
 }

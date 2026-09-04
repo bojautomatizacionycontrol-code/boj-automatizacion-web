@@ -17,6 +17,7 @@ test("restaura una composición compacta con capturas vigentes en Home", () => {
   assert.match(homeSource, /import appSeleccionSintoma from "\.\.\/assets\/app-seleccion-sintoma-v8-17-24\.jpg"/);
   assert.match(homeSource, /import appVerificacionGuiada from "\.\.\/assets\/app-verificacion-guiada-v8-17-24\.jpg"/);
   assert.match(visualSource, /src=\{appVerificacionGuiada\}[\s\S]*?width="1460"[\s\S]*?height="675"/);
+  assert.match(visualSource, /className="app-mobile-screen"[\s\S]*?src=\{appSeleccionSintoma\}/);
   assert.match(visualSource, /src=\{appSeleccionSintoma\}[\s\S]*?width="1000"[\s\S]*?height="455"/);
   assert.doesNotMatch(
     visualSource,
@@ -43,7 +44,11 @@ test("el marco recupera la proporción histórica sin la franja negra", () => {
   );
   assert.match(
     stylesSource,
-    /\.app-mobile-frame img\s*\{[^}]*object-fit:\s*cover;[^}]*object-position:\s*left top;/,
+    /\.app-mobile-screen\s*\{[^}]*overflow:\s*hidden;[^}]*border-radius:\s*20px;[^}]*background:\s*#07111d;/,
+  );
+  assert.match(
+    stylesSource,
+    /\.app-mobile-screen img\s*\{[^}]*width:\s*420%;[^}]*max-width:\s*none;[^}]*height:\s*auto;[^}]*object-fit:\s*contain;[^}]*object-position:\s*left top;/,
   );
   assert.match(
     stylesSource,
