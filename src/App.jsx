@@ -26,6 +26,7 @@ import {
   getRouteMetadata,
 } from "./route-metadata.js";
 import bojLogo from "./assets/boj-logo-real-cropped.png";
+import { contactAddresses } from "./contact-addresses.js";
 import { M2Picture, track, whatsappUrl } from "./app/shared-eager.jsx";
 import { serializeJsonLd } from "./json-ld.js";
 import { preloadRouteFamily, RouteOutlet } from "./routes/manifest.jsx";
@@ -750,7 +751,8 @@ function MainFooter({ language, buildYear }) {
             www.bojautomatizacion.com
           </a>
           <span>{footerCopy.coverage}</span>
-          <span>{footerCopy.addressLabel} {contact.location}</span>
+          <span>{footerCopy.addressLabel} {contactAddresses[0]}</span>
+          <span>{contactAddresses[1]}</span>
         </div>
         <nav className="mock-footer-nav" aria-label={footerCopy.navigationAria}>
           <h2>{footerCopy.navigation}</h2>

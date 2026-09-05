@@ -4,13 +4,9 @@ import { commercialIdentity, contact, contactChecklist } from "../content.js";
 import heroContacto from "../assets/hero-contacto.jpg";
 import { track, whatsappUrl } from "../app/shared-eager.jsx";
 import { CheckItem, Icon, NotFound, PageShell, PrimaryLink, SecondaryLink, appLicensePlans, appProductUrl, icons } from "./shared.jsx";
+import { contactAddresses } from "../contact-addresses.js";
 
-// Domicilios visibles en la página de contacto (decisión del titular, 5 de septiembre de 2026).
-// La identidad comercial legal (commercialIdentity.address) y el pie de página no cambian.
-const contactAddresses = Object.freeze([
-  "Culpina 63, Ciudad Autónoma de Buenos Aires, Argentina",
-  "Marcos Paz 913, San Miguel de Tucumán, Tucumán, Argentina",
-]);
+// Las dos direcciones se muestran en una sola línea de contacto.
 const contactAddressValue = (
   <>
     {contactAddresses[0]}
