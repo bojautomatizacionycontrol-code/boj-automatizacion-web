@@ -56,6 +56,16 @@ Desde el 5 de septiembre de 2026 se publica la identificación básica del vende
 
 El control antiabuso visible del formulario de contacto es el honeypot y las validaciones del formulario; Cloudflare Turnstile queda diferido como mejora posterior.
 
+## Gestiones de compra en Hotmart (5 de septiembre de 2026)
+
+- Hotmart se reutiliza como canal operativo de las gestiones posteriores a la compra. BOJ no crea formularios, tablas, API, sistema de tickets ni paneles propios para reembolsos o bajas.
+- Garantía verificada de 7 días en los cinco productos: 7942906 (Curso Diagnóstico S7-300/400 + BOJ S7-PLC PRO), 8271939 (Licencia Mensual), 8273294 (Licencia Profesional + Curso), 8275980 (Licencia Empresarial + Curso) y 8278808 (Suscripción Mensual).
+- Destinos oficiales centralizados en `src/hotmart-links.js`: solicitud de reembolso `https://refund.hotmart.com/`, seguimiento `https://refund.hotmart.com/tracking`, cancelación de renovaciones en la cuenta del comprador `https://consumer.hotmart.com/main`, instrucciones oficiales para cancelar una suscripción `https://help.hotmart.com/es/article/115002183968/como-cancelar-mi-suscripcion` y soporte de Hotmart para compradores `https://help.hotmart.com/es/contact-us?subject=bought-and-need-help`.
+- El sitio muestra en todas las rutas, antes del pie de página y sin autenticación, prueba, licencia ni formulario previo, los enlaces "BOTÓN DE ARREPENTIMIENTO" (portal de reembolsos) y "BOTÓN DE BAJA DE SERVICIO" (cuenta del comprador), con la aclaración de que la baja aplica a la Suscripción Mensual con renovación automática y que las licencias de pago único vencen al finalizar su plazo.
+- Reembolso y cancelación de renovación son trámites distintos: el reembolso afecta la compra correspondiente; la cancelación impide cobros futuros, no devuelve automáticamente un importe ya cobrado y el período pagado sigue vigente hasta su vencimiento. La única oferta recurrente es 8278808; Mensual, Profesional y Empresarial son pagos únicos sin renovación automática.
+- El soporte técnico y de acceso de BOJ (`contacto@bojautomatizacion.com`) se presenta separado y no sustituye el trámite formal de reembolso ni la cancelación en la cuenta del comprador. La revocación de acceso ocurre cuando el backend recibe y valida el evento de Hotmart; abrir un enlace no modifica licencias.
+- No se promete aprobación automática, plazo exacto de devolución ni número de protocolo. La revisión jurídica profesional sigue pendiente y este registro no certifica cumplimiento normativo.
+
 ## Regla técnica de mes calendario
 
 La implementación productiva de BOJ S7-PLC `v8.17.24` establece una licencia PRO de `months: 1`. La función vigente suma `make_interval(months => 1)` al instante de procesamiento para una licencia nueva o vencida, o al vencimiento actual cuando la licencia todavía está vigente. La base opera en UTC y PostgreSQL ajusta al último día del mes cuando el día equivalente no existe. La activación posterior de un dispositivo no reinicia ni extiende el plazo.

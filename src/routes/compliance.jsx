@@ -5,6 +5,7 @@ import heroContacto from "../assets/hero-contacto.jpg";
 import { track, whatsappUrl } from "../app/shared-eager.jsx";
 import { CheckItem, Icon, NotFound, PageShell, PrimaryLink, SecondaryLink, appLicensePlans, appProductUrl, icons } from "./shared.jsx";
 import { contactAddresses } from "../contact-addresses.js";
+import { hotmartLinks } from "../hotmart-links.js";
 
 // Las dos direcciones se muestran en una sola línea de contacto.
 const contactAddressValue = (
@@ -723,10 +724,24 @@ const legalContent = {
       ["Servicios técnicos", "Alcance, agenda, entregables, costos y condiciones se confirman por propuesta. La atención urgente es coordinada y está sujeta a disponibilidad."],
       ["Prueba y alcance de BOJ S7-PLC PRO", "La prueba gratuita dura 48 horas, funciona en línea y tiene funciones limitadas. El alcance técnico de BOJ S7-PLC PRO se limita a sistemas Siemens S7-300/400 compatibles. La app organiza síntomas, evidencias, hipótesis priorizadas y verificaciones; no se conecta al PLC, no controla equipos y no reemplaza STEP 7, los procedimientos de seguridad ni el criterio de personal autorizado."],
       ["Compra, activación y Hotmart", `Hotmart procesa los pagos de las ofertas publicadas. BOJ proporciona la licencia, el contenido incluido y el soporte de acceso. La activación se vincula al correo informado durante la compra; si necesita ayuda, escriba a ${contact.email} desde ese mismo correo.`],
-      ["Suscripción, cancelación y vigencia", "La suscripción mensual se renueva automáticamente hasta su cancelación. La cancelación se realiza desde la cuenta de comprador en Hotmart, evita cobros futuros y no revoca de inmediato el período ya pagado: el acceso continúa hasta su fecha de vencimiento. Las otras tres ofertas son pagos únicos sin renovación automática."],
+      [
+        "Suscripción, cancelación y vigencia",
+        <>
+          La Suscripción Mensual BOJ S7-PLC PRO (producto Hotmart 8278808) es la única oferta que se renueva automáticamente hasta su cancelación. La cancelación se realiza desde la cuenta de comprador en Hotmart, en el{" "}
+          <HotmartLink href={hotmartLinks.subscriptionManagementUrl}>portal del comprador</HotmartLink>, siguiendo las{" "}
+          <HotmartLink href={hotmartLinks.subscriptionCancellationHelpUrl}>instrucciones oficiales de Hotmart</HotmartLink>. Cancelar evita cobros futuros y no revoca de inmediato el período ya pagado: el acceso continúa hasta su fecha de vencimiento. Cancelar la renovación es un trámite distinto de solicitar un reembolso. Las otras tres ofertas de BOJ S7-PLC PRO y el curso son pagos únicos sin renovación automática.
+        </>,
+      ],
       ["Licencia mensual de pago único", "Su vigencia es de un mes calendario. En una licencia nueva o vencida, comienza cuando BOJ procesa la confirmación de pago de Hotmart y activa la licencia; si ya existe una licencia vigente, el mes se suma a su vencimiento actual. Finaliza en la fecha y hora UTC equivalente del mes siguiente; si ese día no existe, finaliza el último día de ese mes a la misma hora UTC. La activación posterior en un dispositivo no reinicia ni extiende el plazo. Es un pago único, no se renueva automáticamente y una nueva vigencia requiere una nueva compra."],
       ["Curso incluido", "Las licencias Profesional y Empresarial incluyen acceso permanente al curso Diagnóstico S7-300/400, con material técnico descargable, guías prácticas y contenidos de apoyo. La suscripción mensual y la licencia mensual de pago único no incluyen el curso."],
-      ["Garantía y reembolsos", "Los cuatro checkouts de BOJ S7-PLC PRO muestran una garantía de 7 días. En una suscripción, la posibilidad de reembolso corresponde a la transacción inicial de adhesión; cancelar la renovación no equivale a solicitar un reembolso. El trámite se realiza mediante el flujo de Hotmart."],
+      [
+        "Garantía y reembolsos",
+        <>
+          Los cuatro checkouts de BOJ S7-PLC PRO muestran una garantía de 7 días. La solicitud de reembolso se inicia en el{" "}
+          <HotmartLink href={hotmartLinks.refundRequestUrl}>portal de reembolsos de Hotmart</HotmartLink> y su estado puede consultarse en el{" "}
+          <HotmartLink href={hotmartLinks.refundTrackingUrl}>seguimiento de reembolsos de Hotmart</HotmartLink>. En una suscripción, la posibilidad de reembolso corresponde a la transacción inicial de adhesión; cancelar la renovación no equivale a solicitar un reembolso, y un reembolso aprobado afecta a la compra correspondiente. La aprobación y el procesamiento siguen el flujo de Hotmart.
+        </>,
+      ],
       ["Idioma", "Interfaz disponible en seis idiomas. El contenido técnico especializado y los documentos legales se proporcionan actualmente en español."],
       ["Propiedad intelectual", "La compra concede un derecho personal de uso y no autoriza redistribución, reventa, publicación o copia masiva."],
       ["Marcas de terceros", "Siemens, SIMATIC, STEP 7, TIA Portal, S7-300 y S7-400 son marcas de sus respectivos titulares. BOJ es independiente y no está afiliada, patrocinada ni certificada por Siemens."],
@@ -742,11 +757,17 @@ const legalContent = {
     sections: [
       ["Prueba gratuita", "La prueba inicial dura 48 horas, funciona sólo en línea y ofrece funciones limitadas. No constituye una licencia paga ni habilita funcionamiento sin conexión."],
       ["Activación", "Las licencias pagas se vinculan al correo registrado en Hotmart. La duración y el límite de dispositivos dependen de la oferta adquirida."],
-      ["Duración, renovación y cancelación", "La suscripción se renueva cada mes hasta su cancelación. Cancelarla en la cuenta de comprador de Hotmart evita cobros futuros y mantiene el acceso hasta el final del período ya pagado. La licencia mensual de pago único dura un mes calendario: en una licencia nueva o vencida, comienza cuando BOJ procesa la confirmación de pago de Hotmart y activa la licencia; si existe una licencia vigente, el mes se suma a su vencimiento actual. Finaliza en la fecha y hora UTC equivalente del mes siguiente o, si ese día no existe, el último día de ese mes a la misma hora UTC. Una activación posterior en un dispositivo no reinicia ni extiende el plazo. Es un pago único sin renovación automática y una nueva vigencia requiere una nueva compra. Profesional y Empresarial también vencen al finalizar su plazo y no se renuevan automáticamente."],
+      [
+        "Duración, renovación y cancelación",
+        <>
+          La suscripción se renueva cada mes hasta su cancelación. Cancelarla en la cuenta de comprador de Hotmart (
+          <HotmartLink href={hotmartLinks.subscriptionManagementUrl}>portal del comprador</HotmartLink>) evita cobros futuros y mantiene el acceso hasta el final del período ya pagado. La licencia mensual de pago único dura un mes calendario: en una licencia nueva o vencida, comienza cuando BOJ procesa la confirmación de pago de Hotmart y activa la licencia; si existe una licencia vigente, el mes se suma a su vencimiento actual. Finaliza en la fecha y hora UTC equivalente del mes siguiente o, si ese día no existe, el último día de ese mes a la misma hora UTC. Una activación posterior en un dispositivo no reinicia ni extiende el plazo. Es un pago único sin renovación automática y una nueva vigencia requiere una nueva compra. Profesional y Empresarial también vencen al finalizar su plazo y no se renuevan automáticamente.
+        </>,
+      ],
       ["Dispositivos y funcionamiento sin conexión", "La suscripción y la licencia mensual de pago único admiten 1 dispositivo; Profesional admite hasta 2 y Empresarial hasta 10. Las tres primeras licencias pueden funcionar sin conexión hasta 2 días desde la última validación en línea correcta; Empresarial, hasta 7 días. Al agotarse esa ventana, la app requiere volver a validar en línea."],
       ["Alcance de uso", "La licencia es limitada, no exclusiva e intransferible."],
       ["Limitación técnica", "El alcance técnico de BOJ S7-PLC PRO se limita a sistemas Siemens S7-300/400 compatibles. La app organiza síntomas, evidencias, hipótesis priorizadas y verificaciones. No se conecta al PLC, no controla equipos y no sustituye STEP 7, los procedimientos de seguridad ni un diagnóstico profesional."],
-      ["Reembolso o contracargo", "Cuando Hotmart confirma un reembolso o contracargo, se revoca el acceso correspondiente a esa compra."],
+      ["Reembolso o contracargo", "Cuando Hotmart confirma un reembolso o contracargo y el backend de BOJ recibe y valida el evento correspondiente, se revoca el acceso vinculado a esa compra. Abrir el portal de reembolsos o el portal del comprador no modifica por sí mismo ninguna licencia."],
       ["Soporte e idioma", `El soporte cubre acceso, activación y uso general de la app por correo: ${contact.email}. La interfaz está disponible en seis idiomas; el contenido técnico especializado y los documentos legales se proporcionan actualmente en español.`],
     ],
   },
@@ -759,8 +780,22 @@ const legalContent = {
     offerIntro: "La garantía publicada para las cuatro ofertas de BOJ S7-PLC PRO es de 7 días y se tramita mediante el proceso de Hotmart.",
     sections: [
       ["Ofertas de BOJ S7-PLC PRO", "Puede solicitar un reembolso dentro del período de garantía de 7 días configurado para la oferta adquirida, mediante el flujo de Hotmart. En la suscripción mensual, esa posibilidad corresponde a la transacción inicial de adhesión y no a cada renovación posterior."],
-      ["Cancelación no es reembolso", "Cancelar la suscripción mensual detiene los cobros futuros y conserva el acceso hasta el final del período ya pagado; no devuelve automáticamente el pago. El reembolso debe solicitarse por separado dentro del período aplicable."],
-      ["Cómo solicitarlo", `La solicitud puede iniciarse en refund.hotmart.com con los datos de la compra o mediante el soporte de BOJ en ${contact.email}. La aprobación y el procesamiento siguen el flujo de Hotmart.`],
+      [
+        "Cancelación no es reembolso",
+        <>
+          Cancelar la suscripción mensual desde el{" "}
+          <HotmartLink href={hotmartLinks.subscriptionManagementUrl}>portal del comprador de Hotmart</HotmartLink> detiene los cobros futuros y conserva el acceso hasta el final del período ya pagado; no devuelve automáticamente el pago. El reembolso debe solicitarse por separado dentro del período aplicable.
+        </>,
+      ],
+      [
+        "Cómo solicitarlo",
+        <>
+          La solicitud autónoma de reembolso se inicia en el{" "}
+          <HotmartLink href={hotmartLinks.refundRequestUrl}>portal de reembolsos de Hotmart</HotmartLink> con los datos de la compra. Puede consultar posteriormente su estado mediante el{" "}
+          <HotmartLink href={hotmartLinks.refundTrackingUrl}>seguimiento de reembolsos de Hotmart</HotmartLink>. Para dudas operativas sobre la plataforma, utilice el{" "}
+          <HotmartLink href={hotmartLinks.hotmartBuyerSupportUrl}>soporte de Hotmart para compradores</HotmartLink>. El soporte de BOJ (<a href={`mailto:${contact.email}`}>{contact.email}</a>) brinda ayuda técnica y de acceso, pero no sustituye el trámite formal de reembolso. La aprobación y el procesamiento siguen el flujo de Hotmart.
+        </>,
+      ],
       ["Suscripción y Mensual", "Si Hotmart aprueba el reembolso, se revoca la licencia BOJ S7-PLC PRO vinculada a esa compra. Estas dos ofertas no incluyen curso ni materiales; la licencia mensual de pago único tampoco incluye acceso permanente."],
       ["Profesional y Empresarial", "Si Hotmart aprueba el reembolso, se revocan la licencia BOJ S7-PLC PRO y el acceso permanente al curso y sus materiales vinculados a esa compra."],
       ["Curso S7-300/400", "La oferta independiente del curso también se procesa en Hotmart y muestra una garantía de 7 días. Si el reembolso es aprobado, se revocan el curso, su material y la licencia PRO incluida."],
@@ -830,6 +865,14 @@ function LegalPage({ type }) {
         <p className="legal-contact">Consultas legales o de privacidad: <a href={`mailto:${contact.email}`}>{contact.email}</a>.</p>
       </article>
     </PageShell>
+  );
+}
+
+function HotmartLink({ href, children }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {children}
+    </a>
   );
 }
 

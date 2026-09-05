@@ -108,3 +108,107 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Gestiones de compra ────────────────────────────────────────────────────────
+   Banda global discreta antes del pie: enlaces oficiales de Hotmart (arrepentimiento,
+   baja de servicio, seguimiento y soporte). Fondo claro, contraste AA y foco visible. */
+.purchase-actions {
+  padding: clamp(28px, 3vw, 40px) 0;
+  border-top: 1px solid #d6e4ec;
+  background: #f3f7fa;
+  color: #071421;
+}
+
+.purchase-actions-inner {
+  display: grid;
+  gap: 18px;
+}
+
+.purchase-actions-copy h2 {
+  margin: 0 0 6px;
+  color: #071421;
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
+
+.purchase-actions-copy p,
+.purchase-actions-list p,
+.purchase-actions-support {
+  margin: 0;
+  color: #41586b;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.purchase-actions-copy p {
+  max-width: 78ch;
+}
+
+.purchase-actions-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.purchase-actions-list li {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.purchase-action-link {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  padding: 0 22px;
+  border: 2px solid #006b93;
+  border-radius: 6px;
+  background: #006b93;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-decoration: none;
+}
+
+.purchase-action-link:hover {
+  background: #00527a;
+  border-color: #00527a;
+}
+
+.purchase-action-link:focus-visible,
+.purchase-actions-support a:focus-visible {
+  outline: 3px solid #071421;
+  outline-offset: 3px;
+}
+
+.purchase-actions-support {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+}
+
+.purchase-actions-support a {
+  color: #006b93;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .purchase-actions-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .purchase-action-link {
+    width: 100%;
+    justify-self: stretch;
+  }
+}

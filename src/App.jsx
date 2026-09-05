@@ -27,6 +27,7 @@ import {
 } from "./route-metadata.js";
 import bojLogo from "./assets/boj-logo-real-cropped.png";
 import { contactAddresses } from "./contact-addresses.js";
+import { hotmartLinks } from "./hotmart-links.js";
 import { M2Picture, track, whatsappUrl } from "./app/shared-eager.jsx";
 import { serializeJsonLd } from "./json-ld.js";
 import { preloadRouteFamily, RouteOutlet } from "./routes/manifest.jsx";
@@ -659,7 +660,80 @@ function BrandLogo({ compact = false }) {
 }
 
 function Footer({ language, buildYear }) {
-  return <MainFooter language={language} buildYear={buildYear} />;
+  return (
+    <>
+      <PurchaseActions language={language} />
+      <MainFooter language={language} buildYear={buildYear} />
+    </>
+  );
+}
+
+// Gestiones de compra: enlaces oficiales de Hotmart, prerenderizados en todas las rutas del
+// shell y visibles sin autenticación, prueba, licencia ni formulario previo. Son enlaces reales
+// (href) hacia la plataforma donde se realiza cada trámite; abrirlos no envía ninguna solicitud
+// a BOJ ni modifica licencias. Los dos rótulos principales se mantienen en español en todos los
+// idiomas porque corresponden a los mecanismos exigidos en Argentina.
+const purchaseActionsCopy = {
+  es: {
+    title: "Gestiones de compra",
+    intro: "Las compras de BOJ S7-PLC se procesan en Hotmart y cada trámite se realiza en su plataforma. Abrir un enlace no envía ninguna solicitud a BOJ.",
+    refundNote: "Solicitud autónoma de reembolso dentro de la garantía de 7 días de la oferta adquirida.",
+    cancelNote: "Aplica a la Suscripción Mensual con renovación automática. Las licencias de pago único vencen al finalizar su plazo y no tienen renovación automática.",
+    tracking: "Seguimiento del reembolso",
+    hotmartSupport: "Soporte de Hotmart para compradores",
+    bojSupport: "Soporte técnico y de acceso de BOJ",
+  },
+  en: {
+    title: "Purchase management",
+    intro: "BOJ S7-PLC purchases are processed by Hotmart and each procedure is completed on its platform. Opening a link does not send any request to BOJ.",
+    refundNote: "Withdrawal and refund request within the 7-day guarantee of the purchased offer.",
+    cancelNote: "Applies to the Monthly Subscription with automatic renewal. One-time licenses expire at the end of their term and do not renew automatically.",
+    tracking: "Refund tracking",
+    hotmartSupport: "Hotmart buyer support",
+    bojSupport: "BOJ technical and access support",
+  },
+  pt: {
+    title: "Gestões de compra",
+    intro: "As compras do BOJ S7-PLC são processadas pela Hotmart e cada procedimento é feito na plataforma dela. Abrir um link não envia nenhuma solicitação à BOJ.",
+    refundNote: "Solicitação autônoma de reembolso dentro da garantia de 7 dias da oferta adquirida.",
+    cancelNote: "Aplica-se à Assinatura Mensal com renovação automática. As licenças de pagamento único vencem ao final do prazo e não têm renovação automática.",
+    tracking: "Acompanhamento do reembolso",
+    hotmartSupport: "Suporte da Hotmart para compradores",
+    bojSupport: "Suporte técnico e de acesso da BOJ",
+  },
+};
+
+function PurchaseActions({ language }) {
+  const copy = purchaseActionsCopy[language] || purchaseActionsCopy.es;
+  return (
+    <section className="purchase-actions" aria-labelledby="purchase-actions-title">
+      <div className="mock-home-container purchase-actions-inner">
+        <div className="purchase-actions-copy">
+          <h2 id="purchase-actions-title">{copy.title}</h2>
+          <p>{copy.intro}</p>
+        </div>
+        <ul className="purchase-actions-list">
+          <li>
+            <a className="purchase-action-link" href={hotmartLinks.refundRequestUrl} target="_blank" rel="noopener noreferrer">
+              BOTÓN DE ARREPENTIMIENTO
+            </a>
+            <p>{copy.refundNote}</p>
+          </li>
+          <li>
+            <a className="purchase-action-link" href={hotmartLinks.subscriptionManagementUrl} target="_blank" rel="noopener noreferrer">
+              BOTÓN DE BAJA DE SERVICIO
+            </a>
+            <p>{copy.cancelNote}</p>
+          </li>
+        </ul>
+        <p className="purchase-actions-support">
+          <a href={hotmartLinks.refundTrackingUrl} target="_blank" rel="noopener noreferrer">{copy.tracking}</a>
+          <a href={hotmartLinks.hotmartBuyerSupportUrl} target="_blank" rel="noopener noreferrer">{copy.hotmartSupport}</a>
+          <a href={`mailto:${contact.email}`}>{copy.bojSupport}: {contact.email}</a>
+        </p>
+      </div>
+    </section>
+  );
 }
 
 function MainFooter({ language, buildYear }) {

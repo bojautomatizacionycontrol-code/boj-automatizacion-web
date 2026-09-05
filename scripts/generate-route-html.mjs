@@ -17,7 +17,7 @@ export const ROOT_SHELL = '<div id="root"></div>';
 // auditado (74.416 B por documento; 1.115.044 B la matriz) y detectan deriva sin
 // convertirlo en el shell mínimo de #41.
 export const SSR_HTML_DOCUMENT_BUDGET = Object.freeze({ raw: 96_000, gzip: 18_000 });
-export const SSR_HTML_MATRIX_BUDGET = Object.freeze({ raw: 1_300_000, gzip: 300_000 });
+export const SSR_HTML_MATRIX_BUDGET = Object.freeze({ raw: 1_400_000, gzip: 320_000 });
 
 const NOT_FOUND_ROUTE = "/__boj_not_found__";
 const VOID_ELEMENTS = new Set([
