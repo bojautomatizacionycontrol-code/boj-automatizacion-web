@@ -39,23 +39,19 @@ test("la tarjeta lateral de TIA completa el espacio con información del program
   assert.doesNotMatch(tiaVisualSource, /ladder-lines|status-cluster/);
 });
 
-test("el hero español de App usa una captura guiada sin porcentajes probabilísticos", async () => {
+test("el hero español de App usa la composición de dispositivos con capturas vigentes sin porcentajes probabilísticos", async () => {
   const previewSource = sourceBetween('const appHeroPreviewCopy = {', 'const appQuickAccessCopy = {');
 
-  await access(new URL("../src/assets/app-diagnostico-guiado.jpg", import.meta.url));
-  assert.match(appSource, /import appDiagnosticoGuiado from "\.\.\/assets\/app-diagnostico-guiado\.jpg"/);
-  assert.match(previewSource, /src=\{appDiagnosticoGuiado\}/);
-  assert.doesNotMatch(previewSource, /appSadDevicePreview|app-hero-diagnostic-preview-screen--device-composite/);
-  assert.doesNotMatch(previewSource, /app-hero-diagnostic-preview-focus/);
-  assert.match(
-    stylesSource,
-    /\.app-hero-diagnostic-preview-screen img\s*\{[^}]*object-fit:\s*cover;[^}]*object-position:\s*left top;[^}]*filter:\s*brightness\(1\.18\) contrast\(1\.04\) saturate\(1\.04\);[^}]*transform:\s*scale\(1\.34\);/
-  );
-  assert.match(
-    stylesSource,
-    /\.app-hero-diagnostic-preview\s*\{[^}]*color:\s*#102c3b;[^}]*linear-gradient\(145deg, rgba\(248, 253, 255, 0\.98\), rgba\(218, 242, 249, 0\.95\)\);/
-  );
-  assert.doesNotMatch(stylesSource, /\.app-hero-diagnostic-preview-screen img\s*\{[^}]*object-fit:\s*contain;/);
+  await access(new URL("../src/assets/app-estado-cpu-desktop-v8-4-15.jpg", import.meta.url));
+  await access(new URL("../src/assets/app-estado-cpu-mobile-v7-3.png", import.meta.url));
+  assert.match(appSource, /import appEstadoCpuDesktop from "\.\.\/assets\/app-estado-cpu-desktop-v8-4-15\.jpg"/);
+  assert.match(previewSource, /src=\{appEstadoCpuDesktop\}[\s\S]*?width="1672"[\s\S]*?height="941"[\s\S]*?loading="eager"/);
+  assert.match(previewSource, /className="app-mobile-screen"[\s\S]*?src=\{appEstadoCpuMobile\}[\s\S]*?width="594"[\s\S]*?height="919"/);
+  assert.doesNotMatch(previewSource, /appSadDevicePreview|app-hero-diagnostic-preview-screen--device-composite|appDiagnosticoGuiado/);
+  assert.doesNotMatch(previewSource, /app-hero-diagnostic-preview-focus|fetchPriority|%/);
+  assert.match(stylesSource, /\.app-hero-devices \.app-product-stage\s*\{[^}]*width:\s*min\(100%, 720px\);[^}]*margin-inline:\s*auto;/);
+  assert.match(stylesSource, /\.app-pro-page > \.boj-hero \.boj-hero-inner--with-aside\s*\{[^}]*grid-template-columns:\s*minmax\(0, 1fr\) minmax\(360px, 0\.92fr\);/);
+  assert.doesNotMatch(stylesSource, /app-hero-diagnostic-preview/);
 });
 
 test("el hero de App no activa las capturas históricas con semántica probabilística", () => {
