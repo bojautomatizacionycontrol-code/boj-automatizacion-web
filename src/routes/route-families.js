@@ -27,6 +27,9 @@ export const routeFamilies = Object.freeze({
     "/recursos-tecnicos/microwin",
     "/recursos-tecnicos/logo-soft-comfort",
     "/recursos-tecnicos/wincc",
+    "/recursos-tecnicos/cpu-s7-300-en-stop",
+    "/recursos-tecnicos/bf-profibus-dp",
+    "/recursos-tecnicos/sf-con-cpu-en-run",
   ]),
   compliance: Object.freeze([
     "/contacto",

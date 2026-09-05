@@ -781,12 +781,14 @@
 }
 
 .technical-article h3,
-.technical-article h2 {
+.technical-article section h2,
+.technical-article a strong {
   color: #071421;
 }
 
 .technical-article p,
-.technical-article li {
+.technical-article li,
+.official-link-grid a span {
   color: #41586b;
 }
 

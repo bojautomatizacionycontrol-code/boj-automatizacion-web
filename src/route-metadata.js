@@ -97,9 +97,9 @@ export const routeMetadata = Object.freeze({
       "BOJ S7-PLC PRO: herramienta web de asistencia técnica para diagnóstico orientativo en PLC Siemens S7-300/400, con prueba inicial de 48 horas y licencias PRO.",
   },
   "/recursos-tecnicos": {
-    title: "Recursos técnicos Siemens: STEP 7, TIA Portal y WinCC | BOJ",
+    title: "Guías de diagnóstico y recursos Siemens | BOJ",
     description:
-      "Biblioteca técnica sobre STEP 7 SIMATIC Manager, TIA Portal, MicroWIN, LOGO Soft Comfort, WinCC, PLC Siemens, PROFIBUS, PROFINET y mantenimiento industrial.",
+      "Guías de diagnóstico de fallas para PLC Siemens S7-300/400 y recursos sobre STEP 7, TIA Portal, MicroWIN, LOGO! Soft Comfort y WinCC para mantenimiento industrial.",
   },
   "/recursos-tecnicos/simatic-manager": {
     title: "STEP 7 SIMATIC Manager | PLC Siemens S7-300/400 | BOJ",
@@ -125,6 +125,21 @@ export const routeMetadata = Object.freeze({
     title: "SIMATIC WinCC | HMI SCADA Siemens | BOJ",
     description:
       "Recurso técnico sobre SIMATIC WinCC, HMI, SCADA, alarmas, tendencias, operación de procesos, visualización de variables y mantenimiento industrial.",
+  },
+  "/recursos-tecnicos/cpu-s7-300-en-stop": {
+    title: "CPU S7-300 en STOP: causas y verificación | BOJ",
+    description:
+      "Guía de diagnóstico: qué revisar cuando una CPU Siemens S7-300 queda en STOP. LEDs, Diagnostic Buffer, HW Config, causas ordenadas y pasos antes de intervenir.",
+  },
+  "/recursos-tecnicos/bf-profibus-dp": {
+    title: "BF en PROFIBUS DP: fijo, intermitente y cómo aislarlo | BOJ",
+    description:
+      "Guía de diagnóstico del LED BF en PLC Siemens S7-300/400: qué indica cada estado, causas probables, terminación, conectores y verificación por tramos.",
+  },
+  "/recursos-tecnicos/sf-con-cpu-en-run": {
+    title: "SF con CPU en RUN: módulos, periferia y señales | BOJ",
+    description:
+      "Guía de diagnóstico del LED SF en Siemens S7-300/400 con la CPU en RUN: alarmas de módulo, tensión de carga, rotura de hilo, ET200 y verificación en campo.",
   },
   "/obras": {
     title: "Obras y trabajos realizados | BOJ Automatización",

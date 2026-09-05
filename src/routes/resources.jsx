@@ -1,6 +1,9 @@
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { technicalResources } from "../content.js";
+import { diagnosticGuides } from "./diagnostic-guides.js";
 import heroRecursos from "../assets/hero-recursos.jpg";
+import appEstadoCpuDesktop from "../assets/app-estado-cpu-desktop-v8-4-15.jpg";
+import appSeleccionSintoma from "../assets/app-seleccion-sintoma-v8-17-24.jpg";
 import step7ManagerVisual from "../assets/11.png";
 import step7HwConfigVisual from "../assets/12.png";
 import step7LadderVisual from "../assets/13.png";
@@ -8,10 +11,26 @@ import tiaPortalResourceVisual from "../assets/TIA_Portal_1.png";
 import microWinResourceVisual from "../assets/MicroWin-1.png";
 import logoSoftComfortResourceVisual from "../assets/Logo comfort - 1.jpg";
 import winccResourceVisual from "../assets/WinCC-1.jfif";
-import { whatsappUrl } from "../app/shared-eager.jsx";
+import { M2Picture, m2ImageSpecs, registerM2Images, whatsappUrl } from "../app/shared-eager.jsx";
 import { CheckItem, Icon, NotFound, PageShell, PrimaryLink, RouteCTA } from "./shared.jsx";
 
+// La captura de estado de CPU reutiliza las variantes AVIF/WebP generadas para Inicio.
+registerM2Images(import.meta.glob("../assets/m2/app-estado-cpu-desktop-*.{avif,webp}", { eager: true, import: "default" }));
+m2ImageSpecs.set(appEstadoCpuDesktop, {
+  stem: "app-estado-cpu-desktop",
+  width: 1672,
+  height: 941,
+  widths: [640, 960, 1672],
+  formats: ["avif", "webp"],
+  sizes: "(max-width: 760px) 100vw, 760px",
+});
+
+const allResources = [...diagnosticGuides, ...technicalResources];
+
 const resourceVisuals = {
+  cpuStop: [appEstadoCpuDesktop],
+  bfProfibus: [appSeleccionSintoma],
+  sfRun: [appEstadoCpuDesktop],
   simaticManager: [step7HwConfigVisual, step7ManagerVisual, step7LadderVisual],
   tiaPortal: [tiaPortalResourceVisual],
   microWin: [microWinResourceVisual],
@@ -20,6 +39,8 @@ const resourceVisuals = {
 };
 
 const resourceVisualDimensions = new Map([
+  [appEstadoCpuDesktop, { width: 1672, height: 941 }],
+  [appSeleccionSintoma, { width: 1000, height: 455 }],
   [step7HwConfigVisual, { width: 1024, height: 533 }],
   [step7ManagerVisual, { width: 1024, height: 572 }],
   [step7LadderVisual, { width: 1024, height: 612 }],
@@ -38,7 +59,7 @@ function TechnicalResourcesPage() {
     <PageShell
       eyebrow="Recursos técnicos"
       title="Biblioteca técnica Siemens para automatización industrial"
-      subtitle="Guías aplicadas sobre herramientas Siemens utilizadas en planta: STEP 7 SIMATIC Manager, TIA Portal, MicroWIN, LOGO! Soft Comfort y SIMATIC WinCC."
+      subtitle="Guías de diagnóstico de fallas para S7-300/400 y recursos aplicados sobre STEP 7 SIMATIC Manager, TIA Portal, MicroWIN, LOGO! Soft Comfort y SIMATIC WinCC."
       heroImage={heroRecursos}
       heroPrimary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para realizar una consulta técnica.") }}
       heroSecondary={{ label: "Ver cursos", href: "/cursos" }}
@@ -58,6 +79,19 @@ function TechnicalResourcesPage() {
           <CheckItem>Contenido técnico sin instaladores no oficiales ni atajos riesgosos.</CheckItem>
           <CheckItem>Enfoque aplicado a planta, diagnóstico, respaldo y puesta en marcha.</CheckItem>
           <CheckItem>Conexión directa con cursos y servicios técnicos de BOJ.</CheckItem>
+        </div>
+      </section>
+
+      <section className="inner-section">
+        <SectionHeader
+          eyebrow="Guías de diagnóstico"
+          title="Del síntoma a la verificación, paso a paso"
+          text="Tres guías escritas con la misma lógica que usamos en planta: qué estás viendo, qué registrar antes de tocar, causas en orden y cómo verificarlas."
+        />
+        <div className="resources-index-grid">
+          {diagnosticGuides.map((resource) => (
+            <TechnicalResourceCard key={resource.id} resource={resource} />
+          ))}
         </div>
       </section>
 
@@ -94,7 +128,11 @@ function TechnicalResourceCard({ resource }) {
             <span>Visual técnico editable</span>
           </div>
         )}
-        <span className="visual-disclaimer">Imagen ilustrativa</span>
+        {resource.visualLabel ? (
+          <span className="visual-disclaimer">{resource.visualLabel}</span>
+        ) : (
+          <span className="visual-disclaimer">Imagen ilustrativa</span>
+        )}
         <span className="resource-status">{resource.status}</span>
       </div>
       <div className="technical-resource-body">
@@ -114,15 +152,16 @@ function TechnicalResourceCard({ resource }) {
 }
 
 function TechnicalArticlePage({ route }) {
-  const resource = technicalResources.find((item) => item.path === route);
+  const resource = allResources.find((item) => item.path === route);
   if (!resource) return <NotFound />;
+  const isGuide = resource.kind === "guide";
 
   return (
-    <PageShell eyebrow="Recurso técnico" title={resource.title} subtitle={resource.subtitle}>
+    <PageShell eyebrow={isGuide ? "Guía de diagnóstico" : "Recurso técnico"} title={resource.title} subtitle={resource.subtitle}>
       <article className="technical-article resource-article">
         <div className="article-kicker">
           <span>{resource.status}</span>
-          <span>Aplicado a mantenimiento industrial</span>
+          <span>{isGuide ? "Orientación técnica: verifica siempre en campo" : "Aplicado a mantenimiento industrial"}</span>
         </div>
         <p className="article-lead">{resource.description}</p>
         <div className="article-tags">
@@ -144,11 +183,26 @@ function TechnicalArticlePage({ route }) {
                 ))}
               </ul>
             ) : null}
+            {section.steps ? (
+              <ol className="article-list article-steps">
+                {section.steps.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ol>
+            ) : null}
+            {section.note ? (
+              <div className="diagnostic-checklist">
+                <h3>{section.note.title}</h3>
+                {section.note.items.map((item) => (
+                  <CheckItem key={item}>{item}</CheckItem>
+                ))}
+              </div>
+            ) : null}
           </section>
         ))}
 
         <OfficialLinksBlock links={resource.officialLinks} />
-        <CourseCTA />
+        {isGuide ? <DiagnosticCTA /> : <CourseCTA />}
       </article>
     </PageShell>
   );
@@ -173,11 +227,12 @@ function TechnicalResourceVisual({ resource }) {
   return (
     <div className={`resource-visual-panel ${visuals.length > 1 ? "has-collage" : ""}`}>
       <div className="resource-main-image">
-        <img
+        <M2Picture
           src={visuals[0]}
-          alt={`${resource.title} aplicado a automatización industrial`}
+          alt={resource.visualAlt || `${resource.title} aplicado a automatización industrial`}
           width={mainDimensions.width}
           height={mainDimensions.height}
+          sizes="(max-width: 760px) 100vw, 760px"
           loading="lazy"
           decoding="async"
         />
@@ -226,6 +281,19 @@ function OfficialLinksBlock({ links }) {
         ))}
       </div>
     </section>
+  );
+}
+
+function DiagnosticCTA() {
+  return (
+    <RouteCTA
+      title="¿La falla sigue ahí?"
+      text="Cuéntanos el síntoma, el equipo y lo que ya verificaste. Con esa base ordenamos alcance, riesgo y próximo paso técnico. La app BOJ S7-PLC recorre esta misma secuencia frente al tablero."
+      primaryLabel="Consultar por WhatsApp"
+      primaryHref={whatsappUrl("Hola, leí una guía de diagnóstico en la web de BOJ y necesito ayuda con una falla en un PLC Siemens.")}
+      secondaryLabel="Probar BOJ S7-PLC"
+      secondaryHref="/app"
+    />
   );
 }
 

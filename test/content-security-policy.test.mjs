@@ -71,10 +71,10 @@ test("genera 34 hashes JSON-LD exactos y deterministas desde las 35 rutas", () =
     .filter(Boolean)
     .map((jsonLd) => sha256Source(serializeJsonLd(jsonLd)));
   const hashes = [...getJsonLdHashSources()];
-  assert.equal(publicRoutePaths.length, 35);
-  assert.equal(expected.length, 34);
-  assert.equal(hashes.length, 34);
-  assert.equal(new Set(expected).size, 34);
+  assert.equal(publicRoutePaths.length, 38);
+  assert.equal(expected.length, 37);
+  assert.equal(hashes.length, 37);
+  assert.equal(new Set(expected).size, 37);
   assert.deepEqual(hashes, [...expected].sort());
   assert.deepEqual(getJsonLdHashSources(), getJsonLdHashSources());
   assert.equal(serializeJsonLd(getRouteMetadata("/").jsonLd), JSON.stringify(getRouteMetadata("/").jsonLd));
@@ -149,7 +149,7 @@ test("certifica los bytes inline físicos y detecta un hash postbuild alterado",
     paths.push(notFoundPath);
 
     const result = await validateBuiltCsp(paths, vercelConfig);
-    assert.deepEqual(result, { generatedFiles: 36, inlineScripts: 34, hashes: 34 });
+    assert.deepEqual(result, { generatedFiles: 39, inlineScripts: 37, hashes: 37 });
 
     const first = await readFile(paths[0], "utf8");
     await writeFile(paths[0], first.replace("</script>", " </script>"), "utf8");
