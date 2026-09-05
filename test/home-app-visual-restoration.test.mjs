@@ -14,10 +14,11 @@ assert.ok(visualEnd > visualStart, "No se pudo delimitar AppDiagnosticMockup");
 const visualSource = homeSource.slice(visualStart, visualEnd);
 
 test("restaura una composición compacta con capturas vigentes en Home", () => {
-  assert.match(homeSource, /import appSeleccionSintoma from "\.\.\/assets\/app-seleccion-sintoma-v8-17-24\.jpg"/);
-  assert.match(homeSource, /import appVerificacionGuiada from "\.\.\/assets\/app-verificacion-guiada-v8-17-24\.jpg"/);
-  assert.match(visualSource, /src=\{appVerificacionGuiada\}[\s\S]*?width="1460"[\s\S]*?height="675"/);
-  assert.match(visualSource, /src=\{appSeleccionSintoma\}[\s\S]*?width="1000"[\s\S]*?height="455"/);
+  assert.match(homeSource, /import appEstadoCpuDesktop from "\.\.\/assets\/app-estado-cpu-desktop-v8-4-15\.jpg"/);
+  assert.match(homeSource, /import appEstadoCpuMobile from "\.\.\/assets\/app-estado-cpu-mobile-v7-3\.png"/);
+  assert.match(visualSource, /src=\{appEstadoCpuDesktop\}[\s\S]*?width="1672"[\s\S]*?height="941"/);
+  assert.match(visualSource, /className="app-mobile-screen"[\s\S]*?src=\{appEstadoCpuMobile\}/);
+  assert.match(visualSource, /src=\{appEstadoCpuMobile\}[\s\S]*?width="594"[\s\S]*?height="919"/);
   assert.doesNotMatch(
     visualSource,
     /appDiagnosticoGuiado|appSadDevicePreview|app-sad-device-preview|APP\.png|boj-s7-plc-real-capture/,
@@ -31,7 +32,7 @@ test("el marco recupera la proporción histórica sin la franja negra", () => {
   );
   assert.match(
     stylesSource,
-    /\.app-desktop-screen img\s*\{[^}]*width:\s*100%;[^}]*height:\s*auto;[^}]*aspect-ratio:\s*auto;/,
+    /\.app-desktop-screen img\s*\{[^}]*width:\s*100%;[^}]*height:\s*auto;[^}]*aspect-ratio:\s*1460\s*\/\s*675;[^}]*object-fit:\s*cover;[^}]*object-position:\s*center top;/,
   );
   assert.match(
     stylesSource,
@@ -39,15 +40,19 @@ test("el marco recupera la proporción histórica sin la franja negra", () => {
   );
   assert.match(
     stylesSource,
-    /\.app-mobile-frame\s*\{[^}]*top:\s*16%;[^}]*right:\s*5%;[^}]*width:\s*20\.7%;/,
+    /\.app-mobile-frame\s*\{[^}]*top:\s*16%;[^}]*right:\s*5%;[^}]*width:\s*20\.7%;[^}]*padding:\s*10px 4px 6px;[^}]*border:\s*4px solid #060d16;/,
   );
   assert.match(
     stylesSource,
-    /\.app-mobile-frame img\s*\{[^}]*object-fit:\s*cover;[^}]*object-position:\s*left top;/,
+    /\.app-mobile-screen\s*\{[^}]*overflow:\s*hidden;[^}]*border-radius:\s*22px;[^}]*background:\s*#0c141c;/,
   );
   assert.match(
     stylesSource,
-    /@media \(max-width:\s*760px\)\s*\{[\s\S]*?\.app-mobile-frame\s*\{[^}]*top:\s*10%;[^}]*right:\s*2%;[^}]*width:\s*clamp\(104px,\s*23vw,\s*124px\);/,
+    /\.app-mobile-screen img\s*\{[^}]*width:\s*135%;[^}]*max-width:\s*none;[^}]*height:\s*auto;[^}]*margin-left:\s*-17\.5%;[^}]*background:\s*#0c141c;/,
+  );
+  assert.match(
+    stylesSource,
+    /@media \(max-width:\s*760px\)\s*\{[\s\S]*?\.app-mobile-frame\s*\{[^}]*top:\s*10%;[^}]*right:\s*2%;[^}]*width:\s*clamp\(104px,\s*23vw,\s*124px\);[^}]*border-width:\s*3px;[^}]*padding:\s*7px 3px 5px;/,
   );
   assert.match(
     stylesSource,
