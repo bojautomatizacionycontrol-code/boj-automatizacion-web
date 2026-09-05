@@ -20,7 +20,7 @@ const [mainSource, appSource, manifestSource, deferredSource, manualSource, styl
 test("mantiene el CSS modularizado byte-equivalente al baseline visual vigente", () => {
   assert.equal(
     sha256(stylesSource),
-    "91042ed0fd8f2f9790cea2a24abc43c7e1c3515003a6ff3842f3f62ba440f7de"
+    "f90e47051a36faf580ebc6c5a73900ec0335c597c2d9768980986ef36320da28"
   );
   assert.match(mainSource, /import "\.\/styles\.css";[\s\S]*import "\.\/audit\.css";[\s\S]*import "\.\/m1-accessibility\.css";/);
   assert.doesNotMatch(mainSource, /commercial-impact\.css/);

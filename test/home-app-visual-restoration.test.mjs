@@ -40,11 +40,11 @@ test("el marco recupera la proporción histórica sin la franja negra", () => {
   );
   assert.match(
     stylesSource,
-    /\.app-mobile-frame\s*\{[^}]*top:\s*16%;[^}]*right:\s*5%;[^}]*width:\s*20\.7%;/,
+    /\.app-mobile-frame\s*\{[^}]*top:\s*16%;[^}]*right:\s*5%;[^}]*width:\s*20\.7%;[^}]*padding:\s*10px 4px 6px;[^}]*border:\s*4px solid #060d16;/,
   );
   assert.match(
     stylesSource,
-    /\.app-mobile-screen\s*\{[^}]*overflow:\s*hidden;[^}]*border-radius:\s*20px;[^}]*background:\s*#0c141c;/,
+    /\.app-mobile-screen\s*\{[^}]*overflow:\s*hidden;[^}]*border-radius:\s*22px;[^}]*background:\s*#0c141c;/,
   );
   assert.match(
     stylesSource,
@@ -52,7 +52,7 @@ test("el marco recupera la proporción histórica sin la franja negra", () => {
   );
   assert.match(
     stylesSource,
-    /@media \(max-width:\s*760px\)\s*\{[\s\S]*?\.app-mobile-frame\s*\{[^}]*top:\s*10%;[^}]*right:\s*2%;[^}]*width:\s*clamp\(104px,\s*23vw,\s*124px\);/,
+    /@media \(max-width:\s*760px\)\s*\{[\s\S]*?\.app-mobile-frame\s*\{[^}]*top:\s*10%;[^}]*right:\s*2%;[^}]*width:\s*clamp\(104px,\s*23vw,\s*124px\);[^}]*border-width:\s*3px;[^}]*padding:\s*7px 3px 5px;/,
   );
   assert.match(
     stylesSource,
