@@ -44,11 +44,11 @@ test("el marco recupera la proporción histórica sin la franja negra", () => {
   );
   assert.match(
     stylesSource,
-    /\.app-mobile-screen\s*\{[^}]*overflow:\s*hidden;[^}]*border-radius:\s*20px;[^}]*background:\s*#07111d;/,
+    /\.app-mobile-screen\s*\{[^}]*overflow:\s*hidden;[^}]*border-radius:\s*20px;[^}]*background:\s*#0c141c;/,
   );
   assert.match(
     stylesSource,
-    /\.app-mobile-screen img\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;[^}]*object-fit:\s*cover;[^}]*object-position:\s*30% top;/,
+    /\.app-mobile-screen img\s*\{[^}]*width:\s*135%;[^}]*max-width:\s*none;[^}]*height:\s*auto;[^}]*margin-left:\s*-17\.5%;[^}]*background:\s*#0c141c;/,
   );
   assert.match(
     stylesSource,
