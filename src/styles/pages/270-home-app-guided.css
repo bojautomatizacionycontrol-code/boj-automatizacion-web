@@ -645,3 +645,25 @@
     width: min(100%, 640px);
   }
 }
+
+/* En el hero de /app la captura de computadora va sin marco ni barra de botones y algo más grande. */
+.app-hero-devices .app-desktop-toolbar,
+.app-hero-devices .app-laptop-base {
+  display: none;
+}
+
+.app-hero-devices .app-desktop-frame {
+  top: 4%;
+  width: 92%;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  box-shadow:
+    0 30px 62px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 174, 234, 0.18);
+}
+
+.app-hero-devices .app-desktop-screen {
+  border-radius: 14px;
+}
