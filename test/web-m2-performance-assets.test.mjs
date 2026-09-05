@@ -151,7 +151,9 @@ test("asigna seis familias OG 1200x630 y metadata social completa sin duplicados
 });
 
 test("retira Inter, conserva Geist y reemplaza sólo el enlace oficial WinCC", () => {
-  assert.match(indexSource, /family=Geist:wght@400;500;600;700;800;900/);
+  assert.doesNotMatch(indexSource, /fonts\.googleapis\.com|fonts\.gstatic\.com/);
+  assert.match(indexSource, /rel="preload" href="\/src\/assets\/fonts\/geist-latin\.woff2" as="font" type="font\/woff2" crossorigin/);
+  assert.match(stylesSource, /@font-face\s*\{[^}]*font-family:\s*"Geist";[^}]*font-weight:\s*100 900;[^}]*font-display:\s*swap;[^}]*geist-latin\.woff2/);
   assert.doesNotMatch(indexSource, /family=Inter|Inter:wght/);
   assert.doesNotMatch(stylesSource, /["']Inter["']/);
   assert.match(contentSource, /href: "https:\/\/www\.siemens\.com\/en-us\/products\/simatic-hmi\/wincc-unified-engineering\/"/);
@@ -186,6 +188,7 @@ test("mantiene CSP y suma sólo hardening compatible de bajo riesgo", () => {
   assert.equal(values["X-Content-Type-Options"], "nosniff");
   assert.equal(values["Referrer-Policy"], "strict-origin-when-cross-origin");
   assert.equal(values["Permissions-Policy"], "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()");
-  assert.equal(global.headers.length, 4);
+  assert.equal(values["Strict-Transport-Security"], "max-age=63072000; includeSubDomains; preload");
+  assert.equal(global.headers.length, 5);
   assert.equal(Object.values(values).filter((value) => value.includes("immutable")).length, 0);
 });

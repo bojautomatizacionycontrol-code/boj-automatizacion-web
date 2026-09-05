@@ -63,9 +63,9 @@ function getSocialImageMetadata(route, lang) {
 }
 
 const homeMetadata = Object.freeze({
-  title: "BOJ Automatización y Control | PLC Siemens, diagnóstico y mantenimiento industrial",
+  title: "BOJ Automatización y Control | Diagnóstico PLC Siemens",
   description:
-    "Automatización industrial en Tucumán y Argentina: PLC Siemens, diagnóstico de fallas, PROFIBUS, PROFINET, TIA Portal, cursos técnicos y app para mantenimiento industrial.",
+    "Automatización industrial en Tucumán y Argentina: PLC Siemens, diagnóstico de fallas, PROFIBUS, PROFINET, TIA Portal, cursos técnicos y app de mantenimiento.",
 });
 
 export const routeMetadata = Object.freeze({
@@ -74,7 +74,7 @@ export const routeMetadata = Object.freeze({
   "/servicios": {
     title: "Servicios de automatización industrial y diagnóstico | BOJ",
     description:
-      "Servicios técnicos para planta: PLC Siemens, diagnóstico de fallas, redes PROFIBUS/PROFINET, migraciones, instrumentación, tableros y puesta en marcha en Argentina.",
+      "Servicios técnicos para planta: PLC Siemens, diagnóstico de fallas, redes PROFIBUS/PROFINET, migraciones, instrumentación, tableros y puesta en marcha.",
   },
   "/cursos": {
     title: "Formación PLC Siemens disponible y futura | BOJ",
@@ -94,17 +94,17 @@ export const routeMetadata = Object.freeze({
   "/app": {
     title: "BOJ S7-PLC PRO | App de diagnóstico PLC Siemens S7-300/400",
     description:
-      "BOJ S7-PLC PRO es una herramienta web de asistencia técnica para diagnóstico orientativo en PLC Siemens S7-300/400, con una prueba inicial de 48 horas y licencias PRO.",
+      "BOJ S7-PLC PRO: herramienta web de asistencia técnica para diagnóstico orientativo en PLC Siemens S7-300/400, con prueba inicial de 48 horas y licencias PRO.",
   },
   "/recursos-tecnicos": {
-    title: "Recursos técnicos Siemens | STEP 7, TIA Portal, MicroWIN y WinCC | BOJ",
+    title: "Recursos técnicos Siemens: STEP 7, TIA Portal y WinCC | BOJ",
     description:
       "Biblioteca técnica sobre STEP 7 SIMATIC Manager, TIA Portal, MicroWIN, LOGO Soft Comfort, WinCC, PLC Siemens, PROFIBUS, PROFINET y mantenimiento industrial.",
   },
   "/recursos-tecnicos/simatic-manager": {
     title: "STEP 7 SIMATIC Manager | PLC Siemens S7-300/400 | BOJ",
     description:
-      "Recurso técnico sobre STEP 7 SIMATIC Manager para PLC Siemens S7-300 y S7-400: hardware, Diagnostic Buffer, PROFIBUS, diagnóstico online y mantenimiento industrial.",
+      "STEP 7 SIMATIC Manager para PLC Siemens S7-300 y S7-400: hardware, Diagnostic Buffer, PROFIBUS, diagnóstico online y mantenimiento industrial.",
   },
   "/recursos-tecnicos/tia-portal": {
     title: "STEP 7 TIA Portal | PLC Siemens S7-1200/1500 | BOJ",
@@ -134,7 +134,7 @@ export const routeMetadata = Object.freeze({
   "/contacto": {
     title: "Contacto técnico | BOJ Automatización y Control",
     description:
-      "Contacto técnico en Ciudad Autónoma de Buenos Aires, Argentina, para automatización industrial, diagnóstico de fallas, cursos PLC Siemens, TIA Portal y PROFIBUS.",
+      "Contacto técnico en Ciudad Autónoma de Buenos Aires para automatización industrial, diagnóstico de fallas, cursos PLC Siemens, TIA Portal y PROFIBUS.",
   },
   "/privacidad": {
     title: "Política de privacidad | BOJ Automatización y Control",
@@ -157,7 +157,7 @@ export const routeMetadata = Object.freeze({
     description: "Estado de tu operación: acceso al material y activación de BOJ S7-PLC PRO.",
   },
   "/en": {
-    title: "BOJ Automation and Control | Siemens PLC diagnostics and engineering",
+    title: "BOJ Automation and Control | Siemens PLC diagnostics",
     description:
       "Industrial automation, Siemens PLC troubleshooting, technical training and BOJ S7-PLC diagnostic support for maintenance teams.",
   },
@@ -197,7 +197,7 @@ export const routeMetadata = Object.freeze({
       "Contact BOJ for industrial diagnostics, Siemens PLC automation, technical training and BOJ S7-PLC licensing.",
   },
   "/pt": {
-    title: "BOJ Automação e Controle | Diagnóstico e engenharia de PLC Siemens",
+    title: "BOJ Automação e Controle | Diagnóstico de PLC Siemens",
     description:
       "Automação industrial, diagnóstico de falhas em PLC Siemens, formação técnica e suporte BOJ S7-PLC para equipes de manutenção.",
   },

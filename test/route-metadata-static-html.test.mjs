@@ -397,6 +397,12 @@ test("la SPA consume el manifiesto y Vercel prioriza archivos limpios sin catch-
   assert.deepEqual(vercelConfig.redirects, [
     { source: "/inicio", destination: "/", permanent: true },
     { source: "/contact", destination: "/contacto", permanent: true },
+    {
+      source: "/(.*)",
+      has: [{ type: "host", value: "bojautomatizacion.com" }],
+      destination: "https://www.bojautomatizacion.com/$1",
+      permanent: true,
+    },
   ]);
   assert.equal((templateFor().match(new RegExp(ROUTE_METADATA_START, "g")) || []).length, 1);
   assert.equal((templateFor().match(new RegExp(ROUTE_METADATA_END, "g")) || []).length, 1);
