@@ -229,7 +229,11 @@ test("TIA permanece presente como contenido futuro pero sin oferta ni inicio", (
   for (const route of tiaRoutes) {
     const metadata = getRouteMetadata(route);
     assert.equal(metadata.ogType, "website");
-    assert.deepEqual(metadata.jsonLd["@graph"].map((node) => node["@type"]), ["WebPage"]);
+    // Las migas de pan (BreadcrumbList) son navegación, no oferta: se toleran.
+    assert.deepEqual(
+      metadata.jsonLd["@graph"].map((node) => node["@type"]).filter((type) => type !== "BreadcrumbList"),
+      ["WebPage"]
+    );
     assert.equal("checkout" in metadata, false);
     assert.equal("price" in metadata, false);
     assert.doesNotMatch(JSON.stringify(metadata), /pay\.hotmart\.com/i);
