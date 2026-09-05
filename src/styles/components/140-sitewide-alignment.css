@@ -577,7 +577,21 @@
 .resource-status {
   border-color: rgba(0, 174, 234, 0.2);
   background: rgba(0, 174, 234, 0.08);
-  color: #007da9;
+  color: #006b93;
+}
+
+/* Páginas auxiliares sobre fondo claro: el p global usa --muted (tema oscuro). */
+.section-container > .notfound-help,
+.gracias-steps .gracias-step p {
+  color: #41586b;
+}
+
+.notfound-help a,
+.gracias-step p a {
+  color: #006b93;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .resource-visual-panel,
@@ -614,7 +628,7 @@
   border: 1px solid rgba(0, 174, 234, 0.22);
   border-radius: 999px;
   background: rgba(0, 174, 234, 0.08);
-  color: #007da9;
+  color: #006b93;
   font-size: 0.88rem;
   font-weight: 900;
 }
@@ -841,10 +855,15 @@
 .tia-course-side-copy > span {
   display: block;
   margin-bottom: 8px;
-  color: #0088b8;
+  color: #006b93;
   font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 0.1em;
+}
+
+/* La variante clara del panel lateral TIA heredaba el cian del tema oscuro (1,6:1). */
+.course-side-visual.tia .side-visual-header {
+  color: #006b93;
 }
 
 .tia-course-side-copy h2 {

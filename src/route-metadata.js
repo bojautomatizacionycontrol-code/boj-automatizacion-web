@@ -446,6 +446,74 @@ function getNotFoundMetadata(route) {
   };
 }
 
+// Nodos de navegación y de artículo técnico. Viven fuera del bloque protegido
+// (sellerNode … getRouteJsonLd) y solo amplían el @graph de rutas anidadas.
+const breadcrumbRoots = Object.freeze({
+  es: { home: { name: "Inicio", path: "/" }, sections: { "/cursos": "Cursos", "/recursos-tecnicos": "Recursos técnicos" } },
+  en: { home: { name: "Home", path: "/en" }, sections: { "/en/courses": "Courses" } },
+  pt: { home: { name: "Início", path: "/pt" }, sections: { "/pt/cursos": "Cursos" } },
+});
+const techArticlePrefix = "/recursos-tecnicos/";
+
+function shortTitle(title) {
+  return title.split(" | ")[0].trim();
+}
+
+function breadcrumbNode(route, metadata) {
+  const roots = breadcrumbRoots[getRouteLanguage(route)] || breadcrumbRoots.es;
+  const parentPath = route.slice(0, route.lastIndexOf("/"));
+  const sectionName = roots.sections[parentPath];
+  if (!sectionName) return null;
+  const trail = [
+    { name: roots.home.name, item: absoluteUrl(roots.home.path) },
+    { name: sectionName, item: absoluteUrl(parentPath) },
+    { name: shortTitle(metadata.title), item: metadata.canonical },
+  ];
+  return {
+    "@type": "BreadcrumbList",
+    "@id": `${metadata.canonical}#breadcrumb`,
+    itemListElement: trail.map((entry, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: entry.name,
+      item: entry.item,
+    })),
+  };
+}
+
+function publisherNode() {
+  return {
+    "@type": "Organization",
+    "@id": `${SITE_ORIGIN}/#publisher`,
+    name: contact.brand,
+    url: `${SITE_ORIGIN}/`,
+  };
+}
+
+function techArticleNode(route, metadata) {
+  if (!route.startsWith(techArticlePrefix)) return null;
+  return {
+    "@type": "TechArticle",
+    "@id": `${metadata.canonical}#article`,
+    headline: shortTitle(metadata.title),
+    description: metadata.description,
+    url: metadata.canonical,
+    inLanguage: metadata.lang,
+    mainEntityOfPage: { "@id": `${metadata.canonical}#webpage` },
+    author: { "@id": `${SITE_ORIGIN}/#publisher` },
+    publisher: { "@id": `${SITE_ORIGIN}/#publisher` },
+  };
+}
+
+function withNavigationNodes(route, metadata, jsonLd) {
+  if (!jsonLd) return jsonLd;
+  const extras = [breadcrumbNode(route, metadata), techArticleNode(route, metadata)].filter(Boolean);
+  if (!extras.length) return jsonLd;
+  const graph = [...jsonLd["@graph"], ...extras];
+  if (extras.some((node) => node["@type"] === "TechArticle")) graph.push(publisherNode());
+  return { ...jsonLd, "@graph": graph };
+}
+
 export function getRouteMetadata(route) {
   const normalizedRoute = route.length > 1 ? route.replace(/\/+$/, "") : route;
   const base = routeMetadata[normalizedRoute];
@@ -467,6 +535,6 @@ export function getRouteMetadata(route) {
     indexable,
     alternates: getRouteAlternates(normalizedRoute),
   };
-  metadata.jsonLd = getRouteJsonLd(path, metadata);
+  metadata.jsonLd = withNavigationNodes(path, metadata, getRouteJsonLd(path, metadata));
   return metadata;
 }
