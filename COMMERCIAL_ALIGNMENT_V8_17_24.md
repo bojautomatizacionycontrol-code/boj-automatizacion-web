@@ -51,6 +51,8 @@ Desde el 5 de septiembre de 2026 se publica la identificación básica del vende
 2. Teléfono: el número visible pasa a `+54 9 381 532-7469`; el número técnico de WhatsApp sigue siendo `5493815327469`.
 3. Conservación de consultas: hasta 24 meses desde el último contacto, con eliminación anticipada a pedido del titular cuando no exista una obligación legal, contractual o un reclamo pendiente. Los datos vinculados con compras, facturación o reclamos se conservan por los plazos legales aplicables. No se implementa un sistema automático de retención; la aplicación operativa de la política depende también del buzón receptor y de los proveedores utilizados.
 4. Horario de atención: lunes a viernes de 09:00 a 17:00, hora de Argentina, excepto feriados. Se mantiene la respuesta comprometida dentro de 48 horas hábiles.
+5. Política de privacidad: el responsable del tratamiento es Hexa Group Holding SAS, CUIT 30-71955124-2, con nombre comercial BOJ Automatización y Control, domicilio Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina, y contacto contacto@bojautomatizacion.com. Privacidad no muestra la ficha comercial completa. Términos, Licencias, Reembolsos y Privacidad quedan con fecha de última actualización 5 de septiembre de 2026.
+6. Domicilios: la diferencia de detalle es intencional. Términos, Licencias y Reembolsos muestran el domicilio legal completo; el pie de página y la página de contacto muestran "Culpina 63, Ciudad Autónoma de Buenos Aires, Argentina" y, por separado, la base técnica "Marcos Paz 913, San Miguel de Tucumán, Tucumán, Argentina".
 
 El control antiabuso visible del formulario de contacto es el honeypot y las validaciones del formulario; Cloudflare Turnstile queda diferido como mejora posterior.
 

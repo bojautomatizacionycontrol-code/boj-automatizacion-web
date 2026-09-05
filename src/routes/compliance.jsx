@@ -702,7 +702,7 @@ const legalContent = {
     intro: "Explica qué datos recopilamos en este sitio, para qué se utilizan, con qué proveedores se comparten y cómo puede ejercer sus derechos.",
     updated: "5 de septiembre de 2026",
     sections: [
-      ["Responsable", `BOJ Automatización y Control. Contacto: ${contact.email}.`],
+      ["Responsable del tratamiento", `${commercialIdentity.seller}, CUIT ${commercialIdentity.taxId}, con nombre comercial ${commercialIdentity.brand}. Domicilio: ${commercialIdentity.address}. Contacto: ${commercialIdentity.supportEmail}.`],
       ["Marco legal", "El tratamiento de datos personales se rige por la Ley 25.326 de Protección de los Datos Personales de la República Argentina y sus normas complementarias. El órgano de control es la Agencia de Acceso a la Información Pública."],
       ["Datos que recopilamos", "El formulario puede solicitar nombre, empresa, correo, teléfono, servicio de interés y mensaje. La lista de espera de cursos solicita nombre, correo y nivel. También podemos registrar métricas anónimas o seudónimas de navegación y conversiones mediante Vercel Web Analytics, que no utiliza cookies de seguimiento."],
       ["Finalidad y base legal", "Usamos los datos para responder consultas, coordinar servicios, avisar sobre cursos solicitados, facilitar acceso a productos adquiridos y mejorar el funcionamiento del sitio. La base es el consentimiento que otorga al enviar cada formulario y la ejecución de la relación contractual o precontractual. No vendemos datos personales ni enviamos publicidad sin pedido previo."],
@@ -714,7 +714,7 @@ const legalContent = {
   terms: {
     title: "Términos y condiciones",
     intro: "Condiciones generales para utilizar el sitio y contratar servicios o productos digitales de BOJ.",
-    updated: "30 de agosto de 2026",
+    updated: "5 de septiembre de 2026",
     showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "Estas son las cuatro ofertas de BOJ S7-PLC PRO publicadas para compra. Los precios se expresan en dólares estadounidenses y el checkout muestra la modalidad antes de confirmar el pago.",
@@ -735,7 +735,7 @@ const legalContent = {
   licenses: {
     title: "Condiciones de licencia de BOJ S7-PLC PRO",
     intro: "Reglas principales de acceso y uso de la herramienta de diagnóstico.",
-    updated: "30 de agosto de 2026",
+    updated: "5 de septiembre de 2026",
     showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "Cada oferta define una duración, un límite de dispositivos, una modalidad de renovación y una ventana de funcionamiento sin conexión.",
@@ -753,7 +753,7 @@ const legalContent = {
   refunds: {
     title: "Política de reembolsos",
     intro: "Las compras digitales se procesan en Hotmart y las ofertas publicadas muestran una garantía de reembolso de 7 días.",
-    updated: "30 de agosto de 2026",
+    updated: "5 de septiembre de 2026",
     showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "La garantía publicada para las cuatro ofertas de BOJ S7-PLC PRO es de 7 días y se tramita mediante el proceso de Hotmart.",

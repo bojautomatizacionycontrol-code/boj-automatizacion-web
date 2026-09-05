@@ -218,7 +218,9 @@ test("publica identidad comercial ratificada en los tres documentos y conserva p
   const privacySource = appSource.slice(privacyStart, privacyEnd);
   assert.match(privacySource, /updated: "5 de septiembre de 2026"/);
   assert.match(privacySource, /No vendemos datos personales/);
-  assert.doesNotMatch(privacySource, /showCommercialIdentity|Hexa Group Holding SAS/);
+  // Decisión del titular (5 de septiembre de 2026): Privacidad identifica al responsable del tratamiento sin la ficha comercial completa.
+  assert.match(privacySource, /\["Responsable del tratamiento", `\$\{commercialIdentity\.seller\}, CUIT \$\{commercialIdentity\.taxId\}, con nombre comercial \$\{commercialIdentity\.brand\}\. Domicilio: \$\{commercialIdentity\.address\}\. Contacto: \$\{commercialIdentity\.supportEmail\}\.`\]/);
+  assert.doesNotMatch(privacySource, /showCommercialIdentity|commercialIdentity\.(taxStatus|invoicing|product|supportOwner)/);
 
   assert.doesNotMatch(appSource, /Lunes a viernes de 8:00 a 18:00|Respondemos normalmente dentro/);
   assert.doesNotMatch(publicTextCorpus, /\+54 381 5327469|\+543815327469|9:00 a 16:00/);
@@ -258,7 +260,8 @@ test("actualiza los tres documentos comerciales y conserva el contrato técnico"
   assert.match(appSource, /Su vigencia es de un mes calendario\./);
   assert.match(appSource, /fecha y hora UTC equivalente del mes siguiente/);
   assert.match(appSource, /La activación posterior en un dispositivo no reinicia ni extiende el plazo/);
-  assert.equal(appSource.match(/updated: "30 de agosto de 2026"/g)?.length, 3);
+  assert.equal(appSource.match(/updated: "30 de agosto de 2026"/g), null);
+  assert.equal(appSource.match(/updated: "5 de septiembre de 2026"/g)?.length, 4);
   assert.match(legalStylesSource, /\.legal-offer-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,/);
   assert.match(legalStylesSource, /@media \(max-width: 760px\)[\s\S]*?\.legal-offer-grid\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\);/);
 });
