@@ -32,16 +32,29 @@ La identidad comercial publicada separa funciones:
 
 - Hexa Group Holding SAS es vendedor y facturador.
 - Walter Adrián Boj es titular de BOJ Automatización y BOJ S7-PLC y autorizó su comercialización por Hexa Group Holding SAS.
-- Domicilio comercial informado: Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina.
+- CUIT: 30-71955124-2.
+- Domicilio legal y comercial: Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina. El pie de página y la página de contacto muestran "Culpina 63, Ciudad Autónoma de Buenos Aires, Argentina" y la base técnica "Marcos Paz 913, San Miguel de Tucumán, Tucumán, Argentina" (decisión del titular, 5 de septiembre de 2026).
+- Marca comercial: BOJ Automatización y Control. Producto asociado: BOJ S7-PLC.
 - Correo institucional: `contacto@hexagroup.com.ar`.
 - Soporte, privacidad, reclamos y reembolsos: `contacto@bojautomatizacion.com`.
-- Teléfono y WhatsApp: `+54 381 5327469`.
-- Atención: lunes a viernes de 9:00 a 16:00, hora argentina, excepto feriados.
+- Teléfono y WhatsApp visible: `+54 9 381 532-7469`. Número técnico de WhatsApp: `5493815327469`. En datos estructurados: `+5493815327469`.
+- Atención: lunes a viernes de 09:00 a 17:00, hora de Argentina, excepto feriados.
 - Respuesta comprometida: dentro de 48 horas hábiles.
 - Condición fiscal declarada: Responsable Inscripto. Facturación electrónica y factura E para exportaciones, según corresponda.
 - Responsable interno de soporte: Walter Adrián Boj.
 
-No se publica CUIT ni se afirma la existencia de un contrato exclusivo firmado.
+Desde el 5 de septiembre de 2026 se publica la identificación básica del vendedor (razón social, CUIT, domicilio legal y comercial, marca comercial y producto asociado) en los documentos legales que muestran la identidad comercial. No se publican Ingresos Brutos, seguros, CBU, documentos societarios, una ficha de proveedor descargable ni datos no confirmados. No se afirma la existencia de un contrato exclusivo firmado. El Formulario 960/D Data Fiscal se tratará por separado cuando el titular entregue el código oficial generado en ARCA; no se publica ningún enlace provisional.
+
+## Decisiones del titular del 5 de septiembre de 2026
+
+1. Identificación del vendedor: se levanta la prohibición de publicar el CUIT y se muestran los datos indicados arriba, con las exclusiones señaladas.
+2. Teléfono: el número visible pasa a `+54 9 381 532-7469`; el número técnico de WhatsApp sigue siendo `5493815327469`.
+3. Conservación de consultas: hasta 24 meses desde el último contacto, con eliminación anticipada a pedido del titular cuando no exista una obligación legal, contractual o un reclamo pendiente. Los datos vinculados con compras, facturación o reclamos se conservan por los plazos legales aplicables. No se implementa un sistema automático de retención; la aplicación operativa de la política depende también del buzón receptor y de los proveedores utilizados.
+4. Horario de atención: lunes a viernes de 09:00 a 17:00, hora de Argentina, excepto feriados. Se mantiene la respuesta comprometida dentro de 48 horas hábiles.
+5. Política de privacidad: el responsable del tratamiento es Hexa Group Holding SAS, CUIT 30-71955124-2, con nombre comercial BOJ Automatización y Control, domicilio Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina, y contacto contacto@bojautomatizacion.com. Privacidad no muestra la ficha comercial completa. Términos, Licencias, Reembolsos y Privacidad quedan con fecha de última actualización 5 de septiembre de 2026.
+6. Domicilios: la diferencia de detalle es intencional. Términos, Licencias y Reembolsos muestran el domicilio legal completo; el pie de página y la página de contacto muestran "Culpina 63, Ciudad Autónoma de Buenos Aires, Argentina" y, por separado, la base técnica "Marcos Paz 913, San Miguel de Tucumán, Tucumán, Argentina".
+
+El control antiabuso visible del formulario de contacto es el honeypot y las validaciones del formulario; Cloudflare Turnstile queda diferido como mejora posterior.
 
 ## Regla técnica de mes calendario
 

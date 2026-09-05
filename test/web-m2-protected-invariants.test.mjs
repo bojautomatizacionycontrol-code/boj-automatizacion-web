@@ -62,7 +62,7 @@ const vercelConfig = JSON.parse(vercelSource);
 
 const protectedFileHashes = {
   "../api/contact.js": "55E987AD98E485669F6A2A415EB3508794B4D004C06E035DA7C121AA97BE7C24",
-  "../COMMERCIAL_ALIGNMENT_V8_17_24.md": "7B82BEBD9C24A68C061E0DB0F5BA845476712E1703E7A5FA6D260EB53D82F8CA",
+  "../COMMERCIAL_ALIGNMENT_V8_17_24.md": "B5B53ECC81237F3729EC30B1924834CFA5D6445BDA579A3FB90A4AF2FA934627",
   "../src/AccessibleDialog.jsx": "2248CAAEEC74167D3714EF73E1C1495564547FDD829D7CD52B6FD8BEB567BFD8",
   "../src/accessibility.js": "59DEFB57B8006063543B5282EE57FC7A0FF215050ADCA714389E4FE62F78B892",
   "../src/i18n.js": "B17FBCE573031D949BEAEB4097BB13C666E00233609D1BD32F76E6B28FDD3FC0",
@@ -78,7 +78,7 @@ const protectedFileHashes = {
   "./web-m1-accessible-dialog.test.mjs": "C8BE063490D2941FE0FE5CB13601933BBA02EC91A02F1F434449777F647C19FE",
   "./web-m1-accessible-navigation.test.mjs": "22B28DD4A72E694E9F7450F336B0510FD7628486B8791DC15CB7B5002A6166C0",
   "./web-m1-contact-accessibility.test.mjs": "B275449C88F3E67E5F1B21EA612F56A3B130D877A6478B958690B2000BB954BF",
-  "./web-m1-protected-invariants.test.mjs": "D4E20FFEFB5553473C87C0BBF1FA06257C7153153A9E31ED6F7314A4B3DB8889",
+  "./web-m1-protected-invariants.test.mjs": "BAB4FB7D12869D2D10CEE8800B60A998470005F2714EC59CABBAD895ED69E89E",
   "./web-m1-tia-future-state.test.mjs": "75CD071DBA0F5182FF97E89D0C4A9B41254889F7732B94C031B6358FD16A1E31",
   "./web-m1-visual-accessibility.test.mjs": "1772545D1BC68F4E9D0015B40D47D8657AFBF22079FCFFB1E18F8896FAD68CA3",
 };
@@ -102,8 +102,8 @@ test("la entrada WEB-M3 hidrata el prerender sin relajar las protecciones previa
 
 test("contenido comercial fiscal legal y de App conserva los bloques aprobados", () => {
   for (const [startMarker, endMarker, expectedHash] of [
-    ["export const contact = {", "export const commercialIdentity", "61031A78D06801F4F2FACF1632193B218266204A4BD887853708123BE34845EC"],
-    ["export const commercialIdentity = Object.freeze({", "export const navItems", "5A90B0CB06A2845AF190CB323A0F6DD1AEEE2B39E638755DD4701A9E7172465C"],
+    ["export const contact = {", "export const commercialIdentity", "64A9CC137A2DAE4963E081136081AB0D409486BA4D143929EB1CEF353CA8A0D4"],
+    ["export const commercialIdentity = Object.freeze({", "export const navItems", "A321F2F02D44C1943F7C517AB6ACAFB5B226E0D05DABA9BE046F4268A941328B"],
     ["export const tiaCourse = {", "export const appHero", "F083DAEF6B0F97123E20AA689F52F25351D5AE1FD10C14BD83C0DD01B43B46D9"],
     ["export const appHero = {", "export const technicalResources", "2E7158704F2630FDCD67924C8F6667563C4A044147182E71C2C854E2B979E8E3"],
     ["export const offer = {", "", "59CC64F553E13AEB0ECDE32AE9187F27626FC0C992CAA94056CFE0075282EB88"],
@@ -162,7 +162,7 @@ test("Analytics contacto encabezado legal y wrappers TIA conservan sus bloques",
     [complianceSource, "function EnglishContactForm(", "function EnglishContactPage(", "752F9FD389C967F59AAFB2881856345247BE9F0D7E5467B78EA5DE052A7D09C5"],
     [complianceSource, "function PortugueseContactForm(", "function PortugueseContactPage(", "CFA0269E18B56A065C901F7B531916725E827C97344F8B680BBEFDCEA1B87D5F"],
     [complianceSource, "function ContactForm(", "const legalContent", "4AA70FE49BD12F6B09B36D27C93924A8F85142E123EC7019E4D2CCD51A946637"],
-    [complianceSource, "const legalContent = {", "function ContactLine(", "DC72B0772A8D087BF5BD27E0BF622705CA1895EBB470C013874B40BC98A27B58"],
+    [complianceSource, "const legalContent = {", "function ContactLine(", "05C9992ADFB2DCEEED954EA88CFE07F07B4BC16C89DBD34571C10B9F28555712"],
   ]) {
     assert.equal(sha256(sourceBlock(source, startMarker, endMarker)), expectedHash, startMarker);
   }
@@ -187,7 +187,7 @@ test("Analytics contacto encabezado legal y wrappers TIA conservan sus bloques",
 test("rutas schema CSP y redirects permanecen dentro del contrato vigente", () => {
   assert.equal(
     sha256(sourceBlock(contentSource, "export const contact = {", "export const commercialIdentity")),
-    "61031A78D06801F4F2FACF1632193B218266204A4BD887853708123BE34845EC"
+    "64A9CC137A2DAE4963E081136081AB0D409486BA4D143929EB1CEF353CA8A0D4"
   );
 
   assert.equal(
@@ -196,7 +196,7 @@ test("rutas schema CSP y redirects permanecen dentro del contrato vigente", () =
   );
   assert.equal(
     sha256(sourceBlock(routeSource, "const appRouteSet = new Set(", "function getNotFoundMetadata(")),
-    "9B7D7830C471D1698E1BB1C8176D4D606ED59A0A212FDEBC937EA350A3B1AECA"
+    "2E9C085F234C08B5A3E5B6F9275804C99DF41AC2AE43151B187D8F7C7AA7273A"
   );
   assert.equal(publicRoutePaths.length, 38);
   assert.equal(indexableRoutePaths.length, 37);

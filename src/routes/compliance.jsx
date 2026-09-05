@@ -702,19 +702,19 @@ const legalContent = {
     intro: "Explica qué datos recopilamos en este sitio, para qué se utilizan, con qué proveedores se comparten y cómo puede ejercer sus derechos.",
     updated: "5 de septiembre de 2026",
     sections: [
-      ["Responsable", `BOJ Automatización y Control. Contacto: ${contact.email}.`],
+      ["Responsable del tratamiento", `${commercialIdentity.seller}, CUIT ${commercialIdentity.taxId}, con nombre comercial ${commercialIdentity.brand}. Domicilio: ${commercialIdentity.address}. Contacto: ${commercialIdentity.supportEmail}.`],
       ["Marco legal", "El tratamiento de datos personales se rige por la Ley 25.326 de Protección de los Datos Personales de la República Argentina y sus normas complementarias. El órgano de control es la Agencia de Acceso a la Información Pública."],
       ["Datos que recopilamos", "El formulario puede solicitar nombre, empresa, correo, teléfono, servicio de interés y mensaje. La lista de espera de cursos solicita nombre, correo y nivel. También podemos registrar métricas anónimas o seudónimas de navegación y conversiones mediante Vercel Web Analytics, que no utiliza cookies de seguimiento."],
       ["Finalidad y base legal", "Usamos los datos para responder consultas, coordinar servicios, avisar sobre cursos solicitados, facilitar acceso a productos adquiridos y mejorar el funcionamiento del sitio. La base es el consentimiento que otorga al enviar cada formulario y la ejecución de la relación contractual o precontractual. No vendemos datos personales ni enviamos publicidad sin pedido previo."],
       ["Proveedores y transferencias internacionales", "El formulario se procesa mediante Resend. Las compras se procesan en Hotmart y la activación de la app puede vincular el correo de compra con Supabase. El sitio se aloja en Vercel. Estos proveedores pueden tratar los datos en servidores ubicados fuera de Argentina, principalmente en Estados Unidos y Brasil, con garantías contractuales de protección de datos. Cada proveedor aplica sus propias condiciones de privacidad."],
-      ["Conservación", "Las consultas y solicitudes de aviso se conservan hasta 24 meses desde el último contacto. Los datos vinculados a compras se conservan durante el plazo que exigen las obligaciones fiscales y contables aplicables."],
+      ["Conservación", "Las consultas y solicitudes de aviso se conservan hasta 24 meses desde el último contacto. Podrán eliminarse antes a pedido del titular cuando no exista una obligación legal, contractual o un reclamo pendiente que justifique su conservación. Los datos vinculados con compras, facturación o reclamos se conservan por los plazos legales aplicables."],
       ["Derechos", `Puede solicitar acceso, rectificación, actualización o supresión de sus datos escribiendo a ${contact.email}. El titular de los datos personales tiene la facultad de ejercer el derecho de acceso a los mismos en forma gratuita a intervalos no inferiores a seis meses, salvo que se acredite un interés legítimo al efecto, conforme a lo establecido en el artículo 14, inciso 3, de la Ley 25.326. La Agencia de Acceso a la Información Pública, órgano de control de la Ley 25.326, tiene la atribución de atender las denuncias y reclamos que se interpongan con relación al incumplimiento de las normas sobre protección de datos personales.`],
     ],
   },
   terms: {
     title: "Términos y condiciones",
     intro: "Condiciones generales para utilizar el sitio y contratar servicios o productos digitales de BOJ.",
-    updated: "30 de agosto de 2026",
+    updated: "5 de septiembre de 2026",
     showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "Estas son las cuatro ofertas de BOJ S7-PLC PRO publicadas para compra. Los precios se expresan en dólares estadounidenses y el checkout muestra la modalidad antes de confirmar el pago.",
@@ -735,7 +735,7 @@ const legalContent = {
   licenses: {
     title: "Condiciones de licencia de BOJ S7-PLC PRO",
     intro: "Reglas principales de acceso y uso de la herramienta de diagnóstico.",
-    updated: "30 de agosto de 2026",
+    updated: "5 de septiembre de 2026",
     showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "Cada oferta define una duración, un límite de dispositivos, una modalidad de renovación y una ventana de funcionamiento sin conexión.",
@@ -753,7 +753,7 @@ const legalContent = {
   refunds: {
     title: "Política de reembolsos",
     intro: "Las compras digitales se procesan en Hotmart y las ofertas publicadas muestran una garantía de reembolso de 7 días.",
-    updated: "30 de agosto de 2026",
+    updated: "5 de septiembre de 2026",
     showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "La garantía publicada para las cuatro ofertas de BOJ S7-PLC PRO es de 7 días y se tramita mediante el proceso de Hotmart.",
@@ -785,7 +785,10 @@ function LegalPage({ type }) {
               {" "}por {commercialIdentity.seller} está autorizada por el titular.
             </p>
             <dl className="legal-business-facts">
-              <dt>Domicilio comercial informado</dt><dd>{commercialIdentity.address}</dd>
+              <dt>CUIT</dt><dd>{commercialIdentity.taxId}</dd>
+              <dt>Domicilio legal y comercial</dt><dd>{commercialIdentity.address}</dd>
+              <dt>Marca comercial</dt><dd>{commercialIdentity.brand}</dd>
+              <dt>Producto asociado</dt><dd>{commercialIdentity.product}</dd>
               <dt>Correo institucional</dt><dd><a href={`mailto:${commercialIdentity.institutionalEmail}`}>{commercialIdentity.institutionalEmail}</a></dd>
               <dt>Soporte, privacidad, reclamos y reembolsos</dt><dd><a href={`mailto:${commercialIdentity.supportEmail}`}>{commercialIdentity.supportEmail}</a></dd>
               <dt>Teléfono y WhatsApp</dt><dd>{commercialIdentity.phone}</dd>
