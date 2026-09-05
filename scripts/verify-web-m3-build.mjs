@@ -24,7 +24,9 @@ const ROUTE_ENTRIES = Object.freeze([
 ]);
 
 const ENTRY_BUDGET = Object.freeze({ raw: 300_000, gzip: 95_000 });
-const ROUTE_INITIAL_BUDGET = Object.freeze({ raw: 370_000, gzip: 110_000 });
+// 5 de septiembre de 2026: el hero de /app incorpora la composición de dispositivos con dos familias
+// de imágenes responsive (las mismas que Inicio); el presupuesto raw sube 10 KB. El gzip no cambia.
+const ROUTE_INITIAL_BUDGET = Object.freeze({ raw: 380_000, gzip: 110_000 });
 const CSS_BUDGET = Object.freeze({ raw: 400_000, gzip: 70_000 });
 
 function requireRecord(manifest, key) {

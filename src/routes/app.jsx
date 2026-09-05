@@ -14,13 +14,33 @@ import {
 import { contact, offer } from "../content.js";
 import { englishApp, portugueseApp } from "../i18n.js";
 import appProHeroLaptopVisual from "../assets/hero-app.jpg";
-import appDiagnosticoGuiado from "../assets/app-diagnostico-guiado.jpg";
+import appEstadoCpuDesktop from "../assets/app-estado-cpu-desktop-v8-4-15.jpg";
+import appEstadoCpuMobile from "../assets/app-estado-cpu-mobile-v7-3.png";
 import appSeleccionSintoma from "../assets/app-seleccion-sintoma-v8-17-24.jpg";
 import appVerificacionGuiada from "../assets/app-verificacion-guiada-v8-17-24.jpg";
 import appRegistroIntervencion from "../assets/app-registro-intervencion-v8-17-24.jpg";
 import walterBojAvatar from "../assets/walter-boj-avatar-field.jpeg";
-import { track } from "../app/shared-eager.jsx";
+import { M2Picture, m2ImageSpecs, registerM2Images, track } from "../app/shared-eager.jsx";
 import { Hero, Icon, S7ProofStrip, S7Testimonials, appLicensePlans, appProductUrl } from "./shared.jsx";
+
+// Variantes AVIF/WebP de las capturas vigentes usadas en la composición del hero (las mismas que Inicio).
+registerM2Images(import.meta.glob("../assets/m2/app-estado-cpu-*.{avif,webp}", { eager: true, import: "default" }));
+m2ImageSpecs.set(appEstadoCpuDesktop, {
+  stem: "app-estado-cpu-desktop",
+  width: 1672,
+  height: 941,
+  widths: [640, 960, 1672],
+  formats: ["avif", "webp"],
+  sizes: "(max-width: 760px) 92vw, 640px",
+});
+m2ImageSpecs.set(appEstadoCpuMobile, {
+  stem: "app-estado-cpu-mobile",
+  width: 594,
+  height: 919,
+  widths: [320, 594],
+  formats: ["avif", "webp"],
+  sizes: "200px",
+});
 
 const appProIncludes = [
   {
@@ -236,69 +256,65 @@ const appFaqItems = [
 
 const appHeroPreviewCopy = {
   es: {
-    ariaLabel: "Ejemplo visual del flujo de diagnóstico de BOJ S7-PLC PRO",
-    eyebrow: "FLUJO REAL DE LA HERRAMIENTA",
-    caseLabel: "CASO GUIADO",
-    imageAlt: "Pantalla de diagnóstico guiado de BOJ S7-PLC PRO",
-    stages: [
-      { label: "Síntoma", value: "CPU STOP + BF" },
-      { label: "Hipótesis", value: "Red o nodo remoto" },
-      { label: "Verificación", value: "Evidencia priorizada" },
-    ],
+    ariaLabel: "Pantallas actuales de BOJ S7-PLC PRO en marcos de computadora y teléfono",
+    desktop: "Pantalla actual de BOJ S7-PLC PRO en computadora",
+    mobile: "Pantalla actual de BOJ S7-PLC PRO en teléfono",
   },
   en: {
-    ariaLabel: "Visual example of the BOJ S7-PLC PRO diagnostic workflow",
-    eyebrow: "REAL TOOL WORKFLOW",
-    caseLabel: "GUIDED CASE",
-    imageAlt: "BOJ S7-PLC PRO guided diagnostic screen",
-    stages: [
-      { label: "Symptom", value: "CPU STOP + BF" },
-      { label: "Hypothesis", value: "Network or remote node" },
-      { label: "Verification", value: "Prioritized evidence" },
-    ],
+    ariaLabel: "Current BOJ S7-PLC PRO screens in desktop and phone frames",
+    desktop: "Current BOJ S7-PLC PRO screen on a desktop",
+    mobile: "Current BOJ S7-PLC PRO screen on a phone",
   },
   pt: {
-    ariaLabel: "Exemplo visual do fluxo de diagnóstico do BOJ S7-PLC PRO",
-    eyebrow: "FLUXO REAL DA FERRAMENTA",
-    caseLabel: "CASO GUIADO",
-    imageAlt: "Tela de diagnóstico guiado do BOJ S7-PLC PRO",
-    stages: [
-      { label: "Sintoma", value: "CPU STOP + BF" },
-      { label: "Hipótese", value: "Rede ou nó remoto" },
-      { label: "Verificação", value: "Evidência priorizada" },
-    ],
+    ariaLabel: "Telas atuais do BOJ S7-PLC PRO em quadros de computador e telefone",
+    desktop: "Tela atual do BOJ S7-PLC PRO em computador",
+    mobile: "Tela atual do BOJ S7-PLC PRO em telefone",
   },
 };
 
+// Misma composición de dispositivos que en Inicio (capturas vigentes de la app), en el hero de /app.
+// Las imágenes cargan de inmediato porque están sobre el pliegue; la prioridad alta queda reservada
+// al fondo del hero.
 function AppHeroDiagnosticPreview({ language = "es" }) {
   const copy = appHeroPreviewCopy[language] || appHeroPreviewCopy.es;
 
   return (
-    <aside className="app-hero-diagnostic-preview" aria-label={copy.ariaLabel}>
-      <div className="app-hero-diagnostic-preview-head">
-        <span>{copy.eyebrow}</span>
-        <small><span aria-hidden="true" /> {copy.caseLabel}</small>
-      </div>
-      <div className="app-hero-diagnostic-preview-screen">
-        <img
-          src={appDiagnosticoGuiado}
-          alt={copy.imageAlt}
-          width="1474"
-          height="588"
-          decoding="async"
-        />
-      </div>
-      <ol className="app-hero-diagnostic-preview-stages">
-        {copy.stages.map((stage, index) => (
-          <li key={stage.label}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <div>
-              <small>{stage.label}</small>
-              <strong>{stage.value}</strong>
+    <aside className="app-hero-devices" aria-label={copy.ariaLabel}>
+      <figure className="app-product-composition app-hero-devices-figure">
+        <div className="app-product-stage">
+          <div className="app-desktop-frame">
+            <div className="app-desktop-toolbar" aria-hidden="true">
+              <span />
+              <span />
+              <span />
             </div>
-          </li>
-        ))}
-      </ol>
+            <div className="real-app-screen app-desktop-screen">
+              <M2Picture
+                src={appEstadoCpuDesktop}
+                alt={copy.desktop}
+                width="1672"
+                height="941"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            <div className="app-laptop-base" aria-hidden="true" />
+          </div>
+          <div className="app-mobile-frame">
+            <div className="app-mobile-speaker" aria-hidden="true" />
+            <div className="app-mobile-screen">
+              <M2Picture
+                src={appEstadoCpuMobile}
+                alt={copy.mobile}
+                width="594"
+                height="919"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </div>
+      </figure>
     </aside>
   );
 }

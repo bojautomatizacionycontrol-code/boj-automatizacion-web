@@ -88,7 +88,8 @@ test("App reutiliza la galería real y todos los bloques comerciales de español
   }
 
   const preview = sourceBetween("const appHeroPreviewCopy =", "const appQuickAccessCopy =");
-  assert.match(preview, /src=\{appDiagnosticoGuiado\}/);
+  assert.match(preview, /src=\{appEstadoCpuDesktop\}/);
+  assert.match(preview, /src=\{appEstadoCpuMobile\}/);
   assert.doesNotMatch(preview, /appSadDevicePreview|app-hero-diagnostic-preview-screen--device-composite/);
   assert.doesNotMatch(preview, /appResultadoDiagnostico|app-hero-diagnostic-preview-focus/);
   assert.match(appSource, /const appRealViewCopyByLanguage = \{/);

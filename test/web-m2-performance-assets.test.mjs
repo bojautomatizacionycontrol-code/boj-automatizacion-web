@@ -100,7 +100,7 @@ test("reserva aspecto, prioriza sólo el hero y difiere fondos fuera del viewpor
   assert.doesNotMatch(appSource, /src=\{plantVisual\} alt="" aria-hidden="true" \/>/);
   assert.ok((appSource.match(/src=\{plantVisual\} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async"/g) || []).length >= 6);
   assert.match(appSource, /src=\{manualPreviewImages\[0\]\}[^>]+width="1100" height="1556" decoding="async"/);
-  assert.match(appSource, /src=\{appDiagnosticoGuiado\}[\s\S]{0,140}width="1474"[\s\S]{0,80}height="588"[\s\S]{0,80}decoding="async"/);
+  assert.match(appSource, /src=\{appEstadoCpuDesktop\}[\s\S]{0,140}width="1672"[\s\S]{0,80}height="941"[\s\S]{0,80}loading="eager"[\s\S]{0,40}decoding="async"/);
 });
 
 test("reduce el favicon más de 80 por ciento y mantiene cada variante por debajo de 50 KB", async () => {

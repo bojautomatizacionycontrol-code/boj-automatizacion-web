@@ -60,11 +60,12 @@ test("App muestra una demostración real y precios antes de la explicación exte
 
   assert.match(appPageSource, /image=\{appProHeroLaptopVisual\}/);
   assert.match(appPageSource, /aside=\{<AppHeroDiagnosticPreview \/>\}/);
-  assert.match(previewSource, /appDiagnosticoGuiado/);
-  assert.doesNotMatch(previewSource, /appSadDevicePreview|app-hero-diagnostic-preview-screen--device-composite/);
-  assert.match(previewSource, /Síntoma/);
-  assert.match(previewSource, /Hipótesis/);
-  assert.match(previewSource, /Verificación/);
+  // Decisión del titular (5 de septiembre de 2026): el hero de /app muestra la misma composición de
+  // dispositivos que Inicio, con las capturas vigentes, en lugar del card "Flujo real de la herramienta".
+  assert.match(previewSource, /src=\{appEstadoCpuDesktop\}[\s\S]*?className="app-mobile-screen"[\s\S]*?src=\{appEstadoCpuMobile\}/);
+  assert.doesNotMatch(previewSource, /appSadDevicePreview|app-hero-diagnostic-preview-screen--device-composite|appDiagnosticoGuiado|APP\.png/);
+  assert.doesNotMatch(previewSource, /FLUJO REAL|CASO GUIADO|REAL TOOL WORKFLOW/);
+  assert.match(previewSource, /marcos de computadora y teléfono/);
 
   const proofStrip = appPageSource.indexOf("<S7ProofStrip />");
   const quickAccess = appPageSource.indexOf("<AppQuickCommercialAccess />");
@@ -125,8 +126,9 @@ test("el sistema visual nuevo es responsive, accesible y respeta movimiento redu
     /\.home-hero-navigator a:focus-visible/,
     /\.app-pro-quick-access-link:focus-visible/,
     /@media \(max-width: 980px\)[\s\S]*?\.app-pro-page > \.boj-hero \.boj-hero-inner--with-aside/,
-    /@media \(max-width: 560px\)[\s\S]*?\.app-hero-diagnostic-preview-stages\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);/,
-    /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.app-hero-diagnostic-preview-head small span\s*\{[\s\S]*?animation:\s*none;/,
+    /\.app-hero-devices \.app-product-stage\s*\{[\s\S]*?width:\s*min\(100%, 720px\);/,
+    /@media \(max-width: 980px\)[\s\S]*?\.app-hero-devices \.app-product-stage\s*\{[\s\S]*?width:\s*min\(100%, 640px\);/,
+    /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.home-hero-navigator a,\s*\.course-hero-preview-media img\s*\{[\s\S]*?transition:\s*none;/,
   ];
 
   for (const pattern of requiredPatterns) {
