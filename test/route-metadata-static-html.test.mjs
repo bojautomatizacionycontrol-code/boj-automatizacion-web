@@ -66,10 +66,10 @@ function prerenderFixture(route, buildYear) {
 }
 
 test("inventaría 34 rutas indexables y una ruta transaccional noindex", () => {
-  assert.equal(indexableRoutePaths.length, 34);
-  assert.equal(publicRoutePaths.length, 35);
-  assert.equal(new Set(indexableRoutePaths).size, 34);
-  assert.equal(new Set(publicRoutePaths).size, 35);
+  assert.equal(indexableRoutePaths.length, 37);
+  assert.equal(publicRoutePaths.length, 38);
+  assert.equal(new Set(indexableRoutePaths).size, 37);
+  assert.equal(new Set(publicRoutePaths).size, 38);
   assert.ok(!publicRoutePaths.includes("/inicio"));
   assert.ok(publicRoutePaths.includes("/gracias"));
   assert.equal(getRouteMetadata("/gracias").robots, "noindex, follow");
@@ -176,7 +176,7 @@ test("emite JSON-LD relevante sin ofertas, ratings ni curso global", () => {
   assert.equal(getRouteMetadata("/gracias").jsonLd, null);
 });
 
-test("genera 35 HTML prerenderizados y 404 con el mismo entrypoint hidratable", async () => {
+test("genera 38 HTML prerenderizados y 404 con el mismo entrypoint hidratable", async () => {
   const directory = await mkdtemp(join(tmpdir(), "boj-route-html-"));
   try {
     await writeFile(join(directory, "index.html"), templateFor(), "utf8");
@@ -198,7 +198,7 @@ test("genera 35 HTML prerenderizados y 404 con el mismo entrypoint hidratable", 
       renderRoute: async (route, year) => prerenderFixture(route, year),
       buildYear,
     });
-    assert.equal(generated.length, 36);
+    assert.equal(generated.length, 39);
 
     for (const route of publicRoutePaths) {
       const html = await readFile(outputFileForRoute(directory, route), "utf8");
@@ -231,14 +231,14 @@ test("genera 35 HTML prerenderizados y 404 con el mismo entrypoint hidratable", 
   }
 });
 
-test("mapea las 35 rutas públicas a chunks exactos y reserva compliance para el 404", () => {
+test("mapea las 38 rutas públicas a chunks exactos y reserva compliance para el 404", () => {
   const mappedPublicRoutes = Object.keys(routeFamilyByPath)
     .filter((route) => route !== "/inicio")
     .sort();
   assert.deepEqual(mappedPublicRoutes, [...publicRoutePaths].sort());
   assert.deepEqual(
     Object.fromEntries(Object.entries(routeFamilies).map(([family, routes]) => [family, routes.length])),
-    { home: 4, services: 6, coursesIndex: 3, courseS7: 3, courseTia: 3, app: 3, resources: 6, compliance: 8 }
+    { home: 4, services: 6, coursesIndex: 3, courseS7: 3, courseTia: 3, app: 3, resources: 9, compliance: 8 }
   );
   for (const [route, family] of Object.entries(routeFamilyByPath)) {
     assert.equal(getRouteFamily(route), family, route);

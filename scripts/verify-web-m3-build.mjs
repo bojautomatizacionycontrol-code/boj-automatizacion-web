@@ -97,7 +97,7 @@ export async function verifyPrerenderedHtmlBuild(outDir) {
   const unexpected = [...actualPaths].filter((filePath) => !expectedPaths.has(filePath));
   if (missing.length || unexpected.length || actualPaths.size !== expectedPaths.size) {
     throw new Error(
-      `PRERENDER-BUILD: matriz HTML distinta de 35+404; ` +
+      `PRERENDER-BUILD: matriz HTML distinta de ${publicRoutePaths.length}+404; ` +
       `actual=${actualPaths.size} faltantes=${missing.join(",") || "0"} ` +
       `sobrantes=${unexpected.join(",") || "0"}`
     );
