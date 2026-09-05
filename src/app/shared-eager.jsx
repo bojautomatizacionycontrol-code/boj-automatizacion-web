@@ -13,10 +13,24 @@ import heroContacto from "../assets/hero-contacto.jpg";
 import courseS7400Visual from "../assets/course-s7-400.jpg";
 import courseTiaPortalVisual from "../assets/course-tia-portal.jpg";
 
-const m2ImageModules = import.meta.glob("../assets/m2/*.{avif,webp}", {
-  eager: true,
-  import: "default",
-});
+// Inventario responsive del entrypoint: heros, portadas de cursos y logo. Las familias
+// que usa una sola ruta (obras, capturas de la app, retrato) se registran desde su módulo
+// con registerM2Images para no engordar el chunk de entrada.
+const m2ImageModules = {
+  ...import.meta.glob(
+    [
+      "../assets/m2/*.{avif,webp}",
+      "!../assets/m2/obra-*",
+      "!../assets/m2/app-estado-cpu-*",
+      "!../assets/m2/walter-boj-avatar-field-*",
+    ],
+    { eager: true, import: "default" }
+  ),
+};
+
+function registerM2Images(modules) {
+  Object.assign(m2ImageModules, modules);
+}
 
 const heroM2Spec = (stem) => ({
   stem,
@@ -96,4 +110,15 @@ function whatsappUrl(message = "Hola, escribo desde la web de BOJ Automatizació
   return `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
-export { M2Picture, getM2SourceSet, heroM2Spec, m2ImageModules, m2ImageSpecs, track, whatsappUrl };
+async function sendContactRequest(payload) {
+  const response = await fetch("/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(result.error || "No se pudo enviar la solicitud.");
+  return result;
+}
+
+export { M2Picture, getM2SourceSet, heroM2Spec, m2ImageModules, m2ImageSpecs, registerM2Images, sendContactRequest, track, whatsappUrl };

@@ -892,6 +892,115 @@
   line-height: 1.45;
 }
 
+.course-waitlist {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 174, 234, 0.18);
+}
+
+.course-waitlist-intro strong {
+  color: #071421;
+  font-size: 0.98rem;
+  line-height: 1.3;
+}
+
+.course-waitlist-intro p {
+  margin: 0;
+  color: #496173;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.course-waitlist-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1.2fr) auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.course-waitlist-fields label {
+  display: grid;
+  gap: 4px;
+  color: #071421;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.course-waitlist-fields input,
+.course-waitlist-fields select {
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid #d8e3ec;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #071421;
+  font: inherit;
+  font-size: 0.92rem;
+}
+
+.course-waitlist-fields input:focus,
+.course-waitlist-fields select:focus {
+  border-color: #00aee8;
+  box-shadow: 0 0 0 3px rgba(0, 174, 234, 0.14);
+}
+
+.founder-block,
+.s7-testimonials {
+  --s7-cyan-2: #00c8ff;
+  --s7-light: #f3f7fb;
+  --s7-ink: #061524;
+  --s7-muted: #566879;
+}
+
+.founder-block .s7-sales-kicker {
+  color: #086d98;
+}
+
+.founder-block-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.services-engagement-section {
+  padding: clamp(40px, 4.5vw, 56px) 0;
+  background: #f3f7fb;
+  color: #071521;
+}
+
+.services-engagement-grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.services-engagement-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 12px;
+  border-radius: 999px;
+  background: #061826;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+@media (max-width: 760px) {
+  .course-waitlist-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .founder-block .s7-sales-instructor-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
 .course-landing {
   grid-template-columns: minmax(0, 1fr) minmax(330px, 0.44fr);
   gap: 28px;

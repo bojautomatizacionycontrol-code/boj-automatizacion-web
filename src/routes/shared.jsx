@@ -43,26 +43,6 @@ import plantVisual from "../assets/old-site/35-47edf350.jpg";
 import aerialPlantVisual from "../assets/old-site/43-00658318.jpg";
 import { M2Picture } from "../app/shared-eager.jsx";
 
-const serviceWorkImageModules = import.meta.glob([
-  "../assets/services-works/*.{png,jpg,jpeg,webp}",
-  "!../assets/services-works/panel app.png",
-  "!../assets/services-works/panel app 2.png",
-], {
-  eager: true,
-  import: "default",
-});
-
-const getServiceWorkImage = (fileNames) => {
-  const candidates = Array.isArray(fileNames) ? fileNames : [fileNames];
-
-  for (const fileName of candidates) {
-    const image = serviceWorkImageModules[`../assets/services-works/${fileName}`];
-    if (image) return image;
-  }
-
-  return "";
-};
-
 const icons = {
   ArrowRight,
   Brain,
@@ -106,17 +86,6 @@ const projectVisuals = [
   aerialPlantVisual,
   engineeringVisual,
   step7Visual,
-];
-
-const projectWorkImageFiles = [
-  "Generador industrial — para Generador WEG BT40.jpg",
-  "Sistema contra incendios industrial — bombas, cañerías, válvulas.jpg",
-  "Evaporador  equipo de proceso — para Evaporador CALSA.jpg",
-  "Turbina o generador industrial — para Generadores Siemens TG3TG4.jpg",
-  "Motocompresor industrial — para Compresores TGN.jpg",
-  "Planta de agua  bombeo industrial — bombas, cañerías, tratamiento.jpg",
-  "envolvedora-papel.jpg",
-  "envasadora.jpg",
 ];
 
 const appProductUrl = offer.app.productUrl;
@@ -241,8 +210,9 @@ const s7TestimonialsCopy = {
   pt: { kicker: "O que dizem os técnicos", title: "Experiência real em planta, não promessas vazias.", source: "Depoimento original em espanhol" },
 };
 
-function S7Testimonials({ background = "light", language = "es" }) {
+function S7Testimonials({ background = "light", language = "es", limit }) {
   const copy = s7TestimonialsCopy[language] || s7TestimonialsCopy.es;
+  const items = limit ? s7Testimonials.slice(0, limit) : s7Testimonials;
   const initials = (name) =>
     name
       .split(" ")
@@ -260,7 +230,7 @@ function S7Testimonials({ background = "light", language = "es" }) {
           <h2>{copy.title}</h2>
         </div>
         <div className="s7-testimonials-grid">
-          {s7Testimonials.map((item) => (
+          {items.map((item) => (
             <figure className="s7-testimonial-card" key={item.name}>
               <span className="s7-testimonial-mark" aria-hidden="true">“</span>
               <blockquote>{item.quote}</blockquote>
@@ -339,4 +309,4 @@ function RouteCTA({ title, text, primaryLabel, primaryHref, secondaryLabel, seco
   );
 }
 
-export { CheckItem, Hero, HeroAction, HeroTitle, Icon, NotFound, PageShell, PrimaryLink, RouteCTA, S7ProofStrip, S7Testimonials, SecondaryLink, appLicensePlans, appProPlans, appProductUrl, getServiceWorkImage, icons, projectVisuals, projectWorkImageFiles, s7ProofCopy, s7TestimonialsCopy, serviceWorkImageModules };
+export { CheckItem, Hero, HeroAction, HeroTitle, Icon, NotFound, PageShell, PrimaryLink, RouteCTA, S7ProofStrip, S7Testimonials, SecondaryLink, appLicensePlans, appProPlans, appProductUrl, icons, projectVisuals, s7ProofCopy, s7TestimonialsCopy };
