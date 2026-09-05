@@ -14,8 +14,30 @@ import appEstadoCpuDesktop from "../assets/app-estado-cpu-desktop-v8-4-15.jpg";
 import appEstadoCpuMobile from "../assets/app-estado-cpu-mobile-v7-3.png";
 import heroInicio from "../assets/hero-inicio.jpg";
 import plantVisual from "../assets/old-site/35-47edf350.jpg";
-import { whatsappUrl } from "../app/shared-eager.jsx";
-import { Hero, Icon, getServiceWorkImage, projectVisuals, projectWorkImageFiles } from "./shared.jsx";
+import { M2Picture, m2ImageSpecs, registerM2Images, whatsappUrl } from "../app/shared-eager.jsx";
+import { FounderBlock } from "./founder-block.jsx";
+import { Hero, Icon, S7Testimonials, projectVisuals } from "./shared.jsx";
+import { getServiceWorkImage, projectWorkImageFiles } from "./works-images.jsx";
+
+registerM2Images(import.meta.glob("../assets/m2/app-estado-cpu-*.{avif,webp}", { eager: true, import: "default" }));
+
+// Variantes AVIF/WebP de las capturas de la app usadas en la composición de dispositivos.
+m2ImageSpecs.set(appEstadoCpuDesktop, {
+  stem: "app-estado-cpu-desktop",
+  width: 1672,
+  height: 941,
+  widths: [640, 960, 1672],
+  formats: ["avif", "webp"],
+  sizes: "(max-width: 760px) 92vw, 693px",
+});
+m2ImageSpecs.set(appEstadoCpuMobile, {
+  stem: "app-estado-cpu-mobile",
+  width: 594,
+  height: 919,
+  widths: [320, 594],
+  formats: ["avif", "webp"],
+  sizes: "200px",
+});
 
 const homeProblems = [
   { icon: "ShieldCheck", text: "Máquinas detenidas\nsin causa clara" },
@@ -159,6 +181,8 @@ function HomeLandingRedesign() {
         </div>
       </section>
 
+      <FounderBlock id="home-founder" />
+
       <section className="mock-section mock-app" data-home-section="app">
         <div className="mock-home-container mock-app-grid">
           <div className="mock-app-copy">
@@ -180,6 +204,8 @@ function HomeLandingRedesign() {
       </section>
 
       <HomeObrasTeaser />
+
+      <S7Testimonials limit={2} />
 
       <section className="mock-final-cta" data-home-section="cta">
         <img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" />
@@ -238,7 +264,7 @@ function HomeObrasTeaser() {
           {featured.map((project, index) => (
             <article className="mock-obras-card" key={project.title}>
               <div className="mock-obras-media">
-                <img src={getServiceWorkImage(projectWorkImageFiles[index]) || projectVisuals[index]} alt={`Imagen ilustrativa para ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" />
+                <M2Picture src={getServiceWorkImage(projectWorkImageFiles[index]) || projectVisuals[index]} alt={`Imagen ilustrativa para ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" />
                 <span className="works-image-disclaimer">Imagen ilustrativa</span>
                 <span className="mock-obras-client">{project.client}</span>
               </div>
@@ -291,7 +317,7 @@ function AppDiagnosticMockup({ language = "es" }) {
             <span />
           </div>
           <div className="real-app-screen app-desktop-screen">
-            <img
+            <M2Picture
               src={appEstadoCpuDesktop}
               alt={visualCopy.desktop}
               width="1672"
@@ -305,7 +331,7 @@ function AppDiagnosticMockup({ language = "es" }) {
         <div className="app-mobile-frame" aria-label={visualCopy.mobileFrame}>
           <div className="app-mobile-speaker" aria-hidden="true" />
           <div className="app-mobile-screen">
-            <img
+            <M2Picture
               src={appEstadoCpuMobile}
               alt={visualCopy.mobile}
               width="594"
@@ -405,6 +431,8 @@ function EnglishHomePage() {
         </div>
       </section>
 
+      <FounderBlock language="en" id="en-home-founder" />
+
       <section className="mock-section mock-app">
         <div className="mock-home-container mock-app-grid">
           <div className="mock-app-copy">
@@ -438,7 +466,7 @@ function EnglishHomePage() {
               return (
                 <article className="mock-obras-card" key={project.title}>
                   <div className="mock-obras-media">
-                    <img src={getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]} alt={`Illustrative image for ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" />
+                    <M2Picture src={getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]} alt={`Illustrative image for ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" />
                     <span className="works-image-disclaimer">Illustrative image</span>
                     <span className="mock-obras-client">{source.client}</span>
                   </div>
@@ -458,6 +486,8 @@ function EnglishHomePage() {
           </div>
         </div>
       </section>
+
+      <S7Testimonials language="en" limit={2} />
 
       <section className="mock-final-cta">
         <img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" />
@@ -508,8 +538,10 @@ function PortugueseHomePage() {
       <section className="mock-clients" data-home-section="clients"><div className="mock-home-container mock-clients-inner"><p className="mock-clients-label">Alguns clientes industriais</p><ul className="mock-clients-list">{homeClientNames.map((name) => <li key={name}>{name}</li>)}</ul><a className="mock-clients-link" href="/pt/projetos">Ver projetos realizados <ArrowRight size={15} /></a></div></section>
       <section className="mock-section mock-problems"><div className="mock-home-container"><h2>Problemas que ajudamos a resolver</h2><p className="mock-problems-subtitle">Partimos do sintoma real: uma CPU parada, uma rede instável, sinais inconsistentes ou um equipamento que já não responde como deveria.</p><div className="mock-problems-grid">{portugueseHome.problems.map((problem) => <article className="mock-problem-item" key={problem.text}><Icon name={problem.icon} size={36} /><span>{problem.text}</span></article>)}</div></div></section>
       <section className="mock-tech-strip"><div className="mock-home-container"><h2>Foco técnico</h2><p className="mock-tech-subtitle">Tecnologias industriais e áreas abrangidas pelo nosso trabalho.</p><div className="mock-tech-grid">{portugueseHome.specialties.map((item) => <article className="mock-tech-card" key={item.title}><Icon name={item.icon} size={48} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div></section>
+      <FounderBlock language="pt" id="pt-home-founder" />
       <section className="mock-section mock-app"><div className="mock-home-container mock-app-grid"><div className="mock-app-copy"><span className="section-badge">BOJ S7-PLC PRO</span><h2>Uma primeira resposta mais clara antes de abrir o STEP 7</h2><p>Informe estados da CPU, LEDs e sintomas de campo. O app organiza hipóteses técnicas e sugere o que verificar primeiro.</p><ul><li>Fluxo orientado por sintomas</li><li>Hipóteses técnicas priorizadas</li><li>Orientação para verificação em campo</li></ul><a className="mock-btn mock-btn-primary" href="/pt/app">Conhecer o app <ArrowRight size={18} /></a></div><AppDiagnosticMockup language="pt" /></div></section>
-      <section className="mock-section mock-obras"><div className="mock-home-container"><h2>Projetos realizados</h2><p className="mock-obras-subtitle">Projetos selecionados de engenharia, migração de PLC e comissionamento realizados em ambientes reais de produção. As imagens são ilustrativas; os clientes e escopos são reais.</p><div className="mock-obras-grid">{portugueseProjects.map((project) => { const source = projects[project.sourceIndex]; return <article className="mock-obras-card" key={project.title}><div className="mock-obras-media"><img src={getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]} alt={`Imagem ilustrativa para ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" /><span className="works-image-disclaimer">Imagem ilustrativa</span><span className="mock-obras-client">{source.client}</span></div><div className="mock-obras-body"><span className="mock-obras-year">{source.year}</span><h3>{project.title}</h3><p>{project.result}</p></div></article>; })}</div><div className="mock-obras-cta"><a className="mock-btn mock-btn-primary" href="/pt/projetos">Ver projetos selecionados <ArrowRight size={18} /></a></div></div></section>
+      <section className="mock-section mock-obras"><div className="mock-home-container"><h2>Projetos realizados</h2><p className="mock-obras-subtitle">Projetos selecionados de engenharia, migração de PLC e comissionamento realizados em ambientes reais de produção. As imagens são ilustrativas; os clientes e escopos são reais.</p><div className="mock-obras-grid">{portugueseProjects.map((project) => { const source = projects[project.sourceIndex]; return <article className="mock-obras-card" key={project.title}><div className="mock-obras-media"><M2Picture src={getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]} alt={`Imagem ilustrativa para ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" /><span className="works-image-disclaimer">Imagem ilustrativa</span><span className="mock-obras-client">{source.client}</span></div><div className="mock-obras-body"><span className="mock-obras-year">{source.year}</span><h3>{project.title}</h3><p>{project.result}</p></div></article>; })}</div><div className="mock-obras-cta"><a className="mock-btn mock-btn-primary" href="/pt/projetos">Ver projetos selecionados <ArrowRight size={18} /></a></div></div></section>
+      <S7Testimonials language="pt" limit={2} />
       <section className="mock-final-cta"><img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" /><div className="mock-final-overlay" aria-hidden="true" /><div className="mock-home-container mock-final-content"><h2>Sua planta tem uma falha, uma máquina parada ou uma equipe que precisa de capacitação?</h2><p>Conte-nos o que está acontecendo e ajudaremos a identificar o próximo passo adequado.</p><div className="mock-final-actions"><a className="mock-btn mock-btn-whatsapp" href={whatsappUrl("Olá, gostaria de conversar sobre uma falha industrial, um projeto de automação ou uma necessidade de capacitação técnica.")}><Phone size={18} /> Falar pelo WhatsApp</a><a className="mock-btn mock-btn-outline" href="/pt/contato"><Mail size={18} /> Enviar consulta técnica</a></div></div></section>
     </div>
   );

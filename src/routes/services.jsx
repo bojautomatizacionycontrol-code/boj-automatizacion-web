@@ -15,8 +15,104 @@ import {
 import heroServicios from "../assets/hero-servicios.jpg";
 import heroObras from "../assets/hero-obras.jpg";
 import plantVisual from "../assets/old-site/35-47edf350.jpg";
-import { whatsappUrl } from "../app/shared-eager.jsx";
-import { Hero, Icon, PageShell, RouteCTA, getServiceWorkImage, projectVisuals, projectWorkImageFiles } from "./shared.jsx";
+import { M2Picture, whatsappUrl } from "../app/shared-eager.jsx";
+import { FounderBlock } from "./founder-block.jsx";
+import { Hero, Icon, PageShell, RouteCTA, S7Testimonials, projectVisuals } from "./shared.jsx";
+import { getServiceWorkImage, projectWorkImageFiles } from "./works-images.jsx";
+
+const serviceEngagementCopy = {
+  es: {
+    kicker: "CÓMO TRABAJAMOS",
+    title: "Del primer mensaje a la intervención",
+    intro: "Alcance, agenda, entregables y costo se confirman por propuesta escrita antes de intervenir.",
+    steps: [
+      {
+        icon: "Phone",
+        title: "Primer contacto",
+        text: "Cuéntanos el síntoma, el equipo y lo que ya observaste; fotos del tablero o capturas online ayudan. Primera respuesta dentro de las 48 horas hábiles; las urgencias se coordinan por WhatsApp según disponibilidad.",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Propuesta técnica",
+        text: "Definimos por escrito alcance, agenda, entregables y costo. Sin cargos que no estén en la propuesta.",
+      },
+      {
+        icon: "Wrench",
+        title: "Intervención y cierre",
+        text: "En planta o a distancia según el caso, con pruebas, documentación técnica y una recomendación clara para operación y mantenimiento.",
+      },
+    ],
+  },
+  en: {
+    kicker: "HOW WE WORK",
+    title: "From the first message to the intervention",
+    intro: "Scope, schedule, deliverables and cost are confirmed in a written proposal before any intervention.",
+    steps: [
+      {
+        icon: "Phone",
+        title: "First contact",
+        text: "Tell us the symptom, the equipment and what you have already observed; cabinet photos or online screenshots help. We reply within 48 business hours and urgent cases are coordinated on WhatsApp subject to availability.",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Technical proposal",
+        text: "We define scope, schedule, deliverables and cost in writing. No charges outside the proposal.",
+      },
+      {
+        icon: "Wrench",
+        title: "Intervention and hand-over",
+        text: "On site or remotely depending on the case, with tests, technical documentation and a clear recommendation for operation and maintenance.",
+      },
+    ],
+  },
+  pt: {
+    kicker: "COMO TRABALHAMOS",
+    title: "Da primeira mensagem à intervenção",
+    intro: "Escopo, agenda, entregáveis e custo são confirmados em proposta escrita antes de intervir.",
+    steps: [
+      {
+        icon: "Phone",
+        title: "Primeiro contato",
+        text: "Conte-nos o sintoma, o equipamento e o que já observou; fotos do painel ou capturas online ajudam. Respondemos em até 48 horas úteis e as urgências são coordenadas pelo WhatsApp conforme disponibilidade.",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Proposta técnica",
+        text: "Definimos por escrito escopo, agenda, entregáveis e custo. Sem cobranças fora da proposta.",
+      },
+      {
+        icon: "Wrench",
+        title: "Intervenção e encerramento",
+        text: "Em planta ou à distância conforme o caso, com testes, documentação técnica e uma recomendação clara para operação e manutenção.",
+      },
+    ],
+  },
+};
+
+function ServicesEngagement({ language = "es" }) {
+  const copy = serviceEngagementCopy[language] || serviceEngagementCopy.es;
+  return (
+    <section className="services-engagement-section" aria-labelledby={`services-engagement-${language}`}>
+      <div className="mock-home-container">
+        <div className="services-section-heading services-workflow-heading">
+          <span className="services-section-kicker">{copy.kicker}</span>
+          <h2 id={`services-engagement-${language}`}>{copy.title}</h2>
+          <p>{copy.intro}</p>
+        </div>
+        <ol className="services-workflow-grid services-engagement-grid">
+          {copy.steps.map((step, index) => (
+            <li className="services-workflow-card services-engagement-step" key={step.title}>
+              <span className="services-engagement-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+              <Icon name={step.icon} size={26} />
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
 
 const servicesAreaCards = [
   {
@@ -314,6 +410,12 @@ function ServicesPage() {
         </div>
       </section>
 
+      <ServicesEngagement language="es" />
+
+      <FounderBlock language="es" id="services-founder" />
+
+      <S7Testimonials language="es" limit={2} />
+
       <section className="services-redesign-cta" data-surface="dark">
         <img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" />
         <div className="services-redesign-cta-overlay" aria-hidden="true" />
@@ -518,6 +620,12 @@ function EnglishServicesPage() {
         </div>
       </section>
 
+      <ServicesEngagement language="en" />
+
+      <FounderBlock language="en" id="en-services-founder" />
+
+      <S7Testimonials language="en" limit={2} />
+
       <section className="services-redesign-cta" data-surface="dark">
         <img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" />
         <div className="services-redesign-cta-overlay" aria-hidden="true" />
@@ -553,7 +661,7 @@ function EnglishProjectsPage() {
           const visual = getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length];
           return (
             <article className="project-card" key={project.title}>
-              <div className="project-media"><img className="project-photo" src={visual} alt={`Illustrative image for ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" /><span>PROJECT {String(index + 1).padStart(2, "0")}</span><span className="works-image-disclaimer">Illustrative image</span><div className="project-media-overlay"><strong>{source.year}</strong><small>{source.client}</small></div></div>
+              <div className="project-media"><M2Picture className="project-photo" src={visual} alt={`Illustrative image for ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" /><span>PROJECT {String(index + 1).padStart(2, "0")}</span><span className="works-image-disclaimer">Illustrative image</span><div className="project-media-overlay"><strong>{source.year}</strong><small>{source.client}</small></div></div>
               <div className="project-body"><div className="project-title-row"><h2>{project.title}</h2></div><p className="project-meta-line">{project.sector} · {project.role}</p><p>{project.description}</p><div className="tag-list">{project.technologies.map((tech) => <span key={tech}>{tech}</span>)}</div><div className="project-result-grid"><div><h3>Initial problem</h3><p>{project.problem}</p></div><div><h3>Intervention</h3><p>{project.intervention}</p></div><div><h3>Result</h3><p>{project.result}</p></div></div></div>
             </article>
           );
@@ -573,6 +681,9 @@ function PortugueseServicesPage() {
       <section className="services-field-section" data-surface="light"><div className="mock-home-container"><div className="services-section-heading services-field-heading"><h2>Experiência em ambientes industriais</h2><p>Trabalho realizado onde continuidade operacional, partida segura e diagnóstico confiável são essenciais.</p></div><div className="services-field-grid">{portugueseServices.field.map((card) => <article className="services-field-card" key={card.title}><Icon name={card.icon} size={30} /><h3>{card.title}</h3><p>{card.text}</p></article>)}</div></div></section>
       <section className="services-redesign-section services-secondary-section" data-surface="dark"><div className="mock-home-container"><div className="services-section-heading services-secondary-heading"><h2>Serviços complementares</h2><p>Suporte técnico para sinais, painéis e capacitação aplicada à manutenção industrial.</p></div><div className="services-secondary-grid">{portugueseServices.secondary.map((service) => <ServiceSecondaryCard key={service.title} service={service} />)}</div></div></section>
       <section className="services-workflow-section" data-surface="light"><div className="mock-home-container"><div className="services-section-heading services-workflow-heading"><h2>Um método para tomar melhores decisões técnicas</h2><p>Do sintoma ao próximo passo prático, com evidências de campo e um escopo de intervenção claro.</p></div><div className="services-workflow-grid">{portugueseServices.workflow.map((card) => <article className="services-workflow-card" key={card.title}><Icon name={card.icon} size={26} /><h3>{card.title}</h3><p>{card.text}</p></article>)}</div></div></section>
+      <ServicesEngagement language="pt" />
+      <FounderBlock language="pt" id="pt-services-founder" />
+      <S7Testimonials language="pt" limit={2} />
       <section className="services-redesign-cta" data-surface="dark"><img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" /><div className="services-redesign-cta-overlay" aria-hidden="true" /><div className="mock-home-container services-redesign-cta-content"><h2>Comece pelo sintoma, pelo equipamento e pelas evidências que já possui</h2><p>Podemos usar essas informações para definir o escopo, o risco e o próximo passo técnico mais útil.</p><div className="services-redesign-actions"><a className="mock-btn mock-btn-whatsapp" href={whatsappUrl("Olá, gostaria de conversar sobre um serviço técnico industrial.")}><Phone size={18} /> Falar pelo WhatsApp</a><a className="mock-btn mock-btn-outline" href="/pt/contato">Dados de contato <ArrowRight size={18} /></a></div></div></section>
     </div>
   );
@@ -582,7 +693,7 @@ function PortugueseProjectsPage() {
   return (
     <PageShell eyebrow="PROJETOS INDUSTRIAIS" title="Trabalhos de engenharia e automação realizados em plantas reais" subtitle="Casos selecionados de programação de PLC, IHM, SCADA, painéis de controle, migrações e comissionamento." heroImage={heroObras} heroPrimary={{ label: "Consultar projeto semelhante", href: whatsappUrl("Olá, gostaria de conversar sobre um projeto de automação industrial semelhante aos trabalhos realizados pela BOJ."), external: true }} heroSecondary={{ label: "Ver serviços", href: "/pt/servicos" }}>
       <section className="portfolio-prep"><div><p className="eyebrow">EXPERIÊNCIA EM PROJETOS REAIS</p><h2>Cada caso apresenta o problema, a intervenção e o resultado</h2><p>Os nomes dos clientes e os escopos correspondem a trabalhos realizados. As imagens são ilustrativas, salvo indicação em contrário.</p></div><div className="asset-slots"><span>Engenharia</span><span>PLC / IHM / SCADA</span><span>Comissionamento</span></div></section>
-      <div className="works-grid">{portugueseProjects.map((project, index) => { const source = projects[project.sourceIndex]; const visual = getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]; return <article className="project-card" key={project.title}><div className="project-media"><img className="project-photo" src={visual} alt={`Imagem ilustrativa para ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" /><span>PROJETO {String(index + 1).padStart(2, "0")}</span><span className="works-image-disclaimer">Imagem ilustrativa</span><div className="project-media-overlay"><strong>{source.year}</strong><small>{source.client}</small></div></div><div className="project-body"><div className="project-title-row"><h2>{project.title}</h2></div><p className="project-meta-line">{project.sector} · {project.role}</p><p>{project.description}</p><div className="tag-list">{project.technologies.map((tech) => <span key={tech}>{tech}</span>)}</div><div className="project-result-grid"><div><h3>Problema inicial</h3><p>{project.problem}</p></div><div><h3>Intervenção</h3><p>{project.intervention}</p></div><div><h3>Resultado</h3><p>{project.result}</p></div></div></div></article>; })}</div>
+      <div className="works-grid">{portugueseProjects.map((project, index) => { const source = projects[project.sourceIndex]; const visual = getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]; return <article className="project-card" key={project.title}><div className="project-media"><M2Picture className="project-photo" src={visual} alt={`Imagem ilustrativa para ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" /><span>PROJETO {String(index + 1).padStart(2, "0")}</span><span className="works-image-disclaimer">Imagem ilustrativa</span><div className="project-media-overlay"><strong>{source.year}</strong><small>{source.client}</small></div></div><div className="project-body"><div className="project-title-row"><h2>{project.title}</h2></div><p className="project-meta-line">{project.sector} · {project.role}</p><p>{project.description}</p><div className="tag-list">{project.technologies.map((tech) => <span key={tech}>{tech}</span>)}</div><div className="project-result-grid"><div><h3>Problema inicial</h3><p>{project.problem}</p></div><div><h3>Intervenção</h3><p>{project.intervention}</p></div><div><h3>Resultado</h3><p>{project.result}</p></div></div></div></article>; })}</div>
       <RouteCTA title="Trabalho técnico para problemas reais de planta" text="Conte-nos o que o sistema está fazendo, quais equipamentos estão envolvidos e quais evidências estão disponíveis." primaryLabel="Consultar projeto semelhante" primaryHref={whatsappUrl("Olá, gostaria de conversar sobre um projeto de automação industrial.")} secondaryLabel="Ver serviços" secondaryHref="/pt/servicos" />
     </PageShell>
   );
@@ -641,7 +752,7 @@ function ProjectCard({ project, index }) {
   return (
     <article className="project-card">
       <div className="project-media">
-        <img className="project-photo" src={visual} alt={`Imagen ilustrativa para ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" />
+        <M2Picture className="project-photo" src={visual} alt={`Imagen ilustrativa para ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" />
         <span>OBRA {String(index).padStart(2, "0")}</span>
         <span className="works-image-disclaimer">Imagen ilustrativa</span>
         <div className="project-media-overlay">

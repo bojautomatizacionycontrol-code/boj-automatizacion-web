@@ -1,5 +1,7 @@
-import { CheckCircle2, Clock } from "lucide-react";
-import { tiaCourse } from "../content.js";
+import { useState } from "react";
+import { ArrowRight, CheckCircle2, Clock } from "lucide-react";
+import { contact, tiaCourse } from "../content.js";
+import { sendContactRequest } from "../app/shared-eager.jsx";
 import { englishTiaCourse, portugueseTiaCourse } from "../i18n.js";
 import heroCursoTia from "../assets/hero-curso-tia.jpg";
 import step7ManagerVisual from "../assets/11.png";
@@ -45,6 +47,131 @@ const coursePreparationCopy = {
   },
 };
 
+const courseWaitlistCopy = {
+  es: {
+    title: "Avísame cuando esté disponible",
+    text: "Deja tu correo y te avisamos cuando abra la inscripción. Sin publicidad.",
+    name: "Nombre",
+    email: "Correo electrónico",
+    level: "Nivel actual",
+    levels: ["Sin experiencia en TIA Portal", "Uso básico de TIA Portal", "Vengo de STEP 7 Classic"],
+    submit: "Quiero recibir el aviso",
+    sending: "Enviando…",
+    success: "Listo. Te avisaremos cuando la inscripción esté abierta.",
+    invalid: "Ingresa tu nombre y un correo electrónico válido.",
+    error: `No se pudo enviar. Puedes escribirnos a ${contact.email}.`,
+    interest: "Lista de espera · Curso TIA Portal",
+    subject: "Lista de espera: curso TIA Portal S7-1200/1500",
+    message: (level) => `Quiero recibir el aviso cuando el curso TIA Portal esté disponible. Nivel actual: ${level}. Idioma del sitio: español.`,
+  },
+  en: {
+    title: "Tell me when it opens",
+    text: "Leave your email and we will let you know when enrollment opens. No advertising.",
+    name: "Name",
+    email: "Email",
+    level: "Current level",
+    levels: ["No TIA Portal experience", "Basic TIA Portal use", "Coming from STEP 7 Classic"],
+    submit: "Notify me",
+    sending: "Sending…",
+    success: "Done. We will let you know when enrollment opens.",
+    invalid: "Enter your name and a valid email address.",
+    error: `The request could not be sent. You can write to ${contact.email}.`,
+    interest: "Waitlist · TIA Portal course",
+    subject: "Waitlist: TIA Portal S7-1200/1500 course",
+    message: (level) => `I want to be notified when the TIA Portal course becomes available. Current level: ${level}. Site language: English.`,
+  },
+  pt: {
+    title: "Avise-me quando estiver disponível",
+    text: "Deixe seu e-mail e avisaremos quando as inscrições abrirem. Sem publicidade.",
+    name: "Nome",
+    email: "E-mail",
+    level: "Nível atual",
+    levels: ["Sem experiência em TIA Portal", "Uso básico do TIA Portal", "Venho do STEP 7 Classic"],
+    submit: "Quero receber o aviso",
+    sending: "Enviando…",
+    success: "Pronto. Avisaremos quando as inscrições abrirem.",
+    invalid: "Informe seu nome e um e-mail válido.",
+    error: `Não foi possível enviar. Você pode escrever para ${contact.email}.`,
+    interest: "Lista de espera · Curso TIA Portal",
+    subject: "Lista de espera: curso TIA Portal S7-1200/1500",
+    message: (level) => `Quero receber o aviso quando o curso TIA Portal estiver disponível. Nível atual: ${level}. Idioma do site: português.`,
+  },
+};
+
+function CourseWaitlist({ language = "es" }) {
+  const copy = courseWaitlistCopy[language] || courseWaitlistCopy.es;
+  const [form, setForm] = useState({ name: "", email: "", level: copy.levels[0], website: "" });
+  const [status, setStatus] = useState("idle");
+  const [feedback, setFeedback] = useState("");
+  const idPrefix = `tia-waitlist-${language}`;
+
+  function updateField(event) {
+    const { name, value } = event.target;
+    setForm((current) => ({ ...current, [name]: value }));
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const name = form.name.trim();
+    const email = form.email.trim();
+    if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus("error");
+      setFeedback(copy.invalid);
+      return;
+    }
+    setStatus("sending");
+    setFeedback("");
+    try {
+      await sendContactRequest({
+        name,
+        email,
+        company: "",
+        phone: "",
+        interest: copy.interest,
+        subject: copy.subject,
+        message: copy.message(form.level),
+        website: form.website,
+      });
+      setStatus("success");
+      setFeedback(copy.success);
+      setForm({ name: "", email: "", level: copy.levels[0], website: "" });
+    } catch (_) {
+      setStatus("error");
+      setFeedback(copy.error);
+    }
+  }
+
+  return (
+    <form className="course-waitlist" onSubmit={handleSubmit} noValidate aria-labelledby={`${idPrefix}-title`}>
+      <div className="course-waitlist-intro">
+        <strong id={`${idPrefix}-title`}>{copy.title}</strong>
+        <p>{copy.text}</p>
+      </div>
+      <div className="course-waitlist-fields">
+        <label htmlFor={`${idPrefix}-name`}>
+          {copy.name}
+          <input id={`${idPrefix}-name`} name="name" autoComplete="name" value={form.name} onChange={updateField} required />
+        </label>
+        <label htmlFor={`${idPrefix}-email`}>
+          {copy.email}
+          <input id={`${idPrefix}-email`} name="email" type="email" autoComplete="email" value={form.email} onChange={updateField} required />
+        </label>
+        <label htmlFor={`${idPrefix}-level`}>
+          {copy.level}
+          <select id={`${idPrefix}-level`} name="level" value={form.level} onChange={updateField}>
+            {copy.levels.map((level) => <option key={level} value={level}>{level}</option>)}
+          </select>
+        </label>
+        <input className="visually-hidden" name="website" value={form.website} onChange={updateField} tabIndex="-1" autoComplete="off" aria-hidden="true" />
+        <button className="mock-btn mock-btn-primary" type="submit" disabled={status === "sending"}>
+          {status === "sending" ? copy.sending : copy.submit} <ArrowRight size={17} aria-hidden="true" />
+        </button>
+      </div>
+      {feedback ? <p className={`form-feedback ${status}`} role={status === "error" ? "alert" : "status"}>{feedback}</p> : null}
+    </form>
+  );
+}
+
 function CoursePreparationStrip({ language = "es" }) {
   const copy = coursePreparationCopy[language] || coursePreparationCopy.es;
   return (
@@ -58,6 +185,7 @@ function CoursePreparationStrip({ language = "es" }) {
           <strong>{copy.title}</strong>
           <p>{copy.text}</p>
         </div>
+        <CourseWaitlist language={language} />
       </div>
     </section>
   );

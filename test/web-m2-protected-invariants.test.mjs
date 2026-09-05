@@ -162,7 +162,7 @@ test("Analytics contacto encabezado legal y wrappers TIA conservan sus bloques",
     [complianceSource, "function EnglishContactForm(", "function EnglishContactPage(", "752F9FD389C967F59AAFB2881856345247BE9F0D7E5467B78EA5DE052A7D09C5"],
     [complianceSource, "function PortugueseContactForm(", "function PortugueseContactPage(", "CFA0269E18B56A065C901F7B531916725E827C97344F8B680BBEFDCEA1B87D5F"],
     [complianceSource, "function ContactForm(", "const legalContent", "4AA70FE49BD12F6B09B36D27C93924A8F85142E123EC7019E4D2CCD51A946637"],
-    [complianceSource, "const legalContent = {", "function ContactLine(", "FBE4254312D0D77DB58F4B0428DF8192D35045CD2443B2CA0E497B6FEEB39C4D"],
+    [complianceSource, "const legalContent = {", "function ContactLine(", "DC72B0772A8D087BF5BD27E0BF622705CA1895EBB470C013874B40BC98A27B58"],
   ]) {
     assert.equal(sha256(sourceBlock(source, startMarker, endMarker)), expectedHash, startMarker);
   }

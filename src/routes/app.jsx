@@ -439,7 +439,7 @@ function LocalizedAppPlanGuide({ language }) {
           const target = `${copy.idPrefix}${sourceTitle.toLowerCase().replaceAll(" ", "-")}`;
           return (
             <li key={target}>
-              <a href={`#${target}`} aria-label={`${context}: ${title}`}>
+              <a href={`#${target}`}>
                 <span>{context}</span>
                 <strong>{title}</strong>
                 <small>{detail}</small>
@@ -811,7 +811,7 @@ function AppPage() {
             <ul>
               {appPlanDecisionGuide.map((option) => (
                 <li key={option.target}>
-                  <a href={`#${option.target}`} aria-label={`${option.context}: ver plan ${option.title}`}>
+                  <a href={`#${option.target}`}>
                     <span>{option.context}</span>
                     <strong>{option.title}</strong>
                     <small>{option.detail}</small>

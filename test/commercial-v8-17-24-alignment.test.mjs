@@ -208,7 +208,7 @@ test("publica identidad comercial ratificada en los tres documentos y conserva p
   const privacyStart = appSource.indexOf("  privacy: {");
   const privacyEnd = appSource.indexOf("  terms: {", privacyStart);
   const privacySource = appSource.slice(privacyStart, privacyEnd);
-  assert.match(privacySource, /updated: "16 de julio de 2026"/);
+  assert.match(privacySource, /updated: "5 de septiembre de 2026"/);
   assert.match(privacySource, /No vendemos datos personales/);
   assert.doesNotMatch(privacySource, /showCommercialIdentity|Hexa Group Holding SAS/);
 

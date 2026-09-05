@@ -696,6 +696,8 @@ function MainFooter({ language, buildYear }) {
         description: "Industrial diagnostics, automation and technical training.",
         contact: "Contact",
         contactAria: "Contact details",
+        coverage: "Service across Argentina, on site and remote",
+        addressLabel: "Registered address:",
         navigation: "Navigation",
         navigationAria: "Footer navigation",
         legalAria: "Legal information in Spanish",
@@ -708,6 +710,8 @@ function MainFooter({ language, buildYear }) {
           description: "Diagnóstico industrial, automação e formação técnica.",
           contact: "Contato",
           contactAria: "Dados de contato",
+          coverage: "Atendimento em toda a Argentina, em planta e à distância",
+          addressLabel: "Endereço comercial:",
           navigation: "Navegação",
           navigationAria: "Navegação do rodapé",
           legalAria: "Informações legais em espanhol",
@@ -719,6 +723,8 @@ function MainFooter({ language, buildYear }) {
           description: "Soluciones para diagnóstico y eficiencia en automatización.",
           contact: "Contacto",
           contactAria: "Datos de contacto",
+          coverage: "Atención en toda Argentina, en planta y a distancia",
+          addressLabel: "Domicilio comercial:",
           navigation: "Navegación",
           navigationAria: "Navegación del footer",
           legalAria: "Información legal",
@@ -743,7 +749,8 @@ function MainFooter({ language, buildYear }) {
           <a href="https://www.bojautomatizacion.com" target="_blank" rel="noreferrer">
             www.bojautomatizacion.com
           </a>
-          <span>{contact.location}</span>
+          <span>{footerCopy.coverage}</span>
+          <span>{footerCopy.addressLabel} {contact.location}</span>
         </div>
         <nav className="mock-footer-nav" aria-label={footerCopy.navigationAria}>
           <h2>{footerCopy.navigation}</h2>

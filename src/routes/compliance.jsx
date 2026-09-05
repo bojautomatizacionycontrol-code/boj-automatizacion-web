@@ -315,7 +315,8 @@ function EnglishContactPage() {
         <div className="contact-panel">
           <h2>Contact details</h2><p className="contact-panel-intro">Use the form, email or WhatsApp. The information reaches the same technical team.</p>
           <ContactLine icon="Wrench" label="Technical contact" value={contact.responsible} />
-          <ContactLine icon="MapPin" label="Location" value={contact.location} />
+          <ContactLine icon="MapPin" label="Registered address" value={contact.location} />
+          <ContactLine icon="Globe" label="Coverage" value="All of Argentina · on site and remote" />
           <ContactLine icon="Mail" label="Email" value={contact.email} href={`mailto:${contact.email}`} />
           <ContactLine icon="Phone" label="WhatsApp" value={contact.whatsappDisplay} href={whatsappUrl("Hello, I am contacting BOJ from the English website.")} />
           <div className="social-placeholders"><a href={contact.linktree} target="_blank" rel="noreferrer">BOJ Linktree</a><a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a></div>
@@ -405,7 +406,8 @@ function PortugueseContactPage() {
           <h2>Dados de contato</h2>
           <p className="contact-panel-intro">Use o formulário, e-mail ou WhatsApp. As informações chegam à mesma equipe técnica.</p>
           <ContactLine icon="Wrench" label="Responsável técnico" value={contact.responsible} />
-          <ContactLine icon="MapPin" label="Localização" value={contact.location} />
+          <ContactLine icon="MapPin" label="Endereço comercial" value={contact.location} />
+          <ContactLine icon="Globe" label="Cobertura" value="Toda a Argentina · em planta e à distância" />
           <ContactLine icon="Mail" label="E-mail" value={contact.email} href={`mailto:${contact.email}`} />
           <ContactLine icon="Phone" label="WhatsApp" value={contact.whatsappDisplay} href={whatsappUrl("Olá, estou entrando em contato com a BOJ pelo site em português.")} />
           <div className="social-placeholders">
@@ -532,7 +534,8 @@ function ContactPage() {
             más cómodo. La información llega al mismo equipo técnico.
           </p>
           <ContactLine icon="Wrench" label="Responsable" value={contact.responsible} />
-          <ContactLine icon="MapPin" label="Ubicación" value={contact.location} />
+          <ContactLine icon="MapPin" label="Domicilio comercial" value={contact.location} />
+          <ContactLine icon="Globe" label="Cobertura" value="Toda Argentina · en planta y a distancia" />
           <ContactLine icon="Mail" label="Correo electrónico" value={contact.email} href={`mailto:${contact.email}`} />
           <ContactLine
             icon="Phone"
@@ -686,14 +689,16 @@ function ContactForm() {
 const legalContent = {
   privacy: {
     title: "Política de privacidad",
-    intro: "Explica qué datos recopilamos en este sitio, para qué se utilizan y cómo puede ejercer sus derechos.",
-    updated: "16 de julio de 2026",
+    intro: "Explica qué datos recopilamos en este sitio, para qué se utilizan, con qué proveedores se comparten y cómo puede ejercer sus derechos.",
+    updated: "5 de septiembre de 2026",
     sections: [
       ["Responsable", `BOJ Automatización y Control. Contacto: ${contact.email}.`],
-      ["Datos que recopilamos", "El formulario puede solicitar nombre, empresa, correo, teléfono, servicio de interés y mensaje. También podemos registrar métricas anónimas o seudónimas de navegación y conversiones mediante Vercel Web Analytics."],
-      ["Finalidad", "Usamos los datos para responder consultas, coordinar servicios, facilitar acceso a productos adquiridos y mejorar el funcionamiento del sitio. No vendemos datos personales."],
-      ["Proveedores", "El formulario se procesa mediante Resend. Las compras se procesan en Hotmart y la activación de la app puede vincular el correo de compra con Supabase. Cada proveedor aplica sus propias condiciones de privacidad."],
-      ["Conservación y derechos", `Conservamos la información durante el tiempo necesario para atender la relación comercial y obligaciones aplicables. Puede solicitar acceso, corrección o eliminación escribiendo a ${contact.email}.`],
+      ["Marco legal", "El tratamiento de datos personales se rige por la Ley 25.326 de Protección de los Datos Personales de la República Argentina y sus normas complementarias. El órgano de control es la Agencia de Acceso a la Información Pública."],
+      ["Datos que recopilamos", "El formulario puede solicitar nombre, empresa, correo, teléfono, servicio de interés y mensaje. La lista de espera de cursos solicita nombre, correo y nivel. También podemos registrar métricas anónimas o seudónimas de navegación y conversiones mediante Vercel Web Analytics, que no utiliza cookies de seguimiento."],
+      ["Finalidad y base legal", "Usamos los datos para responder consultas, coordinar servicios, avisar sobre cursos solicitados, facilitar acceso a productos adquiridos y mejorar el funcionamiento del sitio. La base es el consentimiento que otorga al enviar cada formulario y la ejecución de la relación contractual o precontractual. No vendemos datos personales ni enviamos publicidad sin pedido previo."],
+      ["Proveedores y transferencias internacionales", "El formulario se procesa mediante Resend. Las compras se procesan en Hotmart y la activación de la app puede vincular el correo de compra con Supabase. El sitio se aloja en Vercel. Estos proveedores pueden tratar los datos en servidores ubicados fuera de Argentina, principalmente en Estados Unidos y Brasil, con garantías contractuales de protección de datos. Cada proveedor aplica sus propias condiciones de privacidad."],
+      ["Conservación", "Las consultas y solicitudes de aviso se conservan hasta 24 meses desde el último contacto. Los datos vinculados a compras se conservan durante el plazo que exigen las obligaciones fiscales y contables aplicables."],
+      ["Derechos", `Puede solicitar acceso, rectificación, actualización o supresión de sus datos escribiendo a ${contact.email}. El titular de los datos personales tiene la facultad de ejercer el derecho de acceso a los mismos en forma gratuita a intervalos no inferiores a seis meses, salvo que se acredite un interés legítimo al efecto, conforme a lo establecido en el artículo 14, inciso 3, de la Ley 25.326. La Agencia de Acceso a la Información Pública, órgano de control de la Ley 25.326, tiene la atribución de atender las denuncias y reclamos que se interpongan con relación al incumplimiento de las normas sobre protección de datos personales.`],
     ],
   },
   terms: {
