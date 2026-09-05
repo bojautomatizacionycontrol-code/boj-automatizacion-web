@@ -5,6 +5,20 @@ import heroContacto from "../assets/hero-contacto.jpg";
 import { track, whatsappUrl } from "../app/shared-eager.jsx";
 import { CheckItem, Icon, NotFound, PageShell, PrimaryLink, SecondaryLink, appLicensePlans, appProductUrl, icons } from "./shared.jsx";
 
+// Domicilios visibles en la página de contacto (decisión del titular, 5 de septiembre de 2026).
+// La identidad comercial legal (commercialIdentity.address) y el pie de página no cambian.
+const contactAddresses = Object.freeze([
+  "Culpina 63, Ciudad Autónoma de Buenos Aires, Argentina",
+  "Marcos Paz 913, San Miguel de Tucumán, Tucumán, Argentina",
+]);
+const contactAddressValue = (
+  <>
+    {contactAddresses[0]}
+    <br />
+    {contactAddresses[1]}
+  </>
+);
+
 const quickServices = [
   "Diagnóstico de fallas",
   "Automatización industrial",
@@ -315,7 +329,7 @@ function EnglishContactPage() {
         <div className="contact-panel">
           <h2>Contact details</h2><p className="contact-panel-intro">Use the form, email or WhatsApp. The information reaches the same technical team.</p>
           <ContactLine icon="Wrench" label="Technical contact" value={contact.responsible} />
-          <ContactLine icon="MapPin" label="Registered address" value={contact.location} />
+          <ContactLine icon="MapPin" label="Registered address" value={contactAddressValue} />
           <ContactLine icon="Globe" label="Coverage" value="All of Argentina · on site and remote" />
           <ContactLine icon="Mail" label="Email" value={contact.email} href={`mailto:${contact.email}`} />
           <ContactLine icon="Phone" label="WhatsApp" value={contact.whatsappDisplay} href={whatsappUrl("Hello, I am contacting BOJ from the English website.")} />
@@ -406,7 +420,7 @@ function PortugueseContactPage() {
           <h2>Dados de contato</h2>
           <p className="contact-panel-intro">Use o formulário, e-mail ou WhatsApp. As informações chegam à mesma equipe técnica.</p>
           <ContactLine icon="Wrench" label="Responsável técnico" value={contact.responsible} />
-          <ContactLine icon="MapPin" label="Endereço comercial" value={contact.location} />
+          <ContactLine icon="MapPin" label="Endereço comercial" value={contactAddressValue} />
           <ContactLine icon="Globe" label="Cobertura" value="Toda a Argentina · em planta e à distância" />
           <ContactLine icon="Mail" label="E-mail" value={contact.email} href={`mailto:${contact.email}`} />
           <ContactLine icon="Phone" label="WhatsApp" value={contact.whatsappDisplay} href={whatsappUrl("Olá, estou entrando em contato com a BOJ pelo site em português.")} />
@@ -534,7 +548,7 @@ function ContactPage() {
             más cómodo. La información llega al mismo equipo técnico.
           </p>
           <ContactLine icon="Wrench" label="Responsable" value={contact.responsible} />
-          <ContactLine icon="MapPin" label="Domicilio comercial" value={contact.location} />
+          <ContactLine icon="MapPin" label="Domicilio comercial" value={contactAddressValue} />
           <ContactLine icon="Globe" label="Cobertura" value="Toda Argentina · en planta y a distancia" />
           <ContactLine icon="Mail" label="Correo electrónico" value={contact.email} href={`mailto:${contact.email}`} />
           <ContactLine
