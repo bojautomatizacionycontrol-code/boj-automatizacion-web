@@ -34,6 +34,7 @@
 
 .contact-route-card {
   --contact-route-accent: #079bca;
+  --contact-route-action-color: #006b93;
   position: relative;
   display: flex;
   min-width: 0;
@@ -60,6 +61,7 @@
 
 .contact-route-card--urgent {
   --contact-route-accent: #e27232;
+  --contact-route-action-color: #b84e17;
 }
 
 .contact-route-card--training {
@@ -119,7 +121,7 @@
   align-items: center;
   gap: 0.5rem;
   margin-top: 1.2rem;
-  color: var(--contact-route-accent);
+  color: var(--contact-route-action-color, var(--contact-route-accent));
   font-size: 0.88rem;
   font-weight: 800;
 }
