@@ -12,10 +12,7 @@
 h1,
 h2,
 h3,
-.boj-hero-title,
-.mock-hero-copy h1,
-.app-pro-product-name,
-.s7-sales-eyebrow {
+.boj-hero-title {
   font-family: var(--font-display);
   font-synthesis: none;
 }
@@ -44,8 +41,7 @@ h3,
 /* Eyebrows: tracking amplio + display, sensacion editorial premium */
 .boj-hero-eyebrow,
 .mock-section .eyebrow,
-.s7-sales-kicker,
-.app-pro-product-name {
+.s7-sales-kicker {
   font-family: var(--font-display);
   letter-spacing: 0.14em;
   font-weight: 600;
@@ -493,14 +489,6 @@ h3,
 
 .s7-sales-offer-regular del {
   text-decoration: line-through;
-}
-
-.s7-sales-offer-savings {
-  margin: 0 0 12px;
-  color: #9fd9ef;
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.01em;
 }
 
 /* ── Panel de cierre S7: layout 2 columnas premium ──────────────────────── */

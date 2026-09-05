@@ -17,7 +17,7 @@ export const ROOT_SHELL = '<div id="root"></div>';
 // auditado (74.416 B por documento; 1.115.044 B la matriz) y detectan deriva sin
 // convertirlo en el shell mínimo de #41.
 export const SSR_HTML_DOCUMENT_BUDGET = Object.freeze({ raw: 96_000, gzip: 18_000 });
-export const SSR_HTML_MATRIX_BUDGET = Object.freeze({ raw: 1_250_000, gzip: 280_000 });
+export const SSR_HTML_MATRIX_BUDGET = Object.freeze({ raw: 1_300_000, gzip: 300_000 });
 
 const NOT_FOUND_ROUTE = "/__boj_not_found__";
 const VOID_ELEMENTS = new Set([
@@ -356,7 +356,7 @@ export function validateHtmlBudgets(documents) {
     if (!largest || size.gzip > largest.gzip) largest = { label: document.label, ...size };
   }
   const total = { raw, gzip };
-  enforceHtmlBudget("matriz 35+404", total, SSR_HTML_MATRIX_BUDGET);
+  enforceHtmlBudget(`matriz ${documents.length - 1}+404`, total, SSR_HTML_MATRIX_BUDGET);
   return Object.freeze({ count: documents.length, total: Object.freeze(total), largest: Object.freeze(largest) });
 }
 

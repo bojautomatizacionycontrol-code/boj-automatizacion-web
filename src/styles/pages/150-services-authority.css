@@ -4,24 +4,6 @@
   background: #f3f7fb;
 }
 
-.services-redesign-page .services-redesign-hero-grid {
-  grid-template-columns: minmax(0, 880px);
-  justify-content: start;
-  gap: 0;
-}
-
-.services-redesign-page .services-redesign-hero-copy {
-  max-width: 880px;
-}
-
-.services-redesign-page .services-redesign-hero-copy h1 {
-  max-width: 840px;
-}
-
-.services-redesign-page .services-redesign-hero-copy > p:not(.services-redesign-eyebrow) {
-  max-width: 780px;
-}
-
 .services-redesign-page .services-section-heading {
   max-width: 820px;
   margin-bottom: 30px;
@@ -122,108 +104,12 @@
   color: rgba(238, 248, 255, 0.78);
 }
 
-.services-works-section,
 .services-areas-section,
 .services-main-section {
   background:
     radial-gradient(circle at 12% 0%, rgba(0, 174, 234, 0.08), transparent 30%),
     linear-gradient(180deg, #ffffff 0%, #f3f7fb 100%);
   color: #071421;
-}
-
-.services-works-section {
-  padding-block: 60px 54px;
-}
-
-.services-works-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.services-work-card {
-  min-height: 190px;
-  display: grid;
-  grid-template-columns: minmax(150px, 34%) minmax(0, 1fr);
-  align-items: stretch;
-  overflow: hidden;
-  padding: 0;
-  border: 1px solid rgba(7, 37, 62, 0.12);
-  border-radius: 8px;
-  background: #ffffff;
-  box-shadow: 0 16px 36px rgba(2, 13, 30, 0.08);
-}
-
-.services-work-media {
-  position: relative;
-  min-height: 190px;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 24% 34%, rgba(0, 174, 234, 0.12), transparent 48%),
-    #f2f7fa;
-}
-
-.services-work-media::after {
-  content: "";
-  position: absolute;
-  inset: 0 -1px 0 auto;
-  width: 68%;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.58) 52%,
-    #ffffff 100%
-  );
-  pointer-events: none;
-}
-
-.services-work-media img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-  filter: saturate(0.96) contrast(1.02);
-}
-
-.services-work-content {
-  display: grid;
-  align-content: center;
-  min-width: 0;
-  padding: 24px 24px 24px 14px;
-}
-
-.services-work-card h3 {
-  margin: 0;
-  color: #071421;
-  font-size: clamp(1rem, 1.14vw, 1.16rem);
-  line-height: 1.18;
-}
-
-.services-work-card p {
-  margin: 9px 0 0;
-  color: #5b7081;
-  font-weight: 750;
-  line-height: 1.35;
-}
-
-.services-work-content span {
-  display: block;
-  max-width: 34rem;
-  margin-top: 10px;
-  color: #607689;
-  font-size: 0.92rem;
-  font-weight: 560;
-  line-height: 1.45;
-}
-
-.services-work-card--missing-media .services-work-media::before {
-  content: "";
-  position: absolute;
-  inset: 18px;
-  border: 1px solid rgba(0, 174, 234, 0.18);
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(0, 174, 234, 0.1), rgba(255, 255, 255, 0.18));
 }
 
 .services-areas-section {
@@ -475,26 +361,11 @@
   .services-field-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-
-  .services-works-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 920px) {
-  .services-works-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .services-work-card {
-    grid-template-columns: minmax(180px, 33%) minmax(0, 1fr);
-  }
 }
 
 @media (max-width: 760px) {
   .services-workflow-section,
   .services-field-section,
-  .services-works-section,
   .services-areas-section,
   .services-main-section,
   .services-secondary-section {
@@ -511,7 +382,6 @@
   }
 
   .services-field-grid,
-  .services-works-grid,
   .services-area-grid {
     grid-template-columns: 1fr;
   }
@@ -524,49 +394,11 @@
     padding: 18px;
   }
 
-  .services-work-card {
-    min-height: 172px;
-    grid-template-columns: minmax(122px, 38%) minmax(0, 1fr);
-    padding: 0;
-  }
-
-  .services-work-media {
-    min-height: 172px;
-  }
-
-  .services-work-content {
-    padding: 18px 16px 18px 10px;
-  }
-
   .services-primary-head {
     gap: 14px;
   }
 
   .services-redesign-cta {
     min-height: 260px;
-  }
-}
-
-@media (max-width: 420px) {
-  .services-work-card {
-    grid-template-columns: minmax(104px, 36%) minmax(0, 1fr);
-  }
-
-  .services-work-media,
-  .services-work-card {
-    min-height: 164px;
-  }
-
-  .services-work-content {
-    padding: 16px 14px 16px 8px;
-  }
-
-  .services-work-card h3 {
-    font-size: 0.95rem;
-  }
-
-  .services-work-content span {
-    font-size: 0.84rem;
-    line-height: 1.34;
   }
 }

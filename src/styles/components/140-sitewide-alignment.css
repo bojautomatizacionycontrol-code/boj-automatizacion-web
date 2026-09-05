@@ -2,8 +2,7 @@
 /* BOJ sitewide commercial alignment */
 .mock-home,
 .services-redesign-page,
-.courses-redesign-page,
-.page-hero + .section {
+.courses-redesign-page {
   overflow-x: hidden;
   font-size: 16px;
   letter-spacing: 0;
@@ -19,21 +18,14 @@
 
 .mock-home p,
 .services-redesign-page p,
-.courses-redesign-page p,
-.page-hero + .section p,
-.page-hero + .section li,
-.page-hero + .section label,
-.page-hero + .section input,
-.page-hero + .section select,
-.page-hero + .section textarea {
+.courses-redesign-page p {
   font-size: max(0.9375rem, 15px);
   line-height: 1.55;
 }
 
 .mock-home .mock-btn,
 .services-redesign-page .mock-btn,
-.courses-redesign-page .mock-btn,
-.page-hero + .section .btn {
+.courses-redesign-page .mock-btn {
   min-height: 42px;
   padding: 11px 18px;
   border-radius: 6px;
@@ -41,33 +33,6 @@
   font-weight: 900;
 }
 
-.page-hero {
-  padding: 58px 0 48px;
-  border-bottom: 1px solid rgba(0, 200, 255, 0.18);
-  background:
-    radial-gradient(circle at 80% 0%, rgba(0, 200, 255, 0.16), transparent 34%),
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(180deg, #061827 0%, #020d1e 100%);
-  background-size: auto, 44px 44px, 44px 44px, auto;
-}
-
-.page-hero h1 {
-  max-width: 900px;
-  color: #ffffff;
-  font-size: clamp(2.05rem, 3.1vw, 3.45rem);
-  line-height: 1.05;
-  font-weight: 900;
-}
-
-.page-hero p:not(.eyebrow) {
-  max-width: 760px;
-  color: rgba(238, 248, 255, 0.84);
-  font-size: 1.05rem;
-  line-height: 1.55;
-}
-
-.page-hero .eyebrow,
 .section-header .eyebrow,
 .resources-intro-panel .eyebrow,
 .contact-direct .eyebrow,
@@ -77,16 +42,6 @@
   letter-spacing: 0.08em;
 }
 
-.page-hero + .section {
-  padding: 58px 0 72px;
-  background:
-    radial-gradient(circle at 12% 0%, rgba(0, 183, 232, 0.08), transparent 30%),
-    linear-gradient(180deg, #f3f7fb 0%, #ffffff 100%);
-  color: #071421;
-}
-
-.page-hero + .section h2,
-.page-hero + .section h3,
 .section-header h2 {
   color: #071421;
   letter-spacing: 0;
@@ -108,76 +63,13 @@
   font-size: 1rem;
 }
 
-.page-hero + .section .btn.primary {
-  color: #02111f;
-  background: linear-gradient(135deg, #00c8ff, #00aee8);
-  box-shadow: 0 14px 30px rgba(0, 174, 234, 0.2);
-}
-
-.page-hero + .section .btn.secondary {
-  color: #052235;
-  border-color: rgba(0, 174, 234, 0.28);
-  background: rgba(0, 174, 234, 0.08);
-}
-
-.page-hero + .section .check-item {
-  color: #344b5f;
-}
-
-.page-hero + .section .check-item svg {
-  color: #00aee8;
-}
-
 .mock-home {
   background: #f3f7fb;
 }
 
-.mock-hero {
-  min-height: 460px;
-  background: #020d1e;
-  border-bottom: 1px solid rgba(0, 200, 255, 0.18);
-}
-
-.mock-hero-bg {
-  opacity: 0.92;
-  filter: brightness(1.08) contrast(1.04) saturate(0.96);
-}
-
-.mock-hero-shade {
-  background:
-    linear-gradient(90deg, rgba(2, 13, 30, 0.98) 0%, rgba(2, 13, 30, 0.88) 38%, rgba(2, 13, 30, 0.36) 72%, rgba(2, 13, 30, 0.1) 100%),
-    linear-gradient(180deg, rgba(2, 13, 30, 0.06), rgba(2, 13, 30, 0.48));
-}
-
-.mock-hero-grid {
-  grid-template-columns: minmax(0, 1fr);
-  gap: 22px;
-  padding: 52px 0 46px;
-}
-
-.mock-hero-copy h1 {
-  max-width: 620px;
-  font-size: clamp(2.35rem, 3.35vw, 3.55rem);
-  line-height: 1.05;
-  font-weight: 900;
-}
-
-.mock-hero-copy p {
-  max-width: 620px;
-  margin-top: 14px;
-  color: rgba(244, 250, 255, 0.88);
-  font-size: 1.03rem;
-  line-height: 1.52;
-}
-
-.mock-hero-actions,
 .mock-final-actions {
   gap: 12px;
   margin-top: 20px;
-}
-
-.mock-hero-actions .mock-btn {
-  min-width: 178px;
 }
 
 .mock-section {
@@ -185,98 +77,11 @@
   background: #f3f7fb;
 }
 
-.mock-work {
-  padding-top: 50px;
-  border-bottom: 1px solid #d9e5ee;
-}
-
 .mock-section h2,
 .mock-tech-strip h2 {
   margin-bottom: 22px;
   font-size: clamp(1.65rem, 2.35vw, 2.35rem);
   line-height: 1.08;
-}
-
-.mock-work-grid {
-  gap: 18px;
-}
-
-.mock-work-card {
-  position: relative;
-  min-height: 132px;
-  grid-template-columns: 64px minmax(0, 1fr);
-  gap: 18px;
-  padding: 22px;
-  border-color: rgba(7, 37, 62, 0.12);
-  border-radius: 8px;
-  background: #ffffff;
-  color: inherit;
-  text-decoration: none;
-  box-shadow: 0 14px 32px rgba(2, 13, 30, 0.07);
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.mock-work-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(0, 174, 234, 0.38);
-  box-shadow: 0 18px 38px rgba(2, 13, 30, 0.12);
-}
-
-.mock-work-card:focus-visible {
-  outline: 3px solid rgba(0, 174, 234, 0.72);
-  outline-offset: 4px;
-}
-
-.mock-work-card-copy {
-  min-width: 0;
-}
-
-.mock-work-card p {
-  color: #4d6274;
-  font-size: 0.95rem;
-  line-height: 1.48;
-}
-
-.mock-work-card-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  min-height: 44px;
-  margin-top: 8px;
-  color: #007ca8;
-  font-size: 0.9rem;
-  font-weight: 850;
-}
-
-.mock-work-card-cta svg {
-  transition: transform 180ms ease;
-}
-
-.mock-work-card:hover .mock-work-card-cta svg,
-.mock-work-card:focus-visible .mock-work-card-cta svg {
-  transform: translateX(3px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mock-work-card,
-  .mock-work-card-cta svg {
-    transition: none;
-  }
-
-  .mock-work-card:hover {
-    transform: none;
-  }
-}
-
-.mock-icon-circle {
-  width: 58px;
-  height: 58px;
-  border-color: rgba(0, 174, 234, 0.2);
-  background: rgba(0, 174, 234, 0.08);
-  color: #00aee8;
 }
 
 .mock-problems {
@@ -641,31 +446,6 @@
     top: 8%;
     right: 0;
   }
-}
-
-.services-redesign-hero,
-.courses-hero {
-  min-height: 430px;
-}
-
-.services-redesign-hero-grid,
-.courses-hero-content {
-  width: min(calc(100% - 72px), 1240px);
-  padding-block: 52px 48px;
-}
-
-.services-redesign-hero-copy h1,
-.courses-hero-content h1 {
-  max-width: 760px;
-  font-size: clamp(2.35rem, 3.55vw, 3.55rem);
-  line-height: 1.04;
-}
-
-.services-redesign-hero-copy > p:not(.services-redesign-eyebrow),
-.courses-hero-content > p {
-  max-width: 700px;
-  font-size: 1.03rem;
-  line-height: 1.55;
 }
 
 .services-redesign-section,
@@ -1182,19 +962,15 @@
 }
 
 .app-pro-include-card p,
-.app-pro-benefit-card p,
-.app-pro-real-view-card p,
 .app-pro-offline-items p,
 .app-pro-trust-metrics p {
   font-size: max(0.9375rem, 15px);
 }
 
-.page-hero .eyebrow,
 .section-header .eyebrow,
 .resources-intro-panel .eyebrow,
 .contact-direct .eyebrow,
-.official-links-panel .eyebrow,
-.services-redesign-eyebrow {
+.official-links-panel .eyebrow {
   font-size: max(0.9375rem, 15px);
 }
 
@@ -1212,85 +988,6 @@
 .app-pro-page .mock-btn {
   min-height: 44px;
   font-size: max(0.9375rem, 15px);
-}
-
-.app-pro-hero {
-  height: 468px;
-  min-height: 468px;
-  max-height: 480px;
-}
-
-.app-pro-hero-bg {
-  filter: brightness(1.22) contrast(1.03) saturate(1.04);
-}
-
-.app-pro-hero-shade {
-  background:
-    linear-gradient(90deg, rgba(2, 11, 20, 0.99) 0%, rgba(2, 11, 20, 0.93) 36%, rgba(2, 11, 20, 0.44) 67%, rgba(2, 11, 20, 0.04) 100%),
-    linear-gradient(180deg, rgba(2, 11, 20, 0) 0%, rgba(2, 11, 20, 0.34) 100%);
-}
-
-.app-pro-hero-content {
-  min-height: 468px;
-  padding-block: 24px 18px;
-}
-
-.app-pro-hero-copy,
-.app-pro-hero-copy h1,
-.app-pro-hero-copy > p:not(.app-pro-product-name),
-.app-pro-hero-badges {
-  max-width: 620px;
-}
-
-.app-pro-hero-copy {
-  gap: 7px;
-}
-
-.app-pro-hero-copy h1 {
-  font-size: clamp(2.2rem, 3.28vw, 3rem);
-  line-height: 1.05;
-  font-weight: 900;
-}
-
-.app-pro-hero-copy h1::after {
-  width: 92px;
-  margin-top: 8px;
-}
-
-.app-pro-product-name {
-  font-size: max(0.9375rem, 15px);
-}
-
-.app-pro-hero-copy > p:not(.app-pro-product-name) {
-  font-size: max(0.9375rem, 15px);
-  line-height: 1.42;
-}
-
-.app-pro-actions {
-  gap: 10px;
-  margin-top: 2px;
-}
-
-.app-pro-actions .mock-btn {
-  min-height: 40px;
-  padding-inline: 18px;
-}
-
-.app-pro-hero-badges {
-  gap: 7px;
-  margin-top: 1px;
-}
-
-.app-pro-hero-badge {
-  min-height: 34px;
-  padding: 6px 9px;
-  font-size: max(0.875rem, 14px);
-  line-height: 1.1;
-}
-
-.app-pro-hero-badge svg {
-  width: 15px;
-  height: 15px;
 }
 
 .app-pro-problems-how-section {
@@ -1361,41 +1058,17 @@
   gap: 14px;
 }
 
-.app-pro-include-card,
-.app-pro-benefit-card {
+.app-pro-include-card {
   min-height: 150px;
   padding: 18px 17px;
 }
 
-.app-pro-include-card h3,
-.app-pro-benefit-card h3 {
+.app-pro-include-card h3 {
   font-size: max(1rem, 16px);
 }
 
-.app-pro-include-card p,
-.app-pro-benefit-card p {
+.app-pro-include-card p {
   font-size: max(0.9375rem, 15px);
-}
-
-.app-pro-real-view-card {
-  grid-template-rows: 224px auto;
-  min-height: 0;
-}
-
-.app-pro-real-view-card figure {
-  height: 224px;
-  background: #06101a;
-}
-
-.app-pro-real-view-trigger,
-.app-pro-real-view-trigger img,
-.app-pro-real-view-card img {
-  background: #06101a;
-  object-fit: contain;
-}
-
-.app-pro-real-view-card div {
-  padding: 14px 16px 15px;
 }
 
 .app-pro-language-card {
@@ -1466,22 +1139,6 @@
   font-size: max(0.75rem, 12px);
 }
 
-.app-pro-trial-section {
-  padding: 18px 0;
-}
-
-.app-pro-trial-grid {
-  gap: 16px;
-}
-
-.app-pro-trial-grid h2 {
-  font-size: clamp(1.45rem, 2.2vw, 2rem);
-}
-
-.app-pro-trial-grid p {
-  font-size: max(0.9375rem, 15px);
-}
-
 .app-pro-faq-grid {
   gap: 10px 12px;
 }
@@ -1497,15 +1154,6 @@
 }
 
 @media (max-width: 1180px) {
-  .app-pro-hero,
-  .app-pro-hero-content {
-    height: auto;
-    min-height: 460px;
-  }
-
-  .app-pro-hero-copy h1 {
-    font-size: clamp(2.15rem, 4.25vw, 2.65rem);
-  }
 
   .app-pro-problems-how-grid,
   .app-pro-real-language-grid {
@@ -1534,51 +1182,6 @@
     font-size: max(0.9375rem, 15px);
   }
 
-  .app-pro-hero {
-    height: auto;
-    min-height: 0;
-    max-height: none;
-  }
-
-  .app-pro-hero-bg {
-    object-position: 70% center;
-  }
-
-  .app-pro-hero-shade {
-    background:
-      linear-gradient(90deg, rgba(2, 11, 20, 0.99) 0%, rgba(2, 11, 20, 0.88) 100%),
-      linear-gradient(180deg, rgba(2, 11, 20, 0.1) 0%, rgba(2, 11, 20, 0.76) 100%);
-  }
-
-  .app-pro-hero-content {
-    height: auto;
-    min-height: 0;
-    padding-block: 34px 24px;
-  }
-
-  .app-pro-hero-copy {
-    gap: 10px;
-  }
-
-  .app-pro-hero-copy h1 {
-    font-size: clamp(1.55rem, 7.4vw, 2.05rem);
-    line-height: 1.06;
-  }
-
-  .app-pro-product-name {
-    font-size: max(0.9375rem, 15px);
-  }
-
-  .app-pro-hero-copy > p:not(.app-pro-product-name) {
-    font-size: max(0.9375rem, 15px);
-    line-height: 1.44;
-  }
-
-  .app-pro-hero-badge {
-    min-height: 36px;
-    font-size: max(0.875rem, 14px);
-  }
-
   .app-pro-problems-how-section,
   .app-pro-includes-section,
   .app-pro-real-language-section,
@@ -1592,7 +1195,6 @@
   .app-pro-how-steps,
   .app-pro-problem-grid,
   .app-pro-include-grid,
-  .app-pro-real-view-grid,
   .app-pro-plan-grid,
   .app-pro-faq-grid {
     grid-template-columns: 1fr;
@@ -1610,15 +1212,6 @@
     grid-row: span 2;
   }
 
-  .app-pro-real-view-card {
-    grid-template-rows: 190px auto;
-  }
-
-  .app-pro-real-view-card figure {
-    height: 190px;
-  }
-
-  .app-pro-real-view-card div,
   .app-pro-language-card {
     padding: 16px;
   }
@@ -1636,17 +1229,6 @@
     width: 118px;
     height: 118px;
   }
-
-  .app-pro-trial-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    text-align: center;
-  }
-
-  .app-pro-trial-grid .mock-btn {
-    width: 100%;
-    min-width: 0;
-  }
 }
 
 @media (max-width: 1180px) {
@@ -1654,15 +1236,11 @@
   .services-redesign-page .mock-home-container,
   .courses-redesign-page .mock-home-container,
   .boj-hero .mock-home-container,
-  .section-container,
-  .services-redesign-hero-grid,
-  .courses-hero-content {
+  .section-container {
     width: min(calc(100% - 48px), 1060px);
   }
 
-  .mock-hero-grid,
   .mock-app-grid,
-  .services-redesign-hero-grid,
   .course-available-card,
   .course-landing,
   .contact-grid,
@@ -1681,52 +1259,16 @@
   .services-redesign-page .mock-home-container,
   .courses-redesign-page .mock-home-container,
   .boj-hero .mock-home-container,
-  .section-container,
-  .services-redesign-hero-grid,
-  .courses-hero-content {
+  .section-container {
     width: min(calc(100% - 28px), 560px);
   }
 
   .mock-home,
   .services-redesign-page,
-  .courses-redesign-page,
-  .page-hero + .section {
+  .courses-redesign-page {
     font-size: 15px;
   }
 
-  .mock-hero,
-  .services-redesign-hero,
-  .courses-hero {
-    min-height: auto;
-  }
-
-  .mock-hero-grid,
-  .services-redesign-hero-grid,
-  .courses-hero-content {
-    padding-block: 42px 34px;
-  }
-
-  .services-redesign-hero-grid {
-    gap: 16px;
-  }
-
-  .mock-hero-copy h1,
-  .services-redesign-hero-copy h1,
-  .courses-hero-content h1,
-  .page-hero h1 {
-    font-size: clamp(1.8rem, 8.5vw, 2.25rem);
-    line-height: 1.06;
-  }
-
-  .mock-hero-copy p,
-  .services-redesign-hero-copy > p:not(.services-redesign-eyebrow),
-  .courses-hero-content > p,
-  .page-hero p:not(.eyebrow) {
-    font-size: 0.95rem;
-    line-height: 1.48;
-  }
-
-  .mock-hero-actions,
   .mock-final-actions,
   .services-redesign-actions,
   .courses-actions,
@@ -1737,8 +1279,7 @@
 
   .mock-home .mock-btn,
   .services-redesign-page .mock-btn,
-  .courses-redesign-page .mock-btn,
-  .page-hero + .section .btn {
+  .courses-redesign-page .mock-btn {
     width: 100%;
     min-height: 44px;
     white-space: normal;
@@ -1751,12 +1292,10 @@
   .services-redesign-section,
   .courses-light-section,
   .courses-available-section,
-  .courses-learning-section,
-  .page-hero + .section {
+  .courses-learning-section {
     padding-block: 34px;
   }
 
-  .mock-work-grid,
   .mock-problems-grid,
   .mock-tech-grid,
   .resources-index-grid,
@@ -1766,11 +1305,6 @@
   .services-main-grid,
   .services-secondary-grid {
     grid-template-columns: 1fr;
-  }
-
-  .mock-work-card {
-    grid-template-columns: 48px minmax(0, 1fr);
-    padding: 18px 16px;
   }
 
   .mock-problem-item {
@@ -1827,10 +1361,6 @@
 }
 
 /* BOJ sitewide final legibility polish */
-.services-redesign-hero-copy h1,
-.courses-hero-content h1 {
-  line-height: 1.08;
-}
 
 .training-strip span,
 .training-strip.page-strip span,
@@ -1846,15 +1376,6 @@
 
 .resources-intro-panel h2,
 .resources-intro-panel > div h2 {
-  color: #ffffff;
-}
-
-.page-hero + .section .resources-intro-panel h2 {
-  color: #ffffff;
-}
-
-.page-hero + .section .contact-direct h2,
-.page-hero + .section .route-cta h2 {
   color: #ffffff;
 }
 
@@ -1913,10 +1434,6 @@
 }
 
 @media (max-width: 760px) {
-  .services-redesign-hero-copy h1,
-  .courses-hero-content h1 {
-    line-height: 1.08;
-  }
 
   .mock-home .mock-final-content {
     grid-template-columns: 1fr;
@@ -1929,20 +1446,6 @@
 
   .mock-home .mock-final-actions {
     justify-content: stretch;
-  }
-
-  .services-redesign-hero-grid {
-    gap: 14px;
-    padding-block: 34px 28px;
-  }
-
-  .services-redesign-hero-copy h1 {
-    font-size: clamp(1.72rem, 7.4vw, 2.08rem);
-  }
-
-  .services-redesign-hero-copy > p:not(.services-redesign-eyebrow) {
-    font-size: max(0.9375rem, 15px);
-    line-height: 1.42;
   }
 
   .services-redesign-actions {

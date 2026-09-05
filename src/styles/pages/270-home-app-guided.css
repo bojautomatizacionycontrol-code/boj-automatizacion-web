@@ -301,41 +301,6 @@
   transform-origin: left top;
 }
 
-.app-hero-diagnostic-preview-screen--device-composite {
-  aspect-ratio: 797 / 453;
-  overflow: visible;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-.app-hero-diagnostic-preview-clip {
-  position: absolute;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-}
-
-.app-hero-diagnostic-preview-screen--device-composite img {
-  object-fit: contain;
-  object-position: center;
-  -webkit-clip-path: url("#app-hero-device-silhouette");
-  clip-path: url("#app-hero-device-silhouette");
-  filter: drop-shadow(0 16px 18px rgba(0, 8, 15, 0.34));
-}
-
-.app-hero-diagnostic-preview-focus {
-  position: absolute;
-  top: 5%;
-  left: 2%;
-  width: 96%;
-  height: 29%;
-  border: 1px solid rgba(69, 213, 255, 0.72);
-  border-radius: 9px;
-  box-shadow: 0 0 0 999px rgba(1, 10, 17, 0.08), 0 0 28px rgba(69, 213, 255, 0.2);
-  animation: app-diagnostic-focus 3.2s ease-in-out infinite;
-}
-
 .app-hero-diagnostic-preview-stages {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -401,11 +366,6 @@
 @keyframes app-diagnostic-status {
   0%, 100% { opacity: 0.55; }
   50% { opacity: 1; }
-}
-
-@keyframes app-diagnostic-focus {
-  0%, 100% { border-color: rgba(69, 213, 255, 0.45); }
-  50% { border-color: rgba(69, 213, 255, 0.95); }
 }
 
 .app-pro-quick-access {
@@ -815,8 +775,7 @@
     transform: none;
   }
 
-  .app-hero-diagnostic-preview-head small span,
-  .app-hero-diagnostic-preview-focus {
+  .app-hero-diagnostic-preview-head small span {
     animation: none;
   }
 }

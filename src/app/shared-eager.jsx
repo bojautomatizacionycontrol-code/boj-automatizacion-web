@@ -53,7 +53,7 @@ const m2ImageSpecs = new Map([
   [heroContacto, heroM2Spec("hero-contacto")],
   [courseS7400Visual, { stem: "course-s7-400", width: 2172, height: 724, widths: [640, 960, 1280], formats: ["avif", "webp"], sizes: "(max-width: 760px) 100vw, 35vw" }],
   [courseTiaPortalVisual, { stem: "course-tia-portal", width: 2172, height: 724, widths: [640, 960, 1280], formats: ["avif", "webp"], sizes: "(max-width: 760px) 100vw, 35vw" }],
-  [bojLogo, { stem: "boj-logo-real-cropped", width: 730, height: 232, widths: [240, 480], formats: ["webp"], sizes: "232px" }],
+  [bojLogo, { stem: "boj-logo-real-cropped", width: 730, height: 232, widths: [240, 480], formats: ["avif", "webp"], sizes: "232px" }],
 ]);
 
 function getM2SourceSet(spec, format) {

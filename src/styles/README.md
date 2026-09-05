@@ -26,5 +26,8 @@ Reglas de evolución:
 3. No mover imports ni trasladar overrides históricos sin una comparación
    visual y de estilos computados específica.
 4. Ejecutar `node --test test/web-m3-css-modularity.test.mjs` después de tocar
-   el manifiesto o una frontera. El hash de equivalencia sólo debe cambiar ante
-   una modificación visual deliberada, nunca por una reorganización.
+   el manifiesto o una frontera. Desde septiembre de 2026 la prueba verifica
+   estructura y presupuesto, no un hash: el build exige menos de 400 KB sin
+   comprimir y cada regla debe apuntar a una clase, id o atributo presente en
+   `src/` o en el HTML prerenderizado. Las reglas huérfanas se purgaron en la
+   tanda 4 (1331 reglas, 32 % del código fuente); no reintroducir CSS sin uso.
