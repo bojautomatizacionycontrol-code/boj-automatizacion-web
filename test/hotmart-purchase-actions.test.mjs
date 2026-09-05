@@ -125,7 +125,8 @@ test("los legales enlazan solicitud, seguimiento, cancelación y soportes sin us
 
 test("las gestiones de compra se ven en móvil y escritorio con foco visible", () => {
   assert.match(stylesSource, /\.purchase-actions \{[^}]*background: #f3f7fa;[^}]*color: #071421;/);
-  assert.match(stylesSource, /\.purchase-action-link \{[^}]*background: #006b93;[^}]*color: #ffffff;/);
+  assert.match(stylesSource, /\.purchase-action-link \{[^}]*border: 1\.5px solid #006b93;[^}]*background: #ffffff;[^}]*color: #006b93;/);
+  assert.match(stylesSource, /\.purchase-action-link:hover \{[^}]*background: #006b93;[^}]*color: #ffffff;/);
   assert.match(stylesSource, /\.purchase-action-link:focus-visible,\s*\.purchase-actions-support a:focus-visible \{[^}]*outline: 3px solid #071421;/);
   assert.match(stylesSource, /@media \(max-width: 760px\) \{\s*\.purchase-actions-list \{\s*grid-template-columns: minmax\(0, 1fr\);/);
   assert.doesNotMatch(stylesSource, /\.purchase-action[a-z-]*[^{]*\{[^}]*display:\s*none/);

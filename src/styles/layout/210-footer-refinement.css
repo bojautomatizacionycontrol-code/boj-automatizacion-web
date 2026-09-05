@@ -111,9 +111,10 @@
 
 /* Gestiones de compra ────────────────────────────────────────────────────────
    Banda global discreta antes del pie: enlaces oficiales de Hotmart (arrepentimiento,
-   baja de servicio, seguimiento y soporte). Fondo claro, contraste AA y foco visible. */
+   baja de servicio, seguimiento y soporte). Compacta y de bajo protagonismo visual,
+   con contraste AA y foco visible. Los rótulos y destinos no cambian. */
 .purchase-actions {
-  padding: clamp(28px, 3vw, 40px) 0;
+  padding: 18px 0 20px;
   border-top: 1px solid #d6e4ec;
   background: #f3f7fa;
   color: #071421;
@@ -121,34 +122,37 @@
 
 .purchase-actions-inner {
   display: grid;
-  gap: 18px;
+  grid-template-columns: minmax(220px, 0.9fr) minmax(0, 2fr);
+  gap: 10px 32px;
+  align-items: start;
 }
 
 .purchase-actions-copy h2 {
-  margin: 0 0 6px;
-  color: #071421;
-  font-size: 1.05rem;
-  font-weight: 900;
-  letter-spacing: 0.01em;
+  margin: 0 0 4px;
+  color: #41586b;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .purchase-actions-copy p,
 .purchase-actions-list p,
 .purchase-actions-support {
   margin: 0;
-  color: #41586b;
-  font-size: 0.92rem;
-  line-height: 1.5;
+  color: #5b6f80;
+  font-size: 0.78rem;
+  line-height: 1.45;
 }
 
 .purchase-actions-copy p {
-  max-width: 78ch;
+  max-width: 44ch;
 }
 
 .purchase-actions-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px 24px;
+  gap: 10px 20px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -156,31 +160,31 @@
 
 .purchase-actions-list li {
   display: grid;
-  gap: 8px;
+  gap: 5px;
   align-content: start;
 }
 
 .purchase-action-link {
   display: inline-flex;
-  min-height: 46px;
+  min-height: 36px;
   align-items: center;
   justify-content: center;
   justify-self: start;
-  padding: 0 22px;
-  border: 2px solid #006b93;
-  border-radius: 6px;
-  background: #006b93;
-  color: #ffffff;
-  font-size: 0.9rem;
-  font-weight: 900;
-  letter-spacing: 0.06em;
+  padding: 0 14px;
+  border: 1.5px solid #006b93;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #006b93;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
   text-align: center;
   text-decoration: none;
 }
 
 .purchase-action-link:hover {
-  background: #00527a;
-  border-color: #00527a;
+  background: #006b93;
+  color: #ffffff;
 }
 
 .purchase-action-link:focus-visible,
@@ -190,16 +194,23 @@
 }
 
 .purchase-actions-support {
+  grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 22px;
+  gap: 4px 18px;
 }
 
 .purchase-actions-support a {
   color: #006b93;
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .purchase-actions-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (max-width: 760px) {
@@ -210,5 +221,6 @@
   .purchase-action-link {
     width: 100%;
     justify-self: stretch;
+    min-height: 40px;
   }
 }
