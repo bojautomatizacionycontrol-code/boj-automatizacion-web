@@ -14,11 +14,11 @@ assert.ok(visualEnd > visualStart, "No se pudo delimitar AppDiagnosticMockup");
 const visualSource = homeSource.slice(visualStart, visualEnd);
 
 test("restaura una composición compacta con capturas vigentes en Home", () => {
-  assert.match(homeSource, /import appSeleccionSintoma from "\.\.\/assets\/app-seleccion-sintoma-v8-17-24\.jpg"/);
-  assert.match(homeSource, /import appVerificacionGuiada from "\.\.\/assets\/app-verificacion-guiada-v8-17-24\.jpg"/);
-  assert.match(visualSource, /src=\{appVerificacionGuiada\}[\s\S]*?width="1460"[\s\S]*?height="675"/);
-  assert.match(visualSource, /className="app-mobile-screen"[\s\S]*?src=\{appSeleccionSintoma\}/);
-  assert.match(visualSource, /src=\{appSeleccionSintoma\}[\s\S]*?width="1000"[\s\S]*?height="455"/);
+  assert.match(homeSource, /import appEstadoCpuDesktop from "\.\.\/assets\/app-estado-cpu-desktop-v8-4-15\.jpg"/);
+  assert.match(homeSource, /import appEstadoCpuMobile from "\.\.\/assets\/app-estado-cpu-mobile-v7-3\.png"/);
+  assert.match(visualSource, /src=\{appEstadoCpuDesktop\}[\s\S]*?width="1672"[\s\S]*?height="941"/);
+  assert.match(visualSource, /className="app-mobile-screen"[\s\S]*?src=\{appEstadoCpuMobile\}/);
+  assert.match(visualSource, /src=\{appEstadoCpuMobile\}[\s\S]*?width="594"[\s\S]*?height="919"/);
   assert.doesNotMatch(
     visualSource,
     /appDiagnosticoGuiado|appSadDevicePreview|app-sad-device-preview|APP\.png|boj-s7-plc-real-capture/,
@@ -32,7 +32,7 @@ test("el marco recupera la proporción histórica sin la franja negra", () => {
   );
   assert.match(
     stylesSource,
-    /\.app-desktop-screen img\s*\{[^}]*width:\s*100%;[^}]*height:\s*auto;[^}]*aspect-ratio:\s*auto;/,
+    /\.app-desktop-screen img\s*\{[^}]*width:\s*100%;[^}]*height:\s*auto;[^}]*aspect-ratio:\s*1460\s*\/\s*675;[^}]*object-fit:\s*cover;[^}]*object-position:\s*center top;/,
   );
   assert.match(
     stylesSource,
@@ -48,7 +48,7 @@ test("el marco recupera la proporción histórica sin la franja negra", () => {
   );
   assert.match(
     stylesSource,
-    /\.app-mobile-screen img\s*\{[^}]*width:\s*420%;[^}]*max-width:\s*none;[^}]*height:\s*auto;[^}]*object-fit:\s*contain;[^}]*object-position:\s*left top;/,
+    /\.app-mobile-screen img\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;[^}]*object-fit:\s*cover;[^}]*object-position:\s*30% top;/,
   );
   assert.match(
     stylesSource,
