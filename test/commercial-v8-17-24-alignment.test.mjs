@@ -174,14 +174,17 @@ test("centraliza las cuatro ofertas verificadas sin alterar precios ni checkouts
 test("publica identidad comercial ratificada en los tres documentos y conserva privacidad separada", () => {
   const expectedIdentity = {
     seller: "Hexa Group Holding SAS",
+    taxId: "30-71955124-2",
     owner: "Walter Adrián Boj",
     ownedBrands: "BOJ Automatización y BOJ S7-PLC",
     authorization: "Comercialización autorizada por el titular",
+    brand: "BOJ Automatización y Control",
+    product: "BOJ S7-PLC",
     address: "Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina",
     institutionalEmail: "contacto@hexagroup.com.ar",
     supportEmail: "contacto@bojautomatizacion.com",
-    phone: "+54 381 5327469",
-    hours: "Lunes a viernes de 9:00 a 16:00, hora argentina, excepto feriados",
+    phone: "+54 9 381 532-7469",
+    hours: "Lunes a viernes de 09:00 a 17:00, hora de Argentina, excepto feriados",
     responseTime: "Dentro de 48 horas hábiles",
     website: "www.bojautomatizacion.com",
     taxStatus: "Responsable Inscripto",
@@ -202,7 +205,12 @@ test("publica identidad comercial ratificada en los tres documentos y conserva p
   assert.match(appSource, /commercialIdentity\.supportEmail/);
   assert.match(appSource, /commercialIdentity\.taxStatus/);
   assert.match(appSource, /commercialIdentity\.invoicing/);
-  assert.doesNotMatch(publicTextCorpus, /\bCUIT\b|\b\d{2}-\d{8}-\d\b/);
+  // Decisión del titular (5 de septiembre de 2026): se publica la identificación básica del vendedor.
+  assert.match(appSource, /<dt>CUIT<\/dt><dd>\{commercialIdentity\.taxId\}<\/dd>/);
+  assert.match(appSource, /<dt>Marca comercial<\/dt><dd>\{commercialIdentity\.brand\}<\/dd>/);
+  assert.match(appSource, /<dt>Producto asociado<\/dt><dd>\{commercialIdentity\.product\}<\/dd>/);
+  assert.equal(commercialIdentity.taxId, "30-71955124-2");
+  assert.doesNotMatch(publicTextCorpus, /Ingresos Brutos|\bCBU\b|ficha de proveedor|960\/D|Data Fiscal|arca\.gob\.ar/i);
   assert.doesNotMatch(publicTextCorpus, /contrato exclusivo firmado|autorización exclusiva/i);
 
   const privacyStart = appSource.indexOf("  privacy: {");
@@ -213,8 +221,9 @@ test("publica identidad comercial ratificada en los tres documentos y conserva p
   assert.doesNotMatch(privacySource, /showCommercialIdentity|Hexa Group Holding SAS/);
 
   assert.doesNotMatch(appSource, /Lunes a viernes de 8:00 a 18:00|Respondemos normalmente dentro/);
-  assert.doesNotMatch(publicTextCorpus, /\+54 9 381 5327469|\+5493815327469/);
-  assert.match(indexSource, /"telephone": "\+543815327469"/);
+  assert.doesNotMatch(publicTextCorpus, /\+54 381 5327469|\+543815327469|9:00 a 16:00/);
+  assert.match(indexSource, /"telephone": "\+5493815327469"/);
+  assert.match(indexSource, /"taxID": "30-71955124-2"/);
   assert.match(indexSource, /"streetAddress": "Culpina 63, piso 5°, departamento C"/);
   assert.equal((indexSource.match(/"Ciudad Autónoma de Buenos Aires"/g) || []).length, 2);
   assert.match(appSource, /<dd>\{commercialIdentity\.hours\}<\/dd>/);

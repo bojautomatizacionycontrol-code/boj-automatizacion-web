@@ -16,7 +16,7 @@ async function fileHash(path) {
 
 test("backend de contacto y alineación comercial permanecen byte a byte", async () => {
   assert.equal(await fileHash("../api/contact.js"), "55E987AD98E485669F6A2A415EB3508794B4D004C06E035DA7C121AA97BE7C24");
-  assert.equal(await fileHash("../COMMERCIAL_ALIGNMENT_V8_17_24.md"), "7B82BEBD9C24A68C061E0DB0F5BA845476712E1703E7A5FA6D260EB53D82F8CA");
+  assert.equal(await fileHash("../COMMERCIAL_ALIGNMENT_V8_17_24.md"), "4D4CE1C89BDB88620D88FE6B0ED1A2789C22764135DAF9009848AA779CB0AFC7");
 });
 
 test("identidad precios garantía y URLs conservan la fuente aprobada", () => {

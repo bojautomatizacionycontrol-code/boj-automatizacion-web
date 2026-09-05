@@ -307,8 +307,9 @@ function sellerNode() {
     "@id": `${SITE_ORIGIN}/#seller`,
     name: commercialIdentity.seller,
     legalName: commercialIdentity.seller,
+    taxID: commercialIdentity.taxId,
     email: commercialIdentity.institutionalEmail,
-    telephone: "+543815327469",
+    telephone: "+5493815327469",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Culpina 63, piso 5°, departamento C",
