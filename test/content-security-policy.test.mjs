@@ -86,8 +86,8 @@ test("clasifica las propiedades React sin abrir style-src-attr y mantiene dorman
   assert.equal((appSource.match(/className="app-pro-real-view-image"/g) || []).length, 1);
   assert.equal((appSource.match(/<AppRealViewGallery/g) || []).length, 3);
   assert.doesNotMatch(appSource, /<style\b|dangerouslySetInnerHTML/);
-  assert.match(indexSource, /https:\/\/fonts\.googleapis\.com\/css2/);
-  assert.match(indexSource, /rel="preconnect" href="https:\/\/fonts\.gstatic\.com"/);
+  assert.doesNotMatch(indexSource, /fonts\.googleapis\.com|fonts\.gstatic\.com/);
+  assert.match(indexSource, /<link rel="preload" href="\/src\/assets\/fonts\/geist-latin\.woff2" as="font" type="font\/woff2" crossorigin \/>/);
   assert.match(appSource, /fetch\("\/api\/contact"/);
   assert.match(appSource, /<Analytics \/>/);
   assert.doesNotMatch(packageSource, /@vercel\/speed-insights/);

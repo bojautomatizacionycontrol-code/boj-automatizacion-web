@@ -14,8 +14,8 @@ const normalizeLf = (value) => value.replaceAll("\r\n", "\n").replaceAll("\r", "
 const sha256 = (value) => createHash("sha256").update(normalizeLf(value)).digest("hex").toUpperCase();
 
 const baseline = Object.freeze({
-  normalizedBytes: 501802,
-  sha256: "F90E47051A36FAF580EBC6C5A73900EC0335C597C2D9768980986EF36320DA28",
+  normalizedBytes: 502867,
+  sha256: "EEC16A13DD0A823F5099BB0A2A29948D2F7FCB3369BA2ABB1DB31793B37565D6",
 });
 
 const expectedModules = Object.freeze([

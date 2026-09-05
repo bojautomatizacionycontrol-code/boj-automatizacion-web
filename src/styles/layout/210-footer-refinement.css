@@ -45,6 +45,12 @@
 .site-footer.mock-footer .mock-footer-contact a,
 .site-footer.mock-footer .mock-footer-contact span {
   overflow-wrap: anywhere;
+  font-size: 0.9rem;
+}
+
+/* El correo sólo corta después de la arroba (wbr en el marcado), nunca a mitad de palabra */
+.site-footer.mock-footer .mock-footer-contact a[href^="mailto:"] {
+  overflow-wrap: normal;
 }
 
 /* Columna 3 — navegación: encabezado full-width + 7 enlaces en 2 columnas */

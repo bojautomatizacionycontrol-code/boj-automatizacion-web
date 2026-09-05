@@ -570,7 +570,7 @@
 
   .app-pro-how-step {
     min-height: 112px;
-    grid-template-columns: 36px 48px minmax(0, 1fr);
+    grid-template-columns: 36px minmax(0, 1fr);
     grid-template-rows: auto 1fr;
     align-content: center;
     justify-items: start;
@@ -578,14 +578,12 @@
     text-align: left;
   }
 
-  .app-pro-how-step .app-pro-step-number,
-  .app-pro-how-step .app-pro-step-icon-circle {
+  .app-pro-how-step .app-pro-step-number {
     grid-row: 1 / span 2;
   }
 
   .app-pro-how-step .app-pro-step-icon-circle {
-    width: 46px;
-    height: 46px;
+    display: none;
   }
 
   .app-pro-how-step h3,

@@ -534,7 +534,7 @@ function LanguageSwitcher({ route, language, onSelect }) {
         hrefLang="es"
         lang="es"
         aria-current={language === "es" ? "page" : undefined}
-        aria-label="Ver sitio en español"
+        aria-label="ES · Ver sitio en español"
         onClick={() => chooseLanguage("es")}
       >
         ES
@@ -546,7 +546,7 @@ function LanguageSwitcher({ route, language, onSelect }) {
         hrefLang="en"
         lang="en"
         aria-current={language === "en" ? "page" : undefined}
-        aria-label="View site in English"
+        aria-label="EN · View site in English"
         onClick={() => chooseLanguage("en")}
       >
         EN
@@ -558,7 +558,7 @@ function LanguageSwitcher({ route, language, onSelect }) {
         hrefLang="pt-BR"
         lang="pt-BR"
         aria-current={language === "pt" ? "page" : undefined}
-        aria-label="Ver site em português"
+        aria-label="PT · Ver site em português"
         onClick={() => chooseLanguage("pt")}
       >
         PT
@@ -736,7 +736,10 @@ function MainFooter({ language, buildYear }) {
         </div>
         <div className="mock-footer-contact" aria-label={footerCopy.contactAria}>
           <h2>{footerCopy.contact}</h2>
-          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          <a href={`mailto:${contact.email}`}>
+            {contact.email.split("@")[0]}@<wbr />
+            {contact.email.split("@")[1]}
+          </a>
           <a href="https://www.bojautomatizacion.com" target="_blank" rel="noreferrer">
             www.bojautomatizacion.com
           </a>
@@ -760,8 +763,14 @@ function MainFooter({ language, buildYear }) {
         <div className="mock-footer-social">
           <h2>{footerCopy.follow}</h2>
           <div>
-            <a href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">in</a>
-            <a href={contact.linktree} target="_blank" rel="noreferrer" aria-label="Linktree">lt</a>
+            <a href={contact.linkedin} target="_blank" rel="noreferrer">
+              <span aria-hidden="true">in</span>
+              <span className="visually-hidden">LinkedIn</span>
+            </a>
+            <a href={contact.linktree} target="_blank" rel="noreferrer">
+              <span aria-hidden="true">lt</span>
+              <span className="visually-hidden">Linktree</span>
+            </a>
           </div>
         </div>
       </div>

@@ -69,7 +69,7 @@ const protectedFileHashes = {
   "../src/m1-accessibility.css": "65A5411E4EFDE3DD5231779640AC34D1DB032CB622A12A0E44DD7CDA8B98DA87",
   "../src/app/preserved-analytics-inventory.js": "1EC89D5816FB33278F5A9724CF9AB909687845763DBE05581753086ACE781149",
   "../scripts/csp-policy.mjs": "696D7C2CB8A01960612C132D94D5B8266D3BB19C2108199BBB72C1042E5931D7",
-  "../public/sitemap.xml": "42799F7D6F42AD873881D4CBC65F5B8E8557FB4968C4EA552ABB0157FC91032D",
+  "../public/sitemap.xml": "86F382CCE4BDD71655A5DC52E902136C0E3BDF011CBD1273AEEAD0E8DFFDBEA0",
   "../public/robots.txt": "928DAC7480C646B5F7E1285CF8DC5E8A529EF5AD728F724FFB110AA6E3AB8FAB",
   "../package-lock.json": "9B6B206FDF31963376A261C207D9F11D7319DC2A00DC82582583A7F91897FCC5",
   "./contact-decision-paths.test.mjs": "A3455113BA19591BC447E39F1E29F41D8A2979B5FB2A775091DFBA4BEFA0061D",
@@ -212,6 +212,12 @@ test("rutas schema CSP y redirects permanecen dentro del contrato vigente", () =
   assert.deepEqual(vercelConfig.redirects, [
     { source: "/inicio", destination: "/", permanent: true },
     { source: "/contact", destination: "/contacto", permanent: true },
+    {
+      source: "/(.*)",
+      has: [{ type: "host", value: "bojautomatizacion.com" }],
+      destination: "https://www.bojautomatizacion.com/$1",
+      permanent: true,
+    },
   ]);
 });
 

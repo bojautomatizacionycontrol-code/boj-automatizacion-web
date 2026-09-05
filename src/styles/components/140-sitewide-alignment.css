@@ -333,9 +333,14 @@
 .mock-tech-card {
   min-height: 180px;
   padding: 22px 18px;
+  align-content: start;
   border: 1px solid rgba(0, 200, 255, 0.18);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.055);
+}
+
+.mock-tech-card h3 {
+  min-height: 2.36em;
 }
 
 .mock-tech-card svg {
