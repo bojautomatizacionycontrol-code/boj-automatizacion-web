@@ -152,13 +152,6 @@
 }
 
 /* ── Flipbook: primeras páginas del manual ───────────────────────────── */
-.s7-manual-lead {
-  margin: 12px auto 0;
-  max-width: 680px;
-  color: #b9cdda;
-  font-size: 1rem;
-  line-height: 1.55;
-}
 .s7-flip {
   margin-top: 30px;
 }
@@ -655,9 +648,6 @@
     max-width: 360px;
     margin-inline: auto;
   }
-  .s7-sales-app-highlights {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ── Ribbon de lanzamiento + value-stack en la oferta ────────────────── */
@@ -713,16 +703,6 @@
 .s7-sales-valuestack-total strong {
   color: #00e0ff;
   font-size: 1.18rem;
-}
-.s7-sales-valuestack-anchor {
-  margin: 14px 0 0;
-  padding: 12px 14px;
-  border-radius: 10px;
-  background: rgba(255, 157, 61, 0.1);
-  border: 1px solid rgba(255, 157, 61, 0.28);
-  color: #ffe6c4;
-  font-size: 0.88rem;
-  line-height: 1.5;
 }
 
 /* ── Testimonios (curso + app) ───────────────────────────────────────── */

@@ -5,15 +5,6 @@
    ===================================================================== */
 
 /* Hero: línea de prueba técnica */
-.mock-hero-proof {
-  max-width: 650px;
-  margin: 22px 0 0;
-  color: rgba(248, 251, 255, 0.74);
-  font-size: 0.86rem;
-  line-height: 1.5;
-  font-weight: 650;
-  letter-spacing: 0.015em;
-}
 
 /* Franja de clientes (texto, sin logos) */
 .mock-clients {
@@ -451,44 +442,8 @@
    ===================================================================== */
 
 /* --- Heroes: alturas similares (440-500px) en home, app y curso --- */
-.mock-hero,
-.s7-sales-hero {
-  min-height: clamp(440px, 34vw, 500px);
-}
-
-.app-pro-hero {
-  height: auto;
-  min-height: clamp(440px, 34vw, 500px);
-  max-height: none;
-}
 
 /* --- Heroes: imagenes mas claras (menos overlay oscuro) --- */
-.mock-hero-bg {
-  opacity: 1;
-  filter: brightness(1.07) contrast(1.02) saturate(1.02);
-}
-
-.app-pro-hero-bg {
-  filter: brightness(1.08) contrast(1) saturate(1.02);
-}
-
-.mock-hero-shade {
-  background:
-    linear-gradient(90deg, rgba(2, 11, 20, 0.8) 0%, rgba(2, 11, 20, 0.56) 38%, rgba(2, 11, 20, 0.24) 70%, rgba(2, 11, 20, 0.48) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(2, 11, 20, 0.46));
-}
-
-.app-pro-hero-shade {
-  background:
-    linear-gradient(90deg, rgba(2, 11, 20, 0.84) 0%, rgba(2, 11, 20, 0.62) 40%, rgba(2, 11, 20, 0.3) 70%, rgba(2, 11, 20, 0.1) 100%),
-    linear-gradient(180deg, rgba(2, 11, 20, 0.04) 0%, rgba(2, 11, 20, 0.3) 100%);
-}
-
-.s7-sales-hero {
-  background-image:
-    linear-gradient(90deg, rgba(0, 12, 24, 0.8) 0%, rgba(0, 12, 24, 0.56) 46%, rgba(0, 12, 24, 0.2) 100%),
-    var(--s7-sales-hero-image);
-}
 
 /* --- Recursos: imagenes del mismo tamano (simetria de los 5 bloques) --- */
 .resource-card-visual {

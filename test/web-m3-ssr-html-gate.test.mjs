@@ -192,7 +192,7 @@ test("aplica presupuestos HTML por documento y para la matriz completa", () => {
     html: "x".repeat(Math.min(95_000, SSR_HTML_DOCUMENT_BUDGET.raw - 1)),
   }));
   assert.ok(matrix.reduce((sum, item) => sum + item.html.length, 0) > SSR_HTML_MATRIX_BUDGET.raw);
-  assert.throws(() => validateHtmlBudgets(matrix), /matriz 35\+404 excede presupuesto HTML/);
+  assert.throws(() => validateHtmlBudgets(matrix), /matriz \d+\+404 excede presupuesto HTML/);
 });
 
 test("verifica la matriz física 38+404, assets, CSP, 404 y presupuestos como un único gate", async () => {

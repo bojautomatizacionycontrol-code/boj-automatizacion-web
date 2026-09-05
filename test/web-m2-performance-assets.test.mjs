@@ -74,8 +74,8 @@ test("preserva los originales y entrega el inventario responsive AVIF/WebP compl
   }
 
   const files = (await readdir(join(root, "src", "assets", "m2"))).sort();
-  assert.equal(files.length, 130);
-  assert.equal(files.filter((name) => name.endsWith(".avif")).length, 64);
+  assert.equal(files.length, 132);
+  assert.equal(files.filter((name) => name.endsWith(".avif")).length, 66);
   assert.equal(files.filter((name) => name.endsWith(".webp")).length, 66);
   for (const file of files) assert.ok((await stat(join(root, "src", "assets", "m2", file))).size > 0, file);
 

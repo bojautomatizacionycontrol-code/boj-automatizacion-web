@@ -126,7 +126,7 @@ test("el sistema visual nuevo es responsive, accesible y respeta movimiento redu
     /\.app-pro-quick-access-link:focus-visible/,
     /@media \(max-width: 980px\)[\s\S]*?\.app-pro-page > \.boj-hero \.boj-hero-inner--with-aside/,
     /@media \(max-width: 560px\)[\s\S]*?\.app-hero-diagnostic-preview-stages\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);/,
-    /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.app-hero-diagnostic-preview-focus\s*\{[\s\S]*?animation:\s*none;/,
+    /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.app-hero-diagnostic-preview-head small span\s*\{[\s\S]*?animation:\s*none;/,
   ];
 
   for (const pattern of requiredPatterns) {

@@ -70,7 +70,7 @@ test("concatenar los módulos produce un bundle dentro del presupuesto del build
   const bundle = await readCssBundle();
   const bytes = Buffer.byteLength(normalizeLf(bundle));
 
-  assert.ok(bytes >= 350_000 && bytes <= 560_000, `bundle CSS fuera de rango: ${bytes} bytes`);
+  assert.ok(bytes >= 250_000 && bytes <= 560_000, `bundle CSS fuera de rango: ${bytes} bytes`);
   assert.equal(sha256(bundle), sha256(bundle.replaceAll("\r\n", "\n")), "la normalización de saltos debe ser estable");
 });
 

@@ -8,10 +8,6 @@
     display: grid;
   }
 
-  .header-cta {
-    display: none;
-  }
-
   .main-nav {
     position: absolute;
     top: 100%;
@@ -62,48 +58,25 @@
     font-size: 0.78rem;
   }
 
-  .header-cta {
-    padding-inline: 11px;
-    font-size: 0.82rem;
-  }
-
   .hero {
     min-height: auto;
     padding-top: 76px;
   }
 
-  .industrial-panel {
-    opacity: 0.28;
-    right: -120px;
-    width: 520px;
-  }
-
-  .feature-grid,
-  .card-grid.three,
   .function-grid,
   .method-grid,
-  .app-module-grid,
   .audience-grid,
   .resources-index-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .split-section,
-  .app-intro,
-  .app-page-grid,
   .contact-grid,
   .contact-direct,
   .course-landing,
-  .authority-grid,
-  .evidence-grid,
-  .app-field-panel,
-  .app-evidence-panel,
-  .service-principles,
   .official-links-panel,
   .resources-intro-panel,
   .route-cta,
-  .portfolio-prep,
-  .workflow-panel {
+  .portfolio-prep {
     grid-template-columns: 1fr;
   }
 
@@ -132,10 +105,6 @@
 
   .nav-toggle {
     display: grid;
-  }
-
-  .header-cta {
-    display: none;
   }
 
   .main-nav {
@@ -175,9 +144,6 @@
     width: min(calc(100% - 28px), var(--container));
   }
 
-  .hero-content > *,
-  .hero-metrics,
-  .hero-proof-grid,
   .hero-subtitle {
     max-width: calc(100vw - 28px);
   }
@@ -187,71 +153,21 @@
     padding: 64px 0;
   }
 
-  .page-hero {
-    padding: 72px 0 58px;
-  }
-
   .hero h1 {
     max-width: 100%;
     font-size: clamp(1.72rem, 5.35vw, 2.35rem);
     line-height: 1.08;
   }
 
-  .hero-positioning {
-    max-width: 100%;
-    font-size: 0.98rem;
-  }
-
-  .feature-grid,
-  .card-grid.three,
-  .card-grid.two,
-  .course-grid,
-  .check-grid,
   .function-grid,
-  .app-module-grid,
-  .app-version-grid,
-  .case-grid,
   .audience-grid,
   .method-grid,
-  .logo-strip,
-  .service-columns,
-  .service-proof-grid,
   .project-result-grid,
-  .footer-grid,
   .trust-grid,
   .training-strip,
   .asset-slots,
-  .hero-proof-grid,
-  .authority-list,
-  .evidence-visual-grid,
   .resources-index-grid {
     grid-template-columns: 1fr;
-  }
-
-  .evidence-visual-grid {
-    grid-template-rows: repeat(3, 180px);
-  }
-
-  .evidence-photo.large {
-    grid-row: auto;
-  }
-
-  .trust-item,
-  .trust-item:last-child {
-    border-inline: 1px solid var(--line);
-    min-height: auto;
-  }
-
-  .page-hero::after {
-    display: none;
-  }
-
-  .industrial-panel {
-    display: none;
-  }
-
-  .hero-asset-visual {
-    display: none;
   }
 
   .hero-actions,
@@ -262,33 +178,6 @@
   .hero-actions .btn,
   .button-row .btn {
     width: 100%;
-  }
-
-  .comparison-row.header {
-    display: none;
-  }
-
-  .comparison-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 14px;
-  }
-
-  .comparison-row span {
-    border-left: 0;
-    padding: 5px 0;
-  }
-
-  .comparison-row span:nth-child(2)::before {
-    content: "Course Edition: ";
-    color: var(--cyan);
-    font-weight: 900;
-  }
-
-  .comparison-row span:nth-child(3)::before {
-    content: "PRO: ";
-    color: var(--orange);
-    font-weight: 900;
   }
 
   .form-row {
@@ -309,11 +198,6 @@
     max-width: 160px;
   }
 
-  .brand-mark {
-    width: 40px;
-    height: 40px;
-  }
-
   .brand-logo {
     width: 136px;
     height: 42px;
@@ -321,10 +205,6 @@
 
   .hero {
     padding: 58px 0 56px;
-  }
-
-  .hero-content > * {
-    max-width: 100%;
   }
 
   h1 {
@@ -348,18 +228,6 @@
     line-height: 1.65;
   }
 
-  .hero-positioning {
-    width: 100%;
-    padding: 12px 13px;
-    font-size: 0.9rem;
-    overflow-wrap: anywhere;
-  }
-
-  .feature-card,
-  .service-card,
-  .info-card,
-  .version-card,
-  .technical-note,
   .technical-article,
   .official-links-panel,
   .resources-intro-panel,
@@ -367,22 +235,11 @@
   .resource-visual-panel.fallback,
   .contact-panel,
   .contact-form,
-  .service-detail,
-  .service-principles,
   .route-cta,
   .portfolio-prep,
-  .app-field-panel,
-  .app-module-card,
-  .app-evidence-panel,
-  .workflow-panel,
   .contact-direct,
-  .project-body,
-  .course-card-body {
+  .project-body {
     padding: 20px;
-  }
-
-  .method-card {
-    min-height: auto;
   }
 
   .step7-collage {
@@ -398,25 +255,8 @@
     font-size: 0.66rem;
   }
 
-  .service-heading {
-    grid-template-columns: 1fr;
-  }
-
   .project-title-row {
     grid-template-columns: 1fr;
-  }
-
-  .phone-frame {
-    min-height: 580px;
-  }
-
-  .app-screenshot-shell {
-    width: min(100%, 340px);
-    padding: 10px;
-  }
-
-  .app-screenshot-frame {
-    max-height: 560px;
   }
 
   .resource-secondary-grid,
@@ -438,9 +278,5 @@
 
   .article-lead {
     font-size: 0.98rem;
-  }
-
-  .diagnostic-screen {
-    min-height: 500px;
   }
 }
