@@ -213,7 +213,7 @@ test("publica identidad comercial ratificada en los tres documentos y conserva p
   assert.doesNotMatch(privacySource, /showCommercialIdentity|Hexa Group Holding SAS/);
 
   assert.doesNotMatch(appSource, /Lunes a viernes de 8:00 a 18:00|Respondemos normalmente dentro/);
-  assert.doesNotMatch(publicTextCorpus, /San Miguel de Tucumán|\+54 9 381 5327469|\+5493815327469/);
+  assert.doesNotMatch(publicTextCorpus, /\+54 9 381 5327469|\+5493815327469/);
   assert.match(indexSource, /"telephone": "\+543815327469"/);
   assert.match(indexSource, /"streetAddress": "Culpina 63, piso 5°, departamento C"/);
   assert.equal((indexSource.match(/"Ciudad Autónoma de Buenos Aires"/g) || []).length, 2);

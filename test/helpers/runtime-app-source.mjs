@@ -28,6 +28,7 @@ const runtimeSourceFiles = Object.freeze([
   "routes/founder-block.jsx",
   "routes/works-images.jsx",
   "routes/diagnostic-guides.js",
+  "contact-addresses.js",
 ]);
 
 export async function readRuntimeAppSource() {
