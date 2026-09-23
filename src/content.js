@@ -1298,10 +1298,10 @@ export const offer = {
   // Curso Diagnóstico S7-300/400 + App PRO
   course: {
     // Precio vigente. Alimenta hero, total, CTA final y tracking.
-    price: "89 USD",
-    priceValue: 89,
+    price: "80 USD",
+    priceValue: 80,
     priceCurrency: "USD",
-    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 89 USD.",
+    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 80 USD.",
     // Slot del video demo de la landing: con "" la sección no se renderiza.
     demoVideoUrl: "",
     // Estado del checkout definitivo (Hotmart). El corte del bloque 3B consiste
@@ -1347,7 +1347,7 @@ export const offer = {
     proPlans: [
       {
         title: "Suscripción mensual",
-        price: "49 USD",
+        price: "44 USD",
         meta: "Por mes · Renovación automática hasta cancelación · 1 dispositivo",
         text: "Suscripción mensual a la app BOJ S7-PLC PRO, con renovación automática hasta cancelación.",
         contract: {
@@ -1372,7 +1372,7 @@ export const offer = {
       },
       {
         title: "Mensual de pago único",
-        price: "59 USD",
+        price: "53 USD",
         meta: "Pago único · 1 mes calendario · Sin renovación automática · 1 dispositivo",
         text: "Acceso completo a la app BOJ S7-PLC PRO durante 1 mes calendario, mediante un único pago y sin renovación automática.",
         contract: {
@@ -1397,7 +1397,7 @@ export const offer = {
       },
       {
         title: "Curso + licencia",
-        price: "89 USD",
+        price: "80 USD",
         meta: "Pago único · Curso permanente · App PRO por 1 mes · 1 dispositivo",
         text: "Curso Diagnóstico S7-300/400 con acceso permanente y licencia BOJ S7-PLC PRO por 1 mes.",
         bullets: [
@@ -1412,7 +1412,7 @@ export const offer = {
       },
       {
         title: "Profesional",
-        price: "249 USD",
+        price: "224 USD",
         meta: "Pago único · 6 meses · 2 dispositivos · App PRO + Curso",
         text: "Plan recomendado para técnicos, automatistas, instrumentistas y personal de mantenimiento que necesitan usar la herramienta de forma recurrente y reforzar criterio técnico con material de apoyo.",
         contract: {
@@ -1437,7 +1437,7 @@ export const offer = {
       },
       {
         title: "Empresarial",
-        price: "549 USD",
+        price: "494 USD",
         meta: "Pago único · 6 meses · 10 dispositivos · App PRO + Curso",
         text: "Plan pensado para empresas, equipos de mantenimiento, áreas de automatización, soporte técnico interno o varias estaciones de trabajo.",
         contract: {

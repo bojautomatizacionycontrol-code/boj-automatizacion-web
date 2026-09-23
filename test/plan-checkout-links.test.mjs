@@ -14,31 +14,31 @@ const spanishAppPageSource = appSource.slice(spanishAppPageStart, spanishAppPage
 const expectedPlanMatrix = [
   {
     title: "Suscripción mensual",
-    price: "49 USD",
+    price: "44 USD",
     meta: "Por mes · Renovación automática hasta cancelación · 1 dispositivo",
     url: "https://pay.hotmart.com/C107081619V?off=yzyw7mys",
   },
   {
     title: "Mensual de pago único",
-    price: "59 USD",
+    price: "53 USD",
     meta: "Pago único · 1 mes calendario · Sin renovación automática · 1 dispositivo",
     url: "https://pay.hotmart.com/B107066308U?off=l23qsbj9",
   },
   {
     title: "Curso + licencia",
-    price: "89 USD",
+    price: "80 USD",
     meta: "Pago único · Curso permanente · App PRO por 1 mes · 1 dispositivo",
     url: "https://pay.hotmart.com/P106348963R?off=srrm5ewf",
   },
   {
     title: "Profesional",
-    price: "249 USD",
+    price: "224 USD",
     meta: "Pago único · 6 meses · 2 dispositivos · App PRO + Curso",
     url: "https://pay.hotmart.com/B107069067M?off=hea8bgc1",
   },
   {
     title: "Empresarial",
-    price: "549 USD",
+    price: "494 USD",
     meta: "Pago único · 6 meses · 10 dispositivos · App PRO + Curso",
     url: "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq",
   },
@@ -58,6 +58,13 @@ test("preserva las cinco ofertas pagas con precio, modalidad y checkout exactos"
   assert.deepEqual(actualPlanMatrix, expectedPlanMatrix);
   assert.equal(new Set(actualPlanMatrix.map(({ title }) => title)).size, 5);
   assert.equal(new Set(actualPlanMatrix.map(({ url }) => url)).size, 5);
+});
+
+test("aplica el diez por ciento y redondea hacia abajo sin centavos", () => {
+  const before = [49, 59, 89, 249, 549];
+  const expected = before.map((price) => Math.floor(price * 0.9));
+  assert.deepEqual(offer.app.proPlans.map(({ price }) => price), expected.map((price) => `${price} USD`));
+  assert.equal(offer.course.priceValue, Math.floor(89 * 0.9));
 });
 
 test("mantiene las prestaciones indicadas para cada opción", () => {
@@ -143,9 +150,9 @@ test("el listado renderiza exclusivamente la URL propia de cada plan", () => {
   assert.doesNotMatch(planListSource, /href=\{appProductUrl\}/);
 });
 
-test("actualiza el curso a 89 USD, pago único y su oferta exacta", () => {
-  assert.equal(offer.course.price, "89 USD");
-  assert.equal(offer.course.priceValue, 89);
+test("actualiza el curso a 80 USD, pago único y su oferta exacta", () => {
+  assert.equal(offer.course.price, "80 USD");
+  assert.equal(offer.course.priceValue, 80);
   assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
   assert.equal(offer.course.checkout.appMonths, 1);
   assert.equal(offer.course.checkout.devices, 1);
@@ -154,7 +161,7 @@ test("actualiza el curso a 89 USD, pago único y su oferta exacta", () => {
   assert.doesNotMatch(appSource, /Precio de lanzamiento/);
   const courseSchema = getRouteMetadata("/cursos/s7-300-400").jsonLd["@graph"]
     .find((node) => node["@type"] === "Course");
-  assert.equal(courseSchema.offers.price, "89");
+  assert.equal(courseSchema.offers.price, "80");
   assert.equal(courseSchema.offers.url, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
   assert.equal("priceValidUntil" in courseSchema.offers, false);
   assert.equal(appSource.match(/<PurchaseCTA\b/g)?.length, 2);

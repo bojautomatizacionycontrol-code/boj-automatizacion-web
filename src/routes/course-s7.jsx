@@ -592,7 +592,7 @@ function S7SalesLanding({ course, eyebrow }) {
                 <div className="s7-sales-valuestack">
                   <div className="s7-sales-valuestack-row">
                     <span>App BOJ S7-PLC PRO — 1 mes</span>
-                    <span className="s7-sales-valuestack-value">vale 59 USD</span>
+                    <span className="s7-sales-valuestack-value">vale {offer.app.proPlans.find(({ title }) => title === "Mensual de pago único").price}</span>
                   </div>
                   <div className="s7-sales-valuestack-row">
                     <span>Curso completo + Método BOJ</span>

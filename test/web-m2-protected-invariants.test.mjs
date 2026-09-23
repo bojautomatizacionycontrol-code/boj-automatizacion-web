@@ -73,12 +73,12 @@ const protectedFileHashes = {
   "../public/robots.txt": "928DAC7480C646B5F7E1285CF8DC5E8A529EF5AD728F724FFB110AA6E3AB8FAB",
   "../package-lock.json": "9B6B206FDF31963376A261C207D9F11D7319DC2A00DC82582583A7F91897FCC5",
   "./contact-decision-paths.test.mjs": "A3455113BA19591BC447E39F1E29F41D8A2979B5FB2A775091DFBA4BEFA0061D",
-  "./site-language-navigation.test.mjs": "42345C58E8F35826B68CDA763121859169E626CFE1DFE84A56F4EB84C4042349",
+  "./site-language-navigation.test.mjs": "FE30B3654F13C91562E2FE5BA4F8BC363B9CFE83E949AF7933870A338238AEDC",
   "./web-m1-accessibility-behavior.test.mjs": "DA4F6F57CF72D2973F89525947DC415822B8DE7A51341291927FA922082D36CB",
   "./web-m1-accessible-dialog.test.mjs": "C8BE063490D2941FE0FE5CB13601933BBA02EC91A02F1F434449777F647C19FE",
   "./web-m1-accessible-navigation.test.mjs": "22B28DD4A72E694E9F7450F336B0510FD7628486B8791DC15CB7B5002A6166C0",
   "./web-m1-contact-accessibility.test.mjs": "B275449C88F3E67E5F1B21EA612F56A3B130D877A6478B958690B2000BB954BF",
-  "./web-m1-protected-invariants.test.mjs": "8C8452FF12E9935CE4EAED9AE0296B2447C4FA9BBA18B5DDC4F716D32BDAAC7E",
+  "./web-m1-protected-invariants.test.mjs": "41B14CF962966EA7402B95C45BA5B382B496D14C7CFCA2208B55231599E74C92",
   "./web-m1-tia-future-state.test.mjs": "75CD071DBA0F5182FF97E89D0C4A9B41254889F7732B94C031B6358FD16A1E31",
   "./web-m1-visual-accessibility.test.mjs": "1772545D1BC68F4E9D0015B40D47D8657AFBF22079FCFFB1E18F8896FAD68CA3",
 };
@@ -106,7 +106,7 @@ test("contenido comercial fiscal legal y de App conserva los bloques aprobados",
     ["export const commercialIdentity = Object.freeze({", "export const navItems", "A321F2F02D44C1943F7C517AB6ACAFB5B226E0D05DABA9BE046F4268A941328B"],
     ["export const tiaCourse = {", "export const appHero", "F083DAEF6B0F97123E20AA689F52F25351D5AE1FD10C14BD83C0DD01B43B46D9"],
     ["export const appHero = {", "export const technicalResources", "2E7158704F2630FDCD67924C8F6667563C4A044147182E71C2C854E2B979E8E3"],
-    ["export const offer = {", "", "59CC64F553E13AEB0ECDE32AE9187F27626FC0C992CAA94056CFE0075282EB88"],
+    ["export const offer = {", "", "FC17C927E466F8D2795988A191B5D7CE478CF0E0F3F07D1BF94844635E2B30AB"],
   ]) {
     assert.equal(sha256(sourceBlock(contentSource, startMarker, endMarker)), expectedHash, startMarker);
   }
@@ -118,15 +118,15 @@ test("contenido comercial fiscal legal y de App conserva los bloques aprobados",
     commercialIdentity.invoicing,
     "Factura electrónica y factura E para exportaciones, según corresponda"
   );
-  assert.equal(offer.course.price, "89 USD");
+  assert.equal(offer.course.price, "80 USD");
   assert.equal(offer.course.checkout.guaranteeDays, 7);
   assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
   assert.deepEqual(offer.app.proPlans.map(({ price, url }) => [price, url]), [
-    ["49 USD", "https://pay.hotmart.com/C107081619V?off=yzyw7mys"],
-    ["59 USD", "https://pay.hotmart.com/B107066308U?off=l23qsbj9"],
-    ["89 USD", "https://pay.hotmart.com/P106348963R?off=srrm5ewf"],
-    ["249 USD", "https://pay.hotmart.com/B107069067M?off=hea8bgc1"],
-    ["549 USD", "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq"],
+    ["44 USD", "https://pay.hotmart.com/C107081619V?off=yzyw7mys"],
+    ["53 USD", "https://pay.hotmart.com/B107066308U?off=l23qsbj9"],
+    ["80 USD", "https://pay.hotmart.com/P106348963R?off=srrm5ewf"],
+    ["224 USD", "https://pay.hotmart.com/B107069067M?off=hea8bgc1"],
+    ["494 USD", "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq"],
   ]);
   for (const plan of offer.app.proPlans.filter(({ contract }) => contract)) {
     assert.match(plan.contract.warranty, /7 días/);

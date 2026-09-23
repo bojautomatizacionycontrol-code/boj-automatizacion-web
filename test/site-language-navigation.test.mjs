@@ -143,10 +143,10 @@ test("la versión inglesa toma precios y href de la fuente comercial vigente", (
 
   assert.deepEqual(matrix, [
     { sourceTitle: "Prueba gratuita", englishTitle: "Free trial", price: "Free", href: "https://app.bojautomatizacion.com/" },
-    { sourceTitle: "Suscripción mensual", englishTitle: "Monthly subscription", price: "49 USD", href: "https://pay.hotmart.com/C107081619V?off=yzyw7mys" },
-    { sourceTitle: "Mensual de pago único", englishTitle: "One-time monthly license", price: "59 USD", href: "https://pay.hotmart.com/B107066308U?off=l23qsbj9" },
-    { sourceTitle: "Profesional", englishTitle: "Professional", price: "249 USD", href: "https://pay.hotmart.com/B107069067M?off=hea8bgc1" },
-    { sourceTitle: "Empresarial", englishTitle: "Business", price: "549 USD", href: "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq" },
+    { sourceTitle: "Suscripción mensual", englishTitle: "Monthly subscription", price: "44 USD", href: "https://pay.hotmart.com/C107081619V?off=yzyw7mys" },
+    { sourceTitle: "Mensual de pago único", englishTitle: "One-time monthly license", price: "53 USD", href: "https://pay.hotmart.com/B107066308U?off=l23qsbj9" },
+    { sourceTitle: "Profesional", englishTitle: "Professional", price: "224 USD", href: "https://pay.hotmart.com/B107069067M?off=hea8bgc1" },
+    { sourceTitle: "Empresarial", englishTitle: "Business", price: "494 USD", href: "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq" },
   ]);
 
   const englishAppStart = appSource.indexOf("function EnglishAppPage()");
@@ -168,7 +168,7 @@ test("la landing inglesa del curso conserva precio, oferta y tres CTA al checkou
   const copyEnd = appSource.indexOf("function LocalizedS7MethodStrip", copyStart);
   const copySource = appSource.slice(copyStart, copyEnd);
 
-  assert.equal(offer.course.price, "89 USD");
+  assert.equal(offer.course.price, "80 USD");
   assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
   assert.match(pageSource, /LocalizedS7SalesLanding language="en" courseCopy=\{englishS7Course\}/);
   assert.match(landingSource, /const checkoutUrl = offer\.course\.checkout\.checkoutUrl/);
@@ -196,10 +196,10 @@ test("la versión portuguesa toma precios y href de la fuente comercial vigente"
 
   assert.deepEqual(matrix, [
     { sourceTitle: "Prueba gratuita", portugueseTitle: "Teste gratuito", price: "Gratuito", href: "https://app.bojautomatizacion.com/" },
-    { sourceTitle: "Suscripción mensual", portugueseTitle: "Assinatura mensal", price: "49 USD", href: "https://pay.hotmart.com/C107081619V?off=yzyw7mys" },
-    { sourceTitle: "Mensual de pago único", portugueseTitle: "Licença mensal de pagamento único", price: "59 USD", href: "https://pay.hotmart.com/B107066308U?off=l23qsbj9" },
-    { sourceTitle: "Profesional", portugueseTitle: "Profissional", price: "249 USD", href: "https://pay.hotmart.com/B107069067M?off=hea8bgc1" },
-    { sourceTitle: "Empresarial", portugueseTitle: "Empresarial", price: "549 USD", href: "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq" },
+    { sourceTitle: "Suscripción mensual", portugueseTitle: "Assinatura mensal", price: "44 USD", href: "https://pay.hotmart.com/C107081619V?off=yzyw7mys" },
+    { sourceTitle: "Mensual de pago único", portugueseTitle: "Licença mensal de pagamento único", price: "53 USD", href: "https://pay.hotmart.com/B107066308U?off=l23qsbj9" },
+    { sourceTitle: "Profesional", portugueseTitle: "Profissional", price: "224 USD", href: "https://pay.hotmart.com/B107069067M?off=hea8bgc1" },
+    { sourceTitle: "Empresarial", portugueseTitle: "Empresarial", price: "494 USD", href: "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq" },
   ]);
 
   const pageStart = appSource.indexOf("function PortugueseAppPage()");
@@ -222,7 +222,7 @@ test("la landing portuguesa conserva la oferta y los tres CTA del curso, con avi
   const copyEnd = appSource.indexOf("function LocalizedS7MethodStrip", copyStart);
   const copySource = appSource.slice(copyStart, copyEnd);
 
-  assert.equal(offer.course.price, "89 USD");
+  assert.equal(offer.course.price, "80 USD");
   assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
   assert.match(pageSource, /LocalizedS7SalesLanding language="pt" courseCopy=\{portugueseS7Course\}/);
   assert.match(landingSource, /const checkoutUrl = offer\.course\.checkout\.checkoutUrl/);

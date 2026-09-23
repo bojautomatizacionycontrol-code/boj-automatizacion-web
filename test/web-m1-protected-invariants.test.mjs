@@ -21,15 +21,15 @@ test("backend de contacto y alineación comercial permanecen byte a byte", async
 
 test("identidad precios garantía y URLs conservan la fuente aprobada", () => {
   assert.equal(commercialIdentity.seller, "Hexa Group Holding SAS");
-  assert.equal(offer.course.price, "89 USD");
+  assert.equal(offer.course.price, "80 USD");
   assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
   assert.equal(offer.course.checkout.guaranteeDays, 7);
   assert.deepEqual(offer.app.proPlans.map(({ price, url }) => [price, url]), [
-    ["49 USD", "https://pay.hotmart.com/C107081619V?off=yzyw7mys"],
-    ["59 USD", "https://pay.hotmart.com/B107066308U?off=l23qsbj9"],
-    ["89 USD", "https://pay.hotmart.com/P106348963R?off=srrm5ewf"],
-    ["249 USD", "https://pay.hotmart.com/B107069067M?off=hea8bgc1"],
-    ["549 USD", "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq"],
+    ["44 USD", "https://pay.hotmart.com/C107081619V?off=yzyw7mys"],
+    ["53 USD", "https://pay.hotmart.com/B107066308U?off=l23qsbj9"],
+    ["80 USD", "https://pay.hotmart.com/P106348963R?off=srrm5ewf"],
+    ["224 USD", "https://pay.hotmart.com/B107069067M?off=hea8bgc1"],
+    ["494 USD", "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq"],
   ]);
 });
 

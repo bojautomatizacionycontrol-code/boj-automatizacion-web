@@ -30,7 +30,7 @@ const exactLanguageDisclosure = {
 const expectedOffers = [
   {
     title: "Suscripción mensual",
-    price: "49 USD",
+    price: "44 USD",
     url: "https://pay.hotmart.com/C107081619V?off=yzyw7mys",
     contract: {
       checkoutName: "Suscripción Mensual BOJ S7-PLC PRO",
@@ -45,7 +45,7 @@ const expectedOffers = [
   },
   {
     title: "Mensual de pago único",
-    price: "59 USD",
+    price: "53 USD",
     url: "https://pay.hotmart.com/B107066308U?off=l23qsbj9",
     contract: {
       checkoutName: "Licencia Mensual BOJ S7-PLC PRO",
@@ -60,7 +60,7 @@ const expectedOffers = [
   },
   {
     title: "Profesional",
-    price: "249 USD",
+    price: "224 USD",
     url: "https://pay.hotmart.com/B107069067M?off=hea8bgc1",
     contract: {
       checkoutName: "Licencia Profesional BOJ S7-PLC PRO + Curso",
@@ -75,7 +75,7 @@ const expectedOffers = [
   },
   {
     title: "Empresarial",
-    price: "549 USD",
+    price: "494 USD",
     url: "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq",
     contract: {
       checkoutName: "Licencia Empresarial BOJ S7-PLC PRO + Curso",

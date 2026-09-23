@@ -129,7 +129,7 @@ test("emite JSON-LD relevante sin ofertas, ratings ni curso global", () => {
     assert.ok(jsonLd["@graph"].some((node) => node["@type"] === "WebPage"));
     if (courseRoutes.has(route)) {
       const course = jsonLd["@graph"].find((node) => node["@type"] === "Course");
-      assert.equal(course.offers.price, "89");
+      assert.equal(course.offers.price, "80");
       assert.equal(course.offers.priceCurrency, "USD");
       assert.equal(course.offers.url, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
     } else {
