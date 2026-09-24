@@ -65,11 +65,11 @@ function prerenderFixture(route, buildYear) {
     `<footer>© ${buildYear} BOJ Automatización y Control</footer>`;
 }
 
-test("inventaría 34 rutas indexables y una ruta transaccional noindex", () => {
-  assert.equal(indexableRoutePaths.length, 37);
-  assert.equal(publicRoutePaths.length, 38);
-  assert.equal(new Set(indexableRoutePaths).size, 37);
-  assert.equal(new Set(publicRoutePaths).size, 38);
+test("inventaría 40 rutas indexables y una ruta transaccional noindex", () => {
+  assert.equal(indexableRoutePaths.length, 40);
+  assert.equal(publicRoutePaths.length, 41);
+  assert.equal(new Set(indexableRoutePaths).size, 40);
+  assert.equal(new Set(publicRoutePaths).size, 41);
   assert.ok(!publicRoutePaths.includes("/inicio"));
   assert.ok(publicRoutePaths.includes("/gracias"));
   assert.equal(getRouteMetadata("/gracias").robots, "noindex, follow");
@@ -96,9 +96,9 @@ test("produce metadata original completa y canonical propio para cada ruta", () 
   assert.deepEqual(routeMetadata["/"], routeMetadata["/inicio"]);
 });
 
-test("limita hreflang a los ocho grupos comerciales realmente equivalentes", () => {
+test("limita hreflang a los nueve grupos comerciales realmente equivalentes", () => {
   const localizedRoutes = publicRoutePaths.filter((route) => getRouteMetadata(route).alternates.length > 0);
-  assert.equal(localizedRoutes.length, 24);
+  assert.equal(localizedRoutes.length, 27);
 
   for (const route of localizedRoutes) {
     const alternates = getRouteMetadata(route).alternates;
@@ -176,7 +176,7 @@ test("emite JSON-LD relevante sin ofertas, ratings ni curso global", () => {
   assert.equal(getRouteMetadata("/gracias").jsonLd, null);
 });
 
-test("genera 38 HTML prerenderizados y 404 con el mismo entrypoint hidratable", async () => {
+test("genera 41 HTML prerenderizados y 404 con el mismo entrypoint hidratable", async () => {
   const directory = await mkdtemp(join(tmpdir(), "boj-route-html-"));
   try {
     await writeFile(join(directory, "index.html"), templateFor(), "utf8");
@@ -198,7 +198,7 @@ test("genera 38 HTML prerenderizados y 404 con el mismo entrypoint hidratable", 
       renderRoute: async (route, year) => prerenderFixture(route, year),
       buildYear,
     });
-    assert.equal(generated.length, 39);
+    assert.equal(generated.length, 42);
 
     for (const route of publicRoutePaths) {
       const html = await readFile(outputFileForRoute(directory, route), "utf8");
@@ -231,14 +231,14 @@ test("genera 38 HTML prerenderizados y 404 con el mismo entrypoint hidratable", 
   }
 });
 
-test("mapea las 38 rutas públicas a chunks exactos y reserva compliance para el 404", () => {
+test("mapea las 41 rutas públicas a chunks exactos y reserva compliance para el 404", () => {
   const mappedPublicRoutes = Object.keys(routeFamilyByPath)
     .filter((route) => route !== "/inicio")
     .sort();
   assert.deepEqual(mappedPublicRoutes, [...publicRoutePaths].sort());
   assert.deepEqual(
     Object.fromEntries(Object.entries(routeFamilies).map(([family, routes]) => [family, routes.length])),
-    { home: 4, services: 6, coursesIndex: 3, courseS7: 3, courseTia: 3, app: 3, resources: 9, compliance: 8 }
+    { home: 4, services: 6, copilot: 3, coursesIndex: 3, courseS7: 3, courseTia: 3, app: 3, resources: 9, compliance: 8 }
   );
   for (const [route, family] of Object.entries(routeFamilyByPath)) {
     assert.equal(getRouteFamily(route), family, route);

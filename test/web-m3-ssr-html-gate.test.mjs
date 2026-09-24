@@ -195,22 +195,22 @@ test("aplica presupuestos HTML por documento y para la matriz completa", () => {
   assert.throws(() => validateHtmlBudgets(matrix), /matriz \d+\+404 excede presupuesto HTML/);
 });
 
-test("verifica la matriz física 38+404, assets, CSP, 404 y presupuestos como un único gate", async () => {
+test("verifica la matriz física 41+404, assets, CSP, 404 y presupuestos como un único gate", async () => {
   const { directory, generated } = await createGeneratedFixture();
   try {
-    assert.equal(generated.length, 39);
+    assert.equal(generated.length, 42);
     const verified = await verifyPrerenderedHtmlBuild(directory);
-    assert.equal(verified.files, 39);
-    assert.equal(verified.fragments, 78);
-    assert.equal(verified.budgets.count, 39);
-    assert.equal(verified.csp.generatedFiles, 39);
-    assert.equal(verified.csp.inlineScripts, 37);
-    assert.equal(verified.csp.hashes, 37);
+    assert.equal(verified.files, 42);
+    assert.equal(verified.fragments, 84);
+    assert.equal(verified.budgets.count, 42);
+    assert.equal(verified.csp.generatedFiles, 42);
+    assert.equal(verified.csp.inlineScripts, 40);
+    assert.equal(verified.csp.hashes, 40);
 
     const contactoPath = outputFileForRoute(directory, "/contacto");
     const contacto = await readFile(contactoPath, "utf8");
     await rm(contactoPath);
-    await assert.rejects(verifyPrerenderedHtmlBuild(directory), /matriz HTML distinta de 38\+404/);
+    await assert.rejects(verifyPrerenderedHtmlBuild(directory), /matriz HTML distinta de 41\+404/);
     await writeFile(contactoPath, contacto, "utf8");
 
     const unexpectedPath = join(directory, "inesperado.html");

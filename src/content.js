@@ -31,7 +31,14 @@ export const commercialIdentity = Object.freeze({
 
 export const navItems = [
   { label: "Inicio", path: "/" },
-  { label: "Servicios", path: "/servicios" },
+  {
+    label: "Servicios",
+    path: "/servicios",
+    children: [
+      { label: "Servicios industriales", path: "/servicios" },
+      { label: "Copiloto de Turbinas", path: "/servicios/copiloto-de-turbinas" },
+    ],
+  },
   {
     label: "Cursos",
     path: "/cursos",
@@ -40,7 +47,7 @@ export const navItems = [
       { label: "TIA Portal S7-1200/1500 — Próximamente", path: "/cursos/tia-portal" },
     ],
   },
-  { label: "App", path: "/app" },
+  { label: "App S7-PLC", path: "/app" },
   { label: "Obras", path: "/obras" },
   { label: "Recursos", path: "/recursos-tecnicos" },
   { label: "Contacto", path: "/contacto" },

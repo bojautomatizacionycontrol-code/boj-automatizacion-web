@@ -319,6 +319,8 @@ function Header({ route, language }) {
       closeMenuLabel: "Cerrar menú",
       diagnosticLabel: "Solicitar diagnóstico",
       diagnosticMessage: "Hola, escribo desde la web de BOJ Automatización y Control para solicitar un diagnóstico industrial.",
+      copilotLabel: "Solicitar demostración",
+      copilotMessage: "Hola, quiero solicitar una demostración de Copiloto de Turbinas con datos de ejemplo para evaluar su aplicación en nuestra planta. Empresa: ",
       plansLabel: "Ver planes PRO",
       plansAnchor: "#planes-pro",
       courseLabel: "Ver curso y precio",
@@ -334,6 +336,8 @@ function Header({ route, language }) {
       closeMenuLabel: "Close menu",
       diagnosticLabel: "Request diagnostics",
       diagnosticMessage: "Hello, I am contacting BOJ to request support with an industrial diagnostics case.",
+      copilotLabel: "Request a demonstration",
+      copilotMessage: "Hello, I would like a Turbine Copilot demonstration with sample data to assess it for our plant. Company: ",
       plansLabel: "View PRO plans",
       plansAnchor: "#en-pro-plans",
       courseLabel: "View course and price",
@@ -349,6 +353,8 @@ function Header({ route, language }) {
       closeMenuLabel: "Fechar menu",
       diagnosticLabel: "Solicitar diagnóstico",
       diagnosticMessage: "Olá, estou entrando em contato com a BOJ para solicitar suporte em um caso de diagnóstico industrial.",
+      copilotLabel: "Solicitar demonstração",
+      copilotMessage: "Olá, gostaria de solicitar uma demonstração do Copiloto de Turbinas com dados de exemplo para avaliar seu uso em nossa planta. Empresa: ",
       plansLabel: "Ver planos PRO",
       plansAnchor: "#pt-planos-pro",
       courseLabel: "Ver curso e preço",
@@ -363,7 +369,9 @@ function Header({ route, language }) {
     href: whatsappUrl(headerCopy.diagnosticMessage),
   };
   const routeAction =
-    ["/app", "/en/app", "/pt/app"].includes(route)
+    ["/servicios/copiloto-de-turbinas", "/en/services/turbine-copilot", "/pt/servicos/copiloto-de-turbinas"].includes(route)
+      ? { label: headerCopy.copilotLabel, href: whatsappUrl(headerCopy.copilotMessage) }
+      : ["/app", "/en/app", "/pt/app"].includes(route)
       ? { label: headerCopy.plansLabel, href: headerCopy.plansAnchor }
       : ["/cursos/s7-300-400", "/en/courses/s7-300-400", "/pt/cursos/s7-300-400"].includes(route)
         ? { label: headerCopy.courseLabel, href: headerCopy.courseAnchor }
@@ -744,7 +752,8 @@ function MainFooter({ language, buildYear }) {
         { label: "Home", path: "/en" },
         { label: "Services", path: "/en/services" },
         { label: "Training", path: "/en/courses" },
-        { label: "App", path: "/en/app" },
+        { label: "S7-PLC App", path: "/en/app" },
+        { label: "Turbine Copilot", path: "/en/services/turbine-copilot" },
         { label: "Projects", path: "/en/projects" },
         { label: "Contact", path: "/en/contact" },
       ]
@@ -753,7 +762,8 @@ function MainFooter({ language, buildYear }) {
           { label: "Início", path: "/pt" },
           { label: "Serviços", path: "/pt/servicos" },
           { label: "Cursos", path: "/pt/cursos" },
-          { label: "App", path: "/pt/app" },
+          { label: "App S7-PLC", path: "/pt/app" },
+          { label: "Copiloto de Turbinas", path: "/pt/servicos/copiloto-de-turbinas" },
           { label: "Projetos", path: "/pt/projetos" },
           { label: "Contato", path: "/pt/contato" },
         ]
@@ -762,7 +772,8 @@ function MainFooter({ language, buildYear }) {
         { label: "Servicios", path: "/servicios" },
         { label: "Cursos", path: "/cursos" },
         { label: "Recursos", path: "/recursos-tecnicos" },
-        { label: "App", path: "/app" },
+        { label: "App S7-PLC", path: "/app" },
+        { label: "Copiloto de Turbinas", path: "/servicios/copiloto-de-turbinas" },
         { label: "Obras", path: "/obras" },
         { label: "Contacto", path: "/contacto" },
         ];

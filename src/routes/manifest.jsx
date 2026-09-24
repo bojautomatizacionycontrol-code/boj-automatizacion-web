@@ -6,6 +6,7 @@ export { getRouteFamily } from "./route-families.js";
 const routeFamilyLoaders = Object.freeze({
   home: () => import("./home.jsx"),
   services: () => import("./services.jsx"),
+  copilot: () => import("./copilot.jsx"),
   coursesIndex: () => import("./courses-index.jsx"),
   courseS7: () => import("./course-s7.jsx"),
   courseTia: () => import("./course-tia.jsx"),

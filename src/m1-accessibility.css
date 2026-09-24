@@ -269,6 +269,20 @@ body[data-scroll-locked="true"] {
   color: #0b6f98 !important;
 }
 
+/* Las bandas de CTA conservan fondo oscuro dentro del articulo claro.
+   Sobrescribir aqui evita que sus reglas generales apaguen titulo, texto y enlace. */
+.boj-shell-body section.route-cta h2 {
+  color: #f5fbff;
+}
+
+.boj-shell-body section.route-cta p {
+  color: #d5e6f1;
+}
+
+.boj-shell-body section.route-cta .btn.secondary {
+  color: #eaf6ff !important;
+}
+
 [data-surface="dark"] .s7-sales-kicker,
 .s7-sales-dark .s7-sales-kicker,
 .s7-sales-offer .s7-sales-kicker {

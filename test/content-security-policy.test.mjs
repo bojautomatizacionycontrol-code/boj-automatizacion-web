@@ -65,16 +65,16 @@ test("mantiene cada directiva en su allowlist mínima demostrada", () => {
   assert.doesNotMatch(buildContentSecurityPolicy(), /unsafe-inline|unsafe-eval|\*/);
 });
 
-test("genera 34 hashes JSON-LD exactos y deterministas desde las 35 rutas", () => {
+test("genera 40 hashes JSON-LD exactos y deterministas desde las 41 rutas", () => {
   const expected = publicRoutePaths
     .map((route) => getRouteMetadata(route).jsonLd)
     .filter(Boolean)
     .map((jsonLd) => sha256Source(serializeJsonLd(jsonLd)));
   const hashes = [...getJsonLdHashSources()];
-  assert.equal(publicRoutePaths.length, 38);
-  assert.equal(expected.length, 37);
-  assert.equal(hashes.length, 37);
-  assert.equal(new Set(expected).size, 37);
+  assert.equal(publicRoutePaths.length, 41);
+  assert.equal(expected.length, 40);
+  assert.equal(hashes.length, 40);
+  assert.equal(new Set(expected).size, 40);
   assert.deepEqual(hashes, [...expected].sort());
   assert.deepEqual(getJsonLdHashSources(), getJsonLdHashSources());
   assert.equal(serializeJsonLd(getRouteMetadata("/").jsonLd), JSON.stringify(getRouteMetadata("/").jsonLd));
@@ -149,7 +149,7 @@ test("certifica los bytes inline físicos y detecta un hash postbuild alterado",
     paths.push(notFoundPath);
 
     const result = await validateBuiltCsp(paths, vercelConfig);
-    assert.deepEqual(result, { generatedFiles: 39, inlineScripts: 37, hashes: 37 });
+    assert.deepEqual(result, { generatedFiles: 42, inlineScripts: 40, hashes: 40 });
 
     const first = await readFile(paths[0], "utf8");
     await writeFile(paths[0], first.replace("</script>", " </script>"), "utf8");

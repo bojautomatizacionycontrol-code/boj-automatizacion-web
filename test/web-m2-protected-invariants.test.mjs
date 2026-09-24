@@ -66,15 +66,15 @@ const protectedFileHashes = {
   "../src/AccessibleDialog.jsx": "2248CAAEEC74167D3714EF73E1C1495564547FDD829D7CD52B6FD8BEB567BFD8",
   "../src/accessibility.js": "59DEFB57B8006063543B5282EE57FC7A0FF215050ADCA714389E4FE62F78B892",
   // Updated only for the reviewed EN/PT FAQ clarification of course-inclusive offers.
-  "../src/i18n.js": "D32418E0960366493B586A09EC81F3221FD95DF4AF5A3E25E230354D31E98BB7",
-  "../src/m1-accessibility.css": "65A5411E4EFDE3DD5231779640AC34D1DB032CB622A12A0E44DD7CDA8B98DA87",
+  "../src/i18n.js": "105442099EBB8F5B414E383F78280190803F596B907F66A021AF9E8070A90DD2",
+  "../src/m1-accessibility.css": "90D00A42DD1EBFE3E734BA572F11890A33685FFB45B9140E4A39C36A5AB4C4FB",
   "../src/app/preserved-analytics-inventory.js": "1EC89D5816FB33278F5A9724CF9AB909687845763DBE05581753086ACE781149",
   "../scripts/csp-policy.mjs": "696D7C2CB8A01960612C132D94D5B8266D3BB19C2108199BBB72C1042E5931D7",
-  "../public/sitemap.xml": "DDB75844A2D4AA40361BD98AB785976E0890A0A4012A48A793F3AFDB72E7F71A",
+  "../public/sitemap.xml": "6EADCB3071EAE8DA259461B8059532BA292AEBF243A4CA3B3F31FA86C6E0B4E1",
   "../public/robots.txt": "928DAC7480C646B5F7E1285CF8DC5E8A529EF5AD728F724FFB110AA6E3AB8FAB",
   "../package-lock.json": "9B6B206FDF31963376A261C207D9F11D7319DC2A00DC82582583A7F91897FCC5",
   "./contact-decision-paths.test.mjs": "A3455113BA19591BC447E39F1E29F41D8A2979B5FB2A775091DFBA4BEFA0061D",
-  "./site-language-navigation.test.mjs": "FE30B3654F13C91562E2FE5BA4F8BC363B9CFE83E949AF7933870A338238AEDC",
+  "./site-language-navigation.test.mjs": "16B4B39C67E48465C8D15FFE236C3E9B2FD51B6A64B0C3D19AC567A4FC30FFF8",
   "./web-m1-accessibility-behavior.test.mjs": "DA4F6F57CF72D2973F89525947DC415822B8DE7A51341291927FA922082D36CB",
   "./web-m1-accessible-dialog.test.mjs": "C8BE063490D2941FE0FE5CB13601933BBA02EC91A02F1F434449777F647C19FE",
   "./web-m1-accessible-navigation.test.mjs": "22B28DD4A72E694E9F7450F336B0510FD7628486B8791DC15CB7B5002A6166C0",
@@ -156,7 +156,7 @@ test("Analytics contacto encabezado legal y wrappers TIA conservan sus bloques",
     [shellSource, "const ANALYTICS = {", "let analyticsBootstrapped", "EF666E0300C7D1CB178A06B96DCD41A2BA007694E0DF93DFBB335545EFC30437"],
     [sharedEagerSource, "function track(", "function whatsappUrl", "4D35DA98A35C6066A4D4C088A2EC4C64BB039FD618F1B42A04721D8C2E6B98D8"],
     [shellSource, "function initAnalytics", "function getRoute", "29ECFCDA94234F06FECD57B00FEC61FE1976498E547242EBC2C78F1AE1D6BD9A"],
-    [shellSource, "function Header(", "function LanguageSwitcher(", "3B3E8AF45039AF070B64B0350D7B02A5FD13CC3998AC42E141A4DAAA99C6C147"],
+    [shellSource, "function Header(", "function LanguageSwitcher(", "034857E9015C13EB7CF24D7EBA95DEA42FE3C5F3D446EF11E934C8054F406DA8"],
     [tiaSource, "function TiaCoursePage(", "const coursePreparationCopy", "9719C62AA8D2E1AEA14C61822189459BCF403493C249D4FD251FFF43631BEFA2"],
     [tiaSource, "function EnglishTiaCoursePage(", "function PortugueseTiaCoursePage(", "882A4BA3C741D20FFB20A4FC8FED9D536A81680337C114F15428A0CB99BBA2B4"],
     [tiaSource, "function PortugueseTiaCoursePage(", "function InfoBlock", "9689C6EDE8F0C09422D32051365C9B621CB2DA824934C2A62CB0156314841B5A"],
@@ -199,8 +199,8 @@ test("rutas schema CSP y redirects permanecen dentro del contrato vigente", () =
     sha256(sourceBlock(routeSource, "const appRouteSet = new Set(", "function getNotFoundMetadata(")),
     "2E9C085F234C08B5A3E5B6F9275804C99DF41AC2AE43151B187D8F7C7AA7273A"
   );
-  assert.equal(publicRoutePaths.length, 38);
-  assert.equal(indexableRoutePaths.length, 37);
+  assert.equal(publicRoutePaths.length, 41);
+  assert.equal(indexableRoutePaths.length, 40);
 
   const cspHeaders = (vercelConfig.headers || []).flatMap((rule) =>
     (rule.headers || [])

@@ -2,6 +2,7 @@ export const languageRoutePairs = [
   { es: "/", en: "/en", pt: "/pt" },
   { es: "/inicio", en: "/en", pt: "/pt" },
   { es: "/servicios", en: "/en/services", pt: "/pt/servicos" },
+  { es: "/servicios/copiloto-de-turbinas", en: "/en/services/turbine-copilot", pt: "/pt/servicos/copiloto-de-turbinas" },
   { es: "/cursos", en: "/en/courses", pt: "/pt/cursos" },
   { es: "/cursos/s7-300-400", en: "/en/courses/s7-300-400", pt: "/pt/cursos/s7-300-400" },
   { es: "/cursos/tia-portal", en: "/en/courses/tia-portal", pt: "/pt/cursos/tia-portal" },
@@ -12,7 +13,14 @@ export const languageRoutePairs = [
 
 export const englishNavItems = [
   { label: "Home", path: "/en" },
-  { label: "Services", path: "/en/services" },
+  {
+    label: "Services",
+    path: "/en/services",
+    children: [
+      { label: "Industrial services", path: "/en/services" },
+      { label: "Turbine Copilot", path: "/en/services/turbine-copilot" },
+    ],
+  },
   {
     label: "Training",
     path: "/en/courses",
@@ -21,14 +29,21 @@ export const englishNavItems = [
       { label: "TIA Portal S7-1200/1500 — Upcoming", path: "/en/courses/tia-portal" },
     ],
   },
-  { label: "App", path: "/en/app" },
+  { label: "S7-PLC App", path: "/en/app" },
   { label: "Projects", path: "/en/projects" },
   { label: "Contact", path: "/en/contact" },
 ];
 
 export const portugueseNavItems = [
   { label: "Início", path: "/pt" },
-  { label: "Serviços", path: "/pt/servicos" },
+  {
+    label: "Serviços",
+    path: "/pt/servicos",
+    children: [
+      { label: "Serviços industriais", path: "/pt/servicos" },
+      { label: "Copiloto de Turbinas", path: "/pt/servicos/copiloto-de-turbinas" },
+    ],
+  },
   {
     label: "Cursos",
     path: "/pt/cursos",
@@ -37,7 +52,7 @@ export const portugueseNavItems = [
       { label: "TIA Portal S7-1200/1500 — Em preparação", path: "/pt/cursos/tia-portal" },
     ],
   },
-  { label: "App", path: "/pt/app" },
+  { label: "App S7-PLC", path: "/pt/app" },
   { label: "Projetos", path: "/pt/projetos" },
   { label: "Contato", path: "/pt/contato" },
 ];

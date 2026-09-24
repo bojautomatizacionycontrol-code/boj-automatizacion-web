@@ -28,9 +28,9 @@ test("mantiene el CSS modularizado con los cimientos visuales vigentes", () => {
   assert.doesNotMatch(mainSource, /commercial-impact\.css/);
 });
 
-test("conserva ocho familias de ruta dinámicas sin volver a importar páginas desde el entry", () => {
-  assert.equal((manifestSource.match(/:\s*\(\) => import\("\.\//g) || []).length, 8);
-  assert.doesNotMatch(mainSource, /\.\/routes\/(?:home|services|courses-index|course-s7|course-tia|app|resources|compliance)\.jsx/);
+test("conserva nueve familias de ruta dinámicas sin volver a importar páginas desde el entry", () => {
+  assert.equal((manifestSource.match(/:\s*\(\) => import\("\.\//g) || []).length, 9);
+  assert.doesNotMatch(mainSource, /\.\/routes\/(?:home|services|copilot|courses-index|course-s7|course-tia|app|resources|compliance)\.jsx/);
   assert.match(mainSource, /loadRouteComponent\(initialRoute\)/);
   assert.match(mainSource, /hydrateRoot\(rootElement, tree/);
   assert.match(manifestSource, /getDerivedStateFromProps\(props, state\)[\s\S]*props\.route === state\.route[\s\S]*failed: false, route: props\.route/);

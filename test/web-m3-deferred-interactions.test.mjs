@@ -60,8 +60,8 @@ test("las dimensiones y el foco del flipbook permanecen protegidos", () => {
   assert.match(deferredManualSource, /restoreFocusAfterLoadRef[\s\S]*querySelector\("\.s7-flip-page"\)\?\.focus/);
 });
 
-test("el port no altera la arquitectura de ocho rutas ni hydrateRoot", () => {
-  assert.equal((manifestSource.match(/:\s*\(\) => import\("\.\//g) || []).length, 8);
+test("el port conserva nueve familias diferidas e hydrateRoot", () => {
+  assert.equal((manifestSource.match(/:\s*\(\) => import\("\.\//g) || []).length, 9);
   assert.match(mainSource, /loadRouteComponent\(initialRoute\)/);
   assert.match(mainSource, /hydrateRoot\(rootElement, tree/);
 });

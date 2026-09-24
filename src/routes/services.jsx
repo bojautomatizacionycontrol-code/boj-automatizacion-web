@@ -113,6 +113,46 @@ function ServicesEngagement({ language = "es" }) {
   );
 }
 
+const copilotServiceCopy = {
+  es: {
+    eyebrow: "Software B2B para generación",
+    title: "Copiloto de Turbinas",
+    text: "Historial de instrumentación, rondas y documentación técnica reunidos por máquina y por tag. Conoce el flujo en un entorno de demostración con datos de ejemplo.",
+    action: "Conocer Copiloto",
+    href: "/servicios/copiloto-de-turbinas",
+  },
+  en: {
+    eyebrow: "B2B software for generation",
+    title: "Turbine Copilot",
+    text: "Instrument history, inspection rounds and technical documents organized by unit and tag. Explore the workflow in a demonstration environment with sample data.",
+    action: "Explore Turbine Copilot",
+    href: "/en/services/turbine-copilot",
+  },
+  pt: {
+    eyebrow: "Software B2B para geração",
+    title: "Copiloto de Turbinas",
+    text: "Histórico de instrumentação, rondas e documentos técnicos organizados por máquina e tag. Conheça o fluxo em um ambiente de demonstração com dados de exemplo.",
+    action: "Conhecer o Copiloto",
+    href: "/pt/servicos/copiloto-de-turbinas",
+  },
+};
+
+function CopilotServiceTeaser({ language }) {
+  const copy = copilotServiceCopy[language];
+  return (
+    <section className="services-copilot-feature" aria-labelledby={`services-copilot-${language}`}>
+      <div className="mock-home-container services-copilot-feature-inner">
+        <div>
+          <p>{copy.eyebrow}</p>
+          <h2 id={`services-copilot-${language}`}>{copy.title}</h2>
+          <span>{copy.text}</span>
+        </div>
+        <a href={copy.href}>{copy.action}<ArrowRight size={18} aria-hidden="true" /></a>
+      </div>
+    </section>
+  );
+}
+
 const servicesAreaCards = [
   {
     icon: "FileSearch",
@@ -409,6 +449,7 @@ function ServicesPage() {
         </div>
       </section>
 
+      <CopilotServiceTeaser language="es" />
       <ServicesEngagement language="es" />
 
       <FounderBlock language="es" id="services-founder" />
@@ -619,6 +660,7 @@ function EnglishServicesPage() {
         </div>
       </section>
 
+      <CopilotServiceTeaser language="en" />
       <ServicesEngagement language="en" />
 
       <FounderBlock language="en" id="en-services-founder" />
@@ -680,6 +722,7 @@ function PortugueseServicesPage() {
       <section className="services-field-section" data-surface="light"><div className="mock-home-container"><div className="services-section-heading services-field-heading"><h2>Experiência em ambientes industriais</h2><p>Trabalho realizado onde continuidade operacional, partida segura e diagnóstico confiável são essenciais.</p></div><div className="services-field-grid">{portugueseServices.field.map((card) => <article className="services-field-card" key={card.title}><Icon name={card.icon} size={30} /><h3>{card.title}</h3><p>{card.text}</p></article>)}</div></div></section>
       <section className="services-redesign-section services-secondary-section" data-surface="dark"><div className="mock-home-container"><div className="services-section-heading services-secondary-heading"><h2>Serviços complementares</h2><p>Suporte técnico para sinais, painéis e capacitação aplicada à manutenção industrial.</p></div><div className="services-secondary-grid">{portugueseServices.secondary.map((service) => <ServiceSecondaryCard key={service.title} service={service} />)}</div></div></section>
       <section className="services-workflow-section" data-surface="light"><div className="mock-home-container"><div className="services-section-heading services-workflow-heading"><h2>Um método para tomar melhores decisões técnicas</h2><p>Do sintoma ao próximo passo prático, com evidências de campo e um escopo de intervenção claro.</p></div><div className="services-workflow-grid">{portugueseServices.workflow.map((card) => <article className="services-workflow-card" key={card.title}><Icon name={card.icon} size={26} /><h3>{card.title}</h3><p>{card.text}</p></article>)}</div></div></section>
+      <CopilotServiceTeaser language="pt" />
       <ServicesEngagement language="pt" />
       <FounderBlock language="pt" id="pt-services-founder" />
       <S7Testimonials language="pt" limit={2} />

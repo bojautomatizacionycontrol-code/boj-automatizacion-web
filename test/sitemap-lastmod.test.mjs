@@ -2,9 +2,22 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { withLastmod } from "../scripts/update-sitemap-lastmod.mjs";
+import { familySources, withLastmod } from "../scripts/update-sitemap-lastmod.mjs";
+import { getRouteFamily } from "../src/routes/route-families.js";
 
 const sitemapSource = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
+
+test("Copiloto tiene lastmod basado en su página propia en los tres idiomas", () => {
+  assert.deepEqual(familySources.copilot, ["src/routes/copilot.jsx"]);
+  for (const route of [
+    "/servicios/copiloto-de-turbinas",
+    "/en/services/turbine-copilot",
+    "/pt/servicos/copiloto-de-turbinas",
+  ]) {
+    assert.equal(getRouteFamily(route), "copilot");
+    assert.ok(sitemapSource.includes(`<loc>https://www.bojautomatizacion.com${route}</loc>`));
+  }
+});
 
 test("cada URL del sitemap publica un lastmod ISO válido y no futuro", () => {
   const entries = [...sitemapSource.matchAll(/<url>(.*?)<\/url>/g)].map((match) => match[1]);

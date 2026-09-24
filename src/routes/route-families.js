@@ -8,6 +8,11 @@ export const routeFamilies = Object.freeze({
     "/pt/servicos",
     "/pt/projetos",
   ]),
+  copilot: Object.freeze([
+    "/servicios/copiloto-de-turbinas",
+    "/en/services/turbine-copilot",
+    "/pt/servicos/copiloto-de-turbinas",
+  ]),
   coursesIndex: Object.freeze(["/cursos", "/en/courses", "/pt/cursos"]),
   courseS7: Object.freeze([
     "/cursos/s7-300-400",

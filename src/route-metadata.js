@@ -36,7 +36,8 @@ const socialImageAltByLanguage = Object.freeze({
 
 export function getSocialImageFamily(route) {
   const localizedPath = route.replace(/^\/(?:en|pt)(?=\/|$)/, "") || "/";
-  if (["/servicios", "/services", "/servicos", "/obras", "/projects", "/projetos"].includes(localizedPath)) {
+  if (["/servicios", "/services", "/servicos", "/obras", "/projects", "/projetos"].includes(localizedPath)
+    || ["/servicios/", "/services/", "/servicos/"].some((prefix) => localizedPath.startsWith(prefix))) {
     return "services";
   }
   if (localizedPath === "/app") return "app";
@@ -75,6 +76,11 @@ export const routeMetadata = Object.freeze({
     title: "Servicios de automatización industrial y diagnóstico | BOJ",
     description:
       "Servicios técnicos para planta: PLC Siemens, diagnóstico de fallas, redes PROFIBUS/PROFINET, migraciones, instrumentación, tableros y puesta en marcha.",
+  },
+  "/servicios/copiloto-de-turbinas": {
+    title: "Copiloto de Turbinas | Software para instrumentación de planta | BOJ",
+    description:
+      "Registro técnico de instrumentación de turbinas de gas: lecturas, calibraciones, rondas, alarmas, intervenciones y documentación PDF. Demostración B2B con datos de ejemplo.",
   },
   "/cursos": {
     title: "Formación PLC Siemens disponible y futura | BOJ",
@@ -181,6 +187,11 @@ export const routeMetadata = Object.freeze({
     description:
       "Technical services for Siemens PLCs, HMI, SCADA, PROFIBUS, PROFINET, migrations, instrumentation and industrial commissioning.",
   },
+  "/en/services/turbine-copilot": {
+    title: "Turbine Copilot | Plant instrumentation software | BOJ",
+    description:
+      "Technical records for gas turbine instrumentation: readings, calibrations, rounds, alarms, interventions and PDF documents. Request a B2B demonstration with sample data.",
+  },
   "/en/courses": {
     title: "Available and upcoming Siemens PLC training | BOJ",
     description:
@@ -220,6 +231,11 @@ export const routeMetadata = Object.freeze({
     title: "Serviços de automação e diagnóstico industrial | BOJ",
     description:
       "Serviços técnicos para PLC Siemens, IHM, SCADA, PROFIBUS, PROFINET, migrações, instrumentação e comissionamento industrial.",
+  },
+  "/pt/servicos/copiloto-de-turbinas": {
+    title: "Copiloto de Turbinas | Software de instrumentação industrial | BOJ",
+    description:
+      "Registro técnico da instrumentação de turbinas a gás: leituras, calibrações, rondas, alarmes, intervenções e documentos PDF. Demonstração B2B com dados de exemplo.",
   },
   "/pt/cursos": {
     title: "Formação disponível e futura de PLC Siemens | BOJ",

@@ -11,6 +11,7 @@ const sitemapPath = fileURLToPath(new URL("../public/sitemap.xml", import.meta.u
 export const familySources = Object.freeze({
   home: ["src/routes/home.jsx"],
   services: ["src/routes/services.jsx"],
+  copilot: ["src/routes/copilot.jsx"],
   coursesIndex: ["src/routes/courses-index.jsx"],
   courseS7: ["src/routes/course-s7.jsx"],
   courseTia: ["src/routes/course-tia.jsx"],
