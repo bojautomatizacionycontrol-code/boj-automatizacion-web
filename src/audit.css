@@ -208,7 +208,7 @@ button:disabled,
 }
 
 .site-footer.mock-footer .mock-footer-inner {
-  grid-template-columns: minmax(205px, 1.15fr) minmax(236px, 1fr) minmax(180px, 1fr) minmax(140px, 0.8fr) minmax(100px, auto);
+  grid-template-columns: minmax(200px, 0.95fr) minmax(278px, 1.35fr) minmax(170px, 0.83fr) minmax(125px, 0.64fr) minmax(80px, auto);
 }
 
 .site-footer.mock-footer .mock-footer-legal {
@@ -223,7 +223,7 @@ button:disabled,
 
 @media (max-width: 760px) {
   .site-footer.mock-footer .mock-footer-inner {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .mock-home-container,

@@ -82,7 +82,7 @@ function TechnicalResourcesPage() {
         </div>
       </section>
 
-      <section className="inner-section">
+      <section className="inner-section resources-index-section">
         <SectionHeader
           eyebrow="Guías de diagnóstico"
           title="Del síntoma a la verificación, paso a paso"
@@ -95,7 +95,7 @@ function TechnicalResourcesPage() {
         </div>
       </section>
 
-      <section className="inner-section">
+      <section className="inner-section resources-index-section">
         <SectionHeader
           eyebrow="Biblioteca"
           title="Recursos disponibles"

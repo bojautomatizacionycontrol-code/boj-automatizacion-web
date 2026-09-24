@@ -100,9 +100,8 @@ function ServicesEngagement({ language = "es" }) {
           <p>{copy.intro}</p>
         </div>
         <ol className="services-workflow-grid services-engagement-grid">
-          {copy.steps.map((step, index) => (
+          {copy.steps.map((step) => (
             <li className="services-workflow-card services-engagement-step" key={step.title}>
-              <span className="services-engagement-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
               <Icon name={step.icon} size={26} />
               <h3>{step.title}</h3>
               <p>{step.text}</p>

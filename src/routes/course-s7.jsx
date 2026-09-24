@@ -18,9 +18,9 @@ import {
   metodoBojSteps,
 } from "../content.js";
 import { englishS7Course, portugueseS7Course } from "../i18n.js";
-import appDiagnosticoGuiado from "../assets/app-diagnostico-guiado.jpg";
 import walterBojAvatar from "../assets/walter-boj-avatar-field.jpeg";
 import heroCursoS7 from "../assets/hero-curso-s7.jpg";
+import AppTourPreview from "../components/AppTourPreview.jsx";
 import { track, whatsappUrl } from "../app/shared-eager.jsx";
 import ManualFlipbook from "../components/DeferredManualFlipbook.jsx";
 import {
@@ -39,10 +39,6 @@ const manualPreviewModules = import.meta.glob("../assets/manual-preview/*.jpg", 
 const manualPreviewImages = Object.keys(manualPreviewModules)
   .sort()
   .map((key) => manualPreviewModules[key]);
-
-const s7AppCarousel = [
-  { label: "Subflujo guiado y verificación por etapas", image: appDiagnosticoGuiado },
-];
 
 function CourseHeroPreview() {
   return (
@@ -84,7 +80,6 @@ function S7MethodStrip() {
           {metodoBojSteps.map((step, index) => (
             <div className="s7-method-step-wrap" key={step.num}>
               <article className="s7-method-step">
-                <span className="s7-method-num">{step.num}</span>
                 <span className="s7-method-icon">
                   <Icon name={step.icon} size={26} />
                 </span>
@@ -440,15 +435,9 @@ function S7SalesLanding({ course, eyebrow }) {
               <div className="s7-sales-include-body">
                 <div className="s7-sales-include-media s7-sales-app-media">
                   <p className="s7-sales-include-preview-label">
-                    <ScanSearch size={16} aria-hidden="true" /> Explora capturas reales de la app
+                    <ScanSearch size={16} aria-hidden="true" /> Recorre pantallas reales de la app
                   </p>
-                  <ManualFlipbook
-                    images={s7AppCarousel.map((s) => s.image)}
-                    pages={s7AppCarousel}
-                    variant="card"
-                    orientation="landscape"
-                    altPrefix="Captura real de BOJ S7-PLC PRO"
-                  />
+                  <AppTourPreview language="es" />
                 </div>
                 <div className="s7-sales-app-copy">
                   <p className="s7-sales-app-lead">
@@ -976,7 +965,6 @@ function LocalizedS7MethodStrip({ copy, language }) {
           {copy.methodSteps.map(([icon, title, text], index) => (
             <div className="s7-method-step-wrap" key={title}>
               <article className="s7-method-step">
-                <span className="s7-method-num">{String(index + 1).padStart(2, "0")}</span>
                 <span className="s7-method-icon"><Icon name={icon} size={26} /></span>
                 <h3>{title}</h3>
                 <p>{text}</p>
@@ -1007,7 +995,6 @@ function LocalizedS7SalesLanding({ language, courseCopy }) {
     courseCopy.faq.filter((_, index) => index % 2 === 1),
   ];
   const manualPages = s7ManualPages.map((page, index) => ({ ...page, label: `${language === "en" ? "Page" : "Página"} ${index + 1}` }));
-  const appPages = s7AppCarousel.map((item, index) => ({ ...item, label: `${language === "en" ? "App view" : "Tela do app"} ${index + 1}` }));
 
   return (
     <div className={`s7-sales-page ${copy.pageClass}`} data-language={language}>
@@ -1053,7 +1040,7 @@ function LocalizedS7SalesLanding({ language, courseCopy }) {
             <article className="s7-sales-include-card s7-sales-include-app">
               <span className="s7-sales-include-number">2</span><h3>{copy.appCardTitle}</h3>
               <div className="s7-sales-include-body">
-                <div className="s7-sales-include-media s7-sales-app-media"><p className="s7-sales-include-preview-label"><ScanSearch size={16} aria-hidden="true" /> {copy.appPreview}</p><ManualFlipbook images={s7AppCarousel.map((item) => item.image)} pages={appPages} variant="card" orientation="landscape" language={language} /></div>
+                <div className="s7-sales-include-media s7-sales-app-media"><p className="s7-sales-include-preview-label"><ScanSearch size={16} aria-hidden="true" /> {copy.appPreview}</p><AppTourPreview language={language} /></div>
                 <div className="s7-sales-app-copy"><p className="s7-sales-app-lead">{copy.appLead}</p><div className="s7-sales-app-specs"><span className="s7-sales-app-spec"><CalendarCheck size={18} />1 {language === "en" ? "month" : "mês"}</span><span className="s7-sales-app-spec"><Smartphone size={18} />1 {language === "en" ? "device" : "dispositivo"}</span></div><div className="s7-sales-app-features"><p className="s7-sales-app-features-title">{copy.appFeaturesTitle}</p><ul>{copy.appFeatures.map((item) => <li key={item}><CheckCircle2 size={17} aria-hidden="true" /><span>{item}</span></li>)}</ul></div></div>
               </div>
             </article>

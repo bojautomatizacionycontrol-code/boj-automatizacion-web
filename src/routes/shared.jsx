@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   Brain,
@@ -205,14 +206,32 @@ function S7ProofStrip({ language = "es" }) {
 }
 
 const s7TestimonialsCopy = {
-  es: { kicker: "Lo que dicen los técnicos", title: "Resultados reales en planta, no promesas." },
-  en: { kicker: "What technicians say", title: "Real plant experience, not empty promises.", source: "Original testimonial in Spanish" },
-  pt: { kicker: "O que dizem os técnicos", title: "Experiência real em planta, não promessas vazias.", source: "Depoimento original em espanhol" },
+  es: { kicker: "Lo que dicen los técnicos", title: "Experiencias reales en planta.", previous: "Anterior", next: "Siguiente", pause: "Pausar", resume: "Reanudar" },
+  en: { kicker: "What technicians say", title: "Real experience in the field.", source: "Original testimonial in Spanish", previous: "Previous", next: "Next", pause: "Pause", resume: "Resume" },
+  pt: { kicker: "O que dizem os técnicos", title: "Experiências reais em campo.", source: "Depoimento original em espanhol", previous: "Anterior", next: "Próximo", pause: "Pausar", resume: "Retomar" },
 };
 
 function S7Testimonials({ background = "light", language = "es", limit }) {
   const copy = s7TestimonialsCopy[language] || s7TestimonialsCopy.es;
   const items = limit ? s7Testimonials.slice(0, limit) : s7Testimonials;
+  const [activeIndex, setActiveIndex] = useState(0);
+  const item = items[activeIndex];
+  const [manuallyPaused, setManuallyPaused] = useState(false);
+  useEffect(() => {
+    if (manuallyPaused || items.length < 2) return undefined;
+    const timer = window.setInterval(() => {
+      if (!document.hidden && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setActiveIndex((index) => (index + 1) % items.length);
+      }
+    }, 12000);
+    return () => window.clearInterval(timer);
+  }, [manuallyPaused, items.length]);
+
+  function showTestimonial(direction) {
+    setActiveIndex((index) => (index + direction + items.length) % items.length);
+    setManuallyPaused(true);
+  }
+
   const initials = (name) =>
     name
       .split(" ")
@@ -223,28 +242,45 @@ function S7Testimonials({ background = "light", language = "es", limit }) {
       .toUpperCase();
 
   return (
-    <section className={`s7-sales-section s7-testimonials s7-testimonials-${background}`} data-surface={background}>
+    <section
+      className={`s7-sales-section s7-testimonials s7-testimonials-${background}`}
+      data-surface={background}
+      onFocusCapture={() => setManuallyPaused(true)}
+    >
       <div className="s7-sales-container">
         <div className="s7-sales-centered-heading">
           <p className="s7-sales-kicker">{copy.kicker}</p>
           <h2>{copy.title}</h2>
         </div>
-        <div className="s7-testimonials-grid">
-          {items.map((item) => (
-            <figure className="s7-testimonial-card" key={item.name}>
-              <span className="s7-testimonial-mark" aria-hidden="true">“</span>
-              <blockquote>{item.quote}</blockquote>
-              {copy.source ? <small className="s7-testimonial-language-note">{copy.source}</small> : null}
-              <figcaption>
-                <span className="s7-testimonial-avatar" aria-hidden="true">{initials(item.name)}</span>
-                <span className="s7-testimonial-id">
-                  <strong>{item.name}</strong>
-                  <em>{item.role}</em>
-                </span>
-              </figcaption>
-            </figure>
-          ))}
+        <div className="s7-testimonials-stage" aria-live={manuallyPaused ? "polite" : "off"}>
+          <figure className="s7-testimonial-card is-active">
+            <span className="s7-testimonial-mark" aria-hidden="true">“</span>
+            <blockquote>{item.quote}</blockquote>
+            {copy.source ? <small className="s7-testimonial-language-note">{copy.source}</small> : null}
+            <figcaption>
+              <span className="s7-testimonial-avatar" aria-hidden="true">{initials(item.name)}</span>
+              <span className="s7-testimonial-id">
+                <strong>{item.name}</strong>
+                <em>{item.role}</em>
+              </span>
+            </figcaption>
+          </figure>
         </div>
+        {items.length > 1 ? (
+          <div className="s7-testimonial-controls">
+            <button className="s7-testimonial-nav" type="button" onClick={() => showTestimonial(-1)} aria-label={copy.previous}>
+              <span aria-hidden="true">‹</span>
+            </button>
+            <span className="s7-testimonial-count">{activeIndex + 1} / {items.length}</span>
+            <button className="s7-testimonial-nav" type="button" onClick={() => showTestimonial(1)} aria-label={copy.next}>
+              <span aria-hidden="true">›</span>
+            </button>
+            <button className="s7-testimonial-toggle" type="button" onClick={() => setManuallyPaused((value) => !value)} aria-label={manuallyPaused ? copy.resume : copy.pause}>
+              <span aria-hidden="true">{manuallyPaused ? "▶" : "Ⅱ"}</span>
+              {manuallyPaused ? copy.resume : copy.pause}
+            </button>
+          </div>
+        ) : null}
       </div>
     </section>
   );

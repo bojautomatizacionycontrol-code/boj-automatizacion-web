@@ -122,8 +122,8 @@ test("deja fuera del build las capturas históricas con porcentajes o causas pro
     assert.ok(!appSource.includes(visual), `La captura histórica sigue activa: ${visual}`);
   }
 
-  assert.match(appSource, /import appDiagnosticoGuiado from "\.\.\/assets\/app-diagnostico-guiado\.jpg"/);
-  assert.match(appSource, /const s7AppCarousel = \[[\s\S]*?image: appDiagnosticoGuiado[\s\S]*?\];/);
+  assert.match(appSource, /import AppTourPreview from "\.\.\/components\/AppTourPreview\.jsx"/);
+  assert.match(appSource, /<AppTourPreview language=/);
   assert.match(appSource, /"!\.\.\/assets\/services-works\/panel app\.png"/);
   assert.match(appSource, /"!\.\.\/assets\/services-works\/panel app 2\.png"/);
   for (const activeVisual of [

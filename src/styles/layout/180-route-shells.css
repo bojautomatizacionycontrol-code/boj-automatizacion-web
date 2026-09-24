@@ -197,6 +197,36 @@
   color: inherit;
 }
 
+/* Technical library: headings and cards share the same left edge. */
+.resources-index-section .section-header {
+  margin-inline: 0;
+  text-align: left;
+}
+
+.resources-index-section .section-header > p:last-child {
+  max-width: 68ch;
+}
+
+.resources-index-section .technical-resource-body {
+  gap: 12px;
+}
+
+.resources-index-section .technical-resource-body h3 {
+  min-height: 2.5em;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.resources-index-section .technical-resource-body p {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .resources-index-section .technical-resource-body h3 {
+    min-height: 0;
+  }
+}
+
 /* =====================================================================
    BOJ AUDIT — Conversión de ventas (jun 2026)
    Hero note · proof strip · Método BOJ · flipbook del manual ·
