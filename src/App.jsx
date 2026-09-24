@@ -293,7 +293,6 @@ function App({ initialRoute = "/", initialRouteComponent = null, buildYear = new
         {language === "en" ? "Skip to main content" : language === "pt" ? "Ir para o conteúdo principal" : "Saltar al contenido principal"}
       </a>
       <Header route={route} language={language} />
-      <PurchaseAccessLinks />
       <main id="main-content" tabIndex={-1}>
         <RouteOutlet route={route} initialRoute={initialRoute} initialRouteComponent={initialRouteComponent} onRouteReady={setReadyRoute} />
       </main>
@@ -668,20 +667,6 @@ function BrandLogo({ compact = false }) {
   );
 }
 
-// Los dos enlaces directos permanecen visibles al entrar por cualquier ruta, sin imponer
-// un bloque explicativo en las páginas de producto, servicio o contacto. La explicación
-// completa está reunida en /reembolsos. Los rótulos legales se mantienen en español.
-function PurchaseAccessLinks() {
-  return (
-    <nav className="purchase-access" aria-label="Gestiones de compra">
-      <div className="mock-home-container purchase-access-inner">
-        <a href={hotmartLinks.refundRequestUrl} target="_blank" rel="noopener noreferrer">BOTÓN DE ARREPENTIMIENTO</a>
-        <a href={hotmartLinks.subscriptionManagementUrl} target="_blank" rel="noopener noreferrer">BOTÓN DE BAJA DE SERVICIO</a>
-      </div>
-    </nav>
-  );
-}
-
 function MainFooter({ language, buildYear }) {
   const english = language === "en";
   const portuguese = language === "pt";
@@ -807,6 +792,10 @@ function MainFooter({ language, buildYear }) {
         </div>
       </div>
       <div className="mock-footer-bottom">
+        <nav className="mock-footer-purchase" aria-label="Gestiones de compra en Hotmart">
+          <a href={hotmartLinks.refundRequestUrl} target="_blank" rel="noopener noreferrer">BOTÓN DE ARREPENTIMIENTO</a>
+          <a href={hotmartLinks.subscriptionManagementUrl} target="_blank" rel="noopener noreferrer">BOTÓN DE BAJA DE SERVICIO</a>
+        </nav>
         <span>{footerCopy.copyright}</span>
       </div>
     </footer>

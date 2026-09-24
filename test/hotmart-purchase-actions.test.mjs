@@ -22,7 +22,7 @@ const sliceBetween = (source, start, end) => {
   return source.slice(from, to);
 };
 
-const purchaseAccessSource = sliceBetween(appShellSource, "function PurchaseAccessLinks(", "function MainFooter(");
+const footerSource = sliceBetween(appShellSource, "function MainFooter(", "function FloatingContact(");
 
 test("los destinos oficiales de Hotmart son una fuente única y no llevan parámetros sensibles", () => {
   assert.deepEqual(hotmartLinks, {
@@ -44,25 +44,26 @@ test("los destinos oficiales de Hotmart son una fuente única y no llevan parám
   }
 });
 
-test("los dos enlaces directos se ven al primer acceso y el detalle queda en reembolsos", () => {
-  assert.match(appShellSource, /<Header route=\{route\} language=\{language\} \/>\s*<PurchaseAccessLinks \/>\s*<main id="main-content"/);
+test("los dos enlaces directos aparecen solo en el pie y el detalle queda en reembolsos", () => {
+  assert.match(appShellSource, /<Header route=\{route\} language=\{language\} \/>\s*<main id="main-content"/);
   assert.match(appShellSource, /<\/main>\s*<MainFooter language=\{language\} buildYear=\{buildYear\} \/>/);
   assert.ok(publicRoutePaths.length >= 38);
+  assert.match(footerSource, /<div className="mock-footer-bottom">\s*<nav className="mock-footer-purchase" aria-label="Gestiones de compra en Hotmart">/);
 
   assert.match(
-    purchaseAccessSource,
+    footerSource,
     /<a href=\{hotmartLinks\.refundRequestUrl\} target="_blank" rel="noopener noreferrer">BOTÓN DE ARREPENTIMIENTO<\/a>/
   );
   assert.match(
-    purchaseAccessSource,
+    footerSource,
     /<a href=\{hotmartLinks\.subscriptionManagementUrl\} target="_blank" rel="noopener noreferrer">BOTÓN DE BAJA DE SERVICIO<\/a>/
   );
-  assert.equal((purchaseAccessSource.match(/BOTÓN DE ARREPENTIMIENTO/g) || []).length, 1);
-  assert.equal((purchaseAccessSource.match(/BOTÓN DE BAJA DE SERVICIO/g) || []).length, 1);
-  assert.doesNotMatch(appShellSource, /purchase-actions|PurchaseActions|purchaseActionsCopy/);
+  assert.equal((appShellSource.match(/BOTÓN DE ARREPENTIMIENTO/g) || []).length, 1);
+  assert.equal((appShellSource.match(/BOTÓN DE BAJA DE SERVICIO/g) || []).length, 1);
+  assert.doesNotMatch(appShellSource, /purchase-access|PurchaseAccessLinks|purchase-actions|PurchaseActions|purchaseActionsCopy/);
 
   // No se interponen formularios, modales, autenticación de BOJ ni rutas internas.
-  assert.doesNotMatch(purchaseAccessSource, /onClick|javascript:|<button|<form|<details|<dialog/);
+  assert.doesNotMatch(footerSource, /javascript:|<form|<details|<dialog/);
   assert.doesNotMatch(appSource, /href="\/arrepentimiento"|href="\/baja"|href="\/reembolso"|href="\/cancelacion"/);
 
   // La página específica explica derechos, cancelación y canales, sin duplicar una banda global.
@@ -116,14 +117,11 @@ test("los legales enlazan solicitud, seguimiento, cancelación y soportes sin us
   assert.match(complianceSource, /function HotmartLink\(\{ href, children \}\) \{[\s\S]*?target="_blank" rel="noopener noreferrer"/);
 });
 
-test("las gestiones de compra se ven en móvil y escritorio con foco visible", () => {
-  assert.match(stylesSource, /\.purchase-access \{[^}]*background: #0b1e2a;/);
-  assert.match(stylesSource, /\.purchase-access a \{[^}]*border: 1px solid #31576b;[^}]*color: #d4eaf3;/);
-  assert.match(stylesSource, /\.purchase-access a:focus-visible \{[^}]*outline: 3px solid #22c6ef;/);
-  assert.match(stylesSource, /@media \(max-width: 760px\) \{\s*\.purchase-access-inner \{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[\s\S]*?\.purchase-access a \{[^}]*min-height: 42px;/);
-  assert.doesNotMatch(stylesSource, /\.purchase-actions|\.purchase-action-link/);
-  assert.doesNotMatch(stylesSource, /\.purchase-access[^{]*\{[^}]*display:\s*none/);
-  assert.doesNotMatch(stylesSource, /\.purchase-access[^{]*\{[^}]*visibility:\s*hidden/);
+test("los enlaces del pie se adaptan al ancho y tienen foco visible", () => {
+  assert.match(stylesSource, /\.site-footer\.mock-footer \.mock-footer-purchase \{[^}]*flex-wrap: wrap;/);
+  assert.match(stylesSource, /\.site-footer\.mock-footer \.mock-footer-purchase a \{[^}]*font-size: 0\.75rem;[^}]*text-decoration: underline;/);
+  assert.match(stylesSource, /\.site-footer\.mock-footer \.mock-footer-purchase a:focus-visible \{[^}]*outline: 3px solid #22c6ef;/);
+  assert.doesNotMatch(stylesSource, /\.purchase-access|\.purchase-actions|\.purchase-action-link/);
 });
 
 test("el documento de alineación registra el cierre de gestiones de compra sin certificar cumplimiento", () => {

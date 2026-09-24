@@ -118,6 +118,32 @@
   text-align: center;
 }
 
+.site-footer.mock-footer .mock-footer-purchase {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 20px;
+  margin-bottom: 9px;
+}
+
+.site-footer.mock-footer .mock-footer-purchase a {
+  color: rgba(238, 248, 255, 0.78);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-footer.mock-footer .mock-footer-purchase a:hover {
+  color: #ffffff;
+}
+
+.site-footer.mock-footer .mock-footer-purchase a:focus-visible {
+  outline: 3px solid #22c6ef;
+  outline-offset: 3px;
+}
+
 /* Tablet ≤1180px — 2 columnas: marca+contacto / navegación+redes */
 @media (max-width: 1180px) {
   .site-footer.mock-footer .mock-footer-inner {
@@ -143,61 +169,5 @@
   .site-footer.mock-footer .mock-footer-nav {
     grid-template-columns: 1fr;
     column-gap: 0;
-  }
-}
-
-/* Accesos directos de compra: visibles al primer acceso, sin competir con
-   el contenido de la página. Los detalles quedan sólo en /reembolsos. */
-.purchase-access {
-  border-bottom: 1px solid #244355;
-  background: #0b1e2a;
-}
-
-.purchase-access-inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 5px 8px;
-  padding-block: 5px;
-}
-
-.purchase-access a {
-  display: inline-flex;
-  min-height: 32px;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 11px;
-  border: 1px solid #31576b;
-  border-radius: 4px;
-  color: #d4eaf3;
-  font-size: 0.75rem;
-  font-weight: 650;
-  letter-spacing: 0.015em;
-  line-height: 1.2;
-  text-align: center;
-  text-decoration: none;
-}
-
-.purchase-access a:hover {
-  border-color: #4cbbdf;
-  color: #ffffff;
-}
-
-.purchase-access a:focus-visible {
-  outline: 3px solid #22c6ef;
-  outline-offset: 2px;
-}
-
-@media (max-width: 760px) {
-  .purchase-access-inner {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding-inline: 12px;
-  }
-
-  .purchase-access a {
-    min-height: 42px;
-    padding-inline: 6px;
   }
 }
