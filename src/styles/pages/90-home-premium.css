@@ -524,3 +524,236 @@
     padding-right: 0;
   }
 }
+
+/* Home: an open capability rail keeps the technical proof easy to scan. */
+.mock-home .mock-tech-strip {
+  background:
+    radial-gradient(circle at 50% -30%, rgba(19, 131, 176, 0.15), transparent 52%),
+    #061623;
+}
+
+.mock-home .mock-tech-strip::before {
+  opacity: 0.35;
+}
+
+.mock-home .mock-tech-strip .mock-tech-grid {
+  gap: 0;
+  border-top: 1px solid rgba(145, 198, 222, 0.24);
+  border-bottom: 1px solid rgba(145, 198, 222, 0.24);
+}
+
+.mock-home .mock-tech-strip .mock-tech-card {
+  min-height: 0;
+  justify-items: start;
+  align-content: start;
+  gap: 10px;
+  padding: 24px clamp(16px, 1.8vw, 28px) 26px;
+  overflow: visible;
+  border: 0;
+  border-right: 1px solid rgba(145, 198, 222, 0.18);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+}
+
+.mock-home .mock-tech-strip .mock-tech-card:last-child {
+  border-right: 0;
+}
+
+.mock-home .mock-tech-strip .mock-tech-card::after {
+  display: none;
+}
+
+.mock-home .mock-tech-strip .mock-tech-card svg {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 8px;
+  color: #5ad2ee;
+  filter: none;
+}
+
+.mock-home .mock-tech-strip .mock-tech-card h3 {
+  min-height: 0;
+  max-width: none;
+  margin: 0;
+  font-size: 1.01rem;
+  line-height: 1.25;
+  font-weight: 760;
+}
+
+.mock-home .mock-tech-strip .mock-tech-card p {
+  max-width: none;
+  color: rgba(226, 239, 246, 0.72);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  font-weight: 450;
+}
+
+.mock-home > .founder-block .s7-sales-instructor-grid {
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: clamp(24px, 3vw, 42px);
+}
+
+.mock-home > .founder-block .s7-sales-instructor-avatar {
+  width: 160px;
+  height: 196px;
+  border-radius: 10px;
+  object-position: center 30%;
+}
+
+@media (max-width: 1100px) {
+  .mock-home .mock-tech-strip .mock-tech-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .mock-home .mock-tech-strip .mock-tech-card:nth-child(3) {
+    border-right: 0;
+  }
+
+  .mock-home .mock-tech-strip .mock-tech-card:nth-child(n + 4) {
+    border-top: 1px solid rgba(145, 198, 222, 0.18);
+  }
+}
+
+@media (max-width: 760px) {
+  .mock-home .mock-tech-strip .mock-tech-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mock-home .mock-tech-strip .mock-tech-card {
+    grid-template-columns: 32px minmax(0, 1fr);
+    column-gap: 16px;
+    row-gap: 2px;
+    padding: 17px 4px;
+    border-right: 0;
+    border-top: 1px solid rgba(145, 198, 222, 0.18);
+  }
+
+  .mock-home .mock-tech-strip .mock-tech-card:first-child {
+    border-top: 0;
+  }
+
+  .mock-home .mock-tech-strip .mock-tech-card svg {
+    grid-row: 1 / 3;
+    margin: 2px 0 0;
+  }
+
+  .mock-home > .founder-block .s7-sales-instructor-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .mock-home > .founder-block .s7-sales-instructor-avatar {
+    width: 144px;
+    height: 176px;
+  }
+}
+
+@media (max-width: 560px) {
+  .mock-home > .boj-hero .mock-home-container.boj-hero-inner--with-aside {
+    gap: 14px;
+    padding-top: 22px;
+    padding-bottom: 24px;
+  }
+
+  .mock-home > .boj-hero .boj-hero-eyebrow {
+    margin-bottom: 7px;
+    font-size: 0.69rem;
+    line-height: 1.25;
+  }
+
+  .mock-home > .boj-hero .boj-hero-title {
+    font-size: clamp(1.95rem, 8.4vw, 2.2rem);
+    line-height: 1.07;
+  }
+
+  .mock-home > .boj-hero .boj-hero-subtitle {
+    margin-top: 10px;
+    font-size: 0.89rem;
+    line-height: 1.36;
+  }
+
+  .mock-home > .boj-hero .boj-hero-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .mock-home > .boj-hero .boj-hero-actions .mock-btn {
+    min-height: 44px;
+    gap: 5px;
+    padding: 6px 8px;
+    font-size: 0.76rem;
+    line-height: 1.2;
+  }
+
+  .mock-home .home-hero-navigator {
+    padding: 11px;
+    border-radius: 14px;
+  }
+
+  .mock-home .home-hero-navigator-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.09em;
+  }
+
+  .mock-home .home-hero-navigator h2 {
+    margin: 3px 0 9px;
+    font-size: 1.18rem;
+  }
+
+  .mock-home .home-hero-navigator nav {
+    gap: 5px;
+  }
+
+  .mock-home .home-hero-navigator a {
+    min-height: 56px;
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 9px;
+  }
+
+  .mock-home .home-hero-navigator-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  .mock-home .home-hero-navigator-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .mock-home .home-hero-navigator strong {
+    font-size: 0.84rem;
+  }
+
+  .mock-home .home-hero-navigator small {
+    margin-top: 2px;
+    font-size: 0.75rem;
+    line-height: 1.25;
+  }
+
+  /* Keep the app capture readable and let the phone support it below. */
+  .mock-home .app-product-stage {
+    aspect-ratio: auto;
+    padding-bottom: 145px;
+  }
+
+  .mock-home .app-desktop-frame {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+  }
+
+  .mock-home .app-mobile-frame {
+    top: auto;
+    right: 5%;
+    bottom: 0;
+    width: clamp(82px, 23vw, 96px);
+  }
+}

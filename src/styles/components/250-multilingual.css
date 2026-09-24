@@ -178,6 +178,34 @@ html[lang="pt-BR"] .main-nav {
   }
 }
 
+@media (max-width: 360px) {
+  .site-header {
+    gap: 8px;
+    padding-inline: 10px;
+  }
+
+  .site-header .brand-logo {
+    width: 112px;
+    min-width: 112px;
+    flex: 0 0 112px;
+  }
+
+  .mobile-header-controls {
+    gap: 4px;
+  }
+
+  .mobile-header-controls .language-switcher {
+    gap: 0.16rem;
+    padding-inline: 0.32rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0;
+  }
+
+  .mobile-header-controls .language-switcher svg {
+    display: none;
+  }
+}
+
 @media (max-width: 900px) {
   .language-suggestion {
     grid-template-columns: auto minmax(0, 1fr);

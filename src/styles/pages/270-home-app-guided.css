@@ -46,9 +46,14 @@
 
 .app-pro-page > .boj-hero .boj-hero-shade {
   background:
-    radial-gradient(circle at 78% 46%, rgba(0, 174, 230, 0.14), transparent 34%),
-    linear-gradient(90deg, rgba(2, 11, 20, 0.97) 0%, rgba(2, 11, 20, 0.86) 45%, rgba(2, 11, 20, 0.56) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(2, 11, 20, 0.68));
+    radial-gradient(circle at 76% 45%, rgba(25, 135, 174, 0.26), transparent 42%),
+    linear-gradient(105deg, rgba(3, 16, 29, 0.98), rgba(5, 32, 49, 0.94));
+}
+
+/* The actual dark UI remains the hero visual; the plant photo is only texture. */
+.app-pro-page > .boj-hero .boj-hero-bg {
+  opacity: 0.12;
+  filter: grayscale(0.4) contrast(0.8);
 }
 
 .home-hero-navigator,
@@ -150,19 +155,30 @@
   overflow: hidden;
 }
 
+.s7-sales-page > .boj-hero .course-hero-preview {
+  color: #112c40;
+  border-color: rgba(184, 222, 235, 0.86);
+  background: linear-gradient(145deg, #f7fbfd, #e7f3f8);
+  box-shadow: 0 22px 48px rgba(0, 9, 18, 0.28);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
 .course-hero-preview-media {
   position: relative;
-  min-height: 250px;
+  min-height: 0;
+  aspect-ratio: 1100 / 1556;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(53, 101, 124, 0.22);
   border-radius: 14px;
-  background: #07131d;
+  background: #dceaf0;
 }
 
 .course-hero-preview-media img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center top;
   transition: transform 320ms ease;
 }
@@ -231,6 +247,23 @@
   flex: 0 0 auto;
   margin-top: 0.08rem;
   color: #45d5ff;
+}
+
+.s7-sales-page > .boj-hero .course-hero-preview-copy > span,
+.s7-sales-page > .boj-hero .course-hero-preview-copy li svg {
+  color: #087fa6;
+}
+
+.s7-sales-page > .boj-hero .course-hero-preview-copy > strong {
+  color: #0d293d;
+}
+
+.s7-sales-page > .boj-hero .course-hero-preview-copy > small {
+  color: #4b6476;
+}
+
+.s7-sales-page > .boj-hero .course-hero-preview-copy ul {
+  color: #2f4d61;
 }
 
 .app-pro-quick-access {
@@ -569,7 +602,7 @@
   }
 
   .course-hero-preview-media {
-    min-height: 205px;
+    min-height: 0;
   }
 
   .course-hero-preview-copy > strong {
@@ -578,6 +611,72 @@
 
   .course-hero-preview-copy ul {
     font-size: 0.7rem;
+  }
+
+  .app-pro-page > .boj-hero .boj-hero-inner--with-aside,
+  .s7-sales-page > .boj-hero .boj-hero-inner--with-aside {
+    gap: 1.15rem;
+    padding-top: 27px;
+    padding-bottom: 27px;
+  }
+
+  .app-pro-page > .boj-hero .boj-hero-title,
+  .s7-sales-page > .boj-hero .boj-hero-title {
+    font-size: clamp(1.95rem, 8vw, 2.3rem);
+    line-height: 1.1;
+  }
+
+  .app-pro-page > .boj-hero .boj-hero-subtitle,
+  .s7-sales-page > .boj-hero .boj-hero-subtitle {
+    margin-top: 12px;
+    font-size: 0.94rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .app-pro-page > .boj-hero .boj-hero-actions,
+  .s7-sales-page > .boj-hero .boj-hero-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+    margin-top: 18px;
+  }
+
+  .app-pro-page > .boj-hero .boj-hero-actions .mock-btn-primary,
+  .s7-sales-page > .boj-hero .boj-hero-actions .mock-btn-primary {
+    min-height: 48px;
+  }
+
+  .app-pro-page > .boj-hero .boj-hero-actions .mock-btn-outline,
+  .s7-sales-page > .boj-hero .boj-hero-actions .mock-btn-outline {
+    justify-self: start;
+    min-height: 42px;
+    padding: 0 4px;
+    color: #8bdcf4;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .app-pro-page > .boj-hero .boj-hero-note,
+  .s7-sales-page > .boj-hero .boj-hero-note {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 4px;
+    padding: 0;
+    color: #bfdae7;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    font-size: 0.78rem;
+    font-weight: 400;
+    line-height: 1.45;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .app-pro-quick-access-facts {
@@ -637,7 +736,12 @@
 .app-hero-devices .app-product-stage {
   width: min(100%, 720px);
   margin-inline: auto;
-  filter: drop-shadow(0 26px 44px rgba(0, 0, 0, 0.42));
+  filter: drop-shadow(0 24px 42px rgba(0, 4, 12, 0.46));
+}
+
+.app-hero-devices .app-desktop-screen img,
+.app-hero-devices .app-mobile-screen img {
+  filter: brightness(1.14) contrast(1.04);
 }
 
 @media (max-width: 980px) {

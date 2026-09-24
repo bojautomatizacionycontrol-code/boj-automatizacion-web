@@ -129,8 +129,8 @@
   gap: 12px;
   min-height: 44px;
   padding: 0 27px;
-  border-radius: 4px;
-  font-weight: 850;
+  border-radius: 8px;
+  font-weight: 650;
   text-decoration: none;
   transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
 }

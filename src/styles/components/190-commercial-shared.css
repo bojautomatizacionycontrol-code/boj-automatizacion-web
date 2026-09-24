@@ -80,6 +80,44 @@
   text-decoration: underline;
 }
 
+@media (max-width: 640px) {
+  .s7-proof-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.7rem;
+    padding-block: 14px;
+  }
+
+  .s7-proof-label {
+    align-items: flex-start;
+    color: #b9cbd5;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .s7-proof-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.35rem 0.8rem;
+  }
+
+  .s7-proof-list li {
+    font-size: 0.78rem;
+    font-weight: 650;
+    line-height: 1.2;
+  }
+
+  .s7-proof-list li:not(:last-child)::after {
+    display: none;
+  }
+
+  .s7-proof-link {
+    font-size: 0.78rem;
+    font-weight: 650;
+  }
+}
+
 /* ── Método BOJ (4 pasos) ────────────────────────────────────────────── */
 .s7-method {
   background: #f3f7fb;
