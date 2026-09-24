@@ -146,118 +146,58 @@
   }
 }
 
-/* Gestiones de compra ────────────────────────────────────────────────────────
-   Banda global discreta antes del pie: enlaces oficiales de Hotmart (arrepentimiento,
-   baja de servicio, seguimiento y soporte). Compacta y de bajo protagonismo visual,
-   con contraste AA y foco visible. Los rótulos y destinos no cambian. */
-.purchase-actions {
-  padding: 14px 0 16px;
-  border-top: 1px solid #d6e4ec;
-  background: #f3f7fa;
-  color: #071421;
+/* Accesos directos de compra: visibles al primer acceso, sin competir con
+   el contenido de la página. Los detalles quedan sólo en /reembolsos. */
+.purchase-access {
+  border-bottom: 1px solid #244355;
+  background: #0b1e2a;
 }
 
-.purchase-actions-inner {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.9fr) minmax(0, 2fr);
-  gap: 10px 32px;
-  align-items: start;
+.purchase-access-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px 8px;
+  padding-block: 5px;
 }
 
-.purchase-actions-copy h2 {
-  margin: 0 0 4px;
-  color: #41586b;
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.purchase-actions-copy p,
-.purchase-actions-list p,
-.purchase-actions-support {
-  margin: 0;
-  color: #5b6f80;
-  font-size: 0.78rem;
-  line-height: 1.45;
-}
-
-.purchase-actions-copy p {
-  max-width: 44ch;
-}
-
-.purchase-actions-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px 20px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.purchase-actions-list li {
-  display: grid;
-  gap: 5px;
-  align-content: start;
-}
-
-.purchase-action-link {
+.purchase-access a {
   display: inline-flex;
-  min-height: 36px;
+  min-height: 32px;
   align-items: center;
   justify-content: center;
-  justify-self: start;
-  padding: 0 14px;
-  border: 1.5px solid #006b93;
-  border-radius: 5px;
-  background: #ffffff;
-  color: #006b93;
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
+  padding: 4px 11px;
+  border: 1px solid #31576b;
+  border-radius: 4px;
+  color: #d4eaf3;
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.015em;
+  line-height: 1.2;
   text-align: center;
   text-decoration: none;
 }
 
-.purchase-action-link:hover {
-  background: #006b93;
+.purchase-access a:hover {
+  border-color: #4cbbdf;
   color: #ffffff;
 }
 
-.purchase-action-link:focus-visible,
-.purchase-actions-support a:focus-visible {
-  outline: 3px solid #071421;
-  outline-offset: 3px;
-}
-
-.purchase-actions-support {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 18px;
-}
-
-.purchase-actions-support a {
-  color: #006b93;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-@media (max-width: 900px) {
-  .purchase-actions-inner {
-    grid-template-columns: minmax(0, 1fr);
-  }
+.purchase-access a:focus-visible {
+  outline: 3px solid #22c6ef;
+  outline-offset: 2px;
 }
 
 @media (max-width: 760px) {
-  .purchase-actions-list {
-    grid-template-columns: minmax(0, 1fr);
+  .purchase-access-inner {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-inline: 12px;
   }
 
-  .purchase-action-link {
-    width: 100%;
-    justify-self: stretch;
-    min-height: 40px;
+  .purchase-access a {
+    min-height: 42px;
+    padding-inline: 6px;
   }
 }

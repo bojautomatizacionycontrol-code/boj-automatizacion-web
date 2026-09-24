@@ -170,7 +170,7 @@ export const routeMetadata = Object.freeze({
     description: "Condiciones de acceso y uso de BOJ S7-PLC PRO y de las licencias incluidas con cursos y planes.",
   },
   "/reembolsos": {
-    title: "Política de reembolsos | BOJ Automatización y Control",
+    title: "Gestiones de compra y reembolsos | BOJ Automatización y Control",
     description: "Condiciones de garantía y reembolso aplicables a cursos y productos digitales comercializados por Hotmart.",
   },
   "/gracias": {

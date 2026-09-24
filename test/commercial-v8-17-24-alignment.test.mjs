@@ -261,7 +261,8 @@ test("actualiza los tres documentos comerciales y conserva el contrato técnico"
   assert.match(appSource, /fecha y hora UTC equivalente del mes siguiente/);
   assert.match(appSource, /La activación posterior en un dispositivo no reinicia ni extiende el plazo/);
   assert.equal(appSource.match(/updated: "30 de agosto de 2026"/g), null);
-  assert.equal(appSource.match(/updated: "5 de septiembre de 2026"/g)?.length, 4);
+  assert.equal(appSource.match(/updated: "5 de septiembre de 2026"/g)?.length, 3);
+  assert.equal(appSource.match(/updated: "24 de septiembre de 2026"/g)?.length, 1);
   assert.match(legalStylesSource, /\.legal-offer-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,/);
   assert.match(legalStylesSource, /@media \(max-width: 760px\)[\s\S]*?\.legal-offer-grid\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\);/);
 });

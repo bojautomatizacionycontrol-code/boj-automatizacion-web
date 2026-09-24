@@ -772,9 +772,9 @@ const legalContent = {
     ],
   },
   refunds: {
-    title: "Política de reembolsos",
-    intro: "Las compras digitales se procesan en Hotmart y las ofertas publicadas muestran una garantía de reembolso de 7 días.",
-    updated: "5 de septiembre de 2026",
+    title: "Gestiones de compra y reembolsos",
+    intro: "Aquí se explican la cancelación de la suscripción, los reembolsos y los canales de ayuda. Las ofertas publicadas muestran una garantía comercial de 7 días, sin limitar los derechos que correspondan por ley.",
+    updated: "24 de septiembre de 2026",
     showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "La garantía publicada para las cuatro ofertas de BOJ S7-PLC PRO es de 7 días y se tramita mediante el proceso de Hotmart.",
