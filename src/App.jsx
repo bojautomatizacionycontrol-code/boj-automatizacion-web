@@ -815,7 +815,7 @@ function MainFooter({ language, buildYear }) {
           <BrandLogo compact />
           <p>{footerCopy.description}</p>
         </div>
-        <div className="mock-footer-contact" aria-label={footerCopy.contactAria}>
+        <div className="mock-footer-contact" role="group" aria-label={footerCopy.contactAria}>
           <h2>{footerCopy.contact}</h2>
           <a href={`mailto:${contact.email}`}>
             {contact.email.split("@")[0]}@<wbr />
@@ -873,7 +873,7 @@ function FloatingContact({ language }) {
       ? { aria: "Opções de contato rápido", message: "Olá, estou entrando em contato com a BOJ pelo site em português.", whatsapp: "Falar com a BOJ pelo WhatsApp", email: "Enviar e-mail" }
       : { aria: "Contactos rápidos", message: "Hola, escribo desde la web de BOJ para realizar una consulta técnica.", whatsapp: "Consultar por WhatsApp", email: "Enviar correo electrónico" };
   return (
-    <div className="floating-contact" aria-label={quickCopy.aria}>
+    <div className="floating-contact" role="group" aria-label={quickCopy.aria}>
       <a href={whatsappUrl(quickCopy.message)} aria-label={quickCopy.whatsapp}>
         <Phone size={20} />
       </a>

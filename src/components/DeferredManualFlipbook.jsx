@@ -52,6 +52,7 @@ function ManualFlipbookPlaceholder({
       ref={observerRef}
       className={`s7-flip s7-flip-${variant} s7-flip-${orientation}`}
       data-deferred-manual-flipbook=""
+      role="group"
       aria-label={caption}
     >
       <div className="s7-flip-stage">

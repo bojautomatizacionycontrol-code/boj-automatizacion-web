@@ -350,7 +350,7 @@ function S7SalesLanding({ course, eyebrow }) {
     },
     {
       question: "¿Qué pasa cuando vence el mes de APP PRO?",
-      answer: "El acceso mensual a la APP PRO finaliza. El material del curso permanece disponible según las condiciones de entrega definidas, y la app puede renovarse si necesitas continuar con acceso PRO.",
+      answer: "La licencia de APP PRO incluida finaliza al cumplirse el mes. El curso conserva su acceso permanente; si quieres seguir utilizando la app, puedes renovar la licencia por separado.",
     },
     {
       question: "¿La APP PRO reemplaza al curso?",
