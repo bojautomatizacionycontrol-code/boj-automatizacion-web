@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile, stat } from "node:fs/promises";
 import test from "node:test";
 
-import { navItems } from "../src/content.js";
+import { copilotCommercialIdentity, navItems } from "../src/content.js";
 import { englishNavItems, languageRoutePairs, portugueseNavItems } from "../src/i18n.js";
 import { getRouteMetadata, getSocialImageFamily } from "../src/route-metadata.js";
 import { getRouteFamily } from "../src/routes/route-families.js";
@@ -34,6 +34,11 @@ test("Copiloto tiene rutas B2B propias sin reemplazar la App S7-PLC", () => {
 
 test("Copiloto identifica las capturas como demostración y evita promesas no verificadas", async () => {
   const source = await readFile(new URL("../src/routes/copilot.jsx", import.meta.url), "utf8");
+  assert.equal(copilotCommercialIdentity.seller, "Hexa Group Holding SAS");
+  assert.equal(copilotCommercialIdentity.taxId, "30-71955124-2");
+  assert.match(source, /providerLabel: "Proveedor y facturador de Copiloto de Turbinas"/);
+  assert.match(source, /copilotCommercialIdentity\.seller/);
+  assert.match(source, /copilotCommercialIdentity\.taxId/);
   assert.match(source, /No representa una instalación de cliente/);
   assert.match(source, /does not acquire live signals/);
   assert.match(source, /no adquiere señales en tiempo real/);

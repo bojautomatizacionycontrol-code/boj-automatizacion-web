@@ -20,7 +20,8 @@ test("backend de contacto y alineación comercial permanecen byte a byte", async
 });
 
 test("identidad precios garantía y URLs conservan la fuente aprobada", () => {
-  assert.equal(commercialIdentity.seller, "Hexa Group Holding SAS");
+  assert.equal(commercialIdentity.seller, "Walter Adrián Boj");
+  assert.equal(commercialIdentity.taxId, "20-36838884-0");
   assert.equal(offer.course.price, "80 USD");
   assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
   assert.equal(offer.course.checkout.guaranteeDays, 7);

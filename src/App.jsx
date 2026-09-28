@@ -706,7 +706,8 @@ function MainFooter({ language, buildYear }) {
         contact: "Contact",
         contactAria: "Contact details",
         coverage: "Service across Argentina, on site and remote",
-        addressLabel: "Registered address:",
+        personalAddressLabel: "BOJ S7-PLC, courses and personal contact:",
+        copilotAddressLabel: "Turbine Copilot (Hexa Group Holding SAS):",
         navigation: "Navigation",
         navigationAria: "Footer navigation",
         legalAria: "Legal information in Spanish",
@@ -720,7 +721,8 @@ function MainFooter({ language, buildYear }) {
           contact: "Contato",
           contactAria: "Dados de contato",
           coverage: "Atendimento em toda a Argentina, em planta e à distância",
-          addressLabel: "Endereço comercial:",
+          personalAddressLabel: "BOJ S7-PLC, cursos e contato pessoal:",
+          copilotAddressLabel: "Copiloto de Turbinas (Hexa Group Holding SAS):",
           navigation: "Navegação",
           navigationAria: "Navegação do rodapé",
           legalAria: "Informações legais em espanhol",
@@ -733,7 +735,8 @@ function MainFooter({ language, buildYear }) {
           contact: "Contacto",
           contactAria: "Datos de contacto",
           coverage: "Atención en toda Argentina, en planta y a distancia",
-          addressLabel: "Domicilio comercial:",
+          personalAddressLabel: "BOJ S7-PLC, cursos y contacto personal:",
+          copilotAddressLabel: "Copiloto de Turbinas (Hexa Group Holding SAS):",
           navigation: "Navegación",
           navigationAria: "Navegación del footer",
           legalAria: "Información legal",
@@ -759,8 +762,8 @@ function MainFooter({ language, buildYear }) {
             www.bojautomatizacion.com
           </a>
           <span>{footerCopy.coverage}</span>
-          <span>{footerCopy.addressLabel} {contactAddresses[0]}</span>
-          <span>{contactAddresses[1]}</span>
+          <span>{footerCopy.personalAddressLabel} {contactAddresses.personal}</span>
+          <span>{footerCopy.copilotAddressLabel} {contactAddresses.copilot}</span>
         </div>
         <nav className="mock-footer-nav" aria-label={footerCopy.navigationAria}>
           <h2>{footerCopy.navigation}</h2>

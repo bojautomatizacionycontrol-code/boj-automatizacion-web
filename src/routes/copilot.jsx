@@ -1,5 +1,5 @@
 import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
-import { contact } from "../content.js";
+import { contact, copilotCommercialIdentity } from "../content.js";
 import { whatsappUrl } from "../app/shared-eager.jsx";
 import plantDemo from "../assets/copiloto-demo-estado-planta.png";
 import instrumentDemo from "../assets/copiloto-demo-ficha-instrumento.png";
@@ -44,6 +44,8 @@ const copyByLanguage = {
     closeEyebrow: "Para plantas y equipos de mantenimiento",
     closeTitle: "Evaluemos el caso de tu planta",
     closeText: "Podemos mostrar el flujo con datos de ejemplo y luego definir qué unidades, instrumentos y documentos convendría incorporar. El alcance y la cotización se acuerdan por separado.",
+    providerLabel: "Proveedor y facturador de Copiloto de Turbinas",
+    providerNote: "La contratación B2B se define en una propuesta específica.",
     email: "Consultar por correo",
     emailSubject: "Consulta B2B - Copiloto de Turbinas",
     related: "¿Buscas diagnóstico guiado para PLC Siemens? Conoce BOJ S7-PLC PRO.",
@@ -88,6 +90,8 @@ const copyByLanguage = {
     closeEyebrow: "For plant and maintenance teams",
     closeTitle: "Let's assess your plant's case",
     closeText: "We can show the workflow using sample data, then define which units, instruments and documents would be relevant. Scope and quotation are agreed separately.",
+    providerLabel: "Turbine Copilot provider and invoicing entity",
+    providerNote: "B2B terms are set out in a specific proposal.",
     email: "Contact us by email",
     emailSubject: "B2B inquiry - Turbine Copilot",
     related: "Looking for guided Siemens PLC diagnostics? Explore BOJ S7-PLC PRO.",
@@ -132,6 +136,8 @@ const copyByLanguage = {
     closeEyebrow: "Para plantas e equipes de manutenção",
     closeTitle: "Vamos avaliar sua planta",
     closeText: "Podemos mostrar o fluxo com dados de exemplo e depois definir quais unidades, instrumentos e documentos seriam relevantes. Escopo e orçamento são acordados separadamente.",
+    providerLabel: "Fornecedor e emissor da fatura do Copiloto de Turbinas",
+    providerNote: "A contratação B2B é definida em uma proposta específica.",
     email: "Consultar por e-mail",
     emailSubject: "Consulta B2B - Copiloto de Turbinas",
     related: "Procura diagnóstico guiado para PLC Siemens? Conheça o BOJ S7-PLC PRO.",
@@ -228,6 +234,7 @@ function TurbineCopilotPage({ route }) {
             <p className="copilot-eyebrow">{copy.closeEyebrow}</p>
             <h2 id="copilot-close-title">{copy.closeTitle}</h2>
             <p>{copy.closeText}</p>
+            <p className="copilot-provider">{copy.providerLabel}: {copilotCommercialIdentity.seller}, CUIT {copilotCommercialIdentity.taxId}. {copilotCommercialIdentity.address}. {copy.providerNote}</p>
           </div>
           <div className="copilot-close-actions">
             <a className="copilot-button copilot-button-primary" href={demoHref} target="_blank" rel="noopener noreferrer">{copy.demo}<ArrowRight size={18} aria-hidden="true" /></a>

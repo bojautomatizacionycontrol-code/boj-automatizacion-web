@@ -79,7 +79,7 @@ const protectedFileHashes = {
   "./web-m1-accessible-dialog.test.mjs": "C8BE063490D2941FE0FE5CB13601933BBA02EC91A02F1F434449777F647C19FE",
   "./web-m1-accessible-navigation.test.mjs": "22B28DD4A72E694E9F7450F336B0510FD7628486B8791DC15CB7B5002A6166C0",
   "./web-m1-contact-accessibility.test.mjs": "B275449C88F3E67E5F1B21EA612F56A3B130D877A6478B958690B2000BB954BF",
-  "./web-m1-protected-invariants.test.mjs": "41B14CF962966EA7402B95C45BA5B382B496D14C7CFCA2208B55231599E74C92",
+  "./web-m1-protected-invariants.test.mjs": "7AAC1F124F183EC71DB4FA18004906AEF2B2E94FCA1C7275D84CFDE056B01126",
   "./web-m1-tia-future-state.test.mjs": "75CD071DBA0F5182FF97E89D0C4A9B41254889F7732B94C031B6358FD16A1E31",
   "./web-m1-visual-accessibility.test.mjs": "1772545D1BC68F4E9D0015B40D47D8657AFBF22079FCFFB1E18F8896FAD68CA3",
 };
@@ -103,8 +103,8 @@ test("la entrada WEB-M3 hidrata el prerender sin relajar las protecciones previa
 
 test("contenido comercial fiscal legal y de App conserva los bloques aprobados", () => {
   for (const [startMarker, endMarker, expectedHash] of [
-    ["export const contact = {", "export const commercialIdentity", "64A9CC137A2DAE4963E081136081AB0D409486BA4D143929EB1CEF353CA8A0D4"],
-    ["export const commercialIdentity = Object.freeze({", "export const navItems", "A321F2F02D44C1943F7C517AB6ACAFB5B226E0D05DABA9BE046F4268A941328B"],
+    ["export const contact = {", "export const commercialIdentity", "799AA773EBB44DD89921CA0BCB1FE6A3211E4CB694CB6BB40580707C45C38FF6"],
+    ["export const commercialIdentity = Object.freeze({", "export const navItems", "85639AAA691B12DB282DED24C6073E8198BEDD6DE07FA68B50338CE0D9965E5F"],
     ["export const tiaCourse = {", "export const appHero", "F083DAEF6B0F97123E20AA689F52F25351D5AE1FD10C14BD83C0DD01B43B46D9"],
     ["export const appHero = {", "export const technicalResources", "2E7158704F2630FDCD67924C8F6667563C4A044147182E71C2C854E2B979E8E3"],
     ["export const offer = {", "", "FC17C927E466F8D2795988A191B5D7CE478CF0E0F3F07D1BF94844635E2B30AB"],
@@ -112,12 +112,13 @@ test("contenido comercial fiscal legal y de App conserva los bloques aprobados",
     assert.equal(sha256(sourceBlock(contentSource, startMarker, endMarker)), expectedHash, startMarker);
   }
 
-  assert.equal(commercialIdentity.seller, "Hexa Group Holding SAS");
+  assert.equal(commercialIdentity.seller, "Walter Adrián Boj");
   assert.equal(commercialIdentity.owner, "Walter Adrián Boj");
-  assert.equal(commercialIdentity.taxStatus, "Responsable Inscripto");
+  assert.equal(commercialIdentity.taxId, "20-36838884-0");
+  assert.equal(commercialIdentity.taxStatus, "Monotributista");
   assert.equal(
     commercialIdentity.invoicing,
-    "Factura electrónica y factura E para exportaciones, según corresponda"
+    "Comprobante emitido por Walter Adrián Boj según la operación y la normativa aplicable"
   );
   assert.equal(offer.course.price, "80 USD");
   assert.equal(offer.course.checkout.guaranteeDays, 7);
@@ -163,7 +164,7 @@ test("Analytics contacto encabezado legal y wrappers TIA conservan sus bloques",
     [complianceSource, "function EnglishContactForm(", "function EnglishContactPage(", "752F9FD389C967F59AAFB2881856345247BE9F0D7E5467B78EA5DE052A7D09C5"],
     [complianceSource, "function PortugueseContactForm(", "function PortugueseContactPage(", "CFA0269E18B56A065C901F7B531916725E827C97344F8B680BBEFDCEA1B87D5F"],
     [complianceSource, "function ContactForm(", "const legalContent", "4AA70FE49BD12F6B09B36D27C93924A8F85142E123EC7019E4D2CCD51A946637"],
-    [complianceSource, "const legalContent = {", "function ContactLine(", "C3CADAB00C86D5F4B45CAF780C04F6773C5BB159687758E3811D6C44B72A0777"],
+    [complianceSource, "const legalContent = {", "function ContactLine(", "9FF94CFDB2D8BE74EA99A95154CAE9EEEE03F3046F2B85CCCFBF45C11F20490B"],
   ]) {
     assert.equal(sha256(sourceBlock(source, startMarker, endMarker)), expectedHash, startMarker);
   }
@@ -188,7 +189,7 @@ test("Analytics contacto encabezado legal y wrappers TIA conservan sus bloques",
 test("rutas schema CSP y redirects permanecen dentro del contrato vigente", () => {
   assert.equal(
     sha256(sourceBlock(contentSource, "export const contact = {", "export const commercialIdentity")),
-    "64A9CC137A2DAE4963E081136081AB0D409486BA4D143929EB1CEF353CA8A0D4"
+    "799AA773EBB44DD89921CA0BCB1FE6A3211E4CB694CB6BB40580707C45C38FF6"
   );
 
   assert.equal(
@@ -197,7 +198,7 @@ test("rutas schema CSP y redirects permanecen dentro del contrato vigente", () =
   );
   assert.equal(
     sha256(sourceBlock(routeSource, "const appRouteSet = new Set(", "function getNotFoundMetadata(")),
-    "2E9C085F234C08B5A3E5B6F9275804C99DF41AC2AE43151B187D8F7C7AA7273A"
+    "9EB3ADE551A12243B7FB1C4F697F4E99EA6FB5F12426702A898A0DFC70CA8D81"
   );
   assert.equal(publicRoutePaths.length, 41);
   assert.equal(indexableRoutePaths.length, 40);

@@ -1,7 +1,7 @@
 export const contact = {
   brand: "BOJ Automatización y Control",
   responsible: "Walter Adrián Boj",
-  location: "Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina",
+  location: "Marcos Paz 913, San Miguel de Tucumán, Tucumán, Argentina",
   email: "contacto@bojautomatizacion.com",
   whatsappDisplay: "+54 9 381 532-7469",
   whatsappNumber: "5493815327469",
@@ -10,23 +10,29 @@ export const contact = {
 };
 
 export const commercialIdentity = Object.freeze({
-  seller: "Hexa Group Holding SAS",
-  taxId: "30-71955124-2",
+  seller: "Walter Adrián Boj",
+  taxId: "20-36838884-0",
   owner: "Walter Adrián Boj",
   ownedBrands: "BOJ Automatización y BOJ S7-PLC",
-  authorization: "Comercialización autorizada por el titular",
   brand: "BOJ Automatización y Control",
-  product: "BOJ S7-PLC",
-  address: "Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina",
-  institutionalEmail: "contacto@hexagroup.com.ar",
+  product: "BOJ S7-PLC PRO y curso de diagnóstico S7-300/400",
+  address: "Marcos Paz 913, San Miguel de Tucumán, Tucumán, Argentina",
+  institutionalEmail: "contacto@bojautomatizacion.com",
   supportEmail: "contacto@bojautomatizacion.com",
   phone: "+54 9 381 532-7469",
   hours: "Lunes a viernes de 09:00 a 17:00, hora de Argentina, excepto feriados",
   responseTime: "Dentro de 48 horas hábiles",
   website: "www.bojautomatizacion.com",
-  taxStatus: "Responsable Inscripto",
-  invoicing: "Factura electrónica y factura E para exportaciones, según corresponda",
+  taxStatus: "Monotributista",
+  invoicing: "Comprobante emitido por Walter Adrián Boj según la operación y la normativa aplicable",
   supportOwner: "Walter Adrián Boj",
+});
+
+export const copilotCommercialIdentity = Object.freeze({
+  seller: "Hexa Group Holding SAS",
+  taxId: "30-71955124-2",
+  address: "Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina",
+  institutionalEmail: "contacto@hexagroup.com.ar",
 });
 
 export const navItems = [

@@ -1,20 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { commercialIdentity, contact, contactChecklist } from "../content.js";
+import { commercialIdentity, contact, contactChecklist, copilotCommercialIdentity } from "../content.js";
 import heroContacto from "../assets/hero-contacto.jpg";
 import { track, whatsappUrl } from "../app/shared-eager.jsx";
 import { CheckItem, Icon, NotFound, PageShell, PrimaryLink, SecondaryLink, appLicensePlans, appProductUrl, icons } from "./shared.jsx";
 import { contactAddresses } from "../contact-addresses.js";
 import { hotmartLinks } from "../hotmart-links.js";
 
-// Las dos direcciones se muestran en una sola línea de contacto.
-const contactAddressValue = (
-  <>
-    {contactAddresses[0]}
-    <br />
-    {contactAddresses[1]}
-  </>
-);
+const contactAddressValue = contactAddresses.personal;
 
 const quickServices = [
   "Diagnóstico de fallas",
@@ -326,7 +319,7 @@ function EnglishContactPage() {
         <div className="contact-panel">
           <h2>Contact details</h2><p className="contact-panel-intro">Use the form, email or WhatsApp. The information reaches the same technical team.</p>
           <ContactLine icon="Wrench" label="Technical contact" value={contact.responsible} />
-          <ContactLine icon="MapPin" label="Registered address" value={contactAddressValue} />
+          <ContactLine icon="MapPin" label="Personal contact address" value={contactAddressValue} />
           <ContactLine icon="Globe" label="Coverage" value="All of Argentina · on site and remote" />
           <ContactLine icon="Mail" label="Email" value={contact.email} href={`mailto:${contact.email}`} />
           <ContactLine icon="Phone" label="WhatsApp" value={contact.whatsappDisplay} href={whatsappUrl("Hello, I am contacting BOJ from the English website.")} />
@@ -417,7 +410,7 @@ function PortugueseContactPage() {
           <h2>Dados de contato</h2>
           <p className="contact-panel-intro">Use o formulário, e-mail ou WhatsApp. As informações chegam à mesma equipe técnica.</p>
           <ContactLine icon="Wrench" label="Responsável técnico" value={contact.responsible} />
-          <ContactLine icon="MapPin" label="Endereço comercial" value={contactAddressValue} />
+          <ContactLine icon="MapPin" label="Endereço de contato pessoal" value={contactAddressValue} />
           <ContactLine icon="Globe" label="Cobertura" value="Toda a Argentina · em planta e à distância" />
           <ContactLine icon="Mail" label="E-mail" value={contact.email} href={`mailto:${contact.email}`} />
           <ContactLine icon="Phone" label="WhatsApp" value={contact.whatsappDisplay} href={whatsappUrl("Olá, estou entrando em contato com a BOJ pelo site em português.")} />
@@ -545,7 +538,7 @@ function ContactPage() {
             más cómodo. La información llega al mismo equipo técnico.
           </p>
           <ContactLine icon="Wrench" label="Responsable" value={contact.responsible} />
-          <ContactLine icon="MapPin" label="Domicilio comercial" value={contactAddressValue} />
+          <ContactLine icon="MapPin" label="Domicilio de contacto personal" value={contactAddressValue} />
           <ContactLine icon="Globe" label="Cobertura" value="Toda Argentina · en planta y a distancia" />
           <ContactLine icon="Mail" label="Correo electrónico" value={contact.email} href={`mailto:${contact.email}`} />
           <ContactLine
@@ -701,9 +694,9 @@ const legalContent = {
   privacy: {
     title: "Política de privacidad",
     intro: "Explica qué datos recopilamos en este sitio, para qué se utilizan, con qué proveedores se comparten y cómo puede ejercer sus derechos.",
-    updated: "5 de septiembre de 2026",
+    updated: "27 de septiembre de 2026",
     sections: [
-      ["Responsable del tratamiento", `${commercialIdentity.seller}, CUIT ${commercialIdentity.taxId}, con nombre comercial ${commercialIdentity.brand}. Domicilio: ${commercialIdentity.address}. Contacto: ${commercialIdentity.supportEmail}.`],
+      ["Responsable del tratamiento", `${commercialIdentity.owner}, CUIT ${commercialIdentity.taxId}, titular de ${commercialIdentity.ownedBrands}, administra los datos de usuarios de BOJ S7-PLC PRO, compras, licencias y soporte, así como las consultas recibidas en este sitio. Domicilio: ${commercialIdentity.address}. Contacto: ${commercialIdentity.supportEmail}.`],
       ["Marco legal", "El tratamiento de datos personales se rige por la Ley 25.326 de Protección de los Datos Personales de la República Argentina y sus normas complementarias. El órgano de control es la Agencia de Acceso a la Información Pública."],
       ["Datos que recopilamos", "El formulario puede solicitar nombre, empresa, correo, teléfono, servicio de interés y mensaje. La lista de espera de cursos solicita nombre, correo y nivel. También podemos registrar métricas anónimas o seudónimas de navegación y conversiones mediante Vercel Web Analytics, que no utiliza cookies de seguimiento."],
       ["Finalidad y base legal", "Usamos los datos para responder consultas, coordinar servicios, avisar sobre cursos solicitados, facilitar acceso a productos adquiridos y mejorar el funcionamiento del sitio. La base es el consentimiento que otorga al enviar cada formulario y la ejecución de la relación contractual o precontractual. No vendemos datos personales ni enviamos publicidad sin pedido previo."],
@@ -715,15 +708,15 @@ const legalContent = {
   terms: {
     title: "Términos y condiciones",
     intro: "Condiciones generales para utilizar el sitio y contratar servicios o productos digitales de BOJ.",
-    updated: "5 de septiembre de 2026",
+    updated: "27 de septiembre de 2026",
     showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "Estas son las cuatro ofertas de BOJ S7-PLC PRO publicadas para compra. Los precios se expresan en dólares estadounidenses y el checkout muestra la modalidad antes de confirmar el pago.",
     sections: [
       ["Uso del sitio", "La información técnica es orientativa y no reemplaza procedimientos de planta, evaluación de riesgos, normativa aplicable ni intervención de personal autorizado."],
-      ["Servicios técnicos", "Alcance, agenda, entregables, costos y condiciones se confirman por propuesta. La atención urgente es coordinada y está sujeta a disponibilidad."],
+      ["Servicios técnicos", `Alcance, agenda, entregables, costos y condiciones se confirman por propuesta. La propuesta identifica al prestador y a quien emitirá el comprobante. Los servicios que correspondan a la actividad personal podrán contratarse con ${commercialIdentity.owner}; Copiloto de Turbinas se ofrece por ${copilotCommercialIdentity.seller}. La atención urgente es coordinada y está sujeta a disponibilidad.`],
       ["Prueba y alcance de BOJ S7-PLC PRO", "La prueba gratuita dura 48 horas, funciona en línea y tiene funciones limitadas. El alcance técnico de BOJ S7-PLC PRO se limita a sistemas Siemens S7-300/400 compatibles. La app organiza síntomas, evidencias, hipótesis priorizadas y verificaciones; no se conecta al PLC, no controla equipos y no reemplaza STEP 7, los procedimientos de seguridad ni el criterio de personal autorizado."],
-      ["Compra, activación y Hotmart", `Hotmart procesa los pagos de las ofertas publicadas. BOJ proporciona la licencia, el contenido incluido y el soporte de acceso. La activación se vincula al correo informado durante la compra; si necesita ayuda, escriba a ${contact.email} desde ese mismo correo.`],
+      ["Compra, activación y Hotmart", `${commercialIdentity.seller} vende y factura los productos digitales BOJ S7-PLC PRO y el curso de diagnóstico S7-300/400. Hotmart procesa los pagos de las ofertas publicadas; BOJ proporciona la licencia, el contenido incluido y el soporte de acceso. La activación se vincula al correo informado durante la compra; si necesita ayuda, escriba a ${contact.email} desde ese mismo correo.`],
       [
         "Suscripción, cancelación y vigencia",
         <>
@@ -750,7 +743,7 @@ const legalContent = {
   licenses: {
     title: "Condiciones de licencia de BOJ S7-PLC PRO",
     intro: "Reglas principales de acceso y uso de la herramienta de diagnóstico.",
-    updated: "5 de septiembre de 2026",
+    updated: "27 de septiembre de 2026",
     showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "Cada oferta define una duración, un límite de dispositivos, una modalidad de renovación y una ventana de funcionamiento sin conexión.",
@@ -774,7 +767,7 @@ const legalContent = {
   refunds: {
     title: "Gestiones de compra y reembolsos",
     intro: "Aquí se explican la cancelación de la suscripción, los reembolsos y los canales de ayuda. Las ofertas publicadas muestran una garantía comercial de 7 días, sin limitar los derechos que correspondan por ley.",
-    updated: "24 de septiembre de 2026",
+    updated: "27 de septiembre de 2026",
     showCommercialIdentity: true,
     showAppOffers: true,
     offerIntro: "La garantía publicada para las cuatro ofertas de BOJ S7-PLC PRO es de 7 días y se tramita mediante el proceso de Hotmart.",
@@ -815,16 +808,14 @@ function LegalPage({ type }) {
           <section className="legal-business" aria-labelledby={`${type}-business-title`}>
             <h2 id={`${type}-business-title`}>Identidad comercial y atención</h2>
             <p>
-              <strong>Vendedor y facturador:</strong> {commercialIdentity.seller}. <strong>Titular:</strong>
-              {" "}{commercialIdentity.owner}, titular de {commercialIdentity.ownedBrands}. La comercialización
-              {" "}por {commercialIdentity.seller} está autorizada por el titular.
+              <strong>Vendedor y facturador de los productos digitales BOJ S7-PLC PRO y el curso S7-300/400:</strong>
+              {" "}{commercialIdentity.seller}, titular de {commercialIdentity.ownedBrands}.
             </p>
             <dl className="legal-business-facts">
               <dt>CUIT</dt><dd>{commercialIdentity.taxId}</dd>
-              <dt>Domicilio legal y comercial</dt><dd>{commercialIdentity.address}</dd>
+              <dt>Domicilio comercial y de contacto</dt><dd>{commercialIdentity.address}</dd>
               <dt>Marca comercial</dt><dd>{commercialIdentity.brand}</dd>
               <dt>Producto asociado</dt><dd>{commercialIdentity.product}</dd>
-              <dt>Correo institucional</dt><dd><a href={`mailto:${commercialIdentity.institutionalEmail}`}>{commercialIdentity.institutionalEmail}</a></dd>
               <dt>Soporte, privacidad, reclamos y reembolsos</dt><dd><a href={`mailto:${commercialIdentity.supportEmail}`}>{commercialIdentity.supportEmail}</a></dd>
               <dt>Teléfono y WhatsApp</dt><dd>{commercialIdentity.phone}</dd>
               <dt>Atención</dt><dd>{commercialIdentity.hours}</dd>

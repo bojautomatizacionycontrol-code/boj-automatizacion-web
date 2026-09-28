@@ -393,6 +393,12 @@
   line-height: 1.65;
 }
 
+.copilot-close .copilot-provider {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #a9c2d1;
+}
+
 .copilot-close-actions {
   display: grid;
   gap: 12px;

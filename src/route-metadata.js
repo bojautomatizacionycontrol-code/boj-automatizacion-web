@@ -317,32 +317,22 @@ export function getRouteAlternates(route) {
   ];
 }
 
-function sellerNode() {
-  return {
-    "@type": "Organization",
-    "@id": `${SITE_ORIGIN}/#seller`,
-    name: commercialIdentity.seller,
-    legalName: commercialIdentity.seller,
-    taxID: commercialIdentity.taxId,
-    email: commercialIdentity.institutionalEmail,
-    telephone: "+5493815327469",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Culpina 63, piso 5°, departamento C",
-      addressLocality: "Ciudad Autónoma de Buenos Aires",
-      addressRegion: "Ciudad Autónoma de Buenos Aires",
-      addressCountry: "AR",
-    },
-    description: `${commercialIdentity.seller} es vendedor y facturador.`,
-  };
-}
-
 function ownerNode() {
   return {
     "@type": "Person",
     "@id": `${SITE_ORIGIN}/#owner`,
     name: commercialIdentity.owner,
-    description: `${commercialIdentity.owner} es titular de ${commercialIdentity.ownedBrands}.`,
+    taxID: commercialIdentity.taxId,
+    email: commercialIdentity.institutionalEmail,
+    telephone: "+5493815327469",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Marcos Paz 913",
+      addressLocality: "San Miguel de Tucumán",
+      addressRegion: "Tucumán",
+      addressCountry: "AR",
+    },
+    description: `${commercialIdentity.owner} es titular de ${commercialIdentity.ownedBrands} y vende los productos digitales BOJ S7-PLC PRO y el curso de diagnóstico S7-300/400.`,
     sameAs: [contact.linkedin],
   };
 }
@@ -374,7 +364,6 @@ export function getRouteJsonLd(route, metadata) {
 
   const graph = [];
   if (route === "/") {
-    graph.push(sellerNode());
     graph.push(ownerNode());
     graph.push(brandNode());
     graph.push({
@@ -422,7 +411,7 @@ export function getRouteJsonLd(route, metadata) {
         priceCurrency: "USD",
         category: "Paid",
         url: offer.course.checkout.checkoutUrl,
-        seller: { "@id": `${SITE_ORIGIN}/#seller` },
+        seller: { "@id": `${SITE_ORIGIN}/#owner` },
       },
     });
   }
@@ -464,7 +453,7 @@ function getNotFoundMetadata(route) {
 }
 
 // Nodos de navegación y de artículo técnico. Viven fuera del bloque protegido
-// (sellerNode … getRouteJsonLd) y solo amplían el @graph de rutas anidadas.
+// (ownerNode … getRouteJsonLd) y solo amplían el @graph de rutas anidadas.
 const breadcrumbRoots = Object.freeze({
   es: { home: { name: "Inicio", path: "/" }, sections: { "/cursos": "Cursos", "/recursos-tecnicos": "Recursos técnicos" } },
   en: { home: { name: "Home", path: "/en" }, sections: { "/en/courses": "Courses" } },

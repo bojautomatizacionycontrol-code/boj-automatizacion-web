@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { commercialIdentity, contact, offer } from "../src/content.js";
+import { commercialIdentity, contact, copilotCommercialIdentity, offer } from "../src/content.js";
 
 const appSource = await readRuntimeAppSource();
 const contentSource = await readFile(new URL("../src/content.js", import.meta.url), "utf8");
@@ -171,63 +171,70 @@ test("centraliza las cuatro ofertas verificadas sin alterar precios ni checkouts
   assert.equal(new Set(actualOffers.map(({ url }) => url)).size, 4);
 });
 
-test("publica identidad comercial ratificada en los tres documentos y conserva privacidad separada", () => {
+test("distingue al vendedor personal de BOJ S7-PLC del proveedor SAS de Copiloto", () => {
   const expectedIdentity = {
-    seller: "Hexa Group Holding SAS",
-    taxId: "30-71955124-2",
+    seller: "Walter Adrián Boj",
+    taxId: "20-36838884-0",
     owner: "Walter Adrián Boj",
     ownedBrands: "BOJ Automatización y BOJ S7-PLC",
-    authorization: "Comercialización autorizada por el titular",
     brand: "BOJ Automatización y Control",
-    product: "BOJ S7-PLC",
-    address: "Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina",
-    institutionalEmail: "contacto@hexagroup.com.ar",
+    product: "BOJ S7-PLC PRO y curso de diagnóstico S7-300/400",
+    address: "Marcos Paz 913, San Miguel de Tucumán, Tucumán, Argentina",
+    institutionalEmail: "contacto@bojautomatizacion.com",
     supportEmail: "contacto@bojautomatizacion.com",
     phone: "+54 9 381 532-7469",
     hours: "Lunes a viernes de 09:00 a 17:00, hora de Argentina, excepto feriados",
     responseTime: "Dentro de 48 horas hábiles",
     website: "www.bojautomatizacion.com",
-    taxStatus: "Responsable Inscripto",
-    invoicing: "Factura electrónica y factura E para exportaciones, según corresponda",
+    taxStatus: "Monotributista",
+    invoicing: "Comprobante emitido por Walter Adrián Boj según la operación y la normativa aplicable",
     supportOwner: "Walter Adrián Boj",
   };
 
   assert.deepEqual(commercialIdentity, expectedIdentity);
+  assert.deepEqual(copilotCommercialIdentity, {
+    seller: "Hexa Group Holding SAS",
+    taxId: "30-71955124-2",
+    address: "Culpina 63, piso 5°, departamento C, Ciudad Autónoma de Buenos Aires, Argentina",
+    institutionalEmail: "contacto@hexagroup.com.ar",
+  });
   assert.equal(Object.isFrozen(commercialIdentity), true);
+  assert.equal(Object.isFrozen(copilotCommercialIdentity), true);
   assert.equal(contact.location, commercialIdentity.address);
   assert.equal(contact.whatsappDisplay, commercialIdentity.phone);
   assert.equal(contact.whatsappNumber, "5493815327469");
   assert.equal(appSource.match(/showCommercialIdentity:\s*true/g)?.length, 3);
-  assert.match(appSource, /<strong>Vendedor y facturador:<\/strong> \{commercialIdentity\.seller\}/);
-  assert.match(appSource, /La comercialización[\s\S]*?está autorizada por el titular/);
+  assert.match(appSource, /Vendedor y facturador de los productos digitales BOJ S7-PLC PRO y el curso S7-300\/400:/);
+  assert.match(appSource, /Copiloto de Turbinas se ofrece por \$\{copilotCommercialIdentity\.seller\}/);
   assert.match(appSource, /className="legal-business-facts"/);
-  assert.match(appSource, /commercialIdentity\.institutionalEmail/);
   assert.match(appSource, /commercialIdentity\.supportEmail/);
   assert.match(appSource, /commercialIdentity\.taxStatus/);
   assert.match(appSource, /commercialIdentity\.invoicing/);
-  // Decisión del titular (5 de septiembre de 2026): se publica la identificación básica del vendedor.
+  // Decisión del titular (27 de septiembre de 2026): identidad personal del vendedor digital.
   assert.match(appSource, /<dt>CUIT<\/dt><dd>\{commercialIdentity\.taxId\}<\/dd>/);
+  assert.match(appSource, /<dt>Domicilio comercial y de contacto<\/dt><dd>\{commercialIdentity\.address\}<\/dd>/);
   assert.match(appSource, /<dt>Marca comercial<\/dt><dd>\{commercialIdentity\.brand\}<\/dd>/);
   assert.match(appSource, /<dt>Producto asociado<\/dt><dd>\{commercialIdentity\.product\}<\/dd>/);
-  assert.equal(commercialIdentity.taxId, "30-71955124-2");
+  assert.equal(commercialIdentity.taxId, "20-36838884-0");
   assert.doesNotMatch(publicTextCorpus, /Ingresos Brutos|\bCBU\b|ficha de proveedor|960\/D|Data Fiscal|arca\.gob\.ar/i);
   assert.doesNotMatch(publicTextCorpus, /contrato exclusivo firmado|autorización exclusiva/i);
 
   const privacyStart = appSource.indexOf("  privacy: {");
   const privacyEnd = appSource.indexOf("  terms: {", privacyStart);
   const privacySource = appSource.slice(privacyStart, privacyEnd);
-  assert.match(privacySource, /updated: "5 de septiembre de 2026"/);
+  assert.match(privacySource, /updated: "27 de septiembre de 2026"/);
   assert.match(privacySource, /No vendemos datos personales/);
-  // Decisión del titular (5 de septiembre de 2026): Privacidad identifica al responsable del tratamiento sin la ficha comercial completa.
-  assert.match(privacySource, /\["Responsable del tratamiento", `\$\{commercialIdentity\.seller\}, CUIT \$\{commercialIdentity\.taxId\}, con nombre comercial \$\{commercialIdentity\.brand\}\. Domicilio: \$\{commercialIdentity\.address\}\. Contacto: \$\{commercialIdentity\.supportEmail\}\.`\]/);
+  // Los datos de usuarios, licencias y soporte los administra la persona, no la SAS.
+  assert.match(privacySource, /\["Responsable del tratamiento", `\$\{commercialIdentity\.owner\}, CUIT \$\{commercialIdentity\.taxId\}/);
+  assert.match(privacySource, /Domicilio: \$\{commercialIdentity\.address\}\. Contacto: \$\{commercialIdentity\.supportEmail\}/);
   assert.doesNotMatch(privacySource, /showCommercialIdentity|commercialIdentity\.(taxStatus|invoicing|product|supportOwner)/);
 
   assert.doesNotMatch(appSource, /Lunes a viernes de 8:00 a 18:00|Respondemos normalmente dentro/);
   assert.doesNotMatch(publicTextCorpus, /\+54 381 5327469|\+543815327469|9:00 a 16:00/);
   assert.match(indexSource, /"telephone": "\+5493815327469"/);
-  assert.match(indexSource, /"taxID": "30-71955124-2"/);
-  assert.match(indexSource, /"streetAddress": "Culpina 63, piso 5°, departamento C"/);
-  assert.equal((indexSource.match(/"Ciudad Autónoma de Buenos Aires"/g) || []).length, 2);
+  assert.match(indexSource, /"taxID": "20-36838884-0"/);
+  assert.match(indexSource, /"streetAddress": "Marcos Paz 913"/);
+  assert.doesNotMatch(indexSource, /Hexa Group Holding SAS|30-71955124-2|#seller/);
   assert.match(appSource, /<dd>\{commercialIdentity\.hours\}<\/dd>/);
   assert.equal((appSource.match(/Respondemos dentro de 48 horas hábiles/g) || []).length, 2);
   assert.match(legalStylesSource, /\.legal-business-facts\s*\{[\s\S]*?grid-template-columns:\s*minmax\(190px,/);
@@ -261,8 +268,7 @@ test("actualiza los tres documentos comerciales y conserva el contrato técnico"
   assert.match(appSource, /fecha y hora UTC equivalente del mes siguiente/);
   assert.match(appSource, /La activación posterior en un dispositivo no reinicia ni extiende el plazo/);
   assert.equal(appSource.match(/updated: "30 de agosto de 2026"/g), null);
-  assert.equal(appSource.match(/updated: "5 de septiembre de 2026"/g)?.length, 3);
-  assert.equal(appSource.match(/updated: "24 de septiembre de 2026"/g)?.length, 1);
+  assert.equal(appSource.match(/updated: "27 de septiembre de 2026"/g)?.length, 4);
   assert.match(legalStylesSource, /\.legal-offer-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,/);
   assert.match(legalStylesSource, /@media \(max-width: 760px\)[\s\S]*?\.legal-offer-grid\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\);/);
 });

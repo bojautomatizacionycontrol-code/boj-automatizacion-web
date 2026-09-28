@@ -138,13 +138,13 @@ test("emite JSON-LD relevante sin ofertas, ratings ni curso global", () => {
   }
 
   const homeGraph = getRouteMetadata("/").jsonLd["@graph"];
-  const seller = homeGraph.find((node) => node["@id"] === `${SITE_ORIGIN}/#seller`);
   const owner = homeGraph.find((node) => node["@id"] === `${SITE_ORIGIN}/#owner`);
   const brand = homeGraph.find((node) => node["@id"] === `${SITE_ORIGIN}/#brand`);
-  assert.equal(seller.legalName, "Hexa Group Holding SAS");
-  assert.equal(seller.alternateName, undefined);
-  assert.equal(seller.sameAs, undefined);
+  assert.equal(homeGraph.find((node) => node["@id"] === `${SITE_ORIGIN}/#seller`), undefined);
+  assert.equal(owner["@type"], "Person");
   assert.equal(owner.name, "Walter Adrián Boj");
+  assert.equal(owner.taxID, "20-36838884-0");
+  assert.equal(owner.address.streetAddress, "Marcos Paz 913");
   assert.deepEqual(owner.sameAs, ["https://www.linkedin.com/in/adrianboj4/"]);
   assert.equal(brand.name, "BOJ Automatización y Control");
   assert.deepEqual(brand.sameAs, ["https://linktr.ee/bojautomatizacionycontrol"]);
@@ -167,7 +167,7 @@ test("emite JSON-LD relevante sin ofertas, ratings ni curso global", () => {
       "@type": "CourseInstance",
       instructor: { "@id": `${SITE_ORIGIN}/#owner` },
     });
-    assert.deepEqual(course.offers.seller, { "@id": `${SITE_ORIGIN}/#seller` });
+    assert.deepEqual(course.offers.seller, { "@id": `${SITE_ORIGIN}/#owner` });
   }
 
   for (const route of ["/privacidad", "/terminos", "/licencias", "/reembolsos"]) {
