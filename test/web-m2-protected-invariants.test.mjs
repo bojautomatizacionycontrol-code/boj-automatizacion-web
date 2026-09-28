@@ -199,7 +199,7 @@ test("rutas schema CSP y redirects permanecen dentro del contrato vigente", () =
   );
   assert.equal(
     sha256(sourceBlock(routeSource, "const appRouteSet = new Set(", "function getNotFoundMetadata(")),
-    "9EB3ADE551A12243B7FB1C4F697F4E99EA6FB5F12426702A898A0DFC70CA8D81"
+    "495A931220FB1CB70A9CE3FFF9C53F8FFFCBE45360F7C5FD7BEF443AAD624389"
   );
   assert.equal(publicRoutePaths.length, 41);
   assert.equal(indexableRoutePaths.length, 40);

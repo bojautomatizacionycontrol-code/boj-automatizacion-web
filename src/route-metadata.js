@@ -377,21 +377,6 @@ export function getRouteJsonLd(route, metadata) {
 
   graph.push(webPageNode(metadata));
 
-  if (appRouteSet.has(route)) {
-    graph.push({
-      "@type": ["SoftwareApplication", "Product"],
-      "@id": `${metadata.canonical}#software`,
-      name: "BOJ S7-PLC PRO",
-      url: metadata.canonical,
-      description: metadata.description,
-      inLanguage: metadata.lang,
-      applicationCategory: "BusinessApplication",
-      operatingSystem: "Web browser",
-      brand: { "@type": "Brand", name: "BOJ S7-PLC" },
-      creator: { "@id": `${SITE_ORIGIN}/#owner` },
-    });
-  }
-
   if (s7CourseRouteSet.has(route)) {
     graph.push({
       "@type": "Course",

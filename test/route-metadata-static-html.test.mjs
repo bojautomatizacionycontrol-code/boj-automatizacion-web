@@ -151,12 +151,10 @@ test("emite JSON-LD relevante sin ofertas, ratings ni curso global", () => {
   assert.ok(homeGraph.some((node) => node["@type"] === "WebSite"));
 
   for (const route of ["/app", "/en/app", "/pt/app"]) {
-    const software = getRouteMetadata(route).jsonLd["@graph"]
-      .find((node) => Array.isArray(node["@type"]));
-    assert.deepEqual(software["@type"], ["SoftwareApplication", "Product"]);
-    assert.equal(software.name, "BOJ S7-PLC PRO");
-    assert.deepEqual(software.creator, { "@id": `${SITE_ORIGIN}/#owner` });
-    assert.equal(software.provider, undefined);
+    assert.deepEqual(
+      getRouteMetadata(route).jsonLd["@graph"].map((node) => node["@type"]),
+      ["WebPage"],
+    );
   }
 
   for (const route of courseRoutes) {
