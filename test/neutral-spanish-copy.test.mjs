@@ -109,7 +109,7 @@ test("la neutralización conserva los mensajes técnicos centrales", () => {
     "STEP 7",
     "PROFIBUS",
     "BOJ S7-PLC PRO",
-    "La app no se conecta directamente al PLC ni reemplaza STEP 7.",
+    "La app no lee datos ni envía comandos al PLC.",
   ];
 
   for (const copy of expectedTechnicalCopy) {

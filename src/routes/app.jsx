@@ -115,8 +115,8 @@ const appRealViews = [
   },
   {
     id: "guided-verification",
-    title: "Verifica con una pregunta concreta",
-    text: "Cada etapa explica por qué se pregunta, qué revisar y qué acción realizar antes de avanzar.",
+    title: "BF en PROFIBUS: verifica antes de concluir",
+    text: "Con evidencia insuficiente, la app pregunta si puedes conectarte a la CPU desde SIMATIC Manager antes de atribuir la falla al cable.",
     image: appVerificacionGuiada,
     width: 1460,
     height: 675,
@@ -134,12 +134,12 @@ const appRealViews = [
 const appRealViewCopyByLanguage = {
   en: {
     "symptom-entry": { title: "Start from the observed symptom", text: "Filter by CPU, networks, signals or actuators and begin with the actual field condition." },
-    "guided-verification": { title: "Verify with one concrete question", text: "Each stage explains why it asks, what to inspect and which action to take before moving on." },
+    "guided-verification": { title: "PROFIBUS BF: verify before concluding", text: "With insufficient evidence, the app asks whether you can connect to the CPU from SIMATIC Manager before blaming the cable." },
     "intervention-record": { title: "Document the intervention", text: "Record the equipment, area, technician and criticality to keep the diagnostic work traceable." },
   },
   pt: {
     "symptom-entry": { title: "Comece pelo sintoma observado", text: "Filtre por CPU, redes, sinais ou atuadores e parta da condição real encontrada em campo." },
-    "guided-verification": { title: "Verifique com uma pergunta concreta", text: "Cada etapa explica por que pergunta, o que revisar e qual ação executar antes de avançar." },
+    "guided-verification": { title: "BF no PROFIBUS: verifique antes de concluir", text: "Com evidências insuficientes, o app pergunta se é possível conectar à CPU pelo SIMATIC Manager antes de atribuir a falha ao cabo." },
     "intervention-record": { title: "Documente a intervenção", text: "Registre equipamento, área, responsável e criticidade para manter o diagnóstico rastreável." },
   },
 };
@@ -605,9 +605,9 @@ function AppPage() {
     <div className="app-pro-page">
       <Hero
         image={appProHeroLaptopVisual}
-        eyebrow="ASISTENCIA DE DIAGNÓSTICO EN CAMPO"
-        title="Antes de conectar STEP 7, identifica qué debes revisar."
-        subtitle="Ingresa los síntomas, los LEDs y las condiciones que observas en el panel de control. BOJ S7-PLC PRO ordena las causas posibles, prioriza las verificaciones y te ayuda a distinguir si el problema apunta a la CPU, la red, un módulo, la alimentación, una señal o la lógica."
+        eyebrow="APP WEB DE DIAGNÓSTICO EN CAMPO"
+        title="Diagnóstico guiado para PLC Siemens S7-300/400"
+        subtitle="BOJ S7-PLC PRO parte de los LEDs, síntomas y condiciones que tú observas. Organiza hipótesis según la evidencia disponible y propone qué verificar en campo o con STEP 7 antes de intervenir."
         primary={{
           label: "Probar gratis durante 48 horas",
           href: appProductUrl,
@@ -622,7 +622,7 @@ function AppPage() {
             focusHashTarget("#planes-pro");
           },
         }}
-        note="La app no se conecta directamente al PLC ni reemplaza STEP 7. Orienta el diagnóstico inicial y prepara una intervención con mayor criterio."
+        note="La app no lee datos ni envía comandos al PLC. No sustituye STEP 7 ni el criterio técnico: la causa se confirma con evidencia y verificaciones seguras."
         aside={<AppHeroDiagnosticPreview />}
       />
 
@@ -656,8 +656,8 @@ function AppPage() {
               <span className="app-pro-positioning-route-number">02</span>
               <Icon name="MonitorCog" size={27} />
               <div>
-                <small>CONFIRMACIÓN ONLINE</small>
-                <h3>Diagnóstico con STEP 7</h3>
+                <small>EVIDENCIA ONLINE</small>
+                <h3>Comprobación con STEP 7</h3>
                 <p>Llegas con una hipótesis técnica y una búsqueda más acotada para revisar hardware, eventos, bloques o registros.</p>
               </div>
             </div>
@@ -673,8 +673,8 @@ function AppPage() {
 
           <p className="app-pro-positioning-summary">
             <strong>BOJ S7-PLC orienta.</strong>
-            <span>STEP 7 confirma.</span>
-            <span>El técnico decide.</span>
+            <span>STEP 7 aporta evidencia online.</span>
+            <span>El técnico verifica y decide.</span>
           </p>
         </div>
       </section>
@@ -760,6 +760,20 @@ function AppPage() {
               expandLabel="Ampliar captura"
               selectorLabel="Seleccionar vista real de la herramienta"
             />
+            <aside className="app-pro-guided-example" aria-labelledby="app-pro-guided-example-title">
+              <div className="app-pro-guided-example-heading">
+                <span>EJEMPLO DEL FLUJO PROFIBUS</span>
+                <h3 id="app-pro-guided-example-title">BF activo: una sospecha aún no es una causa</h3>
+                <p>La segunda captura muestra una etapa real de la app: el resultado indica evidencia insuficiente y plantea una comprobación antes de concluir que el cable está dañado.</p>
+              </div>
+              <ol>
+                <li><strong>Observación</strong><span>El técnico registra BF y los síntomas de comunicación que ve en planta.</span></li>
+                <li><strong>Hipótesis</strong><span>Un problema de cableado es posible, pero también pueden intervenir la configuración, la estación remota o su alimentación.</span></li>
+                <li><strong>Verificación</strong><span>Se comprueba la conectividad desde SIMATIC Manager y se contrasta HW Config; cualquier inspección o medición en campo sigue el procedimiento de seguridad de planta.</span></li>
+              </ol>
+              <p className="app-pro-guided-example-note">La app no detecta ni confirma por sí sola el componente averiado. Las hipótesis cambian con la evidencia que aporta el técnico.</p>
+              <a href="/recursos-tecnicos/bf-profibus-dp">Leer la guía BF en PROFIBUS <ArrowRight size={16} aria-hidden="true" /></a>
+            </aside>
             <div className="app-pro-real-gallery-actions">
               <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
                 Probar gratis durante 48 horas <ExternalLink size={17} aria-hidden="true" />
@@ -1103,11 +1117,11 @@ function EnglishAppPage() {
           <div className="app-pro-positioning-route" role="group" aria-label="Diagnostic workflow">
             <div className="app-pro-positioning-route-step"><span className="app-pro-positioning-route-number">01</span><Icon name="Smartphone" size={27} /><div><small>FIRST RESPONSE</small><h3>Guidance with BOJ S7-PLC</h3><p>Record symptoms, LEDs and field conditions from a phone, tablet or browser.</p></div></div>
             <ArrowRight className="app-pro-positioning-route-arrow" size={24} />
-            <div className="app-pro-positioning-route-step"><span className="app-pro-positioning-route-number">02</span><Icon name="MonitorCog" size={27} /><div><small>ONLINE CONFIRMATION</small><h3>Diagnostics with STEP 7</h3><p>Review hardware, events, blocks or registers with a more focused hypothesis.</p></div></div>
+            <div className="app-pro-positioning-route-step"><span className="app-pro-positioning-route-number">02</span><Icon name="MonitorCog" size={27} /><div><small>ONLINE EVIDENCE</small><h3>Diagnostics with STEP 7</h3><p>Review hardware, events, blocks or registers with a more focused hypothesis.</p></div></div>
             <ArrowRight className="app-pro-positioning-route-arrow" size={24} />
             <div className="app-pro-positioning-route-decision"><Icon name="ShieldCheck" size={27} /><div><small>TECHNICAL DECISION</small><strong>The technician evaluates the evidence before intervening.</strong></div></div>
           </div>
-          <p className="app-pro-positioning-summary"><strong>BOJ S7-PLC guides.</strong><span>STEP 7 confirms.</span><span>The technician decides.</span></p>
+          <p className="app-pro-positioning-summary"><strong>BOJ S7-PLC guides.</strong><span>STEP 7 provides online evidence.</span><span>The technician verifies and decides.</span></p>
         </div>
       </section>
 
@@ -1256,7 +1270,7 @@ function PortugueseAppPage() {
 
       <AppQuickCommercialAccess language="pt" />
 
-      <section className="app-pro-positioning-section"><div className="mock-home-container"><div className="app-pro-positioning-heading"><span className="app-pro-positioning-eyebrow">DUAS ETAPAS, UM PROCESSO DE DIAGNÓSTICO</span><h2>Oriente a primeira resposta. Aprofunde somente quando as evidências exigirem.</h2><p>O BOJ S7-PLC ajuda o técnico de campo a chegar ao diagnóstico online com uma busca mais delimitada e útil.</p></div><div className="app-pro-positioning-route" role="group" aria-label="Fluxo de diagnóstico"><div className="app-pro-positioning-route-step"><span className="app-pro-positioning-route-number">01</span><Icon name="Smartphone" size={27} /><div><small>PRIMEIRA RESPOSTA</small><h3>Orientação com BOJ S7-PLC</h3><p>Registre sintomas, LEDs e condições de campo por um celular ou tablet, ou pelo navegador.</p></div></div><ArrowRight className="app-pro-positioning-route-arrow" size={24} /><div className="app-pro-positioning-route-step"><span className="app-pro-positioning-route-number">02</span><Icon name="MonitorCog" size={27} /><div><small>CONFIRMAÇÃO ONLINE</small><h3>Diagnóstico com STEP 7</h3><p>Revise hardware, eventos, blocos ou registros com uma hipótese mais focada.</p></div></div><ArrowRight className="app-pro-positioning-route-arrow" size={24} /><div className="app-pro-positioning-route-decision"><Icon name="ShieldCheck" size={27} /><div><small>DECISÃO TÉCNICA</small><strong>O técnico avalia as evidências antes de intervir.</strong></div></div></div><p className="app-pro-positioning-summary"><strong>O BOJ S7-PLC orienta.</strong><span>O STEP 7 confirma.</span><span>O técnico decide.</span></p></div></section>
+      <section className="app-pro-positioning-section"><div className="mock-home-container"><div className="app-pro-positioning-heading"><span className="app-pro-positioning-eyebrow">DUAS ETAPAS, UM PROCESSO DE DIAGNÓSTICO</span><h2>Oriente a primeira resposta. Aprofunde somente quando as evidências exigirem.</h2><p>O BOJ S7-PLC ajuda o técnico de campo a chegar ao diagnóstico online com uma busca mais delimitada e útil.</p></div><div className="app-pro-positioning-route" role="group" aria-label="Fluxo de diagnóstico"><div className="app-pro-positioning-route-step"><span className="app-pro-positioning-route-number">01</span><Icon name="Smartphone" size={27} /><div><small>PRIMEIRA RESPOSTA</small><h3>Orientação com BOJ S7-PLC</h3><p>Registre sintomas, LEDs e condições de campo por um celular ou tablet, ou pelo navegador.</p></div></div><ArrowRight className="app-pro-positioning-route-arrow" size={24} /><div className="app-pro-positioning-route-step"><span className="app-pro-positioning-route-number">02</span><Icon name="MonitorCog" size={27} /><div><small>EVIDÊNCIA ONLINE</small><h3>Diagnóstico com STEP 7</h3><p>Revise hardware, eventos, blocos ou registros com uma hipótese mais focada.</p></div></div><ArrowRight className="app-pro-positioning-route-arrow" size={24} /><div className="app-pro-positioning-route-decision"><Icon name="ShieldCheck" size={27} /><div><small>DECISÃO TÉCNICA</small><strong>O técnico avalia as evidências antes de intervir.</strong></div></div></div><p className="app-pro-positioning-summary"><strong>O BOJ S7-PLC orienta.</strong><span>O STEP 7 fornece evidências online.</span><span>O técnico verifica e decide.</span></p></div></section>
 
       <section className="app-pro-problems-how-section"><div className="mock-home-container app-pro-problems-how-grid"><div className="app-pro-problems-panel"><div className="app-pro-panel-heading"><span className="app-pro-section-kicker">DIAGNÓSTICO EM CAMPO</span><h2>Problemas que ajuda a organizar</h2><p>Identifique a categoria da falha antes de trocar hardware ou intervir no processo.</p></div><div className="app-pro-problem-grid">{portugueseApp.problems.map((item) => <article className="app-pro-problem-item" key={item.title}><Icon name={item.icon} size={26} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div><div className="app-pro-how-panel"><div className="app-pro-panel-heading"><span className="app-pro-section-kicker">FLUXO DE TRABALHO</span><h2>Como funciona</h2><p>De um sintoma a hipóteses priorizadas e verificações práticas em campo.</p></div><div className="app-pro-how-steps">{portugueseApp.steps.map((item, index) => <div className="app-pro-how-step-wrap" key={item.title}><article className="app-pro-how-step"><span className="app-pro-step-number">{index + 1}</span><div className="app-pro-step-icon-circle"><Icon name={item.icon} size={28} /></div><h3>{item.title}</h3><p>{item.text}</p></article>{index < portugueseApp.steps.length - 1 ? <span className="app-pro-step-arrow"><ArrowRight size={24} /></span> : null}</div>)}</div></div></div></section>
 

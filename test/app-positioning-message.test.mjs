@@ -8,11 +8,11 @@ const stylesSource = await readRuntimeStylesSource();
 
 test("el hero explica qué hace la app y su relación con STEP 7", () => {
   const expectedCopy = [
-    "ASISTENCIA DE DIAGNÓSTICO EN CAMPO",
-    "Antes de conectar STEP 7, identifica qué debes revisar.",
-    "Ingresa los síntomas, los LEDs y las condiciones que observas en el panel de control.",
-    "La app no se conecta directamente al PLC ni reemplaza STEP 7.",
-    "Orienta el diagnóstico inicial y prepara una intervención con mayor criterio.",
+    "APP WEB DE DIAGNÓSTICO EN CAMPO",
+    "Diagnóstico guiado para PLC Siemens S7-300/400",
+    "BOJ S7-PLC PRO parte de los LEDs, síntomas y condiciones que tú observas.",
+    "La app no lee datos ni envía comandos al PLC.",
+    "la causa se confirma con evidencia y verificaciones seguras.",
   ];
 
   for (const copy of expectedCopy) {
@@ -43,11 +43,11 @@ test("presenta una explicación integrada en dos etapas antes del flujo operativ
     "DOS ETAPAS, UN MISMO DIAGNÓSTICO",
     "Orienta el diagnóstico primero. Profundiza sólo cuando sea necesario.",
     "Orientación con BOJ S7-PLC",
-    "Diagnóstico con STEP 7",
+    "Comprobación con STEP 7",
     "El técnico evalúa la evidencia antes de intervenir.",
     "BOJ S7-PLC orienta.",
-    "STEP 7 confirma.",
-    "El técnico decide.",
+    "STEP 7 aporta evidencia online.",
+    "El técnico verifica y decide.",
   ];
 
   for (const copy of expectedCopy) {

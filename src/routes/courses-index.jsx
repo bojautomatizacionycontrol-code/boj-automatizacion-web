@@ -198,6 +198,12 @@ function CourseAvailableCard({ course }) {
             </li>
           ))}
         </ul>
+        {course.path === "/cursos/s7-300-400" ? (
+          <p className="course-available-companion">
+            El curso incluye un mes de acceso a BOJ S7-PLC PRO. Conoce cómo la{" "}
+            <a href="/app">app de diagnóstico guiado para S7-300/400</a> ayuda a ordenar síntomas y verificaciones en campo.
+          </p>
+        ) : null}
       </div>
       <div className="course-available-visual">
         <M2Picture src={course.image} alt="" aria-hidden="true" loading="lazy" />

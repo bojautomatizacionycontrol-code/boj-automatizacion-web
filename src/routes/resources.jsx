@@ -86,7 +86,7 @@ function TechnicalResourcesPage() {
         <SectionHeader
           eyebrow="Guías de diagnóstico"
           title="Del síntoma a la verificación, paso a paso"
-          text="Tres guías escritas con la misma lógica que usamos en planta: qué estás viendo, qué registrar antes de tocar, causas en orden y cómo verificarlas."
+          text={<>Tres guías escritas con la misma lógica que usamos en planta: qué estás viendo, qué registrar antes de tocar, causas en orden y cómo verificarlas. Para aplicar este enfoque frente al tablero, conoce la <a href="/app">app de diagnóstico guiado BOJ S7-PLC PRO</a>.</>}
         />
         <div className="resources-index-grid">
           {diagnosticGuides.map((resource) => (

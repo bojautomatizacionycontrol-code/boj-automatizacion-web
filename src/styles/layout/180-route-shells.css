@@ -207,6 +207,13 @@
   max-width: 68ch;
 }
 
+.resources-index-section .section-header a {
+  color: #006f9f;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .resources-index-section .technical-resource-body {
   gap: 12px;
 }
