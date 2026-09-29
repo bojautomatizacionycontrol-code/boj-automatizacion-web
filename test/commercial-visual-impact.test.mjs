@@ -116,7 +116,8 @@ test("el curso se diferencia con una vista previa sin alterar sus checkouts", ()
   assert.match(previewSource, /manualPreviewImages\[0\]/);
   assert.match(previewSource, /\{offer\.course\.price\}/);
   assert.match(previewSource, /Pago único · Acceso permanente al curso/);
-  assert.match(previewSource, /1 mes de BOJ S7-PLC PRO/);
+  assert.match(previewSource, /Curso autoguiado en PDF/);
+  assert.match(previewSource, /App PRO: 1 mes · 1 dispositivo/);
   assert.doesNotMatch(previewSource, /href=|pay\.hotmart\.com/);
   assert.match(salesSource, /aside=\{<CourseHeroPreview \/>\}/);
 });

@@ -121,18 +121,23 @@ test("separa Curso + licencia de la grilla principal y publica una única franja
   assert.match(appSource, /const pricingCards = \[appTrialPlan, \.\.\.appLicensePlans\];/);
 
   const trainingStart = spanishAppPageSource.indexOf('<aside className="app-pro-training-strip"');
-  const institutionalStart = spanishAppPageSource.indexOf('<article className="app-pro-institutional">', trainingStart);
-  const trainingSource = spanishAppPageSource.slice(trainingStart, institutionalStart);
+  const trainingEnd = spanishAppPageSource.indexOf('</aside>', trainingStart);
+  const guideStart = spanishAppPageSource.indexOf('<nav className="app-pro-plan-guide"', trainingStart);
+  const trainingSource = spanishAppPageSource.slice(trainingStart, trainingEnd + '</aside>'.length);
 
   assert.notEqual(trainingStart, -1);
-  assert.notEqual(institutionalStart, -1);
+  assert.notEqual(trainingEnd, -1);
+  assert.notEqual(guideStart, -1);
   assert.equal(spanishAppPageSource.match(/className="app-pro-training-strip"/g)?.length, 1);
   assert.match(trainingSource, /FORMACIÓN TÉCNICA/);
   assert.match(trainingSource, /¿También necesitas formación\?/);
   assert.match(
     trainingSource,
-    /Curso Diagnóstico S7-300\/400 con acceso permanente \+ 1 mes de BOJ S7-PLC PRO\./
+    /Curso autoguiado en PDF con acceso permanente \+ 1 mes de BOJ S7-PLC PRO para 1 dispositivo\./
   );
+  assert.match(trainingSource, /Aprendes el método y lo aplicas con la app\./);
+  assert.ok(trainingStart < guideStart);
+  assert.ok(trainingStart < spanishAppPageSource.indexOf('className="app-pro-plan-grid"'));
   assert.match(trainingSource, /\{offer\.course\.price\} · Pago único/);
   assert.match(trainingSource, /Ver curso y contenidos/);
   assert.match(trainingSource, /href="\/cursos\/s7-300-400"/);

@@ -474,16 +474,16 @@ function LocalizedAppPlanGuide({ language }) {
 const appObjectionCopy = {
   en: {
     title: "Is it only a fault table?",
-    text: "No. A table gives you a fixed list; BOJ S7-PLC keeps the context of your symptom and organizes hypotheses according to the evidence you enter: LEDs, Diagnostic Buffer, network state, modules and signals. It helps you decide what to verify first and what to rule out, including safety criteria for each step.",
-    badTitle: "A table or PDF",
+    text: "The self-paced PDF course teaches the diagnostic method; BOJ S7-PLC helps apply it to a particular case. Unlike a fixed checklist, the app keeps the symptom context and organizes hypotheses according to the evidence you enter: LEDs, Diagnostic Buffer, network state, modules and signals. It helps you decide what to verify first and what to rule out, including safety criteria for each step.",
+    badTitle: "A fixed checklist",
     bad: ["Fixed list of faults", "Does not follow your symptom", "Does not prioritize evidence", "Relies on memory"],
     goodTitle: "BOJ S7-PLC",
     good: ["Keeps the case context", "Guides each phase from the symptom", "Prioritizes hypotheses by evidence", "Includes safety criteria at every step"],
   },
   pt: {
     title: "É apenas uma tabela de falhas?",
-    text: "Não. Uma tabela oferece uma lista fixa; o BOJ S7-PLC mantém o contexto do sintoma e organiza as hipóteses de acordo com as evidências informadas: LEDs, Diagnostic Buffer, estado da rede, módulos e sinais. Ele ajuda a decidir o que verificar primeiro e o que descartar, com critérios de segurança em cada etapa.",
-    badTitle: "Uma tabela ou PDF",
+    text: "O curso autoguiado em PDF ensina o método de diagnóstico; o BOJ S7-PLC ajuda a aplicá-lo a um caso específico. Diferentemente de uma lista fixa, o app mantém o contexto do sintoma e organiza as hipóteses de acordo com as evidências informadas: LEDs, Diagnostic Buffer, estado da rede, módulos e sinais. Ele ajuda a decidir o que verificar primeiro e o que descartar, com critérios de segurança em cada etapa.",
+    badTitle: "Uma lista fixa",
     bad: ["Lista fixa de falhas", "Não acompanha o sintoma", "Não prioriza evidências", "Depende da memória"],
     goodTitle: "BOJ S7-PLC",
     good: ["Mantém o contexto do caso", "Orienta cada fase a partir do sintoma", "Prioriza hipóteses por evidência", "Inclui critérios de segurança em cada etapa"],
@@ -833,6 +833,19 @@ function AppPage() {
               <a href="/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.
             </p>
           </div>
+          <aside className="app-pro-training-strip" aria-labelledby="app-pro-training-title">
+            <div className="app-pro-training-copy">
+              <span className="app-pro-training-eyebrow">FORMACIÓN TÉCNICA</span>
+              <h3 id="app-pro-training-title">¿También necesitas formación?</h3>
+              <p>Curso autoguiado en PDF con acceso permanente + 1 mes de BOJ S7-PLC PRO para 1 dispositivo. Aprendes el método y lo aplicas con la app.</p>
+            </div>
+            <div className="app-pro-training-action">
+              <strong>{offer.course.price} · Pago único</strong>
+              <a className="mock-btn mock-btn-outline" href="/cursos/s7-300-400">
+                Ver curso y contenidos <ArrowRight size={17} aria-hidden="true" />
+              </a>
+            </div>
+          </aside>
           <nav className="app-pro-plan-guide" aria-labelledby="app-pro-plan-guide-title">
             <div className="app-pro-plan-guide-heading">
               <span>DECISIÓN RÁPIDA</span>
@@ -895,19 +908,6 @@ function AppPage() {
               <CheckCircle2 size={17} aria-hidden="true" /> Activación con el correo electrónico utilizado en la compra
             </li>
           </ul>
-          <aside className="app-pro-training-strip" aria-labelledby="app-pro-training-title">
-            <div className="app-pro-training-copy">
-              <span className="app-pro-training-eyebrow">FORMACIÓN TÉCNICA</span>
-              <h3 id="app-pro-training-title">¿También necesitas formación?</h3>
-              <p>Curso Diagnóstico S7-300/400 con acceso permanente + 1 mes de BOJ S7-PLC PRO.</p>
-            </div>
-            <div className="app-pro-training-action">
-              <strong>{offer.course.price} · Pago único</strong>
-              <a className="mock-btn mock-btn-outline" href="/cursos/s7-300-400">
-                Ver curso y contenidos <ArrowRight size={17} aria-hidden="true" />
-              </a>
-            </div>
-          </aside>
           <article className="app-pro-institutional">
             <Icon name="Landmark" size={34} />
             <div>
@@ -927,22 +927,22 @@ function AppPage() {
       <section className="app-pro-dark-section app-pro-objection-section">
         <div className="mock-home-container app-pro-objection-grid">
           <div className="app-pro-objection-copy">
-            <h2>¿No es solo una tabla de fallas?</h2>
+            <h2>¿Qué aporta la app además del material técnico?</h2>
             <p>
-              No. Una tabla te da una lista; BOJ S7-PLC <strong>mantiene el contexto de tu síntoma</strong> y ordena
-              las hipótesis según la evidencia que vas cargando: LEDs, Diagnostic Buffer, estado de red, módulos y
-              señales. Te dice <strong>qué verificar primero y qué descartar</strong>, con el criterio de seguridad de
-              cada paso. Es el método de un técnico con experiencia, no un listado para memorizar.
+              El curso en PDF te enseña el método de diagnóstico. BOJ S7-PLC PRO te ayuda a aplicarlo a un caso:
+              conserva el contexto del síntoma y organiza hipótesis según los LEDs, eventos, estado de red, módulos
+              y señales que ingresas. Propone <strong>qué verificar primero y qué descartar</strong>; la conclusión se
+              confirma con mediciones y criterio técnico.
             </p>
           </div>
           <div className="app-pro-objection-compare">
             <article className="app-pro-objection-col app-pro-objection-bad">
-              <h3>Una tabla / PDF</h3>
+              <h3>Listado estático de fallas</h3>
               <ul>
-                <li><X size={15} aria-hidden="true" /> Lista fija de fallas</li>
-                <li><X size={15} aria-hidden="true" /> No sigue tu síntoma</li>
+                <li><X size={15} aria-hidden="true" /> Consulta general, sin datos del caso</li>
+                <li><X size={15} aria-hidden="true" /> No sigue el síntoma ingresado</li>
                 <li><X size={15} aria-hidden="true" /> No prioriza por evidencia</li>
-                <li><X size={15} aria-hidden="true" /> Dependes de la memoria</li>
+                <li><X size={15} aria-hidden="true" /> No propone una secuencia de verificación</li>
               </ul>
             </article>
             <article className="app-pro-objection-col app-pro-objection-good">
@@ -980,10 +980,10 @@ function AppPage() {
           </article>
           <article className="app-pro-cost-card">
             <div>
-              <h2>Una parada de planta puede costar más que una licencia</h2>
+              <h2>Antes de intervenir, organiza la evidencia</h2>
               <p>
-                Cuando una máquina está detenida, cada minuto cuenta. BOJ S7-PLC PRO ayuda a ordenar síntomas,
-                hipótesis y verificaciones antes de cambiar hardware, reiniciar equipos o intervenir sin evidencia.
+                BOJ S7-PLC PRO ayuda a ordenar síntomas, hipótesis y verificaciones antes de cambiar hardware,
+                reiniciar equipos o intervenir sin evidencia suficiente.
               </p>
               <ul className="app-pro-cost-bullets">
                 <li>Ordena síntomas e hipótesis antes de intervenir.</li>
@@ -1197,6 +1197,10 @@ function EnglishAppPage() {
             <p>Compare renewal, duration, devices and offline availability before choosing.</p>
             <p className="app-pro-plans-crosslink"><strong>Professional</strong> and <strong>Business</strong> include the <a href="/en/courses/s7-300-400">S7-300/400 diagnostics course</a>.</p>
           </div>
+          <aside className="app-pro-training-strip">
+            <div className="app-pro-training-copy"><span className="app-pro-training-eyebrow">TECHNICAL TRAINING</span><h3>Learn the method, then apply it in the app</h3><p>Self-paced S7-300/400 diagnostics course in Spanish, with permanent access to its PDF materials, plus one month of BOJ S7-PLC PRO for one device.</p></div>
+            <div className="app-pro-training-action"><strong>{offer.course.price} · One-time payment</strong><a className="mock-btn mock-btn-outline" href="/en/courses/s7-300-400">View course content <ArrowRight size={17} /></a></div>
+          </aside>
           <LocalizedAppPlanGuide language="en" />
           <div className="app-pro-plan-grid">
             {pricingCards.map((plan) => (
@@ -1213,10 +1217,6 @@ function EnglishAppPage() {
             <li><CheckCircle2 size={17} />Price and billing model shown before confirmation</li>
             <li><CheckCircle2 size={17} />Activation uses the email address entered during purchase</li>
           </ul>
-          <aside className="app-pro-training-strip">
-            <div className="app-pro-training-copy"><span className="app-pro-training-eyebrow">TECHNICAL TRAINING</span><h3>Do you also need structured training?</h3><p>Permanent access to the S7-300/400 diagnostics course plus one month of BOJ S7-PLC PRO.</p></div>
-            <div className="app-pro-training-action"><strong>{offer.course.price} · One-time payment</strong><a className="mock-btn mock-btn-outline" href="/en/courses/s7-300-400">View course content <ArrowRight size={17} /></a></div>
-          </aside>
           <article className="app-pro-institutional">
             <Icon name="Landmark" size={34} /><div><h3>Companies and training centers: tailored pricing</h3><p>Special conditions for organizations, technical training programs and teams with multiple users.</p></div><a className="mock-btn mock-btn-outline" href="/en/contact">Request information <ArrowRight size={17} /></a>
           </article>
@@ -1228,7 +1228,7 @@ function EnglishAppPage() {
       <section className="app-pro-value-row-section">
         <div className="mock-home-container app-pro-value-row-grid">
           <article className="app-pro-offline-card"><h2>Access and availability</h2><p className="app-pro-offline-intro">Use the app from a modern browser or install it on a compatible device.</p><div className="app-pro-offline-items"><div><Icon name="Globe" size={34} /><h3>Web access</h3><p>No mandatory software installation.</p></div><div><Icon name="Smartphone" size={34} /><h3>Installable</h3><p>Direct access on compatible devices.</p></div><div><Icon name="WifiOff" size={34} /><h3>Offline by plan</h3><p>Offline duration depends on the selected license.</p></div></div></article>
-          <article className="app-pro-cost-card"><div><h2>A plant stoppage can cost more than a license</h2><p>BOJ S7-PLC PRO helps organize symptoms and evidence before hardware is changed or equipment is restarted without a clear reason.</p><ul className="app-pro-cost-bullets"><li>Reduce trial and error under pressure.</li><li>Prioritize evidence before intervening.</li><li>Prepare a more focused STEP 7 session.</li></ul><strong className="app-pro-cost-emphasis">Less guesswork. Better technical judgment.</strong></div><div className="app-pro-cost-visual" aria-hidden="true"><span /><span /><span /><span /><b><TriangleAlert size={24} /></b></div></article>
+          <article className="app-pro-cost-card"><div><h2>Prioritize checks before intervening</h2><p>BOJ S7-PLC PRO helps organize symptoms and evidence before hardware is changed or equipment is restarted without a clear reason.</p><ul className="app-pro-cost-bullets"><li>Reduce trial and error under pressure.</li><li>Prioritize evidence before intervening.</li><li>Prepare a more focused STEP 7 session.</li></ul><strong className="app-pro-cost-emphasis">Less guesswork. Better technical judgment.</strong></div><div className="app-pro-cost-visual" aria-hidden="true"><span /><span /><span /><span /><b><TriangleAlert size={24} /></b></div></article>
           <article className="app-pro-audience-card"><h2>Who it is for</h2><p className="app-pro-audience-intro">For professionals and teams troubleshooting Siemens S7-300/400 systems.</p><div className="app-pro-audience-list">{englishApp.audience.map((item) => <div className="app-pro-audience-item" key={item.text}><Icon name={item.icon} size={18} /><span>{item.text}</span></div>)}</div><p className="app-pro-audience-note">It supports the technician; it does not replace qualified technical judgment.</p></article>
         </div>
       </section>
@@ -1306,11 +1306,11 @@ function PortugueseAppPage() {
 
       <AccessibleDialog open={Boolean(activeScreenshot)} onClose={() => setActiveScreenshot(null)} labelledBy="pt-app-lightbox-title" className="app-pro-lightbox" panelClassName="app-pro-lightbox-panel"><button className="app-pro-lightbox-close" type="button" onClick={() => setActiveScreenshot(null)} aria-label="Fechar captura ampliada" data-dialog-initial-focus><X size={20} /></button><img src={activeScreenshot?.image} alt={activeScreenshot?.title || ""} width={activeScreenshot?.width || 1474} height={activeScreenshot?.height || 588} decoding="async" /><div className="app-pro-lightbox-copy"><div><h2 id="pt-app-lightbox-title">{activeScreenshot?.title}</h2><p>{activeScreenshot?.text}</p></div><AppRealViewDialogNavigation views={portugueseAppRealViews} activeView={activeScreenshot} onChange={setActiveScreenshot} previousLabel="Captura anterior" nextLabel="Próxima captura" ofLabel="de" /></div></AccessibleDialog>
 
-      <section className="app-pro-plans-section" id="pt-planos-pro"><div className="mock-home-container"><div className="app-pro-section-heading"><span className="app-pro-section-kicker">LICENÇAS E OPÇÕES</span><h2>Escolha sua licença PRO</h2><p>Compare renovação, duração, dispositivos e disponibilidade offline antes de escolher.</p><p className="app-pro-plans-crosslink"><strong>Profissional</strong> e <strong>Empresarial</strong> incluem o <a href="/pt/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.</p></div><LocalizedAppPlanGuide language="pt" /><div className="app-pro-plan-grid">{pricingCards.map((plan) => <article className={`app-pro-plan-card${plan.badge ? " featured" : ""}${plan.sourceTitle === "Prueba gratuita" ? " trial" : ""}`} id={`pt-plano-${plan.sourceTitle.toLowerCase().replaceAll(" ", "-")}`} key={plan.sourceTitle}>{plan.badge ? <span className="app-pro-plan-badge">{plan.badge}</span> : null}<h3>{plan.title}</h3><strong>{plan.price}</strong><span className="app-pro-plan-meta">{plan.meta}</span><ul>{plan.bullets.map((item) => <li key={item}><CheckCircle2 size={15} />{item}</li>)}</ul><a className="mock-btn mock-btn-primary" href={plan.url} target="_blank" rel="noreferrer" onClick={() => track("plan_click", { plan: plan.sourceTitle, language: "pt" })}>{plan.button} <ExternalLink size={17} /></a></article>)}</div><ul className="app-pro-purchase-confidence" aria-label="Informações da compra"><li><CheckCircle2 size={17} />Compra processada pela Hotmart</li><li><CheckCircle2 size={17} />Preço e modalidade exibidos antes da confirmação</li><li><CheckCircle2 size={17} />A ativação usa o e-mail informado durante a compra</li></ul><aside className="app-pro-training-strip"><div className="app-pro-training-copy"><span className="app-pro-training-eyebrow">FORMAÇÃO TÉCNICA</span><h3>Também precisa de capacitação estruturada?</h3><p>Acesso permanente ao curso de diagnóstico S7-300/400, em espanhol, mais um mês de BOJ S7-PLC PRO.</p></div><div className="app-pro-training-action"><strong>{offer.course.price} · Pagamento único</strong><a className="mock-btn mock-btn-outline" href="/pt/cursos/s7-300-400">Ver conteúdo do curso <ArrowRight size={17} /></a></div></aside><article className="app-pro-institutional"><Icon name="Landmark" size={34} /><div><h3>Empresas e centros de formação: condições personalizadas</h3><p>Condições especiais para organizações, programas de capacitação técnica e equipes com vários usuários.</p></div><a className="mock-btn mock-btn-outline" href="/pt/contato">Solicitar informações <ArrowRight size={17} /></a></article></div></section>
+      <section className="app-pro-plans-section" id="pt-planos-pro"><div className="mock-home-container"><div className="app-pro-section-heading"><span className="app-pro-section-kicker">LICENÇAS E OPÇÕES</span><h2>Escolha sua licença PRO</h2><p>Compare renovação, duração, dispositivos e disponibilidade offline antes de escolher.</p><p className="app-pro-plans-crosslink"><strong>Profissional</strong> e <strong>Empresarial</strong> incluem o <a href="/pt/cursos/s7-300-400">curso de diagnóstico S7-300/400</a>.</p></div><aside className="app-pro-training-strip"><div className="app-pro-training-copy"><span className="app-pro-training-eyebrow">FORMAÇÃO TÉCNICA</span><h3>Aprenda o método e aplique-o no app</h3><p>Curso autoguiado de diagnóstico S7-300/400 em espanhol, com materiais em PDF e acesso permanente, mais um mês de BOJ S7-PLC PRO para um dispositivo.</p></div><div className="app-pro-training-action"><strong>{offer.course.price} · Pagamento único</strong><a className="mock-btn mock-btn-outline" href="/pt/cursos/s7-300-400">Ver conteúdo do curso <ArrowRight size={17} /></a></div></aside><LocalizedAppPlanGuide language="pt" /><div className="app-pro-plan-grid">{pricingCards.map((plan) => <article className={`app-pro-plan-card${plan.badge ? " featured" : ""}${plan.sourceTitle === "Prueba gratuita" ? " trial" : ""}`} id={`pt-plano-${plan.sourceTitle.toLowerCase().replaceAll(" ", "-")}`} key={plan.sourceTitle}>{plan.badge ? <span className="app-pro-plan-badge">{plan.badge}</span> : null}<h3>{plan.title}</h3><strong>{plan.price}</strong><span className="app-pro-plan-meta">{plan.meta}</span><ul>{plan.bullets.map((item) => <li key={item}><CheckCircle2 size={15} />{item}</li>)}</ul><a className="mock-btn mock-btn-primary" href={plan.url} target="_blank" rel="noreferrer" onClick={() => track("plan_click", { plan: plan.sourceTitle, language: "pt" })}>{plan.button} <ExternalLink size={17} /></a></article>)}</div><ul className="app-pro-purchase-confidence" aria-label="Informações da compra"><li><CheckCircle2 size={17} />Compra processada pela Hotmart</li><li><CheckCircle2 size={17} />Preço e modalidade exibidos antes da confirmação</li><li><CheckCircle2 size={17} />A ativação usa o e-mail informado durante a compra</li></ul><article className="app-pro-institutional"><Icon name="Landmark" size={34} /><div><h3>Empresas e centros de formação: condições personalizadas</h3><p>Condições especiais para organizações, programas de capacitação técnica e equipes com vários usuários.</p></div><a className="mock-btn mock-btn-outline" href="/pt/contato">Solicitar informações <ArrowRight size={17} /></a></article></div></section>
 
       <LocalizedAppObjection language="pt" />
 
-      <section className="app-pro-value-row-section"><div className="mock-home-container app-pro-value-row-grid"><article className="app-pro-offline-card"><h2>Acesso e disponibilidade</h2><p className="app-pro-offline-intro">Use o app em um navegador moderno ou instale-o em um dispositivo compatível.</p><div className="app-pro-offline-items"><div><Icon name="Globe" size={34} /><h3>Acesso web</h3><p>Sem instalação obrigatória de software.</p></div><div><Icon name="Smartphone" size={34} /><h3>Instalável</h3><p>Acesso direto em dispositivos compatíveis.</p></div><div><Icon name="WifiOff" size={34} /><h3>Offline conforme o plano</h3><p>A duração offline depende da licença escolhida.</p></div></div></article><article className="app-pro-cost-card"><div><h2>Uma parada de planta pode custar mais do que uma licença</h2><p>O BOJ S7-PLC PRO ajuda a organizar sintomas e evidências antes de trocar hardware ou reiniciar equipamentos sem uma causa clara.</p><ul className="app-pro-cost-bullets"><li>Reduza a tentativa e erro sob pressão.</li><li>Priorize evidências antes de intervir.</li><li>Prepare uma sessão mais focada no STEP 7.</li></ul><strong className="app-pro-cost-emphasis">Menos suposições. Melhor critério técnico.</strong></div><div className="app-pro-cost-visual" aria-hidden="true"><span /><span /><span /><span /><b><TriangleAlert size={24} /></b></div></article><article className="app-pro-audience-card"><h2>Para quem é</h2><p className="app-pro-audience-intro">Para profissionais e equipes que diagnosticam sistemas Siemens S7-300/400.</p><div className="app-pro-audience-list">{portugueseApp.audience.map((item) => <div className="app-pro-audience-item" key={item.text}><Icon name={item.icon} size={18} /><span>{item.text}</span></div>)}</div><p className="app-pro-audience-note">Apoia o técnico; não substitui o critério técnico qualificado.</p></article></div></section>
+      <section className="app-pro-value-row-section"><div className="mock-home-container app-pro-value-row-grid"><article className="app-pro-offline-card"><h2>Acesso e disponibilidade</h2><p className="app-pro-offline-intro">Use o app em um navegador moderno ou instale-o em um dispositivo compatível.</p><div className="app-pro-offline-items"><div><Icon name="Globe" size={34} /><h3>Acesso web</h3><p>Sem instalação obrigatória de software.</p></div><div><Icon name="Smartphone" size={34} /><h3>Instalável</h3><p>Acesso direto em dispositivos compatíveis.</p></div><div><Icon name="WifiOff" size={34} /><h3>Offline conforme o plano</h3><p>A duração offline depende da licença escolhida.</p></div></div></article><article className="app-pro-cost-card"><div><h2>Priorize as verificações antes de intervir</h2><p>O BOJ S7-PLC PRO ajuda a organizar sintomas e evidências antes de trocar hardware ou reiniciar equipamentos sem uma causa clara.</p><ul className="app-pro-cost-bullets"><li>Reduza a tentativa e erro sob pressão.</li><li>Priorize evidências antes de intervir.</li><li>Prepare uma sessão mais focada no STEP 7.</li></ul><strong className="app-pro-cost-emphasis">Menos suposições. Melhor critério técnico.</strong></div><div className="app-pro-cost-visual" aria-hidden="true"><span /><span /><span /><span /><b><TriangleAlert size={24} /></b></div></article><article className="app-pro-audience-card"><h2>Para quem é</h2><p className="app-pro-audience-intro">Para profissionais e equipes que diagnosticam sistemas Siemens S7-300/400.</p><div className="app-pro-audience-list">{portugueseApp.audience.map((item) => <div className="app-pro-audience-item" key={item.text}><Icon name={item.icon} size={18} /><span>{item.text}</span></div>)}</div><p className="app-pro-audience-note">Apoia o técnico; não substitui o critério técnico qualificado.</p></article></div></section>
 
       <section className="app-pro-trust-section"><div className="mock-home-container app-pro-trust-grid"><img className="app-pro-trust-avatar" src={walterBojAvatar} alt="Walter Adrián Boj" width="1086" height="1448" loading="lazy" decoding="async" /><div className="app-pro-trust-copy"><h2>Desenvolvido com experiência de planta</h2><p>O BOJ S7-PLC PRO foi desenvolvido por Walter Adrián Boj, especialista em automação industrial com experiência em diagnóstico de PLC Siemens, manutenção, programação e redes industriais.</p><a className="mock-btn mock-btn-outline" href={contact.linkedin} target="_blank" rel="noreferrer">Ver perfil profissional <ExternalLink size={17} /></a></div><div className="app-pro-trust-metrics"><article><Icon name="Clock" size={22} /><h3>Mais de 15 anos</h3><p>Experiência em automação e diagnóstico industrial.</p></article><article><Icon name="Cpu" size={22} /><h3>PLC Siemens</h3><p>Foco em falhas reais de planta com S7-300/400.</p></article><article><Icon name="ShieldCheck" size={22} /><h3>Método de campo</h3><p>Processo estruturado para reduzir suposições.</p></article></div></div></section>
       <S7Testimonials background="dark" language="pt" />

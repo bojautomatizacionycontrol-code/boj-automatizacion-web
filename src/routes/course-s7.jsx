@@ -52,8 +52,8 @@ function CourseHeroPreview() {
         <strong>{offer.course.price}</strong>
         <small>Pago único · Acceso permanente al curso</small>
         <ul>
-          <li><CheckCircle2 size={15} aria-hidden="true" /> Método de diagnóstico aplicado</li>
-          <li><CheckCircle2 size={15} aria-hidden="true" /> 1 mes de BOJ S7-PLC PRO</li>
+          <li><CheckCircle2 size={15} aria-hidden="true" /> Curso autoguiado en PDF</li>
+          <li><CheckCircle2 size={15} aria-hidden="true" /> App PRO: 1 mes · 1 dispositivo</li>
         </ul>
       </div>
     </aside>
@@ -180,7 +180,7 @@ function S7SalesLanding({ course, eyebrow }) {
     {
       icon: "Clock",
       title: "Menos prueba y error",
-      text: "Ordena la búsqueda y reduce los tiempos de máquina detenida.",
+      text: "Ordena la búsqueda antes de intervenir o sustituir componentes.",
     },
     {
       icon: "ShieldCheck",
@@ -202,23 +202,23 @@ function S7SalesLanding({ course, eyebrow }) {
   const learningCards = [
     {
       icon: "Cable",
-      title: "Perder el miedo a conectarte al PLC",
-      text: "Buenas prácticas para entrar online con STEP 7 / SIMATIC Manager, leer hardware y diagnosticar sin intervenir a ciegas.",
+      title: "Preparar la revisión online del PLC",
+      text: "Buenas prácticas para observar el sistema con STEP 7 / SIMATIC Manager antes de modificar hardware o programa.",
     },
     {
       icon: "MonitorCog",
       title: "Leer hardware online con STEP 7 / SIMATIC Manager",
-      text: "Comprende el sistema con criterio profesional.",
+      text: "Relaciona la configuración, el estado observado y los módulos implicados en la falla.",
     },
     {
       icon: "Cpu",
       title: "Interpretar estados RUN/STOP/SF/BF",
-      text: "Qué significan realmente y qué acción tomar.",
+      text: "Usa los indicadores como punto de partida y contrástalos con otras evidencias.",
     },
     {
       icon: "ClipboardCheck",
       title: "Usar Diagnostic Buffer con criterio técnico",
-      text: "Extrae, filtra y analiza los eventos relevantes.",
+      text: "Lee la secuencia de eventos y distingue el primer indicio de sus consecuencias.",
     },
     {
       icon: "Network",
@@ -228,7 +228,7 @@ function S7SalesLanding({ course, eyebrow }) {
     {
       icon: "CircuitBoard",
       title: "Diferenciar falla de campo, red, módulo o lógica",
-      text: "Localiza el origen del problema sin perder tiempo.",
+      text: "Compara evidencias para acotar el área de la falla antes de intervenir.",
     },
     {
       icon: "Brain",
@@ -238,7 +238,7 @@ function S7SalesLanding({ course, eyebrow }) {
     {
       icon: "RefreshCcw",
       title: "Reducir prueba y error cuando la máquina está parada",
-      text: "Método sistemático para diagnosticar rápido y bien.",
+      text: "Sigue una secuencia de verificaciones antes de reemplazar piezas por suposición.",
     },
   ];
 
@@ -249,7 +249,7 @@ function S7SalesLanding({ course, eyebrow }) {
     },
     {
       title: "Material técnico aplicado",
-      text: "Guías estructuradas con criterio de campo para estudiar, consultar y usar como apoyo durante diagnósticos reales.",
+      text: "Material autoguiado en PDF para estudiar a tu ritmo y consultar cuando necesites revisar un diagnóstico.",
     },
     {
       title: "Casos de falla y razonamiento técnico",
@@ -284,7 +284,7 @@ function S7SalesLanding({ course, eyebrow }) {
   ];
 
   const offerIncludes = [
-    "Curso aplicado de diagnóstico S7-300/400",
+    "Curso autoguiado en PDF de diagnóstico S7-300/400",
     "Método BOJ de diagnóstico industrial",
     "Material técnico aplicado y guías técnicas",
     "Casos de falla y razonamiento técnico",
@@ -305,11 +305,11 @@ function S7SalesLanding({ course, eyebrow }) {
   const courseFaqItems = [
     {
       question: "¿Qué recibo exactamente al comprar?",
-      answer: "Recibes un conjunto profesional de recursos de diagnóstico: material técnico estructurado, documentos PDF de consulta, método de análisis, casos de fallas reales y 1 mes de acceso a BOJ S7-PLC PRO.",
+      answer: "Recibes el curso autoguiado con material técnico en PDF y acceso permanente: método de análisis, guías de consulta y casos de falla. También incluye 1 mes de BOJ S7-PLC PRO para 1 dispositivo.",
     },
     {
       question: "¿El curso incluye la APP PRO?",
-      answer: "Sí. La compra incluye el curso Diagnóstico S7-300/400 y 1 mes de acceso a BOJ S7-PLC PRO.",
+      answer: "Sí. La compra incluye el curso Diagnóstico S7-300/400 con acceso permanente y 1 mes de BOJ S7-PLC PRO para 1 dispositivo.",
     },
     {
       question: "¿Por cuánto tiempo tengo la APP PRO?",
@@ -364,7 +364,7 @@ function S7SalesLanding({ course, eyebrow }) {
         image={heroCursoS7}
         eyebrow="Diagnóstico industrial · Método BOJ"
         title="Diagnostica fallas reales en PLC S7-300/400 con método y evidencia."
-        subtitle="Aprende una secuencia práctica para interpretar síntomas, reunir evidencia y llegar a la causa probable en CPU, PROFIBUS, módulos y señales. Formación técnica para mantenimiento industrial que necesita decidir con criterio bajo presión."
+        subtitle="Curso técnico autoguiado en PDF para diagnosticar fallas en S7-300/400. Aprende a pasar del síntoma a la evidencia y a la causa probable; incluye un mes de BOJ S7-PLC PRO para un dispositivo."
         primary={heroPurchaseAction}
         secondary={{ label: "Ver qué incluye", href: "/cursos/s7-300-400", onClick: (event) => scrollToCourseSection(event, "curso-s7-incluye") }}
         note={guaranteeNote}
@@ -396,13 +396,13 @@ function S7SalesLanding({ course, eyebrow }) {
         <div className="s7-sales-container">
           <div className="s7-sales-section-heading">
             <p className="s7-sales-kicker">Qué incluye</p>
-            <h2>Una formación aplicada + una herramienta profesional para diagnosticar con más criterio en PLC Siemens S7-300/400.</h2>
+            <h2>Aprende el método con el curso en PDF y aplícalo con la app frente al tablero.</h2>
           </div>
 
           <div className="s7-sales-include-grid">
             <article className="s7-sales-include-card s7-sales-include-course">
               <span className="s7-sales-include-number">1</span>
-              <h3>Curso aplicado S7-300/400</h3>
+              <h3>Curso autoguiado S7-300/400 · PDF</h3>
               <div className="s7-sales-include-body">
                 <div className="s7-sales-include-media">
                   <p className="s7-sales-include-preview-label">
@@ -441,7 +441,7 @@ function S7SalesLanding({ course, eyebrow }) {
                 </div>
                 <div className="s7-sales-app-copy">
                   <p className="s7-sales-app-lead">
-                    Tu <strong>copiloto de diagnóstico</strong> frente al tablero: ordena síntomas, LEDs, hipótesis y verificaciones, paso a paso.
+                    Tu <strong>apoyo de diagnóstico</strong> frente al tablero: ordena síntomas, LEDs, hipótesis y verificaciones, paso a paso. La app orienta; no se conecta ni controla el PLC.
                   </p>
                   <div className="s7-sales-app-specs">
                     {appHighlights.map((item) => (
@@ -490,7 +490,7 @@ function S7SalesLanding({ course, eyebrow }) {
       <div className="s7-sales-confidence" data-surface="dark">
         <div className="s7-sales-container">
           <Icon name="ShieldCheck" size={26} />
-          <p>Conéctate al PLC con confianza y diagnostica con <strong>criterio profesional.</strong></p>
+          <p>Revisa la evidencia online con más criterio antes de intervenir el PLC.</p>
         </div>
       </div>
 
@@ -560,7 +560,7 @@ function S7SalesLanding({ course, eyebrow }) {
           <div className="s7-sales-offer-heading">
             <p className="s7-sales-kicker">Accede al curso + BOJ S7-PLC PRO</p>
             <h2>Una oferta técnica para ordenar el diagnóstico antes de intervenir.</h2>
-            <p>Una parada de máquina puede costar más que esta formación. El objetivo es que sepas ordenar el diagnóstico antes de cambiar hardware, reiniciar equipos o intervenir sin evidencia.</p>
+            <p>Aprende a ordenar síntomas, lecturas y verificaciones antes de cambiar hardware, reiniciar equipos o intervenir sin evidencia suficiente.</p>
           </div>
 
           <div className="s7-sales-offer-panel">
@@ -571,13 +571,13 @@ function S7SalesLanding({ course, eyebrow }) {
                 </span>
                 <p className="s7-sales-kicker">Curso + licencia</p>
                 <h2>Curso Diagnóstico S7-300/400 + APP PRO</h2>
-                <span className="s7-sales-offer-tagline">Incluye 1 mes de BOJ S7-PLC PRO</span>
+                <span className="s7-sales-offer-tagline">Curso en PDF permanente + App PRO por 1 mes para 1 dispositivo</span>
               </div>
 
               <div className="s7-sales-offer-price">
                 <span className="s7-sales-offer-regular">Pago único</span>
                 <strong>{offer.course.price}</strong>
-                <p>Acceso permanente al curso + herramienta PRO por 1 mes.</p>
+                <p>Material autoguiado en PDF con acceso permanente + App PRO por 1 mes para 1 dispositivo.</p>
                 <div className="s7-sales-valuestack">
                   <div className="s7-sales-valuestack-row">
                     <span>App BOJ S7-PLC PRO — 1 mes</span>
@@ -691,8 +691,8 @@ function S7SalesLanding({ course, eyebrow }) {
             <p className="s7-sales-offer-anchor">
               <TriangleAlert size={18} aria-hidden="true" />
               <span>
-                ¿Cuánto cuesta una hora de línea parada en tu planta? Casi siempre, mucho más que esto. Un solo
-                módulo cambiado a ciegas ya vale más que el curso completo.
+                Antes de sustituir un módulo o reiniciar una CPU, reúne evidencia y confirma la causa probable.
+                El curso enseña el método; la app ayuda a seguirlo en cada caso.
               </span>
             </p>
           </div>
