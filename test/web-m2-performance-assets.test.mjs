@@ -74,13 +74,22 @@ test("preserva los originales y entrega el inventario responsive AVIF/WebP compl
   }
 
   const files = (await readdir(join(root, "src", "assets", "m2"))).sort();
-  assert.equal(files.length, 132);
-  assert.equal(files.filter((name) => name.endsWith(".avif")).length, 66);
-  assert.equal(files.filter((name) => name.endsWith(".webp")).length, 66);
+  assert.equal(files.length, 142);
+  assert.equal(files.filter((name) => name.endsWith(".avif")).length, 71);
+  assert.equal(files.filter((name) => name.endsWith(".webp")).length, 71);
   for (const file of files) assert.ok((await stat(join(root, "src", "assets", "m2", file))).size > 0, file);
 
   for (const stem of ["hero-app", "hero-contacto", "hero-curso-s7", "hero-curso-tia", "hero-cursos", "hero-inicio", "hero-obras", "hero-recursos", "hero-servicios"]) {
     for (const width of [640, 960, 1672]) {
+      assert.ok(files.includes(`${stem}-${width}.avif`));
+      assert.ok(files.includes(`${stem}-${width}.webp`));
+    }
+  }
+  for (const [stem, widths] of [
+    ["app-estado-cpu-desktop-316-2dp-20260929", [640, 960, 1672]],
+    ["app-estado-cpu-mobile-313c-20260928", [320, 365]],
+  ]) {
+    for (const width of widths) {
       assert.ok(files.includes(`${stem}-${width}.avif`));
       assert.ok(files.includes(`${stem}-${width}.webp`));
     }
@@ -100,7 +109,7 @@ test("reserva aspecto, prioriza sólo el hero y difiere fondos fuera del viewpor
   assert.doesNotMatch(appSource, /src=\{plantVisual\} alt="" aria-hidden="true" \/>/);
   assert.ok((appSource.match(/src=\{plantVisual\} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async"/g) || []).length >= 6);
   assert.match(appSource, /src=\{manualPreviewImages\[0\]\}[^>]+width="1100" height="1556" decoding="async"/);
-  assert.match(appSource, /src=\{appEstadoCpuDesktop\}[\s\S]{0,140}width="1672"[\s\S]{0,80}height="941"[\s\S]{0,80}loading="eager"[\s\S]{0,40}decoding="async"/);
+  assert.match(appSource, /src=\{appEstadoCpuDesktop\}[\s\S]{0,140}width="1920"[\s\S]{0,80}height="888"[\s\S]{0,80}loading="eager"[\s\S]{0,40}decoding="async"/);
 });
 
 test("reduce el favicon más de 80 por ciento y mantiene cada variante por debajo de 50 KB", async () => {

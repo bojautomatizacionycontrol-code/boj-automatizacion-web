@@ -14,8 +14,8 @@ import {
 import { contact, offer } from "../content.js";
 import { englishApp, portugueseApp } from "../i18n.js";
 import appProHeroLaptopVisual from "../assets/hero-app.jpg";
-import appEstadoCpuDesktop from "../assets/app-estado-cpu-desktop-v8-4-15.jpg";
-import appEstadoCpuMobile from "../assets/app-estado-cpu-mobile-v7-3.png";
+import appEstadoCpuDesktop from "../assets/app-estado-cpu-desktop-316-2dp-20260929.png";
+import appEstadoCpuMobile from "../assets/app-estado-cpu-mobile-313c-20260928.png";
 import appSeleccionSintoma from "../assets/app-seleccion-sintoma-v8-17-24.jpg";
 import appVerificacionGuiada from "../assets/app-verificacion-guiada-v8-17-24.jpg";
 import appRegistroIntervencion from "../assets/app-registro-intervencion-v8-17-24.jpg";
@@ -26,18 +26,18 @@ import { Hero, Icon, S7ProofStrip, S7Testimonials, appLicensePlans, appProductUr
 // Variantes AVIF/WebP de las capturas vigentes usadas en la composición del hero (las mismas que Inicio).
 registerM2Images(import.meta.glob("../assets/m2/app-estado-cpu-*.{avif,webp}", { eager: true, import: "default" }));
 m2ImageSpecs.set(appEstadoCpuDesktop, {
-  stem: "app-estado-cpu-desktop",
-  width: 1672,
-  height: 941,
+  stem: "app-estado-cpu-desktop-316-2dp-20260929",
+  width: 1920,
+  height: 888,
   widths: [640, 960, 1672],
   formats: ["avif", "webp"],
   sizes: "(max-width: 760px) 92vw, 640px",
 });
 m2ImageSpecs.set(appEstadoCpuMobile, {
-  stem: "app-estado-cpu-mobile",
-  width: 594,
-  height: 919,
-  widths: [320, 594],
+  stem: "app-estado-cpu-mobile-313c-20260928",
+  width: 365,
+  height: 902,
+  widths: [320, 365],
   formats: ["avif", "webp"],
   sizes: "200px",
 });
@@ -256,19 +256,19 @@ const appFaqItems = [
 
 const appHeroPreviewCopy = {
   es: {
-    ariaLabel: "Pantallas actuales de BOJ S7-PLC PRO en marcos de computadora y teléfono",
-    desktop: "Pantalla actual de BOJ S7-PLC PRO en computadora",
-    mobile: "Pantalla actual de BOJ S7-PLC PRO en teléfono",
+    ariaLabel: "Capturas ilustrativas de BOJ S7-PLC PRO en computadora y teléfono, sin datos de la cuenta",
+    desktop: "Captura real del estado de CPU 316-2 DP en BOJ S7-PLC PRO con PLC y botones de LED",
+    mobile: "CPU 313C e indicadores del frontal de BOJ S7-PLC PRO en un teléfono",
   },
   en: {
-    ariaLabel: "Current BOJ S7-PLC PRO screens in desktop and phone frames",
-    desktop: "Current BOJ S7-PLC PRO screen on a desktop",
-    mobile: "Current BOJ S7-PLC PRO screen on a phone",
+    ariaLabel: "Illustrative BOJ S7-PLC PRO screenshots on desktop and phone, without account details",
+    desktop: "Real BOJ S7-PLC PRO CPU 316-2 DP status screen with PLC and LED state buttons",
+    mobile: "BOJ S7-PLC PRO CPU 313C and its front-panel indicators on a phone",
   },
   pt: {
-    ariaLabel: "Telas atuais do BOJ S7-PLC PRO em quadros de computador e telefone",
-    desktop: "Tela atual do BOJ S7-PLC PRO em computador",
-    mobile: "Tela atual do BOJ S7-PLC PRO em telefone",
+    ariaLabel: "Capturas ilustrativas do BOJ S7-PLC PRO em computador e telefone, sem dados da conta",
+    desktop: "Captura real do estado da CPU 316-2 DP no BOJ S7-PLC PRO com PLC e botões dos LEDs",
+    mobile: "CPU 313C e indicadores frontais do BOJ S7-PLC PRO em um telefone",
   },
 };
 
@@ -292,8 +292,8 @@ function AppHeroDiagnosticPreview({ language = "es" }) {
               <M2Picture
                 src={appEstadoCpuDesktop}
                 alt={copy.desktop}
-                width="1672"
-                height="941"
+                width="1920"
+                height="888"
                 loading="eager"
                 decoding="async"
               />
@@ -306,8 +306,8 @@ function AppHeroDiagnosticPreview({ language = "es" }) {
               <M2Picture
                 src={appEstadoCpuMobile}
                 alt={copy.mobile}
-                width="594"
-                height="919"
+                width="365"
+                height="902"
                 loading="eager"
                 decoding="async"
               />

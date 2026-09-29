@@ -14,11 +14,11 @@ assert.ok(visualEnd > visualStart, "No se pudo delimitar AppDiagnosticMockup");
 const visualSource = homeSource.slice(visualStart, visualEnd);
 
 test("restaura una composición compacta con capturas vigentes en Home", () => {
-  assert.match(homeSource, /import appEstadoCpuDesktop from "\.\.\/assets\/app-estado-cpu-desktop-v8-4-15\.jpg"/);
-  assert.match(homeSource, /import appEstadoCpuMobile from "\.\.\/assets\/app-estado-cpu-mobile-v7-3\.png"/);
-  assert.match(visualSource, /src=\{appEstadoCpuDesktop\}[\s\S]*?width="1672"[\s\S]*?height="941"/);
+  assert.match(homeSource, /import appEstadoCpuDesktop from "\.\.\/assets\/app-estado-cpu-desktop-316-2dp-20260929\.png"/);
+  assert.match(homeSource, /import appEstadoCpuMobile from "\.\.\/assets\/app-estado-cpu-mobile-313c-20260928\.png"/);
+  assert.match(visualSource, /src=\{appEstadoCpuDesktop\}[\s\S]*?width="1920"[\s\S]*?height="888"/);
   assert.match(visualSource, /className="app-mobile-screen"[\s\S]*?src=\{appEstadoCpuMobile\}/);
-  assert.match(visualSource, /src=\{appEstadoCpuMobile\}[\s\S]*?width="594"[\s\S]*?height="919"/);
+  assert.match(visualSource, /src=\{appEstadoCpuMobile\}[\s\S]*?width="365"[\s\S]*?height="902"/);
   assert.doesNotMatch(
     visualSource,
     /appDiagnosticoGuiado|appSadDevicePreview|app-sad-device-preview|APP\.png|boj-s7-plc-real-capture/,
@@ -48,7 +48,7 @@ test("el marco recupera la proporción histórica sin la franja negra", () => {
   );
   assert.match(
     stylesSource,
-    /\.app-mobile-screen img\s*\{[^}]*width:\s*135%;[^}]*max-width:\s*none;[^}]*height:\s*auto;[^}]*margin-left:\s*-17\.5%;[^}]*background:\s*#0c141c;/,
+    /\.app-mobile-screen img\s*\{[^}]*width:\s*100%;[^}]*max-width:\s*none;[^}]*height:\s*100%;[^}]*object-fit:\s*cover;[^}]*margin-left:\s*0;[^}]*background:\s*#0c141c;/,
   );
   assert.match(
     stylesSource,

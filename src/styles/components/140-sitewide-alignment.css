@@ -341,12 +341,20 @@
   background: #0c141c;
 }
 
+.app-mobile-screen picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .app-mobile-screen img {
   display: block;
-  width: 135%;
+  width: 100%;
   max-width: none;
-  height: auto;
-  margin-left: -17.5%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  margin-left: 0;
   background: #0c141c;
 }
 

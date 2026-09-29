@@ -65,7 +65,7 @@ test("App muestra una demostración real y precios antes de la explicación exte
   assert.match(previewSource, /src=\{appEstadoCpuDesktop\}[\s\S]*?className="app-mobile-screen"[\s\S]*?src=\{appEstadoCpuMobile\}/);
   assert.doesNotMatch(previewSource, /appSadDevicePreview|app-hero-diagnostic-preview-screen--device-composite|appDiagnosticoGuiado|APP\.png/);
   assert.doesNotMatch(previewSource, /FLUJO REAL|CASO GUIADO|REAL TOOL WORKFLOW/);
-  assert.match(previewSource, /marcos de computadora y teléfono/);
+  assert.match(previewSource, /Capturas ilustrativas de BOJ S7-PLC PRO en computadora y teléfono, sin datos de la cuenta/);
 
   const proofStrip = appPageSource.indexOf("<S7ProofStrip />");
   const quickAccess = appPageSource.indexOf("<AppQuickCommercialAccess />");

@@ -10,8 +10,8 @@ import {
   portugueseHome,
   portugueseProjects,
 } from "../i18n.js";
-import appEstadoCpuDesktop from "../assets/app-estado-cpu-desktop-v8-4-15.jpg";
-import appEstadoCpuMobile from "../assets/app-estado-cpu-mobile-v7-3.png";
+import appEstadoCpuDesktop from "../assets/app-estado-cpu-desktop-316-2dp-20260929.png";
+import appEstadoCpuMobile from "../assets/app-estado-cpu-mobile-313c-20260928.png";
 import heroInicio from "../assets/hero-inicio.jpg";
 import plantVisual from "../assets/old-site/35-47edf350.jpg";
 import { M2Picture, m2ImageSpecs, registerM2Images, whatsappUrl } from "../app/shared-eager.jsx";
@@ -23,18 +23,18 @@ registerM2Images(import.meta.glob("../assets/m2/app-estado-cpu-*.{avif,webp}", {
 
 // Variantes AVIF/WebP de las capturas de la app usadas en la composición de dispositivos.
 m2ImageSpecs.set(appEstadoCpuDesktop, {
-  stem: "app-estado-cpu-desktop",
-  width: 1672,
-  height: 941,
+  stem: "app-estado-cpu-desktop-316-2dp-20260929",
+  width: 1920,
+  height: 888,
   widths: [640, 960, 1672],
   formats: ["avif", "webp"],
   sizes: "(max-width: 760px) 92vw, 693px",
 });
 m2ImageSpecs.set(appEstadoCpuMobile, {
-  stem: "app-estado-cpu-mobile",
-  width: 594,
-  height: 919,
-  widths: [320, 594],
+  stem: "app-estado-cpu-mobile-313c-20260928",
+  width: 365,
+  height: 902,
+  widths: [320, 365],
   formats: ["avif", "webp"],
   sizes: "200px",
 });
@@ -289,23 +289,23 @@ function HomeObrasTeaser() {
 function AppDiagnosticMockup({ language = "es" }) {
   const visualCopy = language === "en"
     ? {
-        figure: "Current BOJ S7-PLC screens presented in desktop and phone frames",
-        desktop: "Current BOJ S7-PLC CPU status diagnostic screen",
+        figure: "Illustrative BOJ S7-PLC interface screenshots in desktop and phone frames, without account details",
+        desktop: "Real BOJ S7-PLC CPU 316-2 DP status screen with PLC and LED state buttons",
         mobileFrame: "BOJ S7-PLC CPU status diagnostic shown in a phone frame",
-        mobile: "Current BOJ S7-PLC CPU status diagnostic screen in a phone frame",
+        mobile: "BOJ S7-PLC CPU 313C and its front-panel indicators on a phone",
       }
     : language === "pt"
       ? {
-          figure: "Telas atuais do BOJ S7-PLC apresentadas em quadros de computador e telefone",
-          desktop: "Tela atual de diagnóstico por estado da CPU do BOJ S7-PLC",
+          figure: "Capturas ilustrativas da interface do BOJ S7-PLC em computador e telefone, sem dados da conta",
+          desktop: "Captura real do estado da CPU 316-2 DP no BOJ S7-PLC com PLC e botões dos LEDs",
           mobileFrame: "Diagnóstico por estado da CPU do BOJ S7-PLC apresentado em um quadro de telefone",
-          mobile: "Tela atual de diagnóstico por estado da CPU do BOJ S7-PLC em um quadro de telefone",
+          mobile: "CPU 313C e indicadores frontais do BOJ S7-PLC em um telefone",
         }
       : {
-          figure: "Pantallas actuales de BOJ S7-PLC presentadas en marcos de computadora y teléfono",
-          desktop: "Pantalla actual de diagnóstico por estado de CPU de BOJ S7-PLC",
+          figure: "Capturas ilustrativas de la interfaz de BOJ S7-PLC en computadora y teléfono, sin datos de la cuenta",
+          desktop: "Captura real del estado de CPU 316-2 DP en BOJ S7-PLC con PLC y botones de LED",
           mobileFrame: "Diagnóstico por estado de CPU de BOJ S7-PLC presentado en un marco de teléfono",
-          mobile: "Pantalla actual de diagnóstico por estado de CPU de BOJ S7-PLC en un marco de teléfono",
+          mobile: "CPU 313C e indicadores del frontal de BOJ S7-PLC en un teléfono",
         };
   return (
     <figure className="mock-app-visual real-app-capture app-product-composition" aria-label={visualCopy.figure}>
@@ -320,8 +320,8 @@ function AppDiagnosticMockup({ language = "es" }) {
             <M2Picture
               src={appEstadoCpuDesktop}
               alt={visualCopy.desktop}
-              width="1672"
-              height="941"
+              width="1920"
+              height="888"
               loading="lazy"
               decoding="async"
             />
@@ -334,8 +334,8 @@ function AppDiagnosticMockup({ language = "es" }) {
             <M2Picture
               src={appEstadoCpuMobile}
               alt={visualCopy.mobile}
-              width="594"
-              height="919"
+              width="365"
+              height="902"
               loading="lazy"
               decoding="async"
             />
