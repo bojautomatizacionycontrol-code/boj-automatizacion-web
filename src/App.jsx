@@ -28,6 +28,7 @@ import {
 import bojLogo from "./assets/boj-logo-real-cropped.png";
 import { contactAddresses } from "./contact-addresses.js";
 import { hotmartLinks } from "./hotmart-links.js";
+import { addCampaignToHotmart, keepCampaignOnSite } from "./marketing-attribution.js";
 import { M2Picture, track, whatsappUrl } from "./app/shared-eager.jsx";
 import { serializeJsonLd } from "./json-ld.js";
 import { preloadRouteFamily, RouteOutlet } from "./routes/manifest.jsx";
@@ -122,7 +123,7 @@ function App({ initialRoute = "/", initialRouteComponent = null, buildYear = new
     }
     if (savedLanguage === "en" || savedLanguage === "pt") {
       const savedHome = `/${savedLanguage}`;
-      window.history.replaceState(null, "", savedHome);
+      window.history.replaceState(null, "", keepCampaignOnSite(savedHome, window.location.search));
       setRoute(savedHome);
     }
   }, []);
@@ -132,9 +133,18 @@ function App({ initialRoute = "/", initialRouteComponent = null, buildYear = new
     window.addEventListener("popstate", onPopState);
 
     const navigate = (to) => {
+      to = keepCampaignOnSite(to, window.location.search);
       const current = window.location.pathname + window.location.search + window.location.hash;
       if (to !== current) window.history.pushState(null, "", to);
       startTransition(() => setRoute(getRoute()));
+    };
+
+    const attributeCheckoutAnchor = (anchor, url) => {
+      if (url.protocol !== "https:" || url.hostname !== "pay.hotmart.com") return false;
+      const original = anchor.dataset.bojCheckoutBase || anchor.href;
+      anchor.dataset.bojCheckoutBase = original;
+      anchor.href = addCampaignToHotmart(original, window.location.search);
+      return true;
     };
 
     // Interceptor de clics: convierte enlaces internos same-origin en navegación
@@ -148,7 +158,6 @@ function App({ initialRoute = "/", initialRouteComponent = null, buildYear = new
       const target = event.target;
       const anchor = target && target.closest ? target.closest("a") : null;
       if (!anchor) return;
-      if (anchor.target && anchor.target !== "_self") return;
       if (anchor.hasAttribute("download")) return;
       const href = anchor.getAttribute("href");
       if (!href) return;
@@ -163,6 +172,8 @@ function App({ initialRoute = "/", initialRouteComponent = null, buildYear = new
       } catch {
         return;
       }
+      if (attributeCheckoutAnchor(anchor, url)) return;
+      if (anchor.target && anchor.target !== "_self") return;
       if (url.origin !== window.location.origin) return; // externos
       if (url.protocol !== "http:" && url.protocol !== "https:") return; // mailto/tel/javascript
       event.preventDefault();
@@ -175,6 +186,7 @@ function App({ initialRoute = "/", initialRouteComponent = null, buildYear = new
       if (!anchor) return;
       try {
         const url = new URL(anchor.href);
+        if (attributeCheckoutAnchor(anchor, url)) return;
         if (url.origin === window.location.origin) preloadRouteSafely(url.pathname);
       } catch {
         // El enlace puede ser mailto/tel u otro esquema no navegable por la SPA.
