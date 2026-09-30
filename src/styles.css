@@ -52,3 +52,6 @@
 
 /* B2B software offering, separate from the S7-PLC App funnel. */
 @import "./styles/pages/290-copilot.css";
+
+/* Beginner CAD course, scoped to its own route and catalog preview. */
+@import "./styles/pages/300-course-solidworks.css";

@@ -1,0 +1,741 @@
+.solidworks-course-page {
+  --sw-ink: #061b2b;
+  --sw-cyan: #1fc6f3;
+  --sw-blue: #008ec0;
+  color: #f6fbff;
+  background: #051521;
+}
+
+.solidworks-course-page h1,
+.solidworks-course-page h2,
+.solidworks-course-page h3,
+.solidworks-course-page p,
+.solidworks-course-page figure {
+  margin-top: 0;
+}
+
+.solidworks-kicker,
+.solidworks-eyebrow {
+  color: var(--sw-cyan);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.115em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.solidworks-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(56px, 5vw, 72px) 0 clamp(60px, 5vw, 72px);
+  background:
+    radial-gradient(circle at 80% 44%, rgba(0, 167, 219, 0.20), transparent 39%),
+    radial-gradient(circle at 12% 92%, rgba(0, 98, 146, 0.16), transparent 40%),
+    linear-gradient(130deg, #04111e 0%, #072638 60%, #041521 100%);
+}
+
+.solidworks-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.52;
+  background-image:
+    linear-gradient(rgba(57, 190, 226, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 190, 226, 0.075) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(90deg, transparent, black 38%, black 100%);
+}
+
+.solidworks-hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.13fr) minmax(280px, 0.87fr);
+  gap: clamp(38px, 6vw, 96px);
+  align-items: center;
+}
+
+.solidworks-hero-copy {
+  max-width: 690px;
+}
+
+.solidworks-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 23px;
+}
+
+.solidworks-hero h1 {
+  max-width: 740px;
+  margin-bottom: 24px;
+  color: #fff;
+  font-size: clamp(2.75rem, 4vw, 3.75rem);
+  font-weight: 850;
+  letter-spacing: -0.055em;
+  line-height: 1.035;
+  text-wrap: balance;
+}
+
+.solidworks-hero-lead {
+  max-width: 590px;
+  margin-bottom: 26px;
+  color: #c4d8e5;
+  font-size: clamp(1.03rem, 1.36vw, 1.22rem);
+  line-height: 1.63;
+}
+
+.solidworks-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.solidworks-author-monogram {
+  display: grid;
+  width: 45px;
+  height: 45px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(67, 200, 235, 0.5);
+  border-radius: 50%;
+  background: rgba(17, 163, 203, 0.13);
+  color: #d7f7ff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.solidworks-author strong,
+.solidworks-author small {
+  display: block;
+}
+
+.solidworks-author strong {
+  color: #fff;
+  font-size: 0.96rem;
+}
+
+.solidworks-author small {
+  margin-top: 3px;
+  color: #a9c3d1;
+  font-size: 0.82rem;
+}
+
+.solidworks-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.solidworks-hero-actions .mock-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  min-height: 48px;
+  padding-inline: 18px;
+  border-radius: 8px;
+  font-size: 0.94rem;
+}
+
+.solidworks-cover {
+  position: relative;
+  width: min(100%, 235px);
+  justify-self: center;
+  margin: 0;
+}
+
+.solidworks-cover::before {
+  content: "";
+  position: absolute;
+  inset: 12px -16px 36px 20px;
+  border: 1px solid rgba(51, 203, 240, 0.30);
+  border-radius: 8px;
+  transform: rotate(4deg);
+}
+
+.solidworks-cover-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(97, 214, 245, 0.42);
+  border-radius: 8px;
+  background: #071420;
+  box-shadow: 0 34px 70px rgba(0, 5, 12, 0.42), 0 0 52px rgba(0, 158, 211, 0.12);
+}
+
+.solidworks-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.solidworks-cover figcaption {
+  position: relative;
+  margin-top: 14px;
+  color: #9cbdcf;
+  font-size: 0.76rem;
+  text-align: center;
+}
+
+.solidworks-status {
+  padding: 24px 0;
+  border-block: 1px solid rgba(73, 194, 228, 0.29);
+  background: #0a2938;
+}
+
+.solidworks-status-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.solidworks-status-mark {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 auto;
+  margin-top: 5px;
+  border: 2px solid #69dbf9;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(76, 213, 246, 0.10);
+}
+
+.solidworks-status h2 {
+  margin: 4px 0 5px;
+  color: #fff;
+  font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+  line-height: 1.3;
+}
+
+.solidworks-status p {
+  max-width: 850px;
+  margin: 0;
+  color: #bdd5e0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.solidworks-intro,
+.solidworks-audience,
+.solidworks-program,
+.solidworks-outcomes,
+.solidworks-close {
+  padding: clamp(66px, 7vw, 108px) 0;
+}
+
+.solidworks-intro,
+.solidworks-outcomes {
+  color: var(--sw-ink);
+  background: #f5f9fc;
+}
+
+.solidworks-intro .solidworks-kicker,
+.solidworks-program .solidworks-kicker,
+.solidworks-outcomes .solidworks-kicker {
+  color: #006c91;
+}
+
+.solidworks-intro-grid,
+.solidworks-outcomes-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(38px, 7vw, 110px);
+  align-items: start;
+}
+
+.solidworks-intro-grid {
+  align-items: center;
+}
+
+.solidworks-intro h2,
+.solidworks-outcomes h2,
+.solidworks-section-heading h2,
+.solidworks-close h2 {
+  margin: 10px 0 0;
+  font-size: clamp(2.05rem, 3.35vw, 3.55rem);
+  font-weight: 820;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.solidworks-intro-copy > p {
+  margin: 24px 0 22px;
+  color: #40576b;
+  font-size: 1.07rem;
+  line-height: 1.68;
+}
+
+.solidworks-part-figure {
+  width: 100%;
+  margin: 0;
+}
+
+.solidworks-part-stage {
+  overflow: hidden;
+  border: 1px solid #a4d4e4;
+  border-radius: 14px;
+  background: radial-gradient(circle at 50% 45%, #18465d 0%, #0b283c 58%, #061725 100%);
+  box-shadow: 0 22px 46px rgba(5, 31, 49, 0.13);
+}
+
+.solidworks-part-stage img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.solidworks-part-figure figcaption {
+  margin-top: 12px;
+  color: #536b7c;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.solidworks-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.solidworks-facts li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border: 1px solid #b5dfed;
+  border-radius: 999px;
+  background: #e9f7fc;
+  color: #075779;
+  font-size: 0.85rem;
+  font-weight: 760;
+}
+
+.solidworks-audience {
+  color: #f8fbfe;
+  background: linear-gradient(145deg, #071d2e, #051521 72%);
+}
+
+.solidworks-section-heading {
+  max-width: 780px;
+  margin-bottom: 32px;
+}
+
+.solidworks-section-heading > p {
+  margin: 16px 0 0;
+  color: #4d6272;
+  font-size: 1.04rem;
+  line-height: 1.6;
+}
+
+.solidworks-audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.solidworks-audience-card {
+  min-height: 211px;
+  padding: 26px;
+  border: 1px solid rgba(76, 198, 231, 0.22);
+  border-radius: 10px;
+  background: rgba(12, 43, 62, 0.58);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.solidworks-audience-card > span {
+  color: #57d7f6;
+  font-size: 0.84rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.solidworks-audience-card h3 {
+  margin: 22px 0 9px;
+  color: #fff;
+  font-size: 1.16rem;
+  line-height: 1.3;
+}
+
+.solidworks-audience-card p {
+  margin-bottom: 0;
+  color: #bdd3df;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.solidworks-audience-note {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  margin: 19px 0 0;
+  color: #abc8d6;
+  font-size: 0.86rem;
+  line-height: 1.52;
+}
+
+.solidworks-audience-note svg {
+  flex: 0 0 auto;
+  color: #62d2ef;
+}
+
+.solidworks-program {
+  color: var(--sw-ink);
+  background: #fff;
+  scroll-margin-top: 84px;
+}
+
+.solidworks-module-list {
+  display: grid;
+  gap: 11px;
+}
+
+.solidworks-module {
+  border: 1px solid #d8e6ed;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(8, 31, 47, 0.035);
+}
+
+.solidworks-module[open] {
+  border-color: #9bd8e9;
+  box-shadow: 0 18px 32px rgba(8, 71, 99, 0.085);
+}
+
+.solidworks-module summary {
+  display: grid;
+  grid-template-columns: 39px 47px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 20px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.solidworks-module summary::-webkit-details-marker {
+  display: none;
+}
+
+.solidworks-module summary:focus-visible,
+.solidworks-course-page a:focus-visible {
+  outline: 3px solid #05a7df;
+  outline-offset: 3px;
+}
+
+.solidworks-module-number {
+  color: #007eaa;
+  font-size: 0.94rem;
+  font-weight: 860;
+  letter-spacing: 0.07em;
+}
+
+.solidworks-module-icon {
+  display: grid;
+  width: 45px;
+  height: 45px;
+  place-items: center;
+  border: 1px solid #b6e5f2;
+  border-radius: 9px;
+  background: #e9f9fd;
+  color: #087da5;
+}
+
+.solidworks-module-heading strong,
+.solidworks-module-heading small {
+  display: block;
+}
+
+.solidworks-module-heading strong {
+  color: #0a2637;
+  font-size: 1.12rem;
+  line-height: 1.25;
+}
+
+.solidworks-module-heading small {
+  margin-top: 5px;
+  color: #587080;
+  font-size: 0.86rem;
+  font-weight: 450;
+  line-height: 1.45;
+}
+
+.solidworks-module-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #006e97;
+  font-size: 0.82rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.solidworks-module-toggle > span {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border: 1px solid #a3d7e7;
+  border-radius: 50%;
+  font-size: 1.18rem;
+  line-height: 1;
+}
+
+.solidworks-module[open] .solidworks-module-toggle > span {
+  transform: rotate(45deg);
+}
+
+.solidworks-module > ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 24px;
+  margin: 0 20px 20px 122px;
+  padding: 18px 0 0;
+  border-top: 1px solid #e1edf2;
+  list-style: none;
+}
+
+.solidworks-module > ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #375062;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.solidworks-module > ul svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: #008cb8;
+}
+
+.solidworks-outcomes-grid > div > ul {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.solidworks-outcomes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #17374b;
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+.solidworks-outcomes li svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: #078eb8;
+}
+
+.solidworks-outcomes-grid > div > p {
+  margin: 24px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid #cbdce5;
+  color: #526a7a;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.solidworks-close {
+  background:
+    radial-gradient(circle at 84% 10%, rgba(0, 172, 214, 0.16), transparent 34%),
+    linear-gradient(150deg, #071e2d, #03121e);
+}
+
+.solidworks-close-inner {
+  max-width: 840px;
+}
+
+.solidworks-close h2 {
+  margin-bottom: 17px;
+  color: #fff;
+}
+
+.solidworks-close p {
+  max-width: 670px;
+  margin-bottom: 26px;
+  color: #bcd1de;
+  font-size: 1.04rem;
+  line-height: 1.62;
+}
+
+.solidworks-close small {
+  display: block;
+  max-width: 720px;
+  margin-top: 32px;
+  color: #92abba;
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+/* The source cover is portrait; show the publication rather than stretching it into a landscape photo. */
+.course-available-card--solidworks .course-available-visual {
+  align-content: center;
+  justify-items: center;
+  min-height: 355px;
+  padding: 22px;
+  background: radial-gradient(circle at 55% 50%, rgba(23, 156, 196, 0.20), rgba(2, 11, 20, 0) 66%);
+}
+
+.course-available-card--solidworks .course-available-visual img {
+  position: relative;
+  inset: auto;
+  width: auto;
+  max-width: 100%;
+  height: 310px;
+  object-fit: contain;
+  opacity: 1;
+  filter: none;
+  border: 1px solid rgba(89, 204, 235, 0.34);
+  border-radius: 4px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.34);
+}
+
+.course-available-card--solidworks .course-available-visual::before,
+.course-available-card--solidworks .course-available-visual > div {
+  display: none;
+}
+
+.course-available-card--solidworks .course-available-visual strong {
+  position: absolute;
+  right: 16px;
+  bottom: 15px;
+  margin: 0;
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  line-height: 1.2;
+}
+
+.course-available-card--solidworks .course-available-visual .mock-btn {
+  position: absolute;
+  left: 16px;
+  bottom: 15px;
+  min-width: 0;
+  padding: 8px 11px;
+  font-size: 0.83rem;
+}
+
+@media (max-width: 960px) {
+  .solidworks-hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 0.7fr);
+    gap: 36px;
+  }
+
+  .solidworks-hero h1 {
+    font-size: clamp(2.55rem, 5vw, 4rem);
+  }
+}
+
+@media (max-width: 720px) {
+  .solidworks-hero-grid,
+  .solidworks-intro-grid,
+  .solidworks-outcomes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solidworks-hero {
+    padding-block: 58px 64px;
+  }
+
+  .solidworks-cover {
+    width: min(68%, 210px);
+    margin-top: 12px;
+  }
+
+  .solidworks-audience-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solidworks-audience-card {
+    min-height: 0;
+  }
+
+  .solidworks-module > ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .solidworks-hero h1 {
+    font-size: clamp(2.4rem, 10vw, 3.3rem);
+  }
+
+  .solidworks-hero-actions,
+  .solidworks-hero-actions .mock-btn {
+    width: 100%;
+  }
+
+  .solidworks-cover {
+    width: min(62%, 195px);
+  }
+
+  .solidworks-status-inner {
+    gap: 14px;
+  }
+
+  .solidworks-module summary {
+    grid-template-columns: 32px 42px minmax(0, 1fr);
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .solidworks-module-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .solidworks-module-heading strong {
+    font-size: 1rem;
+  }
+
+  .solidworks-module-toggle {
+    grid-column: 3;
+    justify-self: start;
+    margin-top: -2px;
+  }
+
+  .solidworks-module > ul {
+    margin: 0 15px 17px;
+  }
+
+  .course-available-card--solidworks .course-available-visual {
+    min-height: 350px;
+    padding-bottom: 54px;
+  }
+
+  .course-available-card--solidworks .course-available-visual img {
+    height: 280px;
+  }
+
+  .course-available-card--solidworks .course-available-visual strong {
+    display: none;
+  }
+
+  .course-available-card--solidworks .course-available-visual .mock-btn {
+    right: 16px;
+    bottom: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .solidworks-module,
+  .solidworks-cover-frame,
+  .solidworks-audience-card {
+    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+
+  .solidworks-module:hover,
+  .solidworks-audience-card:hover {
+    border-color: rgba(35, 170, 210, 0.55);
+    transform: translateY(-2px);
+  }
+}

@@ -190,7 +190,7 @@ function extractInlineScripts(html) {
 
 export async function validateBuiltCsp(generatedPaths, vercelConfig) {
   if (!Array.isArray(generatedPaths) || generatedPaths.length !== publicRoutePaths.length + 1) {
-    throw new Error(`CSP-BUILD: se esperaban 35 rutas + 404; actual=${generatedPaths?.length ?? 0}`);
+    throw new Error(`CSP-BUILD: se esperaban ${publicRoutePaths.length} rutas + 404; actual=${generatedPaths?.length ?? 0}`);
   }
 
   const config = vercelConfig || JSON.parse(

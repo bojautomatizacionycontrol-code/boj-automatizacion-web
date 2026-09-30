@@ -24,6 +24,11 @@ export const routeFamilies = Object.freeze({
     "/en/courses/tia-portal",
     "/pt/cursos/tia-portal",
   ]),
+  courseSolidworks: Object.freeze([
+    "/cursos/solidworks",
+    "/en/courses/solidworks",
+    "/pt/cursos/solidworks",
+  ]),
   app: Object.freeze(["/app", "/en/app", "/pt/app"]),
   resources: Object.freeze([
     "/recursos-tecnicos",

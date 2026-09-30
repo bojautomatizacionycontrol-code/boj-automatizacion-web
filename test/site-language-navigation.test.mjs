@@ -27,6 +27,7 @@ const expectedPairs = [
   ["/cursos", "/en/courses", "/pt/cursos"],
   ["/cursos/s7-300-400", "/en/courses/s7-300-400", "/pt/cursos/s7-300-400"],
   ["/cursos/tia-portal", "/en/courses/tia-portal", "/pt/cursos/tia-portal"],
+  ["/cursos/solidworks", "/en/courses/solidworks", "/pt/cursos/solidworks"],
   ["/app", "/en/app", "/pt/app"],
   ["/obras", "/en/projects", "/pt/projetos"],
   ["/contacto", "/en/contact", "/pt/contato"],

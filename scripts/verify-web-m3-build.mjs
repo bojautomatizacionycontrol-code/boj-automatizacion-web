@@ -19,6 +19,7 @@ const ROUTE_ENTRIES = Object.freeze([
   "src/routes/courses-index.jsx",
   "src/routes/course-s7.jsx",
   "src/routes/course-tia.jsx",
+  "src/routes/course-solidworks.jsx",
   "src/routes/app.jsx",
   "src/routes/resources.jsx",
   "src/routes/compliance.jsx",
@@ -27,8 +28,8 @@ const ROUTE_ENTRIES = Object.freeze([
 const ENTRY_BUDGET = Object.freeze({ raw: 300_000, gzip: 95_000 });
 // 5 de septiembre de 2026: el hero de /app incorpora la composición de dispositivos con dos familias
 // de imágenes responsive (las mismas que Inicio); el presupuesto raw sube 10 KB. El gzip no cambia.
-// La navegación B2B añade enlace, submenú y CTA al shell compartido; margen de 2 KB gzip.
-const ROUTE_INITIAL_BUDGET = Object.freeze({ raw: 380_000, gzip: 112_000 });
+// La nueva ruta y sus enlaces localizados amplían el shell compartido; conservar un margen de 2 KB gzip.
+const ROUTE_INITIAL_BUDGET = Object.freeze({ raw: 380_000, gzip: 114_000 });
 const CSS_BUDGET = Object.freeze({ raw: 400_000, gzip: 70_000 });
 
 function requireRecord(manifest, key) {

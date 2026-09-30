@@ -10,6 +10,7 @@ const routeFamilyLoaders = Object.freeze({
   coursesIndex: () => import("./courses-index.jsx"),
   courseS7: () => import("./course-s7.jsx"),
   courseTia: () => import("./course-tia.jsx"),
+  courseSolidworks: () => import("./course-solidworks.jsx"),
   app: () => import("./app.jsx"),
   resources: () => import("./resources.jsx"),
   compliance: () => import("./compliance.jsx"),
