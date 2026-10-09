@@ -187,7 +187,7 @@ test("aplica presupuestos HTML por documento y para la matriz completa", () => {
     () => validateHtmlBudgets([{ label: "grande.html", html: "x".repeat(SSR_HTML_DOCUMENT_BUDGET.raw + 1) }]),
     /grande\.html excede presupuesto HTML/
   );
-  const matrix = Array.from({ length: 16 }, (_, index) => ({
+  const matrix = Array.from({ length: 17 }, (_, index) => ({
     label: `${index}.html`,
     html: "x".repeat(Math.min(95_000, SSR_HTML_DOCUMENT_BUDGET.raw - 1)),
   }));
@@ -195,22 +195,22 @@ test("aplica presupuestos HTML por documento y para la matriz completa", () => {
   assert.throws(() => validateHtmlBudgets(matrix), /matriz \d+\+404 excede presupuesto HTML/);
 });
 
-test("verifica la matriz física 41+404, assets, CSP, 404 y presupuestos como un único gate", async () => {
+test("verifica la matriz física 44+404, assets, CSP, 404 y presupuestos como un único gate", async () => {
   const { directory, generated } = await createGeneratedFixture();
   try {
-    assert.equal(generated.length, 42);
+    assert.equal(generated.length, 45);
     const verified = await verifyPrerenderedHtmlBuild(directory);
-    assert.equal(verified.files, 42);
-    assert.equal(verified.fragments, 84);
-    assert.equal(verified.budgets.count, 42);
-    assert.equal(verified.csp.generatedFiles, 42);
-    assert.equal(verified.csp.inlineScripts, 40);
-    assert.equal(verified.csp.hashes, 40);
+    assert.equal(verified.files, 45);
+    assert.equal(verified.fragments, 90);
+    assert.equal(verified.budgets.count, 45);
+    assert.equal(verified.csp.generatedFiles, 45);
+    assert.equal(verified.csp.inlineScripts, 43);
+    assert.equal(verified.csp.hashes, 43);
 
     const contactoPath = outputFileForRoute(directory, "/contacto");
     const contacto = await readFile(contactoPath, "utf8");
     await rm(contactoPath);
-    await assert.rejects(verifyPrerenderedHtmlBuild(directory), /matriz HTML distinta de 41\+404/);
+    await assert.rejects(verifyPrerenderedHtmlBuild(directory), /matriz HTML distinta de 44\+404/);
     await writeFile(contactoPath, contacto, "utf8");
 
     const unexpectedPath = join(directory, "inesperado.html");

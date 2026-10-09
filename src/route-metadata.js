@@ -12,7 +12,7 @@ const socialImageAltByLanguage = Object.freeze({
     institutional: "BOJ Automatización y Control",
     services: "BOJ Automatización y Control — servicios industriales",
     app: "BOJ S7-PLC PRO — asistencia de diagnóstico industrial",
-    course: "BOJ — formación técnica en PLC Siemens",
+    course: "BOJ — formación técnica industrial",
     resources: "BOJ — recursos técnicos Siemens",
     contact: "BOJ Automatización y Control — contacto técnico",
   }),
@@ -20,7 +20,7 @@ const socialImageAltByLanguage = Object.freeze({
     institutional: "BOJ Automation and Control",
     services: "BOJ Automation and Control — industrial services",
     app: "BOJ S7-PLC PRO — industrial diagnostic assistance",
-    course: "BOJ — Siemens PLC technical training",
+    course: "BOJ — industrial technical training",
     resources: "BOJ — Siemens technical resources",
     contact: "BOJ Automation and Control — technical contact",
   }),
@@ -28,7 +28,7 @@ const socialImageAltByLanguage = Object.freeze({
     institutional: "BOJ Automação e Controle",
     services: "BOJ Automação e Controle — serviços industriais",
     app: "BOJ S7-PLC PRO — assistência de diagnóstico industrial",
-    course: "BOJ — formação técnica em PLC Siemens",
+    course: "BOJ — formação técnica industrial",
     resources: "BOJ — recursos técnicos Siemens",
     contact: "BOJ Automação e Controle — contato técnico",
   }),
@@ -83,9 +83,9 @@ export const routeMetadata = Object.freeze({
       "Registro técnico de instrumentación de turbinas de gas: lecturas, calibraciones, rondas, alarmas, intervenciones y documentación PDF. Demostración B2B con datos de ejemplo.",
   },
   "/cursos": {
-    title: "Formación PLC Siemens disponible y futura | BOJ",
+    title: "Cursos de PLC Siemens y diseño en SolidWorks | BOJ",
     description:
-      "Curso de diagnóstico S7-300/400 disponible y futuro curso TIA Portal S7-1200/1500 en preparación para mantenimiento industrial.",
+      "Formación técnica en diagnóstico PLC Siemens S7-300/400, TIA Portal en preparación y manual práctico de SolidWorks para principiantes.",
   },
   "/cursos/s7-300-400": {
     title: "Curso diagnóstico industrial PLC Siemens S7-300/400 | BOJ",
@@ -96,6 +96,11 @@ export const routeMetadata = Object.freeze({
     title: "Curso TIA Portal S7-1200/1500 — Próximamente | BOJ",
     description:
       "Curso futuro en preparación sobre TIA Portal para PLC Siemens S7-1200/1500. La inscripción todavía no está habilitada.",
+  },
+  "/cursos/solidworks": {
+    title: "Manual de SolidWorks para principiantes · USD 29 | BOJ",
+    description:
+      "Manual teórico-práctico de SolidWorks para principiantes: 222 páginas, seis módulos, ejercicios, cuestionarios y 30 días de soporte. Material en español por USD 29.",
   },
   "/app": {
     title: "BOJ S7-PLC PRO | App de diagnóstico PLC Siemens S7-300/400",
@@ -193,9 +198,9 @@ export const routeMetadata = Object.freeze({
       "Technical records for gas turbine instrumentation: readings, calibrations, rounds, alarms, interventions and PDF documents. Request a B2B demonstration with sample data.",
   },
   "/en/courses": {
-    title: "Available and upcoming Siemens PLC training | BOJ",
+    title: "Siemens PLC and SolidWorks design courses | BOJ",
     description:
-      "Available Siemens S7-300/400 diagnostics training and an upcoming TIA Portal S7-1200/1500 course now in preparation.",
+      "Technical training in Siemens S7-300/400 diagnostics, TIA Portal in preparation and a finished beginner SolidWorks self-study manual.",
   },
   "/en/courses/s7-300-400": {
     title: "Siemens S7-300/400 industrial diagnostics course | BOJ",
@@ -206,6 +211,11 @@ export const routeMetadata = Object.freeze({
     title: "TIA Portal S7-1200/1500 course — Upcoming | BOJ",
     description:
       "Upcoming introductory TIA Portal course for Siemens S7-1200/1500 PLC systems. Enrollment is not open yet.",
+  },
+  "/en/courses/solidworks": {
+    title: "Beginner SolidWorks manual · USD 29 | BOJ",
+    description:
+      "Spanish-language beginner SolidWorks manual: 222 pages, six modules, exercises, questionnaires and 30 days of support. Price: USD 29.",
   },
   "/en/app": {
     title: "BOJ S7-PLC PRO | Siemens S7-300/400 diagnostics app",
@@ -238,9 +248,9 @@ export const routeMetadata = Object.freeze({
       "Registro técnico da instrumentação de turbinas a gás: leituras, calibrações, rondas, alarmes, intervenções e documentos PDF. Demonstração B2B com dados de exemplo.",
   },
   "/pt/cursos": {
-    title: "Formação disponível e futura de PLC Siemens | BOJ",
+    title: "Cursos de PLC Siemens e design em SolidWorks | BOJ",
     description:
-      "Formação disponível em diagnóstico Siemens S7-300/400 e futuro curso TIA Portal S7-1200/1500 em preparação.",
+      "Formação técnica em diagnóstico Siemens S7-300/400, TIA Portal em preparação e manual prático de SolidWorks para iniciantes.",
   },
   "/pt/cursos/s7-300-400": {
     title: "Curso de diagnóstico industrial Siemens S7-300/400 | BOJ",
@@ -251,6 +261,11 @@ export const routeMetadata = Object.freeze({
     title: "Curso TIA Portal S7-1200/1500 — Em preparação | BOJ",
     description:
       "Curso futuro de TIA Portal para PLC Siemens S7-1200/1500, atualmente em preparação. As inscrições ainda não estão abertas.",
+  },
+  "/pt/cursos/solidworks": {
+    title: "Manual de SolidWorks para iniciantes · USD 29 | BOJ",
+    description:
+      "Manual de SolidWorks para iniciantes em espanhol: 222 páginas, seis módulos, exercícios, questionários e 30 dias de suporte. Preço: USD 29.",
   },
   "/pt/app": {
     title: "BOJ S7-PLC PRO | App de diagnóstico Siemens S7-300/400",

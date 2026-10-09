@@ -6,9 +6,9 @@ import { getRouteMetadata, indexableRoutePaths, SITE_ORIGIN } from "../src/route
 
 const sitemapSource = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
 
-test("el sitemap enumera una sola vez las 40 rutas públicas indexables con sus URL canónicas", () => {
+test("el sitemap enumera una sola vez las 43 rutas públicas indexables con sus URL canónicas", () => {
   const entries = [...sitemapSource.matchAll(/<url>(.*?)<\/url>/g)].map((match) => match[1]);
-  assert.equal(entries.length, 40);
+  assert.equal(entries.length, 43);
   assert.equal(entries.length, indexableRoutePaths.length);
   assert.ok(sitemapSource.startsWith('<?xml version="1.0" encoding="UTF-8"?>'));
   assert.ok(sitemapSource.includes('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'));

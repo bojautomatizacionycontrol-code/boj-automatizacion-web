@@ -6,6 +6,7 @@ export const languageRoutePairs = [
   { es: "/cursos", en: "/en/courses", pt: "/pt/cursos" },
   { es: "/cursos/s7-300-400", en: "/en/courses/s7-300-400", pt: "/pt/cursos/s7-300-400" },
   { es: "/cursos/tia-portal", en: "/en/courses/tia-portal", pt: "/pt/cursos/tia-portal" },
+  { es: "/cursos/solidworks", en: "/en/courses/solidworks", pt: "/pt/cursos/solidworks" },
   { es: "/app", en: "/en/app", pt: "/pt/app" },
   { es: "/obras", en: "/en/projects", pt: "/pt/projetos" },
   { es: "/contacto", en: "/en/contact", pt: "/pt/contato" },
@@ -27,6 +28,7 @@ export const englishNavItems = [
     children: [
       { label: "S7-300/400 diagnostics", path: "/en/courses/s7-300-400" },
       { label: "TIA Portal S7-1200/1500 — Upcoming", path: "/en/courses/tia-portal" },
+      { label: "SolidWorks beginner — Material completed", path: "/en/courses/solidworks" },
     ],
   },
   { label: "S7-PLC App", path: "/en/app" },
@@ -50,6 +52,7 @@ export const portugueseNavItems = [
     children: [
       { label: "Diagnóstico S7-300/400", path: "/pt/cursos/s7-300-400" },
       { label: "TIA Portal S7-1200/1500 — Em preparação", path: "/pt/cursos/tia-portal" },
+      { label: "SolidWorks iniciante — Material finalizado", path: "/pt/cursos/solidworks" },
     ],
   },
   { label: "App S7-PLC", path: "/pt/app" },

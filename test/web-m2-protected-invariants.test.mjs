@@ -65,17 +65,17 @@ const protectedFileHashes = {
   "../COMMERCIAL_ALIGNMENT_V8_17_24.md": "788988DAECE96A1791BEE3663908DF0715C5A20E683646624DEAF75F3D217BEA",
   "../src/AccessibleDialog.jsx": "2248CAAEEC74167D3714EF73E1C1495564547FDD829D7CD52B6FD8BEB567BFD8",
   "../src/accessibility.js": "59DEFB57B8006063543B5282EE57FC7A0FF215050ADCA714389E4FE62F78B892",
-  // Updated only for the reviewed EN/PT FAQ clarification of course-inclusive offers.
-  "../src/i18n.js": "105442099EBB8F5B414E383F78280190803F596B907F66A021AF9E8070A90DD2",
+  // Includes the localized route pair and navigation entry for the SolidWorks course.
+  "../src/i18n.js": "1F5F35CF32F8A41CEA2F14DCF834001391D085EA23F8E2A2A74221FA948BC011",
   "../src/m1-accessibility.css": "90D00A42DD1EBFE3E734BA572F11890A33685FFB45B9140E4A39C36A5AB4C4FB",
   "../src/app/preserved-analytics-inventory.js": "1EC89D5816FB33278F5A9724CF9AB909687845763DBE05581753086ACE781149",
-  "../scripts/csp-policy.mjs": "696D7C2CB8A01960612C132D94D5B8266D3BB19C2108199BBB72C1042E5931D7",
-  // El sitemap conserva las 40 URL canónicas y omite lastmod no verificable por ruta.
-  "../public/sitemap.xml": "0BE5F788C9868DB950B05E689132B568D1F6E9375E847E30DF28320C9C02DFE6",
+  "../scripts/csp-policy.mjs": "CCA764C9B1F9F7813EC67CEE235D943B9E1991DA0E7E1B2A6C026BC2FEFD1D86",
+  // El sitemap conserva las 43 URL canónicas y omite lastmod no verificable por ruta.
+  "../public/sitemap.xml": "1F357FE1F2C767AFF5324AC32AE279E3D0D1C3A5F884DD45DB53064C087EF582",
   "../public/robots.txt": "928DAC7480C646B5F7E1285CF8DC5E8A529EF5AD728F724FFB110AA6E3AB8FAB",
   "../package-lock.json": "9B6B206FDF31963376A261C207D9F11D7319DC2A00DC82582583A7F91897FCC5",
   "./contact-decision-paths.test.mjs": "A3455113BA19591BC447E39F1E29F41D8A2979B5FB2A775091DFBA4BEFA0061D",
-  "./site-language-navigation.test.mjs": "16B4B39C67E48465C8D15FFE236C3E9B2FD51B6A64B0C3D19AC567A4FC30FFF8",
+  "./site-language-navigation.test.mjs": "19F5AF37A240BA290C6BD02DE41427B5ED092DCA6FE40AC1948CC579AE0FD36A",
   "./web-m1-accessibility-behavior.test.mjs": "DA4F6F57CF72D2973F89525947DC415822B8DE7A51341291927FA922082D36CB",
   "./web-m1-accessible-dialog.test.mjs": "C8BE063490D2941FE0FE5CB13601933BBA02EC91A02F1F434449777F647C19FE",
   "./web-m1-accessible-navigation.test.mjs": "22B28DD4A72E694E9F7450F336B0510FD7628486B8791DC15CB7B5002A6166C0",
@@ -201,8 +201,8 @@ test("rutas schema CSP y redirects permanecen dentro del contrato vigente", () =
     sha256(sourceBlock(routeSource, "const appRouteSet = new Set(", "function getNotFoundMetadata(")),
     "495A931220FB1CB70A9CE3FFF9C53F8FFFCBE45360F7C5FD7BEF443AAD624389"
   );
-  assert.equal(publicRoutePaths.length, 41);
-  assert.equal(indexableRoutePaths.length, 40);
+  assert.equal(publicRoutePaths.length, 44);
+  assert.equal(indexableRoutePaths.length, 43);
 
   const cspHeaders = (vercelConfig.headers || []).flatMap((rule) =>
     (rule.headers || [])

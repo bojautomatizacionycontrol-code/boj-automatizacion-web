@@ -9,7 +9,10 @@ const styleSource = await readRuntimeStylesSource();
 test("Cursos diferencia visuales ilustrativos y disponibilidad", () => {
   const illustrativeLabels = appSource.match(/className="visual-disclaimer">Imagen ilustrativa/g) ?? [];
 
-  assert.equal(illustrativeLabels.length, 2);
+  assert.equal(illustrativeLabels.length, 1);
+  assert.match(appSource, /course\.path === "\/cursos\/solidworks" \? "Portada final" : "Imagen ilustrativa"/);
+  assert.match(appSource, /status: "Material finalizado"/);
+  assert.match(appSource, /actionLabel: "Ver material y precio"/);
   assert.match(appSource, /className="course-status-badge"/);
   assert.match(appSource, /course\.upcoming \? "Próximamente" : "Disponible"/);
   assert.match(styleSource, /\.course-status-badge\s*\{/);
