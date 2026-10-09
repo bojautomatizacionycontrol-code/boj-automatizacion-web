@@ -279,7 +279,9 @@ test("registra v8.17.24, la evidencia externa y la aprobación provisional sin s
 
   assert.ok(reviewSource.includes(approvalMarker));
   assert.doesNotMatch(publicTextCorpus, new RegExp(approvalMarker));
-  assert.doesNotMatch(publicTextCorpus, /\b(?:30 días|30 days|30 dias)\b/i);
+  // The app offers must not fall back to the former 30-day duration. The
+  // SolidWorks product legitimately includes a separate 30-day support period.
+  assert.doesNotMatch(JSON.stringify(offer), /\b(?:30 días|30 days|30 dias)\b/i);
   assert.match(contentSource, /Pago único · 1 mes calendario · Sin renovación automática · 1 dispositivo/);
   assert.match(i18nSource, /One-time payment · 1 calendar month · No automatic renewal · 1 device/);
   assert.match(i18nSource, /Pagamento único · 1 mês-calendário · Sem renovação automática · 1 dispositivo/);

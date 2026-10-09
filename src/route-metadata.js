@@ -85,7 +85,7 @@ export const routeMetadata = Object.freeze({
   "/cursos": {
     title: "Cursos de PLC Siemens y diseño en SolidWorks | BOJ",
     description:
-      "Formación técnica en diagnóstico PLC Siemens S7-300/400, TIA Portal en preparación y diseño en SolidWorks para principiantes en desarrollo.",
+      "Formación técnica en diagnóstico PLC Siemens S7-300/400, TIA Portal en preparación y manual práctico de SolidWorks para principiantes.",
   },
   "/cursos/s7-300-400": {
     title: "Curso diagnóstico industrial PLC Siemens S7-300/400 | BOJ",
@@ -98,9 +98,9 @@ export const routeMetadata = Object.freeze({
       "Curso futuro en preparación sobre TIA Portal para PLC Siemens S7-1200/1500. La inscripción todavía no está habilitada.",
   },
   "/cursos/solidworks": {
-    title: "Diseño en SolidWorks: nivel principiante | BOJ",
+    title: "Manual de SolidWorks para principiantes · USD 29 | BOJ",
     description:
-      "Curso de diseño en SolidWorks para principiantes, en desarrollo por Sabrina Daniela Chaile. Programa de seis módulos: bocetos, modelado 3D, edición, ensamblajes y planos.",
+      "Manual teórico-práctico de SolidWorks para principiantes: 222 páginas, seis módulos, ejercicios, cuestionarios y 30 días de soporte. Material en español por USD 29.",
   },
   "/app": {
     title: "BOJ S7-PLC PRO | App de diagnóstico PLC Siemens S7-300/400",
@@ -200,7 +200,7 @@ export const routeMetadata = Object.freeze({
   "/en/courses": {
     title: "Siemens PLC and SolidWorks design courses | BOJ",
     description:
-      "Technical training in Siemens S7-300/400 diagnostics, TIA Portal in preparation and beginner SolidWorks design in development.",
+      "Technical training in Siemens S7-300/400 diagnostics, TIA Portal in preparation and a finished beginner SolidWorks self-study manual.",
   },
   "/en/courses/s7-300-400": {
     title: "Siemens S7-300/400 industrial diagnostics course | BOJ",
@@ -213,9 +213,9 @@ export const routeMetadata = Object.freeze({
       "Upcoming introductory TIA Portal course for Siemens S7-1200/1500 PLC systems. Enrollment is not open yet.",
   },
   "/en/courses/solidworks": {
-    title: "SolidWorks design: beginner level | BOJ",
+    title: "Beginner SolidWorks manual · USD 29 | BOJ",
     description:
-      "Beginner SolidWorks design course in development by Sabrina Daniela Chaile. Six modules cover sketches, basic 3D, editing, assemblies and production drawings.",
+      "Spanish-language beginner SolidWorks manual: 222 pages, six modules, exercises, questionnaires and 30 days of support. Price: USD 29.",
   },
   "/en/app": {
     title: "BOJ S7-PLC PRO | Siemens S7-300/400 diagnostics app",
@@ -250,7 +250,7 @@ export const routeMetadata = Object.freeze({
   "/pt/cursos": {
     title: "Cursos de PLC Siemens e design em SolidWorks | BOJ",
     description:
-      "Formação técnica em diagnóstico Siemens S7-300/400, TIA Portal em preparação e design em SolidWorks para iniciantes em desenvolvimento.",
+      "Formação técnica em diagnóstico Siemens S7-300/400, TIA Portal em preparação e manual prático de SolidWorks para iniciantes.",
   },
   "/pt/cursos/s7-300-400": {
     title: "Curso de diagnóstico industrial Siemens S7-300/400 | BOJ",
@@ -263,9 +263,9 @@ export const routeMetadata = Object.freeze({
       "Curso futuro de TIA Portal para PLC Siemens S7-1200/1500, atualmente em preparação. As inscrições ainda não estão abertas.",
   },
   "/pt/cursos/solidworks": {
-    title: "Design em SolidWorks: nível iniciante | BOJ",
+    title: "Manual de SolidWorks para iniciantes · USD 29 | BOJ",
     description:
-      "Curso de design em SolidWorks para iniciantes, em desenvolvimento por Sabrina Daniela Chaile. Seis módulos sobre esboços, 3D básico, edição, montagens e desenhos técnicos.",
+      "Manual de SolidWorks para iniciantes em espanhol: 222 páginas, seis módulos, exercícios, questionários e 30 dias de suporte. Preço: USD 29.",
   },
   "/pt/app": {
     title: "BOJ S7-PLC PRO | App de diagnóstico Siemens S7-300/400",

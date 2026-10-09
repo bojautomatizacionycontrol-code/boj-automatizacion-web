@@ -160,14 +160,21 @@ export async function verifyWebM3Build(outDir) {
     routeSizes.push({ routeEntry, ...size });
   }
 
-  const courseEntry = requireRecord(manifest, "src/routes/course-s7.jsx");
   const manualEntryKey = "src/components/ManualFlipbook.jsx";
   const manualEntry = requireRecord(manifest, manualEntryKey);
-  if (!manualEntry.isDynamicEntry || !courseEntry.dynamicImports?.includes(manualEntryKey)) {
-    throw new Error("WEB-M3-BUDGET: ManualFlipbook debe permanecer como chunk diferido del curso S7");
-  }
-  if (collectStaticFiles(manifest, "src/routes/course-s7.jsx").has(manualEntry.file)) {
-    throw new Error("WEB-M3-BUDGET: ManualFlipbook entró en la carga inicial del curso S7");
+  const manualConsumers = ["src/routes/course-s7.jsx", "src/routes/course-solidworks.jsx"];
+  for (const routeEntryKey of manualConsumers) {
+    const routeEntry = requireRecord(manifest, routeEntryKey);
+    const defersDirectly = routeEntry.dynamicImports?.includes(manualEntryKey);
+    const defersThroughSharedLoader = routeEntry.imports?.some((importedKey) =>
+      manifest[importedKey]?.dynamicImports?.includes(manualEntryKey)
+    );
+    if (!manualEntry.isDynamicEntry || (!defersDirectly && !defersThroughSharedLoader)) {
+      throw new Error(`WEB-M3-BUDGET: ManualFlipbook debe permanecer diferido en ${routeEntryKey}`);
+    }
+    if (collectStaticFiles(manifest, routeEntryKey).has(manualEntry.file)) {
+      throw new Error(`WEB-M3-BUDGET: ManualFlipbook entró en la carga inicial de ${routeEntryKey}`);
+    }
   }
 
   const cssFiles = entry.css || [];
