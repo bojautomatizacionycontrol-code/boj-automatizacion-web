@@ -28,7 +28,7 @@ export const englishNavItems = [
     children: [
       { label: "S7-300/400 diagnostics", path: "/en/courses/s7-300-400" },
       { label: "TIA Portal S7-1200/1500 — Upcoming", path: "/en/courses/tia-portal" },
-      { label: "SolidWorks beginner — Material completed", path: "/en/courses/solidworks" },
+      { label: "SolidWorks beginner", path: "/en/courses/solidworks" },
     ],
   },
   { label: "S7-PLC App", path: "/en/app" },

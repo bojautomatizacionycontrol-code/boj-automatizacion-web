@@ -4,6 +4,7 @@ import test from "node:test";
 
 const routeSource = await readFile(new URL("../src/routes/course-solidworks.jsx", import.meta.url), "utf8");
 const coursesSource = await readFile(new URL("../src/routes/courses-index.jsx", import.meta.url), "utf8");
+const contentSource = await readFile(new URL("../src/content.js", import.meta.url), "utf8");
 const i18nSource = await readFile(new URL("../src/i18n.js", import.meta.url), "utf8");
 
 test("SolidWorks presenta la oferta confirmada sin habilitar una compra sin enlace", () => {
@@ -27,7 +28,10 @@ test("el índice de cursos identifica la portada final y el material terminado",
   assert.doesNotMatch(coursesSource, /SolidWorks[^\n]{0,80}En desarrollo/);
 });
 
-test("el menú portugués usa el nombre corto del curso de SolidWorks", () => {
+test("los menús usan el nombre corto del curso de SolidWorks en los tres idiomas", () => {
+  assert.match(contentSource, /label: "SolidWorks principiante", path: "\/cursos\/solidworks"/);
+  assert.doesNotMatch(contentSource, /SolidWorks principiante — Material finalizado/);
+  assert.match(i18nSource, /label: "SolidWorks beginner", path: "\/en\/courses\/solidworks"/);
   assert.match(i18nSource, /label: "SolidWorks iniciante", path: "\/pt\/cursos\/solidworks"/);
-  assert.doesNotMatch(i18nSource, /SolidWorks iniciante — Material finalizado/);
+  assert.doesNotMatch(i18nSource, /SolidWorks beginner — Material completed|SolidWorks iniciante — Material finalizado/);
 });
