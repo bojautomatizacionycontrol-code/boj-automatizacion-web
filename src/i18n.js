@@ -52,7 +52,7 @@ export const portugueseNavItems = [
     children: [
       { label: "Diagnóstico S7-300/400", path: "/pt/cursos/s7-300-400" },
       { label: "TIA Portal S7-1200/1500 — Em preparação", path: "/pt/cursos/tia-portal" },
-      { label: "SolidWorks iniciante — Material finalizado", path: "/pt/cursos/solidworks" },
+      { label: "SolidWorks iniciante", path: "/pt/cursos/solidworks" },
     ],
   },
   { label: "App S7-PLC", path: "/pt/app" },
