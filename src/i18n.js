@@ -213,8 +213,8 @@ export const englishApp = {
     "Prueba gratuita": {
       title: "Free trial",
       price: "Free",
-      meta: "48 hours · Online · Limited features",
-      bullets: ["Free access for 48 hours", "Online use only", "Some features are limited", "A practical way to explore the workflow"],
+      meta: "14 days · Online · Limited features",
+      bullets: ["Free access for 14 days", "Online use only", "Some features are limited", "A practical way to explore the workflow"],
       button: "Start the free trial",
     },
     "Suscripción mensual": {
@@ -544,8 +544,8 @@ export const portugueseApp = {
     "Prueba gratuita": {
       title: "Teste gratuito",
       price: "Gratuito",
-      meta: "48 horas · Online · Recursos limitados",
-      bullets: ["Acesso gratuito por 48 horas", "Uso somente online", "Alguns recursos são limitados", "Uma forma prática de conhecer o fluxo de trabalho"],
+      meta: "14 dias · Online · Recursos limitados",
+      bullets: ["Acesso gratuito por 14 dias", "Uso somente online", "Alguns recursos são limitados", "Uma forma prática de conhecer o fluxo de trabalho"],
       button: "Iniciar teste gratuito",
     },
     "Suscripción mensual": {

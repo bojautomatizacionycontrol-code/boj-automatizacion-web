@@ -672,7 +672,7 @@ function S7SalesLanding({ course, eyebrow }) {
                   rel="noreferrer"
                   onClick={() => track("app_trial_click", { source: "offer" })}
                 >
-                  Probar APP durante 48 horas
+                  Probar APP durante 14 días
                 </a>
               </div>
               <div className="s7-sales-offer-decision-copy">
@@ -789,7 +789,7 @@ function S7SalesLanding({ course, eyebrow }) {
                   rel="noreferrer"
                   onClick={() => track("app_trial_click", { source: "final" })}
                 >
-                  Probar APP durante 48 horas
+                  Probar APP durante 14 días
                 </a>
               </div>
               <p className="s7-sales-final-note"><span>Acceso digital · Curso + APP PRO</span></p>
@@ -851,7 +851,7 @@ const localizedS7SalesCopy = {
     offerAccess: "Permanent course access + PRO tool for 1 month.",
     offerContent: "Everything you receive",
     appIncluded: "PRO App included",
-    trial: "Try the App for 48 hours",
+    trial: "Try the App for 14 days",
     offerNote: "Digital access. Always verify conclusions in the field before intervening.",
     plansLead: "Will you use the app regularly or with a team?",
     plansLink: "View PRO plans",
@@ -925,7 +925,7 @@ const localizedS7SalesCopy = {
     offerAccess: "Acesso permanente ao curso + ferramenta PRO por 1 mês.",
     offerContent: "Tudo o que você recebe",
     appIncluded: "App PRO incluído",
-    trial: "Testar o App por 48 horas",
+    trial: "Testar o App por 14 dias",
     offerNote: "Acesso digital. Sempre verifique as conclusões em campo antes de intervir.",
     plansLead: "Vai usar o app com frequência ou em equipe?",
     plansLink: "Ver planos PRO",

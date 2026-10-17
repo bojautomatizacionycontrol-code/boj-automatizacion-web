@@ -72,7 +72,7 @@ test("App muestra una demostración real y precios antes de la explicación exte
   const positioning = appPageSource.indexOf('className="app-pro-positioning-section"');
   assert.ok(proofStrip < quickAccess && quickAccess < positioning);
 
-  assert.match(quickAccessSource, /trialDuration: "48 horas"/);
+  assert.match(quickAccessSource, /trialDuration: "14 días"/);
   assert.match(quickAccessSource, /: appTrialPlan\.price/);
   assert.match(quickAccessSource, /subscriptionSuffix: "por mes"/);
   assert.match(quickAccessSource, /oneTimePrefix: "Desde"/);
@@ -94,7 +94,7 @@ test("el recorrido comercial muestra los planes antes de las objeciones y evita 
   assert.equal(appPageSource.match(/className="app-pro-plans-section"/g)?.length, 1);
   assert.doesNotMatch(appPageSource, /app-pro-trial-section|trial-48|source: "trial_section"/);
 
-  assert.match(appPageSource, /label: "Probar gratis durante 48 horas"[\s\S]*?href: appProductUrl/);
+  assert.match(appPageSource, /label: "Probar gratis durante 14 días"[\s\S]*?href: appProductUrl/);
   assert.match(appPageSource, /<AppQuickCommercialAccess \/>/);
   assert.match(appPageSource, /const pricingCards = \[appTrialPlan, \.\.\.appLicensePlans\];/);
 });

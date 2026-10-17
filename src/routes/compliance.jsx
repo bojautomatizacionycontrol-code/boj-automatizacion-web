@@ -715,7 +715,7 @@ const legalContent = {
     sections: [
       ["Uso del sitio", "La información técnica es orientativa y no reemplaza procedimientos de planta, evaluación de riesgos, normativa aplicable ni intervención de personal autorizado."],
       ["Servicios técnicos", `Alcance, agenda, entregables, costos y condiciones se confirman por propuesta. La propuesta identifica al prestador y a quien emitirá el comprobante. Los servicios que correspondan a la actividad personal podrán contratarse con ${commercialIdentity.owner}; Copiloto de Turbinas se ofrece por ${copilotCommercialIdentity.seller}. La atención urgente es coordinada y está sujeta a disponibilidad.`],
-      ["Prueba y alcance de BOJ S7-PLC PRO", "La prueba gratuita dura 48 horas, funciona en línea y tiene funciones limitadas. El alcance técnico de BOJ S7-PLC PRO se limita a sistemas Siemens S7-300/400 compatibles. La app organiza síntomas, evidencias, hipótesis priorizadas y verificaciones; no se conecta al PLC, no controla equipos y no reemplaza STEP 7, los procedimientos de seguridad ni el criterio de personal autorizado."],
+      ["Prueba y alcance de BOJ S7-PLC PRO", "La prueba gratuita dura 14 días, funciona en línea y tiene funciones limitadas. El alcance técnico de BOJ S7-PLC PRO se limita a sistemas Siemens S7-300/400 compatibles. La app organiza síntomas, evidencias, hipótesis priorizadas y verificaciones; no se conecta al PLC, no controla equipos y no reemplaza STEP 7, los procedimientos de seguridad ni el criterio de personal autorizado."],
       ["Compra, activación y Hotmart", `${commercialIdentity.seller} vende y factura los productos digitales BOJ S7-PLC PRO y el curso de diagnóstico S7-300/400. Hotmart procesa los pagos de las ofertas publicadas; BOJ proporciona la licencia, el contenido incluido y el soporte de acceso. La activación se vincula al correo informado durante la compra; si necesita ayuda, escriba a ${contact.email} desde ese mismo correo.`],
       [
         "Suscripción, cancelación y vigencia",
@@ -748,7 +748,7 @@ const legalContent = {
     showAppOffers: true,
     offerIntro: "Cada oferta define una duración, un límite de dispositivos, una modalidad de renovación y una ventana de funcionamiento sin conexión.",
     sections: [
-      ["Prueba gratuita", "La prueba inicial dura 48 horas, funciona sólo en línea y ofrece funciones limitadas. No constituye una licencia paga ni habilita funcionamiento sin conexión."],
+      ["Prueba gratuita", "La prueba inicial dura 14 días, funciona sólo en línea y ofrece funciones limitadas. No constituye una licencia paga ni habilita funcionamiento sin conexión."],
       ["Activación", "Las licencias pagas se vinculan al correo registrado en Hotmart. La duración y el límite de dispositivos dependen de la oferta adquirida."],
       [
         "Duración, renovación y cancelación",

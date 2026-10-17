@@ -210,7 +210,7 @@ const appTrustMetrics = [
 const appFaqItems = [
   {
     question: "¿Qué incluye la prueba gratuita?",
-    answer: "La prueba gratuita permite utilizar BOJ S7-PLC PRO durante 48 horas. Funciona sólo en línea y algunas funciones pueden estar limitadas.",
+    answer: "La prueba gratuita permite utilizar BOJ S7-PLC PRO durante 14 días. Funciona sólo en línea y algunas funciones pueden estar limitadas.",
   },
   {
     question: "¿La app se puede instalar?",
@@ -324,7 +324,7 @@ const appQuickAccessCopy = {
     eyebrow: "EMPIEZA SIN COMPLICACIONES",
     title: "Prueba el flujo y elige la licencia cuando estés listo.",
     trial: "Prueba gratuita",
-    trialDuration: "48 horas",
+    trialDuration: "14 días",
     subscription: "Suscripción",
     subscriptionSuffix: "por mes",
     oneTime: "Pago único",
@@ -337,7 +337,7 @@ const appQuickAccessCopy = {
     eyebrow: "START WITHOUT COMPLICATIONS",
     title: "Try the workflow and choose a license when you are ready.",
     trial: "Free trial",
-    trialDuration: "48 hours",
+    trialDuration: "14 days",
     subscription: "Subscription",
     subscriptionSuffix: "per month",
     oneTime: "One-time payment",
@@ -350,7 +350,7 @@ const appQuickAccessCopy = {
     eyebrow: "COMECE SEM COMPLICAÇÕES",
     title: "Teste o fluxo e escolha a licença quando estiver pronto.",
     trial: "Teste gratuito",
-    trialDuration: "48 horas",
+    trialDuration: "14 dias",
     subscription: "Assinatura",
     subscriptionSuffix: "por mês",
     oneTime: "Pagamento único",
@@ -418,7 +418,7 @@ const localizedPlanGuideCopy = {
     link: "View plan",
     idPrefix: "en-plan-",
     options: [
-      ["I want to explore first", "Free trial", "48 hours with no payment", "Prueba gratuita"],
+      ["I want to explore first", "Free trial", "14 days with no payment", "Prueba gratuita"],
       ["I use it every month", "Monthly subscription", "Automatic renewal until cancelled", "Suscripción mensual"],
       ["I only need one calendar month", "One-time monthly license", "One calendar month with no automatic renewal", "Mensual de pago único"],
       ["I work independently", "Professional", "6 months, 2 devices and course", "Profesional"],
@@ -431,7 +431,7 @@ const localizedPlanGuideCopy = {
     link: "Ver plano",
     idPrefix: "pt-plano-",
     options: [
-      ["Quero conhecer primeiro", "Teste gratuito", "48 horas sem pagamento", "Prueba gratuita"],
+      ["Quero conhecer primeiro", "Teste gratuito", "14 dias sem pagamento", "Prueba gratuita"],
       ["Uso todos os meses", "Assinatura mensal", "Renovação automática até o cancelamento", "Suscripción mensual"],
       ["Preciso somente de um mês-calendário", "Licença mensal avulsa", "Um mês-calendário sem renovação automática", "Mensual de pago único"],
       ["Trabalho de forma independente", "Profissional", "6 meses, 2 dispositivos e curso", "Profesional"],
@@ -609,7 +609,7 @@ function AppPage() {
         title="Diagnóstico guiado para PLC Siemens S7-300/400"
         subtitle="BOJ S7-PLC PRO parte de los LEDs, síntomas y condiciones que tú observas. Organiza hipótesis según la evidencia disponible y propone qué verificar en campo o con STEP 7 antes de intervenir."
         primary={{
-          label: "Probar gratis durante 48 horas",
+          label: "Probar gratis durante 14 días",
           href: appProductUrl,
           external: true,
           onClick: () => track("app_trial_click", { source: "app_hero" }),
@@ -776,7 +776,7 @@ function AppPage() {
             </aside>
             <div className="app-pro-real-gallery-actions">
               <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
-                Probar gratis durante 48 horas <ExternalLink size={17} aria-hidden="true" />
+                Probar gratis durante 14 días <ExternalLink size={17} aria-hidden="true" />
               </a>
               <a className="mock-btn mock-btn-outline" href="#planes-pro">
                 Ver planes PRO <ArrowRight size={17} aria-hidden="true" />
@@ -1097,7 +1097,7 @@ function EnglishAppPage() {
         eyebrow="FIRST-LINE FIELD DIAGNOSTICS"
         title="Before opening STEP 7, identify what you need to verify"
         subtitle="Enter the symptoms, LEDs and conditions observed at the control panel. BOJ S7-PLC PRO organizes possible causes and helps you decide whether to investigate the CPU, network, modules, power, signals or logic."
-        primary={{ label: "Start the 48-hour free trial", href: appProductUrl, external: true, onClick: () => track("app_trial_click", { source: "app_en_hero" }) }}
+        primary={{ label: "Start the 14-day free trial", href: appProductUrl, external: true, onClick: () => track("app_trial_click", { source: "app_en_hero" }) }}
         secondary={{ label: "View PRO plans", href: "#en-pro-plans" }}
         note="The app does not connect directly to the PLC and does not replace STEP 7 or qualified technical judgment."
         aside={<EnglishAppHeroDiagnosticPreview />}
@@ -1169,7 +1169,7 @@ function EnglishAppPage() {
             />
             <div className="app-pro-real-gallery-actions">
               <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
-                Start the 48-hour free trial <ExternalLink size={17} aria-hidden="true" />
+                Start the 14-day free trial <ExternalLink size={17} aria-hidden="true" />
               </a>
               <a className="mock-btn mock-btn-outline" href="#en-pro-plans">
                 View PRO plans <ArrowRight size={17} aria-hidden="true" />
@@ -1264,7 +1264,7 @@ function PortugueseAppPage() {
 
   return (
     <div className="app-pro-page portuguese-page" data-language="pt">
-      <Hero image={appProHeroLaptopVisual} eyebrow="DIAGNÓSTICO DE PRIMEIRA LINHA EM CAMPO" title="Antes de abrir o STEP 7, identifique o que precisa verificar" subtitle="Informe os sintomas, LEDs e condições observadas no painel. O BOJ S7-PLC PRO organiza as possíveis causas e ajuda a decidir se você deve investigar a CPU, a rede, os módulos, a alimentação, os sinais ou a lógica." primary={{ label: "Iniciar teste gratuito de 48 horas", href: appProductUrl, external: true, onClick: () => track("app_trial_click", { source: "app_pt_hero" }) }} secondary={{ label: "Ver planos PRO", href: "#pt-planos-pro" }} note="O app não se conecta diretamente ao PLC e não substitui o STEP 7 nem o critério técnico qualificado." aside={<PortugueseAppHeroDiagnosticPreview />} />
+      <Hero image={appProHeroLaptopVisual} eyebrow="DIAGNÓSTICO DE PRIMEIRA LINHA EM CAMPO" title="Antes de abrir o STEP 7, identifique o que precisa verificar" subtitle="Informe os sintomas, LEDs e condições observadas no painel. O BOJ S7-PLC PRO organiza as possíveis causas e ajuda a decidir se você deve investigar a CPU, a rede, os módulos, a alimentação, os sinais ou a lógica." primary={{ label: "Iniciar teste gratuito de 14 dias", href: appProductUrl, external: true, onClick: () => track("app_trial_click", { source: "app_pt_hero" }) }} secondary={{ label: "Ver planos PRO", href: "#pt-planos-pro" }} note="O app não se conecta diretamente ao PLC e não substitui o STEP 7 nem o critério técnico qualificado." aside={<PortugueseAppHeroDiagnosticPreview />} />
 
       <S7ProofStrip language="pt" />
 
@@ -1293,7 +1293,7 @@ function PortugueseAppPage() {
             />
             <div className="app-pro-real-gallery-actions">
               <a className="mock-btn mock-btn-primary" href={appProductUrl} target="_blank" rel="noreferrer">
-                Iniciar teste gratuito de 48 horas <ExternalLink size={17} aria-hidden="true" />
+                Iniciar teste gratuito de 14 dias <ExternalLink size={17} aria-hidden="true" />
               </a>
               <a className="mock-btn mock-btn-outline" href="#pt-planos-pro">
                 Ver planos PRO <ArrowRight size={17} aria-hidden="true" />

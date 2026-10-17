@@ -259,7 +259,7 @@ test("distingue el efecto del reembolso según el contenido real de cada oferta"
 test("actualiza los tres documentos comerciales y conserva el contrato técnico", () => {
   assert.equal(appSource.match(/showAppOffers:\s*true/g)?.length, 3);
   assert.match(appSource, /Ofertas BOJ S7-PLC PRO publicadas/);
-  assert.match(appSource, /La prueba gratuita dura 48 horas/);
+  assert.match(appSource, /La prueba gratuita dura 14 días/);
   assert.match(appSource, /La cancelación se realiza desde la cuenta de comprador en Hotmart/);
   assert.equal((appSource.match(/El alcance técnico de BOJ S7-PLC PRO se limita a sistemas Siemens S7-300\/400 compatibles\./g) || []).length, 2);
   assert.match(appSource, /no se conecta al PLC, no controla equipos/);

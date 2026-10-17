@@ -36,7 +36,7 @@ test("la oferta agrupa todo el contenido vigente sin duplicarlo ni eliminarlo", 
   assert.equal(offerSource.match(/offerIncludes\.slice/g)?.length, 2);
   assert.equal(offerSource.match(/<PurchaseCTA source="offer"/g)?.length, 1);
   assert.match(offerSource, /Comprar curso \+ APP PRO/);
-  assert.match(offerSource, /Probar APP durante 48 horas/);
+  assert.match(offerSource, /Probar APP durante 14 días/);
 });
 
 test("el panel alinea resumen, contenido, proceso y decisión con lectura móvil lineal", () => {
