@@ -177,15 +177,15 @@ test("preserva la prueba gratuita y deriva Institucional al contacto", () => {
   assert.deepEqual(offer.app.trialPlan, {
     title: "Prueba gratuita",
     price: "Gratis",
-    meta: "48 horas · En línea · Funciones limitadas",
+    meta: "14 días · En línea · Funciones limitadas",
     text: "Prueba inicial para conocer el flujo de diagnóstico de BOJ S7-PLC PRO antes de activar una licencia paga.",
     bullets: [
-      "Acceso gratuito durante 48 horas",
+      "Acceso gratuito durante 14 días",
       "Funciona sólo en línea",
       "Algunas funciones limitadas",
       "Ideal para conocer la herramienta",
     ],
-    button: "Probar gratis durante 48 horas",
+    button: "Probar gratis durante 14 días",
     url: "https://app.bojautomatizacion.com/",
   });
   assert.equal(offer.app.productUrl, "https://app.bojautomatizacion.com/");

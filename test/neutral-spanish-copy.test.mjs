@@ -89,7 +89,7 @@ test("las expresiones comerciales regionales se presentan de forma universal", (
 
   const expectedCopy = [
     "Prueba gratuita",
-    "Probar gratis durante 48 horas",
+    "Probar gratis durante 14 días",
     "correo electrónico",
     "teléfono móvil, la tableta o el navegador",
     "Precio personalizado",

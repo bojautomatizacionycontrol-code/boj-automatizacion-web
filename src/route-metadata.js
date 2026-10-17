@@ -105,7 +105,7 @@ export const routeMetadata = Object.freeze({
   "/app": {
     title: "BOJ S7-PLC PRO | App de diagnóstico PLC Siemens S7-300/400",
     description:
-      "BOJ S7-PLC PRO: herramienta web de asistencia técnica para diagnóstico orientativo en PLC Siemens S7-300/400, con prueba inicial de 48 horas y licencias PRO.",
+      "BOJ S7-PLC PRO: herramienta web de asistencia técnica para diagnóstico orientativo en PLC Siemens S7-300/400, con prueba inicial de 14 días y licencias PRO.",
   },
   "/recursos-tecnicos": {
     title: "Guías de diagnóstico y recursos Siemens | BOJ",

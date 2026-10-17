@@ -65,8 +65,8 @@ const protectedFileHashes = {
   "../COMMERCIAL_ALIGNMENT_V8_17_24.md": "788988DAECE96A1791BEE3663908DF0715C5A20E683646624DEAF75F3D217BEA",
   "../src/AccessibleDialog.jsx": "2248CAAEEC74167D3714EF73E1C1495564547FDD829D7CD52B6FD8BEB567BFD8",
   "../src/accessibility.js": "59DEFB57B8006063543B5282EE57FC7A0FF215050ADCA714389E4FE62F78B892",
-  // Includes the localized route pair and navigation entry for the SolidWorks course.
-  "../src/i18n.js": "0FFE479E77E6760A54B4FA978BE3ABE8493E74BD733BB6D1B500BA8A88941E84",
+  // Includes the localized route pair, SolidWorks navigation and approved 14-day trial copy.
+  "../src/i18n.js": "47418E9879BB3DD6D93F9DD2C6BCA998665249DEC83C49EB542026BF1B445F3F",
   "../src/m1-accessibility.css": "90D00A42DD1EBFE3E734BA572F11890A33685FFB45B9140E4A39C36A5AB4C4FB",
   "../src/app/preserved-analytics-inventory.js": "1EC89D5816FB33278F5A9724CF9AB909687845763DBE05581753086ACE781149",
   "../scripts/csp-policy.mjs": "CCA764C9B1F9F7813EC67CEE235D943B9E1991DA0E7E1B2A6C026BC2FEFD1D86",
@@ -108,7 +108,7 @@ test("contenido comercial fiscal legal y de App conserva los bloques aprobados",
     ["export const commercialIdentity = Object.freeze({", "export const navItems", "85639AAA691B12DB282DED24C6073E8198BEDD6DE07FA68B50338CE0D9965E5F"],
     ["export const tiaCourse = {", "export const appHero", "F083DAEF6B0F97123E20AA689F52F25351D5AE1FD10C14BD83C0DD01B43B46D9"],
     ["export const appHero = {", "export const technicalResources", "2E7158704F2630FDCD67924C8F6667563C4A044147182E71C2C854E2B979E8E3"],
-    ["export const offer = {", "", "FC17C927E466F8D2795988A191B5D7CE478CF0E0F3F07D1BF94844635E2B30AB"],
+    ["export const offer = {", "", "36EBDAFCFC99EBFA2540D89DCF7DFD6832BE9778FA65A1A68C9026729E5C6100"],
   ]) {
     assert.equal(sha256(sourceBlock(contentSource, startMarker, endMarker)), expectedHash, startMarker);
   }
@@ -165,7 +165,7 @@ test("Analytics contacto encabezado legal y wrappers TIA conservan sus bloques",
     [complianceSource, "function EnglishContactForm(", "function EnglishContactPage(", "752F9FD389C967F59AAFB2881856345247BE9F0D7E5467B78EA5DE052A7D09C5"],
     [complianceSource, "function PortugueseContactForm(", "function PortugueseContactPage(", "CFA0269E18B56A065C901F7B531916725E827C97344F8B680BBEFDCEA1B87D5F"],
     [complianceSource, "function ContactForm(", "const legalContent", "4AA70FE49BD12F6B09B36D27C93924A8F85142E123EC7019E4D2CCD51A946637"],
-    [complianceSource, "const legalContent = {", "function ContactLine(", "9FF94CFDB2D8BE74EA99A95154CAE9EEEE03F3046F2B85CCCFBF45C11F20490B"],
+    [complianceSource, "const legalContent = {", "function ContactLine(", "B77A2BAF3BA8D8F6EA0DF8AF5C79F5A459894252B2764800795F21DC65A987D7"],
   ]) {
     assert.equal(sha256(sourceBlock(source, startMarker, endMarker)), expectedHash, startMarker);
   }
