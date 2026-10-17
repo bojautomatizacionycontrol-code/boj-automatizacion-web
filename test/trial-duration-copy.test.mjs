@@ -21,8 +21,8 @@ test("la prueba de 14 días es coherente en planes, rutas y metadatos", () => {
   const compliancePage = readSource("../src/routes/compliance.jsx");
   assert.doesNotMatch(appPage, /\b48(?: horas| hours|-hour)\b/);
   assert.doesNotMatch(coursePage, /\b48(?: horas| hours|-hour)\b/);
-  assert.match(compliancePage, /La prueba gratuita dura 14 días/);
-  assert.match(compliancePage, /La prueba inicial dura 14 días/);
+  assert.match(compliancePage, /Las nuevas pruebas gratuitas duran 14 días desde su activación/);
+  assert.match(compliancePage, /Las nuevas pruebas duran 14 días desde su activación/);
 });
 
 test("el plazo de respuesta de consultas sigue siendo independiente de la prueba", () => {
