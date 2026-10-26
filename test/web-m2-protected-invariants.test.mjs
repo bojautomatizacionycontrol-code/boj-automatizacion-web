@@ -75,12 +75,12 @@ const protectedFileHashes = {
   "../public/robots.txt": "928DAC7480C646B5F7E1285CF8DC5E8A529EF5AD728F724FFB110AA6E3AB8FAB",
   "../package-lock.json": "9B6B206FDF31963376A261C207D9F11D7319DC2A00DC82582583A7F91897FCC5",
   "./contact-decision-paths.test.mjs": "A3455113BA19591BC447E39F1E29F41D8A2979B5FB2A775091DFBA4BEFA0061D",
-  "./site-language-navigation.test.mjs": "19F5AF37A240BA290C6BD02DE41427B5ED092DCA6FE40AC1948CC579AE0FD36A",
+  "./site-language-navigation.test.mjs": "01DA1A70910207B54F50E993665DC9BEF381F1D29F020F3B8ABB2B50049F3CE7",
   "./web-m1-accessibility-behavior.test.mjs": "DA4F6F57CF72D2973F89525947DC415822B8DE7A51341291927FA922082D36CB",
   "./web-m1-accessible-dialog.test.mjs": "C8BE063490D2941FE0FE5CB13601933BBA02EC91A02F1F434449777F647C19FE",
   "./web-m1-accessible-navigation.test.mjs": "22B28DD4A72E694E9F7450F336B0510FD7628486B8791DC15CB7B5002A6166C0",
   "./web-m1-contact-accessibility.test.mjs": "B275449C88F3E67E5F1B21EA612F56A3B130D877A6478B958690B2000BB954BF",
-  "./web-m1-protected-invariants.test.mjs": "7AAC1F124F183EC71DB4FA18004906AEF2B2E94FCA1C7275D84CFDE056B01126",
+  "./web-m1-protected-invariants.test.mjs": "97D08D377792923AC16023A77321B72C441D68D28D89C082A001B571F99B25D6",
   "./web-m1-tia-future-state.test.mjs": "75CD071DBA0F5182FF97E89D0C4A9B41254889F7732B94C031B6358FD16A1E31",
   "./web-m1-visual-accessibility.test.mjs": "1772545D1BC68F4E9D0015B40D47D8657AFBF22079FCFFB1E18F8896FAD68CA3",
 };
@@ -108,7 +108,7 @@ test("contenido comercial fiscal legal y de App conserva los bloques aprobados",
     ["export const commercialIdentity = Object.freeze({", "export const navItems", "85639AAA691B12DB282DED24C6073E8198BEDD6DE07FA68B50338CE0D9965E5F"],
     ["export const tiaCourse = {", "export const appHero", "F083DAEF6B0F97123E20AA689F52F25351D5AE1FD10C14BD83C0DD01B43B46D9"],
     ["export const appHero = {", "export const technicalResources", "2E7158704F2630FDCD67924C8F6667563C4A044147182E71C2C854E2B979E8E3"],
-    ["export const offer = {", "", "36EBDAFCFC99EBFA2540D89DCF7DFD6832BE9778FA65A1A68C9026729E5C6100"],
+    ["export const offer = {", "", "9375963E73A68A78BEE91252A07D11865CDB452BAE1D65113BDAAC5EB3B10B8E"],
   ]) {
     assert.equal(sha256(sourceBlock(contentSource, startMarker, endMarker)), expectedHash, startMarker);
   }
@@ -121,13 +121,13 @@ test("contenido comercial fiscal legal y de App conserva los bloques aprobados",
     commercialIdentity.invoicing,
     "Comprobante emitido por Walter Adrián Boj según la operación y la normativa aplicable"
   );
-  assert.equal(offer.course.price, "80 USD");
+  assert.equal(offer.course.price, "65 USD");
   assert.equal(offer.course.checkout.guaranteeDays, 7);
   assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
   assert.deepEqual(offer.app.proPlans.map(({ price, url }) => [price, url]), [
     ["44 USD", "https://pay.hotmart.com/C107081619V?off=yzyw7mys"],
     ["53 USD", "https://pay.hotmart.com/B107066308U?off=l23qsbj9"],
-    ["80 USD", "https://pay.hotmart.com/P106348963R?off=srrm5ewf"],
+    ["65 USD", "https://pay.hotmart.com/P106348963R?off=srrm5ewf"],
     ["224 USD", "https://pay.hotmart.com/B107069067M?off=hea8bgc1"],
     ["494 USD", "https://pay.hotmart.com/Q107075095G?off=kbs1xzpq"],
   ]);

@@ -170,7 +170,7 @@ test("la landing inglesa del curso conserva precio, oferta y tres CTA al checkou
   const copyEnd = appSource.indexOf("function LocalizedS7MethodStrip", copyStart);
   const copySource = appSource.slice(copyStart, copyEnd);
 
-  assert.equal(offer.course.price, "80 USD");
+  assert.equal(offer.course.price, "65 USD");
   assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
   assert.match(pageSource, /LocalizedS7SalesLanding language="en" courseCopy=\{englishS7Course\}/);
   assert.match(landingSource, /const checkoutUrl = offer\.course\.checkout\.checkoutUrl/);
@@ -224,7 +224,7 @@ test("la landing portuguesa conserva la oferta y los tres CTA del curso, con avi
   const copyEnd = appSource.indexOf("function LocalizedS7MethodStrip", copyStart);
   const copySource = appSource.slice(copyStart, copyEnd);
 
-  assert.equal(offer.course.price, "80 USD");
+  assert.equal(offer.course.price, "65 USD");
   assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
   assert.match(pageSource, /LocalizedS7SalesLanding language="pt" courseCopy=\{portugueseS7Course\}/);
   assert.match(landingSource, /const checkoutUrl = offer\.course\.checkout\.checkoutUrl/);
