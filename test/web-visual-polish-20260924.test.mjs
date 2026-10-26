@@ -10,10 +10,18 @@ test("el recorrido del curso usa solo capturas vigentes y ofrece controles acces
     source("../src/routes/course-s7.jsx"),
   ]);
   for (const capture of [
+    "app-panel-leds-v8-17-24.jpg",
     "app-seleccion-sintoma-v8-17-24.jpg",
-    "app-verificacion-guiada-v8-17-24.jpg",
     "app-registro-intervencion-v8-17-24.jpg",
+    "app-pregunta-guiada-v8-17-24.jpg",
+    "app-verificacion-guiada-v8-17-24.jpg",
+    "app-hipotesis-evidencia-v8-17-24.jpg",
+    "app-resultado-priorizado-v8-17-24.jpg",
+    "app-informe-tecnico-v8-17-24.jpg",
   ]) assert.ok(tour.includes(capture), `Falta ${capture}`);
+  assert.match(tour, /aria-pressed=\{index === active\}/);
+  assert.match(tour, /className="app-tour-thumbnails"/);
+  assert.match(tour, /Pantalla[^\n]+de[^\n]+8|frames\.length/);
   assert.doesNotMatch(tour, /app-resultado-diagnostico\.jpg/);
   assert.match(tour, /prefers-reduced-motion: reduce/);
   assert.match(tour, /IntersectionObserver/);

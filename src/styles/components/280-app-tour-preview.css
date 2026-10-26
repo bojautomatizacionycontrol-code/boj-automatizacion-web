@@ -117,6 +117,66 @@
   background: #0b9ccf;
 }
 
+.app-tour-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  padding: 0 14px 14px;
+}
+
+.app-tour-thumbnails button {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 7px;
+  background: #071a27;
+  box-shadow: 0 0 0 1px #c7dce7;
+  cursor: pointer;
+  opacity: 0.74;
+  transition: border-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease, transform 160ms ease;
+}
+
+.app-tour-thumbnails button:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.app-tour-thumbnails button.is-active {
+  border-color: #0ba5dc;
+  box-shadow: 0 0 0 2px rgba(11, 165, 220, 0.18);
+  opacity: 1;
+}
+
+.app-tour-thumbnails button:focus-visible {
+  outline: 2px solid #087eae;
+  outline-offset: 2px;
+  opacity: 1;
+}
+
+.app-tour-thumbnails img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.app-tour-thumbnails span {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  min-width: 22px;
+  border-radius: 999px;
+  padding: 3px 5px;
+  background: rgba(3, 19, 29, 0.84);
+  color: #fff;
+  font-size: 0.58rem;
+  font-weight: 750;
+  line-height: 1;
+  text-align: center;
+}
+
 @media (max-width: 680px) {
   .app-tour-bottom {
     align-items: flex-start;
@@ -134,6 +194,23 @@
   .app-tour-controls button {
     width: 34px;
     height: 34px;
+  }
+
+  .app-tour-thumbnails {
+    display: grid;
+    grid-auto-columns: 104px;
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    overflow-x: auto;
+    padding-bottom: 15px;
+    scroll-padding-inline: 14px;
+    scroll-snap-type: x proximity;
+    scrollbar-color: #9fc5d6 transparent;
+    scrollbar-width: thin;
+  }
+
+  .app-tour-thumbnails button {
+    scroll-snap-align: start;
   }
 }
 
