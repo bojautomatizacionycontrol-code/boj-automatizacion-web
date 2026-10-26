@@ -7,7 +7,7 @@ const coursesSource = await readFile(new URL("../src/routes/courses-index.jsx", 
 const contentSource = await readFile(new URL("../src/content.js", import.meta.url), "utf8");
 const i18nSource = await readFile(new URL("../src/i18n.js", import.meta.url), "utf8");
 
-test("SolidWorks presenta la oferta confirmada sin habilitar una compra sin enlace", () => {
+test("SolidWorks presenta la oferta confirmada y habilita el checkout oficial de Hotmart", () => {
   assert.match(routeSource, /Manual teórico-práctico \+ ejercicios y cuestionarios/);
   assert.match(routeSource, /price: "USD 29"/);
   assert.match(routeSource, /222 páginas/);
@@ -17,7 +17,12 @@ test("SolidWorks presenta la oferta confirmada sin habilitar una compra sin enla
   assert.match(routeSource, /<DeferredManualFlipbook images=\{manualPreviewImages\}/);
   assert.match(routeSource, /No incluye certificado/);
   assert.match(routeSource, /No incluye el software SolidWorks ni su licencia/);
-  assert.match(routeSource, /className="mock-btn mock-btn-primary solidworks-purchase-pending" disabled/);
+  assert.match(routeSource, /const solidworksCheckoutUrl = "https:\/\/pay\.hotmart\.com\/P108131947K";/);
+  assert.equal(routeSource.match(/href=\{solidworksCheckoutUrl\} target="_blank" rel="noopener noreferrer"/g)?.length, 2);
+  assert.match(routeSource, /purchaseAction: "Comprar ahora en Hotmart"/);
+  assert.match(routeSource, /purchaseAction: "Buy now on Hotmart"/);
+  assert.match(routeSource, /purchaseAction: "Comprar agora na Hotmart"/);
+  assert.doesNotMatch(routeSource, /solidworks-purchase-pending|disabled|en preparación|being prepared|em preparação|enlace próximamente|link coming soon|link em breve/);
   assert.doesNotMatch(routeSource, /Programa en desarrollo|Inscripción aún no habilitada|Portada preliminar/);
 });
 

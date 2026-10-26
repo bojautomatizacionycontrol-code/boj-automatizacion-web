@@ -514,16 +514,8 @@
   font-size: 0.88rem;
 }
 
-.solidworks-price-card .solidworks-purchase-pending {
+.solidworks-price-card .solidworks-purchase-link {
   width: 100%;
-}
-
-.solidworks-purchase-pending:disabled {
-  border-color: rgba(52, 201, 238, 0.42);
-  background: linear-gradient(180deg, #188eb7, #0e7398);
-  color: #effbff;
-  cursor: not-allowed;
-  opacity: 0.78;
 }
 
 .solidworks-purchase-note {
