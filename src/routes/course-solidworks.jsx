@@ -28,6 +28,7 @@ import manualObjectives from "../assets/solidworks-manual-preview/objectives.web
 import manualTechnicalDrawings from "../assets/solidworks-manual-preview/technical-drawings.webp";
 
 const manualPreviewImages = [manualObjectives, manualGuidedPractice, manualAssemblies, manualTechnicalDrawings];
+const solidworksCheckoutUrl = "https://pay.hotmart.com/P108131947K";
 
 const modulesByLanguage = {
   es: [
@@ -95,8 +96,8 @@ const copyByLanguage = {
     coverAlt: "Portada final del manual Diseño en SolidWorks: Nivel Principiante, de Sabrina Daniela Chaile",
     coverCaption: "Portada final del manual teórico-práctico.",
     statusEyebrow: "Estado del producto",
-    statusTitle: "Material finalizado. Checkout de Hotmart en preparación.",
-    statusText: "El manual, los ejercicios y los cuestionarios ya están terminados. La compra se habilitará aquí cuando esté conectado el enlace definitivo de Hotmart.",
+    statusTitle: "Material finalizado y disponible en Hotmart.",
+    statusText: "El manual, los ejercicios y los cuestionarios están listos. La compra y la entrega digital se gestionan mediante Hotmart.",
     previewEyebrow: "Capturas reales del contenido",
     previewTitle: "Mira cómo está trabajado antes de decidir.",
     previewText: "No es una maqueta ni una imagen ilustrativa: estas páginas pertenecen al material terminado y muestran la progresión desde los fundamentos hasta la práctica, los ensamblajes y los planos.",
@@ -120,8 +121,8 @@ const copyByLanguage = {
     priceLabel: "Precio del paquete",
     price: "USD 29",
     priceMeta: "Pago único · Entrega digital",
-    purchasePending: "Compra en Hotmart · enlace próximamente",
-    purchaseNote: "El botón de compra se activará cuando esté disponible el enlace definitivo.",
+    purchaseAction: "Comprar ahora en Hotmart",
+    purchaseNote: "Pago único. Hotmart muestra las condiciones aplicables antes de confirmar la compra.",
     supportLabel: "Soporte incluido:",
     refundNote: "Política de reembolso gestionada por Hotmart; las condiciones aplicables se mostrarán en el checkout.",
     notIncludedTitle: "Información importante antes de comprar",
@@ -143,8 +144,8 @@ const copyByLanguage = {
     outcomes: ["Crear y administrar archivos de SolidWorks.", "Construir bocetos definidos y piezas con operaciones básicas.", "Editar modelos y analizar errores iniciales.", "Armar ensamblajes sencillos.", "Preparar planos básicos y exportar archivos."],
     materialNote: "Los ejercicios prácticos y cuestionarios se entregan en la carpeta separada Ejercicios_NivelPrincipiante, tal como se indica dentro del manual.",
     closeEyebrow: "Material finalizado",
-    closeTitle: "Todo preparado para empezar; falta habilitar la compra.",
-    closeText: "Puedes revisar ahora el contenido y escribirnos si tienes una consulta. El enlace de Hotmart se incorporará en esta misma página.",
+    closeTitle: "Todo preparado para empezar.",
+    closeText: "Compra el material a través de Hotmart o escríbenos si necesitas aclarar algo antes de decidir.",
     allCourses: "Ver todos los cursos",
     allCoursesPath: "/cursos",
     independentNote: "Material independiente. SOLIDWORKS es una marca de sus respectivos titulares; este manual no está afiliado ni avalado por Dassault Systèmes o SOLIDWORKS Corporation.",
@@ -163,8 +164,8 @@ const copyByLanguage = {
     coverAlt: "Final cover of the Spanish manual SolidWorks Design: Beginner Level, by Sabrina Daniela Chaile",
     coverCaption: "Final cover of the theory-and-practice manual.",
     statusEyebrow: "Product status",
-    statusTitle: "Material completed. Hotmart checkout is being prepared.",
-    statusText: "The manual, exercises and questionnaires are finished. Purchasing will be enabled here when the final Hotmart link is connected.",
+    statusTitle: "Completed material, available on Hotmart.",
+    statusText: "The manual, exercises and questionnaires are ready. Purchase and digital delivery are handled through Hotmart.",
     previewEyebrow: "Real content previews",
     previewTitle: "See how the material is built before deciding.",
     previewText: "These are not mockups or illustrative images. They are real pages from the finished Spanish-language material, showing the progression from fundamentals to practice, assemblies and drawings.",
@@ -188,8 +189,8 @@ const copyByLanguage = {
     priceLabel: "Package price",
     price: "USD 29",
     priceMeta: "One-time payment · Digital delivery",
-    purchasePending: "Buy on Hotmart · link coming soon",
-    purchaseNote: "The purchase button will be enabled when the final checkout link is available.",
+    purchaseAction: "Buy now on Hotmart",
+    purchaseNote: "One-time payment. Hotmart displays the applicable terms before you confirm the purchase.",
     supportLabel: "Support included:",
     refundNote: "Refund policy managed through Hotmart; applicable terms will be shown at checkout.",
     notIncludedTitle: "Important information before buying",
@@ -211,8 +212,8 @@ const copyByLanguage = {
     outcomes: ["Create and manage SolidWorks files.", "Build defined sketches and parts with basic features.", "Edit models and investigate introductory errors.", "Create simple assemblies.", "Prepare basic drawings and export files."],
     materialNote: "Practical exercises and questionnaires are delivered in the separate Ejercicios_NivelPrincipiante folder, as indicated in the manual.",
     closeEyebrow: "Completed material",
-    closeTitle: "Everything is ready to begin; checkout activation is the remaining step.",
-    closeText: "You can review the content now and contact us with questions. The Hotmart link will be added to this page.",
+    closeTitle: "Everything is ready to begin.",
+    closeText: "Purchase the material through Hotmart or contact us if you need clarification before deciding.",
     allCourses: "View all courses",
     allCoursesPath: "/en/courses",
     independentNote: "Independent material. SOLIDWORKS is a trademark of its respective owners; this manual is not affiliated with or endorsed by Dassault Systèmes or SOLIDWORKS Corporation.",
@@ -231,8 +232,8 @@ const copyByLanguage = {
     coverAlt: "Capa final do manual em espanhol Design em SolidWorks: Nível Iniciante, de Sabrina Daniela Chaile",
     coverCaption: "Capa final do manual teórico-prático.",
     statusEyebrow: "Status do produto",
-    statusTitle: "Material finalizado. Checkout da Hotmart em preparação.",
-    statusText: "O manual, os exercícios e os questionários já estão concluídos. A compra será habilitada aqui quando o link definitivo da Hotmart estiver conectado.",
+    statusTitle: "Material finalizado e disponível na Hotmart.",
+    statusText: "O manual, os exercícios e os questionários estão prontos. A compra e a entrega digital são gerenciadas pela Hotmart.",
     previewEyebrow: "Prévia real do conteúdo",
     previewTitle: "Veja como o material foi elaborado antes de decidir.",
     previewText: "Não são mockups nem imagens ilustrativas. São páginas reais do material finalizado em espanhol, mostrando a progressão dos fundamentos à prática, às montagens e aos desenhos.",
@@ -256,8 +257,8 @@ const copyByLanguage = {
     priceLabel: "Preço do pacote",
     price: "USD 29",
     priceMeta: "Pagamento único · Entrega digital",
-    purchasePending: "Comprar na Hotmart · link em breve",
-    purchaseNote: "O botão de compra será habilitado quando o link definitivo estiver disponível.",
+    purchaseAction: "Comprar agora na Hotmart",
+    purchaseNote: "Pagamento único. A Hotmart exibe as condições aplicáveis antes da confirmação da compra.",
     supportLabel: "Suporte incluído:",
     refundNote: "Política de reembolso gerenciada pela Hotmart; as condições aplicáveis serão exibidas no checkout.",
     notIncludedTitle: "Informações importantes antes da compra",
@@ -279,8 +280,8 @@ const copyByLanguage = {
     outcomes: ["Criar e administrar arquivos do SolidWorks.", "Construir esboços definidos e peças com recursos básicos.", "Editar modelos e analisar erros iniciais.", "Criar montagens simples.", "Preparar desenhos básicos e exportar arquivos."],
     materialNote: "Os exercícios práticos e questionários são entregues na pasta separada Ejercicios_NivelPrincipiante, conforme indicado no manual.",
     closeEyebrow: "Material finalizado",
-    closeTitle: "Tudo preparado para começar; falta habilitar a compra.",
-    closeText: "Você já pode revisar o conteúdo e entrar em contato se tiver dúvidas. O link da Hotmart será adicionado nesta página.",
+    closeTitle: "Tudo pronto para começar.",
+    closeText: "Compre o material pela Hotmart ou entre em contato se precisar esclarecer alguma dúvida antes de decidir.",
     allCourses: "Ver todos os cursos",
     allCoursesPath: "/pt/cursos",
     independentNote: "Material independente. SOLIDWORKS é uma marca de seus respectivos titulares; este manual não é afiliado nem endossado pela Dassault Systèmes ou pela SOLIDWORKS Corporation.",
@@ -366,7 +367,7 @@ function SolidWorksCoursePage({ route = "/cursos/solidworks" }) {
               <span className="solidworks-price-label">{copy.priceLabel}</span>
               <strong className="solidworks-price">{copy.price}</strong>
               <span className="solidworks-price-meta">{copy.priceMeta}</span>
-              <button type="button" className="mock-btn mock-btn-primary solidworks-purchase-pending" disabled>{copy.purchasePending}<ShoppingCart size={18} aria-hidden="true" /></button>
+              <a className="mock-btn mock-btn-primary solidworks-purchase-link" href={solidworksCheckoutUrl} target="_blank" rel="noopener noreferrer">{copy.purchaseAction}<ShoppingCart size={18} aria-hidden="true" /></a>
               <p className="solidworks-purchase-note">{copy.purchaseNote}</p>
               <a className="solidworks-support-link" href={`mailto:${contact.email}`}><Mail size={17} aria-hidden="true" /><span><strong>{copy.supportLabel}</strong>{contact.email}</span></a>
               <p className="solidworks-refund-note"><ShieldCheck size={17} aria-hidden="true" />{copy.refundNote}</p>
@@ -417,7 +418,7 @@ function SolidWorksCoursePage({ route = "/cursos/solidworks" }) {
           <h2>{copy.closeTitle}</h2>
           <p>{copy.closeText}</p>
           <div className="solidworks-hero-actions">
-            <button type="button" className="mock-btn mock-btn-primary solidworks-purchase-pending" disabled>{copy.purchasePending}<ShoppingCart size={18} aria-hidden="true" /></button>
+            <a className="mock-btn mock-btn-primary solidworks-purchase-link" href={solidworksCheckoutUrl} target="_blank" rel="noopener noreferrer">{copy.purchaseAction}<ShoppingCart size={18} aria-hidden="true" /></a>
             <a className="mock-btn mock-btn-outline" href={inquiryHref}>{copy.inquiryAction}<Mail size={18} aria-hidden="true" /></a>
             <a className="mock-btn mock-btn-outline" href={copy.allCoursesPath}>{copy.allCourses}<ArrowRight size={18} aria-hidden="true" /></a>
           </div>
