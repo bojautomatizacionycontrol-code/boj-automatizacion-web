@@ -1312,10 +1312,10 @@ export const offer = {
   // Curso Diagnóstico S7-300/400 + App PRO
   course: {
     // Precio vigente. Alimenta hero, total, CTA final y tracking.
-    price: "80 USD",
-    priceValue: 80,
+    price: "65 USD",
+    priceValue: 65,
     priceCurrency: "USD",
-    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 80 USD.",
+    purchaseMessage: "Quiero comprar el curso Diagnóstico S7-300/400 + APP PRO por 65 USD.",
     // Slot del video demo de la landing: con "" la sección no se renderiza.
     demoVideoUrl: "",
     // Estado del checkout definitivo (Hotmart). El corte del bloque 3B consiste
@@ -1411,7 +1411,7 @@ export const offer = {
       },
       {
         title: "Curso + licencia",
-        price: "80 USD",
+        price: "65 USD",
         meta: "Pago único · Curso permanente · App PRO por 1 mes · 1 dispositivo",
         text: "Curso Diagnóstico S7-300/400 con acceso permanente y licencia BOJ S7-PLC PRO por 1 mes.",
         bullets: [

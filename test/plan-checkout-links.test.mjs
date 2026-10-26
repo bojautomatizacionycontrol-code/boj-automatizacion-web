@@ -26,7 +26,7 @@ const expectedPlanMatrix = [
   },
   {
     title: "Curso + licencia",
-    price: "80 USD",
+    price: "65 USD",
     meta: "Pago único · Curso permanente · App PRO por 1 mes · 1 dispositivo",
     url: "https://pay.hotmart.com/P106348963R?off=srrm5ewf",
   },
@@ -60,11 +60,13 @@ test("preserva las cinco ofertas pagas con precio, modalidad y checkout exactos"
   assert.equal(new Set(actualPlanMatrix.map(({ url }) => url)).size, 5);
 });
 
-test("aplica el diez por ciento y redondea hacia abajo sin centavos", () => {
-  const before = [49, 59, 89, 249, 549];
+test("conserva el ajuste de licencias y fija el curso completo en 65 USD", () => {
+  const licensePlans = offer.app.proPlans.filter(({ title }) => title !== "Curso + licencia");
+  const before = [49, 59, 249, 549];
   const expected = before.map((price) => Math.floor(price * 0.9));
-  assert.deepEqual(offer.app.proPlans.map(({ price }) => price), expected.map((price) => `${price} USD`));
-  assert.equal(offer.course.priceValue, Math.floor(89 * 0.9));
+  assert.deepEqual(licensePlans.map(({ price }) => price), expected.map((price) => `${price} USD`));
+  assert.equal(offer.app.proPlans.find(({ title }) => title === "Curso + licencia").price, "65 USD");
+  assert.equal(offer.course.priceValue, 65);
 });
 
 test("mantiene las prestaciones indicadas para cada opción", () => {
@@ -155,9 +157,9 @@ test("el listado renderiza exclusivamente la URL propia de cada plan", () => {
   assert.doesNotMatch(planListSource, /href=\{appProductUrl\}/);
 });
 
-test("actualiza el curso a 80 USD, pago único y su oferta exacta", () => {
-  assert.equal(offer.course.price, "80 USD");
-  assert.equal(offer.course.priceValue, 80);
+test("actualiza el curso a 65 USD, pago único y su oferta exacta", () => {
+  assert.equal(offer.course.price, "65 USD");
+  assert.equal(offer.course.priceValue, 65);
   assert.equal(offer.course.checkout.checkoutUrl, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
   assert.equal(offer.course.checkout.appMonths, 1);
   assert.equal(offer.course.checkout.devices, 1);
@@ -166,7 +168,7 @@ test("actualiza el curso a 80 USD, pago único y su oferta exacta", () => {
   assert.doesNotMatch(appSource, /Precio de lanzamiento/);
   const courseSchema = getRouteMetadata("/cursos/s7-300-400").jsonLd["@graph"]
     .find((node) => node["@type"] === "Course");
-  assert.equal(courseSchema.offers.price, "80");
+  assert.equal(courseSchema.offers.price, "65");
   assert.equal(courseSchema.offers.url, "https://pay.hotmart.com/P106348963R?off=srrm5ewf");
   assert.equal("priceValidUntil" in courseSchema.offers, false);
   assert.equal(appSource.match(/<PurchaseCTA\b/g)?.length, 2);
