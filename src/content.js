@@ -50,8 +50,8 @@ export const navItems = [
     path: "/cursos",
     children: [
       { label: "Diagnóstico S7-300/400", path: "/cursos/s7-300-400" },
-      { label: "TIA Portal S7-1200/1500 — Próximamente", path: "/cursos/tia-portal" },
       { label: "SolidWorks principiante", path: "/cursos/solidworks" },
+      { label: "TIA Portal S7-1200/1500 — Próximamente", path: "/cursos/tia-portal" },
     ],
   },
   { label: "App S7-PLC", path: "/app" },

@@ -65,8 +65,8 @@ const protectedFileHashes = {
   "../COMMERCIAL_ALIGNMENT_V8_17_24.md": "788988DAECE96A1791BEE3663908DF0715C5A20E683646624DEAF75F3D217BEA",
   "../src/AccessibleDialog.jsx": "2248CAAEEC74167D3714EF73E1C1495564547FDD829D7CD52B6FD8BEB567BFD8",
   "../src/accessibility.js": "59DEFB57B8006063543B5282EE57FC7A0FF215050ADCA714389E4FE62F78B892",
-  // Includes the localized route pair, SolidWorks navigation and approved 14-day trial copy.
-  "../src/i18n.js": "47418E9879BB3DD6D93F9DD2C6BCA998665249DEC83C49EB542026BF1B445F3F",
+  // Includes the localized route pair, approved course order and 14-day trial copy.
+  "../src/i18n.js": "75281B9F0F56B93F1B8862EC0129FD232A8D8550317C016425825A667761BEF6",
   "../src/m1-accessibility.css": "90D00A42DD1EBFE3E734BA572F11890A33685FFB45B9140E4A39C36A5AB4C4FB",
   "../src/app/preserved-analytics-inventory.js": "1EC89D5816FB33278F5A9724CF9AB909687845763DBE05581753086ACE781149",
   "../scripts/csp-policy.mjs": "CCA764C9B1F9F7813EC67CEE235D943B9E1991DA0E7E1B2A6C026BC2FEFD1D86",
@@ -81,7 +81,7 @@ const protectedFileHashes = {
   "./web-m1-accessible-navigation.test.mjs": "22B28DD4A72E694E9F7450F336B0510FD7628486B8791DC15CB7B5002A6166C0",
   "./web-m1-contact-accessibility.test.mjs": "B275449C88F3E67E5F1B21EA612F56A3B130D877A6478B958690B2000BB954BF",
   "./web-m1-protected-invariants.test.mjs": "97D08D377792923AC16023A77321B72C441D68D28D89C082A001B571F99B25D6",
-  "./web-m1-tia-future-state.test.mjs": "75CD071DBA0F5182FF97E89D0C4A9B41254889F7732B94C031B6358FD16A1E31",
+  "./web-m1-tia-future-state.test.mjs": "370B87819D135F179C6908BB0B22661B64F78C5D1312939599C580B56795DAF7",
   "./web-m1-visual-accessibility.test.mjs": "1772545D1BC68F4E9D0015B40D47D8657AFBF22079FCFFB1E18F8896FAD68CA3",
 };
 
@@ -242,9 +242,9 @@ test("TIA permanece presente como contenido futuro pero sin oferta ni inicio", (
     assert.doesNotMatch(JSON.stringify(metadata), /pay\.hotmart\.com/i);
   }
 
-  assert.match(navItems.find(({ path }) => path === "/cursos").children[1].label, /Próximamente/);
-  assert.match(englishNavItems.find(({ path }) => path === "/en/courses").children[1].label, /Upcoming/);
-  assert.match(portugueseNavItems.find(({ path }) => path === "/pt/cursos").children[1].label, /Em preparação/);
+  assert.match(navItems.find(({ path }) => path === "/cursos").children[2].label, /Próximamente/);
+  assert.match(englishNavItems.find(({ path }) => path === "/en/courses").children[2].label, /Upcoming/);
+  assert.match(portugueseNavItems.find(({ path }) => path === "/pt/cursos").children[2].label, /Em preparação/);
   assert.match(courses.find(({ id }) => id === "tia").mode, /inscripción todavía no habilitada/i);
   assert.equal(technicalResources.find(({ id }) => id === "tia-portal").status, "Recurso informativo disponible");
   assert.doesNotMatch(JSON.stringify(offer), /TIA Portal|S7-1200|S7-1500/i);
