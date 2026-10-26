@@ -7,10 +7,29 @@ import { getRouteMetadata } from "../src/route-metadata.js";
 
 const tiaRoutes = ["/cursos/tia-portal", "/en/courses/tia-portal", "/pt/cursos/tia-portal"];
 
-test("la navegación publica los rótulos TIA exactos en ES EN PT", () => {
-  assert.equal(navItems.find(({ path }) => path === "/cursos").children[1].label, "TIA Portal S7-1200/1500 — Próximamente");
-  assert.equal(englishNavItems.find(({ path }) => path === "/en/courses").children[1].label, "TIA Portal S7-1200/1500 — Upcoming");
-  assert.equal(portugueseNavItems.find(({ path }) => path === "/pt/cursos").children[1].label, "TIA Portal S7-1200/1500 — Em preparação");
+test("la navegación ordena Diagnóstico, SolidWorks y TIA y conserva los rótulos exactos en ES EN PT", () => {
+  const spanishCourses = navItems.find(({ path }) => path === "/cursos").children;
+  const englishCourses = englishNavItems.find(({ path }) => path === "/en/courses").children;
+  const portugueseCourses = portugueseNavItems.find(({ path }) => path === "/pt/cursos").children;
+
+  assert.deepEqual(spanishCourses.map(({ path }) => path), [
+    "/cursos/s7-300-400",
+    "/cursos/solidworks",
+    "/cursos/tia-portal",
+  ]);
+  assert.deepEqual(englishCourses.map(({ path }) => path), [
+    "/en/courses/s7-300-400",
+    "/en/courses/solidworks",
+    "/en/courses/tia-portal",
+  ]);
+  assert.deepEqual(portugueseCourses.map(({ path }) => path), [
+    "/pt/cursos/s7-300-400",
+    "/pt/cursos/solidworks",
+    "/pt/cursos/tia-portal",
+  ]);
+  assert.equal(spanishCourses[2].label, "TIA Portal S7-1200/1500 — Próximamente");
+  assert.equal(englishCourses[2].label, "TIA Portal S7-1200/1500 — Upcoming");
+  assert.equal(portugueseCourses[2].label, "TIA Portal S7-1200/1500 — Em preparação");
 });
 
 test("H1 title description OG y WebPage declaran futuro sin inscripción", () => {
