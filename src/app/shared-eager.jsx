@@ -22,6 +22,7 @@ const m2ImageModules = {
       "../assets/m2/*.{avif,webp}",
       "!../assets/m2/obra-*",
       "!../assets/m2/app-estado-cpu-*",
+      "!../assets/m2/in-company-*",
       "!../assets/m2/walter-boj-avatar-field-*",
     ],
     { eager: true, import: "default" }

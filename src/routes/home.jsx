@@ -3,23 +3,24 @@ import {
   Mail,
   Phone,
 } from "lucide-react";
-import { projects } from "../content.js";
 import {
   englishHome,
-  englishProjects,
   portugueseHome,
-  portugueseProjects,
 } from "../i18n.js";
 import appEstadoCpuDesktop from "../assets/app-estado-cpu-desktop-316-2dp-20260929.png";
 import appEstadoCpuMobile from "../assets/app-estado-cpu-mobile-313c-20260928.png";
 import heroInicio from "../assets/hero-inicio.jpg";
+import papeleraTrainingPhoto from "../assets/in-company/papelera-tucuman-capacitacion-plc-s7-grupo.jpg";
+import zingarasTrainingPhoto from "../assets/in-company/zingaras-capacitacion-electricidad-industrial-grupo.jpg";
 import plantVisual from "../assets/old-site/35-47edf350.jpg";
 import { M2Picture, m2ImageSpecs, registerM2Images, whatsappUrl } from "../app/shared-eager.jsx";
 import { FounderBlock } from "./founder-block.jsx";
-import { Hero, Icon, S7Testimonials, projectVisuals } from "./shared.jsx";
-import { getServiceWorkImage, projectWorkImageFiles } from "./works-images.jsx";
+import { Hero, Icon, S7Testimonials } from "./shared.jsx";
 
-registerM2Images(import.meta.glob("../assets/m2/app-estado-cpu-*.{avif,webp}", { eager: true, import: "default" }));
+registerM2Images(import.meta.glob([
+  "../assets/m2/app-estado-cpu-*.{avif,webp}",
+  "../assets/m2/in-company-*.{avif,webp}",
+], { eager: true, import: "default" }));
 
 // Variantes AVIF/WebP de las capturas de la app usadas en la composición de dispositivos.
 m2ImageSpecs.set(appEstadoCpuDesktop, {
@@ -37,6 +38,22 @@ m2ImageSpecs.set(appEstadoCpuMobile, {
   widths: [320, 365],
   formats: ["avif", "webp"],
   sizes: "200px",
+});
+m2ImageSpecs.set(papeleraTrainingPhoto, {
+  stem: "in-company-papelera-tucuman",
+  width: 1280,
+  height: 720,
+  widths: [640, 960, 1280],
+  formats: ["avif", "webp"],
+  sizes: "(max-width: 900px) 92vw, 540px",
+});
+m2ImageSpecs.set(zingarasTrainingPhoto, {
+  stem: "in-company-zingaras",
+  width: 1600,
+  height: 1200,
+  widths: [640, 960, 1280],
+  formats: ["avif", "webp"],
+  sizes: "(max-width: 900px) 92vw, 540px",
 });
 
 const homeProblems = [
@@ -84,6 +101,93 @@ const homeClientNames = [
   "CALSA",
   "GETSA",
 ];
+
+const inCompanyTrainingCopy = {
+  es: {
+    eyebrow: "FORMACIÓN TÉCNICA EN PLANTA",
+    title: "Capacitaciones In Company",
+    intro: "Formación técnica aplicada dentro de la planta para elevar el nivel del personal de mantenimiento, mejorar la respuesta ante fallas y contribuir a reducir pérdidas asociadas a tiempos excesivos de parada.",
+    proof: "Capacitación real en planta",
+    format: "Formación técnica aplicada",
+    cta: "Consultar capacitación para mi empresa",
+    ctaAria: "Consultar capacitación para mi empresa por WhatsApp; abre en una pestaña nueva",
+    message: "Hola, quiero consultar por una capacitación In Company para el personal de mantenimiento de mi empresa.",
+    cases: [
+      {
+        id: "papelera",
+        client: "Papelera de Tucumán",
+        title: "Diagnóstico y resolución de fallas en PLC Siemens S7-300 y S7-400",
+        text: "Capacitación práctica orientada a reconocer síntomas, interpretar estados y ordenar verificaciones antes de intervenir.",
+        image: papeleraTrainingPhoto,
+        alt: "Grupo de cinco personas en Papelera de Tucumán al finalizar la capacitación en diagnóstico de PLC Siemens, mostrando sus certificados.",
+      },
+      {
+        id: "zingaras",
+        client: "Zíngaras",
+        title: "Diagnóstico de fallas en electricidad industrial",
+        text: "Formación práctica sobre mediciones, interpretación de fallas y criterios de intervención segura para mantenimiento eléctrico.",
+        image: zingarasTrainingPhoto,
+        alt: "Grupo de siete personas en Zíngaras al finalizar la capacitación en electricidad industrial, mostrando sus certificados.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "ON-SITE TECHNICAL TRAINING",
+    title: "In-company training",
+    intro: "Applied technical training delivered inside the plant to strengthen maintenance teams, improve fault response and help reduce losses associated with excessive machine downtime.",
+    proof: "Real on-site training",
+    format: "Applied technical training",
+    cta: "Ask about training for my company",
+    ctaAria: "Ask about training for my company on WhatsApp; opens in a new tab",
+    message: "Hello, I would like to ask about in-company training for my maintenance team.",
+    cases: [
+      {
+        id: "papelera",
+        client: "Papelera de Tucumán",
+        title: "Fault diagnosis and troubleshooting on Siemens S7-300 and S7-400 PLCs",
+        text: "Practical training focused on recognizing symptoms, interpreting states and organizing checks before intervening.",
+        image: papeleraTrainingPhoto,
+        alt: "Group of five people at Papelera de Tucumán after completing Siemens PLC diagnostics training, holding their certificates.",
+      },
+      {
+        id: "zingaras",
+        client: "Zíngaras",
+        title: "Industrial electrical fault diagnostics",
+        text: "Practical training in measurements, fault interpretation and safe intervention criteria for electrical maintenance.",
+        image: zingarasTrainingPhoto,
+        alt: "Group of seven people at Zíngaras after completing industrial electricity training, holding their certificates.",
+      },
+    ],
+  },
+  pt: {
+    eyebrow: "TREINAMENTO TÉCNICO NA PLANTA",
+    title: "Treinamentos In Company",
+    intro: "Formação técnica aplicada dentro da planta para elevar o nível das equipes de manutenção, melhorar a resposta a falhas e contribuir para reduzir perdas associadas a paradas excessivas de máquina.",
+    proof: "Treinamento real na planta",
+    format: "Formação técnica aplicada",
+    cta: "Consultar treinamento para minha empresa",
+    ctaAria: "Consultar treinamento para minha empresa pelo WhatsApp; abre em uma nova aba",
+    message: "Olá, gostaria de consultar sobre um treinamento In Company para a equipe de manutenção da minha empresa.",
+    cases: [
+      {
+        id: "papelera",
+        client: "Papelera de Tucumán",
+        title: "Diagnóstico e solução de falhas em PLC Siemens S7-300 e S7-400",
+        text: "Treinamento prático para reconhecer sintomas, interpretar estados e organizar verificações antes da intervenção.",
+        image: papeleraTrainingPhoto,
+        alt: "Grupo de cinco pessoas na Papelera de Tucumán após o treinamento em diagnóstico de PLC Siemens, mostrando seus certificados.",
+      },
+      {
+        id: "zingaras",
+        client: "Zíngaras",
+        title: "Diagnóstico de falhas em eletricidade industrial",
+        text: "Formação prática sobre medições, interpretação de falhas e critérios de intervenção segura na manutenção elétrica.",
+        image: zingarasTrainingPhoto,
+        alt: "Grupo de sete pessoas na Zíngaras após o treinamento em eletricidade industrial, mostrando seus certificados.",
+      },
+    ],
+  },
+};
 
 function HomeHeroNavigator() {
   const paths = [
@@ -203,7 +307,7 @@ function HomeLandingRedesign() {
         </div>
       </section>
 
-      <HomeObrasTeaser />
+      <HomeInCompanyTraining />
 
       <S7Testimonials limit={2} />
 
@@ -251,34 +355,37 @@ function HomeClientStrip() {
   );
 }
 
-function HomeObrasTeaser() {
-  const featured = projects.slice(0, 3);
+function HomeInCompanyTraining({ language = "es" }) {
+  const copy = inCompanyTrainingCopy[language] || inCompanyTrainingCopy.es;
+  const headingId = `home-in-company-title-${language}`;
+
   return (
-    <section className="mock-section mock-obras" data-home-section="obras">
+    <section className="mock-section home-in-company" data-home-section="in-company-training" aria-labelledby={headingId}>
       <div className="mock-home-container">
-        <h2>Obras realizadas</h2>
-        <p className="mock-obras-subtitle">
-          Ingeniería, programación, migraciones y puesta en marcha en plantas industriales. Los casos, clientes y alcances corresponden a trabajos realizados; las imágenes son ilustrativas.
-        </p>
-        <div className="mock-obras-grid">
-          {featured.map((project, index) => (
-            <article className="mock-obras-card" key={project.title}>
-              <div className="mock-obras-media">
-                <M2Picture src={getServiceWorkImage(projectWorkImageFiles[index]) || projectVisuals[index]} alt={`Imagen ilustrativa para ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" />
-                <span className="works-image-disclaimer">Imagen ilustrativa</span>
-                <span className="mock-obras-client">{project.client}</span>
+        <div className="home-in-company-heading">
+          <span>{copy.eyebrow}</span>
+          <h2 id={headingId}>{copy.title}</h2>
+          <p>{copy.intro}</p>
+        </div>
+        <div className="home-in-company-grid">
+          {copy.cases.map((training) => (
+            <article className={`home-in-company-card home-in-company-card--${training.id}`} key={training.id}>
+              <div className="home-in-company-media">
+                <M2Picture src={training.image} alt={training.alt} loading="lazy" decoding="async" />
+                <span className="home-in-company-proof"><Icon name="GraduationCap" size={15} aria-hidden="true" />{copy.proof}</span>
+                <span className="home-in-company-client">{training.client}</span>
               </div>
-              <div className="mock-obras-body">
-                <span className="mock-obras-year">{project.year}</span>
-                <h3>{project.title}</h3>
-                <p>{project.result}</p>
+              <div className="home-in-company-body">
+                <span className="home-in-company-format">{copy.format}</span>
+                <h3>{training.title}</h3>
+                <p>{training.text}</p>
               </div>
             </article>
           ))}
         </div>
-        <div className="mock-obras-cta">
-          <a className="mock-btn mock-btn-primary" href="/obras">
-            Ver todos los proyectos <ArrowRight size={18} />
+        <div className="home-in-company-cta">
+          <a className="mock-btn mock-btn-primary" href={whatsappUrl(copy.message)} target="_blank" rel="noopener noreferrer" aria-label={copy.ctaAria}>
+            <Phone size={18} aria-hidden="true" /> {copy.cta}
           </a>
         </div>
       </div>
@@ -454,38 +561,7 @@ function EnglishHomePage() {
         </div>
       </section>
 
-      <section className="mock-section mock-obras">
-        <div className="mock-home-container">
-          <h2>Completed projects</h2>
-          <p className="mock-obras-subtitle">
-            Selected engineering, PLC migration and commissioning work completed in real production environments. Images are illustrative; clients and project scopes are real.
-          </p>
-          <div className="mock-obras-grid">
-            {englishProjects.map((project) => {
-              const source = projects[project.sourceIndex];
-              return (
-                <article className="mock-obras-card" key={project.title}>
-                  <div className="mock-obras-media">
-                    <M2Picture src={getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]} alt={`Illustrative image for ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" />
-                    <span className="works-image-disclaimer">Illustrative image</span>
-                    <span className="mock-obras-client">{source.client}</span>
-                  </div>
-                  <div className="mock-obras-body">
-                    <span className="mock-obras-year">{source.year}</span>
-                    <h3>{project.title}</h3>
-                    <p>{project.result}</p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-          <div className="mock-obras-cta">
-            <a className="mock-btn mock-btn-primary" href="/en/projects">
-              View selected projects <ArrowRight size={18} />
-            </a>
-          </div>
-        </div>
-      </section>
+      <HomeInCompanyTraining language="en" />
 
       <S7Testimonials language="en" limit={2} />
 
@@ -540,7 +616,7 @@ function PortugueseHomePage() {
       <section className="mock-tech-strip"><div className="mock-home-container"><h2>Foco técnico</h2><p className="mock-tech-subtitle">Tecnologias industriais e áreas abrangidas pelo nosso trabalho.</p><div className="mock-tech-grid">{portugueseHome.specialties.map((item) => <article className="mock-tech-card" key={item.title}><Icon name={item.icon} size={48} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div></section>
       <FounderBlock language="pt" id="pt-home-founder" />
       <section className="mock-section mock-app"><div className="mock-home-container mock-app-grid"><div className="mock-app-copy"><span className="section-badge">BOJ S7-PLC PRO</span><h2>Uma primeira resposta mais clara antes de abrir o STEP 7</h2><p>Informe estados da CPU, LEDs e sintomas de campo. O app organiza hipóteses técnicas e sugere o que verificar primeiro.</p><ul><li>Fluxo orientado por sintomas</li><li>Hipóteses técnicas priorizadas</li><li>Orientação para verificação em campo</li></ul><a className="mock-btn mock-btn-primary" href="/pt/app">Conhecer o app <ArrowRight size={18} /></a></div><AppDiagnosticMockup language="pt" /></div></section>
-      <section className="mock-section mock-obras"><div className="mock-home-container"><h2>Projetos realizados</h2><p className="mock-obras-subtitle">Projetos selecionados de engenharia, migração de PLC e comissionamento realizados em ambientes reais de produção. As imagens são ilustrativas; os clientes e escopos são reais.</p><div className="mock-obras-grid">{portugueseProjects.map((project) => { const source = projects[project.sourceIndex]; return <article className="mock-obras-card" key={project.title}><div className="mock-obras-media"><M2Picture src={getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]} alt={`Imagem ilustrativa para ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" /><span className="works-image-disclaimer">Imagem ilustrativa</span><span className="mock-obras-client">{source.client}</span></div><div className="mock-obras-body"><span className="mock-obras-year">{source.year}</span><h3>{project.title}</h3><p>{project.result}</p></div></article>; })}</div><div className="mock-obras-cta"><a className="mock-btn mock-btn-primary" href="/pt/projetos">Ver projetos selecionados <ArrowRight size={18} /></a></div></div></section>
+      <HomeInCompanyTraining language="pt" />
       <S7Testimonials language="pt" limit={2} />
       <section className="mock-final-cta"><img src={plantVisual} alt="" aria-hidden="true" width="800" height="531" loading="lazy" decoding="async" /><div className="mock-final-overlay" aria-hidden="true" /><div className="mock-home-container mock-final-content"><h2>Sua planta tem uma falha, uma máquina parada ou uma equipe que precisa de capacitação?</h2><p>Conte-nos o que está acontecendo e ajudaremos a identificar o próximo passo adequado.</p><div className="mock-final-actions"><a className="mock-btn mock-btn-whatsapp" href={whatsappUrl("Olá, gostaria de conversar sobre uma falha industrial, um projeto de automação ou uma necessidade de capacitação técnica.")}><Phone size={18} /> Falar pelo WhatsApp</a><a className="mock-btn mock-btn-outline" href="/pt/contato"><Mail size={18} /> Enviar consulta técnica</a></div></div></section>
     </div>

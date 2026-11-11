@@ -66,6 +66,8 @@ const originalFallbacks = Object.freeze({
   "boj-logo-real-cropped.png": "c07e214f651bd93e2c7b316836d4a843d50eee81e310c63e643681cef9ab36e1",
   "walter-boj-avatar-field.jpeg": "0c3c32e90e5740b2c2fc72c63f2e38841615167cc506659f84afe963f85254f1",
   "boj-favicon.png": "8bd9caad436f885ee853bd8434aa6b9e6d96b5759809f2b34c3327b94d24952c",
+  "in-company/papelera-tucuman-capacitacion-plc-s7-grupo.jpg": "cf9c2fb601674cf2ec4c12b7c2af9df2d7c3067d4b27b1df1eb5d7c9ef2cd196",
+  "in-company/zingaras-capacitacion-electricidad-industrial-grupo.jpg": "7aea86aeea28035c9f23ee558218b24b1860b283dd49dce38ef1248a54147e4e",
 });
 
 test("preserva los originales y entrega el inventario responsive AVIF/WebP completo", async () => {
@@ -74,9 +76,9 @@ test("preserva los originales y entrega el inventario responsive AVIF/WebP compl
   }
 
   const files = (await readdir(join(root, "src", "assets", "m2"))).sort();
-  assert.equal(files.length, 142);
-  assert.equal(files.filter((name) => name.endsWith(".avif")).length, 71);
-  assert.equal(files.filter((name) => name.endsWith(".webp")).length, 71);
+  assert.equal(files.length, 154);
+  assert.equal(files.filter((name) => name.endsWith(".avif")).length, 77);
+  assert.equal(files.filter((name) => name.endsWith(".webp")).length, 77);
   for (const file of files) assert.ok((await stat(join(root, "src", "assets", "m2", file))).size > 0, file);
 
   for (const stem of ["hero-app", "hero-contacto", "hero-curso-s7", "hero-curso-tia", "hero-cursos", "hero-inicio", "hero-obras", "hero-recursos", "hero-servicios"]) {
@@ -88,6 +90,8 @@ test("preserva los originales y entrega el inventario responsive AVIF/WebP compl
   for (const [stem, widths] of [
     ["app-estado-cpu-desktop-316-2dp-20260929", [640, 960, 1672]],
     ["app-estado-cpu-mobile-313c-20260928", [320, 365]],
+    ["in-company-papelera-tucuman", [640, 960, 1280]],
+    ["in-company-zingaras", [640, 960, 1280]],
   ]) {
     for (const width of widths) {
       assert.ok(files.includes(`${stem}-${width}.avif`));

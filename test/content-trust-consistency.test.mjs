@@ -10,19 +10,18 @@ const contentSource = await readFile(new URL("../src/content.js", import.meta.ur
 const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
 
 test("las imágenes de Obras se identifican como ilustrativas", () => {
-  const homeStart = appSource.indexOf("function HomeObrasTeaser()");
-  const homeEnd = appSource.indexOf("function AppDiagnosticMockup(", homeStart);
+  const worksStart = appSource.indexOf("function WorksPage()");
+  const worksEnd = appSource.indexOf("function ProjectCard(", worksStart);
   const projectStart = appSource.indexOf("function ProjectCard(");
   const projectEnd = appSource.indexOf("function PortfolioPrep()", projectStart);
-  const spanishWorksSource = `${appSource.slice(homeStart, homeEnd)}\n${appSource.slice(projectStart, projectEnd)}`;
+  const spanishWorksSource = `${appSource.slice(worksStart, worksEnd)}\n${appSource.slice(projectStart, projectEnd)}`;
   const labels = spanishWorksSource.match(/className="works-image-disclaimer"/g) ?? [];
 
-  assert.equal(labels.length, 2);
-  assert.match(spanishWorksSource, /<h2>Obras realizadas<\/h2>/);
-  assert.match(appSource, /<h2>Completed projects<\/h2>/);
-  assert.match(appSource, /<h2>Projetos realizados<\/h2>/);
+  assert.equal(labels.length, 1);
+  assert.match(spanishWorksSource, /title="Obras y trabajos realizados en entornos industriales"/);
+  assert.match(appSource, /title="Engineering and automation work completed in real plants"/);
+  assert.match(appSource, /title="Trabalhos de engenharia e automação realizados em plantas reais"/);
   assert.doesNotMatch(appSource, /Obras reales, no ejemplos de manual|Industrial work, not theoretical examples|Trabalho industrial, não exemplos teóricos/);
-  assert.match(spanishWorksSource, /Los casos, clientes y alcances corresponden a trabajos realizados; las imágenes son ilustrativas\./);
   assert.match(spanishWorksSource, /alt=\{`Imagen ilustrativa para \$\{project\.title\}`\}/);
   assert.doesNotMatch(spanishWorksSource, /Imagen real \(de services-works\)/);
 });
