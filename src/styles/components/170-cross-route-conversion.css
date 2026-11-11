@@ -225,6 +225,27 @@
   margin-top: 30px;
 }
 
+/* Une la evidencia de capacitación y los testimonios sin acumular el aire de dos secciones. */
+.mock-home > .home-in-company {
+  padding-bottom: 32px;
+}
+
+.mock-home > .home-in-company + .s7-testimonials {
+  position: relative;
+  padding-top: 40px;
+}
+
+.mock-home > .home-in-company + .s7-testimonials::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(1120px, calc(100% - 48px));
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(8, 126, 170, 0.28), transparent);
+  content: "";
+  transform: translateX(-50%);
+}
+
 @media (max-width: 900px) {
   .home-in-company-grid {
     grid-template-columns: 1fr;
@@ -237,6 +258,18 @@
 }
 
 @media (max-width: 540px) {
+  .mock-home > .home-in-company {
+    padding-bottom: 24px;
+  }
+
+  .mock-home > .home-in-company + .s7-testimonials {
+    padding-top: 30px;
+  }
+
+  .mock-home > .home-in-company + .s7-testimonials::before {
+    width: calc(100% - 28px);
+  }
+
   .home-in-company-heading {
     margin-bottom: 22px;
   }

@@ -45,3 +45,10 @@ test("las dos fotos se sirven responsivamente y la grilla pasa de dos columnas a
   assert.match(stylesSource, /\.home-in-company-media\s*\{[\s\S]*?aspect-ratio:\s*16 \/ 9/);
   assert.match(stylesSource, /@media \(max-width: 900px\)[\s\S]*?\.home-in-company-grid\s*\{[\s\S]*?grid-template-columns:\s*1fr/);
 });
+
+test("la transición hacia testimonios evita el doble espaciado y conserva una separación sutil", () => {
+  assert.match(stylesSource, /\.mock-home > \.home-in-company\s*\{[\s\S]*?padding-bottom:\s*32px/);
+  assert.match(stylesSource, /\.mock-home > \.home-in-company \+ \.s7-testimonials\s*\{[\s\S]*?padding-top:\s*40px/);
+  assert.match(stylesSource, /\.mock-home > \.home-in-company \+ \.s7-testimonials::before\s*\{[\s\S]*?linear-gradient\(90deg, transparent, rgba\(8, 126, 170, 0\.28\), transparent\)/);
+  assert.match(stylesSource, /@media \(max-width: 540px\)[\s\S]*?\.mock-home > \.home-in-company\s*\{[\s\S]*?padding-bottom:\s*24px[\s\S]*?\.mock-home > \.home-in-company \+ \.s7-testimonials\s*\{[\s\S]*?padding-top:\s*30px/);
+});
