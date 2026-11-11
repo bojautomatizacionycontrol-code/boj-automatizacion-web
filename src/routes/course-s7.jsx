@@ -570,27 +570,38 @@ function S7SalesLanding({ course, eyebrow }) {
                   <CheckCircle2 size={15} aria-hidden="true" /> Pago único · curso con acceso permanente
                 </span>
                 <p className="s7-sales-kicker">Curso + licencia</p>
-                <h2>Curso Diagnóstico S7-300/400 + APP PRO</h2>
+                <h3>Curso Diagnóstico S7-300/400 + APP PRO</h3>
                 <span className="s7-sales-offer-tagline">Curso en PDF permanente + App PRO por 1 mes para 1 dispositivo</span>
               </div>
 
-              <div className="s7-sales-offer-price">
-                <span className="s7-sales-offer-regular">Pago único</span>
-                <strong>{offer.course.price}</strong>
-                <p>Material autoguiado en PDF con acceso permanente + App PRO por 1 mes para 1 dispositivo.</p>
-                <div className="s7-sales-valuestack">
-                  <div className="s7-sales-valuestack-row">
-                    <span>App BOJ S7-PLC PRO — 1 mes</span>
-                    <span className="s7-sales-valuestack-value">vale {offer.app.proPlans.find(({ title }) => title === "Mensual de pago único").price}</span>
+              <div className="s7-sales-offer-purchase">
+                <div className="s7-sales-offer-price" role="group" aria-label={`Pago único de ${offer.course.price}`}>
+                  <span className="s7-sales-offer-regular">Pago único</span>
+                  <strong>{offer.course.price}</strong>
+                  <p>Material autoguiado en PDF con acceso permanente + App PRO por 1 mes para 1 dispositivo.</p>
+                  <div className="s7-sales-valuestack">
+                    <div className="s7-sales-valuestack-row">
+                      <span>App BOJ S7-PLC PRO — 1 mes</span>
+                      <span className="s7-sales-valuestack-value">vale {offer.app.proPlans.find(({ title }) => title === "Mensual de pago único").price}</span>
+                    </div>
+                    <div className="s7-sales-valuestack-row">
+                      <span>Curso completo + Método BOJ</span>
+                      <span className="s7-sales-valuestack-value">incluido</span>
+                    </div>
+                    <div className="s7-sales-valuestack-total">
+                      <span>Pago único</span>
+                      <strong>{offer.course.price}</strong>
+                    </div>
                   </div>
-                  <div className="s7-sales-valuestack-row">
-                    <span>Curso completo + Método BOJ</span>
-                    <span className="s7-sales-valuestack-value">incluido</span>
-                  </div>
-                  <div className="s7-sales-valuestack-total">
-                    <span>Pago único</span>
-                    <strong>{offer.course.price}</strong>
-                  </div>
+                </div>
+                <div className="s7-sales-offer-primary-action">
+                  <PurchaseCTA source="offer" className="s7-sales-btn s7-sales-btn-primary">
+                    Comprar curso + APP PRO
+                  </PurchaseCTA>
+                  <p className="s7-sales-offer-guarantee">
+                    <ShieldCheck size={18} aria-hidden="true" />
+                    {guaranteeNote}
+                  </p>
                 </div>
               </div>
             </div>
@@ -662,9 +673,6 @@ function S7SalesLanding({ course, eyebrow }) {
 
             <div className="s7-sales-offer-decision">
               <div className="s7-sales-offer-actions">
-                <PurchaseCTA source="offer" className="s7-sales-btn s7-sales-btn-primary">
-                  Comprar curso + APP PRO
-                </PurchaseCTA>
                 <a
                   className="s7-sales-btn s7-sales-btn-secondary"
                   href={appProductUrl}
@@ -676,10 +684,6 @@ function S7SalesLanding({ course, eyebrow }) {
                 </a>
               </div>
               <div className="s7-sales-offer-decision-copy">
-                <p className="s7-sales-offer-guarantee">
-                  <ShieldCheck size={18} aria-hidden="true" />
-                  {guaranteeNote}
-                </p>
                 <p className="s7-sales-offer-crosslink">
                   ¿Vas a utilizar la app de forma recurrente o en equipo? Consulta los{" "}
                   <a href="/app">planes PRO (6 meses / varios dispositivos)</a>.
@@ -687,15 +691,15 @@ function S7SalesLanding({ course, eyebrow }) {
                 <p className="s7-sales-offer-note">Acceso digital. Verifica siempre las conclusiones en campo antes de intervenir.</p>
               </div>
             </div>
-
-            <p className="s7-sales-offer-anchor">
-              <TriangleAlert size={18} aria-hidden="true" />
-              <span>
-                Antes de sustituir un módulo o reiniciar una CPU, reúne evidencia y confirma la causa probable.
-                El curso enseña el método; la app ayuda a seguirlo en cada caso.
-              </span>
-            </p>
           </div>
+
+          <p className="s7-sales-offer-anchor">
+            <TriangleAlert size={18} aria-hidden="true" />
+            <span>
+              Antes de sustituir un módulo o reiniciar una CPU, reúne evidencia y confirma la causa probable.
+              El curso enseña el método; la app ayuda a seguirlo en cada caso.
+            </span>
+          </p>
         </div>
       </section>
 
@@ -1066,9 +1070,27 @@ function LocalizedS7SalesLanding({ language, courseCopy }) {
         <div className="s7-sales-container">
           <div className="s7-sales-offer-heading"><p className="s7-sales-kicker">{copy.offerKicker}</p><h2>{copy.offerTitle}</h2><p>{copy.offerText}</p></div>
           <div className="s7-sales-offer-panel">
-            <div className="s7-sales-offer-summary"><div className="s7-sales-offer-product"><span className="s7-sales-launch"><CheckCircle2 size={15} aria-hidden="true" /> {copy.oneTime} · {copy.permanent}</span><p className="s7-sales-kicker">{copy.bundleLabel}</p><h2>{copy.offerProduct}</h2><span className="s7-sales-offer-tagline">{copy.offerTagline}</span></div><div className="s7-sales-offer-price"><span className="s7-sales-offer-regular">{copy.oneTime}</span><strong>{offer.course.price}</strong><p>{copy.offerAccess}</p></div></div>
+            <div className="s7-sales-offer-summary">
+              <div className="s7-sales-offer-product">
+                <span className="s7-sales-launch"><CheckCircle2 size={15} aria-hidden="true" /> {copy.oneTime} · {copy.permanent}</span>
+                <p className="s7-sales-kicker">{copy.bundleLabel}</p>
+                <h3>{copy.offerProduct}</h3>
+                <span className="s7-sales-offer-tagline">{copy.offerTagline}</span>
+              </div>
+              <div className="s7-sales-offer-purchase">
+                <div className="s7-sales-offer-price" role="group" aria-label={`${copy.oneTime}: ${offer.course.price}`}>
+                  <span className="s7-sales-offer-regular">{copy.oneTime}</span>
+                  <strong>{offer.course.price}</strong>
+                  <p>{copy.offerAccess}</p>
+                </div>
+                <div className="s7-sales-offer-primary-action">
+                  <a className="s7-sales-btn s7-sales-btn-primary" href={checkoutUrl} target="_blank" rel="noreferrer" onClick={checkoutAction(`${language}_course_offer`)}>{copy.buy}</a>
+                  <p className="s7-sales-offer-guarantee"><ShieldCheck size={18} aria-hidden="true" />{copy.note}</p>
+                </div>
+              </div>
+            </div>
             <div className="s7-sales-offer-content"><div className="s7-sales-offer-content-heading"><p className="s7-sales-kicker">{copy.includesKicker}</p><h3>{copy.offerContent}</h3></div><div className="s7-sales-offer-groups"><div className="s7-sales-offer-group"><div className="s7-sales-offer-group-heading"><GraduationCap size={22} /><h4>{copy.courseCardTitle}</h4></div><ul className="s7-sales-offer-list">{courseCopy.includes.map((item) => <li key={item}><CheckCircle2 size={18} aria-hidden="true" /><span>{item}</span></li>)}</ul></div><div className="s7-sales-offer-group s7-sales-offer-group-app"><div className="s7-sales-offer-group-heading"><Smartphone size={22} /><h4>{copy.appIncluded}</h4></div><ul className="s7-sales-offer-list">{copy.appFeatures.slice(0, 3).map((item) => <li key={item}><CheckCircle2 size={18} aria-hidden="true" /><span>{item}</span></li>)}</ul></div></div></div>
-            <div className="s7-sales-offer-decision"><div className="s7-sales-offer-actions"><a className="s7-sales-btn s7-sales-btn-primary" href={checkoutUrl} target="_blank" rel="noreferrer" onClick={checkoutAction(`${language}_course_offer`)}>{copy.buy}</a><a className="s7-sales-btn s7-sales-btn-secondary" href={appProductUrl} target="_blank" rel="noreferrer" onClick={() => track("app_trial_click", { source: "course_offer", language })}>{copy.trial}</a></div><div className="s7-sales-offer-decision-copy"><p className="s7-sales-offer-guarantee"><ShieldCheck size={18} aria-hidden="true" />{copy.note}</p><p className="s7-sales-offer-crosslink">{copy.plansLead} <a href={copy.plansHref}>{copy.plansLink}</a>.</p><p className="s7-sales-offer-note">{copy.offerNote}</p></div></div>
+            <div className="s7-sales-offer-decision"><div className="s7-sales-offer-actions"><a className="s7-sales-btn s7-sales-btn-secondary" href={appProductUrl} target="_blank" rel="noreferrer" onClick={() => track("app_trial_click", { source: "course_offer", language })}>{copy.trial}</a></div><div className="s7-sales-offer-decision-copy"><p className="s7-sales-offer-crosslink">{copy.plansLead} <a href={copy.plansHref}>{copy.plansLink}</a>.</p><p className="s7-sales-offer-note">{copy.offerNote}</p></div></div>
           </div>
         </div>
       </section>
