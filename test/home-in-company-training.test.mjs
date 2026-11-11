@@ -30,6 +30,9 @@ test("las fotos, descripciones y CTA conservan paridad en español, inglés y po
   assert.match(trainingSource, /cta: "Consultar capacitación para mi empresa"/);
   assert.match(trainingSource, /cta: "Ask about training for my company"/);
   assert.match(trainingSource, /cta: "Consultar treinamento para minha empresa"/);
+  assert.match(trainingSource, /proof: "Capacitación In Company"/);
+  assert.match(trainingSource, /proof: "In-company training"/);
+  assert.match(trainingSource, /proof: "Treinamento In Company"/);
   assert.equal((trainingSource.match(/ctaAria:/g) || []).length, 3);
   assert.match(trainingSource, /aria-label=\{copy\.ctaAria\}/);
   assert.equal((appSource.match(/<HomeInCompanyTraining(?: language="(?:en|pt)")? \/>/g) || []).length, 3);
