@@ -262,7 +262,7 @@ export const englishApp = {
 
 export const englishS7Course = {
   includes: [
-    "Permanent access to the S7-300/400 industrial diagnostics course",
+    "Permanent access to the course PDFs in Spanish and Brazilian Portuguese",
     "Professional technical manual with a field-oriented method",
     "One month of BOJ S7-PLC PRO for one device",
     "Applied cases involving CPU states, SF/BF, PROFIBUS, modules and signals",
@@ -290,7 +290,7 @@ export const englishS7Course = {
     "Applied cases and intervention criteria",
   ],
   faq: [
-    { question: "Is the course delivered online?", answer: "Yes. It provides permanent online access to the course material after purchase confirmation." },
+    { question: "Is the course delivered online?", answer: "Yes. Once your purchase is confirmed, you get permanent access to the PDFs in Spanish and Brazilian Portuguese." },
     { question: "Is it suitable for beginners?", answer: "It is designed for people with a basic electrical, maintenance or automation background who want a structured diagnostic method." },
     { question: "Which Siemens systems does it cover?", answer: "The main focus is Siemens S7-300/400 with STEP 7 Classic, including CPU states, hardware, PROFIBUS, modules and field signals." },
     { question: "What is included with the PRO App?", answer: "The offer includes one month of BOJ S7-PLC PRO for one device, with no automatic renewal." },
@@ -593,7 +593,7 @@ export const portugueseApp = {
 
 export const portugueseS7Course = {
   includes: [
-    "Acesso permanente ao curso de diagnóstico industrial S7-300/400",
+    "Acesso permanente aos PDFs do curso em espanhol e português do Brasil",
     "Manual técnico profissional com método orientado ao campo",
     "Um mês de BOJ S7-PLC PRO para um dispositivo",
     "Casos aplicados com estados da CPU, SF/BF, PROFIBUS, módulos e sinais",
@@ -621,7 +621,7 @@ export const portugueseS7Course = {
     "Casos aplicados e critérios de intervenção",
   ],
   faq: [
-    { question: "O curso é oferecido online?", answer: "Sim. Após a confirmação da compra, você recebe acesso online permanente ao material do curso, que está disponível em espanhol." },
+    { question: "O curso é oferecido online?", answer: "Sim. Após a confirmação da compra, você recebe acesso permanente aos PDFs em espanhol e português do Brasil." },
     { question: "É adequado para iniciantes?", answer: "Foi desenvolvido para pessoas com conhecimentos básicos de elétrica, manutenção ou automação que buscam um método estruturado de diagnóstico." },
     { question: "Quais sistemas Siemens são abordados?", answer: "O foco principal é Siemens S7-300/400 com STEP 7 Classic, incluindo estados da CPU, hardware, PROFIBUS, módulos e sinais de campo." },
     { question: "O que está incluído no App PRO?", answer: "A oferta inclui um mês de BOJ S7-PLC PRO para um dispositivo, sem renovação automática." },

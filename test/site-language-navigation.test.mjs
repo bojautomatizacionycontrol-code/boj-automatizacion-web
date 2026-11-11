@@ -179,8 +179,8 @@ test("la landing inglesa del curso conserva precio, oferta y tres CTA al checkou
   assert.match(copySource, /One-time payment/);
   assert.match(copySource, /Permanent course access/);
   assert.match(copySource, /1 month of BOJ S7-PLC PRO/i);
-  assert.match(copySource, /Course materials are currently available in Spanish/);
-  assert.match(copySource, /Course language: Spanish/);
+  assert.match(copySource, /PDF materials are available in Spanish and Brazilian Portuguese/);
+  assert.match(copySource, /One-time payment · Permanent course access/);
   assert.doesNotMatch(`${pageSource}${landingSource}${copySource}`, /priceValidUntil|promotion/i);
 });
 
@@ -232,7 +232,7 @@ test("la landing portuguesa conserva la oferta y los tres CTA del curso, con avi
   assert.equal(landingSource.match(/href: checkoutUrl/g)?.length, 1);
   assert.match(copySource, /Pagamento único/);
   assert.match(copySource, /Acesso permanente/);
-  assert.match(copySource, /conteúdo do curso está disponível em espanhol/i);
-  assert.match(copySource, /Idioma do curso: espanhol/);
+  assert.match(copySource, /materiais em PDF estão disponíveis em espanhol e português do Brasil/i);
+  assert.match(copySource, /Pagamento único · Acesso permanente/);
   assert.doesNotMatch(`${pageSource}${landingSource}${copySource}`, /priceValidUntil|promoção vencida/i);
 });

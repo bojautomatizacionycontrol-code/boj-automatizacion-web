@@ -35,7 +35,7 @@ const coursesAvailableCards = [
     path: "/cursos/s7-300-400",
     quickFacts: [
       { icon: "Gauge", title: "Nivel", text: "Intermedio técnico" },
-      { icon: "MonitorCog", title: "Formato", text: "Material técnico en PDF, guías y casos reales" },
+      { icon: "MonitorCog", title: "Formato", text: "Guías y casos reales en PDF en español y portugués de Brasil" },
       { icon: "FileSearch", title: "Enfoque", text: "Fallas CPU, BF/SF, señales, red, hardware y criterio de diagnóstico" },
     ],
     bullets: [
@@ -252,7 +252,7 @@ function EnglishCourseAvailableCard({ type }) {
         image: courseS7400Visual,
         path: "/en/courses/s7-300-400",
         icon: "Cpu",
-        facts: [["Format", "Online"], ["Language", "Spanish"], ["Access", "Permanent"], ["Includes", "1 month PRO App"]],
+        facts: [["Format", "Online"], ["PDF languages", "Spanish and Brazilian Portuguese"], ["Access", "Permanent"], ["Includes", "1 month PRO App"]],
         bullets: ["STEP 7 Classic and SIMATIC Manager", "CPU states, SF/BF and Diagnostic Buffer", "PROFIBUS, modules and field signals"],
       }
     : type === "tia" ? {
@@ -345,7 +345,7 @@ function PortugueseCourseAvailableCard({ type }) {
   const isS7 = type === "s7";
   const isSolidworks = type === "solidworks";
   const course = isS7
-    ? { label: "DISPONÍVEL AGORA", title: "Diagnóstico industrial para Siemens S7-300/400", image: courseS7400Visual, path: "/pt/cursos/s7-300-400", icon: "Cpu", facts: [["Formato", "Online"], ["Idioma", "Espanhol"], ["Acesso", "Permanente"], ["Inclui", "1 mês de App PRO"]], bullets: ["STEP 7 Classic e SIMATIC Manager", "Estados da CPU, SF/BF e Diagnostic Buffer", "PROFIBUS, módulos e sinais de campo"] }
+    ? { label: "DISPONÍVEL AGORA", title: "Diagnóstico industrial para Siemens S7-300/400", image: courseS7400Visual, path: "/pt/cursos/s7-300-400", icon: "Cpu", facts: [["Formato", "Online"], ["Idioma dos PDFs", "Espanhol e português do Brasil"], ["Acesso", "Permanente"], ["Inclui", "1 mês de App PRO"]], bullets: ["STEP 7 Classic e SIMATIC Manager", "Estados da CPU, SF/BF e Diagnostic Buffer", "PROFIBUS, módulos e sinais de campo"] }
     : type === "tia"
       ? { label: "EM PREPARAÇÃO", title: "TIA Portal para Siemens S7-1200/1500", image: courseTiaPortalVisual, path: "/pt/cursos/tia-portal", icon: "MonitorCog", facts: [["Formato", "Online"], ["Nível", "Introdutório"], ["Status", "Em preparação"]], bullets: ["Configuração de hardware", "Variáveis e LAD", "Monitoramento online e diagnóstico básico"] }
       : { label: "MATERIAL FINALIZADO", title: "Design em SolidWorks: nível iniciante", image: solidworksCourseCover, path: "/pt/cursos/solidworks", icon: "Settings", facts: [["Nível", "Iniciante"], ["Formato", "Manual + prática"], ["Preço", "USD 29"]], bullets: ["Manual de 222 páginas em espanhol", "Pasta separada com exercícios e questionários", "Seis módulos dos esboços aos desenhos", "30 dias de suporte por e-mail"] };

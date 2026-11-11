@@ -249,7 +249,7 @@ function S7SalesLanding({ course, eyebrow }) {
     },
     {
       title: "Material técnico aplicado",
-      text: "Material autoguiado en PDF para estudiar a tu ritmo y consultar cuando necesites revisar un diagnóstico.",
+      text: "PDF descargables en español y portugués de Brasil para estudiar a tu ritmo y consultar durante un diagnóstico.",
     },
     {
       title: "Casos de falla y razonamiento técnico",
@@ -284,7 +284,7 @@ function S7SalesLanding({ course, eyebrow }) {
   ];
 
   const offerIncludes = [
-    "Curso autoguiado en PDF de diagnóstico S7-300/400",
+    "Curso autoguiado en PDF en español y portugués de Brasil",
     "Método BOJ de diagnóstico industrial",
     "Material técnico aplicado y guías técnicas",
     "Casos de falla y razonamiento técnico",
@@ -305,7 +305,7 @@ function S7SalesLanding({ course, eyebrow }) {
   const courseFaqItems = [
     {
       question: "¿Qué recibo exactamente al comprar?",
-      answer: "Recibes el curso autoguiado con material técnico en PDF y acceso permanente: método de análisis, guías de consulta y casos de falla. También incluye 1 mes de BOJ S7-PLC PRO para 1 dispositivo.",
+      answer: "Recibes acceso permanente al método de análisis, las guías de consulta y los casos de falla en PDF. Los materiales están disponibles en español y portugués de Brasil. También se incluye 1 mes de BOJ S7-PLC PRO para 1 dispositivo.",
     },
     {
       question: "¿El curso incluye la APP PRO?",
@@ -364,7 +364,7 @@ function S7SalesLanding({ course, eyebrow }) {
         image={heroCursoS7}
         eyebrow="Diagnóstico industrial · Método BOJ"
         title="Diagnostica fallas reales en PLC S7-300/400 con método y evidencia."
-        subtitle="Curso técnico autoguiado en PDF para diagnosticar fallas en S7-300/400. Aprende a pasar del síntoma a la evidencia y a la causa probable; incluye un mes de BOJ S7-PLC PRO para un dispositivo."
+        subtitle="Curso técnico autoguiado con PDF en español y portugués de Brasil. Aprende a pasar del síntoma a la causa probable con evidencia. Incluye un mes de BOJ S7-PLC PRO para un dispositivo."
         primary={heroPurchaseAction}
         secondary={{ label: "Ver qué incluye", href: "/cursos/s7-300-400", onClick: (event) => scrollToCourseSection(event, "curso-s7-incluye") }}
         note={guaranteeNote}
@@ -810,10 +810,10 @@ const localizedS7SalesCopy = {
     purchaseId: "en-course-purchase",
     eyebrow: "INDUSTRIAL DIAGNOSTICS · BOJ METHOD",
     title: "Diagnose real Siemens S7-300/400 faults with method and evidence",
-    subtitle: "Learn a practical sequence for interpreting symptoms, gathering evidence and narrowing down the probable cause across CPUs, PROFIBUS, modules and field signals. Course materials are currently available in Spanish.",
+    subtitle: "Learn a practical sequence for interpreting symptoms, gathering evidence and narrowing down the probable cause across CPUs, PROFIBUS, modules and field signals. PDF materials are available in Spanish and Brazilian Portuguese.",
     buy: "Buy course + PRO App",
     viewIncludes: "See what is included",
-    note: "Course language: Spanish · One-time payment · Permanent course access · 1 month of BOJ S7-PLC PRO · 1 device",
+    note: "One-time payment · Permanent course access · 1 month of BOJ S7-PLC PRO · 1 device",
     heroPreviewAria: "Course offer preview",
     manualAlt: "Cover of the S7-300/400 diagnostics manual",
     manualLabel: "Professional technical manual",
@@ -884,10 +884,10 @@ const localizedS7SalesCopy = {
     purchaseId: "pt-compra-curso",
     eyebrow: "DIAGNÓSTICO INDUSTRIAL · MÉTODO BOJ",
     title: "Diagnostique falhas reais em Siemens S7-300/400 com método e evidências",
-    subtitle: "Aprenda uma sequência prática para interpretar sintomas, reunir evidências e delimitar a causa provável em CPUs, PROFIBUS, módulos e sinais de campo. O conteúdo do curso está disponível em espanhol.",
+    subtitle: "Aprenda uma sequência prática para interpretar sintomas, reunir evidências e delimitar a causa provável em CPUs, PROFIBUS, módulos e sinais de campo. Os materiais em PDF estão disponíveis em espanhol e português do Brasil.",
     buy: "Comprar curso + App PRO",
     viewIncludes: "Ver o que está incluído",
-    note: "Idioma do curso: espanhol · Pagamento único · Acesso permanente · 1 mês de BOJ S7-PLC PRO · 1 dispositivo",
+    note: "Pagamento único · Acesso permanente · 1 mês de BOJ S7-PLC PRO · 1 dispositivo",
     heroPreviewAria: "Resumo da oferta do curso",
     manualAlt: "Capa do manual de diagnóstico S7-300/400",
     manualLabel: "Manual técnico profissional",
