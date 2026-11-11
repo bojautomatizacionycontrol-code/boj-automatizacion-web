@@ -444,7 +444,7 @@ export const s7Course = {
     "Casos reales de planta y mantenimiento",
     "BOJ S7-PLC PRO incluida durante 1 mes",
     "Actualizaciones futuras del material técnico incluidas sin costo",
-    "Versión actual en español; las futuras traducciones se agregarán al mismo acceso sin costo",
+    "PDF disponibles en español y portugués de Brasil con el mismo acceso",
     "Ejemplos con tablero didáctico real",
     "Lectura de LEDs, CPU, Diagnostic Buffer y HW Config Online",
     "Procedimiento estructurado de búsqueda de causa probable",

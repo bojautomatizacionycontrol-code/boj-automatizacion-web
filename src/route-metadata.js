@@ -90,7 +90,7 @@ export const routeMetadata = Object.freeze({
   "/cursos/s7-300-400": {
     title: "Curso diagnóstico industrial PLC Siemens S7-300/400 | BOJ",
     description:
-      "Curso aplicado de diagnóstico industrial en PLC Siemens S7-300/400 con STEP 7 Classic, Diagnostic Buffer, HW Config Online, PROFIBUS y fallas reales de planta.",
+      "Curso de diagnóstico Siemens S7-300/400 con STEP 7 Classic, PROFIBUS y casos reales de planta. PDF en español y portugués de Brasil.",
   },
   "/cursos/tia-portal": {
     title: "Curso TIA Portal S7-1200/1500 — Próximamente | BOJ",
@@ -205,7 +205,7 @@ export const routeMetadata = Object.freeze({
   "/en/courses/s7-300-400": {
     title: "Siemens S7-300/400 industrial diagnostics course | BOJ",
     description:
-      "Applied Siemens S7-300/400 diagnostics course with STEP 7 Classic, Diagnostic Buffer, HW Config Online, PROFIBUS and field cases.",
+      "Applied Siemens S7-300/400 diagnostics course with STEP 7 Classic, PROFIBUS and field cases. PDFs in Spanish and Brazilian Portuguese.",
   },
   "/en/courses/tia-portal": {
     title: "TIA Portal S7-1200/1500 course — Upcoming | BOJ",
@@ -255,7 +255,7 @@ export const routeMetadata = Object.freeze({
   "/pt/cursos/s7-300-400": {
     title: "Curso de diagnóstico industrial Siemens S7-300/400 | BOJ",
     description:
-      "Curso aplicado de diagnóstico Siemens S7-300/400 com STEP 7 Classic, Diagnostic Buffer, HW Config Online, PROFIBUS e casos de campo. Conteúdo em espanhol.",
+      "Curso de diagnóstico Siemens S7-300/400 com STEP 7 Classic, PROFIBUS e casos de campo. PDFs em espanhol e português do Brasil.",
   },
   "/pt/cursos/tia-portal": {
     title: "Curso TIA Portal S7-1200/1500 — Em preparação | BOJ",
