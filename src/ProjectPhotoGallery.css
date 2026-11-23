@@ -1,3 +1,10 @@
+.project-photo-crop {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
 .project-photo-lightbox {
   position: fixed;
   inset: 0;
