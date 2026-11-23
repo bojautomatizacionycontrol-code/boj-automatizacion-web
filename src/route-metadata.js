@@ -225,7 +225,7 @@ export const routeMetadata = Object.freeze({
   "/en/projects": {
     title: "Industrial automation projects | BOJ",
     description:
-      "Selected industrial engineering, Siemens PLC, HMI, SCADA, migration and commissioning projects completed by BOJ.",
+      "Selected projects from Walter Adrián Boj’s professional experience in industrial engineering, Siemens PLC, HMI, SCADA, migrations and commissioning.",
   },
   "/en/contact": {
     title: "Technical contact | BOJ Automation and Control",
@@ -275,7 +275,7 @@ export const routeMetadata = Object.freeze({
   "/pt/projetos": {
     title: "Projetos de automação industrial | BOJ",
     description:
-      "Projetos selecionados de engenharia industrial, PLC Siemens, IHM, SCADA, migração e comissionamento realizados pela BOJ.",
+      "Projetos selecionados da experiência profissional de Walter Adrián Boj em engenharia industrial, PLC Siemens, IHM, SCADA, migrações e comissionamento.",
   },
   "/pt/contato": {
     title: "Contato técnico | BOJ Automação e Controle",

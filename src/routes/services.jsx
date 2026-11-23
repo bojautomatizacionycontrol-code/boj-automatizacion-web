@@ -5,11 +5,11 @@ import {
   ClipboardCheck,
   Phone,
 } from "lucide-react";
-import { projects } from "../content.js";
+
+import { getWorkProjects } from "../works-content.js";
+import { ProjectPhotoGallery } from "../ProjectPhotoGallery.jsx";
 import {
-  englishProjects,
   englishServices,
-  portugueseProjects,
   portugueseServices,
 } from "../i18n.js";
 import heroServicios from "../assets/hero-servicios.jpg";
@@ -311,9 +311,7 @@ const secondaryServiceCards = [
   },
 ];
 
-const featuredProjects = projects.slice(0, 3);
 
-const additionalProjects = projects.slice(3);
 
 function ServicesPage() {
   const scrollToServiceDetails = (event) => {
@@ -687,32 +685,7 @@ function EnglishServicesPage() {
 }
 
 function EnglishProjectsPage() {
-  return (
-    <PageShell
-      eyebrow="INDUSTRIAL PROJECTS"
-      title="Engineering and automation work completed in real plants"
-      subtitle="Selected cases involving PLC programming, HMI, SCADA, control panels, migrations and commissioning."
-      heroImage={heroObras}
-      heroPrimary={{ label: "Discuss a similar project", href: whatsappUrl("Hello, I would like to discuss an industrial automation project similar to your previous work."), external: true }}
-      heroSecondary={{ label: "View services", href: "/en/services" }}
-    >
-      <section className="portfolio-prep"><div><p className="eyebrow">REAL PROJECT EXPERIENCE</p><h2>Each case is presented as a problem, intervention and result</h2><p>Client names and project scopes correspond to completed work. Images are illustrative unless otherwise stated.</p></div><div className="asset-slots"><span>Engineering</span><span>PLC / HMI / SCADA</span><span>Commissioning</span></div></section>
-      <div className="works-grid">
-        {englishProjects.map((project, index) => {
-          const source = projects[project.sourceIndex];
-          if (project.sourceIndex === 0) return <LedesmaCase key={project.title} project={{ ...source, ...project }} language="en" />;
-          const visual = getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length];
-          return (
-            <article className="project-card" key={project.title}>
-              <div className="project-media"><M2Picture className="project-photo" src={visual} alt={`Illustrative image for ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" /><span>PROJECT {String(index + 1).padStart(2, "0")}</span><span className="works-image-disclaimer">Illustrative image</span><div className="project-media-overlay"><strong>{source.year}</strong><small>{source.client}</small></div></div>
-              <div className="project-body"><div className="project-title-row"><h2>{project.title}</h2></div><p className="project-meta-line">{project.sector} · {project.role}</p><p>{project.description}</p><div className="tag-list">{project.technologies.map((tech) => <span key={tech}>{tech}</span>)}</div><div className="project-result-grid"><div><h3>Initial problem</h3><p>{project.problem}</p></div><div><h3>Intervention</h3><p>{project.intervention}</p></div><div><h3>Result</h3><p>{project.result}</p></div></div></div>
-            </article>
-          );
-        })}
-      </div>
-      <RouteCTA title="Technical work for real plant problems" text="Tell us what the system is doing, what equipment is involved and what evidence is available." primaryLabel="Discuss a similar project" primaryHref={whatsappUrl("Hello, I would like to discuss an industrial automation project.")} secondaryLabel="View services" secondaryHref="/en/services" />
-    </PageShell>
-  );
+  return <LocalizedWorksPage language="en" />;
 }
 
 function PortugueseServicesPage() {
@@ -734,134 +707,137 @@ function PortugueseServicesPage() {
 }
 
 function PortugueseProjectsPage() {
-  return (
-    <PageShell eyebrow="PROJETOS INDUSTRIAIS" title="Trabalhos de engenharia e automação realizados em plantas reais" subtitle="Casos selecionados de programação de PLC, IHM, SCADA, painéis de controle, migrações e comissionamento." heroImage={heroObras} heroPrimary={{ label: "Consultar projeto semelhante", href: whatsappUrl("Olá, gostaria de conversar sobre um projeto de automação industrial semelhante aos trabalhos realizados pela BOJ."), external: true }} heroSecondary={{ label: "Ver serviços", href: "/pt/servicos" }}>
-      <section className="portfolio-prep"><div><p className="eyebrow">EXPERIÊNCIA EM PROJETOS REAIS</p><h2>Cada caso apresenta o problema, a intervenção e o resultado</h2><p>Os nomes dos clientes e os escopos correspondem a trabalhos realizados. As imagens são ilustrativas, salvo indicação em contrário.</p></div><div className="asset-slots"><span>Engenharia</span><span>PLC / IHM / SCADA</span><span>Comissionamento</span></div></section>
-      <div className="works-grid">{portugueseProjects.map((project, index) => { const source = projects[project.sourceIndex]; if (project.sourceIndex === 0) return <LedesmaCase key={project.title} project={{ ...source, ...project }} language="pt" />; const visual = getServiceWorkImage(projectWorkImageFiles[project.sourceIndex]) || projectVisuals[project.sourceIndex % projectVisuals.length]; return <article className="project-card" key={project.title}><div className="project-media"><M2Picture className="project-photo" src={visual} alt={`Imagem ilustrativa para ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" /><span>PROJETO {String(index + 1).padStart(2, "0")}</span><span className="works-image-disclaimer">Imagem ilustrativa</span><div className="project-media-overlay"><strong>{source.year}</strong><small>{source.client}</small></div></div><div className="project-body"><div className="project-title-row"><h2>{project.title}</h2></div><p className="project-meta-line">{project.sector} · {project.role}</p><p>{project.description}</p><div className="tag-list">{project.technologies.map((tech) => <span key={tech}>{tech}</span>)}</div><div className="project-result-grid"><div><h3>Problema inicial</h3><p>{project.problem}</p></div><div><h3>Intervenção</h3><p>{project.intervention}</p></div><div><h3>Resultado</h3><p>{project.result}</p></div></div></div></article>; })}</div>
-      <RouteCTA title="Trabalho técnico para problemas reais de planta" text="Conte-nos o que o sistema está fazendo, quais equipamentos estão envolvidos e quais evidências estão disponíveis." primaryLabel="Consultar projeto semelhante" primaryHref={whatsappUrl("Olá, gostaria de conversar sobre um projeto de automação industrial.")} secondaryLabel="Ver serviços" secondaryHref="/pt/servicos" />
-    </PageShell>
-  );
+  return <LocalizedWorksPage language="pt" />;
 }
 
 function WorksPage() {
+  return <LocalizedWorksPage language="es" />;
+}
+
+const worksPageCopy = {
+  es: {
+    eyebrow: "Obras", title: "Obras y trabajos realizados en entornos industriales",
+    subtitle: "Casos de ingeniería, programación PLC, HMI, SCADA, tableros, migraciones y puesta en marcha presentados con problema inicial, intervención y resultado.",
+    primary: "Solicitar diagnóstico", primaryText: "Hola, escribo desde la web de BOJ para consultar por una obra o intervención industrial similar.",
+    secondary: "Ver servicios", servicesPath: "/servicios",
+    archive: (count) => `Ver ${count} obras adicionales`, archiveText: "Casos completos con problema, intervención y resultado",
+    ctaTitle: "Intervenciones técnicas para problemas reales de planta", ctaText: "El análisis puede partir del problema operativo, revisar el estado técnico actual y definir una solución con alcance claro, pruebas y puesta en marcha.",
+    ctaPrimary: "Consultar por una obra similar", work: "OBRA", realPhoto: "Fotografía real", illustration: "Imagen ilustrativa",
+    openPhoto: "Abrir fotografía", morePhotos: "Más fotografías", problem: "Problema inicial", intervention: "Intervención", result: "Resultado", related: "Otros trabajos realizados en CALSA",
+    prepEyebrow: "Portfolio técnico con obras reales", prepTitle: "Experiencia presentada como problema, intervención y resultado",
+    prepText: "Cada caso resume una situación real de planta: qué necesitaba el sistema, cómo se intervino y qué valor técnico quedó para operación o mantenimiento.",
+    slots: ["Ingeniería", "PLC / HMI / SCADA", "Puesta en marcha"],
+  },
+  en: {
+    eyebrow: "INDUSTRIAL PROJECTS", title: "Engineering and automation work completed in real plants",
+    subtitle: "Selected cases involving PLC programming, HMI, SCADA, control panels, migrations and commissioning.",
+    primary: "Discuss a similar project", primaryText: "Hello, I would like to discuss an industrial automation project similar to your previous work.",
+    secondary: "View services", servicesPath: "/en/services",
+    archive: (count) => `View ${count} additional projects`, archiveText: "Complete cases with the initial problem, work performed and result",
+    ctaTitle: "Technical work for real plant problems", ctaText: "Tell us what the system is doing, what equipment is involved and what evidence is available.",
+    ctaPrimary: "Discuss a similar project", work: "PROJECT", realPhoto: "Actual project photograph", illustration: "Illustrative image",
+    openPhoto: "Open photograph", morePhotos: "More photographs", problem: "Initial problem", intervention: "Intervention", result: "Result", related: "Other work completed at CALSA",
+    prepEyebrow: "REAL PROJECT EXPERIENCE", prepTitle: "Each case is presented as a problem, intervention and result",
+    prepText: "Each case describes work carried out in a real plant, with photographs of the installation and the intervention.",
+    slots: ["Engineering", "PLC / HMI / SCADA", "Commissioning"],
+  },
+  pt: {
+    eyebrow: "PROJETOS INDUSTRIAIS", title: "Trabalhos de engenharia e automação realizados em plantas reais",
+    subtitle: "Casos selecionados de programação de PLC, IHM, SCADA, painéis de controle, migrações e comissionamento.",
+    primary: "Consultar projeto semelhante", primaryText: "Olá, gostaria de conversar sobre um projeto de automação industrial semelhante aos projetos apresentados.",
+    secondary: "Ver serviços", servicesPath: "/pt/servicos",
+    archive: (count) => `Ver ${count} projetos adicionais`, archiveText: "Casos completos com problema inicial, intervenção e resultado",
+    ctaTitle: "Trabalho técnico para problemas reais de planta", ctaText: "Conte-nos o que o sistema está fazendo, quais equipamentos estão envolvidos e quais evidências estão disponíveis.",
+    ctaPrimary: "Consultar projeto semelhante", work: "PROJETO", realPhoto: "Fotografia real", illustration: "Imagem ilustrativa",
+    openPhoto: "Abrir fotografia", morePhotos: "Mais fotografias", problem: "Problema inicial", intervention: "Intervenção", result: "Resultado", related: "Outros trabalhos realizados na CALSA",
+    prepEyebrow: "EXPERIÊNCIA EM PROJETOS REAIS", prepTitle: "Cada caso apresenta o problema, a intervenção e o resultado",
+    prepText: "Cada caso descreve trabalhos realizados em uma planta real, com fotografias da instalação e da intervenção.",
+    slots: ["Engenharia", "PLC / IHM / SCADA", "Comissionamento"],
+  },
+};
+
+function LocalizedWorksPage({ language = "es" }) {
+  const copy = worksPageCopy[language] || worksPageCopy.es;
+  const localizedProjects = getWorkProjects(language);
+  const featuredProjects = localizedProjects.slice(0, 3);
+  const additionalProjects = localizedProjects.slice(3);
   return (
     <PageShell
-      eyebrow="Obras"
-      title="Obras y trabajos realizados en entornos industriales"
-      subtitle="Casos de ingeniería, programación PLC, HMI, SCADA, tableros, migraciones y puesta en marcha presentados con problema inicial, intervención y resultado."
+      eyebrow={copy.eyebrow}
+      title={copy.title}
+      subtitle={copy.subtitle}
       heroImage={heroObras}
-      heroPrimary={{ label: "Solicitar diagnóstico", href: whatsappUrl("Hola, escribo desde la web de BOJ para consultar por una obra o intervención industrial similar.") }}
-      heroSecondary={{ label: "Ver servicios", href: "/servicios" }}
+      heroPrimary={{ label: copy.primary, href: whatsappUrl(copy.primaryText), external: true }}
+      heroSecondary={{ label: copy.secondary, href: copy.servicesPath }}
     >
-      <PortfolioPrep />
+      <PortfolioPrep language={language} />
       <div className="works-grid">
-        {featuredProjects.map((project, index) => (
-          <ProjectCard key={project.title} project={project} index={index + 1} />
-        ))}
+        {featuredProjects.map((project, index) => <ProjectCard key={project.title} project={project} index={index + 1} language={language} />)}
       </div>
       {additionalProjects.length ? (
         <details className="works-archive">
-          <summary>
-            <span className="works-archive-summary">
-              <strong>Ver {additionalProjects.length} obras adicionales</strong>
-              <small>Casos completos con problema, intervención y resultado</small>
-            </span>
-          </summary>
+          <summary><span className="works-archive-summary"><strong>{copy.archive(additionalProjects.length)}</strong><small>{copy.archiveText}</small></span></summary>
           <div className="works-grid works-grid-archive">
-            {additionalProjects.map((project, index) => (
-              <ProjectCard
-                key={project.title}
-                project={project}
-                index={index + featuredProjects.length + 1}
-              />
-            ))}
+            {additionalProjects.map((project, index) => <ProjectCard key={project.title} project={project} index={index + featuredProjects.length + 1} language={language} />)}
           </div>
         </details>
       ) : null}
-      <RouteCTA
-        title="Intervenciones técnicas para problemas reales de planta"
-        text="El análisis puede partir del problema operativo, revisar el estado técnico actual y definir una solución con alcance claro, pruebas y puesta en marcha."
-        primaryLabel="Consultar por una obra similar"
-        primaryHref={whatsappUrl("Hola, escribo desde la web de BOJ para consultar por una obra o intervención industrial similar.")}
-        secondaryLabel="Ver servicios"
-        secondaryHref="/servicios"
-      />
+      <RouteCTA title={copy.ctaTitle} text={copy.ctaText} primaryLabel={copy.ctaPrimary} primaryHref={whatsappUrl(copy.primaryText)} secondaryLabel={copy.secondary} secondaryHref={copy.servicesPath} />
     </PageShell>
   );
 }
 
-function ProjectCard({ project, index }) {
-  if (project.caseId === "ledesma-bt40") return <LedesmaCase project={project} />;
-  const visual = getServiceWorkImage(projectWorkImageFiles[index - 1]) || projectVisuals[(index - 1) % projectVisuals.length];
-
+function ProjectCard({ project, index, language = "es" }) {
+  if (project.caseId === "ledesma-bt40") return <LedesmaCase project={project} language={language} />;
+  const copy = worksPageCopy[language] || worksPageCopy.es;
+  const sourceIndex = project.sourceIndex ?? index - 1;
+  const visual = project.photo || getServiceWorkImage(projectWorkImageFiles[sourceIndex]) || projectVisuals[sourceIndex % projectVisuals.length];
+  const photos = project.photos?.length ? project.photos : [{ src: visual, alt: project.photoAlt || project.title, caption: project.title }];
   return (
-    <article className="project-card">
-      <div className="project-media">
-        <M2Picture className="project-photo" src={visual} alt={`Imagen ilustrativa para ${project.title}`} width="1280" height="960" loading="lazy" decoding="async" />
-        <span>OBRA {String(index).padStart(2, "0")}</span>
-        <span className="works-image-disclaimer">Imagen ilustrativa</span>
-        <div className="project-media-overlay">
-          <strong>{project.year}</strong>
-          <small>{project.client}</small>
-        </div>
-      </div>
-      <div className="project-body">
-        <div className="project-title-row">
-          <h2>{project.title}</h2>
-        </div>
-        {project.sector || project.role ? (
-          <p className="project-meta-line">{[project.sector, project.role].filter(Boolean).join(" · ")}</p>
-        ) : null}
-        <p>{project.description}</p>
-        {project.highlights?.length ? (
-          <ul className="project-highlights">
-            {project.highlights.map((item) => (
-              <li key={item}>
-                <CheckCircle2 size={15} aria-hidden="true" /> {item}
-              </li>
-            ))}
-          </ul>
-        ) : null}
-        <div className="tag-list">
-          {project.technologies.map((tech) => (
-            <span key={tech}>{tech}</span>
-          ))}
-        </div>
-        <div className="project-result-grid">
-          <div>
-            <h3>Problema inicial</h3>
-            <p>{project.problem}</p>
+    <ProjectPhotoGallery photos={photos} language={language}>
+      {(openPhoto) => (
+        <article className="project-card">
+          <div className="project-media work-photo-media">
+            <button type="button" className="work-photo-opener" onClick={() => openPhoto(0)} aria-label={`${copy.openPhoto}: ${project.title}`}>
+              <M2Picture className="project-photo" src={visual} alt={project.photoAlt || project.title} width="1280" height="960" loading="lazy" decoding="async" />
+            </button>
+            <span>{copy.work} {String(index).padStart(2, "0")}</span>
+            <span className="works-image-disclaimer">{project.realPhoto ? copy.realPhoto : copy.illustration}</span>
+            <div className="project-media-overlay">
+              {project.year ? <strong>{project.year}</strong> : null}
+              <small>{project.client}</small>
+            </div>
           </div>
-          <div>
-            <h3>Intervención</h3>
-            <p>{project.intervention}</p>
+          <div className="project-body">
+            <div className="project-title-row"><h2>{project.title}</h2></div>
+            {project.sector || project.role ? <p className="project-meta-line">{[project.sector, project.role].filter(Boolean).join(" · ")}</p> : null}
+            <p>{project.description}</p>
+            {project.highlights?.length ? <ul className="project-highlights">{project.highlights.map((item) => <li key={item}><CheckCircle2 size={15} aria-hidden="true" /> {item}</li>)}</ul> : null}
+            {project.relatedWorks?.length ? <div><h3>{copy.related}</h3><ul className="project-highlights">{project.relatedWorks.map((item) => <li key={item}><CheckCircle2 size={15} aria-hidden="true" /> {item}</li>)}</ul></div> : null}
+            <div className="tag-list">{project.technologies.map((tech) => <span key={tech}>{tech}</span>)}</div>
+            {photos.length > 1 ? (
+              <div className="work-photo-thumbnails" role="group" aria-label={copy.morePhotos}>
+                {photos.slice(1).map((photo, photoIndex) => <button type="button" key={photo.src} onClick={() => openPhoto(photoIndex + 1)} aria-label={`${copy.openPhoto}: ${photo.caption || photo.alt}`}><img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" width="130" height="88" /><span>{photo.caption}</span></button>)}
+              </div>
+            ) : null}
+            <div className="project-result-grid">
+              <div><h3>{copy.problem}</h3><p>{project.problem}</p></div>
+              <div><h3>{copy.intervention}</h3><p>{project.intervention}</p></div>
+              <div><h3>{copy.result}</h3><p>{project.result}</p></div>
+            </div>
           </div>
-          <div>
-            <h3>Resultado</h3>
-            <p>{project.result}</p>
-          </div>
-        </div>
-      </div>
-    </article>
+        </article>
+      )}
+    </ProjectPhotoGallery>
   );
 }
 
-function PortfolioPrep() {
+function PortfolioPrep({ language = "es" }) {
+  const copy = worksPageCopy[language] || worksPageCopy.es;
   return (
     <section className="portfolio-prep">
-      <div>
-        <p className="eyebrow">Portfolio técnico con obras reales</p>
-        <h2>Experiencia presentada como problema, intervención y resultado</h2>
-        <p>
-          Cada caso resume una situación real de planta: qué necesitaba el sistema, cómo se
-          intervino y qué valor técnico quedó para operación o mantenimiento.
-        </p>
-      </div>
-      <div className="asset-slots">
-        <span>Ingeniería</span>
-        <span>PLC / HMI / SCADA</span>
-        <span>Puesta en marcha</span>
-      </div>
+      <div><p className="eyebrow">{copy.prepEyebrow}</p><h2>{copy.prepTitle}</h2><p>{copy.prepText}</p></div>
+      <div className="asset-slots">{copy.slots.map((slot) => <span key={slot}>{slot}</span>)}</div>
     </section>
   );
 }

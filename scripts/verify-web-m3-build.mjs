@@ -30,6 +30,11 @@ const ENTRY_BUDGET = Object.freeze({ raw: 300_000, gzip: 95_000 });
 // de imágenes responsive (las mismas que Inicio); el presupuesto raw sube 10 KB. El gzip no cambia.
 // La nueva ruta y sus enlaces localizados amplían el shell compartido; conservar un margen de 2 KB gzip.
 const ROUTE_INITIAL_BUDGET = Object.freeze({ raw: 380_000, gzip: 114_000 });
+// Obras reúne doce casos en ES/EN/PT y sus galerías. El diálogo se carga al abrir
+// una foto; sólo esta familia admite el contenido localizado adicional.
+const ROUTE_BUDGET_OVERRIDES = Object.freeze({
+  "src/routes/services.jsx": Object.freeze({ raw: 405_000, gzip: 122_000 }),
+});
 const CSS_BUDGET = Object.freeze({ raw: 400_000, gzip: 70_000 });
 
 function requireRecord(manifest, key) {
@@ -156,7 +161,7 @@ export async function verifyWebM3Build(outDir) {
   for (const routeEntry of ROUTE_ENTRIES) {
     const files = collectStaticFiles(manifest, routeEntry);
     const size = await measureFiles(outDir, files);
-    enforceBudget(routeEntry, size, ROUTE_INITIAL_BUDGET);
+    enforceBudget(routeEntry, size, ROUTE_BUDGET_OVERRIDES[routeEntry] || ROUTE_INITIAL_BUDGET);
     routeSizes.push({ routeEntry, ...size });
   }
 

@@ -1038,7 +1038,7 @@ export const projects = [
       "Verificación de entradas, salidas y señales críticas.",
       "Pruebas de respuesta y comisionamiento en sitio.",
     ],
-    client: "GETSA",
+    client: "Pluspetrol",
     year: "2017",
     description:
       "Programación y comisionamiento de un sistema contra incendios basado en PLC Siemens S7-1500, con verificación de señales y pruebas funcionales.",
@@ -1235,7 +1235,7 @@ export const s7ProofClients = [
   "Generación Mediterránea",
   "TGN",
   "CALSA",
-  "GETSA",
+  "Pluspetrol",
 ];
 
 // Método BOJ — 4 pasos para el visual de la landing del curso.

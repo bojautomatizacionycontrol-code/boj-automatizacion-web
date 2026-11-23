@@ -99,7 +99,7 @@ const homeClientNames = [
   "Generación Mediterránea",
   "TGN",
   "CALSA",
-  "GETSA",
+  "Pluspetrol",
 ];
 
 const inCompanyTrainingCopy = {

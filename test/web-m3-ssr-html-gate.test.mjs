@@ -187,9 +187,10 @@ test("aplica presupuestos HTML por documento y para la matriz completa", () => {
     () => validateHtmlBudgets([{ label: "grande.html", html: "x".repeat(SSR_HTML_DOCUMENT_BUDGET.raw + 1) }]),
     /grande\.html excede presupuesto HTML/
   );
-  const matrix = Array.from({ length: 17 }, (_, index) => ({
+  const documentSize = Math.min(95_000, SSR_HTML_DOCUMENT_BUDGET.raw - 1);
+  const matrix = Array.from({ length: Math.floor(SSR_HTML_MATRIX_BUDGET.raw / documentSize) + 1 }, (_, index) => ({
     label: `${index}.html`,
-    html: "x".repeat(Math.min(95_000, SSR_HTML_DOCUMENT_BUDGET.raw - 1)),
+    html: "x".repeat(documentSize),
   }));
   assert.ok(matrix.reduce((sum, item) => sum + item.html.length, 0) > SSR_HTML_MATRIX_BUDGET.raw);
   assert.throws(() => validateHtmlBudgets(matrix), /matriz \d+\+404 excede presupuesto HTML/);
