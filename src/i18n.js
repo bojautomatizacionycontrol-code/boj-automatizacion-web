@@ -358,14 +358,14 @@ export const englishTiaCourse = {
 export const englishProjects = [
   {
     sourceIndex: 0,
-    title: "BT40 engineering, field wiring and commissioning",
+    title: "Electrical and instrumentation wiring for the BT40 turbine-generator",
     sector: "Energy / Power generation",
-    role: "Engineering and commissioning",
-    technologies: ["Detail engineering", "Power and control panels", "Field wiring", "Commissioning", "SAT"],
-    description: "Detail engineering, control and power panels, field wiring, signal validation and SAT activities for a 42 MW generator project.",
-    problem: "A high-criticality system required coordinated electrical integration, documentation and testing before operation.",
-    intervention: "Engineering, field wiring, signal checks and commissioning were coordinated with plant conditions.",
-    result: "A traceable start-up process with structured testing and clearer support for operation and maintenance.",
+    role: "Wiring and checks during commissioning",
+    technologies: ["BT40 turbine", "TGM ST800 gearbox", "WEG ST41 generator", "Instrumentation", "Loop checks", "Commissioning"],
+    description: "Work on the Ledesma turbine-generator train, covering electrical and instrumentation wiring, signal verification and functional checks during commissioning.",
+    problem: "BT40 steam turbine, TGM ST800 gearbox and WEG ST41-1120 generator. Generator nameplate ratings: 42,655 kVA, 13.2 kV and 50 Hz.",
+    intervention: "Electrical and instrumentation wiring for the equipment comprising the turbine-generator train.",
+    result: "Signal verification, loop checks, and checks of permissives and interlocks during commissioning.",
   },
   {
     sourceIndex: 1,
@@ -689,14 +689,14 @@ export const portugueseTiaCourse = {
 export const portugueseProjects = [
   {
     sourceIndex: 0,
-    title: "Engenharia, cabeamento de campo e comissionamento BT40",
+    title: "Interligações elétricas e de instrumentação do conjunto BT40",
     sector: "Energia / Geração",
-    role: "Engenharia e comissionamento",
-    technologies: ["Engenharia detalhada", "Painéis de potência e controle", "Cabeamento de campo", "Comissionamento", "SAT"],
-    description: "Engenharia detalhada, painéis de controle e potência, cabeamento de campo, validação de sinais e atividades de SAT para um projeto de geração de 42 MW.",
-    problem: "Um sistema de alta criticidade exigia integração elétrica coordenada, documentação e testes antes da operação.",
-    intervention: "A engenharia, o cabeamento de campo, a verificação de sinais e o comissionamento foram coordenados com as condições da planta.",
-    result: "Um processo de partida rastreável, com testes estruturados e melhor suporte para operação e manutenção.",
+    role: "Interligações e verificações durante o comissionamento",
+    technologies: ["Turbina BT40", "Redutor TGM ST800", "Gerador WEG ST41", "Instrumentação", "Testes de malha", "Comissionamento"],
+    description: "Trabalhos no conjunto turbogerador de Ledesma, abrangendo interligações elétricas e de instrumentação, verificação de sinais e testes funcionais durante o comissionamento.",
+    problem: "Turbina a vapor BT40, redutor TGM ST800 e gerador WEG ST41-1120. Dados de placa do gerador: 42.655 kVA, 13,2 kV e 50 Hz.",
+    intervention: "Interligações elétricas e de instrumentação dos equipamentos que compõem o conjunto turbogerador.",
+    result: "Verificação de sinais, testes de malha e verificação de permissivos e intertravamentos durante o comissionamento.",
   },
   {
     sourceIndex: 1,

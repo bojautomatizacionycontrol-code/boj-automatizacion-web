@@ -17,8 +17,9 @@ export const ROOT_SHELL = '<div id="root"></div>';
 // auditado (74.416 B por documento; 1.115.044 B la matriz) y detectan deriva sin
 // convertirlo en el shell mínimo de #41.
 export const SSR_HTML_DOCUMENT_BUDGET = Object.freeze({ raw: 96_000, gzip: 18_000 });
-// Tres páginas del curso SolidWorks se suman a la matriz; conservar el límite por documento.
-export const SSR_HTML_MATRIX_BUDGET = Object.freeze({ raw: 1_560_000, gzip: 340_000 });
+// Incluye SolidWorks y la ficha Ledesma con cuatro fotografías en tres idiomas.
+// Conservar los límites por documento y de transferencia comprimida de la matriz.
+export const SSR_HTML_MATRIX_BUDGET = Object.freeze({ raw: 1_580_000, gzip: 340_000 });
 
 const NOT_FOUND_ROUTE = "/__boj_not_found__";
 const VOID_ELEMENTS = new Set([

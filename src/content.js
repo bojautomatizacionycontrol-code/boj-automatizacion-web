@@ -999,32 +999,35 @@ export const technicalResources = [
 
 export const projects = [
   {
-    title: "Ingeniería, conexionado y puesta en marcha BT40",
+    caseId: "ledesma-bt40",
+    title: "Conexionado eléctrico e instrumentación del tren BT40",
     sector: "Energía / Generación",
-    role: "Ingeniería, conexionado y puesta en marcha",
+    role: "Conexionado y verificaciones durante la puesta en marcha",
     highlights: [
-      "Generador de 42 MW en la usina del ingenio.",
-      "Ingeniería de detalle, tableros de potencia y control.",
-      "Conexionado en campo, validación de señales y pruebas SAT.",
+      "Turbina de vapor BT40 y reductor TGM ST800.",
+      "Generador WEG ST41-1120: 42.655 kVA, 13,2 kV y 50 Hz.",
+      "Verificación de señales, pruebas de lazo, permisivos y enclavamientos.",
     ],
     client: "Ledesma / Usina - Ingenio",
     year: "2024",
+    periodStart: "2024-02",
+    periodEnd: "2024-08",
     description:
-      "Trabajo de ingeniería, conexionado y puesta en marcha asociado a BT40, con foco en tableros, potencia, control y validación en campo.",
+      "Trabajos sobre el tren turbogenerador de Ledesma, con conexionado eléctrico y de instrumentación, verificación de señales y pruebas funcionales durante la puesta en marcha.",
     technologies: [
-      "Ingeniería de detalle",
-      "Tableros de potencia",
-      "Conexionado en campo",
+      "Turbina BT40",
+      "Reductor TGM ST800",
+      "Generador WEG ST41",
+      "Instrumentación",
+      "Pruebas de lazo",
       "Puesta en marcha",
-      "Pruebas SAT",
-      "Documentación técnica",
     ],
     problem:
-      "Un sistema de alta criticidad necesitaba integración eléctrica y controlada, con documentación y pruebas antes de operar.",
+      "Turbina de vapor BT40, reductor TGM ST800 y generador WEG ST41-1120. Datos de placa del generador: 42.655 kVA, 13,2 kV y 50 Hz.",
     intervention:
-      "Se trabajó sobre ingeniería, conexionado, validación de señales y puesta en marcha coordinada con las condiciones de planta.",
+      "Conexionado eléctrico y de instrumentación de los equipos que integran el tren turbogenerador.",
     result:
-      "El proyecto avanzó con criterio técnico, pruebas ordenadas y una puesta en marcha trazable para operación y mantenimiento.",
+      "Verificación de señales, pruebas de lazo y comprobación de permisivos y enclavamientos durante la puesta en marcha.",
   },
   {
     title: "Sistema contra incendios con PLC S7-1500",

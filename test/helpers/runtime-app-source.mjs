@@ -27,6 +27,7 @@ const runtimeSourceFiles = Object.freeze([
   "routes/route-families.js",
   "routes/founder-block.jsx",
   "routes/works-images.jsx",
+  "routes/ledesma-case.jsx",
   "routes/diagnostic-guides.js",
   "contact-addresses.js",
   "hotmart-links.js",
