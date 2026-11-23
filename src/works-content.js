@@ -354,6 +354,7 @@ const galleryPhotos = [
   },
   {
     sourceIndex: 0, src: ledesmaPersonnelTrain, width: 534, height: 1156,
+    crop: { x: 0, y: 100, width: 534, height: (534 * 1051) / 591 },
     es: { alt: "Persona junto al tren turbogenerador y su instalación de campo.", caption: "Registro junto al tren turbogenerador y su instalación de campo." },
     en: { alt: "A person beside the turbine-generator train and its field installation.", caption: "Record beside the turbine-generator train and its field installation." },
     pt: { alt: "Pessoa junto ao conjunto turbogerador e à sua instalação de campo.", caption: "Registro junto ao conjunto turbogerador e à sua instalação de campo." },
