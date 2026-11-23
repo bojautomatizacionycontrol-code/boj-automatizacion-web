@@ -55,3 +55,6 @@
 
 /* Beginner CAD course, scoped to its own route and catalog preview. */
 @import "./styles/pages/300-course-solidworks.css";
+
+/* Real photographs and verified scope for the Ledesma turbine-generator case. */
+@import "./styles/pages/310-ledesma-case.css";

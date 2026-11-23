@@ -46,6 +46,7 @@ const expectedModules = Object.freeze([
   "./styles/components/280-app-tour-preview.css",
   "./styles/pages/290-copilot.css",
   "./styles/pages/300-course-solidworks.css",
+  "./styles/pages/310-ledesma-case.css",
 ]);
 
 test("el manifiesto declara módulos semánticos una sola vez y en orden estable", async () => {

@@ -1,0 +1,229 @@
+.ledesma-case {
+  grid-column: 1 / -1;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #b9d5df;
+  border-radius: 16px;
+  background: #fff;
+  color: #1d2b3a;
+  box-shadow: 0 16px 42px rgba(7, 17, 28, 0.08);
+}
+
+.ledesma-case-header,
+.ledesma-case-body {
+  padding: clamp(20px, 3.2vw, 36px);
+}
+
+.ledesma-case-header {
+  border-top: 4px solid #06a8c4;
+}
+
+.ledesma-case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-bottom: 20px;
+  color: #4a5b68;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.ledesma-case-badge {
+  padding: 6px 11px;
+  border: 1px solid #c0e2e9;
+  border-radius: 999px;
+  background: #ecf9fc;
+  color: #00647a;
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.ledesma-case-location {
+  color: #243e4b;
+  font-weight: 800;
+}
+
+.ledesma-case-period {
+  margin-left: auto;
+}
+
+.ledesma-case-header h2 {
+  max-width: 1000px;
+  margin: 0 0 14px;
+  color: #112d3b;
+  font-size: clamp(1.55rem, 2.7vw, 2.3rem);
+  line-height: 1.17;
+  text-wrap: balance;
+}
+
+.ledesma-case-description {
+  max-width: 940px;
+  margin: 0;
+  color: #435564;
+  font-size: clamp(0.95rem, 1.2vw, 1.06rem);
+  line-height: 1.7;
+}
+
+.ledesma-case-main-photo,
+.ledesma-case-gallery-photo {
+  min-width: 0;
+  margin: 0;
+}
+
+.ledesma-case-main-photo {
+  margin-inline: clamp(20px, 3.2vw, 36px);
+}
+
+.ledesma-case-photo-link {
+  display: block;
+  overflow: hidden;
+  border: 1px solid #cbdbe1;
+  border-radius: 10px;
+  background: #eef3f5;
+  color: #005d72;
+  text-decoration: none;
+}
+
+.ledesma-case-photo-link:hover {
+  border-color: #0088a2;
+  color: #003e50;
+}
+
+.ledesma-case-photo-link:focus-visible {
+  outline: 3px solid #007b98;
+  outline-offset: -4px;
+}
+
+.ledesma-case-photo-link picture,
+.ledesma-case-photo-link img {
+  display: block;
+  width: 100%;
+}
+
+.ledesma-case-photo-link img {
+  height: auto;
+  object-fit: contain;
+}
+
+.ledesma-case-photo-action {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-top: 1px solid #d2e1e6;
+  background: #f4fafc;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.ledesma-case-photo-action > span {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.ledesma-case figcaption {
+  margin: 10px 0 0;
+  color: #50616d;
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.ledesma-case-details,
+.ledesma-case-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.ledesma-case-detail {
+  min-width: 0;
+  padding: 21px;
+  border: 1px solid #d8e5ea;
+  border-radius: 10px;
+  background: #f8fbfc;
+}
+
+.ledesma-case-detail h3,
+.ledesma-case-gallery > h3 {
+  margin: 0 0 10px;
+  color: #173d4d;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.ledesma-case-detail p {
+  margin: 0;
+  color: #435564;
+  font-size: 0.91rem;
+  line-height: 1.7;
+}
+
+.ledesma-case-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ledesma-case-technologies li {
+  max-width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #cee0e7;
+  border-radius: 6px;
+  background: #f4fafc;
+  color: #335967;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.ledesma-case-gallery {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid #dce6eb;
+}
+
+.ledesma-case-gallery > h3 {
+  margin-bottom: 16px;
+}
+
+.ledesma-case-header h2,
+.ledesma-case-description,
+.ledesma-case-detail p,
+.ledesma-case-technologies li,
+.ledesma-case figcaption {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 899px) {
+  .ledesma-case-details,
+  .ledesma-case-gallery-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+}
+
+@media (max-width: 540px) {
+  .ledesma-case-meta {
+    gap: 10px 14px;
+    margin-bottom: 17px;
+  }
+
+  .ledesma-case-period {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+
+  .ledesma-case-detail {
+    padding: 18px;
+  }
+}
