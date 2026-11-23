@@ -7,6 +7,7 @@ import cabinets480 from "../assets/ledesma/tableros-480.webp";
 import cabinets1156 from "../assets/ledesma/tableros-1156.webp";
 import power480 from "../assets/ledesma/potencia-480.webp";
 import power1156 from "../assets/ledesma/potencia-1156.webp";
+import { ProjectPhotoGallery } from "../ProjectPhotoGallery.jsx";
 
 const caseCopy = {
   es: {
@@ -18,7 +19,7 @@ const caseCopy = {
     workAreas: "Áreas de trabajo",
     gallery: "Detalles de la intervención",
     openPhoto: "Ver fotografía completa",
-    newTab: "Se abre en una pestaña nueva",
+    openPopup: "Abrir fotografía en una ventana emergente",
     trainCaption: "El tren completo: turbina BT40, reductor TGM ST800 y generador WEG ST41-1120.",
     trainAlt: "Tren turbogenerador de Ledesma, con la turbina BT40 a la izquierda, el reductor TGM ST800 en el centro y el generador WEG a la derecha.",
     galleryPhotos: {
@@ -45,7 +46,7 @@ const caseCopy = {
     workAreas: "Work areas",
     gallery: "Details of the work",
     openPhoto: "View full photograph",
-    newTab: "Opens in a new tab",
+    openPopup: "Open photograph in a popup",
     trainCaption: "The complete train: BT40 turbine, TGM ST800 gearbox and WEG ST41-1120 generator.",
     trainAlt: "Ledesma turbine-generator train, with the BT40 turbine on the left, the TGM ST800 gearbox in the centre and the WEG generator on the right.",
     galleryPhotos: {
@@ -72,7 +73,7 @@ const caseCopy = {
     workAreas: "Áreas de trabalho",
     gallery: "Detalhes da intervenção",
     openPhoto: "Ver fotografia completa",
-    newTab: "Abre em uma nova aba",
+    openPopup: "Abrir fotografia em uma janela sobreposta",
     trainCaption: "O conjunto completo: turbina BT40, redutor TGM ST800 e gerador WEG ST41-1120.",
     trainAlt: "Conjunto turbogerador de Ledesma, com a turbina BT40 à esquerda, o redutor TGM ST800 no centro e o gerador WEG à direita.",
     galleryPhotos: {
@@ -98,21 +99,20 @@ const galleryPhotos = [
   { key: "power", small: power480, full: power1156 },
 ];
 
-function FullPhotoLink({ full, label, copy, children }) {
+function FullPhotoButton({ onOpen, label, copy, children }) {
   return (
-    <a
-      className="ledesma-case-photo-link"
-      href={full}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`${copy.openPhoto}: ${label} ${copy.newTab}.`}
+    <button
+      type="button"
+      className="ledesma-case-photo-link ledesma-case-photo-button"
+      onClick={onOpen}
+      aria-label={`${copy.openPopup}: ${label}`}
     >
       {children}
       <span className="ledesma-case-photo-action">
         {copy.openPhoto}
         <span aria-hidden="true">↗</span>
       </span>
-    </a>
+    </button>
   );
 }
 
@@ -123,6 +123,15 @@ export function LedesmaCase({ project, language = "es" }) {
   const copy = caseCopy[locale];
   const headingId = `ledesma-case-title-${locale}`;
   const galleryHeadingId = `ledesma-case-gallery-${locale}`;
+  const additionalPhotos = (project.photos || []).filter((photo) => photo?.src);
+  const popupPhotos = [
+    { src: train1280, alt: copy.trainAlt, caption: copy.trainCaption },
+    ...galleryPhotos.map((photo) => ({
+      src: photo.full,
+      ...copy.galleryPhotos[photo.key],
+    })),
+    ...additionalPhotos,
+  ];
   const details = [
     { label: copy.equipment, text: project.problem },
     { label: copy.work, text: project.intervention },
@@ -130,6 +139,8 @@ export function LedesmaCase({ project, language = "es" }) {
   ];
 
   return (
+    <ProjectPhotoGallery photos={popupPhotos} language={locale}>
+      {(openPhoto) => (
     <article className="ledesma-case" aria-labelledby={headingId}>
       <div className="ledesma-case-header">
         <div className="ledesma-case-meta">
@@ -142,7 +153,7 @@ export function LedesmaCase({ project, language = "es" }) {
       </div>
 
       <figure className="ledesma-case-main-photo">
-        <FullPhotoLink full={train1280} label={copy.trainCaption} copy={copy}>
+        <FullPhotoButton onOpen={() => openPhoto(0)} label={copy.trainCaption} copy={copy}>
           <picture>
             <source
               type="image/webp"
@@ -158,7 +169,7 @@ export function LedesmaCase({ project, language = "es" }) {
               decoding="async"
             />
           </picture>
-        </FullPhotoLink>
+        </FullPhotoButton>
         <figcaption>{copy.trainCaption}</figcaption>
       </figure>
 
@@ -183,11 +194,11 @@ export function LedesmaCase({ project, language = "es" }) {
         <section className="ledesma-case-gallery" aria-labelledby={galleryHeadingId}>
           <h3 id={galleryHeadingId}>{copy.gallery}</h3>
           <div className="ledesma-case-gallery-grid">
-            {galleryPhotos.map((photo) => {
+            {galleryPhotos.map((photo, index) => {
               const text = copy.galleryPhotos[photo.key];
               return (
                 <figure className="ledesma-case-gallery-photo" key={photo.key}>
-                  <FullPhotoLink full={photo.full} label={text.caption} copy={copy}>
+                  <FullPhotoButton onOpen={() => openPhoto(index + 1)} label={text.caption} copy={copy}>
                     <picture>
                       <source
                         type="image/webp"
@@ -203,14 +214,34 @@ export function LedesmaCase({ project, language = "es" }) {
                         decoding="async"
                       />
                     </picture>
-                  </FullPhotoLink>
+                  </FullPhotoButton>
                   <figcaption>{text.caption}</figcaption>
                 </figure>
               );
             })}
+            {additionalPhotos.map((photo, index) => (
+              <figure className="ledesma-case-gallery-photo" key={photo.src}>
+                <FullPhotoButton
+                  onOpen={() => openPhoto(index + galleryPhotos.length + 1)}
+                  label={photo.caption || photo.alt || copy.gallery}
+                  copy={copy}
+                >
+                  <img
+                    src={photo.src}
+                    alt={photo.alt || photo.caption || ""}
+                    {...(photo.width && photo.height ? { width: photo.width, height: photo.height } : {})}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </FullPhotoButton>
+                {photo.caption ? <figcaption>{photo.caption}</figcaption> : null}
+              </figure>
+            ))}
           </div>
         </section>
       </div>
     </article>
+      )}
+    </ProjectPhotoGallery>
   );
 }

@@ -1,0 +1,232 @@
+.project-photo-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(3, 12, 19, 0.88);
+  overscroll-behavior: contain;
+}
+
+.project-photo-lightbox-panel {
+  display: flex;
+  flex-direction: column;
+  width: min(1180px, 100%);
+  min-width: 0;
+  max-height: calc(100dvh - 32px);
+  overflow: hidden;
+  border: 1px solid #b9d5df;
+  border-top: 4px solid #06a8c4;
+  border-radius: 14px;
+  background: #fff;
+  color: #1d2b3a;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+}
+
+.project-photo-lightbox-header {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #d8e5ea;
+}
+
+.project-photo-lightbox-header h2 {
+  margin: 0;
+  color: #173d4d;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.project-photo-lightbox-counter {
+  margin: 3px 0 0;
+  color: #526773;
+  font-size: 0.83rem;
+  line-height: 1.4;
+}
+
+.project-photo-lightbox button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 9px 13px;
+  border: 1px solid #c5dce3;
+  border-radius: 7px;
+  background: #f4fafc;
+  color: #005d72;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.project-photo-lightbox button:hover {
+  border-color: #0088a2;
+  background: #eaf7fb;
+}
+
+.project-photo-lightbox button:focus-visible,
+.work-photo-opener:focus-visible,
+.work-photo-thumbnails button:focus-visible {
+  outline: 3px solid #007b98;
+  outline-offset: 3px;
+}
+
+.project-photo-lightbox-figure {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  margin: 0;
+}
+
+.project-photo-lightbox-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  background: #071017;
+}
+
+.project-photo-lightbox-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: max(100px, calc(100dvh - 230px));
+  object-fit: contain;
+}
+
+.project-photo-lightbox-caption {
+  flex: 0 0 auto;
+  max-height: 6em;
+  overflow-y: auto;
+  margin: 0;
+  padding: 12px 18px;
+  color: #435564;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.project-photo-lightbox-navigation {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px;
+  border-top: 1px solid #d8e5ea;
+}
+
+.work-photo-opener {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  cursor: zoom-in;
+}
+
+.work-photo-opener:focus-visible {
+  outline-offset: -4px;
+}
+
+.ledesma-case-photo-button {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  cursor: zoom-in;
+}
+
+.work-photo-media::after,
+.work-photo-media > span,
+.work-photo-media .project-media-overlay {
+  pointer-events: none;
+}
+
+.work-photo-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.work-photo-thumbnails button {
+  display: block;
+  width: 130px;
+  min-height: 88px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #cbdbe1;
+  border-radius: 7px;
+  background: #eef3f5;
+  color: #005d72;
+  text-align: left;
+  cursor: zoom-in;
+}
+
+.work-photo-thumbnails button:hover {
+  border-color: #0088a2;
+}
+
+.work-photo-thumbnails img {
+  display: block;
+  width: 100%;
+  height: 88px;
+  object-fit: cover;
+}
+
+.work-photo-thumbnails button > span {
+  display: block;
+  padding: 6px 8px;
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .project-photo-lightbox {
+    padding: 8px;
+  }
+
+  .project-photo-lightbox-panel {
+    max-height: calc(100dvh - 16px);
+    border-radius: 10px;
+  }
+
+  .project-photo-lightbox-header,
+  .project-photo-lightbox-navigation {
+    padding: 10px 12px;
+  }
+
+  .project-photo-lightbox-caption {
+    padding: 10px 12px;
+  }
+
+  .project-photo-lightbox-header h2 {
+    font-size: 0.93rem;
+  }
+
+  .project-photo-lightbox-image {
+    max-height: max(100px, calc(100dvh - 220px));
+  }
+
+  .work-photo-thumbnails button {
+    width: 112px;
+  }
+}
