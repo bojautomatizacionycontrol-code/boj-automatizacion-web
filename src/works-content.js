@@ -11,7 +11,6 @@ import gasnorUnit from "./assets/works-real/gasnor-unidad.jpg";
 import gasnorTestHmi from "./assets/works-real/gasnor-banco-hmi.jpg";
 import ledesmaPaperControl from "./assets/works-real/ledesma-papel-control.jpg";
 import zingarasPanel from "./assets/works-real/zingaras-tablero.jpg";
-import ledesmaPersonnelPanels from "./assets/ledesma/personal-tableros-1280.jpg";
 import ledesmaPersonnelTrain from "./assets/ledesma/personal-tren-1280.jpg";
 import ledesmaTeam from "./assets/ledesma/equipo-bt40-1280.jpg";
 
@@ -348,15 +347,10 @@ const translations = { en: englishCopy, pt: portugueseCopy };
 const galleryPhotos = [
   {
     sourceIndex: 0, src: ledesmaTeam, width: 591, height: 1280,
+    crop: { x: 0, y: 64, width: 591, height: 1051 },
     es: { alt: "Foto grupal del personal de la obra BT40 en Ledesma.", caption: "Equipo de trabajo de la obra BT40 en Ledesma." },
     en: { alt: "Group photograph of the BT40 project team at Ledesma.", caption: "The BT40 project team at Ledesma." },
     pt: { alt: "Foto em grupo da equipe da obra BT40 na Ledesma.", caption: "Equipe de trabalho da obra BT40 na Ledesma." },
-  },
-  {
-    sourceIndex: 0, src: ledesmaPersonnelPanels, width: 1280, height: 590,
-    es: { alt: "Persona con elementos de trabajo junto a los tableros del tren turbogenerador.", caption: "Registro durante los trabajos junto a los tableros del tren turbogenerador." },
-    en: { alt: "A person wearing work equipment beside the turbine-generator control panels.", caption: "Record of work beside the turbine-generator control panels." },
-    pt: { alt: "Pessoa com equipamentos de trabalho junto aos painéis do conjunto turbogerador.", caption: "Registro durante os trabalhos junto aos painéis do conjunto turbogerador." },
   },
   {
     sourceIndex: 0, src: ledesmaPersonnelTrain, width: 534, height: 1156,
@@ -443,7 +437,7 @@ export function getWorkProjects(language = "es") {
     const photoAlt = project.photoAlt || project.title;
     const supportPhotos = galleryPhotos
       .filter((image) => image.sourceIndex === index)
-      .map((image) => ({ src: image.src, width: image.width, height: image.height, ...image[locale] }));
+      .map((image) => ({ src: image.src, width: image.width, height: image.height, crop: image.crop, ...image[locale] }));
     return {
       ...project,
       sourceIndex: index,

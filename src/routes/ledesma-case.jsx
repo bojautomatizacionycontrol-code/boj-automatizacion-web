@@ -226,13 +226,27 @@ export function LedesmaCase({ project, language = "es" }) {
                   label={photo.caption || photo.alt || copy.gallery}
                   copy={copy}
                 >
-                  <img
-                    src={photo.src}
-                    alt={photo.alt || photo.caption || ""}
-                    {...(photo.width && photo.height ? { width: photo.width, height: photo.height } : {})}
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  {photo.crop ? (
+                    <svg
+                      className="project-photo-crop"
+                      viewBox={`${photo.crop.x} ${photo.crop.y} ${photo.crop.width} ${photo.crop.height}`}
+                      width={photo.crop.width}
+                      height={photo.crop.height}
+                      role="img"
+                      aria-label={photo.alt || photo.caption || ""}
+                      focusable="false"
+                    >
+                      <image href={photo.src} width={photo.width} height={photo.height} />
+                    </svg>
+                  ) : (
+                    <img
+                      src={photo.src}
+                      alt={photo.alt || photo.caption || ""}
+                      {...(photo.width && photo.height ? { width: photo.width, height: photo.height } : {})}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
                 </FullPhotoButton>
                 {photo.caption ? <figcaption>{photo.caption}</figcaption> : null}
               </figure>

@@ -61,13 +61,28 @@ export default function ProjectPhotoDialog({ photo, index, total, language, onCl
       </header>
       <figure className="project-photo-lightbox-figure">
         <div className="project-photo-lightbox-stage">
-          <img
-            key={photo.src}
-            className="project-photo-lightbox-image"
-            src={photo.src}
-            alt={photo.alt || photo.caption || ""}
-            decoding="async"
-          />
+          {photo.crop ? (
+            <svg
+              key={photo.src}
+              className="project-photo-crop project-photo-lightbox-image"
+              viewBox={`${photo.crop.x} ${photo.crop.y} ${photo.crop.width} ${photo.crop.height}`}
+              width={photo.crop.width}
+              height={photo.crop.height}
+              role="img"
+              aria-label={photo.alt || photo.caption || ""}
+              focusable="false"
+            >
+              <image href={photo.src} width={photo.width} height={photo.height} />
+            </svg>
+          ) : (
+            <img
+              key={photo.src}
+              className="project-photo-lightbox-image"
+              src={photo.src}
+              alt={photo.alt || photo.caption || ""}
+              decoding="async"
+            />
+          )}
         </div>
         {photo.caption ? (
           <figcaption className="project-photo-lightbox-caption">{photo.caption}</figcaption>
